@@ -1,0 +1,38 @@
+﻿
+fade_out 0.5
+bg "restaurant"
+fade_in 0.5
+
+
+say "*Você pode trabalhar aqui este turno para ganhar 200 de salário.*"
+say "*Gostaria de trabalhar em Restaurante agora?*"
+choices "Sim" sim "Não" nao
+
+
+waypoint sim
+fade_out 0.5
+bg null
+
+say "*Você passou várias horas atendendo os clientes no local*"
+
+
+
+say "*Você ganhou 200 Dinheiro Celestial!*"
+add_var money 200
+
+bg null
+pass_time
+fade_in 0.5
+goto_script "check_end_game"
+goto end
+
+
+waypoint nao
+say "*Você decidiu trabalhar outro dia.*"
+fade_out 0.5
+bg null
+fade_in 0.5
+goto end
+
+
+waypoint end
