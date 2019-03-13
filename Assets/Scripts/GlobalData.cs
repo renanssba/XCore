@@ -54,6 +54,18 @@ public class GlobalData : MonoBehaviour {
     SelectNewCouple();
   }
 
+  public string CurrentCoupleName(){
+    return people[currentCouple * 2].name + " e " + people[currentCouple * 2+1].name;
+  }
+
+  public Person GetCurrentBoy(){
+    return people[currentCouple * 2];
+  }
+
+  public Person GetCurrentGirl() {
+    return people[currentCouple * 2+1];
+  }
+
   public void SelectNewCouple(){
     if(matchedCouples.Count >= people.Count/2){
       currentCouple = -1;

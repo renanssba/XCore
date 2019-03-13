@@ -47,4 +47,16 @@ public class Person {
     }
     personality = (Personality)Random.Range(0, 3);
   }
+
+  public Attributes AttributetoUse(){
+    switch(personality){
+      case Personality.heroico:
+        return Attributes.guts;
+      case Personality.racional:
+        return Attributes.intelligence;
+      case Personality.emotivo:
+        return Attributes.charisma;
+    }
+    return Attributes.guts;
+  }
 }

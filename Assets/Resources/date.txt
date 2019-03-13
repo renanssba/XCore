@@ -4,41 +4,52 @@ bg "shopping"
 fade_in 0.5
 
 
-say "Atendente" "Oi Fertiliel, seja bem-vinda à loja do Mundo dos Anjos!"
-
-waypoint store_loop
-say "Gostaria de comprar alguma coisa?"
-
-show_shop true
+say "" "\couple resolveram sair para se divertir."
 
 
-if item_id != -1
-  if item_price <= money
-    say "Você quer comprar \item_name por \item_price?"
-	choices "Sim" sim "Não" nao
-  else
-    say "Me desculpe, eu acho que você não tem dinheiro o suficiente para comprar este item."
-  endif
-else
-  goto end
+waypoint new_event
+if #currentDateEvent < 7
+
+goto_script "\currentEventName" event_statement
+choices "Interferir" ac_interfere "Ignorar" ac_continue
+
+waypoint ac_interfere
+waypoint ac_continue
+event_resolution
+
+if resolution == 0
+  goto_script "\currentEventName" guts_success
 endif
-goto store_loop
+if resolution == 1
+  goto_script "\currentEventName" intelligence_success
+endif
+if resolution == 2
+  goto_script "\currentEventName" charisma_success
+endif
+if resolution == 3
+  goto_script "\currentEventName" guts_fail
+endif
+if resolution == 4
+  goto_script "\currentEventName" intelligence_fail
+endif
+if resolution == 5
+  goto_script "\currentEventName" charisma_fail
+endif
 
+if resolution < 3
+  say "O casal superou o desafio!"
+else
+  say "O casal falhou neste desafio."
+endif
+end_event
+goto new_event
 
+endif
 
-waypoint sim
-subtract_var money item_price
-say "*Você adquiriu \item_name!*"
-add_item item_id 1
-goto store_loop
-
-
-waypoint nao
-goto store_loop
 
 
 waypoint end
-say "Obrigada, volte sempre!"
+say "O encontro acabou!"
 
 
 fade_out 0.5

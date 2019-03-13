@@ -58,17 +58,18 @@ public enum RandomBoy {
 }
 
 public enum RandomGirl {
-  Amanda,  
+  Amanda,
   Bianca,
   Carla,
   Marina,
   Fernanda,
   Gabriela,
-  Patricia,
+  Priscila,
   Larissa,
   Margot,
   Valentina,
-  Juliana
+  Juliana,
+  Paola
 }
 
 
