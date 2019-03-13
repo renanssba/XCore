@@ -21,7 +21,7 @@ public class SpecialCodes {
       
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", GameController.instance.date[GameController.instance.currentDateEvent].scriptName);
+      currentString = currentString.Replace("\\currentEventName", GameController.instance.GetCurrentEventName());
       currentString = currentString.Replace("\\boy", GlobalData.instance.people[currentCouple * 2].name);
       currentString = currentString.Replace("\\girl", GlobalData.instance.people[currentCouple * 2+1].name);
 
@@ -43,8 +43,10 @@ public class SpecialCodes {
     switch (keycode){
       case "#random100":
         return Random.Range(0, 100);
+      case "#dateLength":
+        return GameController.instance.date.Length;
       case "#currentDateEvent":
-        return GameController.instance.currentDateEvent;
+        return VsnSaveSystem.GetIntVariable("currentDateEvent");
       default:
         return 0f;
     }

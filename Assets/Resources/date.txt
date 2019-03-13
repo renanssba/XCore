@@ -1,14 +1,18 @@
-﻿
-fade_out 0.5
+﻿fade_out 0.5
 bg "shopping"
 fade_in 0.5
+
+
+generate_date
+set_var currentDateEvent 0
+set_var date_success 0
 
 
 say "" "\couple resolveram sair para se divertir."
 
 
 waypoint new_event
-if #currentDateEvent < 7
+if #currentDateEvent < #dateLength
 
 goto_script "\currentEventName" event_statement
 choices "Interferir" ac_interfere "Ignorar" ac_continue
@@ -37,11 +41,12 @@ if resolution == 5
 endif
 
 if resolution < 3
+  add_var date_success 1
   say "O casal superou o desafio!"
 else
   say "O casal falhou neste desafio."
 endif
-end_event
+add_var currentDateEvent 1
 goto new_event
 
 endif
@@ -49,7 +54,13 @@ endif
 
 
 waypoint end
-say "O encontro acabou!"
+if date_success >= 1
+  say "O encontro acabou, e foi um grande sucesso!"
+  say "\couple se tornaram um casal inseparável, e você sabe que eles terão filhos no futuro!"
+  ship_couple
+else
+  say "O encontro acabou, e foi um fracasso!"
+endif
 
 
 fade_out 0.5

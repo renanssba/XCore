@@ -18,8 +18,9 @@ public class GameController : MonoBehaviour {
   public int day;
   public int maxDays;
 
-  public Event[] date;
-  public int currentDateEvent;
+  public TextAsset dateEventsFile;
+  public List<DateEvent> allDateEvents;
+  public DateEvent[] date;
 
 
 
@@ -35,6 +36,36 @@ public class GameController : MonoBehaviour {
 
   public void Initialize(){
     day = 0;
+    allDateEvents = new List<DateEvent>();
+
+    int id;
+    int guts;
+    int intelligence;
+    int charisma;
+    EventInteractionType interaction = EventInteractionType.male;
+
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
+    foreach(Dictionary<string, string> dic in spreadsheetData.data) {
+      id = int.Parse(dic["Id"]);
+      guts = int.Parse(dic["Dificuldade Guts"]);
+      intelligence = int.Parse(dic["Dificuldade Intelligence"]);
+      charisma = int.Parse(dic["Dificuldade Charisma"]);
+      switch(dic["Tipo de Interação"]){
+        case "male":
+          interaction = EventInteractionType.male;
+          break;
+        case "female":
+          interaction = EventInteractionType.female;
+          break;
+        case "couple":
+          interaction = EventInteractionType.couple;
+          break;
+        case "compatibility":
+          interaction = EventInteractionType.compatibility;
+          break;
+      }
+      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, interaction));
+    }
     PassDay();
   }
 
@@ -68,16 +99,27 @@ public class GameController : MonoBehaviour {
     apText.text = "AP: " + ap;
   }
 
-  public void StartNewDate(){
-    date = new Event[7];
-    for(int i=0; i<7; i++){
-      date[i] = new Event();
+  public void GenerateDate(int location){
+    int dateSize = 2;
+    date = new DateEvent[dateSize];
+    for(int i=0; i< dateSize; i++){
+      date[i] = allDateEvents[i];
     }
-    currentDateEvent = 0;
   }
 
-  public Event GetCurrentEvent(){
+  public DateEvent GetCurrentEvent(){
+    int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
+    if (date.Length <= currentDateEvent) {
+      return null;
+    }
     return date[currentDateEvent];
+  }
+
+  public string GetCurrentEventName() {
+    if(GetCurrentEvent() == null) {
+      return "";
+    }
+    return date[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
 

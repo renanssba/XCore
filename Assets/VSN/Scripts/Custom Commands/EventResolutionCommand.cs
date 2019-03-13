@@ -8,7 +8,7 @@ namespace Command {
   public class EventResolutionCommand : VsnCommand {
 
     public override void Execute() {
-      Event currentEvent = GameController.instance.GetCurrentEvent();
+      DateEvent currentEvent = GameController.instance.GetCurrentEvent();
       Person p = null;
       int attributeToUse;
       int result = 0;

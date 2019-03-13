@@ -6,7 +6,7 @@ public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
   public int currentCouple;
-  public List<int> matchedCouples;
+  public List<int> shippedCouples;
 
   public static GlobalData instance;
 
@@ -49,8 +49,8 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void MatchCurrentCouple(){
-    matchedCouples.Add(currentCouple);
+  public void ShipCurrentCouple(){
+    shippedCouples.Add(currentCouple);
     SelectNewCouple();
   }
 
@@ -67,7 +67,7 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void SelectNewCouple(){
-    if(matchedCouples.Count >= people.Count/2){
+    if(shippedCouples.Count >= people.Count/2){
       currentCouple = -1;
     }
 
@@ -75,7 +75,7 @@ public class GlobalData : MonoBehaviour {
       currentCouple++;
       if(currentCouple> (people.Count/2-1) )
         currentCouple = 0;
-    }while (matchedCouples.Contains(currentCouple));
+    }while (shippedCouples.Contains(currentCouple));
 
     GameController.instance.UpdateUI();
   }
