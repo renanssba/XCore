@@ -8,6 +8,7 @@ namespace Command {
   public class GotoCommand : VsnCommand {
 
     public override void Execute() {
+      Debug.Log("arg0: "+args[0].GetReference());
       VsnController.instance.CurrentScriptReader().GotoWaypoint(args[0].GetReference());
     }
 

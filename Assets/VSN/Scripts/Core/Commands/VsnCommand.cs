@@ -74,7 +74,8 @@ public abstract class VsnCommand{
         return (arg.GetType() == typeof(VsnOperator));
 
       case VsnArgType.referenceArg:
-        return (arg.GetType() == typeof(VsnReference));
+        return (arg.GetType() == typeof(VsnReference) ||
+                arg.GetType() == typeof(VsnMetaReference));
     }
     return false;
   }

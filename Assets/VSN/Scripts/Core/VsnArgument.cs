@@ -29,6 +29,8 @@ public abstract class VsnArgument{
       return GetBooleanValue().ToString();
     } else if (GetType() == typeof(VsnReference)) {
       return GetReference();
+    } else if (GetType() == typeof(VsnMetaReference)) {
+      return "*"+GetReference();
     }
     return "null";
   }

@@ -41,13 +41,8 @@ public class VsnScriptReader {
           VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetStringValue());
           Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetStringValue());
         } else {
-          if(args[i].GetStringValue() != "") {
-            VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetStringValue());
-            Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetStringValue());
-          } else {
-            VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetNumberValue());
-            Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetNumberValue());
-          }
+          VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetReference());
+          Debug.Log("Setting variable arg" + (i + 1) + " to value: " + args[i].GetReference());
         }
       }
     }
@@ -244,6 +239,10 @@ public class VsnScriptReader {
 
     if(arg == "true" || arg == "false") {
       return new VsnBoolean(arg == "true");
+    }
+
+    if (arg[0] == '*') {
+      return new VsnMetaReference(arg.Substring(1, arg.Length-1));
     }
 
     return new VsnReference(arg);

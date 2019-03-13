@@ -24,7 +24,7 @@ namespace Command {
       attributeToUse = (int)p.AttributetoUse();
 
       result = attributeToUse;
-      if (currentEvent.difficultyForAttribute[attributeToUse] < p.attributes[attributeToUse]){
+      if (p.attributes[attributeToUse] < currentEvent.difficultyForAttribute[attributeToUse]){
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
