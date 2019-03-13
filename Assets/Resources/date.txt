@@ -42,9 +42,9 @@ endif
 
 if resolution < 3
   add_var date_success 1
-  say "O casal superou o desafio!"
+  say "" "O casal superou o desafio!"
 else
-  say "O casal falhou neste desafio."
+  say "" "O casal falhou neste desafio."
 endif
 add_var currentDateEvent 1
 goto new_event

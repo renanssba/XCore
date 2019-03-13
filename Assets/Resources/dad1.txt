@@ -1,0 +1,50 @@
+goto *arg1
+
+waypoint event_statement
+say "" "O pai de \girl aparece de surpresa. Ele é mal-encarado e parece muito exigente. Após olhar feio para \boy, ele pergunta:"
+say "Pai da \girl" "Quais são suas intenções com a minha filha?"
+end_script
+
+
+
+waypoint guts_success
+say "\boy" "Meu objetivo com sua filha é fazer muitos filhos, senhor!"
+say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
+say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+end_script
+
+waypoint intelligence_success
+say "\boy" "Eu quero dar um futuro confortável para ela, senhor!"
+say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
+say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+end_script
+
+waypoint charisma_success
+say "\boy" "Eu quero fazê-la muito feliz, senhor!"
+say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
+say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+end_script
+
+
+
+waypoint guts_fail
+say "\boy" "Meu objetivo com sua filha é fazer muitos filhos, senhor!"
+say "" "Após um momento de deliberação, o senhor enche \boy de porrada."
+say "\girl se pergunta o que ele estava pensando..."
+end_script
+
+waypoint intelligence_fail
+say "\boy" "Eu quero dar um futuro confortável para ela, senhor!"
+say "" "O senhor analisa \boy de cima a baixo."
+say "Pai da \girl" "Você não parece o tipo de homem que vai ter sucesso na vida."
+say "\girl fica decepcionada."
+end_script
+
+waypoint charisma_fail
+say "\boy" "Eu quero fazê-la muito feliz, senhor!"
+say "" "O senhor analisa \boy de cima a baixo."
+say "Pai da \girl" "Você não parece o tipo de homem que minha filha merece."
+say "\girl fica decepcionada."
+end_script
+
+

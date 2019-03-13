@@ -100,10 +100,17 @@ public class GameController : MonoBehaviour {
   }
 
   public void GenerateDate(int location){
-    int dateSize = 2;
+    int dateSize = Mathf.Min(allDateEvents.Count, 7);
+    List<int> selectedEvents = new List<int>();
+    int selectedId;
+
     date = new DateEvent[dateSize];
-    for(int i=0; i< dateSize; i++){
-      date[i] = allDateEvents[i];
+    for(int i=0; i<dateSize; i++){
+      do{
+        selectedId = Random.Range(0, allDateEvents.Count);
+      } while(selectedEvents.Contains(selectedId));
+      date[i] = allDateEvents[selectedId];
+      selectedEvents.Add(selectedId);
     }
   }
 
