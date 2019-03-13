@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour {
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
+    VsnAudioManager.instance.PlayMusic("conceito_intro", "conceito_loop");
   }
 
   public void Initialize(){
