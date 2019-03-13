@@ -21,7 +21,12 @@ namespace Command {
           p = GlobalData.instance.GetCurrentGirl();
           break;
       }
-      attributeToUse = (int)p.AttributetoUse();
+
+      if (args.Length > 0) {
+        attributeToUse = (int)args[0].GetNumberValue();
+      } else {
+        attributeToUse = (int)p.AttributetoUse();
+      }
 
       result = attributeToUse;
       if (p.attributes[attributeToUse] < currentEvent.difficultyForAttribute[attributeToUse]){
@@ -32,6 +37,9 @@ namespace Command {
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[0]);
+      signatures.Add(new VsnArgType[] { 
+        VsnArgType.numberArg
+      });
     }
   }
 }

@@ -1,4 +1,9 @@
-﻿
+﻿if #ap < 2
+  goto_script "not_enough_ap"
+  end_script
+endif
+
+
 fade_out 0.5
 bg "restaurant"
 fade_in 0.5
@@ -13,10 +18,8 @@ waypoint sim
 fade_out 0.5
 bg null
 
+spend_ap 2
 say "*Você passou várias horas atendendo os clientes no local*"
-
-
-
 say "*Você ganhou 200 Dinheiro Celestial!*"
 add_var money 200
 

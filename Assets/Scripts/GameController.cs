@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour {
     ap = maxAp;
     day++;
     UpdateUI();
+    VsnController.instance.StartVSN("check_game_end");
   }
 
   public void Update() {
@@ -87,6 +88,7 @@ public class GameController : MonoBehaviour {
       return false;
     }  
     ap -= cost;
+    UpdateUI();
     return true;
   }
   
@@ -133,6 +135,12 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickSelectNewCouple(){
-    GlobalData.instance.SelectNewCouple();
+    if(ap > 1){
+      GlobalData.instance.SelectNewCouple();
+      SpendAP(1);
+      VsnController.instance.StartVSN("change_couple");
+    }else{
+      VsnController.instance.StartVSN("not_enough_ap");
+    }
   }
 }

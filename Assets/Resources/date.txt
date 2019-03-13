@@ -14,13 +14,53 @@ say "" "\couple resolveram sair para se divertir."
 waypoint new_event
 if #currentDateEvent < #dateLength
 
+waypoint start_interaction
 goto_script "\currentEventName" event_statement
-choices "Interferir" ac_interfere "Ignorar" ac_continue
+choices "Interferir (1AP)" ac_interfere "Ignorar" ac_continue
 
 waypoint ac_interfere
+if #ap < 1
+  goto_script "not_enough_ap"
+  goto start_interaction
+endif
+
+if #currentEventInteractionType == 0
+  say "" "Qual a reação que \boy deve tomar?"
+endif
+if #currentEventInteractionType == 1
+  say "" "Qual a reação que \girl deve tomar?"
+endif
+if #currentEventInteractionType == 2
+  say "" "Qual a reação que \couple devem tomar?"
+endif
+choices "Coragem" sug_guts "Inteligência" sug_intelligence "Carisma" sug_charisma "Cancelar" start_interaction
+
+waypoint sug_guts
+set_var selected_attribute 0
+goto suggestion
+
+waypoint sug_intelligence
+set_var selected_attribute 1
+goto suggestion
+
+waypoint sug_charisma
+set_var selected_attribute 2
+goto suggestion
+
+
+waypoint suggestion
+spend_ap 1
+event_resolution selected_attribute
+goto resolution
+
+
+
+
 waypoint ac_continue
 event_resolution
 
+
+waypoint resolution
 if resolution == 0
   goto_script "\currentEventName" guts_success
 endif
@@ -54,7 +94,7 @@ endif
 
 
 waypoint end
-if date_success >= 1
+if date_success >= 5
   say "O encontro acabou, e foi um grande sucesso!"
   say "\couple se tornaram um casal inseparável, e você sabe que eles terão filhos no futuro!"
   ship_couple

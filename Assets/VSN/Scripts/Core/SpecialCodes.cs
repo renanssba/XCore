@@ -47,6 +47,16 @@ public class SpecialCodes {
         return GameController.instance.date.Length;
       case "#currentDateEvent":
         return VsnSaveSystem.GetIntVariable("currentDateEvent");
+      case "#ap":
+        return GameController.instance.ap;
+      case "#max_ap":
+        return GameController.instance.maxAp;
+      case "#day":
+        return GameController.instance.day;
+      case "#max_days":
+        return GameController.instance.maxDays;
+      case "#currentEventInteractionType":
+        return (int)GameController.instance.GetCurrentEvent().interactionType;
       default:
         return 0f;
     }
