@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResourcesManager : MonoBehaviour {
   public Sprite[] faceSprites;
   public Sprite[] cardSprites;
+  public Sprite[] itemSprites;
 
   public static ResourcesManager instance;
 

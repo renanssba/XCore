@@ -52,4 +52,9 @@ public class SpreadsheetReader : MonoBehaviour {
     }
     return ReadTabSeparatedText(spreadsheet.text, header_lines);
   }
+
+  public static SpreadsheetData ReadSpreadsheet(string name, int headerLines) {
+    TextAsset text = Resources.Load(name) as TextAsset;
+    return ReadTabSeparatedText(text.text, 1);
+  }
 }

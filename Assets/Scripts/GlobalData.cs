@@ -7,11 +7,13 @@ public class GlobalData : MonoBehaviour {
   public List<Person> people;
   public int currentCouple;
   public List<int> shippedCouples;
+  public Inventory inventory;
 
   public static GlobalData instance;
 
   void Awake () {
     instance = this;
+    inventory = new Inventory();
   }
 
   public void InitializeChapter(){

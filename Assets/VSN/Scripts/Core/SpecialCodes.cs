@@ -55,6 +55,8 @@ public class SpecialCodes {
         return GameController.instance.day;
       case "#max_days":
         return GameController.instance.maxDays;
+      case "#progress":
+        return GlobalData.instance.shippedCouples.Count;
       case "#currentEventInteractionType":
         return (int)GameController.instance.GetCurrentEvent().interactionType;
       default:

@@ -22,6 +22,10 @@ public class GameController : MonoBehaviour {
   public List<DateEvent> allDateEvents;
   public DateEvent[] date;
 
+  public TextMeshProUGUI progressText;
+  public TextMeshProUGUI objectiveText;
+  public TextMeshProUGUI moneyText;
+
 
 
   public void Awake() {
@@ -98,8 +102,11 @@ public class GameController : MonoBehaviour {
     int coupleId = GlobalData.instance.currentCouple;
     couple[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     couple[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
-    dayText.text = "Dia: " + day + "/" + maxDays;
+    dayText.text = "Dia " + day + " /" + maxDays;
     apText.text = "AP: " + ap;
+    progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
+    objectiveText.text = "/5";
+    moneyText.text = ((int)VsnSaveSystem.GetIntVariable("money")).ToString();
   }
 
   public void GenerateDate(int location){
@@ -136,7 +143,7 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickSelectNewCouple(){
-    if(ap > 1){
+    if(ap >= 1){
       GlobalData.instance.SelectNewCouple();
       SpendAP(1);
       VsnController.instance.StartVSN("change_couple");
