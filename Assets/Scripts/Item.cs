@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,15 @@ public class Item {
   public string name;
   public string description;
 
+  public int[] attribute_bonus;
+
   public ItemType type;
   public int price;
   public Sprite sprite;
+
+  public Item(){
+    attribute_bonus = new int[3];
+  }
 
   public static string GetName(int id){
     if(id == -1){
@@ -79,9 +86,15 @@ public class Inventory{
   }
 
   public void AddItem(int id, int amount){
+    if(id == -1){
+      Debug.LogError("No item to add");
+      return;
+    }
+
     for(int i=0; i<items.Count; i++){
       if(items[i].id == id){
         items[i].amount += amount;
+        SortItems();
         return;
       }
     }
@@ -89,10 +102,12 @@ public class Inventory{
     for(int i=0; i<items.Count; i++){
       if(items[i].id > id){
         items.Insert(i, new ItemListing(id, amount));
+        SortItems();
         return;
       }
     }
     items.Add(new ItemListing(id, amount));
+    SortItems();
   }
 
   public void ConsumeItem(int id, int amount){
@@ -106,9 +121,14 @@ public class Inventory{
         if(items[i].amount <= 0){
           items.RemoveAt(i);
         }
+        SortItems();
         return;
       }
     }
+  }
+
+  public void SortItems(){
+  items = items.OrderBy(o => o.id).ToList();
   }
 
   public bool HasItem(int id){
@@ -127,6 +147,7 @@ public class Inventory{
     return false;
   }
 }
+
 
 [System.Serializable]
 public class ItemListing{

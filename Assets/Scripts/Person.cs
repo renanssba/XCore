@@ -31,6 +31,7 @@ public class Person {
   public int[] attributes;
   public Personality personality;
   public List<Trait> traits;
+  public Item[] equips;
 
   public int faceId;
 
@@ -46,6 +47,10 @@ public class Person {
       faceId = 5 + Random.Range(0, 5);
     }
     personality = (Personality)Random.Range(0, 3);
+    equips = new Item[3];
+    for(int i=0; i<3; i++){
+      equips[i] = null;
+    }
   }
 
   public Attributes AttributetoUse(){
@@ -58,5 +63,30 @@ public class Person {
         return Attributes.charisma;
     }
     return Attributes.guts;
+  }
+
+  public int AttributeValue(int att){
+    int sum = attributes[att];
+    for(int i=0; i<equips.Length; i++){
+      if(equips[i] != null){
+        sum += equips[i].attribute_bonus[att];
+      }
+    }
+    return sum;
+  }
+  
+  public void EquipItemInSlot(int slotId, Item item){
+    equips[slotId] = item;
+    GlobalData.instance.inventory.ConsumeItem(equips[slotId].id, 1);
+    GameController.instance.UpdateUI();
+  }
+
+  public void UnequipItemInSlot(int slotId) {
+    if (equips[slotId] != null) {
+      Debug.LogWarning("Unequiping item: " + equips[slotId].id +", " + equips[slotId].name);
+      GlobalData.instance.inventory.AddItem(equips[slotId].id, 1);
+      equips[slotId] = null;
+      GameController.instance.UpdateUI();
+    }
   }
 }

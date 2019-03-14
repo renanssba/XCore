@@ -60,12 +60,21 @@ public class ItemUI : MonoBehaviour {
   }
 
   public void Clicked(){
-    //UIController.GetInstance().FadeOutShade(ScreenTransitions.fadeTime);
+    //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
-    if(interactionType == ItemInteractionType.store){
-      VsnSaveSystem.SetVariable("item_price", item.price);
+    switch(interactionType) {
+      case ItemInteractionType.store:
+        VsnSaveSystem.SetVariable("item_price", item.price);
+        break;
+      case ItemInteractionType.input:
+        // TODO EQUIP ITEM
+        Person p = VsnSaveSystem.GetIntVariable("person_equip_selected")==1?GlobalData.instance.GetCurrentBoy(): GlobalData.instance.GetCurrentGirl();
+        p.EquipItemInSlot(VsnSaveSystem.GetIntVariable("slot_id"), item);
+        break;
     }
+
     VsnController.instance.GotItemInput();
     //UIController.GetInstance().itemSelectorScreen.gameObject.SetActive(false);
+    ItemSelectorScreen.instance.screenTransition.CloseMenuScreen();
   }
 }

@@ -20,8 +20,10 @@ bg null
 
 spend_ap 2
 say "*Você passou várias horas atendendo os clientes no local*"
-say "*Você ganhou 200 Dinheiro Celestial!*"
+
 add_var money 200
+update_ui
+say "*Você ganhou 200 Dinheiro Celestial!*"
 
 bg null
 pass_time

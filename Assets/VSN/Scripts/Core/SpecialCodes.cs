@@ -24,6 +24,8 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\currentEventName", GameController.instance.GetCurrentEventName());
       currentString = currentString.Replace("\\boy", GlobalData.instance.people[currentCouple * 2].name);
       currentString = currentString.Replace("\\girl", GlobalData.instance.people[currentCouple * 2+1].name);
+      currentString = currentString.Replace("\\item_name", Item.GetName(VsnSaveSystem.GetIntVariable("item_id")));
+      currentString = currentString.Replace("\\item_price", VsnSaveSystem.GetIntVariable("item_price").ToString());
 
     } while (currentString != initialString);
 

@@ -33,7 +33,7 @@ endif
 if #currentEventInteractionType == 2
   say "" "Qual a reação que \couple devem tomar?"
 endif
-choices "Coragem" sug_guts "Inteligência" sug_intelligence "Carisma" sug_charisma "Cancelar" start_interaction
+choices "Valentia" sug_guts "Inteligência" sug_intelligence "Carisma" sug_charisma "Cancelar" start_interaction
 
 waypoint sug_guts
 set_var selected_attribute 0
@@ -107,3 +107,7 @@ fade_out 0.5
 bg null
 update_ui
 fade_in 0.5
+
+if date_success >= 5
+  say "Fertiliel passou a observar o seu próximo casal da lista: \couple."
+else

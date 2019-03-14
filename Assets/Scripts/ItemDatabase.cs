@@ -32,6 +32,10 @@ public class ItemDatabase : MonoBehaviour {
       newItem.name = entry["name"];
       newItem.description = entry["description"];
       newItem.type = (entry["type"] == "c") ? ItemType.celestial : ItemType.mundane;
+      newItem.attribute_bonus[0] = int.Parse(entry["guts_bonus"]);
+      newItem.attribute_bonus[1] = int.Parse(entry["intelligence_bonus"]);
+      newItem.attribute_bonus[2] = int.Parse(entry["charisma_bonus"]);
+
       newItem.price = int.Parse(entry["price"]);
       newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
       if(entry["sellable"] == "yes"){

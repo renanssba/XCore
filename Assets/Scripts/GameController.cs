@@ -8,7 +8,7 @@ using TMPro;
 public class GameController : MonoBehaviour {
 
   public static GameController instance;
-  public PersonCard[] couple;
+  public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
   public TextMeshProUGUI apText;
   
@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI progressText;
   public TextMeshProUGUI objectiveText;
   public TextMeshProUGUI moneyText;
+
+  public ItemSelectorScreen itemSelectorScreen;
 
 
 
@@ -100,13 +102,15 @@ public class GameController : MonoBehaviour {
 
   public void UpdateUI() {
     int coupleId = GlobalData.instance.currentCouple;
-    couple[0].Initialize(GlobalData.instance.people[coupleId * 2]);
-    couple[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
+    personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
+    personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     dayText.text = "Dia " + day + " /" + maxDays;
     apText.text = "AP: " + ap;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     objectiveText.text = "/5";
     moneyText.text = ((int)VsnSaveSystem.GetIntVariable("money")).ToString();
+    personCards[0].UpdateUI();
+    personCards[1].UpdateUI();
   }
 
   public void GenerateDate(int location){

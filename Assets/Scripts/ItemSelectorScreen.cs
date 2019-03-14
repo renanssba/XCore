@@ -6,6 +6,8 @@ using TMPro;
 
 public class ItemSelectorScreen : MonoBehaviour {
 
+  public static ItemSelectorScreen instance;
+
   public TextMeshProUGUI screenNameText;
   public TextMeshProUGUI currentMoneyText;
   public GameObject itemsHolder;
@@ -18,12 +20,13 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   private ItemInteractionType interactionType;
 
+  public void Awake() {
+    instance = this;
+    gameObject.SetActive(false);
+  }
+
   public void OpenStore() {
-    Inventory i = new Inventory();
-    foreach(int it in ItemDatabase.instance.itemsForSale) {
-      i.AddItem(it, 1);
-    }
-    Initialize(ItemInteractionType.store, i);
+    Initialize(ItemInteractionType.store, new Inventory(ItemDatabase.instance.itemsForSale));
     screenTransition.OpenMenuScreen();
   }
 
@@ -43,6 +46,8 @@ public class ItemSelectorScreen : MonoBehaviour {
         screenNameText.text = "Loja";
         break;
       case ItemInteractionType.input:
+        screenNameText.text = "Escolha item para equipar:";
+        break;
       case ItemInteractionType.inventory:
         screenNameText.text = "Inventário";
         break;

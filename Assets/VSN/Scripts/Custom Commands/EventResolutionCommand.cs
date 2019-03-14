@@ -29,7 +29,7 @@ namespace Command {
       }
 
       result = attributeToUse;
-      if (p.attributes[attributeToUse] < currentEvent.difficultyForAttribute[attributeToUse]){
+      if (p.AttributeValue(attributeToUse) < currentEvent.difficultyForAttribute[attributeToUse]){
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
