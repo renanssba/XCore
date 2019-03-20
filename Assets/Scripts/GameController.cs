@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
   public List<DateEvent> allDateEvents;
   public DateEvent[] date;
 
+  public Slider progressSlider;
   public TextMeshProUGUI progressText;
   public TextMeshProUGUI objectiveText;
   public TextMeshProUGUI moneyText;
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
+    VsnSaveSystem.SetVariable("objective", 5);
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
@@ -107,8 +109,9 @@ public class GameController : MonoBehaviour {
     dayText.text = "Dia " + day + " /" + maxDays;
     apText.text = "AP: " + ap;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
-    objectiveText.text = "/5";
-    moneyText.text = ((int)VsnSaveSystem.GetIntVariable("money")).ToString();
+    progressSlider.value = GlobalData.instance.shippedCouples.Count;
+    objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
+    moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
     personCards[0].UpdateUI();
     personCards[1].UpdateUI();
   }

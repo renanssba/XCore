@@ -1,4 +1,5 @@
-﻿fade_out 0.5
+﻿set_people "date"
+fade_out 0.5
 bg "shopping"
 fade_in 0.5
 
@@ -94,7 +95,7 @@ endif
 
 
 waypoint end
-if date_success >= 5
+if date_success >= 4
   say "O encontro acabou, e foi um grande sucesso!"
   say "\couple se tornaram um casal inseparável, e você sabe que eles terão filhos no futuro!"
   ship_couple
@@ -108,6 +109,7 @@ bg null
 update_ui
 fade_in 0.5
 
-if date_success >= 5
+if date_success >= 4
   say "Fertiliel passou a observar o seu próximo casal da lista: \couple."
 else
+set_people "show"

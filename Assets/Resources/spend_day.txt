@@ -1,0 +1,24 @@
+﻿set_people "hide"
+fade_out 0.5
+bg null
+
+
+say "*Fertiliel foi dormir e descansar para o próximo dia.*"
+stop_music
+wait 0.5
+play_sfx "sleep"
+play_sfx "sleep"
+wait 5
+spend_time
+update_ui
+wait 1
+
+play_music "conceito_intro" "conceito_loop"
+
+bg null
+fade_in 0.5
+set_people "show"
+goto_script "check_end_game"
+goto end
+
+waypoint end

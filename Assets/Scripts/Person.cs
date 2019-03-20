@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,10 +38,31 @@ public class Person {
 
 
   public void Initialize() {
+    List<int> attValues = new List<int>();
+    switch (Random.Range(0, 3)) {
+      case 0:
+        attValues.Add(3);
+        attValues.Add(2);
+        attValues.Add(1);
+        break;
+      case 1:
+        attValues.Add(2);
+        attValues.Add(2);
+        attValues.Add(2);
+        break;
+      case 2:
+        attValues.Add(4);
+        attValues.Add(1);
+        attValues.Add(1);
+        break;
+    }
+    attValues = attValues.OrderBy(x => Random.value).ToList();
+
     attributes = new int[3];
-    attributes[(int)Attributes.guts] = Random.Range(1, 4);
-    attributes[(int)Attributes.intelligence] = Random.Range(1, 4);
-    attributes[(int)Attributes.charisma] = Random.Range(1, 4);
+    for(int i=0; i<3; i++){
+      attributes[i] = attValues[i];
+    }
+    
     if (isMale) {
       faceId = Random.Range(0, 5);
     } else {

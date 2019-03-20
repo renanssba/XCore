@@ -4,12 +4,13 @@
 endif
 
 
+set_people "hide"
 fade_out 0.5
 bg "restaurant"
 fade_in 0.5
 
 
-say "*Você pode trabalhar aqui este turno para ganhar 200 de salário.*"
+say "*Você pode trabalhar aqui para ganhar 130 de salário.*"
 say "*Gostaria de trabalhar em Restaurante agora?*"
 choices "Sim" sim "Não" nao
 
@@ -21,14 +22,12 @@ bg null
 spend_ap 2
 say "*Você passou várias horas atendendo os clientes no local*"
 
-add_var money 200
+add_var money 130
 update_ui
-say "*Você ganhou 200 Dinheiro Celestial!*"
+say "*Você ganhou 130 Dinheiro Celestial!*"
 
 bg null
-pass_time
 fade_in 0.5
-goto_script "check_end_game"
 goto end
 
 
@@ -41,3 +40,4 @@ goto end
 
 
 waypoint end
+set_people "show"

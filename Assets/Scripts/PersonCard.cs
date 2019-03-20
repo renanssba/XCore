@@ -15,6 +15,8 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI[] traitTexts;
   public Image[] equipIcons;
 
+  public bool canEquipItems = true;
+
 
   public void Initialize(Person p){
     person = p;
@@ -42,7 +44,19 @@ public class PersonCard : MonoBehaviour {
     traitTexts[0].text = person.personality.ToString();
   }
 
+  public void SetEquipableItems(bool value) {
+    //canEquipItems = value;
+    foreach(Image img in equipIcons){
+      img.transform.parent.GetComponent<Button>().interactable = value;
+    }
+    UpdateUI();
+  }
+
   public void ClickPersonSlot(int slotId){
+    if(!canEquipItems){
+      return;
+    }
+
     if(person.equips[slotId] != null){
       person.UnequipItemInSlot(slotId);
       return;
