@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 
   public int day;
   public int maxDays;
+  public int objective;
 
   public TextAsset dateEventsFile;
   public List<DateEvent> allDateEvents;
@@ -36,7 +37,8 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
-    VsnSaveSystem.SetVariable("objective", 5);
+    VsnSaveSystem.SetVariable("objective", objective);
+    VsnSaveSystem.SetVariable("max_days", maxDays);
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
@@ -106,7 +108,7 @@ public class GameController : MonoBehaviour {
     int coupleId = GlobalData.instance.currentCouple;
     personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
-    dayText.text = "Dia " + day + " /" + maxDays;
+    dayText.text = "Dia " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     apText.text = "AP: " + ap;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;

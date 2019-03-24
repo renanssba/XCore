@@ -83,9 +83,11 @@ endif
 
 if resolution < 3
   add_var date_success 1
-  say "" "O casal superou o desafio!"
+  play_sfx "relationship_up"
+  say "" "Desafio superado!"
 else
-  say "" "O casal falhou neste desafio."
+  play_sfx "relationship_down"
+  say "" "Desafio não superado."
 endif
 add_var currentDateEvent 1
 goto new_event
@@ -95,9 +97,9 @@ endif
 
 
 waypoint end
-if date_success >= 4
+if date_success >= 5
   say "O encontro acabou, e foi um grande sucesso!"
-  say "\couple se tornaram um casal inseparável, e você sabe que eles terão filhos no futuro!"
+  say "\couple se tornaram um casal inseparável, e você sabe que eles terão muitos filhos no futuro!"
   ship_couple
 else
   say "O encontro acabou, e foi um fracasso!"
@@ -109,7 +111,9 @@ bg null
 update_ui
 fade_in 0.5
 
-if date_success >= 4
+if date_success >= 5
   say "Fertiliel passou a observar o seu próximo casal da lista: \couple."
-else
+endif
+
+goto_script "spend_day"
 set_people "show"

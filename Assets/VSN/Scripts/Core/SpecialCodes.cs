@@ -26,6 +26,8 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\girl", GlobalData.instance.people[currentCouple * 2+1].name);
       currentString = currentString.Replace("\\item_name", Item.GetName(VsnSaveSystem.GetIntVariable("item_id")));
       currentString = currentString.Replace("\\item_price", VsnSaveSystem.GetIntVariable("item_price").ToString());
+      currentString = currentString.Replace("\\objective", VsnSaveSystem.GetIntVariable("objective").ToString());
+      currentString = currentString.Replace("\\max_days", VsnSaveSystem.GetIntVariable("max_days").ToString());
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GameController.instance.day.ToString());
 

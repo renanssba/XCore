@@ -1,38 +1,40 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Uma bola de futebol vem vindo em alta velocidade na direção de \girl e ela não percebeu! Rápido, \boy, faça alguma coisa!"
+say "" "Uma bola de futebol vem vindo em alta velocidade na direção de \boy e ele não percebeu! Rápido, \girl, faça alguma coisa!"
 end_script
 
 
 
 waypoint guts_success
-say "" "\boy age rapidamente e bloqueia a bola! \girl se assusta com o movimento, mas logo agradece."
+say "" "\girl age rapidamente e dá um socão na bola, quando ela estava prestes a atingir o rosto do garoto!"
+say "\boy se assusta com o movimento, mas logo agradece."
 end_script
 
 waypoint intelligence_success
-say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \boy faz complexos cálculos de física e grita '\girl!' na hora perfeita."
-say "A garota se vira no momento exato e a bola passa raspando ao lado da sua cabeça."
+say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \girl faz complexos cálculos de física e grita '\boy!' na hora perfeita."
+say "O garoto se vira no momento exato e a bola passa raspando ao lado da sua cabeça."
 end_script
 
 waypoint charisma_success
-say "" "\boy utiliza um olhar 43 furtivo para tentar convencer um transeunte a pular na trajetória da bola."
+say "" "\girl utiliza um olhar 43 furtivo para tentar convencer um transeunte a pular na trajetória da bola."
 say "Milagrosamente, funciona!"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\boy tenta bloquear a bola e erra."
+say "" "\girl tenta dar um socão na bola para bloqueá-la, mas erra e acaba acertando o rosto de \boy."
+say "Depois de levar um soco E uma bolada, \boy parece não estar se sentindo muito bem."
 end_script
 
 waypoint intelligence_fail
-say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \boy faz complexos cálculos de física e grita '\girl!' na hora perfeita."
-say "Porém, \boy erra o cálculo por ter desconsiderado a resistência do ar e a bola acerta \girl em cheio."
+say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \girl faz complexos cálculos de física e grita '\boy!' na hora perfeita."
+say "Porém, \girl erra o cálculo por ter desconsiderado a resistência do ar e a bola acerta \boy em cheio."
 end_script
 
 waypoint charisma_fail
-say "" "\boy utiliza um olhar 43 furtivo para tentar convencer um transeunte a pular na trajetória da bola."
+say "" "\girl utiliza um olhar 43 furtivo para tentar convencer um transeunte a pular na trajetória da bola."
 say "Como era de se esperar, isto não funciona."
 end_script
 

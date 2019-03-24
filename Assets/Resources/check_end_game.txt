@@ -2,14 +2,14 @@
 fade_in 0
 
 /// CONDIÇÕES DE FIM DE JOGO
-if #day > 6
+if #day > max_days
   set_people "hide"
   goto_script "fertiliel_enter"
     
   say "Fertiliel" "Olha só, o nosso tempo acabou!"
   goto end_game
 endif
-if #progress >= 3
+if #progress >= objective
   set_people "hide"
   goto_script "fertiliel_enter"
     
@@ -19,15 +19,14 @@ endif
 
 // IF GAME NOT ENDED
 say "*Com suas forças recuperadas, ela começa um novo dia para juntar casais!*"
-
 end_script
 
 
 waypoint end_game
 say "Fertiliel" "Vamos ver quão bem eu fui na minha missão..."
-say "*A sua missão era reunir 3 casais dentro de 6 dias.*"
-say "*Você conseguiu reunir \progress casais dentro de \day dias.*"
-if #progress >= 3
+say "" "*A sua missão era reunir \objective casais dentro de \max_days dias.*"
+say "*Você conseguiu reunir \objective casais dentro de \day dias.*"
+if #progress >= objective
   say "*Parabéns! Você completou a missão com sucesso!*"
   say "Fertiliel" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
   say "Obrigada por jogar o jogo e me ajudar na missão!"

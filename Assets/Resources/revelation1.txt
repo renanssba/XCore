@@ -1,0 +1,44 @@
+goto *arg1
+
+waypoint event_statement
+say "" "\boy nota que \girl está distraída e com o olhar vazio."
+say "Conversando com ela, \girl revela que está com problemas pessoais."
+end_script
+
+
+
+waypoint guts_success
+say "" "\boy  olha com determinação no fundo dos olhos de \girl e exclama:"
+say "\boy" "Vai dar tudo certo! Eu acredito em você!"
+say "" "\girl se sente motivada!"
+end_script
+
+waypoint intelligence_success
+say "" "\boy analisa os problemas de \girl, recomendando soluções."
+say "\girl admira a racionalidade de \boy. Tão pragmático!"
+end_script
+
+waypoint charisma_success
+say "" "\boy escuta compreensivamente enquanto \girl explica o que a aflige."
+say "\girl agradece. Às vezes, as pessoas só precisam de um ombro amigo."
+end_script
+
+
+
+waypoint guts_fail
+say "" "\boy  olha com determinação no fundo dos olhos de \girl e exclama:"
+say "\boy" "Vai dar tudo certo! Eu acredito em você!"
+say "" "Infelizmente nem todos os problemas se resolvem só com motivação."
+end_script
+
+waypoint intelligence_fail
+say "" "\boy analisa os problemas de \girl, recomendando soluções."
+say "\girl fica indignada."
+end_script
+
+waypoint charisma_fail
+say "" "\boy escuta compreensivamente enquanto \girl explica o que a aflige."
+say "\girl ainda parece muito triste. Às vezes pessoas precisam de soluções práticas."
+end_script
+
+
