@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour {
 
   public ItemSelectorScreen itemSelectorScreen;
 
+  public GameObject dateUiPanel;
   public Toggle[] dateEventToggles;
   public Image[] successIcons;
   public Image[] failIcons;
@@ -188,6 +189,11 @@ public class GameController : MonoBehaviour {
 
   public void ShowButtons(bool value){
     buttonsPanel.SetActive(value);
+  }
+
+  public void ShowDateUiPanel(bool value) {
+    dateUiPanel.SetActive(value);
+    UpdateUI();
   }
 
 

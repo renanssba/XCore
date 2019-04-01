@@ -15,7 +15,7 @@ set_var date_event_result_4 0
 set_var date_event_result_5 0
 set_var date_event_result_6 0
 
-
+show_date_ui true
 say "" "\couple resolveram sair para se divertir."
 
 
@@ -26,25 +26,25 @@ waypoint start_interaction
 goto_script "\currentEventName" event_statement
 set_people "event"
 
-goto ac_interfere
+//goto ac_interfere
 
 
-choices "Interferir (1AP)" ac_interfere "Ignorar" ac_continue
+//choices "Interferir (1AP)" ac_interfere "Ignorar" ac_continue
 
 waypoint ac_interfere
-if #ap < 1
-  goto_script "not_enough_ap"
-  goto start_interaction
-endif
+// if #ap < 1
+  // goto_script "not_enough_ap"
+  // goto start_interaction
+// endif
 
 if #currentEventInteractionType == 0
-  say "" "Qual a reação que \boy deve tomar?"
+  say "" "Qual reação \boy deve tomar?"
 endif
 if #currentEventInteractionType == 1
-  say "" "Qual a reação que \girl deve tomar?"
+  say "" "Qual reação \girl deve tomar?"
 endif
 if #currentEventInteractionType == 2
-  say "" "Qual a reação que \couple devem tomar?"
+  say "" "Qual reação \couple devem tomar?"
 endif
 
 
@@ -141,10 +141,12 @@ endif
 waypoint end
 if date_success >= 5
   say "O encontro acabou, e foi um grande sucesso!"
+  show_date_ui false
   say "\couple se tornaram um casal inseparável, e você sabe que eles terão muitos filhos no futuro!"
   ship_couple
 else
   say "O encontro acabou, e foi um fracasso!"
+  show_date_ui false
 endif
 
 
