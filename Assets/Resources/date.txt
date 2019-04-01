@@ -7,6 +7,13 @@ fade_in 0.5
 generate_date
 set_var currentDateEvent 0
 set_var date_success 0
+set_var date_event_result_0 0
+set_var date_event_result_1 0
+set_var date_event_result_2 0
+set_var date_event_result_3 0
+set_var date_event_result_4 0
+set_var date_event_result_5 0
+set_var date_event_result_6 0
 
 
 say "" "\couple resolveram sair para se divertir."
@@ -17,6 +24,11 @@ if #currentDateEvent < #dateLength
 
 waypoint start_interaction
 goto_script "\currentEventName" event_statement
+set_people "event"
+
+goto ac_interfere
+
+
 choices "Interferir (1AP)" ac_interfere "Ignorar" ac_continue
 
 waypoint ac_interfere
@@ -34,17 +46,45 @@ endif
 if #currentEventInteractionType == 2
   say "" "Qual a reação que \couple devem tomar?"
 endif
-choices "Valentia" sug_guts "Inteligência" sug_intelligence "Carisma" sug_charisma "Cancelar" start_interaction
+
+
+if #currentPersonality == 0
+  choices "Valentia \guts" sug_guts "Inteligência \intelligence - (1AP)" sug_intelligence "Carisma \charisma - (1AP)" sug_charisma
+endif
+if #currentPersonality == 1
+  choices "Valentia \guts - (1AP)" sug_guts "Inteligência \intelligence" sug_intelligence "Carisma \charisma - (1AP)" sug_charisma
+endif
+if #currentPersonality == 2
+  choices "Valentia \guts - (1AP)" sug_guts "Inteligência \intelligence - (1AP)" sug_intelligence "Carisma \charisma" sug_charisma
+endif
 
 waypoint sug_guts
+if #currentPersonality != 0
+  if #ap < 1
+    goto_script "not_enough_ap"
+    goto start_interaction
+  endif
+endif
 set_var selected_attribute 0
 goto suggestion
 
 waypoint sug_intelligence
+if #currentPersonality != 1
+  if #ap < 1
+    goto_script "not_enough_ap"
+    goto start_interaction
+  endif
+endif
 set_var selected_attribute 1
 goto suggestion
 
 waypoint sug_charisma
+if #currentPersonality != 2
+  if #ap < 1
+    goto_script "not_enough_ap"
+    goto start_interaction
+  endif
+endif
 set_var selected_attribute 2
 goto suggestion
 
@@ -81,6 +121,7 @@ if resolution == 5
   goto_script "\currentEventName" charisma_fail
 endif
 
+set_people "date"
 if resolution < 3
   add_var date_success 1
   play_sfx "relationship_up"
@@ -90,6 +131,7 @@ else
   say "" "Desafio não superado."
 endif
 add_var currentDateEvent 1
+update_ui
 goto new_event
 
 endif

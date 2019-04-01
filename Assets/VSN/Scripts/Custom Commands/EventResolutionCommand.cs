@@ -9,6 +9,7 @@ namespace Command {
 
     public override void Execute() {
       DateEvent currentEvent = GameController.instance.GetCurrentEvent();
+      int currentEventId = VsnSaveSystem.GetIntVariable("currentDateEvent");
       Person p = null;
       int attributeToUse;
       int result = 0;
@@ -33,6 +34,13 @@ namespace Command {
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
+      if(result < 3){
+        VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 1);
+      }else{
+        VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 2);
+      }
+
+      GameController.instance.UpdateUI();
     }
 
     public override void AddSupportedSignatures() {

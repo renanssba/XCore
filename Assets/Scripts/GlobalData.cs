@@ -68,6 +68,33 @@ public class GlobalData : MonoBehaviour {
     return people[currentCouple * 2+1];
   }
 
+  public Personality CurrentPersonPersonality(){
+    switch (GameController.instance.GetCurrentEvent().interactionType) {
+      case EventInteractionType.male:
+        return GetCurrentBoy().personality;
+      case EventInteractionType.female:
+        return GetCurrentGirl().personality;
+      case EventInteractionType.couple:
+        return GetCurrentGirl().personality;
+    }
+    return Personality.emotivo;
+  }
+
+  public int EventSolvingAttributeLevel(int attr){
+    if(GameController.instance.GetCurrentEvent() == null) {
+      return 0;
+    }
+    switch(GameController.instance.GetCurrentEvent().interactionType){
+      case EventInteractionType.male:
+        return GetCurrentBoy().AttributeValue(attr);
+      case EventInteractionType.female:
+        return GetCurrentGirl().AttributeValue(attr);
+      case EventInteractionType.couple:
+        return GetCurrentGirl().AttributeValue(attr) + GetCurrentBoy().AttributeValue(attr);
+    }
+    return 0;
+  }
+
   public void SelectNewCouple(){
     if(shippedCouples.Count >= people.Count/2){
       currentCouple = -1;

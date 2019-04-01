@@ -4,40 +4,25 @@
 endif
 
 
-set_people "hide"
-fade_out 0.5
-bg "restaurant"
-fade_in 0.5
+set_var hide_buttons 1
+update_ui
 
-
-say "*Você pode trabalhar aqui para ganhar 130 de salário.*"
-say "*Gostaria de trabalhar em Restaurante agora?*"
+say "*Quer trabalhar, gastando 2 AP para ganhar 130 de salário?*"
 choices "Sim" sim "Não" nao
 
 
 waypoint sim
-fade_out 0.5
-bg null
-
 spend_ap 2
-say "*Você passou várias horas atendendo os clientes no local*"
-
 add_var money 130
 update_ui
-say "*Você ganhou 130 Dinheiro Celestial!*"
-
-bg null
-fade_in 0.5
+say "*Você trabalhou e ganhou 130 Dinheiro Celestial!*"
 goto end
 
 
 waypoint nao
-say "*Você decidiu trabalhar outro dia.*"
-fade_out 0.5
-bg null
-fade_in 0.5
 goto end
 
 
 waypoint end
-set_people "show"
+set_var hide_buttons 0
+update_ui

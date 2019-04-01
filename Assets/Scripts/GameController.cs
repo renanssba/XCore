@@ -28,7 +28,14 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI objectiveText;
   public TextMeshProUGUI moneyText;
 
+  public GameObject buttonsPanel;
+
   public ItemSelectorScreen itemSelectorScreen;
+
+  public Toggle[] dateEventToggles;
+  public Image[] successIcons;
+  public Image[] failIcons;
+  public Image[] unresolvedIcons;
 
 
 
@@ -116,6 +123,37 @@ public class GameController : MonoBehaviour {
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
     personCards[0].UpdateUI();
     personCards[1].UpdateUI();
+
+    bool showButtons = (VsnSaveSystem.GetIntVariable("hide_buttons") == 0);
+    buttonsPanel.SetActive(showButtons);
+
+    int currentEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
+    if (currentEvent < dateEventToggles.Length) {
+      dateEventToggles[currentEvent].isOn = true;
+    }else{
+      foreach (Toggle t in dateEventToggles) {
+        t.isOn = false;
+      }
+    }
+    for(int i=0; i<dateEventToggles.Length; i++){
+      switch (VsnSaveSystem.GetIntVariable("date_event_result_" + i)) {
+        case 0:
+          successIcons[i].gameObject.SetActive(false);
+          failIcons[i].gameObject.SetActive(false);
+          unresolvedIcons[i].gameObject.SetActive(true);
+          break;
+        case 1:
+          successIcons[i].gameObject.SetActive(true);
+          failIcons[i].gameObject.SetActive(false);
+          unresolvedIcons[i].gameObject.SetActive(false);
+          break;
+        case 2:
+          successIcons[i].gameObject.SetActive(false);
+          failIcons[i].gameObject.SetActive(true);
+          unresolvedIcons[i].gameObject.SetActive(false);
+          break;
+      }
+    }
   }
 
   public void GenerateDate(int location){
@@ -146,6 +184,10 @@ public class GameController : MonoBehaviour {
       return "";
     }
     return date[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
+  }
+
+  public void ShowButtons(bool value){
+    buttonsPanel.SetActive(value);
   }
 
 
