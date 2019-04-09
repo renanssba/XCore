@@ -49,13 +49,13 @@ endif
 
 
 if #currentPersonality == 0
-  choices "Valentia \guts" sug_guts "Inteligência \intelligence - (1AP)" sug_intelligence "Carisma \charisma - (1AP)" sug_charisma
+  choices "<sprite='Attributes' index=0 tint>Valentia \guts" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence - (1AP)" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma - (1AP)" sug_charisma
 endif
 if #currentPersonality == 1
-  choices "Valentia \guts - (1AP)" sug_guts "Inteligência \intelligence" sug_intelligence "Carisma \charisma - (1AP)" sug_charisma
+  choices "<sprite='Attributes' index=0 tint>Valentia \guts - (1AP)" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma - (1AP)" sug_charisma
 endif
 if #currentPersonality == 2
-  choices "Valentia \guts - (1AP)" sug_guts "Inteligência \intelligence - (1AP)" sug_intelligence "Carisma \charisma" sug_charisma
+  choices "<sprite='Attributes' index=0 tint>Valentia \guts - (1AP)" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence - (1AP)" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma" sug_charisma
 endif
 
 waypoint sug_guts

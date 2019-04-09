@@ -89,7 +89,7 @@ public class Person {
         sum += equips[i].attribute_bonus[att];
       }
     }
-    return sum;
+    return Mathf.Max(sum, 0);
   }
   
   public void EquipItemInSlot(int slotId, Item item){
@@ -105,5 +105,15 @@ public class Person {
       equips[slotId] = null;
       GameController.instance.UpdateUI();
     }
+  }
+
+  public int EquipsCount(){
+    int count = 0;
+    for (int i = 0; i < equips.Length; i++) {
+      if (equips[i] != null) {
+        count++;
+      }
+    }
+    return count;
   }
 }

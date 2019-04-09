@@ -1,0 +1,49 @@
+//goto end
+
+set_var hide_buttons 1
+set_var show_mini_fertiliel 0
+update_ui
+set_people "hide"
+fade_out 0
+wait 0.1
+fade_in 0.5
+
+
+wait 0.3
+goto_script "fertiliel_enter"
+say "Teste sprite: <sprite name="guts">"
+say "Cupido" "Seja bem-vindo ao Cupid Game - Dungeon Crawler. Como um cupido, o seu objetivo é juntar casais."
+say "Para juntar um casal, você precisa levá-lo para um <color=yellow>Encontro</color>, e ele precisa ser um sucesso."
+say "Sua missão atual é: juntar 2 casais em um período de 5 dias."
+
+char_flip fertiliel
+char_move_x fertiliel 0.14 0.5
+wait 0.5
+
+set_people "date"
+wait 0.5
+say "Este é o casal que você está observando no momento. Perceba que o rapaz e a moça possuem 3 atributos."
+say "Os atributos são: <color=yellow><sprite='Attributes' index=0 tint>Valentia</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> e <color=red><sprite='Attributes' index=2 tint>Carisma</color>. Seus valores vão de 1 (Péssimo) até 5 (Sobrehumano)."
+say "É interessante que seus humanos tenham valores altos nos atributos, pois é o que eles usarão para solucionar os problemas que aparecem durante os <color=yellow>Encontros</color>."
+
+
+
+set_var hide_buttons 0
+update_ui
+wait 0.2
+say "Estas são as ações que você pode tomar diariamente."
+say "Você pode <color=yellow>Fazer Bicos</color> e ir até a <color=yellow>Loja</color> para comprar itens equipáveis que aprimoram os atributos dos seus humanos."
+say "Se não gostar do seu casal humano atual, pode também trocá-lo. Mas fique atento que certas ações consomem o seu <color=yellow>AP (Angel Points)</color>."
+
+wait 1
+
+say "Quando estiver se sentindo pronto, clique aqui para levar seu casal para um Encontro."
+
+goto_script "fertiliel_exit"
+
+set_people "show"
+set_var hide_buttons 0
+set_var show_mini_fertiliel 1
+update_ui
+
+waypoint end

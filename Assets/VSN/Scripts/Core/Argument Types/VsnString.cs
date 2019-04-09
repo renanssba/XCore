@@ -9,7 +9,7 @@ public class VsnString : VsnArgument{
   }
 
   public override string GetStringValue(){
-    return SpecialCodes.InterpretStrings(stringValue);
+    return SpecialCodes.InterpretStrings(stringValue.Replace('\'', '\"'));
   }
 }
 

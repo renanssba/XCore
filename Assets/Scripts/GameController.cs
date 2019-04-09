@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public GameObject buttonsPanel;
+  public GameObject miniFertililel;
 
   public ItemSelectorScreen itemSelectorScreen;
 
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour {
     Initialize();
     UpdateUI();
     VsnAudioManager.instance.PlayMusic("conceito_intro", "conceito_loop");
+    VsnController.instance.StartVSN("tutorial");
   }
 
   public void Initialize(){
@@ -117,7 +119,7 @@ public class GameController : MonoBehaviour {
     personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     dayText.text = "Dia " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
-    apText.text = "AP: " + ap;
+    apText.text = "AP: " + ap+" /"+maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
@@ -128,15 +130,22 @@ public class GameController : MonoBehaviour {
     bool showButtons = (VsnSaveSystem.GetIntVariable("hide_buttons") == 0);
     buttonsPanel.SetActive(showButtons);
 
+    bool showMiniFertiliel = (VsnSaveSystem.GetIntVariable("show_mini_fertiliel") == 1);
+    miniFertililel.SetActive(showMiniFertiliel);
+
+    ShowDateProgressUI();
+  }
+
+  public void ShowDateProgressUI(){
     int currentEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
     if (currentEvent < dateEventToggles.Length) {
       dateEventToggles[currentEvent].isOn = true;
-    }else{
+    } else {
       foreach (Toggle t in dateEventToggles) {
         t.isOn = false;
       }
     }
-    for(int i=0; i<dateEventToggles.Length; i++){
+    for (int i = 0; i < dateEventToggles.Length; i++) {
       switch (VsnSaveSystem.GetIntVariable("date_event_result_" + i)) {
         case 0:
           successIcons[i].gameObject.SetActive(false);

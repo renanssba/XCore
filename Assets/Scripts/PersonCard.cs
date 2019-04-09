@@ -14,6 +14,7 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI[] attributeTexts;
   public TextMeshProUGUI[] traitTexts;
   public Image[] equipIcons;
+  public Image[] addEquipIcons;
 
   public bool canEquipItems = true;
 
@@ -35,6 +36,7 @@ public class PersonCard : MonoBehaviour {
       } else{
         equipIcons[i].gameObject.SetActive(false);
       }
+      addEquipIcons[i].gameObject.SetActive(person.EquipsCount()==i);
     }
     attributeTexts[(int)person.personality].alpha = 1f;
     attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
