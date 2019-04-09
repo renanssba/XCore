@@ -1,4 +1,6 @@
 ﻿set_people "hide"
+set_var show_mini_fertiliel 0
+update_ui
 fade_out 0.5
 bg null
 
@@ -18,6 +20,8 @@ play_music "conceito_intro" "conceito_loop"
 bg null
 fade_in 0.5
 set_people "show"
+set_var show_mini_fertiliel 1
+update_ui
 goto_script "check_end_game"
 goto end
 

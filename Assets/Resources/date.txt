@@ -18,6 +18,10 @@ set_var date_event_result_6 0
 show_date_ui true
 say "" "\couple resolveram sair para se divertir."
 
+if tutorial_date == 0
+  goto_script "tutorial_date"
+endif
+
 
 waypoint new_event
 if #currentDateEvent < #dateLength
@@ -37,6 +41,11 @@ waypoint ac_interfere
   // goto start_interaction
 // endif
 
+if tutorial_date2 == 0
+  goto_script "tutorial_date2"
+endif
+
+
 if #currentEventInteractionType == 0
   say "" "Qual reação \boy deve tomar?"
 endif
@@ -49,13 +58,13 @@ endif
 
 
 if #currentPersonality == 0
-  choices "<sprite='Attributes' index=0 tint>Valentia \guts" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence - (1AP)" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma - (1AP)" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> - (1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> - (1AP)" sug_charisma
 endif
 if #currentPersonality == 1
-  choices "<sprite='Attributes' index=0 tint>Valentia \guts - (1AP)" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma - (1AP)" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> - (1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color>" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> - (1AP)" sug_charisma
 endif
 if #currentPersonality == 2
-  choices "<sprite='Attributes' index=0 tint>Valentia \guts - (1AP)" sug_guts "<sprite='Attributes' index=1 tint>Inteligência \intelligence - (1AP)" sug_intelligence "<sprite='Attributes' index=2 tint>Carisma \charisma" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> - (1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> - (1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color>" sug_charisma
 endif
 
 waypoint sug_guts
@@ -125,10 +134,10 @@ set_people "date"
 if resolution < 3
   add_var date_success 1
   play_sfx "relationship_up"
-  say "" "Desafio superado!"
+  say "" "<color=green>Desafio superado!</color>"
 else
   play_sfx "relationship_down"
-  say "" "Desafio não superado."
+  say "" "<color=red>Desafio não superado.</color>"
 endif
 add_var currentDateEvent 1
 update_ui
@@ -140,12 +149,12 @@ endif
 
 waypoint end
 if date_success >= 5
-  say "O encontro acabou, e foi um grande sucesso!"
+  say "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
   show_date_ui false
   say "\couple se tornaram um casal inseparável, e você sabe que eles terão muitos filhos no futuro!"
   ship_couple
 else
-  say "O encontro acabou, e foi um fracasso!"
+  say "O encontro acabou, e foi um <color=red>fracasso</color>!"
   show_date_ui false
 endif
 

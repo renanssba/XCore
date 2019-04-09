@@ -33,7 +33,8 @@ public class VsnScriptReader {
   public void SetArgs(){
     if(args != null) {
       //Debug.LogWarning("Executing set args");
-      for(int i = 0; i < args.Length; i++) {
+      VsnSaveSystem.SetVariable("argsCount", args.Length);
+      for (int i = 0; i < args.Length; i++) {
         if(args[i].GetType() == typeof(VsnNumber)) {
           VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetNumberValue());
           Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetNumberValue());

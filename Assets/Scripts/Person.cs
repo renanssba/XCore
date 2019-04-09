@@ -116,4 +116,24 @@ public class Person {
     }
     return count;
   }
+
+  public char GenderedVowel(){
+    if(isMale){
+      return 'o';
+    }else{
+      return 'a';
+    }
+  }
+
+  public string PersonalityString(){
+    switch(personality){
+      case Personality.heroico:
+        return "<color=#B27535><sprite=\"Attributes\" index=0 tint>Heróic"+ GenderedVowel()+"</color>";
+      case Personality.racional:
+        return "<color=#248BCF><sprite=\"Attributes\" index=1 tint>Racional</color>";
+      case Personality.emotivo:
+        return "<color=#A80218><sprite=\"Attributes\" index=2 tint>Emotiv" + GenderedVowel() + "</color>";
+    }
+    return "";
+  }
 }

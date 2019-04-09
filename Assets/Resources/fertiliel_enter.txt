@@ -1,6 +1,10 @@
 ﻿character fertiliel "fertiliel"
 char_move_x fertiliel 1
-char_move_x fertiliel 0.5 0.5
+if argsCount > 0
+  char_move_x fertiliel arg1 0.5
+else
+  char_move_x fertiliel 0.5 0.5
+endif
 anim_alpha fertiliel 0 0
 anim_alpha fertiliel 1 0.5
 wait 0.5

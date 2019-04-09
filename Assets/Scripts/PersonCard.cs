@@ -53,7 +53,7 @@ public class PersonCard : MonoBehaviour {
 
     faceImage.sprite = ResourcesManager.instance.faceSprites[person.faceId];
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale?0:1)];
-    traitTexts[0].text = person.personality.ToString();
+    traitTexts[0].text = person.PersonalityString();
   }
 
   public void SetEquipableItems(bool canEquipItems) {

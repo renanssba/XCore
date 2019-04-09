@@ -21,10 +21,14 @@ namespace Command {
         case "show":
           GameController.instance.personCards[0].gameObject.SetActive(true);
           GameController.instance.personCards[1].gameObject.SetActive(true);
+          GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+          GameController.instance.personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
           break;
         case "date":
           GameController.instance.personCards[0].gameObject.SetActive(true);
           GameController.instance.personCards[1].gameObject.SetActive(true);
+          GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+          GameController.instance.personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
           break;
         case "event":
           switch (GameController.instance.GetCurrentEvent().interactionType) {

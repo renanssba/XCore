@@ -51,8 +51,8 @@ public class GameController : MonoBehaviour {
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
-    VsnAudioManager.instance.PlayMusic("conceito_intro", "conceito_loop");
-    VsnController.instance.StartVSN("tutorial");
+    VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
+    VsnController.instance.StartVSN("tutorial_intro");
   }
 
   public void Initialize(){
