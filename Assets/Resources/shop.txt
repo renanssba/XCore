@@ -25,7 +25,7 @@ goto store_loop
 waypoint sim
 subtract_var money item_price
 update_ui
-say "*Você adquiriu \item_name!*"
+say "Você adquiriu \item_name!"
 add_item item_id 1
 goto store_loop
 

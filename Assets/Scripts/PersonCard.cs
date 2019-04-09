@@ -25,8 +25,18 @@ public class PersonCard : MonoBehaviour {
   }
 
   public void UpdateUI() {
+    string state = VsnSaveSystem.GetStringVariable("people_ui_state");
+    switch(state){
+      case "show":
+        SetEquipableItems(true);
+        break;
+      default:
+        SetEquipableItems(false);
+        break;
+    }
+
     nameText.text = person.name;
-    for(int i=0; i<3; i++){
+    for (int i=0; i<3; i++){
       attributeTexts[i].text = person.AttributeValue(i).ToString();
       attributeTexts[i].alpha = 0.4f;
       attributeTexts[i].transform.parent.GetComponent<Image>().DOFade(0.5f, 0f);
@@ -36,7 +46,7 @@ public class PersonCard : MonoBehaviour {
       } else{
         equipIcons[i].gameObject.SetActive(false);
       }
-      addEquipIcons[i].gameObject.SetActive(person.EquipsCount()==i);
+      addEquipIcons[i].gameObject.SetActive(person.EquipsCount()==i && state=="show");
     }
     attributeTexts[(int)person.personality].alpha = 1f;
     attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
@@ -46,12 +56,11 @@ public class PersonCard : MonoBehaviour {
     traitTexts[0].text = person.personality.ToString();
   }
 
-  public void SetEquipableItems(bool value) {
-    //canEquipItems = value;
-    foreach(Image img in equipIcons){
-      img.transform.parent.GetComponent<Button>().interactable = value;
+  public void SetEquipableItems(bool canEquipItems) {
+    for(int i=0; i<equipIcons.Length; i++){
+      equipIcons[i].transform.parent.GetComponent<Button>().interactable = canEquipItems && i<=person.EquipsCount();
     }
-    UpdateUI();
+    //UpdateUI();
   }
 
   public void ClickPersonSlot(int slotId){

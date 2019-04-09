@@ -65,7 +65,11 @@ public class VsnUIManager : MonoBehaviour {
 
   public void SetText(string msg) {
     ShowClickMessageIcon(false);
-    vsnMessageText.text = msg;
+    if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
+      vsnMessageText.text = "\""+msg+ "\"";
+    } else{
+      vsnMessageText.text = msg;
+    }    
     vsnMessageText.GetComponent<VsnConsoleSimulator>().StartShowingCharacters();
   }
 

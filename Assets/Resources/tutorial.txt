@@ -11,9 +11,8 @@ fade_in 0.5
 
 wait 0.3
 goto_script "fertiliel_enter"
-say "Teste sprite: <sprite name="guts">"
 say "Cupido" "Seja bem-vindo ao Cupid Game - Dungeon Crawler. Como um cupido, o seu objetivo é juntar casais."
-say "Para juntar um casal, você precisa levá-lo para um <color=yellow>Encontro</color>, e ele precisa ser um sucesso."
+say "Para juntar um casal ele precisa ter um <color=yellow>Encontro</color> bem sucedido."
 say "Sua missão atual é: juntar 2 casais em um período de 5 dias."
 
 char_flip fertiliel
@@ -33,11 +32,11 @@ update_ui
 wait 0.2
 say "Estas são as ações que você pode tomar diariamente."
 say "Você pode <color=yellow>Fazer Bicos</color> e ir até a <color=yellow>Loja</color> para comprar itens equipáveis que aprimoram os atributos dos seus humanos."
-say "Se não gostar do seu casal humano atual, pode também trocá-lo. Mas fique atento que certas ações consomem o seu <color=yellow>AP (Angel Points)</color>."
+say "Se não gostar dos seus humanos atuais, você também pode <color=yellow>Trocar o Casal</color>. Mas fique atento que certas ações consomem o seu <color=yellow>AP (Angel Points)</color>."
 
 wait 1
 
-say "Quando estiver se sentindo pronto, clique aqui para levar seu casal para um Encontro."
+say "Quando estiver se sentindo pronto, clique no botão aqui embaixo para levar seu casal para um Encontro."
 
 goto_script "fertiliel_exit"
 

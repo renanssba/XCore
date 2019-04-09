@@ -9,6 +9,8 @@ namespace Command {
 
     public override void Execute() {
 
+      VsnSaveSystem.SetVariable("people_ui_state", args[0].GetStringValue());
+
       GameController.instance.personCards[0].gameObject.SetActive(true);
       GameController.instance.personCards[1].gameObject.SetActive(true);
       switch (args[0].GetStringValue()){
@@ -19,18 +21,12 @@ namespace Command {
         case "show":
           GameController.instance.personCards[0].gameObject.SetActive(true);
           GameController.instance.personCards[1].gameObject.SetActive(true);
-          GameController.instance.personCards[0].SetEquipableItems(true);
-          GameController.instance.personCards[1].SetEquipableItems(true);
           break;
         case "date":
           GameController.instance.personCards[0].gameObject.SetActive(true);
           GameController.instance.personCards[1].gameObject.SetActive(true);
-          GameController.instance.personCards[0].SetEquipableItems(false);
-          GameController.instance.personCards[1].SetEquipableItems(false);
           break;
         case "event":
-          GameController.instance.personCards[0].SetEquipableItems(false);
-          GameController.instance.personCards[1].SetEquipableItems(false);
           switch (GameController.instance.GetCurrentEvent().interactionType) {
             case EventInteractionType.male:
               GameController.instance.personCards[0].gameObject.SetActive(true);
@@ -53,7 +49,7 @@ namespace Command {
           }
           break;
       }
-      
+      GameController.instance.UpdateUI();
     }
 
     public override void AddSupportedSignatures() {
