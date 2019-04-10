@@ -1,0 +1,42 @@
+goto *arg1
+
+waypoint event_statement
+say "" "Olhando para o céu estrelado, \girl fica toda metafísica e começa a se perguntar:"
+say "\girl" "Qual o nosso lugar no universo? Qual o sentido da vida?"
+end_script
+
+
+
+waypoint guts_success
+say "\boy" "Quem se importa com nosso lugar no universo? A vida se vive aqui e agora!"
+say "" "\girl fica impressionada com a coragem de \boy!"
+end_script
+
+waypoint intelligence_success
+say "\boy" "Não precisamos procurar sentido na vida. Nós somos apenas grãos de poeira estelar vagando por um universo infinito, fruto de milhares e milhares de coincidências."
+say "" "\girl fica impressionada com a sabedoria de \boy!"
+end_script
+
+waypoint charisma_success
+say "\boy" "Meu lugar no universo é aqui com você."
+say "" "\girl fica derretida com a declaração de \boy!"
+end_script
+
+
+
+waypoint guts_fail
+say "\boy" "Filosofia é muito chato! Vamos fazer outra coisa?"
+say "" "\girl fica decepcionada."
+end_script
+
+waypoint intelligence_fail
+say "" "\boy tentar explicar suas opiniões sobre a vida, o universo e tudo mais, mas não possui eloquência o suficiente para tal."
+say "" "\girl esperava mais."
+end_script
+
+waypoint charisma_fail
+say "\boy" "Meu lugar no universo é aqui com você."
+say "" "\girl nota que \boy só falou aquilo da boca pra fora."
+end_script
+
+

@@ -1,0 +1,39 @@
+﻿set_var hide_buttons 1
+update_ui
+
+//say "Atendente" "Oi Fertiliel, seja bem-vinda!"
+
+waypoint store_loop
+
+show_shop true
+
+
+if item_id != -1
+  if item_price <= money
+    say "Você quer comprar \item_name por \item_price?"
+	choices "Sim" sim "Não" nao
+  else
+    say "Me desculpe, eu acho que você não tem dinheiro o suficiente para comprar este item."
+  endif
+else
+  goto end
+endif
+goto store_loop
+
+
+
+waypoint sim
+subtract_var money item_price
+update_ui
+say "Você adquiriu \item_name!"
+add_item item_id 1
+goto store_loop
+
+
+waypoint nao
+goto store_loop
+
+
+waypoint end
+set_var hide_buttons 0
+update_ui

@@ -1,0 +1,39 @@
+﻿
+fade_in 0
+
+/// CONDIÇÕES DE FIM DE JOGO
+if #day > max_days
+  set_people "hide"
+  goto_script "fertiliel_enter"
+    
+  say "Cupido" "Olha só, o nosso tempo acabou!"
+  goto end_game
+endif
+if #progress >= objective
+  set_people "hide"
+  goto_script "fertiliel_enter"
+    
+  say "Cupido" "Olha só, parece que já juntamos todos os casais!"
+  goto end_game
+endif
+
+// IF GAME NOT ENDED
+say "Com suas forças recuperadas, você começa um novo dia para juntar casais!"
+end_script
+
+
+waypoint end_game
+say "Cupido" "Vamos ver quão bem eu fui na minha missão..."
+say "" "A sua missão era reunir \objective casais dentro de \max_days dias."
+say "Você conseguiu reunir \objective casais dentro de \day dias."
+if #progress >= objective
+  say "Parabéns! Você completou a missão com sucesso!"
+  say "Cupido" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
+  say "Obrigada por jogar o jogo e me ajudar na missão!"
+else
+  say "Que pena, parece que você não conseguiu completar a missão..."
+  say "Por favor, tente novamente. Boa sorte na próxima tentativa!"
+endif
+set_people "hide"
+fade_out 2
+load_scene "TitleScreen"

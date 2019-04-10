@@ -52,17 +52,18 @@ public class VsnController : MonoBehaviour {
   /// </summary>
   /// <param name="scriptPath">Script path from Resources root (e.g \"VSN Scripts/myscript.txt\"</param>
   public void StartVSN(string scriptPath, VsnArgument[] args = null) {
-    TextAsset textAsset = Resources.Load<TextAsset>(scriptPath);
-    if(textAsset == null){
+    scriptPath = VsnSaveSystem.GetStringVariable("language") +"/" + scriptPath;
+    TextAsset textContent = Resources.Load<TextAsset>(scriptPath);
+    if(textContent == null){
       Debug.LogWarning("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");
       return;
     }
 
     if(state == ExecutionState.STOPPED) {
-      StartVSNContent(textAsset.text, scriptPath, args);
+      StartVSNContent(textContent.text, scriptPath, args);
     } else {
       nextScripts.Add(new VsnScriptReader());
-      nextScripts[nextScripts.Count-1].LoadScriptContent(textAsset.text, scriptPath, args);
+      nextScripts[nextScripts.Count-1].LoadScriptContent(textContent.text, scriptPath, args);
     }
   }
 
@@ -88,6 +89,7 @@ public class VsnController : MonoBehaviour {
   }
 
   public void GotoVSNScript(string scriptPath, VsnArgument[] args){
+    scriptPath = VsnSaveSystem.GetStringVariable("language") + "/" + scriptPath;
     TextAsset textAsset = Resources.Load<TextAsset>(scriptPath);
     if(textAsset == null){
       Debug.LogWarning("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");

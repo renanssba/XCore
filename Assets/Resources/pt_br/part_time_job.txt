@@ -1,0 +1,28 @@
+﻿if #ap < 2
+  goto_script "not_enough_ap"
+  end_script
+endif
+
+
+set_var hide_buttons 1
+update_ui
+
+say "Quer trabalhar, gastando 2 AP para ganhar 130 de salário?"
+choices "Sim" sim "Não" nao
+
+
+waypoint sim
+spend_ap 2
+add_var money 130
+update_ui
+say "Você trabalhou e ganhou 130 Dinheiro Celestial!"
+goto end
+
+
+waypoint nao
+goto end
+
+
+waypoint end
+set_var hide_buttons 0
+update_ui

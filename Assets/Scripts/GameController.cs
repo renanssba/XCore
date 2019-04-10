@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour {
   public void Start() {
     VsnSaveSystem.SetVariable("objective", objective);
     VsnSaveSystem.SetVariable("max_days", maxDays);
+    //VsnSaveSystem.SetVariable("language", "pt_br");
+    VsnSaveSystem.SetVariable("language", "eng");
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
