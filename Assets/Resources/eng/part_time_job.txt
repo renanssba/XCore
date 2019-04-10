@@ -7,15 +7,15 @@ endif
 set_var hide_buttons 1
 update_ui
 
-say "Quer trabalhar, gastando 2 AP para ganhar 130 de salário?"
-choices "Sim" sim "Não" nao
+say "Do you want to take a part time job? It consumes 2 AP and you get 130 payment."
+choices "Yes" sim "No" nao
 
 
 waypoint sim
 spend_ap 2
 add_var money 130
 update_ui
-say "Você trabalhou e ganhou 130 Dinheiro Celestial!"
+say "You worked hard and got 130 Celestial Cash!"
 goto end
 
 

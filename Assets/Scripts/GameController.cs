@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour {
     apText.text = "AP: " + ap+" /"+maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
+    progressSlider.maxValue = VsnSaveSystem.GetIntVariable("objective");
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
     personCards[0].UpdateUI();

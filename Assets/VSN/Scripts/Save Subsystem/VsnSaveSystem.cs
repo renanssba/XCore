@@ -64,7 +64,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, float value) {
-    VsnDebug.Log("Variable " + key + " saved with float value " + value);
+    Debug.Log("Variable " + key + " saved with float value " + value);
     string savedKey = GetVariableFloatPrefix(key);
 
     if(savedDataDictionary.ContainsKey(savedKey)) {
@@ -76,7 +76,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, bool value) {
-    VsnDebug.Log("Variable " + key + " saved with bool value " + value);
+    Debug.Log("Variable " + key + " saved with bool value " + value);
     string savedKey = GetVariableFloatPrefix(key);
 
     if (savedDataDictionary.ContainsKey(savedKey)) {
@@ -88,7 +88,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, string value) {
-    VsnDebug.Log("Variable " + key + " saved with string value " + value);
+    Debug.Log("Variable " + key + " saved with string value " + value);
     string savedKey = GetVariableStringPrefix(key);
 
     if(savedDataDictionary.ContainsKey(savedKey)) {
@@ -149,7 +149,7 @@ public class VsnSaveSystem {
   public static void Save(int saveSlot) {		
     SaveHandler.Save(savedDataDictionary, saveSlot, (bool success) => {
       if(success) {
-        VsnDebug.Log("VSN SAVE success");
+        Debug.Log("VSN SAVE success");
       }
     });
   }
@@ -158,7 +158,7 @@ public class VsnSaveSystem {
     SaveHandler.Load(savedDataDictionary, saveSlot, (Dictionary<string,string> dictionary) => {
       if(dictionary != null) {
         savedDataDictionary = dictionary;
-        VsnDebug.Log("VSN LOAD success");
+        Debug.Log("VSN LOAD success");
       }
     });
   }

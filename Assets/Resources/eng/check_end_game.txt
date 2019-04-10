@@ -6,33 +6,33 @@ if #day > max_days
   set_people "hide"
   goto_script "fertiliel_enter"
     
-  say "Cupido" "Olha só, o nosso tempo acabou!"
+  say "Cupid" "Looks like our time is over!"
   goto end_game
 endif
 if #progress >= objective
   set_people "hide"
   goto_script "fertiliel_enter"
     
-  say "Cupido" "Olha só, parece que já juntamos todos os casais!"
+  say "Cupid" "Hey, looks like we have brought together the two couples!"
   goto end_game
 endif
 
 // IF GAME NOT ENDED
-say "Com suas forças recuperadas, você começa um novo dia para juntar casais!"
+say "With your energies renewed, you start a new humans-matching day!"
 end_script
 
 
 waypoint end_game
-say "Cupido" "Vamos ver quão bem eu fui na minha missão..."
-say "" "A sua missão era reunir \objective casais dentro de \max_days dias."
-say "Você conseguiu reunir \objective casais dentro de \day dias."
+say "Cupid" "Let's see how well I did my mission..."
+say "" "Your mission was to bring together \objective couples within \max_days days."
+say "You managed to bring \progress couples until day \day."
 if #progress >= objective
-  say "Parabéns! Você completou a missão com sucesso!"
-  say "Cupido" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
-  say "Obrigada por jogar o jogo e me ajudar na missão!"
+  say "Congratulations! You have completed the mission successfully!"
+  //say "Cupid" "How about you Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
+  say "Thanks for playing Cupid Game - Dungeon Crawler!"
 else
-  say "Que pena, parece que você não conseguiu completar a missão..."
-  say "Por favor, tente novamente. Boa sorte na próxima tentativa!"
+  say "Looks like you didn't complete the mission. That's a shame..."
+  say "Please try again. Good luck next time!"
 endif
 set_people "hide"
 fade_out 2

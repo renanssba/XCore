@@ -68,7 +68,7 @@ public class VsnScriptReader {
     if(waypoint != null) {
       currentCommandIndex = waypoint.commandNumber;
     } else {
-      VsnDebug.Log("Invalid waypoint with label: " + waypointName);
+      Debug.Log("Invalid waypoint with label: " + waypointName);
     }
   }
 
@@ -215,7 +215,7 @@ public class VsnScriptReader {
       }
     }
 
-    VsnDebug.Log("Got a null");
+    Debug.Log("Got a null");
     return null;
   }
 

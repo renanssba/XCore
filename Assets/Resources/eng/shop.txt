@@ -10,10 +10,10 @@ show_shop true
 
 if item_id != -1
   if item_price <= money
-    say "Você quer comprar \item_name por \item_price?"
+    say "Do you want to buy \item_name for \item_price?"
 	choices "Sim" sim "Não" nao
   else
-    say "Me desculpe, eu acho que você não tem dinheiro o suficiente para comprar este item."
+    say "I'm sorry, looks like you don't have enough money for this."
   endif
 else
   goto end
@@ -25,7 +25,7 @@ goto store_loop
 waypoint sim
 subtract_var money item_price
 update_ui
-say "Você adquiriu \item_name!"
+say "You acquired \item_name!"
 add_item item_id 1
 goto store_loop
 

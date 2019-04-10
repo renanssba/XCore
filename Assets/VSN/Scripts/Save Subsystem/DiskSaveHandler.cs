@@ -19,7 +19,7 @@ class DiskSaveHandler : IVsnSaveHandler{
 		Dictionary<string, string> savedDictionary = dictionary;
 		string savedVariables = GenerateSavedVariables (savedDictionary);
 		//savedDictionary = PrefixDictionary(dictionary, saveSlot);
-		VsnDebug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
+		Debug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
 		PlayerPrefs.SetString(GetSaveSlotPrefix(saveSlot), savedVariables);
 
 
@@ -70,7 +70,7 @@ class DiskSaveHandler : IVsnSaveHandler{
 				break;
 			}
 			if (pair.Length != 2) {
-				VsnDebug.Log("<color=red>ERROR: Invalid saved variables string: " + variablePair.ToString() + ". Expected \"varname=value\"</color>");
+				Debug.Log("<color=red>ERROR: Invalid saved variables string: " + variablePair.ToString() + ". Expected \"varname=value\"</color>");
 			}
 
 			string variableName = pair[0];
