@@ -1,19 +1,20 @@
 ﻿set_var hide_buttons 1
 update_ui
 
-//say "Atendente" "Oi Fertiliel, seja bem-vinda!"
-
 waypoint store_loop
+say "Bem-vindo à loja!"
+choices "Comprar" buy "Vender" sell "Cancelar" end
 
-show_shop true
 
+waypoint buy
+show_shop true "buy"
 
 if item_id != -1
   if item_price <= money
     say "Você quer comprar \item_name por \item_price?"
-	choices "Sim" sim "Não" nao
+    choices "Sim" comprar_sim "Não" voltar
   else
-    say "Me desculpe, eu acho que você não tem dinheiro o suficiente para comprar este item."
+    say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
   endif
 else
   goto end
@@ -21,16 +22,41 @@ endif
 goto store_loop
 
 
+waypoint sell
+if #inventory_empty == 1
+  say "Você não tem nenhum item para vender."
+goto store_loop
+endif
 
-waypoint sim
-subtract_var money item_price
-update_ui
-say "Você adquiriu \item_name!"
-add_item item_id 1
+show_shop true "sell"
+if item_id != -1
+  say "Você quer vender \item_name por \item_price?"
+  choices "Sim" vender_sim "Não" voltar
+else
+  goto end
+endif
 goto store_loop
 
 
-waypoint nao
+
+waypoint comprar_sim
+subtract_var money item_price
+update_ui
+add_item item_id 1
+say "Você adquiriu \item_name!"
+goto store_loop
+
+
+waypoint vender_sim
+add_var money item_price
+update_ui
+add_item item_id -1
+say "Obrigado!"
+goto store_loop
+
+
+
+waypoint voltar
 goto store_loop
 
 

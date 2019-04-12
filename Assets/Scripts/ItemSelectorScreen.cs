@@ -26,7 +26,7 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void OpenStore() {
-    Initialize(ItemInteractionType.store, new Inventory(ItemDatabase.instance.itemsForSale));
+    Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
     screenTransition.OpenMenuScreen();
   }
 
@@ -55,36 +55,42 @@ public class ItemSelectorScreen : MonoBehaviour {
     InitializeItems(currentItems);
   }
 
-    void SetScreenNamePtBr(ItemInteractionType type) {
-      switch (type) {
-        case ItemInteractionType.store:
-          screenNameText.text = "Loja";
-          break;
-        case ItemInteractionType.input:
-          screenNameText.text = "Escolha item para equipar:";
-          break;
-        case ItemInteractionType.inventory:
-          screenNameText.text = "Inventário";
-          break;
-      }
+  void SetScreenNamePtBr(ItemInteractionType type) {
+    switch (type) {
+      case ItemInteractionType.store_buy:
+        screenNameText.text = "Loja - Comprar";
+        break;
+      case ItemInteractionType.store_sell:
+        screenNameText.text = "Loja - Vender";
+        break;
+      case ItemInteractionType.input:
+        screenNameText.text = "Escolha item para equipar:";
+        break;
+      case ItemInteractionType.inventory:
+        screenNameText.text = "Inventário";
+        break;
     }
+  }
 
-    void SetScreenNameEng(ItemInteractionType type) {
-      switch (type) {
-        case ItemInteractionType.store:
-          screenNameText.text = "Store";
-          break;
-        case ItemInteractionType.input:
-          screenNameText.text = "Choose item to equip:";
-          break;
-        case ItemInteractionType.inventory:
-          screenNameText.text = "Inventory";
-          break;
-      }
+  void SetScreenNameEng(ItemInteractionType type) {
+    switch (type) {
+      case ItemInteractionType.store_buy:
+        screenNameText.text = "Store - Buy";
+        break;
+      case ItemInteractionType.store_sell:
+        screenNameText.text = "Store - Sell";
+        break;
+      case ItemInteractionType.input:
+        screenNameText.text = "Choose item to equip:";
+        break;
+      case ItemInteractionType.inventory:
+        screenNameText.text = "Inventory";
+        break;
     }
+  }
 
 
-    void InitializeItems(Inventory currentItems){
+  void InitializeItems(Inventory currentItems){
     for(int i = 0; i < currentItems.items.Count; i++) {
       CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
     }
@@ -92,7 +98,7 @@ public class ItemSelectorScreen : MonoBehaviour {
 
 
   void CreateItem(int itemId, int amount){
-    if(interactionType == ItemInteractionType.store &&
+    if(interactionType == ItemInteractionType.store_buy &&
        Item.GetItem(itemId).type == ItemType.celestial &&
        GlobalData.instance.inventory.HasItem(itemId)){
       return;

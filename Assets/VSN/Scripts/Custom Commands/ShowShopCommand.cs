@@ -11,7 +11,14 @@ namespace Command {
       ItemSelectorScreen itemScreen = GameController.instance.itemSelectorScreen;
 
       if(args[0].GetBooleanValue()) {
-        itemScreen.Initialize(ItemInteractionType.store, new Inventory(ItemDatabase.instance.itemsForSale));
+        switch (args[1].GetStringValue()) {
+          case "buy":
+            itemScreen.Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
+            break;
+          case "sell":
+            itemScreen.Initialize(ItemInteractionType.store_sell, GlobalData.instance.inventory);
+            break;
+        }
         itemScreen.screenTransition.OpenMenuScreen();
         VsnController.instance.WaitForCustomInput();
       } else {
@@ -23,6 +30,10 @@ namespace Command {
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
         VsnArgType.booleanArg
+      });
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.booleanArg,
+        VsnArgType.stringArg
       });
     }
   }

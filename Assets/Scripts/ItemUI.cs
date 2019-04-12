@@ -5,9 +5,10 @@ using UnityEngine.UI;
 using TMPro;
 
 public enum ItemInteractionType{
-  store,
+  store_buy,
   input,
-  inventory
+  inventory,
+  store_sell
 }
 
 public class ItemUI : MonoBehaviour {
@@ -32,19 +33,24 @@ public class ItemUI : MonoBehaviour {
   }
 
 
-  public void UpdateUI(){
+  public void UpdateUI() {
     nameText.text = item.name;
     descriptionText.text = item.description;
-//    if(item.type == ItemType.mundane) {
-//      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.mundaneSprite;
-//    } else {
-//      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.celestialSprite;
-//    }
+    //    if(item.type == ItemType.mundane) {
+    //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.mundaneSprite;
+    //    } else {
+    //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.celestialSprite;
+    //    }
     typeImage.sprite = item.sprite;
 
-    costText.text = item.price.ToString();
+    if (interactionType == ItemInteractionType.store_buy){ 
+      costText.text = item.price.ToString();
+    }else{
+      costText.text = (item.price/2).ToString();
+    }
     quantityText.text = "x" + amount;
-    if(interactionType == ItemInteractionType.store) {
+    if(interactionType == ItemInteractionType.store_buy ||
+       interactionType == ItemInteractionType.store_sell) {
       quantityText.gameObject.SetActive(false);
     } else {
       costText.gameObject.SetActive(false);
@@ -63,8 +69,11 @@ public class ItemUI : MonoBehaviour {
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
     switch(interactionType) {
-      case ItemInteractionType.store:
+      case ItemInteractionType.store_buy:
         VsnSaveSystem.SetVariable("item_price", item.price);
+        break;
+      case ItemInteractionType.store_sell:
+        VsnSaveSystem.SetVariable("item_price", item.price/2);
         break;
       case ItemInteractionType.input:
         Person p = VsnSaveSystem.GetIntVariable("person_equip_selected")==1?GlobalData.instance.GetCurrentBoy(): GlobalData.instance.GetCurrentGirl();

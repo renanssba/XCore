@@ -35,7 +35,6 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\max_days", VsnSaveSystem.GetIntVariable("max_days").ToString());
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GameController.instance.day.ToString());
-
     } while (currentString != initialString);
 
     return currentString;
@@ -72,6 +71,8 @@ public class SpecialCodes {
         return (int)GlobalData.instance.CurrentPersonPersonality();
       case "#currentEventInteractionType":
         return (int)GameController.instance.GetCurrentEvent().interactionType;
+      case "#inventory_empty":
+        return GlobalData.instance.inventory.IsEmpty() ? 1f : 0f;
       default:
         return 0f;
     }
