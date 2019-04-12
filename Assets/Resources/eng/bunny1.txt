@@ -1,45 +1,43 @@
 goto *arg1
 
 waypoint event_statement
-say "" "O casal encontrou um coelhinho ferido, precisando de ajuda. A garota ficou com pena e pediu para \boy ajudá-lo."
+say "" "The couple finds an injured bunny, in need of medical help. The girl feels sorry and asks \boy to help it."
 end_script
 
 
 
 waypoint guts_success
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "Surpreendentemente, o coelho se motiva o suficiente para voltar a andar. \girl fica muito surpresa."
+say "\boy" "COME ON, BUNNY! You are better than this injury!"
+say "STAND UP!!!"
+say "" "Surprisingly, the rabbit feels motivated enough to stand up again. \girl gets really surprised."
 end_script
 
 waypoint intelligence_success
-say "" "\boy improvisa uma atadura com materiais encontrados na trilha e rapidamente trata do animal."
-say "\girl fica feliz."
+say "" "\boy improvises a bandage with materials he found in the trail e quickly treats the animal."
+say "\girl gets happy."
 end_script
 
 waypoint charisma_success
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "\girl fica muito tocada."
+say "" "With a lot of care and affection, \boy lifts the rabbit in his arms."
+say "\boy" "We'll take you to a veterinarian. Don't worry, buddy, you'll be just fine."
+say "" "\girl is moved by the act."
 end_script
 
 
 
 waypoint guts_fail
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "O coelho geme baixinho, sentindo muita dor. O discurso motivacional não parece ter surtido efeito. \girl acha que \boy é maluco."
+say "\boy" "COME ON, BUNNY! You are better than this injury!"
+say "STAND UP!!!"
+say "" "The rabbit moans, feeling much pain. Looks like the cheering up had no effect. \girl thinks \boy is crazy."
 end_script
 
 waypoint intelligence_fail
-say "" "\boy tenta improvisar uma atadura com materiais encontrados na trilha, mas não consegue."
-say "\girl fica decepcionada."
+say "" "\boy tries to improvise a bandage with materials he found in the trail, but fails."
+say "\girl looks disappointed."
 end_script
 
 waypoint charisma_fail
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "Infelizmente, \boy tropeça, caindo em cima do coelho. \girl fica horrorizada."
+say "" "With a lot of care and affection, \boy lifts the rabbit in his arms."
+say "\boy" "We'll take you to a veterinarian. Don't worry, buddy, you'll be just fine."
+say "" "Unfortunately, \boy trips and drops the rabbit, falling over it. \girl gets horrified."
 end_script
-
-

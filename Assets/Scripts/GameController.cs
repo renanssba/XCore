@@ -120,7 +120,11 @@ public class GameController : MonoBehaviour {
     int coupleId = GlobalData.instance.currentCouple;
     personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
-    dayText.text = "Dia " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
+    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
+      dayText.text = "Dia " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
+    }else{
+      dayText.text = "Day " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
+    }
     apText.text = "AP: " + ap+" /"+maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;

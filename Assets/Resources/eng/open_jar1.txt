@@ -1,36 +1,37 @@
 goto *arg1
 
 waypoint event_statement
-say "" "\girl compra um pote de algum doce e parece ter dificuldade pra abrir. \boy vai ajudá-la."
+say "" "\girl buys a pot of jam, but seems to have a hard time opening it. \boy asks to help her."
 end_script
 
 
 
 waypoint guts_success
-say "" "Usando um pouco de força, \boy abre o pote facilmente. O doce é muito gostoso."
+say "" "Using a little bit of strength, \boy easily opens the pot. The jam tastes really good."
 end_script
 
 waypoint intelligence_success
-say "" "Ao ler a letrinha miúda, \boy consegue seguir as instruções, abrindo o pote na linha pontilhada. O doce é ótimo."
+say "" "By reading the small letters, \boy locates the pot opening instructions. The jam tastes really good."
 end_script
 
 waypoint charisma_success
-say "" "\boy volta e fala com o vendedor, convencendo-o de que o pote está com algum defeito."
-say "O vendedor se desculpa e devolve o dinheiro, além de um monte de outros doces!"
+say "" "\boy goes back to the store and speaks with the jam seller, convincing him the pot has some kind of flaw."
+say "The seller apologizes and gives them back the money, and some other (easier to open) jam pots!"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\boy tenta abrir o pote e falha miseravelmente. Com raiva, ele usa força demais e acaba arrebentando o pote."
+say "" "\boy tries to open the pot using some strength but fails miserably. Enraged, he applies too much force and wrecks the pot in half."
 end_script
 
 waypoint intelligence_fail
-say "" "\boy tenta entender como abrir o pote, porém as palavras complicadas e instruções confusas da embalagem tornam praticamente impossível abrir o negócio."
+say "" "\boy tries to understand how to open the pot, but the complicated words in the package instructions only make him very confused and frustrated. He fails the task."
 end_script
 
 waypoint charisma_fail
-say "" "\boy volta e fala com o vendedor, o convencendo de que o pote está com algum defeito. O vendedor se enfurece e manda \boy ir catar coquinho."
+say "" "goes back to the store and speaks with the jam seller, trying to convince him the pot has some kind of flaw."
+say "The seller gets really angry and tells \boy to piss off."
 end_script
 
 

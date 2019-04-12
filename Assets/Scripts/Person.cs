@@ -126,13 +126,33 @@ public class Person {
   }
 
   public string PersonalityString(){
-    switch(personality){
+    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
+      return PersonalityStringPtBr();
+    } else {
+      return PersonalityStringEng();
+    }
+  }
+
+  public string PersonalityStringPtBr() {
+    switch (personality) {
       case Personality.heroico:
-        return "<color=#B27535><sprite=\"Attributes\" index=0 tint>Heróic"+ GenderedVowel()+"</color>";
+        return "<color=#B27535><sprite=\"Attributes\" index=0 tint>Heróic" + GenderedVowel() + "</color>";
       case Personality.racional:
         return "<color=#248BCF><sprite=\"Attributes\" index=1 tint>Racional</color>";
       case Personality.emotivo:
         return "<color=#A80218><sprite=\"Attributes\" index=2 tint>Emotiv" + GenderedVowel() + "</color>";
+    }
+    return "";
+  }
+
+  public string PersonalityStringEng(){
+    switch (personality) {
+      case Personality.heroico:
+        return "<color=#B27535><sprite=\"Attributes\" index=0 tint>Heroic</color>";
+      case Personality.racional:
+        return "<color=#248BCF><sprite=\"Attributes\" index=1 tint>Rational</color>";
+      case Personality.emotivo:
+        return "<color=#A80218><sprite=\"Attributes\" index=2 tint>Emotional</color>";
     }
     return "";
   }

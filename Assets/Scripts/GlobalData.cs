@@ -57,7 +57,11 @@ public class GlobalData : MonoBehaviour {
   }
 
   public string CurrentCoupleName(){
-    return people[currentCouple * 2].name + " e " + people[currentCouple * 2+1].name;
+    if(VsnSaveSystem.GetStringVariable("language")=="pt_br"){
+      return people[currentCouple * 2].name + " e " + people[currentCouple * 2 + 1].name;
+    }else{
+      return people[currentCouple * 2].name + " and " + people[currentCouple * 2 + 1].name;
+    }
   }
 
   public Person GetCurrentBoy(){

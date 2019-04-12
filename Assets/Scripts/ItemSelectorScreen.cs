@@ -41,16 +41,10 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void Initialize(ItemInteractionType type, Inventory currentItems){
-    switch(type) {
-      case ItemInteractionType.store:
-        screenNameText.text = "Loja";
-        break;
-      case ItemInteractionType.input:
-        screenNameText.text = "Escolha item para equipar:";
-        break;
-      case ItemInteractionType.inventory:
-        screenNameText.text = "Inventário";
-        break;
+    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
+      SetScreenNamePtBr(type);
+    }else{
+      SetScreenNameEng(type);
     }
 
     currentMoneyText.transform.parent.gameObject.SetActive(true);
@@ -61,8 +55,36 @@ public class ItemSelectorScreen : MonoBehaviour {
     InitializeItems(currentItems);
   }
 
+    void SetScreenNamePtBr(ItemInteractionType type) {
+      switch (type) {
+        case ItemInteractionType.store:
+          screenNameText.text = "Loja";
+          break;
+        case ItemInteractionType.input:
+          screenNameText.text = "Escolha item para equipar:";
+          break;
+        case ItemInteractionType.inventory:
+          screenNameText.text = "Inventário";
+          break;
+      }
+    }
 
-  void InitializeItems(Inventory currentItems){
+    void SetScreenNameEng(ItemInteractionType type) {
+      switch (type) {
+        case ItemInteractionType.store:
+          screenNameText.text = "Store";
+          break;
+        case ItemInteractionType.input:
+          screenNameText.text = "Choose item to equip:";
+          break;
+        case ItemInteractionType.inventory:
+          screenNameText.text = "Inventory";
+          break;
+      }
+    }
+
+
+    void InitializeItems(Inventory currentItems){
     for(int i = 0; i < currentItems.items.Count; i++) {
       CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
     }

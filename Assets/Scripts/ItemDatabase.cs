@@ -29,8 +29,8 @@ public class ItemDatabase : MonoBehaviour {
     foreach(Dictionary<string, string> entry in data.data){
       Item newItem = new Item();
       newItem.id = int.Parse(entry["id"]);
-      newItem.name = entry["name"];
-      newItem.description = entry["description"];
+      newItem.name = entry["name_" + VsnSaveSystem.GetStringVariable("language")];
+      newItem.description = entry["description_" + VsnSaveSystem.GetStringVariable("language")];
       newItem.type = (entry["type"] == "c") ? ItemType.celestial : ItemType.mundane;
       newItem.attribute_bonus[0] = int.Parse(entry["guts_bonus"]);
       newItem.attribute_bonus[1] = int.Parse(entry["intelligence_bonus"]);

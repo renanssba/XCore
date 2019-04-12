@@ -1,38 +1,38 @@
 goto *arg1
 
 waypoint event_statement
-say "???" "Nossa, mas que casal irreverente! *FLASH* Que único! *FLASH*"
-say "Que curioso, curioso! Deem um sorriso para a câmera! *FLASH*"
-say "" "Depois de se recuperar da cegueira temporária, \girl se dá conta de que um fotógrafo está tirando fotos deles por alguma razão."
+say "???" "Wow, what a lively couple! *FLASH* So unique! *FLASH*"
+say "Interesting, interesting! Please, face the camera and smile! *FLASH*"
+say "" "After recovering from the flash blindness, \girl realizes there's a photographer taking pictures of them for some reason."
 end_script
 
 
 
 waypoint guts_success
-say "\girl" "Pode parar!"
-say "" "\girl tampa a lente da câmera com a mão. O fotógrafo sai resmungando algo sobre censura."
-say "\boy fica aliviado por poder enxergar novamente."
+say "\girl" "Stop right there!"
+say "" "\girl blocks the camera lenses with her hand. The photographer goes away mumbling something about censorship."
+say "\boy is glad to see again."
 end_script
 
 waypoint intelligence_success
-say "" "\girl diz que tirar fotos de alguém sem consentimento é crime. O fotógrafo irritante vai embora."
-say "\boy fica aliviado por poder enxergar novamente."
+say "" "\girl says taking picture of someone without permissionis a crime. The annoying photographer goes away."
+say "\boy is glad to see again."
 end_script
 
 waypoint charisma_success
-say "" "\girl começa a posar para as fotos, o que deixa o fotógrafo motivado a continuar."
-say "Fotógrafo" "Isso aí! Linda, super linda!"
-say "" "\girl menciona o custo para o uso de seus direitos de imagem."
-say "O fotógrafo sai correndo. \boy fica aliviado por poder enxergar novamente."
+say "" "\girl starts posing to the pictures, which encourages the photographer to continue the session."
+say "Photographer" "Yes, that's right! Camera loves you, honey!"
+say "" "\girl mentions her image rights cost."
+say "The photographer runs away. \boy is glad to see again."
 end_script
 
 
 
 waypoint guts_fail
 say "\girl" "Pode parar!"
-say "" "\girl tenta tampar a lente da câmera com a mão. Ela erra o cálculo e acaba dando um tapão na câmera, que se espatifa no chão."
-say "Fotógrafo" "Ei, essa câmera custa uma fortuna! Exijo reembolso!"
-say "\boy e \girl saem do local com a promessa de receber uma conta salgada pelo correio."
+say "" "\girl tries to block the camera lenses with her hand. She misses, though, slapping the camera directly to the ground. It smashes to pieces."
+say "Photographer" "Hey, this camera costs a fortune! I demand restitution!"
+say "\couple leave the location with a huge new debt."
 end_script
 
 waypoint intelligence_fail
@@ -41,9 +41,9 @@ say "A saraivada de flashes continua por vários minutos. Não foi uma experiên
 end_script
 
 waypoint charisma_fail
-say "" "\girl começa a posar para as fotos."
-say "Fotógrafo" "Não, não! O foco aqui é ele, minha filha!"
-say "" "O fotógrafo aponta para \boy. A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável."
+say "" "\girl starts posing to the pictures."
+say "Photographer" "No, no! The star here is this one, girl!"
+say "" "The photographer points to \boy. The camera flashes continue for a long time. It wasn't a pleasant experience."
 end_script
 
 

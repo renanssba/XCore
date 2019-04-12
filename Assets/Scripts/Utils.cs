@@ -43,7 +43,7 @@ public enum CharacterTraits {
   timido
 };
 
-public enum RandomBoy {
+public enum RandomBoyPtBr {
   Alberto,
   Jorge,
   Daniel,
@@ -57,7 +57,7 @@ public enum RandomBoy {
   Roberto
 }
 
-public enum RandomGirl {
+public enum RandomGirlPtBr {
   Amanda,
   Bianca,
   Carla,
@@ -70,6 +70,33 @@ public enum RandomGirl {
   Valentina,
   Juliana,
   Paola
+}
+
+public enum RandomBoyEng {
+  Albert,
+  George,
+  Daniel,
+  Peter,
+  Charlie,
+  Joe,
+  Robert,
+  Oliver,
+  Harry,
+  Jacob
+}
+
+public enum RandomGirlEng {
+  Ammanda,
+  Olivia,
+  Emily,
+  Amelia,
+  Sophia,
+  Lily,
+  Charlotte,
+  Jade,
+  Mia,
+  Ruby,
+  Daisy
 }
 
 
@@ -206,15 +233,23 @@ public class Utils {
   }
 
   public static string GetRandomBoyName() {
-    int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomBoy)).Length);
-
-    return System.Enum.GetName(typeof(RandomBoy), selected);
+    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
+      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomBoyPtBr)).Length);
+      return System.Enum.GetName(typeof(RandomBoyPtBr), selected);
+    } else {
+      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomBoyEng)).Length);
+      return System.Enum.GetName(typeof(RandomBoyEng), selected);
+    }
   }
 
   public static string GetRandomGirlName() {
-    int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomGirl)).Length);
-
-    return System.Enum.GetName(typeof(RandomGirl), selected);
+    if(VsnSaveSystem.GetStringVariable("language") == "pt_br"){
+      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomGirlPtBr)).Length);
+      return System.Enum.GetName(typeof(RandomGirlPtBr), selected);
+    } else{
+      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomGirlEng)).Length);
+      return System.Enum.GetName(typeof(RandomGirlEng), selected);
+    }
   }
 
   public static LikeLevel GetRandomTasteValue() {
