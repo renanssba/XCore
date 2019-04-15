@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour {
 
   private void Awake() {
-    VsnSaveSystem.SetVariable("language", "eng");
+    if(VsnSaveSystem.GetStringVariable("language")=="") {
+      VsnSaveSystem.SetVariable("language", "eng");
+    }
   }
 
   void Start(){
@@ -22,6 +24,16 @@ public class TitleController : MonoBehaviour {
     //SoundManager.GetInstance().PlayCancelSound();
     VsnController.instance.StartVSN("title_screen");
     /// TODO: Implement save/load feature
+  }
+
+  public void ClickPortugueseButton(){
+    VsnSaveSystem.SetVariable("language", "pt_br");
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+  }
+
+  public void ClickEnglishButton() {
+    VsnSaveSystem.SetVariable("language", "eng");
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }
 
   public void ClickExit(){
