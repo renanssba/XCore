@@ -6,6 +6,7 @@ public class VsnConsoleSimulator : MonoBehaviour {
   public TMP_Text TmpText;
 
   int totalCharacters;
+  public bool autopass = false;
 
   Coroutine showLettersCoroutine = null;
 
@@ -14,6 +15,9 @@ public class VsnConsoleSimulator : MonoBehaviour {
   }
 
 
+  public void SetAutoPassText(bool value){
+    autopass = value;
+  }
   public void StartShowingCharacters(){
     showLettersCoroutine = StartCoroutine(RevealCharacters());
   }
@@ -28,6 +32,10 @@ public class VsnConsoleSimulator : MonoBehaviour {
       StopCoroutine(showLettersCoroutine);
     }
     showLettersCoroutine = null;
+    if(autopass) {
+      VsnUIManager.instance.OnScreenButtonClick();
+      autopass = false;
+    }
   }
 
 

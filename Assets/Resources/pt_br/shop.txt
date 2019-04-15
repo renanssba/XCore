@@ -2,7 +2,7 @@
 update_ui
 
 waypoint store_loop
-say "Bem-vindo à loja!"
+say_auto "Bem-vindo à loja!"
 choices "Comprar" buy "Vender" sell "Cancelar" end
 
 
@@ -11,7 +11,7 @@ show_shop true "buy"
 
 if item_id != -1
   if item_price <= money
-    say "Você quer comprar \item_name por \item_price?"
+    say_auto "Você quer comprar \item_name por \item_price?"
     choices "Sim" comprar_sim "Não" voltar
   else
     say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
@@ -30,7 +30,7 @@ endif
 
 show_shop true "sell"
 if item_id != -1
-  say "Você quer vender \item_name por \item_price?"
+  say_auto "Você quer vender \item_name por \item_price?"
   choices "Sim" vender_sim "Não" voltar
 else
   goto end

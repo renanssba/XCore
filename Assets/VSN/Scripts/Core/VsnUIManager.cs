@@ -73,6 +73,10 @@ public class VsnUIManager : MonoBehaviour {
     vsnMessageText.GetComponent<VsnConsoleSimulator>().StartShowingCharacters();
   }
 
+  public void SetTextAuto() {
+    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetAutoPassText(true);
+  }
+
   public void ShowClickMessageIcon(bool value){
     clickMessageIcon.SetActive(value);
   }
