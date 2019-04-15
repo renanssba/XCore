@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 public enum StageName {
   TitleScreen,
-  CityMap,
-  Investigation,
+  Gameplay,
   CustomizeScreen
 };
 
@@ -15,20 +14,6 @@ public enum SongNames {
   sewers_loop,
   night_loop,
   conceito_full
-};
-
-public enum LikeLevel {
-  hates = -1,
-  neutral = 0,
-  loves = 1
-};
-
-public enum MainTastes {
-  animais = 0,
-  esportes = 1,
-  videogames = 2,
-  livros = 3,
-  trending = 4
 };
 
 
@@ -162,60 +147,6 @@ public enum RandomTastes {
   fazerPoses
 }
 
-[System.Serializable]
-public class Suggestion {
-  public SuggestionType type;
-  public int target;
-  public int topic;
-  public string phrase;
-
-  //public Suggestion(int newTarget, SuggestionType suggestionType, int newTopic, string newPhrase){
-  //  target = newTarget;
-  //  type = suggestionType;
-  //  topic = newTopic;
-  //  phrase = newPhrase;
-  //}
-};
-
-[System.Serializable]
-public class Opinion {
-  public int personEncounterId;
-  public int topic;
-  public LikeLevel likeValue;
-
-  public Opinion(int id, int newTopic, LikeLevel newLikeValue) {
-    personEncounterId = id;
-    topic = newTopic;
-    likeValue = newLikeValue;
-  }
-};
-
-public enum SuggestionType {
-  replyTaste = 1,
-  replyHobby = 2,
-  replyCrush = 3,
-  changeSubject = 4,
-  giveGift = 5,
-  leaveEncounter = 6,
-  invite = 7,
-  replyHate = 8,
-  talkAboutHobby = 9,
-  talkAboutHate = 10,
-  talkAboutCrush = 11,
-  sayLikeTasteEvaluated = 12,
-  sayHateTasteEvaluated = 13
-}
-
-public enum MatterTypes {
-  ask_opinion = 1,
-  whats_up = 2,
-  ask_crush = 3,
-  what_you_hate = 4,
-  specific_taste_like = 5,
-  specific_taste_hate = 6,
-  be_quiet = 5
-}
-
 
 public class Utils {
   public static string GetRandomTasteName() {
@@ -251,31 +182,8 @@ public class Utils {
       return System.Enum.GetName(typeof(RandomGirlEng), selected);
     }
   }
-
-  public static LikeLevel GetRandomTasteValue() {
-    int selected = Random.Range(-1, 2);
-    LikeLevel value = (LikeLevel)selected;
-
-    return value;
-  }
-
-  public static int LevelOfAgree(LikeLevel taste1, LikeLevel taste2) {
-    int a = (int)taste1;
-    int b = (int)taste2;
-
-    if (a == b &&
-       (taste1 == LikeLevel.loves || taste1 == LikeLevel.hates)) {
-      return 1;
-    }
-
-    if ((taste1 == LikeLevel.hates && taste2 == LikeLevel.loves) ||
-       (taste1 == LikeLevel.loves && taste2 == LikeLevel.hates)) {
-      return -1;
-    }
-
-    return 0;
-  }
-
+  
+  
   public static int GetRandomAge() {
     return Random.Range(15, 18);
   }
@@ -347,19 +255,6 @@ public class Utils {
         count++;
     }
     return count;
-  }
-
-  public static string GetPrintableTrait(string traitName, bool capitalLetters) {
-    if (traitName.Length > 7) {
-      switch (traitName.Substring(traitName.Length - 7, 7)) {
-        case "SegEQua":
-          return GetPrintableString(traitName.Substring(0, traitName.Length - 7), capitalLetters) + " (Seg/Qua)";
-        case "TerEQui":
-          return GetPrintableString(traitName.Substring(0, traitName.Length - 7), capitalLetters) + " (Ter/Qui)";
-      }
-    }
-
-    return GetPrintableString(traitName, capitalLetters);
   }
 
   public static string GetPrintableString(string name, bool capitalLetters) {
