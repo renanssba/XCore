@@ -15,10 +15,10 @@ namespace Command {
       int result = 0;
 
       switch(currentEvent.interactionType){
-        case EventInteractionType.male:
+        case DateEventInteractionType.male:
           p = GlobalData.instance.GetCurrentBoy();
           break;
-        case EventInteractionType.female:
+        case DateEventInteractionType.female:
           p = GlobalData.instance.GetCurrentGirl();
           break;
       }

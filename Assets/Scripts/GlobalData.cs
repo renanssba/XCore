@@ -74,11 +74,11 @@ public class GlobalData : MonoBehaviour {
 
   public Personality CurrentPersonPersonality(){
     switch (GameController.instance.GetCurrentEvent().interactionType) {
-      case EventInteractionType.male:
+      case DateEventInteractionType.male:
         return GetCurrentBoy().personality;
-      case EventInteractionType.female:
+      case DateEventInteractionType.female:
         return GetCurrentGirl().personality;
-      case EventInteractionType.couple:
+      case DateEventInteractionType.couple:
         return GetCurrentGirl().personality;
     }
     return Personality.emotivo;
@@ -89,11 +89,11 @@ public class GlobalData : MonoBehaviour {
       return 0;
     }
     switch(GameController.instance.GetCurrentEvent().interactionType){
-      case EventInteractionType.male:
+      case DateEventInteractionType.male:
         return GetCurrentBoy().AttributeValue(attr);
-      case EventInteractionType.female:
+      case DateEventInteractionType.female:
         return GetCurrentGirl().AttributeValue(attr);
-      case EventInteractionType.couple:
+      case DateEventInteractionType.couple:
         return GetCurrentGirl().AttributeValue(attr) + GetCurrentBoy().AttributeValue(attr);
     }
     return 0;

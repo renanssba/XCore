@@ -32,19 +32,19 @@ namespace Command {
           break;
         case "event":
           switch (GameController.instance.GetCurrentEvent().interactionType) {
-            case EventInteractionType.male:
+            case DateEventInteractionType.male:
               GameController.instance.personCards[0].gameObject.SetActive(true);
               GameController.instance.personCards[1].gameObject.SetActive(true);
               GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
               GameController.instance.personCards[1].GetComponent<CanvasGroup>().alpha = 0.65f;
               break;
-            case EventInteractionType.female:
+            case DateEventInteractionType.female:
               GameController.instance.personCards[0].gameObject.SetActive(true);
               GameController.instance.personCards[1].gameObject.SetActive(true);
               GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 0.65f;
               GameController.instance.personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
               break;
-            case EventInteractionType.couple:
+            case DateEventInteractionType.couple:
               GameController.instance.personCards[0].gameObject.SetActive(true);
               GameController.instance.personCards[1].gameObject.SetActive(true);
               GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 1f;

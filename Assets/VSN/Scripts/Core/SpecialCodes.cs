@@ -21,7 +21,7 @@ public class SpecialCodes {
       
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", GameController.instance.GetCurrentEventName());
+      currentString = currentString.Replace("\\currentEventName", "date/"+GameController.instance.GetCurrentEventName());
       if (GlobalData.instance.GetCurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.GetCurrentBoy().name);
         currentString = currentString.Replace("\\girl", GlobalData.instance.GetCurrentGirl().name);

@@ -8,6 +8,12 @@ public enum ItemType{
   celestial
 }
 
+public enum ItemCategory{
+  clothing,
+  accessory,
+  food
+}
+
 [System.Serializable]
 public class Item {
 

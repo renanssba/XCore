@@ -19,6 +19,10 @@ public class GameController : MonoBehaviour {
   public int maxDays;
   public int objective;
 
+  public TextAsset observationEventsFile;
+  public List<ObservationEvent> allObservationEvents;
+  public ObservationEvent[] observationSegment;
+
   public TextAsset dateEventsFile;
   public List<DateEvent> allDateEvents;
   public DateEvent[] date;
@@ -48,8 +52,9 @@ public class GameController : MonoBehaviour {
   public void Start() {
     VsnSaveSystem.SetVariable("objective", objective);
     VsnSaveSystem.SetVariable("max_days", maxDays);
-    //VsnSaveSystem.SetVariable("language", "pt_br");
-    //VsnSaveSystem.SetVariable("language", "eng");
+    if (VsnSaveSystem.GetStringVariable("language") == "") {
+      VsnSaveSystem.SetVariable("language", "pt_br");
+    }
     GlobalData.instance.InitializeChapter();
     Initialize();
     UpdateUI();
@@ -59,37 +64,96 @@ public class GameController : MonoBehaviour {
 
   public void Initialize(){
     day = 0;
+
+    InitializeDateEvents();
+    InitializeObservationEvents();
+
+    PassDay();
+  }
+
+  public void InitializeDateEvents() {
     allDateEvents = new List<DateEvent>();
 
     int id;
     int guts;
     int intelligence;
     int charisma;
-    EventInteractionType interaction = EventInteractionType.male;
+    DateEventInteractionType interaction = DateEventInteractionType.male;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
-    foreach(Dictionary<string, string> dic in spreadsheetData.data) {
+    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
       id = int.Parse(dic["Id"]);
       guts = int.Parse(dic["Dificuldade Guts"]);
       intelligence = int.Parse(dic["Dificuldade Intelligence"]);
       charisma = int.Parse(dic["Dificuldade Charisma"]);
-      switch(dic["Tipo de Interação"]){
+      switch (dic["Tipo de Interação"]) {
         case "male":
-          interaction = EventInteractionType.male;
+          interaction = DateEventInteractionType.male;
           break;
         case "female":
-          interaction = EventInteractionType.female;
+          interaction = DateEventInteractionType.female;
           break;
         case "couple":
-          interaction = EventInteractionType.couple;
+          interaction = DateEventInteractionType.couple;
           break;
         case "compatibility":
-          interaction = EventInteractionType.compatibility;
+          interaction = DateEventInteractionType.compatibility;
           break;
       }
       allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, interaction));
     }
-    PassDay();
+  }
+
+  public void InitializeObservationEvents() {
+    allObservationEvents = new List<ObservationEvent>();
+
+    int eventId;
+    int difficulty = 0;
+    int discount = 0;
+    int aux;
+    ObservationEventInteractionType interaction = ObservationEventInteractionType.otherGenderPerson;
+    Attributes challengedAttribute = Attributes.guts;
+
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(observationEventsFile, 1);
+    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
+      eventId = int.Parse(dic["Id"]);
+      switch (dic["Interação"]) {
+        case "otherGenderPerson":
+          interaction = ObservationEventInteractionType.otherGenderPerson;
+          break;
+      }
+      switch (dic["Atributo Desafiado"]) {
+        case "guts":
+          challengedAttribute = Attributes.guts;
+          break;
+        case "intelligence":
+          challengedAttribute = Attributes.intelligence;
+          break;
+        case "charisma":
+          challengedAttribute = Attributes.charisma;
+          break;
+      }
+      if(int.TryParse(dic["Dificuldade"], out aux)){
+        difficulty = int.Parse(dic["Dificuldade"]);
+      }
+      if (int.TryParse(dic["Desconto"], out aux)) {
+        discount = int.Parse(dic["Desconto"]);
+      }      
+
+      allObservationEvents.Add(new ObservationEvent {
+        id = eventId,
+        eventType = interaction,
+        eventScript = dic["Nome do Script"],
+
+        personInEvent = GlobalData.instance.people[1],
+        //itemInEvent
+
+        //itemCategory
+        challengedAttribute = challengedAttribute,
+        challengeDifficulty = difficulty,
+        discountPercent = discount
+      });
+    }
   }
 
   public void PassDay(){

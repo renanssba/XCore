@@ -71,7 +71,7 @@ public enum RandomBoyEng {
 }
 
 public enum RandomGirlEng {
-  Ammanda,
+  Chloe,
   Olivia,
   Emily,
   Amelia,
