@@ -8,13 +8,22 @@ namespace Command {
   public class EventResolutionCommand : VsnCommand {
 
     public override void Execute() {
-      DateEvent currentEvent = GameController.instance.GetCurrentEvent();
+      if(args[0].GetStringValue() == "date"){
+        ResolveDate();
+      }else{
+        ResolveObservation();
+      }
+    }
+
+
+    public void ResolveDate(){
+      DateEvent currentEvent = GameController.instance.GetCurrentDateEvent();
       int currentEventId = VsnSaveSystem.GetIntVariable("currentDateEvent");
       Person p = null;
       int attributeToUse;
       int result = 0;
 
-      switch(currentEvent.interactionType){
+      switch (currentEvent.interactionType) {
         case DateEventInteractionType.male:
           p = GlobalData.instance.GetCurrentBoy();
           break;
@@ -24,28 +33,50 @@ namespace Command {
       }
 
       if (args.Length > 0) {
-        attributeToUse = (int)args[0].GetNumberValue();
+        attributeToUse = (int)args[1].GetNumberValue();
       } else {
         attributeToUse = (int)p.AttributetoUse();
       }
 
       result = attributeToUse;
-      if (p.AttributeValue(attributeToUse) < currentEvent.difficultyForAttribute[attributeToUse]){
+      if (p.AttributeValue(attributeToUse) < currentEvent.difficultyForAttribute[attributeToUse]) {
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
-      if(result < 3){
+      if (result < 3) {
         VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 1);
-      }else{
+      } else {
         VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 2);
       }
 
       GameController.instance.UpdateUI();
     }
 
+
+    public void ResolveObservation() {
+      ObservationEvent currentEvent = GameController.instance.GetCurrentObservationEvent();
+      Person person = null;
+      int attributeToUse = (int)currentEvent.challengedAttribute;
+      int result = 0;
+
+      person = GlobalData.instance.GetCurrentBoy();
+
+      if (person.AttributeValue(attributeToUse) >= currentEvent.challengeDifficulty) {
+        result = 0;
+      }else{
+        result = 1;
+      }
+      VsnSaveSystem.SetVariable("resolution", result);
+    }
+
+
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[0]);
-      signatures.Add(new VsnArgType[] { 
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.stringArg
+      });
+
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.stringArg,
         VsnArgType.numberArg
       });
     }

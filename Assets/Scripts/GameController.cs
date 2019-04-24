@@ -21,11 +21,11 @@ public class GameController : MonoBehaviour {
 
   public TextAsset observationEventsFile;
   public List<ObservationEvent> allObservationEvents;
-  public ObservationEvent[] observationSegment;
+  public ObservationEvent[] observationSegments;
 
   public TextAsset dateEventsFile;
   public List<DateEvent> allDateEvents;
-  public DateEvent[] date;
+  public DateEvent[] dateSegments;
 
   public Slider progressSlider;
   public TextMeshProUGUI progressText;
@@ -108,50 +108,58 @@ public class GameController : MonoBehaviour {
     allObservationEvents = new List<ObservationEvent>();
 
     int eventId;
-    int difficulty = 0;
-    int discount = 0;
+    int value = 0;
     int aux;
-    ObservationEventInteractionType interaction = ObservationEventInteractionType.otherGenderPerson;
-    Attributes challengedAttribute = Attributes.guts;
+    ObservationEventType interaction = ObservationEventType.otherGenderPerson;
+    Attributes relevantAttribute = Attributes.guts;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(observationEventsFile, 1);
     foreach (Dictionary<string, string> dic in spreadsheetData.data) {
       eventId = int.Parse(dic["Id"]);
       switch (dic["Interação"]) {
         case "otherGenderPerson":
-          interaction = ObservationEventInteractionType.otherGenderPerson;
+          interaction = ObservationEventType.otherGenderPerson;
+          break;
+        case "attributeTraining":
+          interaction = ObservationEventType.attributeTraining;
+          break;
+        case "sameGenderPerson":
+          interaction = ObservationEventType.sameGenderPerson;
+          break;
+        case "itemOnSale":
+          interaction = ObservationEventType.itemOnSale;
+          break;
+        case "homeStalking":
+          interaction = ObservationEventType.homeStalking;
           break;
       }
-      switch (dic["Atributo Desafiado"]) {
+
+      switch (dic["Atributo"]) {
         case "guts":
-          challengedAttribute = Attributes.guts;
+          relevantAttribute = Attributes.guts;
           break;
         case "intelligence":
-          challengedAttribute = Attributes.intelligence;
+          relevantAttribute = Attributes.intelligence;
           break;
         case "charisma":
-          challengedAttribute = Attributes.charisma;
+          relevantAttribute = Attributes.charisma;
           break;
       }
-      if(int.TryParse(dic["Dificuldade"], out aux)){
-        difficulty = int.Parse(dic["Dificuldade"]);
-      }
-      if (int.TryParse(dic["Desconto"], out aux)) {
-        discount = int.Parse(dic["Desconto"]);
-      }      
+      if(int.TryParse(dic["Valor"], out aux)){
+        value = int.Parse(dic["Valor"]);
+      }   
 
       allObservationEvents.Add(new ObservationEvent {
         id = eventId,
         eventType = interaction,
-        eventScript = dic["Nome do Script"],
+        scriptName = dic["Nome do Script"],
 
         personInEvent = GlobalData.instance.people[1],
         //itemInEvent
 
         //itemCategory
-        challengedAttribute = challengedAttribute,
-        challengeDifficulty = difficulty,
-        discountPercent = discount
+        challengedAttribute = relevantAttribute,
+        challengeDifficulty = value
       });
     }
   }
@@ -242,29 +250,59 @@ public class GameController : MonoBehaviour {
     List<int> selectedEvents = new List<int>();
     int selectedId;
 
-    date = new DateEvent[dateSize];
+    dateSegments = new DateEvent[dateSize];
     for(int i=0; i<dateSize; i++){
       do{
         selectedId = Random.Range(0, allDateEvents.Count);
       } while(selectedEvents.Contains(selectedId));
-      date[i] = allDateEvents[selectedId];
+      dateSegments[i] = allDateEvents[selectedId];
+      selectedEvents.Add(selectedId);
+    }
+  }
+  
+  public void GenerateObservation() {
+    int observationSize = Mathf.Min(allObservationEvents.Count, 5);
+    List<int> selectedEvents = new List<int>();
+    int selectedId;
+
+    observationSegments = new ObservationEvent[observationSize];
+    for (int i = 0; i < observationSize; i++) {
+      do {
+        selectedId = Random.Range(0, allObservationEvents.Count);
+      } while (selectedEvents.Contains(selectedId));
+      observationSegments[i] = allObservationEvents[selectedId];
       selectedEvents.Add(selectedId);
     }
   }
 
-  public DateEvent GetCurrentEvent(){
+  public DateEvent GetCurrentDateEvent(){
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if (date.Length <= currentDateEvent) {
+    if (dateSegments.Length <= currentDateEvent) {
       return null;
     }
-    return date[currentDateEvent];
+    return dateSegments[currentDateEvent];
   }
 
-  public string GetCurrentEventName() {
-    if(GetCurrentEvent() == null) {
+  public ObservationEvent GetCurrentObservationEvent() {
+    int currentEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
+    if (observationSegments.Length <= currentEvent) {
+      return null;
+    }
+    return observationSegments[currentEvent];
+  }
+
+  public string GetCurrentDateEventName() {
+    if(GetCurrentDateEvent() == null) {
       return "";
     }
-    return date[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
+    return dateSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
+  }
+
+  public string GetCurrentObservationEventName() {
+    if (GetCurrentObservationEvent() == null) {
+      return "";
+    }
+    return observationSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
   public void ShowButtons(bool value){

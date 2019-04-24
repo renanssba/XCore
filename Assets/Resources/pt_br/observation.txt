@@ -1,0 +1,80 @@
+﻿set_people "observation"
+fade_out 0.7
+//play_music "date1_intro" "date1_loop"
+wait 0.5
+bg "shopping"
+
+set_var situation 1
+
+generate_segment "observation"
+set_var currentDateEvent 0
+
+fade_in 0.7
+
+say "" "Você decide acompanhar \boy no seu dia-a-dia."
+
+
+waypoint new_event
+if #currentDateEvent < 3
+
+  waypoint start_interaction
+  goto_script "\currentObservationEventName" event_statement
+  //set_people "event"
+  
+  
+  if #observationEventType == 0
+    // continue
+  endif
+  if #observationEventType == 2
+    goto next
+  endif
+
+
+
+
+  //say_auto "" "Qual reação \boy deve tomar?"
+  choices "Ajudar" sug_help "Ignorar" sug_ignore
+
+
+  waypoint sug_help
+  event_resolution "observation"
+  goto resolution
+
+
+
+  waypoint sug_ignore
+  set_var resolution 2
+  goto resolution
+
+
+
+  waypoint resolution
+  if resolution == 0
+    goto_script "\currentObservationEventName" help_success
+  endif
+  if resolution == 1
+    goto_script "\currentObservationEventName" help_fail
+  endif
+  if resolution == 2
+    goto_script "\currentObservationEventName" ignore
+  endif
+  
+
+  waypoint next
+  add_var currentDateEvent 1
+  update_ui
+  goto new_event
+
+endif
+
+say "" "Depois disso, \boy foi descansar. Você parou de acompanhar seu dia."
+
+
+fade_out 0.5
+bg null
+update_ui
+fade_in 0.5
+
+set_people "show"
+
+set_var situation 0

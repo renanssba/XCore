@@ -7,8 +7,8 @@ public class VsnCharacter : MonoBehaviour{
 	public string label;
 
 	public void SetData(string characterFilename, string label){
-		characterFilename = characterFilename;
-		label = label;
+		this.characterFilename = characterFilename;
+    this.label = label;
 	}
 }
 

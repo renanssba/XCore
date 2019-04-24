@@ -4,7 +4,9 @@ play_music "date1_intro" "date1_loop"
 wait 0.5
 bg "shopping"
 
-generate_date
+set_var situation 2
+
+generate_segment "date"
 set_var currentDateEvent 0
 set_var date_success 0
 set_var date_event_result_0 0
@@ -32,10 +34,7 @@ waypoint start_interaction
 goto_script "\currentEventName" event_statement
 set_people "event"
 
-//goto ac_interfere
 
-
-//choices "Interferir (1AP)" ac_interfere "Ignorar" ac_continue
 
 waypoint ac_interfere
 // if #ap < 1
@@ -102,14 +101,10 @@ goto suggestion
 
 waypoint suggestion
 spend_ap 1
-event_resolution selected_attribute
+event_resolution "date" selected_attribute
 goto resolution
 
 
-
-
-waypoint ac_continue
-event_resolution
 
 
 waypoint resolution
@@ -172,3 +167,5 @@ endif
 
 goto_script "spend_day"
 set_people "show"
+
+set_var situation 0

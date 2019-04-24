@@ -21,7 +21,8 @@ public class SpecialCodes {
       
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date/"+GameController.instance.GetCurrentEventName());
+      currentString = currentString.Replace("\\currentEventName", "date/" + GameController.instance.GetCurrentDateEventName());
+      currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
       if (GlobalData.instance.GetCurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.GetCurrentBoy().name);
         currentString = currentString.Replace("\\girl", GlobalData.instance.GetCurrentGirl().name);
@@ -54,9 +55,13 @@ public class SpecialCodes {
       case "#random100":
         return Random.Range(0, 100);
       case "#dateLength":
-        return GameController.instance.date.Length;
+        return GameController.instance.dateSegments.Length;
       case "#currentDateEvent":
         return VsnSaveSystem.GetIntVariable("currentDateEvent");
+      case "#observationLength":
+        return GameController.instance.observationSegments.Length;
+      case "#observationEventType":
+        return (int)GameController.instance.GetCurrentObservationEvent().eventType;
       case "#ap":
         return GameController.instance.ap;
       case "#max_ap":
@@ -70,7 +75,7 @@ public class SpecialCodes {
       case "#currentPersonality":
         return (int)GlobalData.instance.CurrentPersonPersonality();
       case "#currentEventInteractionType":
-        return (int)GameController.instance.GetCurrentEvent().interactionType;
+        return (int)GameController.instance.GetCurrentDateEvent().interactionType;
       case "#inventory_empty":
         return GlobalData.instance.inventory.IsEmpty() ? 1f : 0f;
       default:

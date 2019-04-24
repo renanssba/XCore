@@ -1,0 +1,23 @@
+goto *arg1
+
+waypoint event_statement
+say_auto "" "\boy encontra \girl. Ela está preocupada, olhando para o seu gato que está preso no topo de uma alta árvore."
+end_script
+
+
+
+waypoint help_success
+say "" "\boy age com Valentia e rapidamente sobe na árvore para resgatar a gata."
+say "A gata fica com medo e faz vários arranhões no rosto do garoto, mas mesmo assim o resgate é bem-sucedido."
+end_script
+
+waypoint help_fail
+say "" "\boy tenta subir a árvore para ajudar, mas quando olha pra baixo fica com medo, se desequilibra e cai sobre \girl."
+say "A garota fica com raiva dele e diz que se era pra atrapalhar, seria melhor nem ter tentado ajudar."
+end_script
+
+
+
+waypoint ignore
+say "" "\boy olha para a situação e simplesmente decide não fazer nada a respeito."
+end_script

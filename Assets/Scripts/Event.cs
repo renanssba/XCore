@@ -40,20 +40,20 @@ public class DateEvent {
 
 
 
-public enum ObservationEventInteractionType{
-  otherGenderPerson,
-  sameGenderPerson,
-  attributeTraining,
-  itemOnSale,
-  homeStalking
+public enum ObservationEventType{
+  otherGenderPerson = 0,
+  sameGenderPerson = 1,
+  attributeTraining = 2,
+  itemOnSale = 3,
+  homeStalking = 4
 }
 
 
 [System.Serializable]
 public class ObservationEvent{
   public int id;
-  public ObservationEventInteractionType eventType;
-  public string eventScript;
+  public ObservationEventType eventType;
+  public string scriptName;
 
   public Person personInEvent;
   public Item itemInEvent;

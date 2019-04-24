@@ -13,7 +13,6 @@ class DiskSaveHandler : IVsnSaveHandler{
 
 	void IVsnSaveHandler.Save (Dictionary<string, string> dictionary, int saveSlot, Action<bool> callback){
 		bool success;
-		string finalJson;
 		string saveString = GetSaveSlotPrefix (saveSlot);
 
 		Dictionary<string, string> savedDictionary = dictionary;
@@ -35,8 +34,6 @@ class DiskSaveHandler : IVsnSaveHandler{
 	}
 		
 	void IVsnSaveHandler.Load(Dictionary<string, string> dictionary, int saveSlot, Action<Dictionary<string,string>> callback){
-		bool success = false;
-		string loadedJson;
 		string saveString = GetSaveSlotPrefix (saveSlot);
 		Dictionary<string, string> loadedDictionary = LoadSavedVariables(saveString);
 		callback(loadedDictionary);

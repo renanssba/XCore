@@ -72,8 +72,12 @@ public class GlobalData : MonoBehaviour {
     return people[currentCouple * 2+1];
   }
 
+  public Person GetCurrentObservationPerson(){
+    return GetCurrentBoy();
+  }
+
   public Personality CurrentPersonPersonality(){
-    switch (GameController.instance.GetCurrentEvent().interactionType) {
+    switch (GameController.instance.GetCurrentDateEvent().interactionType) {
       case DateEventInteractionType.male:
         return GetCurrentBoy().personality;
       case DateEventInteractionType.female:
@@ -85,17 +89,29 @@ public class GlobalData : MonoBehaviour {
   }
 
   public int EventSolvingAttributeLevel(int attr){
-    if(GameController.instance.GetCurrentEvent() == null) {
-      return 0;
+
+    switch(VsnSaveSystem.GetIntVariable("situation")) {
+      case 1:
+        if (GetCurrentObservationPerson() != null) {
+          return GetCurrentObservationPerson().attributes[attr];
+        }
+        break;
+      case 2:
+        if (GameController.instance.GetCurrentDateEvent() == null) {
+          return 0;
+        }
+        switch (GameController.instance.GetCurrentDateEvent().interactionType) {
+          case DateEventInteractionType.male:
+            return GetCurrentBoy().AttributeValue(attr);
+          case DateEventInteractionType.female:
+            return GetCurrentGirl().AttributeValue(attr);
+          case DateEventInteractionType.couple:
+            return GetCurrentGirl().AttributeValue(attr) + GetCurrentBoy().AttributeValue(attr);
+        }
+        break;
     }
-    switch(GameController.instance.GetCurrentEvent().interactionType){
-      case DateEventInteractionType.male:
-        return GetCurrentBoy().AttributeValue(attr);
-      case DateEventInteractionType.female:
-        return GetCurrentGirl().AttributeValue(attr);
-      case DateEventInteractionType.couple:
-        return GetCurrentGirl().AttributeValue(attr) + GetCurrentBoy().AttributeValue(attr);
-    }
+
+    
     return 0;
   }
 
