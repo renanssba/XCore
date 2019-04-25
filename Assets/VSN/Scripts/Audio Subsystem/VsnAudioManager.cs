@@ -153,15 +153,16 @@ public class VsnAudioManager : MonoBehaviour {
   }
 
   public string GetPlayingMusicName(){
-    if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null &&
-       (VsnAudioManager.instance.musicPlayer.loopSource.isPlaying || VsnAudioManager.instance.musicPlayer.introSource.isPlaying)
+    if(musicPlayer.loopSource.clip != null &&
+       (musicPlayer.loopSource.isPlaying || musicPlayer.introSource.isPlaying)
       ){
-      return VsnAudioManager.instance.musicPlayer.loopSource.clip.name;
+      return musicPlayer.loopSource.clip.name;
     }
     return "";
   }
 
   public void PlaySfx(string clipName){
+    Debug.LogWarning("PLAY: " + clipName);
     PlaySfx(clipName, 0f);
   }
 

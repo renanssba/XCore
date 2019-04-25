@@ -103,10 +103,13 @@ public class VsnUIManager : MonoBehaviour {
   }
 
   private void AddChoiceButtonListener(Button button, string label) {
+    button.onClick.RemoveAllListeners();
     button.onClick.AddListener(() => {
       VsnCommand command = new GotoCommand();
       List<VsnArgument> arguments = new List<VsnArgument>();
       arguments.Add(new VsnReference(label));
+
+      VsnAudioManager.instance.PlaySfx("ui_confirm");
 
       command.InjectArguments(arguments);
       ShowChoicesPanel(false, 0);

@@ -16,14 +16,12 @@ public class TitleController : MonoBehaviour {
 
   public void ClickNewGame(){
     //GlobalData.GetInstance().InitializeGameData();
-    //SceneManager.LoadScene(StageName.Gameplay.ToString());
     VsnController.instance.StartVSN("start_game");
   }
 
   public void ClickContinue(){
-//    SceneManager.LoadScene(StageName.CityMap.ToString());
-    //SoundManager.GetInstance().PlayCancelSound();
-    VsnController.instance.StartVSN("title_screen");
+    //    SceneManager.LoadScene(StageName.CityMap.ToString());
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
     /// TODO: Implement save/load feature
   }
 
@@ -38,6 +36,7 @@ public class TitleController : MonoBehaviour {
   }
 
   public void ClickExit(){
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
     Application.Quit();
   }
 }
