@@ -95,6 +95,7 @@ public class VsnUIManager : MonoBehaviour {
       isTextAppearing = false;
       vsnMessageText.GetComponent<VsnConsoleSimulator>().FinishShowingCharacters();
     } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH) {
+      VsnAudioManager.instance.PlaySfx("ui_dialogue_advance");
       VsnController.instance.state = ExecutionState.PLAYING;
       ShowClickMessageIcon(false);
       ShowDialogPanel(false);

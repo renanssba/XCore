@@ -19,6 +19,7 @@ namespace Command {
             itemScreen.Initialize(ItemInteractionType.store_sell, GlobalData.instance.inventory);
             break;
         }
+        VsnAudioManager.instance.PlaySfx("ui_menu_open");
         itemScreen.screenTransition.OpenMenuScreen();
         VsnController.instance.WaitForCustomInput();
       } else {

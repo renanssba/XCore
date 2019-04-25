@@ -56,7 +56,8 @@ if #currentDateEvent < 3
     goto_script "\currentObservationEventName" help_fail
   endif
   if resolution == 2
-    goto_script "\currentObservationEventName" ignore
+    //goto_script "\currentObservationEventName" ignore
+    say "" "\boy olha para a situação e simplesmente decide não fazer nada a respeito."
   endif
   
 

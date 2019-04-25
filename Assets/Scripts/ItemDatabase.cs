@@ -17,6 +17,7 @@ public class ItemDatabase : MonoBehaviour {
   }
 
   void Start(){
+    Debug.LogWarning("START ITEMDATABASE");
     InitializeItemDatabase();
   }
 
@@ -27,6 +28,8 @@ public class ItemDatabase : MonoBehaviour {
     database = new List<Item>();
     itemsForSale = new List<int>();
     foreach(Dictionary<string, string> entry in data.data){
+      Debug.LogWarning("Importing Item");
+
       Item newItem = new Item();
       newItem.id = int.Parse(entry["id"]);
       newItem.name = entry["name_" + VsnSaveSystem.GetStringVariable("language")];

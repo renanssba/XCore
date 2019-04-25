@@ -26,16 +26,19 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void OpenStore() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
     screenTransition.OpenMenuScreen();
   }
 
   public void OpenInventory() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.inventory, GlobalData.instance.inventory);
     screenTransition.OpenMenuScreen();
   }
 
   public void OpenInput() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.input, GlobalData.instance.inventory);
     screenTransition.OpenMenuScreen();
   }
@@ -124,6 +127,7 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void ClickExitButton(){
+    VsnAudioManager.instance.PlaySfx("ui_menu_close");
     VsnSaveSystem.SetVariable("item_id", -1);
     VsnController.instance.GotItemInput();
     screenTransition.CloseMenuScreen();

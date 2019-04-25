@@ -6,7 +6,7 @@ public class TitleController : MonoBehaviour {
 
   private void Awake() {
     if(VsnSaveSystem.GetStringVariable("language")=="") {
-      VsnSaveSystem.SetVariable("language", "eng");
+      VsnSaveSystem.SetVariable("language", "pt_br");
     }
   }
 
@@ -16,7 +16,8 @@ public class TitleController : MonoBehaviour {
 
   public void ClickNewGame(){
     //GlobalData.GetInstance().InitializeGameData();
-    SceneManager.LoadScene(StageName.Gameplay.ToString());
+    //SceneManager.LoadScene(StageName.Gameplay.ToString());
+    VsnController.instance.StartVSN("start_game");
   }
 
   public void ClickContinue(){

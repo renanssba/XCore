@@ -43,6 +43,7 @@ waypoint comprar_sim
 subtract_var money item_price
 update_ui
 add_item item_id 1
+play_sfx "ui_money"
 say "Você adquiriu \item_name!"
 goto store_loop
 
@@ -50,6 +51,7 @@ goto store_loop
 waypoint vender_sim
 add_var money item_price
 update_ui
+play_sfx "ui_money"
 add_item item_id -1
 say "Obrigado!"
 goto store_loop

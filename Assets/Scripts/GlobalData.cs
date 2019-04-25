@@ -12,7 +12,17 @@ public class GlobalData : MonoBehaviour {
   public static GlobalData instance;
 
   void Awake () {
-    instance = this;
+    if (instance == null) {
+      instance = this;
+      if (VsnSaveSystem.GetStringVariable("language") == "") {
+        VsnSaveSystem.SetVariable("language", "pt_br");
+      }
+    } else if (instance != this) {
+      Destroy(gameObject);
+      return;
+    }
+    DontDestroyOnLoad(gameObject);
+
     inventory = new Inventory();
   }
 

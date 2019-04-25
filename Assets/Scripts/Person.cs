@@ -93,6 +93,7 @@ public class Person {
   }
   
   public void EquipItemInSlot(int slotId, Item item){
+    VsnAudioManager.instance.PlaySfx("inventory_equip");
     equips[slotId] = item;
     GlobalData.instance.inventory.ConsumeItem(equips[slotId].id, 1);
     GameController.instance.UpdateUI();
@@ -100,6 +101,7 @@ public class Person {
 
   public void UnequipItemInSlot(int slotId) {
     if (equips[slotId] != null) {
+      VsnAudioManager.instance.PlaySfx("inventory_equip");
       Debug.LogWarning("Unequiping item: " + equips[slotId].id +", " + equips[slotId].name);
       GlobalData.instance.inventory.AddItem(equips[slotId].id, 1);
       equips[slotId] = null;
