@@ -39,8 +39,10 @@ GameObject:
   - component: {fileID: 222364627064858506}
   - component: {fileID: 114164694065684242}
   - component: {fileID: 114856979997138754}
+  - component: {fileID: 114300219028707770}
+  - component: {fileID: 114960097871349696}
   m_Layer: 5
-  m_Name: Phone Button
+  m_Name: Inventory Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +265,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OpenPhoneMenu
+        m_MethodName: OpenInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -275,6 +277,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114300219028707770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287307716910714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114960097871349696}
+          m_MethodName: PlaySelectSfx
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114476015263162332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,7 +326,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Manh\xE3"
+  m_text: 'AP: 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
   m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
@@ -365,8 +397,8 @@ MonoBehaviour:
     textComponent: {fileID: 114476015263162332}
     characterCount: 5
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -510,7 +542,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Dia 1 /10 (Qua)
+  m_text: Dia 1 /10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
   m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
@@ -579,10 +611,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114666504652399050}
-    characterCount: 15
+    characterCount: 9
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -678,7 +710,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 45270c4e0921cd844b95b1f7d9088417, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9614d6819d4af954cb039051df5ef16b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -713,6 +745,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114960097871349696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287307716910714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b7882bcd63fd64aaa56fc7666707d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222097112176835776
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -787,7 +830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 27, y: 0}
+  m_AnchoredPosition: {x: 98, y: 0}
   m_SizeDelta: {x: 569, y: 160}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224063166995100268
@@ -798,15 +841,15 @@ RectTransform:
   m_GameObject: {fileID: 1237088328578952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.30042276, y: 0.30042282, z: 0.30042282}
   m_Children: []
   m_Father: {fileID: 224043963895322510}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98.100006, y: -41.5}
-  m_SizeDelta: {x: 64, y: 64}
+  m_AnchoredPosition: {x: -85.29993, y: -33.299988}
+  m_SizeDelta: {x: 139, y: 183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224102475222424932
 RectTransform:
@@ -859,7 +902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -232.90001, y: -48.600002}
+  m_AnchoredPosition: {x: -212, y: -42}
   m_SizeDelta: {x: 363.6, y: 64.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224613132237102760
@@ -897,7 +940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 72, y: 0}
+  m_AnchoredPosition: {x: 86, y: 0}
   m_SizeDelta: {x: 126, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224700806369251550
@@ -972,6 +1015,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85.99997, y: -41.500008}
-  m_SizeDelta: {x: 295, y: 64}
+  m_AnchoredPosition: {x: 101.41008, y: -34.899994}
+  m_SizeDelta: {x: 305.97, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
