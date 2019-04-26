@@ -1,12 +1,19 @@
 ﻿set_people "date"
 fade_out 0.7
-play_music "date1_intro" "date1_loop"
-wait 0.5
-bg "park morning"
 
-set_var situation 2
+say "" "\couple decidem sair para se divertir."
 
 generate_segment "date"
+if date_location == 0
+  bg "park morning"
+  play_music "date1_intro" "date1_loop"
+endif
+if date_location == 1
+  bg "shopping"
+  play_music "date2_intro" "date2_loop"
+endif
+
+set_var situation 2
 set_var currentDateEvent 0
 set_var date_success 0
 set_var date_event_result_0 0
@@ -17,10 +24,9 @@ set_var date_event_result_4 0
 set_var date_event_result_5 0
 set_var date_event_result_6 0
 
+wait 0.5
 show_date_ui true
 fade_in 0.7
-
-say "" "\couple decidem sair para se divertir."
 
 if tutorial_date == 0
   goto_script "tutorial_date"
@@ -48,13 +54,13 @@ endif
 
 
 if #currentEventInteractionType == 0
-  say_auto "" "Qual reação \boy deve tomar?"
+  say_auto "" "Qual atitude \boy deve tomar?"
 endif
 if #currentEventInteractionType == 1
-  say_auto "" "Qual reação \girl deve tomar?"
+  say_auto "" "Qual atitude \girl deve tomar?"
 endif
 if #currentEventInteractionType == 2
-  say_auto "" "Qual reação \couple devem tomar?"
+  say_auto "" "Qual atitude \couple devem tomar?"
 endif
 
 

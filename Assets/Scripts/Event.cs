@@ -15,6 +15,11 @@ public enum RewardType{
   money
 }
 
+public enum DateLocation{
+  parque,
+  shopping,
+  generico
+}
 
 [System.Serializable]
 public class DateEvent {
@@ -22,14 +27,18 @@ public class DateEvent {
   public string scriptName;
   public int id;
   public int[] difficultyForAttribute;
+  public int stage;
+  public string location;
   public DateEventInteractionType interactionType;
 
   public RewardType rewardType;
   public int rewardId;
 
-  public DateEvent(int newid, string name, int difGuts, int difInt, int difCha, DateEventInteractionType interType){
+  public DateEvent(int newid, string name, int difGuts, int difInt, int difCha, int stage, string location, DateEventInteractionType interType){
     id = newid;
     scriptName = name;
+    this.stage = stage;
+    this.location = location;
     difficultyForAttribute = new int[3];
     difficultyForAttribute[0] = difGuts;
     difficultyForAttribute[1] = difInt;

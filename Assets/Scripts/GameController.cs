@@ -71,10 +71,8 @@ public class GameController : MonoBehaviour {
   public void InitializeDateEvents() {
     allDateEvents = new List<DateEvent>();
 
-    int id;
-    int guts;
-    int intelligence;
-    int charisma;
+    int id, guts, intelligence, charisma, stage;
+    string location;
     DateEventInteractionType interaction = DateEventInteractionType.male;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
@@ -83,6 +81,8 @@ public class GameController : MonoBehaviour {
       guts = int.Parse(dic["Dificuldade Guts"]);
       intelligence = int.Parse(dic["Dificuldade Intelligence"]);
       charisma = int.Parse(dic["Dificuldade Charisma"]);
+      location = dic["Localidade"];
+      stage = int.Parse(dic["Etapa"]);
       switch (dic["Tipo de Interação"]) {
         case "male":
           interaction = DateEventInteractionType.male;
@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour {
           interaction = DateEventInteractionType.compatibility;
           break;
       }
-      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, interaction));
+      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, interaction));
     }
   }
 
@@ -246,15 +246,27 @@ public class GameController : MonoBehaviour {
     int dateSize = Mathf.Min(allDateEvents.Count, 7);
     List<int> selectedEvents = new List<int>();
     int selectedId;
+    //int dateLocation = Random.Range(0, 2);
+    int dateLocation = Random.Range(0, 1);
+
+    VsnSaveSystem.SetVariable("date_location", dateLocation);
 
     dateSegments = new DateEvent[dateSize];
     for(int i=0; i<dateSize; i++){
-      do{
+      do {
         selectedId = Random.Range(0, allDateEvents.Count);
-      } while(selectedEvents.Contains(selectedId));
+
+        Debug.LogWarning("selected location: " + allDateEvents[selectedId].location);
+        Debug.LogWarning("date location: " + ((DateLocation)dateLocation).ToString());
+
+      } while (selectedEvents.Contains(selectedId) ||
+              (string.Compare(allDateEvents[selectedId].location, ((DateLocation)dateLocation).ToString())!=0 &&
+               string.Compare(allDateEvents[selectedId].location, "generico")!=0) );
       dateSegments[i] = allDateEvents[selectedId];
       selectedEvents.Add(selectedId);
     }
+    System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
+                                  (event1, event2) => event1.stage.CompareTo(event2.stage) ));
   }
   
   public void GenerateObservation() {

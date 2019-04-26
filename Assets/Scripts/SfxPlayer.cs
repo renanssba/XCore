@@ -16,10 +16,10 @@ public class SfxManager : MonoBehaviour {
   }
 
   public void PlayCancelSfx() {
-
+    //VsnAudioManager.instance.PlaySfx("ui_locked");
   }
 
   public void PlayForbbidenSfx() {
-    VsnAudioManager.instance.PlaySfx("ui_select2");
+    VsnAudioManager.instance.PlaySfx("ui_locked");
   }
 }
