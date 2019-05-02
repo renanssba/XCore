@@ -246,8 +246,8 @@ public class GameController : MonoBehaviour {
     int dateSize = Mathf.Min(allDateEvents.Count, 7);
     List<int> selectedEvents = new List<int>();
     int selectedId;
-    //int dateLocation = Random.Range(0, 2);
-    int dateLocation = Random.Range(0, 1);
+    int dateLocation = Random.Range(0, 2);
+    //int dateLocation = Random.Range(0, 1);
 
     VsnSaveSystem.SetVariable("date_location", dateLocation);
 
