@@ -80,9 +80,10 @@ if #currentPersonality != 0
     goto_script "not_enough_ap"
     goto start_interaction
   endif
+  spend_ap 1
 endif
 set_var selected_attribute 0
-goto suggestion
+goto ev_resolution
 
 waypoint sug_intelligence
 if #currentPersonality != 1
@@ -90,9 +91,10 @@ if #currentPersonality != 1
     goto_script "not_enough_ap"
     goto start_interaction
   endif
+  spend_ap 1
 endif
 set_var selected_attribute 1
-goto suggestion
+goto ev_resolution
 
 waypoint sug_charisma
 if #currentPersonality != 2
@@ -100,20 +102,15 @@ if #currentPersonality != 2
     goto_script "not_enough_ap"
     goto start_interaction
   endif
+  spend_ap 1
 endif
 set_var selected_attribute 2
-goto suggestion
+goto ev_resolution
 
 
-waypoint suggestion
-spend_ap 1
+waypoint ev_resolution
 event_resolution "date" selected_attribute
-goto resolution
 
-
-
-
-waypoint resolution
 if resolution == 0
   goto_script "\currentEventName" guts_success
 endif

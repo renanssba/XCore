@@ -51,7 +51,7 @@ public class PersonCard : MonoBehaviour {
     attributeTexts[(int)person.personality].alpha = 1f;
     attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
 
-    faceImage.sprite = ResourcesManager.instance.faceSprites[person.faceId];
+    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale?0:1)];
     traitTexts[0].text = person.PersonalityString();
   }

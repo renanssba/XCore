@@ -36,11 +36,17 @@ public class GlobalData : MonoBehaviour {
 
     for (int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, true);
+      if(ModsManager.instance.setNames != null){
+        auxName = ModsManager.instance.setNames[0];
+      }
       newPerson = new Person { isMale = true, name = auxName};
       newPerson.Initialize();
       people.Add(newPerson);
 
       auxName = GetNewName(usedNames, false);
+      if (ModsManager.instance.setNames != null) {
+        auxName = ModsManager.instance.setNames[1];
+      }
       newPerson = new Person { isMale = false, name = auxName };
       newPerson.Initialize();
       people.Add(newPerson);

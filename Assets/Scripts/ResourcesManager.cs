@@ -13,4 +13,15 @@ public class ResourcesManager : MonoBehaviour {
   public void Awake() {
     instance = this;
   }
+
+  public Sprite GetFaceSprite(int index){
+    if(ModsManager.instance.setFaces != null){
+      if(index < 5){
+        return ModsManager.instance.setFaces[0];
+      } else{
+        return ModsManager.instance.setFaces[1];
+      }
+    }
+    return faceSprites[index];
+  }
 }
