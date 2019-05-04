@@ -48,6 +48,21 @@ public class WebcamCapture : MonoBehaviour {
     camImage.texture = webcam;
   }
 
+  public void Update() {
+    if(Input.GetKeyDown(KeyCode.Return)) {
+      Debug.Log("PRESSED ENTER");
+      if(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject == imageSearchInputField.gameObject) {
+        Debug.Log("imageSearchInputField IS SELECTED");
+        ClickSearchButton();
+      }
+    }
+
+    if (Input.GetKeyDown(KeyCode.F5)) {
+      webcam.Stop();
+      SceneManager.LoadScene(StageName.TitleScreen.ToString());
+    }
+  }
+
   public void ClickSearchButton(){
     StartCoroutine(ImageGoogleSearch( WWW.EscapeURL(imageSearchInputField.text) ));
   }

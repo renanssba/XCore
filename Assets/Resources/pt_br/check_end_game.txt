@@ -6,14 +6,14 @@ if #day > max_days
   set_people "hide"
   goto_script "fertiliel_enter"
     
-  say "Cupido" "Olha só, o nosso tempo acabou!"
+  say "Fertiliel" "Olha só, o nosso tempo acabou!"
   goto end_game
 endif
 if #progress >= objective
   set_people "hide"
   goto_script "fertiliel_enter"
     
-  say "Cupido" "Olha só, parece que já juntamos todos os casais!"
+  say "Fertiliel" "Olha só, parece que já juntamos todos os casais!"
   goto end_game
 endif
 
@@ -23,12 +23,12 @@ end_script
 
 
 waypoint end_game
-say "Cupido" "Vamos ver quão bem eu fui na minha missão..."
+say "Fertiliel" "Vamos ver quão bem eu fui na minha missão..."
 say "" "A sua missão era reunir \objective casais dentro de \max_days dias."
 say "Você conseguiu reunir \progress casais dentro de \day dias."
 if #progress >= objective
   say "Parabéns! Você completou a missão com sucesso!"
-  say "Cupido" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
+  say "Fertiliel" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
   say "Obrigada por jogar o jogo e me ajudar na missão!"
 else
   say "Que pena, parece que você não conseguiu completar a missão..."

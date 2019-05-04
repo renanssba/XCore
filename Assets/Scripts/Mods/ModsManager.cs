@@ -23,6 +23,8 @@ public class ModsManager : MonoBehaviour {
       Destroy(gameObject);
       return;
     }
+    setNames = null;
+    setFaces = null;
     modsPath = Application.dataPath + "/Mods/Characters/";
   }
 

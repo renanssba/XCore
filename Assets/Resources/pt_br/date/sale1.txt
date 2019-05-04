@@ -1,0 +1,53 @@
+goto *arg1
+
+waypoint event_statement
+say "" "Um tremor se espalha pelos corredores."
+say "Milhares de humanos invadem o shopping, sedentos por produtos. É o dia da famosa promoção, a Black Buyday!"
+say "\girl e \boy começam a correr por suas vidas, porém \boy é engolido pela multidão!"
+end_script
+
+
+
+waypoint guts_success
+say "" "\girl encara o bando de consumidores loucos, finca os pés no chão e estende os braços, num gesto ousado."
+say "\girl" "CAI DENTRO!"
+say "" "A garota desafia a multidão para uma batalha!"
+say "A aura de coragem de \girl é tão intensa que o exército de consumidores se dispersa. 
+\boy fica surpreso com a valentia da garota e a agradece por ter salvo sua vida."
+say "Ele parece aliviado."
+end_script
+
+waypoint intelligence_success
+say "" "\girl se vira para a multidão ensandecida e grita:"
+say "\girl" "A BLACK BUYDAY É UMA FRAUDE!"
+say "Os humanos param, surpreendidos. \girl engata em um discurso sobre o consumismo e a exploração da classe operária."
+say "A multidão se dispersa, arrependida por cair na armadilha da burguesia. \boy fica surpreso com a inteligência de \girl e a agradece por ter salvo sua vida."
+end_script
+
+waypoint charisma_success
+say "" "\girl tenta usar suas habilidades de atuação para criar uma distração."
+say "\girl" "Socorro, eu torci meu tornozelo!"
+say "" "Imediatamente, vários homens da multidão se prontificam para ajudá-la, dispersando a multidão! Graças a \girl, \boy consegue se desvencilhar."
+end_script
+
+
+
+waypoint guts_fail
+say "" "\girl encara o bando de consumidores loucos, , finca os pés no chão e estende os braços, num gesto ousado."
+say "Infelizmente, \girl amarela e desiste de enfrentar a multidão para salvar \boy. O garoto é pisoteado por vários minutos."
+end_script
+
+waypoint intelligence_fail
+say "" "\girl se vira para a multidão ensandecida e grita:"
+say "\girl" "A BLACK BUYDAY É UMA FRAUDE!"
+say "Os humanos param, surpreendidos. \girl tenta continuar, pensando no porquê. Porém, nada surge em sua cabeça."
+say "Os humanos a ignoram e continuam sua marcha pelo shopping. \boy é pisoteado por vários minutos."
+end_script
+
+waypoint charisma_fail
+say "" "\girl tenta usar suas habilidades de atuação para criar uma distração."
+say "\girl" "Socorro, eu torci meu tornozelo!"
+say "Infelizmente, \girl não é charmosa o suficiente e é sumariamente ignorada. \boy é pisoteado por vários minutos."
+end_script
+
+

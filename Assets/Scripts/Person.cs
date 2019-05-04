@@ -43,11 +43,11 @@ public class Person {
       case 0:
         attValues.Add(2);
         attValues.Add(2);
-        attValues.Add(1);
+        attValues.Add(2);
         break;
       case 1:
         attValues.Add(3);
-        attValues.Add(1);
+        attValues.Add(2);
         attValues.Add(1);
         break;
     }

@@ -37,6 +37,7 @@ public class GlobalData : MonoBehaviour {
     for (int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, true);
       if(ModsManager.instance.setNames != null){
+        //Debug.Log("ModsManager.instance.setNames is not null");
         auxName = ModsManager.instance.setNames[0];
       }
       newPerson = new Person { isMale = true, name = auxName};
