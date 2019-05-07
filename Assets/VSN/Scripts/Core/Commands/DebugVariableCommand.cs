@@ -8,7 +8,7 @@ namespace Command {
   public class DebugVariableCommand : VsnCommand {
 
     public override void Execute() {
-      float value = args[0].GetNumberValue();
+      //float value = args[0].GetNumberValue();
 
 //      Debug.Log("Variable " + value + ": " + value);
     }

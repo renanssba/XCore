@@ -5,18 +5,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class WebcamCapture : MonoBehaviour {
+public class CustomizationController : MonoBehaviour {
 
-  public static WebcamCapture instance;
+  public static CustomizationController instance;
 
   public WebCamTexture webcam;
   public RawImage camImage;
 
-  public Image boyImage;
-  public Image girlImage;
+  public Image[] characterImages;
 
-  public TMP_InputField boyNameInputField;
-  public TMP_InputField girlNameInputField;
+  public int customizingCharacter;
+
+
+  public TMP_InputField[] characterInputNameText;
 
   public TMP_InputField imageSearchInputField;
   public Image searchResultImage;
@@ -24,28 +25,21 @@ public class WebcamCapture : MonoBehaviour {
   public GameObject searchResultPrefab;
 
   public Sprite[] defaultSprites;
+  public string[] defaultNames;
+
+  public GameObject customizationPanel;
+  public GameObject loadingIcon;
 
 
   public void Awake() {
     instance = this;
+    ClickResetBoy();
+    ClickResetGirl();
   }
 
   void Start () {
-    WebCamDevice[] devices = WebCamTexture.devices;
-    if(devices.Length <= 0){
-      Debug.LogError("NO CAMERA FOUND.");
-      return;
-    }
-
-    boyImage.sprite = defaultSprites[0];
-    girlImage.sprite = defaultSprites[1];
-
-    Debug.LogWarning("Using camera " + devices[0].name);
-    webcam = new WebCamTexture(devices[0].name, 356, 200);
-    Debug.Log("Did not break");
-
-    webcam.Play();
-    camImage.texture = webcam;
+    characterImages[0].sprite = defaultSprites[0];
+    characterImages[1].sprite = defaultSprites[1];
   }
 
   public void Update() {
@@ -74,6 +68,8 @@ public class WebcamCapture : MonoBehaviour {
     string fullSearchResult;
 
     Debug.Log("Start loading " + query);
+    
+    loadingIcon.SetActive(true);
 
     yield return wwwHtml;
     fullSearchResult = wwwHtml.text;
@@ -88,6 +84,7 @@ public class WebcamCapture : MonoBehaviour {
       Debug.Log("part: " + parts[i]);
       StartCoroutine(CleanAndAddSprite(parts[i]));
     }
+    loadingIcon.SetActive(false);
   }
 
   public void ResetSearchResults() {
@@ -131,13 +128,68 @@ public class WebcamCapture : MonoBehaviour {
 
 
 	
-	public void ClickBoyButton(){
-    SetImageSprite(boyImage);
+	public void ClickCustomizeBoyButton(){
+    customizingCharacter = 0;
+    OpenCustomizationPanel();
   }
 
-  public void ClickGirlButton() {
-    SetImageSprite(girlImage);
+  public void ClickCustomizeGirlButton() {
+    customizingCharacter = 1;
+    OpenCustomizationPanel();
   }
+
+
+
+  public void OpenCustomizationPanel() {
+    customizationPanel.SetActive(true);
+    imageSearchInputField.text = "";
+    ResetSearchResults();
+    InitializeWebcam();
+  }
+
+  public void InitializeWebcam(){
+    WebCamDevice[] devices = WebCamTexture.devices;
+    if (devices.Length <= 0) {
+      Debug.LogError("NO CAMERA FOUND.");
+      return;
+    }
+
+    Debug.LogWarning("Using camera " + devices[0].name);
+    webcam = new WebCamTexture(devices[0].name, 356, 200);
+    Debug.Log("Did not break");
+
+    webcam.Play();
+    camImage.texture = webcam;
+  }
+
+  public void CloseCustomizationPanel() {
+    customizationPanel.SetActive(false);
+    webcam.Stop();
+  }
+
+
+  public void ClickResetBoy() {
+    characterImages[0].sprite = defaultSprites[0];
+    characterInputNameText[0].text = defaultNames[0];
+  }
+
+  public void ClickResetGirl() {
+    characterImages[1].sprite = defaultSprites[1];
+    characterInputNameText[1].text = defaultNames[1];
+  }
+
+
+
+  public void ClickUseWebcamSprite(){
+    SetImageSprite(characterImages[customizingCharacter]);
+    CloseCustomizationPanel();
+  }
+
+  public void SetCharacterSprite(Sprite sprite){
+    characterImages[customizingCharacter].sprite = sprite;
+    CloseCustomizationPanel();
+  }
+
 
   public void SetImageSprite(Image img){
     Texture2D tex = new Texture2D(320, 240, TextureFormat.ARGB32, false);
@@ -146,18 +198,17 @@ public class WebcamCapture : MonoBehaviour {
     img.sprite = Sprite.Create(tex, new Rect(40, 0, 240, 240), new Vector2(0.5f, 0.5f));
   }
 
+
   public void ClickPlayButton(){
     ModsManager modsManager = ModsManager.instance;
 
-    ModsManager.instance.modsPath = "PATH NOVO";
-
     modsManager.setFaces = new Sprite[2];
-    modsManager.setFaces[0] = boyImage.sprite;
-    modsManager.setFaces[1] = girlImage.sprite;
+    modsManager.setFaces[0] = characterImages[0].sprite;
+    modsManager.setFaces[1] = characterImages[1].sprite;
     
     modsManager.setNames = new string[2];
-    modsManager.setNames[0] = char.ToUpper(boyNameInputField.text[0]) + boyNameInputField.text.Substring(1);;
-    modsManager.setNames[1] = char.ToUpper(girlNameInputField.text[0]) + girlNameInputField.text.Substring(1);
+    modsManager.setNames[0] = char.ToUpper(characterInputNameText[0].text[0]) + characterInputNameText[0].text.Substring(1);;
+    modsManager.setNames[1] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
     
     webcam.Stop();
 

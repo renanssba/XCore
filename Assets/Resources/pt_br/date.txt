@@ -65,13 +65,13 @@ endif
 
 
 if #currentPersonality == 0
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> - (1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> - (1AP)" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charisma
 endif
 if #currentPersonality == 1
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> - (1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color>" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> - (1AP)" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color>" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charisma
 endif
 if #currentPersonality == 2
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> - (1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> - (1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color>" sug_charisma
+  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color>" sug_charisma
 endif
 
 waypoint sug_guts

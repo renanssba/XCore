@@ -170,7 +170,8 @@ public class GameController : MonoBehaviour {
 
   public void Update() {
     if(Input.GetKeyDown(KeyCode.F5)){
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      GlobalData.instance.ResetCurrentCouples();
+      SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
   }
 

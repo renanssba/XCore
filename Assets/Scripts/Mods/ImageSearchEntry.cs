@@ -7,11 +7,7 @@ public class ImageSearchEntry : MonoBehaviour {
 
   public Image img;
 
-	public void ClickUseImageBoy(){
-    WebcamCapture.instance.boyImage.sprite = img.sprite;
-  }
-
-  public void ClickUseImageGirl() {
-    WebcamCapture.instance.girlImage.sprite = img.sprite;
+	public void ClickUseImage(){
+    CustomizationController.instance.SetCharacterSprite(img.sprite);
   }
 }

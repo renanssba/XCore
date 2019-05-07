@@ -34,6 +34,8 @@ public class GlobalData : MonoBehaviour {
     people = new List<Person>();
     currentCouple = 0;
 
+    ResetCurrentCouples();
+
     for (int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, true);
       if(ModsManager.instance.setNames != null){
@@ -71,6 +73,10 @@ public class GlobalData : MonoBehaviour {
   public void ShipCurrentCouple(){
     shippedCouples.Add(currentCouple);
     SelectNewCouple();
+  }
+
+  public void ResetCurrentCouples(){
+    shippedCouples.Clear();
   }
 
   public string CurrentCoupleName(){
