@@ -209,8 +209,10 @@ public class CustomizationController : MonoBehaviour {
     modsManager.setNames = new string[2];
     modsManager.setNames[0] = char.ToUpper(characterInputNameText[0].text[0]) + characterInputNameText[0].text.Substring(1);;
     modsManager.setNames[1] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
-    
-    webcam.Stop();
+
+    if(webcam != null) {
+      webcam.Stop();
+    }
 
     //VsnController.instance.StartVSN("got");
     SceneManager.LoadScene(StageName.Gameplay.ToString());

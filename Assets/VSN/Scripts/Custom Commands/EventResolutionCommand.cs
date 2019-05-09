@@ -43,13 +43,12 @@ namespace Command {
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
-      if (result < 3) {
-        VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 1);
-      } else {
-        VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 2);
-      }
-
-      GameController.instance.UpdateUI();
+      //if (result < 3) {
+      //  VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 1);
+      //} else {
+      //  VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 2);
+      //}
+      //GameController.instance.UpdateUI();
     }
 
 

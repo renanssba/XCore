@@ -1,0 +1,47 @@
+﻿if arg1 == "success"
+  if #currentDateEvent == 0
+    set_var date_event_result_0 1
+  endif
+  if #currentDateEvent == 1
+    set_var date_event_result_1 1
+  endif
+  if #currentDateEvent == 2
+    set_var date_event_result_2 1
+  endif
+  if #currentDateEvent == 3
+    set_var date_event_result_3 1
+  endif
+  if #currentDateEvent == 4
+    set_var date_event_result_4 1
+  endif
+  if #currentDateEvent == 5
+    set_var date_event_result_5 1
+  endif
+  if #currentDateEvent == 6
+    set_var date_event_result_6 1
+  endif
+else
+  if #currentDateEvent == 0
+    set_var date_event_result_0 2
+  endif
+  if #currentDateEvent == 1
+    set_var date_event_result_1 2
+  endif
+  if #currentDateEvent == 2
+    set_var date_event_result_2 2
+  endif
+  if #currentDateEvent == 3
+    set_var date_event_result_3 2
+  endif
+  if #currentDateEvent == 4
+    set_var date_event_result_4 2
+  endif
+  if #currentDateEvent == 5
+    set_var date_event_result_5 2
+  endif
+  if #currentDateEvent == 6
+    set_var date_event_result_6 2
+  endif
+endif
+
+update_ui

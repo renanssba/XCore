@@ -43,6 +43,10 @@ public class GameController : MonoBehaviour {
   public Image[] failIcons;
   public Image[] unresolvedIcons;
 
+  public ParticleGenerator babiesParticleGenerator;
+  public Image[] engagementScreenImages;
+  public GameObject engagementScreen;
+
 
 
   public void Awake() {
@@ -322,6 +326,27 @@ public class GameController : MonoBehaviour {
   public void ShowDateUiPanel(bool value) {
     dateUiPanel.SetActive(value);
     UpdateUI();
+  }
+
+  public void ShowEngagementScreen(int babies) {
+    engagementScreenImages[0].sprite = personCards[0].faceImage.sprite;
+    engagementScreenImages[1].sprite = personCards[1].faceImage.sprite;
+    babiesParticleGenerator.particlesToGenerate = babies;
+    engagementScreen.SetActive(true);
+    babiesParticleGenerator.DeleteSons();
+    StartCoroutine(ShowEngagementScreenAnimation(5f+babies));
+  }
+
+  public IEnumerator ShowEngagementScreenAnimation(float waitTime){
+    VsnController.instance.state = ExecutionState.WAITING;
+    yield return new WaitForSeconds(waitTime);
+    VsnController.instance.state = ExecutionState.PLAYING;
+    HideEngagementScreen();
+  }
+
+  public void HideEngagementScreen() {
+    engagementScreen.SetActive(false);
+    babiesParticleGenerator.DeleteSons();
   }
 
 
