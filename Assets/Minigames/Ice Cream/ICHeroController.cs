@@ -8,6 +8,7 @@ public class ICHeroController : MonoBehaviour {
   public float walkingSpeed;
   public float runningSpeed;
   float baseWalkingSpeed;
+  public float facingTolerance = 0f;
 
   void Awake() {
     baseWalkingSpeed = walkingSpeed;
@@ -15,10 +16,15 @@ public class ICHeroController : MonoBehaviour {
 
 
   void Update () {
+    if(!ICGameController.instance.isPlaying){
+      body.velocity = new Vector3(0f, 0f, 0f);
+      return;
+    }
+
     SetWalkingSpeed();
 
     /// If is moving, change facing
-    if(body.velocity.sqrMagnitude > 0f) {
+    if(body.velocity.sqrMagnitude > facingTolerance) {
       ChangeFacingDirection();
     }
 

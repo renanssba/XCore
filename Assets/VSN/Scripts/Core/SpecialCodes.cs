@@ -32,6 +32,7 @@ public class SpecialCodes {
       }
       currentString = currentString.Replace("\\item_name", Item.GetName(VsnSaveSystem.GetIntVariable("item_id")));
       currentString = currentString.Replace("\\item_price", VsnSaveSystem.GetIntVariable("item_price").ToString());
+      currentString = currentString.Replace("\\minigame_score", VsnSaveSystem.GetIntVariable("minigame_score").ToString());
       currentString = currentString.Replace("\\objective", VsnSaveSystem.GetIntVariable("objective").ToString());
       currentString = currentString.Replace("\\max_days", VsnSaveSystem.GetIntVariable("max_days").ToString());
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());

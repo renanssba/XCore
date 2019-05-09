@@ -25,13 +25,19 @@ public class ICClient : ICInteractable {
   public void Initialize(){
     flavorsAsked = new List<IceCreamFlavor>();
     flavorsAsked.Add(IceCreamFlavor.cone);
-    for (int i = 0; i < 3; i++) {
+    int numberOfBalls = Random.Range(2, 4);
+    for (int i = 0; i < numberOfBalls; i++) {
       flavorsAsked.Add((IceCreamFlavor)Random.Range(1, 4));
     }
 
-    for (int i = 0; i < flavorsAsked.Count; i++) {
-      iceCreamBall[i].color = ICGameController.instance.iceCreamFlavorColors[(int)flavorsAsked[i]];
-      iceCreamBall[i].transform.parent.parent.gameObject.SetActive(true);
+    for (int i = 0; i < iceCreamBall.Length; i++) {
+      if(i<flavorsAsked.Count) {
+        iceCreamBall[i].gameObject.SetActive(true);
+        iceCreamBall[i].color = ICGameController.instance.iceCreamFlavorColors[(int)flavorsAsked[i]];
+        iceCreamBall[i].transform.parent.parent.gameObject.SetActive(true);
+      } else{
+        iceCreamBall[i].gameObject.SetActive(false);
+      }
     }
   }
 

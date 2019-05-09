@@ -24,6 +24,10 @@ public class ICGameController : MonoBehaviour {
   public float spawnClientTime;
   public TextMeshProUGUI scoreText;
 
+  public Coroutine spawnCoroutine;
+
+  public bool isPlaying;
+
 
   void Awake() {
     instance = this;
@@ -33,9 +37,10 @@ public class ICGameController : MonoBehaviour {
   void Start(){
     score = 0;
     UpdateUI();
-    StartCoroutine(SpawnClients());
 
     VsnAudioManager.instance.PlayMusic("observacao2_intro", "observacao2_loop");
+    spawnCoroutine = StartCoroutine(SpawnClients());
+    isPlaying = true;
   }
 
 
@@ -86,6 +91,9 @@ public class ICGameController : MonoBehaviour {
     if(selectedContainer != null){
       containerIcons[(int)selectedContainer.flavor].SetActive(true);
     }
+    if(interactable.GetComponent<ICTrashBin>() != null){
+      containerIcons[4].SetActive(true);
+    }
     //ICClient selectedClient = interactable.GetComponent<ICClient>();
     //if (selectedClient != null) {
     //  clientIcons[selectedClient.clientId].SetActive(true);
@@ -117,4 +125,10 @@ public class ICGameController : MonoBehaviour {
     UpdateUI();
   }
 
+  public void EndMinigameTime(){
+    isPlaying = false;
+    StopCoroutine(spawnCoroutine);
+    VsnSaveSystem.SetVariable("minigame_result", score);
+    VsnController.instance.StartVSN("minigame_result");
+  }
 }
