@@ -7,16 +7,38 @@ endif
 set_var hide_buttons 1
 update_ui
 
-say "Quer trabalhar, gastando 2 AP para ganhar 130 de salário?"
+say_auto "Você pode gastar AP para ganhar dinheiro. Quer trabalhar?:"
 choices "Sim" sim "Não" nao
 
 
 waypoint sim
-spend_ap 2
-add_var money 130
+say_auto "Quanto mais AP você gastar, mais dinheiro vai conseguir. Quanto AP você quer gastar?"
+choices "Gastar 2 AP" ap2 "Gastar 3 AP" ap3 "Gastar 4 AP" ap4 "Gastar 5 AP" ap5 "Cancelar" nao
+
+waypoint ap2
+set_var ap_spent 2
+goto start_minigame
+
+waypoint ap3
+set_var ap_spent 3
+goto start_minigame
+
+waypoint ap4
+set_var ap_spent 4
+goto start_minigame
+
+waypoint ap5
+set_var ap_spent 5
+goto start_minigame
+
+
+
+waypoint start_minigame
+spend_ap ap_spent
 update_ui
-play_sfx "ui_money"
-say "Você trabalhou duro e ganhou 130 Dinheiro Celestial!"
+fade_out 0.7
+load_scene "Minigame - Ice Cream"
+wait 0.5
 goto end
 
 

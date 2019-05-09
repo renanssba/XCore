@@ -8,7 +8,7 @@ namespace Command {
   public class SpendTimeCommand : VsnCommand {
 
     public override void Execute() {
-      GameController.instance.PassDay();
+      GlobalData.instance.PassDay();
     }
 
     public override void AddSupportedSignatures() {

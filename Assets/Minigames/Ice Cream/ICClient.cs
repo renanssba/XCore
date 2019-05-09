@@ -8,18 +8,19 @@ public class ICClient : ICInteractable {
 
   public int clientId;
   public Image[] iceCreamBall;
+  public Slider patienceSlider;
+  public Color[] patienceLevelColors;
 
   public List<IceCreamFlavor> flavorsAsked;
 
   public float timeWaiting;
   public float totalTimeToWait;
 
-  public bool available = false;
+  public bool waiting = false;
 
 
   public void Start(){
-    available = false;
-    
+    waiting = false; 
   }
 
   public void Initialize(){
@@ -29,22 +30,53 @@ public class ICClient : ICInteractable {
     for (int i = 0; i < numberOfBalls; i++) {
       flavorsAsked.Add((IceCreamFlavor)Random.Range(1, 4));
     }
+    iceCreamBall[0].transform.parent.parent.gameObject.SetActive(true);
 
     for (int i = 0; i < iceCreamBall.Length; i++) {
       if(i<flavorsAsked.Count) {
         iceCreamBall[i].gameObject.SetActive(true);
         iceCreamBall[i].color = ICGameController.instance.iceCreamFlavorColors[(int)flavorsAsked[i]];
-        iceCreamBall[i].transform.parent.parent.gameObject.SetActive(true);
       } else{
         iceCreamBall[i].gameObject.SetActive(false);
       }
     }
+    patienceSlider.maxValue = totalTimeToWait;
   }
 
+
+  public void Update(){
+    if(waiting) {
+      timeWaiting += Time.deltaTime;
+
+      patienceSlider.value = (totalTimeToWait - timeWaiting);
+      patienceSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = patienceLevelColors[GetPatienceLevel()];
+
+      if (timeWaiting >= totalTimeToWait) {
+        timeWaiting = 0f;
+        GoAway();
+      }
+    }
+
+  }
+
+  public int GetPatienceLevel(){
+    if(timeWaiting >= totalTimeToWait * 2f / 3f){
+      return 0;
+    } else if (timeWaiting >= totalTimeToWait * 1f / 3f) {
+      return 1;
+    }
+    return 2;
+  }
+
+
   public void Appear() {
-    available = false;
+    gameObject.SetActive(true);
+
+    DOTween.Kill(transform);
     transform.DOMoveX(-7f, 2f).OnComplete(() => {
       Initialize();
+      timeWaiting = 0f;
+      waiting = true;
     });
   }
 
@@ -60,19 +92,34 @@ public class ICClient : ICInteractable {
       return;
     }
 
+    int score = 0;
+
+    switch(GetPatienceLevel()) {
+      case 2:
+        score = 100;
+        break;
+      case 1:
+        score = 80;
+        break;
+      case 0:
+        score = 40;
+        break;
+    }
+
     switch(CompareIceCreams(flavorsAsked, gc.currentIceCream)) {
       case 0:
         SfxManager.StaticPlayCancelSfx();
+        score *= 0;
         break;
       case 1:
         SfxManager.StaticPlayConfirmSfx();
-        ICGameController.instance.AddScore(50);
+        score /= 2;
         break;
       case 2:
         SfxManager.StaticPlayBigConfirmSfx();
-        ICGameController.instance.AddScore(100);
         break;
     }
+    ICGameController.instance.AddScore(score);
 
     gc.currentIceCream.Clear();
     gc.UpdateUI();
@@ -117,6 +164,7 @@ public class ICClient : ICInteractable {
   }
 
   public void GoAway(){
+    waiting = false;
     iceCreamBall[0].transform.parent.parent.gameObject.SetActive(false);
 
     transform.DOMoveX(-10f, 2f).OnComplete( ()=> {

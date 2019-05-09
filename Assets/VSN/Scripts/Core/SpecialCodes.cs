@@ -36,7 +36,7 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\objective", VsnSaveSystem.GetIntVariable("objective").ToString());
       currentString = currentString.Replace("\\max_days", VsnSaveSystem.GetIntVariable("max_days").ToString());
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
-      currentString = currentString.Replace("\\day", GameController.instance.day.ToString());
+      currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
     } while (currentString != initialString);
 
     return currentString;
@@ -64,13 +64,13 @@ public class SpecialCodes {
       case "#observationEventType":
         return (int)GameController.instance.GetCurrentObservationEvent().eventType;
       case "#ap":
-        return GameController.instance.ap;
+        return GlobalData.instance.ap;
       case "#max_ap":
-        return GameController.instance.maxAp;
+        return GlobalData.instance.maxAp;
       case "#day":
-        return GameController.instance.day;
+        return GlobalData.instance.day;
       case "#max_days":
-        return GameController.instance.maxDays;
+        return GlobalData.instance.maxDays;
       case "#progress":
         return GlobalData.instance.shippedCouples.Count;
       case "#currentPersonality":

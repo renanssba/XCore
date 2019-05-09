@@ -11,13 +11,6 @@ public class GameController : MonoBehaviour {
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
   public TextMeshProUGUI apText;
-  
-  public int maxAp;
-  public int ap;
-
-  public int day;
-  public int maxDays;
-  public int objective;
 
   public TextAsset observationEventsFile;
   public List<ObservationEvent> allObservationEvents;
@@ -54,22 +47,25 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
-    VsnSaveSystem.SetVariable("objective", objective);
-    VsnSaveSystem.SetVariable("max_days", maxDays);
-    GlobalData.instance.InitializeChapter();
-    Initialize();
-    UpdateUI();
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
-    VsnController.instance.StartVSN("tutorial_intro");
+
+    if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
+      UpdateUI();
+      VsnController.instance.StartVSN("back_from_minigame");
+    } else {
+      GlobalData.instance.InitializeChapter();
+      Initialize();
+      UpdateUI();
+      VsnController.instance.StartVSN("tutorial_intro");
+    }
   }
 
   public void Initialize(){
-    day = 0;
 
     InitializeDateEvents();
     InitializeObservationEvents();
 
-    PassDay();
+    GlobalData.instance.PassDay();
   }
 
   public void InitializeDateEvents() {
@@ -165,13 +161,6 @@ public class GameController : MonoBehaviour {
     }
   }
 
-  public void PassDay(){
-    ap = maxAp;
-    day++;
-    UpdateUI();
-    VsnController.instance.StartVSN("check_game_end");
-  }
-
   public void Update() {
     if(Input.GetKeyDown(KeyCode.F4)){
       GlobalData.instance.ResetCurrentCouples();
@@ -185,25 +174,27 @@ public class GameController : MonoBehaviour {
 
 
   public bool SpendAP(int cost){
-    if(ap < cost){
+    GlobalData gb = GlobalData.instance;
+    if(gb.ap < cost){
       return false;
-    }  
-    ap -= cost;
+    }
+    gb.ap -= cost;
     UpdateUI();
     return true;
   }
   
 
   public void UpdateUI() {
+    GlobalData gb = GlobalData.instance;
     int coupleId = GlobalData.instance.currentCouple;
     personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
-      dayText.text = "Dia " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
+      dayText.text = "Dia " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     }else{
-      dayText.text = "Day " + day + " /" + VsnSaveSystem.GetIntVariable("max_days");
+      dayText.text = "Day " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     }
-    apText.text = "AP: " + ap+" /"+maxAp;
+    apText.text = "AP: " + gb.ap + " /" + gb.maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
     progressSlider.maxValue = VsnSaveSystem.GetIntVariable("objective");
@@ -357,7 +348,7 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickSelectNewCouple(){
-    if(ap >= 1){
+    if(GlobalData.instance.ap >= 1){
       GlobalData.instance.SelectNewCouple();
       SpendAP(1);
       VsnController.instance.StartVSN("change_couple");

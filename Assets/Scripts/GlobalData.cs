@@ -9,6 +9,15 @@ public class GlobalData : MonoBehaviour {
   public List<int> shippedCouples;
   public Inventory inventory;
 
+  
+  public int maxAp;
+  public int ap;
+
+  public int day;
+  public int maxDays;
+  public int objective;
+
+
   public static GlobalData instance;
 
   void Awake () {
@@ -33,6 +42,11 @@ public class GlobalData : MonoBehaviour {
 
     people = new List<Person>();
     currentCouple = 0;
+
+
+    VsnSaveSystem.SetVariable("objective", objective);
+    VsnSaveSystem.SetVariable("max_days", maxDays);
+    day = 0;
 
     ResetCurrentCouples();
 
@@ -151,4 +165,13 @@ public class GlobalData : MonoBehaviour {
 
     GameController.instance.UpdateUI();
   }
+
+  public void PassDay() {
+    ap = maxAp;
+    day++;
+    GameController.instance.UpdateUI();
+    VsnController.instance.StartVSN("check_game_end");
+  }
+
+
 }

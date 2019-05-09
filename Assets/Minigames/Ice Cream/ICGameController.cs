@@ -14,6 +14,8 @@ public class ICGameController : MonoBehaviour {
   public ICClient[] clients;
   public ICInteractable selectedInteractable = null;
 
+  public TimeCounter timer;
+
   public Color[] iceCreamFlavorColors;
 
   public Image[] currentIceCreamImages;
@@ -38,6 +40,25 @@ public class ICGameController : MonoBehaviour {
     score = 0;
     UpdateUI();
 
+    float duration = 0f;
+    switch(VsnSaveSystem.GetIntVariable("ap_spent")){
+      case 2:
+      default:
+        duration = 45f;
+        break;
+      case 3:
+        duration = 60f;
+        break;
+      case 4:
+        duration = 75f;
+        break;
+      case 5:
+        duration = 90f;
+        break;
+    }
+
+    timer.Initialize(true, duration);
+
     VsnAudioManager.instance.PlayMusic("observacao2_intro", "observacao2_loop");
     spawnCoroutine = StartCoroutine(SpawnClients());
     isPlaying = true;
@@ -55,7 +76,6 @@ public class ICGameController : MonoBehaviour {
   public void InstantiateClient(){
     for(int i=0; i<clients.Length; i++){
       if(clients[i].gameObject.activeSelf == false){
-        clients[i].gameObject.SetActive(true);
         clients[i].Appear();
         return;
       }
@@ -128,7 +148,8 @@ public class ICGameController : MonoBehaviour {
   public void EndMinigameTime(){
     isPlaying = false;
     StopCoroutine(spawnCoroutine);
-    VsnSaveSystem.SetVariable("minigame_result", score);
+    VsnSaveSystem.SetVariable("minigame_ended", 1);
+    VsnSaveSystem.SetVariable("minigame_score", score);
     VsnController.instance.StartVSN("minigame_result");
   }
 }

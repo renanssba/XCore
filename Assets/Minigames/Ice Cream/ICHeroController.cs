@@ -28,7 +28,7 @@ public class ICHeroController : MonoBehaviour {
       ChangeFacingDirection();
     }
 
-    if (Input.GetButtonDown("Jump")) {
+    if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Fire2")) {
       ICGameController.instance.ClickInteraction();     
     }
     if (Input.GetAxis("Fire1") > 0f){
@@ -68,6 +68,9 @@ public class ICHeroController : MonoBehaviour {
     float angle = Vector3.Angle(Vector3.back, body.velocity);
     if(body.velocity.x > 0f) {
       angle = -angle;
+      transform.localScale = new Vector3(-1f, 1f, 1f);
+    }else{
+      transform.localScale = Vector3.one;
     }
 
     transform.eulerAngles = new Vector3(0f, angle, 0f);
