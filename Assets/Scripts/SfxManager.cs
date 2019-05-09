@@ -2,24 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SfxPlayer : MonoBehaviour {
+public class SfxManager : MonoBehaviour {
 
 	public void PlayConfirmSfx() {
-    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    StaticPlayConfirmSfx();
   }
   public void PlayBigConfirmSfx() {
-    VsnAudioManager.instance.PlaySfx("ui_big_confirm");
+    StaticPlayBigConfirmSfx();
   }
 
   public void PlaySelectSfx() {
-    VsnAudioManager.instance.PlaySfx("ui_select2");
+    StaticPlaySelectSfx();
   }
 
   public void PlayCancelSfx() {
-
+    StaticPlayCancelSfx();
   }
 
   public void PlayForbbidenSfx() {
+    StaticPlayForbbidenSfx();
+  }
 
+
+
+  public static void StaticPlayConfirmSfx() {
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
+  }
+
+  public static void StaticPlayBigConfirmSfx() {
+    VsnAudioManager.instance.PlaySfx("ui_big_confirm");
+  }
+
+  public static void StaticPlaySelectSfx() {
+    VsnAudioManager.instance.PlaySfx("ui_select2");
+  }
+
+  public static void StaticPlayCancelSfx() {
+    VsnAudioManager.instance.PlaySfx("ui_locked");
+  }
+
+  public static void StaticPlayForbbidenSfx() {
+    VsnAudioManager.instance.PlaySfx("ui_locked");
   }
 }
