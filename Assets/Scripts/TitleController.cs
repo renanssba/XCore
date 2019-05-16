@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour {
 
   private void Awake() {
-    if(VsnSaveSystem.GetStringVariable("language")=="") {
-      VsnSaveSystem.SetVariable("language", "pt_br");
-    }
+    //if(VsnSaveSystem.GetStringVariable("language")=="") {
+      VsnSaveSystem.SetVariable("language", "eng");
+    //}
   }
 
   void Start(){
