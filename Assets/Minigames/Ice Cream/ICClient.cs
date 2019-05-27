@@ -96,13 +96,13 @@ public class ICClient : ICInteractable {
 
     switch(GetPatienceLevel()) {
       case 2:
-        score = 100;
+        score = 10;
         break;
       case 1:
-        score = 80;
+        score = 8;
         break;
       case 0:
-        score = 40;
+        score = 4;
         break;
     }
 

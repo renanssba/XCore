@@ -153,13 +153,7 @@ waypoint end
 if date_success >= 5
   say "The date has ended. It was a <color=green>big success</color>!"
   show_date_ui false
-  
-  
-  set_people "hide"
-  wait 0.5
-  show_engagement
   say "\couple became an inseparable couple and you know they'll have many children in the future!"
-  set_people "date"
   ship_couple
 else
   say "The date has ended. It was a <color=red>failure</color>."

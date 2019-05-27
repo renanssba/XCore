@@ -44,22 +44,22 @@ public class ICGameController : MonoBehaviour {
     switch(VsnSaveSystem.GetIntVariable("ap_spent")){
       case 2:
       default:
-        duration = 45f;
+        duration = 40f;
         break;
       case 3:
         duration = 60f;
         break;
       case 4:
-        duration = 75f;
+        duration = 80f;
         break;
       case 5:
-        duration = 90f;
+        duration = 100f;
         break;
     }
 
     timer.Initialize(true, duration);
 
-    VsnAudioManager.instance.PlayMusic("observacao2_intro", "observacao2_loop");
+    VsnAudioManager.instance.PlayMusic("minigame1_intro", "minigame1_loop");
     spawnCoroutine = StartCoroutine(SpawnClients());
     isPlaying = true;
   }

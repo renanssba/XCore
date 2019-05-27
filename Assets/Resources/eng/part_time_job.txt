@@ -7,16 +7,38 @@ endif
 set_var hide_buttons 1
 update_ui
 
-say "Do you want to take a part time job? It consumes 2 AP and you get 130 payment."
+say_auto "You can spend AP to get money. Do you want to work?"
 choices "Yes" sim "No" nao
 
 
 waypoint sim
-spend_ap 2
-add_var money 130
+say_auto "The more AP you spend, the more money you'll get. How many AP do you want to spend?"
+choices "Spend 2 AP" ap2 "Spend 3 AP" ap3 "Spend 4 AP" ap4 "Spend 5 AP" ap5 "Cancelar" nao
+
+waypoint ap2
+set_var ap_spent 2
+goto start_minigame
+
+waypoint ap3
+set_var ap_spent 3
+goto start_minigame
+
+waypoint ap4
+set_var ap_spent 4
+goto start_minigame
+
+waypoint ap5
+set_var ap_spent 5
+goto start_minigame
+
+
+
+waypoint start_minigame
+spend_ap ap_spent
 update_ui
-play_sfx "ui_money"
-say "You worked hard and got 130 Celestial Cash!"
+fade_out 0.7
+load_scene "Minigame - Ice Cream"
+wait 0.5
 goto end
 
 

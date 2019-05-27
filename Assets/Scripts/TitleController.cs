@@ -6,7 +6,7 @@ public class TitleController : MonoBehaviour {
 
   private void Awake() {
     //if(VsnSaveSystem.GetStringVariable("language")=="") {
-      VsnSaveSystem.SetVariable("language", "eng");
+      VsnSaveSystem.SetVariable("language", "pt_br");
     //}
   }
 

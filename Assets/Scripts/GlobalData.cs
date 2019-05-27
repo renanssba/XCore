@@ -9,7 +9,12 @@ public class GlobalData : MonoBehaviour {
   public List<int> shippedCouples;
   public Inventory inventory;
 
-  
+  public List<ObservationEvent> allObservationEvents;
+  public TextAsset observationEventsFile;
+  public List<DateEvent> allDateEvents;
+  public TextAsset dateEventsFile;
+
+
   public int maxAp;
   public int ap;
 
@@ -42,13 +47,14 @@ public class GlobalData : MonoBehaviour {
 
     people = new List<Person>();
     currentCouple = 0;
+    ResetCurrentCouples();
 
-
+    VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);
     VsnSaveSystem.SetVariable("max_days", maxDays);
     day = 0;
+    inventory.items.Clear();
 
-    ResetCurrentCouples();
 
     for (int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, true);
@@ -69,6 +75,103 @@ public class GlobalData : MonoBehaviour {
       people.Add(newPerson);
     }
     usedNames.Clear();
+
+
+    InitializeDateEvents();
+    InitializeObservationEvents();
+  }
+
+  public void InitializeDateEvents() {
+    allDateEvents = new List<DateEvent>();
+
+    int id, guts, intelligence, charisma, stage;
+    string location;
+    DateEventInteractionType interaction = DateEventInteractionType.male;
+
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
+    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
+      id = int.Parse(dic["Id"]);
+      guts = int.Parse(dic["Dificuldade Guts"]);
+      intelligence = int.Parse(dic["Dificuldade Intelligence"]);
+      charisma = int.Parse(dic["Dificuldade Charisma"]);
+      location = dic["Localidade"];
+      stage = int.Parse(dic["Etapa"]);
+      switch (dic["Tipo de Interação"]) {
+        case "male":
+          interaction = DateEventInteractionType.male;
+          break;
+        case "female":
+          interaction = DateEventInteractionType.female;
+          break;
+        case "couple":
+          interaction = DateEventInteractionType.couple;
+          break;
+        case "compatibility":
+          interaction = DateEventInteractionType.compatibility;
+          break;
+      }
+      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, interaction));
+    }
+  }
+
+  public void InitializeObservationEvents() {
+    allObservationEvents = new List<ObservationEvent>();
+
+    int eventId;
+    int value = 0;
+    int aux;
+    ObservationEventType interaction = ObservationEventType.otherGenderPerson;
+    Attributes relevantAttribute = Attributes.guts;
+
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(observationEventsFile, 1);
+    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
+      eventId = int.Parse(dic["Id"]);
+      switch (dic["Interação"]) {
+        case "otherGenderPerson":
+          interaction = ObservationEventType.otherGenderPerson;
+          break;
+        case "attributeTraining":
+          interaction = ObservationEventType.attributeTraining;
+          break;
+        case "sameGenderPerson":
+          interaction = ObservationEventType.sameGenderPerson;
+          break;
+        case "itemOnSale":
+          interaction = ObservationEventType.itemOnSale;
+          break;
+        case "homeStalking":
+          interaction = ObservationEventType.homeStalking;
+          break;
+      }
+
+      switch (dic["Atributo"]) {
+        case "guts":
+          relevantAttribute = Attributes.guts;
+          break;
+        case "intelligence":
+          relevantAttribute = Attributes.intelligence;
+          break;
+        case "charisma":
+          relevantAttribute = Attributes.charisma;
+          break;
+      }
+      if (int.TryParse(dic["Valor"], out aux)) {
+        value = int.Parse(dic["Valor"]);
+      }
+
+      allObservationEvents.Add(new ObservationEvent {
+        id = eventId,
+        eventType = interaction,
+        scriptName = dic["Nome do Script"],
+
+        personInEvent = people[1],
+        //itemInEvent
+
+        //itemCategory
+        challengedAttribute = relevantAttribute,
+        challengeDifficulty = value
+      });
+    }
   }
 
 

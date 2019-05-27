@@ -12,12 +12,8 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI dayText;
   public TextMeshProUGUI apText;
 
-  public TextAsset observationEventsFile;
-  public List<ObservationEvent> allObservationEvents;
   public ObservationEvent[] observationSegments;
 
-  public TextAsset dateEventsFile;
-  public List<DateEvent> allDateEvents;
   public DateEvent[] dateSegments;
 
   public Slider progressSlider;
@@ -50,116 +46,17 @@ public class GameController : MonoBehaviour {
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
 
     if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
+      VsnSaveSystem.SetVariable("minigame_ended", 0);
       UpdateUI();
       VsnController.instance.StartVSN("back_from_minigame");
     } else {
       GlobalData.instance.InitializeChapter();
-      Initialize();
+      GlobalData.instance.PassDay();
       UpdateUI();
       VsnController.instance.StartVSN("tutorial_intro");
     }
   }
 
-  public void Initialize(){
-
-    InitializeDateEvents();
-    InitializeObservationEvents();
-
-    GlobalData.instance.PassDay();
-  }
-
-  public void InitializeDateEvents() {
-    allDateEvents = new List<DateEvent>();
-
-    int id, guts, intelligence, charisma, stage;
-    string location;
-    DateEventInteractionType interaction = DateEventInteractionType.male;
-
-    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
-    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
-      id = int.Parse(dic["Id"]);
-      guts = int.Parse(dic["Dificuldade Guts"]);
-      intelligence = int.Parse(dic["Dificuldade Intelligence"]);
-      charisma = int.Parse(dic["Dificuldade Charisma"]);
-      location = dic["Localidade"];
-      stage = int.Parse(dic["Etapa"]);
-      switch (dic["Tipo de Interação"]) {
-        case "male":
-          interaction = DateEventInteractionType.male;
-          break;
-        case "female":
-          interaction = DateEventInteractionType.female;
-          break;
-        case "couple":
-          interaction = DateEventInteractionType.couple;
-          break;
-        case "compatibility":
-          interaction = DateEventInteractionType.compatibility;
-          break;
-      }
-      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, interaction));
-    }
-  }
-
-  public void InitializeObservationEvents() {
-    allObservationEvents = new List<ObservationEvent>();
-
-    int eventId;
-    int value = 0;
-    int aux;
-    ObservationEventType interaction = ObservationEventType.otherGenderPerson;
-    Attributes relevantAttribute = Attributes.guts;
-
-    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(observationEventsFile, 1);
-    foreach (Dictionary<string, string> dic in spreadsheetData.data) {
-      eventId = int.Parse(dic["Id"]);
-      switch (dic["Interação"]) {
-        case "otherGenderPerson":
-          interaction = ObservationEventType.otherGenderPerson;
-          break;
-        case "attributeTraining":
-          interaction = ObservationEventType.attributeTraining;
-          break;
-        case "sameGenderPerson":
-          interaction = ObservationEventType.sameGenderPerson;
-          break;
-        case "itemOnSale":
-          interaction = ObservationEventType.itemOnSale;
-          break;
-        case "homeStalking":
-          interaction = ObservationEventType.homeStalking;
-          break;
-      }
-
-      switch (dic["Atributo"]) {
-        case "guts":
-          relevantAttribute = Attributes.guts;
-          break;
-        case "intelligence":
-          relevantAttribute = Attributes.intelligence;
-          break;
-        case "charisma":
-          relevantAttribute = Attributes.charisma;
-          break;
-      }
-      if(int.TryParse(dic["Valor"], out aux)){
-        value = int.Parse(dic["Valor"]);
-      }   
-
-      allObservationEvents.Add(new ObservationEvent {
-        id = eventId,
-        eventType = interaction,
-        scriptName = dic["Nome do Script"],
-
-        personInEvent = GlobalData.instance.people[1],
-        //itemInEvent
-
-        //itemCategory
-        challengedAttribute = relevantAttribute,
-        challengeDifficulty = value
-      });
-    }
-  }
 
   public void Update() {
     if(Input.GetKeyDown(KeyCode.F4)){
@@ -243,7 +140,7 @@ public class GameController : MonoBehaviour {
   }
 
   public void GenerateDate(int location){
-    int dateSize = Mathf.Min(allDateEvents.Count, 7);
+    int dateSize = Mathf.Min(GlobalData.instance.allDateEvents.Count, 7);
     List<int> selectedEvents = new List<int>();
     int selectedId;
     int dateLocation = Random.Range(0, 2);
@@ -254,15 +151,15 @@ public class GameController : MonoBehaviour {
     dateSegments = new DateEvent[dateSize];
     for(int i=0; i<dateSize; i++){
       do {
-        selectedId = Random.Range(0, allDateEvents.Count);
+        selectedId = Random.Range(0, GlobalData.instance.allDateEvents.Count);
 
-        Debug.LogWarning("selected location: " + allDateEvents[selectedId].location);
+        Debug.LogWarning("selected location: " + GlobalData.instance.allDateEvents[selectedId].location);
         Debug.LogWarning("date location: " + ((DateLocation)dateLocation).ToString());
 
       } while (selectedEvents.Contains(selectedId) ||
-              (string.Compare(allDateEvents[selectedId].location, ((DateLocation)dateLocation).ToString())!=0 &&
-               string.Compare(allDateEvents[selectedId].location, "generico")!=0) );
-      dateSegments[i] = allDateEvents[selectedId];
+              (string.Compare(GlobalData.instance.allDateEvents[selectedId].location, ((DateLocation)dateLocation).ToString())!=0 &&
+               string.Compare(GlobalData.instance.allDateEvents[selectedId].location, "generico")!=0) );
+      dateSegments[i] = GlobalData.instance.allDateEvents[selectedId];
       selectedEvents.Add(selectedId);
     }
     System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
@@ -270,16 +167,16 @@ public class GameController : MonoBehaviour {
   }
   
   public void GenerateObservation() {
-    int observationSize = Mathf.Min(allObservationEvents.Count, 5);
+    int observationSize = Mathf.Min(GlobalData.instance.allObservationEvents.Count, 5);
     List<int> selectedEvents = new List<int>();
     int selectedId;
 
     observationSegments = new ObservationEvent[observationSize];
     for (int i = 0; i < observationSize; i++) {
       do {
-        selectedId = Random.Range(0, allObservationEvents.Count);
+        selectedId = Random.Range(0, GlobalData.instance.allObservationEvents.Count);
       } while (selectedEvents.Contains(selectedId));
-      observationSegments[i] = allObservationEvents[selectedId];
+      observationSegments[i] = GlobalData.instance.allObservationEvents[selectedId];
       selectedEvents.Add(selectedId);
     }
   }
