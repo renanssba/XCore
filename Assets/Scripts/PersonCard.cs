@@ -16,6 +16,8 @@ public class PersonCard : MonoBehaviour {
   public Image[] equipIcons;
   public Image[] addEquipIcons;
 
+  public Button observationButton;
+
   public bool canEquipItems = true;
 
 
@@ -29,9 +31,11 @@ public class PersonCard : MonoBehaviour {
     switch(state){
       case "show":
         SetEquipableItems(true);
+        SetObservableButton(true);
         break;
       default:
         SetEquipableItems(false);
+        SetObservableButton(false);
         break;
     }
 
@@ -63,6 +67,10 @@ public class PersonCard : MonoBehaviour {
     //UpdateUI();
   }
 
+  public void SetObservableButton(bool value){
+    observationButton.gameObject.SetActive(value);
+  }
+
   public void ClickPersonSlot(int slotId){
     if(!canEquipItems){
       return;
@@ -75,6 +83,14 @@ public class PersonCard : MonoBehaviour {
       VsnSaveSystem.SetVariable("person_equip_selected", person.isMale ? 1 : 0);
       VsnSaveSystem.SetVariable("slot_id", slotId);
       ItemSelectorScreen.instance.OpenInput();
-    }    
+    }
+  }
+
+  public void ClickObserveButton(){
+    Debug.LogWarning("Observe button clicked");
+    GlobalData.instance.currentObservationPeople[0] = person;
+
+    SfxManager.StaticPlayConfirmSfx();
+    VsnController.instance.StartVSN("observation");
   }
 }

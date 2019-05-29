@@ -25,9 +25,7 @@ namespace Command {
           GameController.instance.personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
           break;
         case "observation":
-          GameController.instance.personCards[0].gameObject.SetActive(true);
-          GameController.instance.personCards[1].gameObject.SetActive(false);
-          GameController.instance.personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+          GameController.instance.ShowOnlyObservedPerson();
           break;
         case "date":
           GameController.instance.personCards[0].gameObject.SetActive(true);

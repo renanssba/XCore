@@ -68,7 +68,8 @@ public class ItemUI : MonoBehaviour {
   public void Clicked(){
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
-    switch(interactionType) {
+    VsnSaveSystem.SetVariable("item_name", Item.GetName(item.id));
+    switch (interactionType) {
       case ItemInteractionType.store_buy:
         VsnSaveSystem.SetVariable("item_price", item.price);
         break;

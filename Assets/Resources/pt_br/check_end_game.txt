@@ -24,7 +24,7 @@ end_script
 
 waypoint end_game
 say "Fertiliel" "Vamos ver quão bem eu fui na minha missão..."
-say "" "A sua missão era reunir \objective casais dentro de \max_days dias."
+say "" "A sua missão era reunir \vsn[objective] casais dentro de \vsn[max_days] dias."
 say "Você conseguiu reunir \progress casais dentro de \day dias."
 if #progress >= objective
   say "Parabéns! Você completou a missão com sucesso!"

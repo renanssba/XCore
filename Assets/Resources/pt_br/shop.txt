@@ -11,7 +11,7 @@ show_shop true "buy"
 
 if item_id != -1
   if item_price <= money
-    say_auto "Você quer comprar \item_name por \item_price?"
+    say_auto "Você quer comprar \vsn[item_name] por \vsn[item_price]?"
     choices "Sim" comprar_sim "Não" voltar
   else
     say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
@@ -30,7 +30,7 @@ endif
 
 show_shop true "sell"
 if item_id != -1
-  say_auto "Você quer vender \item_name por \item_price?"
+  say_auto "Você quer vender \vsn[item_name] por \vsn[item_price]?"
   choices "Sim" vender_sim "Não" voltar
 else
   goto end
@@ -44,7 +44,7 @@ subtract_var money item_price
 update_ui
 add_item item_id 1
 play_sfx "ui_money"
-say "Você adquiriu \item_name!"
+say "Você adquiriu \vsn[item_name]!"
 goto store_loop
 
 

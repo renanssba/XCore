@@ -9,6 +9,8 @@ public class GlobalData : MonoBehaviour {
   public List<int> shippedCouples;
   public Inventory inventory;
 
+  public Person[] currentObservationPeople;
+
   public List<ObservationEvent> allObservationEvents;
   public TextAsset observationEventsFile;
   public List<DateEvent> allDateEvents;
@@ -46,6 +48,7 @@ public class GlobalData : MonoBehaviour {
     string auxName;
 
     people = new List<Person>();
+    currentObservationPeople = new Person[2];
     currentCouple = 0;
     ResetCurrentCouples();
 
@@ -212,8 +215,12 @@ public class GlobalData : MonoBehaviour {
     return people[currentCouple * 2+1];
   }
 
-  public Person GetCurrentObservationPerson(){
-    return GetCurrentBoy();
+  public Person GetCurrentObservedPerson(){
+    return currentObservationPeople[0];
+  }
+
+  public Person GetEncounterPerson() {
+    return currentObservationPeople[1];
   }
 
   public Personality CurrentPersonPersonality(){
@@ -232,8 +239,8 @@ public class GlobalData : MonoBehaviour {
 
     switch(VsnSaveSystem.GetIntVariable("situation")) {
       case 1:
-        if (GetCurrentObservationPerson() != null) {
-          return GetCurrentObservationPerson().attributes[attr];
+        if (GetCurrentObservedPerson() != null) {
+          return GetCurrentObservedPerson().attributes[attr];
         }
         break;
       case 2:

@@ -24,7 +24,7 @@ end_script
 
 waypoint end_game
 say "Cupid" "Let's see how well I did my mission..."
-say "" "Your mission was to bring together \objective couples within \max_days days."
+say "" "Your mission was to bring together \vsn[objective] couples within \vsn[max_days] days."
 say "You managed to bring \progress couples until day \day."
 if #progress >= objective
   say "Congratulations! You have completed the mission successfully!"

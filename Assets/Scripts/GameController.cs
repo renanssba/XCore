@@ -241,6 +241,17 @@ public class GameController : MonoBehaviour {
     babiesParticleGenerator.DeleteSons();
   }
 
+  public void ShowOnlyObservedPerson(){
+    foreach(PersonCard p in personCards){
+      if(p.person == GlobalData.instance.GetCurrentObservedPerson()){
+        p.gameObject.SetActive(true);
+        p.GetComponent<CanvasGroup>().alpha = 1f;
+      } else{
+        p.gameObject.SetActive(false);
+      }
+    }
+  }
+
 
 
 

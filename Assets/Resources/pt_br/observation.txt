@@ -11,8 +11,7 @@ set_var currentDateEvent 0
 
 fade_in 0.7
 
-say "" "Você decide acompanhar \boy no seu dia-a-dia."
-
+say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
 
 waypoint new_event
 if #currentDateEvent < 3
@@ -32,7 +31,7 @@ if #currentDateEvent < 3
 
 
 
-  //say_auto "" "Qual reação \boy deve tomar?"
+  //say_auto "" "Qual reação \observedPerson deve tomar?"
   choices "Ajudar" sug_help "Ignorar" sug_ignore
 
 
@@ -57,7 +56,7 @@ if #currentDateEvent < 3
   endif
   if resolution == 2
     //goto_script "\currentObservationEventName" ignore
-    say "" "\boy olha para a situação e simplesmente decide não fazer nada a respeito."
+    say "" "\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito."
   endif
   
 
@@ -68,7 +67,7 @@ if #currentDateEvent < 3
 
 endif
 
-say "" "Depois disso, \boy foi descansar. Você parou de acompanhar seu dia."
+say "" "Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia."
 
 
 fade_out 0.5

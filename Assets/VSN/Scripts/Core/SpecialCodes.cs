@@ -16,13 +16,22 @@ public class SpecialCodes {
       return initialString;
     }
 
+
+
     do {
       initialString = currentString;
+
+      currentString = InterpretVariableValue(currentString);
       
-      currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date/" + GameController.instance.GetCurrentDateEventName());
       currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
+      if(GlobalData.instance.GetCurrentObservedPerson() != null) {
+        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.GetCurrentObservedPerson().name);
+      }
+      if (GlobalData.instance.GetEncounterPerson() != null) {
+        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.GetCurrentObservedPerson().name);
+      }
       if (GlobalData.instance.GetCurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.GetCurrentBoy().name);
         currentString = currentString.Replace("\\girl", GlobalData.instance.GetCurrentGirl().name);
@@ -30,16 +39,44 @@ public class SpecialCodes {
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.charisma).ToString());
       }
-      currentString = currentString.Replace("\\item_name", Item.GetName(VsnSaveSystem.GetIntVariable("item_id")));
-      currentString = currentString.Replace("\\item_price", VsnSaveSystem.GetIntVariable("item_price").ToString());
-      currentString = currentString.Replace("\\minigame_score", VsnSaveSystem.GetIntVariable("minigame_score").ToString());
-      currentString = currentString.Replace("\\objective", VsnSaveSystem.GetIntVariable("objective").ToString());
-      currentString = currentString.Replace("\\max_days", VsnSaveSystem.GetIntVariable("max_days").ToString());
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
+      currentString = currentString.Replace("\\n", "\n");
     } while (currentString != initialString);
 
     return currentString;
+  }
+
+  public static string InterpretVariableValue(string initial){
+    int start = initial.IndexOf("\\vsn[");
+    int end = initial.IndexOf("]");
+
+    if(start == -1 || end == -1){
+      return initial;
+    }
+
+    string varName = initial.Substring(start+5, (end-start-5));
+    string varString = GetPrintableVariableValue(varName);
+
+    //Debug.LogWarning("VAR NAME IS: " + varName +", its value is " + varString);
+
+    string final = initial.Substring(0, start);
+    final += varString + initial.Substring(end+1, initial.Length-end-1);
+
+    //Debug.LogWarning("VARIABLE INTERPRETATION:\nFrom: "+initial+"\nTo: "+final);
+
+    return final;
+  }
+
+  static string GetPrintableVariableValue(string varName){
+    int intValue = VsnSaveSystem.GetIntVariable(varName);
+    string stringValue = VsnSaveSystem.GetStringVariable(varName);
+
+    if(stringValue != ""){
+      return stringValue;
+    }else{
+      return intValue.ToString();
+    }
   }
 
 
@@ -57,8 +94,6 @@ public class SpecialCodes {
         return Random.Range(0, 100);
       case "#dateLength":
         return GameController.instance.dateSegments.Length;
-      case "#currentDateEvent":
-        return VsnSaveSystem.GetIntVariable("currentDateEvent");
       case "#observationLength":
         return GameController.instance.observationSegments.Length;
       case "#observationEventType":

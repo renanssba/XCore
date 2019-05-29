@@ -8,7 +8,7 @@ namespace Command {
   public class ImproveAttributeCommand : VsnCommand {
 
     public override void Execute() {
-      Person p = GlobalData.instance.GetCurrentObservationPerson();
+      Person p = GlobalData.instance.GetCurrentObservedPerson();
       int improve_value = (int)args[1].GetNumberValue();
 
       //if(args.Length > 2){
