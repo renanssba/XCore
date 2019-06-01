@@ -1,0 +1,16 @@
+goto *arg1
+
+waypoint event_statement
+say "" "\observedPerson vê um menino parado em uma esquina, olhando para as placas como se procurasse algo, indeciso. É \encounterPerson."
+say_auto "O menino olha para \observedPerson, e pede informações sobre como chegar em um lugar."
+end_script
+
+
+
+waypoint help_success
+say "" "\observedPerson sabe onde é, e se oferece para levá-lo até lá. O menino agradece."
+end_script
+
+waypoint help_fail
+say "" "\observedPerson pensa bastante, mas não consegue lembrar onde é. Ela se desculpa e segue seu caminho."
+end_script

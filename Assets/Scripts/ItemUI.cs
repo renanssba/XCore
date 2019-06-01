@@ -77,7 +77,7 @@ public class ItemUI : MonoBehaviour {
         VsnSaveSystem.SetVariable("item_price", item.price/2);
         break;
       case ItemInteractionType.input:
-        Person p = VsnSaveSystem.GetIntVariable("person_equip_selected")==1?GlobalData.instance.GetCurrentBoy(): GlobalData.instance.GetCurrentGirl();
+        Person p = VsnSaveSystem.GetIntVariable("person_equip_selected")==1?GlobalData.instance.CurrentBoy(): GlobalData.instance.CurrentGirl();
         p.EquipItemInSlot(VsnSaveSystem.GetIntVariable("slot_id"), item);
         break;
     }

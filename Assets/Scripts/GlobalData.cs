@@ -16,13 +16,15 @@ public class GlobalData : MonoBehaviour {
   public List<DateEvent> allDateEvents;
   public TextAsset dateEventsFile;
 
-
   public int maxAp;
   public int ap;
 
   public int day;
   public int maxDays;
   public int objective;
+
+  public bool hideTutorials = false;
+
 
 
   public static GlobalData instance;
@@ -123,21 +125,21 @@ public class GlobalData : MonoBehaviour {
     int eventId;
     int value = 0;
     int aux;
-    ObservationEventType interaction = ObservationEventType.otherGenderPerson;
+    ObservationEventType interaction = ObservationEventType.femaleInTrouble;
     Attributes relevantAttribute = Attributes.guts;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(observationEventsFile, 1);
     foreach (Dictionary<string, string> dic in spreadsheetData.data) {
       eventId = int.Parse(dic["Id"]);
       switch (dic["Interação"]) {
-        case "otherGenderPerson":
-          interaction = ObservationEventType.otherGenderPerson;
+        case "femaleInTrouble":
+          interaction = ObservationEventType.femaleInTrouble;
+          break;
+        case "maleInTrouble":
+          interaction = ObservationEventType.maleInTrouble;
           break;
         case "attributeTraining":
           interaction = ObservationEventType.attributeTraining;
-          break;
-        case "sameGenderPerson":
-          interaction = ObservationEventType.sameGenderPerson;
           break;
         case "itemOnSale":
           interaction = ObservationEventType.itemOnSale;
@@ -166,11 +168,6 @@ public class GlobalData : MonoBehaviour {
         id = eventId,
         eventType = interaction,
         scriptName = dic["Nome do Script"],
-
-        personInEvent = people[1],
-        //itemInEvent
-
-        //itemCategory
         challengedAttribute = relevantAttribute,
         challengeDifficulty = value
       });
@@ -207,30 +204,34 @@ public class GlobalData : MonoBehaviour {
     }
   }
 
-  public Person GetCurrentBoy(){
+  public Person CurrentBoy(){
     return people[currentCouple * 2];
   }
 
-  public Person GetCurrentGirl() {
+  public Person CurrentGirl() {
     return people[currentCouple * 2+1];
   }
 
-  public Person GetCurrentObservedPerson(){
+  public Person ObservedPerson(){
     return currentObservationPeople[0];
   }
 
-  public Person GetEncounterPerson() {
-    return currentObservationPeople[1];
+  public Person EncounterPerson() {
+    if(GameController.instance.GetCurrentObservationEvent() != null) {
+      return GameController.instance.GetCurrentObservationEvent().personInEvent;
+    } else{
+      return null;
+    }    
   }
 
   public Personality CurrentPersonPersonality(){
     switch (GameController.instance.GetCurrentDateEvent().interactionType) {
       case DateEventInteractionType.male:
-        return GetCurrentBoy().personality;
+        return CurrentBoy().personality;
       case DateEventInteractionType.female:
-        return GetCurrentGirl().personality;
+        return CurrentGirl().personality;
       case DateEventInteractionType.couple:
-        return GetCurrentGirl().personality;
+        return CurrentGirl().personality;
     }
     return Personality.emotivo;
   }
@@ -239,8 +240,8 @@ public class GlobalData : MonoBehaviour {
 
     switch(VsnSaveSystem.GetIntVariable("situation")) {
       case 1:
-        if (GetCurrentObservedPerson() != null) {
-          return GetCurrentObservedPerson().attributes[attr];
+        if (ObservedPerson() != null) {
+          return ObservedPerson().attributes[attr];
         }
         break;
       case 2:
@@ -249,11 +250,11 @@ public class GlobalData : MonoBehaviour {
         }
         switch (GameController.instance.GetCurrentDateEvent().interactionType) {
           case DateEventInteractionType.male:
-            return GetCurrentBoy().AttributeValue(attr);
+            return CurrentBoy().AttributeValue(attr);
           case DateEventInteractionType.female:
-            return GetCurrentGirl().AttributeValue(attr);
+            return CurrentGirl().AttributeValue(attr);
           case DateEventInteractionType.couple:
-            return GetCurrentGirl().AttributeValue(attr) + GetCurrentBoy().AttributeValue(attr);
+            return CurrentGirl().AttributeValue(attr) + CurrentBoy().AttributeValue(attr);
         }
         break;
     }
@@ -281,6 +282,21 @@ public class GlobalData : MonoBehaviour {
     day++;
     GameController.instance.UpdateUI();
     VsnController.instance.StartVSN("check_game_end");
+  }
+
+  public Person GetDateablePerson(Person p){
+    List<Person> dateable = new List<Person>();
+    foreach(Person p2 in people){
+      if(p.isMale != p2.isMale){
+        dateable.Add(p2);
+      }
+    }
+    
+    if (dateable.Count > 0) {
+      return dateable[Random.Range(0, dateable.Count)];
+    } else {
+      return null;
+    }
   }
 
 

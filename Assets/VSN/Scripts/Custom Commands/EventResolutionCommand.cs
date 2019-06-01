@@ -25,10 +25,10 @@ namespace Command {
 
       switch (currentEvent.interactionType) {
         case DateEventInteractionType.male:
-          p = GlobalData.instance.GetCurrentBoy();
+          p = GlobalData.instance.CurrentBoy();
           break;
         case DateEventInteractionType.female:
-          p = GlobalData.instance.GetCurrentGirl();
+          p = GlobalData.instance.CurrentGirl();
           break;
       }
 
@@ -54,11 +54,9 @@ namespace Command {
 
     public void ResolveObservation() {
       ObservationEvent currentEvent = GameController.instance.GetCurrentObservationEvent();
-      Person person = null;
+      Person person = GlobalData.instance.ObservedPerson();
       int attributeToUse = (int)currentEvent.challengedAttribute;
       int result = 0;
-
-      person = GlobalData.instance.GetCurrentBoy();
 
       if (person.AttributeValue(attributeToUse) >= currentEvent.challengeDifficulty) {
         result = 0;

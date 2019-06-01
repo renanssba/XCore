@@ -1,4 +1,6 @@
-goto end
+if tutorial_date2 == 1
+  goto end
+endif
 
 say "Fertiliel" "Certos desafios devem ser solucionados pelo garoto, outros pela garota, vai depender da situação."
 if #currentEventInteractionType == 0

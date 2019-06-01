@@ -26,15 +26,15 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date/" + GameController.instance.GetCurrentDateEventName());
       currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
-      if(GlobalData.instance.GetCurrentObservedPerson() != null) {
-        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.GetCurrentObservedPerson().name);
+      if(GlobalData.instance.ObservedPerson() != null) {
+        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
       }
-      if (GlobalData.instance.GetEncounterPerson() != null) {
-        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.GetCurrentObservedPerson().name);
+      if (GlobalData.instance.EncounterPerson() != null) {
+        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().name);
       }
-      if (GlobalData.instance.GetCurrentBoy() != null) {
-        currentString = currentString.Replace("\\boy", GlobalData.instance.GetCurrentBoy().name);
-        currentString = currentString.Replace("\\girl", GlobalData.instance.GetCurrentGirl().name);
+      if (GlobalData.instance.CurrentBoy() != null) {
+        currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
+        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
         currentString = currentString.Replace("\\guts", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.charisma).ToString());
@@ -97,7 +97,11 @@ public class SpecialCodes {
       case "#observationLength":
         return GameController.instance.observationSegments.Length;
       case "#observationEventType":
-        return (int)GameController.instance.GetCurrentObservationEvent().eventType;
+        if(GameController.instance.GetCurrentObservationEvent() != null) {
+          return (int)GameController.instance.GetCurrentObservationEvent().eventType;
+        } else{
+          return 0;
+        }
       case "#ap":
         return GlobalData.instance.ap;
       case "#max_ap":

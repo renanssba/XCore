@@ -53,6 +53,11 @@ public class GameController : MonoBehaviour {
       GlobalData.instance.InitializeChapter();
       GlobalData.instance.PassDay();
       UpdateUI();
+
+      if(GlobalData.instance.hideTutorials) {
+        VsnSaveSystem.SetVariable("tutorial_date", 1);
+        VsnSaveSystem.SetVariable("tutorial_date2", 1);
+      }
       VsnController.instance.StartVSN("tutorial_intro");
     }
   }
@@ -167,17 +172,32 @@ public class GameController : MonoBehaviour {
   }
   
   public void GenerateObservation() {
-    int observationSize = Mathf.Min(GlobalData.instance.allObservationEvents.Count, 5);
+    int observationSize = Mathf.Min(GlobalData.instance.allObservationEvents.Count, 3);
     List<int> selectedEvents = new List<int>();
+    List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
     int selectedId;
+
+    allowedEventTypes.Add(ObservationEventType.attributeTraining);
+    allowedEventTypes.Add(ObservationEventType.bet);
+    allowedEventTypes.Add(ObservationEventType.homeStalking);
+    allowedEventTypes.Add(ObservationEventType.itemOnSale);
+    if(GlobalData.instance.ObservedPerson().isMale) {
+      allowedEventTypes.Add(ObservationEventType.femaleInTrouble);
+    } else{
+      allowedEventTypes.Add(ObservationEventType.maleInTrouble);
+    }
 
     observationSegments = new ObservationEvent[observationSize];
     for (int i = 0; i < observationSize; i++) {
       do {
         selectedId = Random.Range(0, GlobalData.instance.allObservationEvents.Count);
-      } while (selectedEvents.Contains(selectedId));
-      observationSegments[i] = GlobalData.instance.allObservationEvents[selectedId];
+      } while (selectedEvents.Contains(selectedId) || !allowedEventTypes.Contains(GlobalData.instance.allObservationEvents[selectedId].eventType));
       selectedEvents.Add(selectedId);
+      observationSegments[i] = GlobalData.instance.allObservationEvents[selectedId];
+      if(observationSegments[i].eventType == ObservationEventType.femaleInTrouble ||
+         observationSegments[i].eventType == ObservationEventType.maleInTrouble) {
+        observationSegments[i].personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
+      }
     }
   }
 
@@ -243,7 +263,7 @@ public class GameController : MonoBehaviour {
 
   public void ShowOnlyObservedPerson(){
     foreach(PersonCard p in personCards){
-      if(p.person == GlobalData.instance.GetCurrentObservedPerson()){
+      if(p.person == GlobalData.instance.ObservedPerson()){
         p.gameObject.SetActive(true);
         p.GetComponent<CanvasGroup>().alpha = 1f;
       } else{

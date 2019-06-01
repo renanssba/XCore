@@ -14,7 +14,7 @@ fade_in 0.7
 say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
 
 waypoint new_event
-if #currentDateEvent < 3
+if currentDateEvent < 3
 
   waypoint start_interaction
   goto_script "\currentObservationEventName" event_statement
@@ -50,8 +50,12 @@ if #currentDateEvent < 3
   waypoint resolution
   if resolution == 0
     goto_script "\currentObservationEventName" help_success
+    play_sfx "relationship_up"
+    say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre seus assuntos favoritos e percebem que têm muita coisa em comum."
+    say "Eles trocam telefones e concordam que seria legal saírem algum dia."
   endif
   if resolution == 1
+    play_sfx "relationship_down"
     goto_script "\currentObservationEventName" help_fail
   endif
   if resolution == 2

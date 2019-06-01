@@ -50,11 +50,12 @@ public class DateEvent {
 
 
 public enum ObservationEventType{
-  otherGenderPerson = 0,
-  sameGenderPerson = 1,
+  femaleInTrouble = 0,
+  maleInTrouble = 1,
   attributeTraining = 2,
-  itemOnSale = 3,
-  homeStalking = 4
+  bet = 3,
+  itemOnSale = 4,
+  homeStalking = 5
 }
 
 

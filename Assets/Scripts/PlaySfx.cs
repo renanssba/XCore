@@ -8,5 +8,5 @@ public class PlaySfx : MonoBehaviour {
 
 	public void PlaySfxName() {
     VsnAudioManager.instance.PlaySfx(sfxName);
-	}
+  }
 }

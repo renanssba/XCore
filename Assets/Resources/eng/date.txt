@@ -34,7 +34,7 @@ endif
 
 
 waypoint new_event
-if #currentDateEvent < #dateLength
+if currentDateEvent < #dateLength
 
 waypoint start_interaction
 goto_script "\currentEventName" event_statement

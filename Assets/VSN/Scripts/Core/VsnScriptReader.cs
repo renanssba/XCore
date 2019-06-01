@@ -215,7 +215,7 @@ public class VsnScriptReader {
       }
     }
 
-    Debug.Log("Got a null");
+    //Debug.Log("Got a null");
     return null;
   }
 
