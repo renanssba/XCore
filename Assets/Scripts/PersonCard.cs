@@ -14,6 +14,7 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI[] attributeTexts;
   public TextMeshProUGUI[] traitTexts;
   public Image[] equipIcons;
+  public Image[] favoriteAttributeIcons;
   public Image[] addEquipIcons;
 
   public Button observationButton;
@@ -42,9 +43,11 @@ public class PersonCard : MonoBehaviour {
     nameText.text = person.name;
     for (int i=0; i<3; i++){
       attributeTexts[i].text = person.AttributeValue(i).ToString();
-      attributeTexts[i].alpha = 0.4f;
-      attributeTexts[i].transform.parent.GetComponent<Image>().DOFade(0.5f, 0f);
-      if(person.equips[i] != null){
+      favoriteAttributeIcons[i].gameObject.SetActive(false);
+      //attributeTexts[i].alpha = 0.4f;
+      //attributeTexts[i].transform.parent.GetComponent<Image>().DOFade(0.5f, 0f);
+
+      if (person.equips[i] != null){
         equipIcons[i].sprite = person.equips[i].sprite;
         equipIcons[i].gameObject.SetActive(true);
       } else{
@@ -52,12 +55,13 @@ public class PersonCard : MonoBehaviour {
       }
       addEquipIcons[i].gameObject.SetActive(person.EquipsCount()==i && state=="show");
     }
-    attributeTexts[(int)person.personality].alpha = 1f;
-    attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
+    //attributeTexts[(int)person.personality].alpha = 1f;
+    //attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
+    favoriteAttributeIcons[(int)person.personality].gameObject.SetActive(true);
 
     faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale?0:1)];
-    traitTexts[0].text = person.PersonalityString();
+    //traitTexts[0].text = person.PersonalityString();
   }
 
   public void SetEquipableItems(bool canEquipItems) {

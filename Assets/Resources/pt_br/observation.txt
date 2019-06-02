@@ -39,7 +39,7 @@ waypoint resolution
 if resolution == 0
   goto_script "\currentObservationEventName" help_success
   play_sfx "relationship_up"
-  say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre seus assuntos favoritos e percebem que têm muita coisa em comum."
+  say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum."
   say "Eles trocam telefones e concordam que seria legal saírem algum dia."
 endif
 if resolution == 1

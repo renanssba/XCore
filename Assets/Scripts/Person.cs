@@ -34,6 +34,9 @@ public class Person {
   public List<Trait> traits;
   public Item[] equips;
 
+  public RandomTastes favoriteMatter;
+  public RandomTastes mostHatedMatter;
+
   public int faceId;
 
 
@@ -57,7 +60,10 @@ public class Person {
     for(int i=0; i<3; i++){
       attributes[i] = attValues[i];
     }
-    
+
+    favoriteMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
+    mostHatedMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
+
     //if (isMale) {
     //  faceId = Random.Range(0, 5);
     //} else {

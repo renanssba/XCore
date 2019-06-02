@@ -17,7 +17,6 @@ public class SpecialCodes {
     }
 
 
-
     do {
       initialString = currentString;
 
@@ -28,9 +27,11 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
+        currentString = currentString.Replace("\\favoriteMatter1", Utils.GetPrintableString(GlobalData.instance.ObservedPerson().favoriteMatter.ToString(), false));
       }
       if (GlobalData.instance.EncounterPerson() != null) {
         currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().name);
+        currentString = currentString.Replace("\\favoriteMatter2", Utils.GetPrintableString(GlobalData.instance.EncounterPerson().favoriteMatter.ToString(), false));
       }
       if (GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);

@@ -100,6 +100,7 @@ public enum RandomTastes {
   //arroz,
   //batatas,
   acampar,
+  oSetindoDaVida,
   hackear,
   imitarTartarugas,
   arquitetura,
@@ -107,6 +108,7 @@ public enum RandomTastes {
   andarACavalo,
   rezar,
   meditacao,
+  memes,
   esgrima,
   //rpg,
   mercadoDeAcoes,
@@ -117,7 +119,7 @@ public enum RandomTastes {
   origami,
   //churros,
   //  minhaVida,
-  //  vidaDosOutros,
+  aVidaDosOutros,
   //pudim,
   //tortas,
   //agua,
@@ -125,7 +127,7 @@ public enum RandomTastes {
   tomarBanho,
   usarAppsDeNamoro,
   yaoi,
-  //waifus,
+  waifus,
   //barbas,
   relacionamentos,
   cuidarDeBebes,
@@ -144,7 +146,8 @@ public enum RandomTastes {
   usarOculos,
   brincarDeBonecas,
   lutar,
-  fazerPoses
+  fazerPoses,
+  count
 }
 
 
