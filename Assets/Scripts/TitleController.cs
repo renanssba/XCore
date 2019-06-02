@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour {
 
+  public GameObject[] buttons;
+
   private void Awake() {
+    Utils.SelectUiElement(buttons[0]);
     //if(VsnSaveSystem.GetStringVariable("language")=="") {
       VsnSaveSystem.SetVariable("language", "pt_br");
     //}

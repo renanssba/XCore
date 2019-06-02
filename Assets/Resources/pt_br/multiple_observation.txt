@@ -1,4 +1,4 @@
-﻿set_people "observation"
+﻿set_screen "observation"
 fade_out 0.7
 //play_music "date1_intro" "date1_loop"
 wait 0.5
@@ -18,7 +18,7 @@ if currentDateEvent < 3
 
   waypoint start_interaction
   goto_script "\currentObservationEventName" event_statement
-  //set_people "event"
+  //set_screen "event"
   
   
   if #observationEventType == 0
@@ -79,6 +79,6 @@ bg null
 update_ui
 fade_in 0.5
 
-set_people "show"
+set_screen "show"
 
 set_var situation 0

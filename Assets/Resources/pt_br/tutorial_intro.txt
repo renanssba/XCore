@@ -5,7 +5,7 @@ endif
 set_var hide_buttons 1
 set_var show_mini_fertiliel 0
 update_ui
-set_people "hide"
+set_screen "hide"
 fade_out 0
 wait 0.1
 fade_in 0.5
@@ -21,7 +21,7 @@ char_flip fertiliel
 char_move_x fertiliel 0.14 0.5
 wait 0.5
 
-set_people "date"
+set_screen "date"
 wait 0.5
 say "Este é o casal que você está observando no momento. Perceba que o rapaz e a moça possuem 3 atributos."
 say "Os atributos são: <color=yellow><sprite='Attributes' index=0 tint>Valentia</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> e <color=red><sprite='Attributes' index=2 tint>Carisma</color>. Seus valores vão de 1 (Péssimo) até 5 (Sobrehumano)."
@@ -43,7 +43,7 @@ say "Após cada encontro (ou se preferir, clicando no botão <color=yellow>Passa
 
 goto_script "fertiliel_exit"
 
-set_people "show"
+set_screen "show"
 set_var hide_buttons 0
 set_var show_mini_fertiliel 1
 update_ui
@@ -52,7 +52,7 @@ wait 0.3
 say "Boa sorte!"
 
 waypoint end
-set_people "show"
+set_screen "show"
 set_var hide_buttons 0
 set_var show_mini_fertiliel 1
 update_ui

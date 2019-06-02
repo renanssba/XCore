@@ -3,7 +3,7 @@ goto end
 set_var hide_buttons 1
 set_var show_mini_fertiliel 0
 update_ui
-set_people "hide"
+set_screen "hide"
 fade_out 0
 wait 0.1
 fade_in 0.5
@@ -19,7 +19,7 @@ char_flip fertiliel
 char_move_x fertiliel 0.14 0.5
 wait 0.5
 
-set_people "date"
+set_screen "date"
 wait 0.5
 say "This is the couple you're currently watching. Please notice the boy and the girl have 3 attributes."
 say "The attributes are: <color=yellow><sprite='Attributes' index=0 tint>Guts</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Intelligence</color> and <color=red><sprite='Attributes' index=2 tint>Charisma</color>. Their values range from 1 (Horrible) up to 5 (Superhuman)."
@@ -41,7 +41,7 @@ say "After every date (or by clicking the <color=yellow>Spend Day</color> button
 
 goto_script "fertiliel_exit"
 
-set_people "show"
+set_screen "show"
 set_var hide_buttons 0
 set_var show_mini_fertiliel 1
 update_ui
@@ -50,7 +50,7 @@ wait 0.3
 say "Good luck!"
 
 waypoint end
-set_people "show"
+set_screen "show"
 set_var hide_buttons 0
 set_var show_mini_fertiliel 1
 update_ui

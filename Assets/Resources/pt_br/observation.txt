@@ -1,6 +1,5 @@
-﻿set_people "observation"
+﻿set_screen "hide"
 fade_out 0.7
-//play_music "date1_intro" "date1_loop"
 wait 0.5
 bg "shopping"
 
@@ -8,12 +7,11 @@ set_var situation 1
 set_var currentDateEvent 0
 
 fade_in 0.7
-
-say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
+set_screen "observation"
 
 waypoint start_interaction
 goto_script "\currentObservationEventName" event_statement
-//set_people "event"
+//set_screen "event"
 
 if #observationEventType == 0
   // continue
@@ -57,14 +55,23 @@ endif
 waypoint next
 update_ui
 
-say "" "Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia."
+
+if observation_energy <= 0
+  say "" "Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia."
+endif
 
 
+set_screen "hide"
 fade_out 0.5
 bg null
 update_ui
 fade_in 0.5
 
-set_people "show"
+if observation_energy > 0
+  set_screen "during_observation"
+else
+  set_screen "show"
+endif
+
 
 set_var situation 0

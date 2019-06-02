@@ -9,14 +9,16 @@ using DG.Tweening;
 public class GameController : MonoBehaviour {
 
   public static GameController instance;
+  public TextMeshProUGUI titleText;
+
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
   public TextMeshProUGUI apText;
-
+  
   public ObservationEvent[] observationSegments;
   public ObservationTile[] observationTiles;
-  public GameObject observationMap;
   public GameObject playerToken;
+  public TextMeshProUGUI energyText;
   public Image playerTokenImage;
   public Color[] observationTilesColors;
 
@@ -27,8 +29,10 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI objectiveText;
   public TextMeshProUGUI moneyText;
 
-  public GameObject buttonsPanel;
-  public GameObject miniFertililel;
+  public ScreenTransitions peoplePanel;
+  public ScreenTransitions buttonsPanel;
+  public ScreenTransitions observationMap;
+  //public GameObject miniFertililel;
 
   public ItemSelectorScreen itemSelectorScreen;
 
@@ -111,11 +115,7 @@ public class GameController : MonoBehaviour {
     personCards[0].UpdateUI();
     personCards[1].UpdateUI();
 
-    bool showButtons = (VsnSaveSystem.GetIntVariable("hide_buttons") == 0);
-    buttonsPanel.SetActive(showButtons);
-
-    bool showMiniFertiliel = (VsnSaveSystem.GetIntVariable("show_mini_fertiliel") == 1);
-    miniFertililel.SetActive(showMiniFertiliel);
+    energyText.text = "Energia: " + VsnSaveSystem.GetIntVariable("observation_energy");
 
     ShowDateProgressUI();
   }
@@ -237,10 +237,6 @@ public class GameController : MonoBehaviour {
     return observationSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
-  public void ShowButtons(bool value){
-    buttonsPanel.SetActive(value);
-  }
-
   public void ShowDateUiPanel(bool value) {
     dateUiPanel.SetActive(value);
     UpdateUI();
@@ -278,6 +274,65 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public void SetScreenLayout(string state){
+    personCards[0].gameObject.SetActive(true);
+    personCards[1].gameObject.SetActive(true);
+  
+    switch (state) {
+      case "hide":
+        peoplePanel.HidePanel();
+        buttonsPanel.HidePanel();
+        observationMap.HidePanel();
+        break;
+      case "show":
+        personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        peoplePanel.ShowPanel();
+        buttonsPanel.ShowPanel();
+        observationMap.HidePanel();
+        break;
+      case "observation":
+        ShowOnlyObservedPerson();
+        peoplePanel.ShowPanel();
+        buttonsPanel.HidePanel();
+        observationMap.HidePanel();
+        break;
+      case "during_observation":
+        peoplePanel.HidePanel();
+        buttonsPanel.HidePanel();
+        playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
+        observationMap.ShowPanel();
+        break;
+      case "date":
+        personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        peoplePanel.ShowPanel();
+        buttonsPanel.HidePanel();
+        observationMap.HidePanel();
+        break;
+      case "event":
+        peoplePanel.ShowPanel();
+        buttonsPanel.HidePanel();
+        observationMap.HidePanel();
+        switch (GetCurrentDateEvent().interactionType) {
+          case DateEventInteractionType.male:
+            personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+            personCards[1].GetComponent<CanvasGroup>().alpha = 0.65f;
+            break;
+          case DateEventInteractionType.female:
+            personCards[0].GetComponent<CanvasGroup>().alpha = 0.65f;
+            personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+            break;
+          case DateEventInteractionType.couple:
+            personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+            personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+            break;
+        }
+        break;
+    }
+    UpdateUI();
+  }
+
   public void HidePeople(){
     foreach (PersonCard p in personCards) {
       p.gameObject.SetActive(false);
@@ -287,7 +342,7 @@ public class GameController : MonoBehaviour {
   public void SetupObservationSegmentTiles(){
     List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
     int selectedId;
-
+    
     allowedEventTypes.Add(ObservationEventType.attributeTraining);
     allowedEventTypes.Add(ObservationEventType.bet);
     allowedEventTypes.Add(ObservationEventType.homeStalking);
@@ -298,10 +353,7 @@ public class GameController : MonoBehaviour {
       allowedEventTypes.Add(ObservationEventType.maleInTrouble);
     }
 
-    playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
-    buttonsPanel.SetActive(false);
-    HidePeople();
-    //setpeopl
+    //SetScreenLayout("during_observation");
 
     foreach (ObservationTile tile in observationTiles) {
       do {
@@ -320,12 +372,11 @@ public class GameController : MonoBehaviour {
     }
 
     observationTiles[14].wasUsed = true;
-    observationMap.SetActive(true);
+    playerToken.transform.position = observationTiles[14].transform.position; // starting player position
   }
 
   public void WalkToObservationTile(ObservationTile tile){
     playerToken.transform.DOMove(tile.transform.position, 1f).OnComplete( ()=> {
-      observationMap.SetActive(false);
       tile.wasUsed = true;
       VsnController.instance.StartVSN("observation");
     } );

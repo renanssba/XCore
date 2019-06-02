@@ -11,6 +11,23 @@ public class ScreenTransitions : MonoBehaviour {
 
   public static float fadeTime = 0.3f;
 
+
+  public void ShowPanel() {
+    if(!IsOpen()) {
+      canvasGroup.alpha = 0f;
+      gameObject.SetActive(true);
+      canvasGroup.DOFade(1f, fadeTime);
+    }
+  }
+
+  public void HidePanel() {
+    if(IsOpen()){
+      canvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
+        gameObject.SetActive(false);
+      });
+    }
+  }
+
   public void OpenMenuScreen(){
     myRect.DOAnchorPos(new Vector2(0f, -200f), 0f).OnComplete( ()=>{
       canvasGroup.alpha = 0f;

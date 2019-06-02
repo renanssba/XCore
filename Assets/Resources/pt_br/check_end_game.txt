@@ -3,14 +3,14 @@ fade_in 0
 
 /// CONDIÇÕES DE FIM DE JOGO
 if #day > max_days
-  set_people "hide"
+  set_screen "hide"
   goto_script "fertiliel_enter"
     
   say "Fertiliel" "Olha só, o nosso tempo acabou!"
   goto end_game
 endif
 if #progress >= objective
-  set_people "hide"
+  set_screen "hide"
   goto_script "fertiliel_enter"
     
   say "Fertiliel" "Olha só, parece que já juntamos todos os casais!"
@@ -34,6 +34,6 @@ else
   say "Que pena, parece que você não conseguiu completar a missão..."
   say "Por favor, tente novamente. Boa sorte na próxima tentativa!"
 endif
-set_people "hide"
+set_screen "hide"
 fade_out 2
 load_scene "TitleScreen"

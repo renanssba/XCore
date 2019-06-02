@@ -1,4 +1,4 @@
-﻿set_people "date"
+﻿set_screen "date"
 fade_out 0.7
 
 say "" "\couple decide to go out and have some fun."
@@ -38,7 +38,7 @@ if currentDateEvent < #dateLength
 
 waypoint start_interaction
 goto_script "\currentEventName" event_statement
-set_people "event"
+set_screen "event"
 
 
 
@@ -130,7 +130,7 @@ if resolution == 5
   goto_script "\currentEventName" charisma_fail
 endif
 
-set_people "date"
+set_screen "date"
 if resolution < 3
   add_var date_success 1
   goto_script "set_event_result" "success"
@@ -155,11 +155,11 @@ if date_success >= 5
   show_date_ui false
   
   
-  set_people "hide"
+  set_screen "hide"
   wait 0.5
   show_engagement
   say "\couple became an inseparable couple and you know they'll have many children in the future!"
-  set_people "date"
+  set_screen "date"
   ship_couple
 else
   say "The date has ended. It was a <color=red>failure</color>."
@@ -177,6 +177,6 @@ if date_success >= 5
 endif
 
 goto_script "spend_day"
-set_people "show"
+set_screen "show"
 
 set_var situation 0

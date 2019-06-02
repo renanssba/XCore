@@ -26,6 +26,7 @@ public class ObservationTile : MonoBehaviour {
       return;
     }
 
+    iconImage.gameObject.SetActive(true);
     tileImage.color = GameController.instance.observationTilesColors[(int)evt.eventType];
     switch (evt.eventType){
       case ObservationEventType.attributeTraining:
@@ -50,9 +51,15 @@ public class ObservationTile : MonoBehaviour {
       return;
     }
 
+    VsnSaveSystem.SetVariable("observation_energy", VsnSaveSystem.GetIntVariable("observation_energy")-1);
+    GameController.instance.UpdateUI();
+
     GameController.instance.observationSegments = new ObservationEvent[1];
     GlobalData.instance.encounterPerson = personInEvent;
     GameController.instance.observationSegments[0] = evt;
+
+    Utils.SelectUiElement(null);
+    VsnController.instance.StartVSNContent("wait 1", "custom");
     GameController.instance.WalkToObservationTile(this);
   }
 }
