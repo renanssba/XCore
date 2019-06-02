@@ -9,7 +9,8 @@ public class GlobalData : MonoBehaviour {
   public List<int> shippedCouples;
   public Inventory inventory;
 
-  public Person[] currentObservationPeople;
+  public Person observationPerson;
+  public Person encounterPerson;
 
   public List<ObservationEvent> allObservationEvents;
   public TextAsset observationEventsFile;
@@ -50,7 +51,6 @@ public class GlobalData : MonoBehaviour {
     string auxName;
 
     people = new List<Person>();
-    currentObservationPeople = new Person[2];
     currentCouple = 0;
     ResetCurrentCouples();
 
@@ -68,7 +68,7 @@ public class GlobalData : MonoBehaviour {
         auxName = ModsManager.instance.setNames[0];
       }
       newPerson = new Person { isMale = true, name = auxName};
-      newPerson.Initialize();
+      newPerson.Initialize(i);
       people.Add(newPerson);
 
       auxName = GetNewName(usedNames, false);
@@ -76,7 +76,7 @@ public class GlobalData : MonoBehaviour {
         auxName = ModsManager.instance.setNames[1];
       }
       newPerson = new Person { isMale = false, name = auxName };
-      newPerson.Initialize();
+      newPerson.Initialize(5+i);
       people.Add(newPerson);
     }
     usedNames.Clear();
@@ -213,12 +213,12 @@ public class GlobalData : MonoBehaviour {
   }
 
   public Person ObservedPerson(){
-    return currentObservationPeople[0];
+    return observationPerson;
   }
 
   public Person EncounterPerson() {
-    if(GameController.instance.GetCurrentObservationEvent() != null) {
-      return GameController.instance.GetCurrentObservationEvent().personInEvent;
+    if(encounterPerson != null) {
+      return encounterPerson;
     } else{
       return null;
     }    
@@ -293,7 +293,9 @@ public class GlobalData : MonoBehaviour {
     }
     
     if (dateable.Count > 0) {
-      return dateable[Random.Range(0, dateable.Count)];
+      int selected = Random.Range(0, dateable.Count);
+      //Debug.Log("Dateable: selected "+selected+" from "+ dateable.Count);
+      return dateable[selected];
     } else {
       return null;
     }

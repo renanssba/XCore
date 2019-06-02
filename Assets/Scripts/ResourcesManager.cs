@@ -7,6 +7,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] faceSprites;
   public Sprite[] cardSprites;
   public Sprite[] itemSprites;
+  public Sprite[] attributeSprites;
 
   public static ResourcesManager instance;
 
@@ -15,10 +16,11 @@ public class ResourcesManager : MonoBehaviour {
   }
 
   public Sprite GetFaceSprite(int index){
-    if(ModsManager.instance.setFaces != null){
-      if(index < 5){
+    if (ModsManager.instance.setFaces != null && ModsManager.instance.setFaces.Length >= 2) {
+      Debug.LogWarning("USING MODDED FACES");
+      if (index < 5) {
         return ModsManager.instance.setFaces[0];
-      } else{
+      } else {
         return ModsManager.instance.setFaces[1];
       }
     }

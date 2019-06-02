@@ -15,8 +15,7 @@ namespace Command {
       GameController.instance.personCards[1].gameObject.SetActive(true);
       switch (args[0].GetStringValue()){
         case "hide":
-          GameController.instance.personCards[0].gameObject.SetActive(false);
-          GameController.instance.personCards[1].gameObject.SetActive(false);
+          GameController.instance.HidePeople();
           break;
         case "show":
           GameController.instance.personCards[0].gameObject.SetActive(true);

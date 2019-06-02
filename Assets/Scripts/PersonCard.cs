@@ -88,10 +88,9 @@ public class PersonCard : MonoBehaviour {
 
   public void ClickObserveButton(){
     Debug.LogWarning("Observe button clicked");
-    GlobalData.instance.currentObservationPeople[0] = person;
-    GlobalData.instance.currentObservationPeople[1] = GlobalData.instance.GetDateablePerson(person);
+    GlobalData.instance.observationPerson = person;
+    GameController.instance.SetupObservationSegmentTiles();
 
     SfxManager.StaticPlayConfirmSfx();
-    VsnController.instance.StartVSN("observation");
   }
 }

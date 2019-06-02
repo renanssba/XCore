@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
 
 public class GameController : MonoBehaviour {
 
@@ -13,6 +14,11 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI apText;
 
   public ObservationEvent[] observationSegments;
+  public ObservationTile[] observationTiles;
+  public GameObject observationMap;
+  public GameObject playerToken;
+  public Image playerTokenImage;
+  public Color[] observationTilesColors;
 
   public DateEvent[] dateSegments;
 
@@ -196,7 +202,7 @@ public class GameController : MonoBehaviour {
       observationSegments[i] = GlobalData.instance.allObservationEvents[selectedId];
       if(observationSegments[i].eventType == ObservationEventType.femaleInTrouble ||
          observationSegments[i].eventType == ObservationEventType.maleInTrouble) {
-        observationSegments[i].personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
+        //observationSegments[i].personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
       }
     }
   }
@@ -270,6 +276,59 @@ public class GameController : MonoBehaviour {
         p.gameObject.SetActive(false);
       }
     }
+  }
+
+  public void HidePeople(){
+    foreach (PersonCard p in personCards) {
+      p.gameObject.SetActive(false);
+    }
+  }
+
+  public void SetupObservationSegmentTiles(){
+    List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
+    int selectedId;
+
+    allowedEventTypes.Add(ObservationEventType.attributeTraining);
+    allowedEventTypes.Add(ObservationEventType.bet);
+    allowedEventTypes.Add(ObservationEventType.homeStalking);
+    allowedEventTypes.Add(ObservationEventType.itemOnSale);
+    if (GlobalData.instance.ObservedPerson().isMale) {
+      allowedEventTypes.Add(ObservationEventType.femaleInTrouble);
+    } else {
+      allowedEventTypes.Add(ObservationEventType.maleInTrouble);
+    }
+
+    playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
+    buttonsPanel.SetActive(false);
+    HidePeople();
+    //setpeopl
+
+    foreach (ObservationTile tile in observationTiles) {
+      do {
+        selectedId = Random.Range(0, GlobalData.instance.allObservationEvents.Count);
+      } while (!allowedEventTypes.Contains(GlobalData.instance.allObservationEvents[selectedId].eventType));
+      tile.evt = GlobalData.instance.allObservationEvents[selectedId];
+      
+      if(tile.evt.eventType == ObservationEventType.femaleInTrouble ||
+         tile.evt.eventType == ObservationEventType.maleInTrouble) {
+        tile.personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
+        Debug.Log("Dateable Person in tile: " + tile.personInEvent.name);
+      }else{
+        tile.personInEvent = null;
+      }
+      tile.wasUsed = false;
+    }
+
+    observationTiles[14].wasUsed = true;
+    observationMap.SetActive(true);
+  }
+
+  public void WalkToObservationTile(ObservationTile tile){
+    playerToken.transform.DOMove(tile.transform.position, 1f).OnComplete( ()=> {
+      observationMap.SetActive(false);
+      tile.wasUsed = true;
+      VsnController.instance.StartVSN("observation");
+    } );
   }
 
 

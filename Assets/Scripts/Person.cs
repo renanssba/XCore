@@ -37,7 +37,7 @@ public class Person {
   public int faceId;
 
 
-  public void Initialize() {
+  public void Initialize(int newFaceId) {
     List<int> attValues = new List<int>();
     switch (Random.Range(0, 2)) {
       case 0:
@@ -58,11 +58,12 @@ public class Person {
       attributes[i] = attValues[i];
     }
     
-    if (isMale) {
-      faceId = Random.Range(0, 5);
-    } else {
-      faceId = 5 + Random.Range(0, 5);
-    }
+    //if (isMale) {
+    //  faceId = Random.Range(0, 5);
+    //} else {
+    //  faceId = 5 + Random.Range(0, 5);
+    //}
+    faceId = newFaceId;
     personality = (Personality)Random.Range(0, 3);
     equips = new Item[3];
     for(int i=0; i<3; i++){

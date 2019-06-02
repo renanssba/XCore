@@ -65,7 +65,6 @@ public class ObservationEvent{
   public ObservationEventType eventType;
   public string scriptName;
 
-  public Person personInEvent;
   public Item itemInEvent;
 
   public ItemCategory itemCategory;
