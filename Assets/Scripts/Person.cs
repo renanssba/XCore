@@ -29,6 +29,8 @@ public class Person {
   public string name;
   public bool isMale;
 
+  public bool revealed;
+
   public int[] attributes;
   public Personality personality;
   public List<Trait> traits;
@@ -60,6 +62,8 @@ public class Person {
     for(int i=0; i<3; i++){
       attributes[i] = attValues[i];
     }
+
+    revealed = false;
 
     favoriteMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
     mostHatedMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);

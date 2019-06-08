@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour {
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
   public TextMeshProUGUI apText;
+
+  public GameObject coupleEntryPrefab;
+  public CoupleEntry[] coupleEntries;
+  public Transform couplesPanelContent;
   
   public ObservationEvent[] observationSegments;
   public ObservationTile[] observationTiles;
@@ -30,6 +34,7 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public ScreenTransitions peoplePanel;
+  public ScreenTransitions couplesPanel;
   public ScreenTransitions buttonsPanel;
   public ScreenTransitions observationMap;
   //public GameObject miniFertililel;
@@ -64,12 +69,27 @@ public class GameController : MonoBehaviour {
       GlobalData.instance.PassDay();
       UpdateUI();
 
+      UpdateCouplesPanelContent();
+
       if(GlobalData.instance.hideTutorials) {
         VsnSaveSystem.SetVariable("tutorial_date", 1);
         VsnSaveSystem.SetVariable("tutorial_date2", 1);
       }
       VsnController.instance.StartVSN("tutorial_intro");
     }
+  }
+
+  public void UpdateCouplesPanelContent() {
+    int childCount = couplesPanelContent.transform.childCount;
+
+    // reset couples panel content
+    for(int i = 0; i < childCount; i++) {
+      Destroy(couplesPanelContent.transform.GetChild(i).gameObject);
+    }
+
+    GameObject newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
+    newobj.GetComponent<CoupleEntry>().Initialize(GlobalData.instance.people[0],
+                                                  GlobalData.instance.people[5]);
   }
 
 
@@ -98,9 +118,11 @@ public class GameController : MonoBehaviour {
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
-    int coupleId = GlobalData.instance.currentCouple;
-    personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
-    personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
+    for(int i=0; i<personCards.Length; i++) {
+      personCards[i].Initialize(GlobalData.instance.people[i]);
+    }
+    //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
+    //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
       dayText.text = "Dia " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     }else{
@@ -112,11 +134,8 @@ public class GameController : MonoBehaviour {
     progressSlider.maxValue = VsnSaveSystem.GetIntVariable("objective");
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
-    personCards[0].UpdateUI();
-    personCards[1].UpdateUI();
 
     energyText.text = "Energia: " + VsnSaveSystem.GetIntVariable("observation_energy");
-
     ShowDateProgressUI();
   }
 
@@ -275,8 +294,11 @@ public class GameController : MonoBehaviour {
   }
 
   public void SetScreenLayout(string state){
-    personCards[0].gameObject.SetActive(true);
-    personCards[1].gameObject.SetActive(true);
+    foreach(PersonCard p in personCards) {
+      p.gameObject.SetActive(p.person.revealed);
+    }
+    //personCards[0].gameObject.SetActive(true);
+    //personCards[1].gameObject.SetActive(true);
   
     switch (state) {
       case "hide":
@@ -285,8 +307,17 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "show":
-        personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        titleText.text = "Escolha quem observar:";
+        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        peoplePanel.ShowPanel();
+        buttonsPanel.ShowPanel();
+        observationMap.HidePanel();
+        break;
+      case "choose_observation_target":
+        titleText.text = "Escolha quem observar:";
+        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
         peoplePanel.ShowPanel();
         buttonsPanel.ShowPanel();
         observationMap.HidePanel();
@@ -298,14 +329,15 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "during_observation":
+        titleText.text = "Escolha Ações:";
         peoplePanel.HidePanel();
         buttonsPanel.HidePanel();
         playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
         observationMap.ShowPanel();
         break;
       case "date":
-        personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
         peoplePanel.ShowPanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
@@ -314,20 +346,20 @@ public class GameController : MonoBehaviour {
         peoplePanel.ShowPanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
-        switch (GetCurrentDateEvent().interactionType) {
-          case DateEventInteractionType.male:
-            personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-            personCards[1].GetComponent<CanvasGroup>().alpha = 0.65f;
-            break;
-          case DateEventInteractionType.female:
-            personCards[0].GetComponent<CanvasGroup>().alpha = 0.65f;
-            personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
-            break;
-          case DateEventInteractionType.couple:
-            personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-            personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
-            break;
-        }
+        //switch (GetCurrentDateEvent().interactionType) {
+        //  case DateEventInteractionType.male:
+        //    personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        //    personCards[1].GetComponent<CanvasGroup>().alpha = 0.65f;
+        //    break;
+        //  case DateEventInteractionType.female:
+        //    personCards[0].GetComponent<CanvasGroup>().alpha = 0.65f;
+        //    personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        //    break;
+        //  case DateEventInteractionType.couple:
+        //    personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
+        //    personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        //    break;
+        //}
         break;
     }
     UpdateUI();
@@ -380,18 +412,5 @@ public class GameController : MonoBehaviour {
       tile.wasUsed = true;
       VsnController.instance.StartVSN("observation");
     } );
-  }
-
-
-
-
-  public void ClickSelectNewCouple(){
-    if(GlobalData.instance.ap >= 1){
-      GlobalData.instance.SelectNewCouple();
-      SpendAP(1);
-      VsnController.instance.StartVSN("change_couple");
-    }else{
-      VsnController.instance.StartVSN("not_enough_ap");
-    }
   }
 }

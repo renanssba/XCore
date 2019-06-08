@@ -6,7 +6,6 @@ public class SpecialCodes {
 
   public static string InterpretStrings(string initialString){
     string currentString = initialString;
-    int currentCouple = GlobalData.instance.currentCouple;
 
     if (initialString == null) {
       return "";
@@ -15,7 +14,6 @@ public class SpecialCodes {
     if(!initialString.Contains("\\")){
       return initialString;
     }
-
 
     do {
       initialString = currentString;
@@ -35,10 +33,12 @@ public class SpecialCodes {
       }
       if (GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
-        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
         currentString = currentString.Replace("\\guts", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.charisma).ToString());
+      }
+      if(GlobalData.instance.CurrentGirl() != null) {
+        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
       }
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());

@@ -5,12 +5,10 @@ using UnityEngine;
 public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
-  public int currentCouple;
   public List<int> shippedCouples;
   public Inventory inventory;
 
-  public Person observationPerson;
-  public Person encounterPerson;
+  public Person[] observedPeople;
 
   public List<ObservationEvent> allObservationEvents;
   public TextAsset observationEventsFile;
@@ -42,6 +40,8 @@ public class GlobalData : MonoBehaviour {
     }
     DontDestroyOnLoad(gameObject);
 
+    observedPeople = new Person[2];
+
     inventory = new Inventory();
   }
 
@@ -51,7 +51,6 @@ public class GlobalData : MonoBehaviour {
     string auxName;
 
     people = new List<Person>();
-    currentCouple = 0;
     ResetCurrentCouples();
 
     VsnSaveSystem.SetVariable("money", 0);
@@ -64,23 +63,25 @@ public class GlobalData : MonoBehaviour {
     for (int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, true);
       if(ModsManager.instance.setNames != null){
-        //Debug.Log("ModsManager.instance.setNames is not null");
         auxName = ModsManager.instance.setNames[0];
       }
       newPerson = new Person { isMale = true, name = auxName};
       newPerson.Initialize(i);
       people.Add(newPerson);
-
+    }
+    for(int i = 0; i < 5; i++) {
       auxName = GetNewName(usedNames, false);
-      if (ModsManager.instance.setNames != null) {
+      if(ModsManager.instance.setNames != null) {
         auxName = ModsManager.instance.setNames[1];
       }
       newPerson = new Person { isMale = false, name = auxName };
-      newPerson.Initialize(5+i);
+      newPerson.Initialize(5 + i);
       people.Add(newPerson);
     }
     usedNames.Clear();
 
+    people[0].revealed = true;
+    people[5].revealed = true;
 
     InitializeDateEvents();
     InitializeObservationEvents();
@@ -188,8 +189,7 @@ public class GlobalData : MonoBehaviour {
 
 
   public void ShipCurrentCouple(){
-    shippedCouples.Add(currentCouple);
-    SelectNewCouple();
+    shippedCouples.Add(Random.Range(0,9999));
   }
 
   public void ResetCurrentCouples(){
@@ -197,28 +197,31 @@ public class GlobalData : MonoBehaviour {
   }
 
   public string CurrentCoupleName(){
+    if(observedPeople[0] == null || observedPeople[1]==null) {
+      return "";
+    }
     if(VsnSaveSystem.GetStringVariable("language")=="pt_br"){
-      return people[currentCouple * 2].name + " e " + people[currentCouple * 2 + 1].name;
+      return CurrentBoy().name + " e " + CurrentGirl().name;
     }else{
-      return people[currentCouple * 2].name + " and " + people[currentCouple * 2 + 1].name;
+      return CurrentBoy().name + " and " + CurrentGirl().name;
     }
   }
 
   public Person CurrentBoy(){
-    return people[currentCouple * 2];
+    return observedPeople[0];
   }
 
   public Person CurrentGirl() {
-    return people[currentCouple * 2+1];
+    return observedPeople[1];
   }
 
   public Person ObservedPerson(){
-    return observationPerson;
+    return observedPeople[0];
   }
 
   public Person EncounterPerson() {
-    if(encounterPerson != null) {
-      return encounterPerson;
+    if(observedPeople[1] != null) {
+      return observedPeople[1];
     } else{
       return null;
     }    
@@ -258,23 +261,8 @@ public class GlobalData : MonoBehaviour {
         }
         break;
     }
-
     
     return 0;
-  }
-
-  public void SelectNewCouple(){
-    if(shippedCouples.Count >= people.Count/2){
-      currentCouple = -1;
-    }
-
-    do{
-      currentCouple++;
-      if(currentCouple> (people.Count/2-1) )
-        currentCouple = 0;
-    }while (shippedCouples.Contains(currentCouple));
-
-    GameController.instance.UpdateUI();
   }
 
   public void PassDay() {

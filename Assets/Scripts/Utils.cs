@@ -23,6 +23,7 @@ public enum CharacterTraits {
   shoppingSegEQua,
   delinquente,
   menteResistente,
+  teimoso, // needs more AP to be persuaded
   //  menteVulneravel,
   seApaixonaFacil,
   timido

@@ -13,22 +13,27 @@ public class ScreenTransitions : MonoBehaviour {
 
 
   public void ShowPanel() {
-    if(!IsOpen()) {
-      canvasGroup.alpha = 0f;
-      gameObject.SetActive(true);
-      canvasGroup.DOFade(1f, fadeTime);
+    if(IsOpen()) {
+      return;
     }
+    canvasGroup.alpha = 0f;
+    gameObject.SetActive(true);
+    canvasGroup.DOFade(1f, fadeTime);
   }
 
   public void HidePanel() {
-    if(IsOpen()){
-      canvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
-        gameObject.SetActive(false);
-      });
+    if(!IsOpen()) {
+      return;
     }
+    canvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
+      gameObject.SetActive(false);
+    });
   }
 
   public void OpenMenuScreen(){
+    if(IsOpen()){
+      return;
+    }
     myRect.DOAnchorPos(new Vector2(0f, -200f), 0f).OnComplete( ()=>{
       canvasGroup.alpha = 0f;
       FadeInShade(fadeTime);
@@ -39,6 +44,9 @@ public class ScreenTransitions : MonoBehaviour {
   }
 
   public void CloseMenuScreen(){
+    if(!IsOpen()) {
+      return;
+    }
     FadeOutShade(fadeTime);
     canvasGroup.DOFade(0f, fadeTime);
     myRect.DOAnchorPos(new Vector2(0f, -200f), fadeTime).SetRelative(true).OnComplete( ()=>{

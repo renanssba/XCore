@@ -12,6 +12,8 @@ public class ObservationTile : MonoBehaviour {
   public TextMeshProUGUI titleText;
   public Person personInEvent;
 
+  public GameObject clickableHighlight;
+
   public bool wasUsed = false;
 
   void OnEnable() {
@@ -23,7 +25,14 @@ public class ObservationTile : MonoBehaviour {
     if (wasUsed){
       tileImage.color = GameController.instance.observationTilesColors[6];
       iconImage.gameObject.SetActive(false);
+      clickableHighlight.SetActive(false);
       return;
+    }
+
+    if(IsCloseToToken() && !wasUsed) {
+      clickableHighlight.SetActive(true);
+    } else {
+      clickableHighlight.SetActive(false);
     }
 
     iconImage.gameObject.SetActive(true);
@@ -43,11 +52,13 @@ public class ObservationTile : MonoBehaviour {
 	public void ClickedTile(){
     if(wasUsed){ 
       SfxManager.StaticPlayForbbidenSfx();
+      VsnController.instance.StartVSN("observation_clicked_used");
       return;
     }
 
-    if (Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) > 1.6f){
+    if(!IsCloseToToken()){
       SfxManager.StaticPlayForbbidenSfx();
+      VsnController.instance.StartVSN("observation_clicked_far");
       return;
     }
 
@@ -55,11 +66,15 @@ public class ObservationTile : MonoBehaviour {
     GameController.instance.UpdateUI();
 
     GameController.instance.observationSegments = new ObservationEvent[1];
-    GlobalData.instance.encounterPerson = personInEvent;
+    GlobalData.instance.observedPeople[1] = personInEvent;
     GameController.instance.observationSegments[0] = evt;
 
     Utils.SelectUiElement(null);
     VsnController.instance.StartVSNContent("wait 1", "custom");
     GameController.instance.WalkToObservationTile(this);
+  }
+
+  public bool IsCloseToToken() {
+    return Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) <= 1.6f;
   }
 }
