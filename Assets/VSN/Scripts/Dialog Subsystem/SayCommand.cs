@@ -14,6 +14,7 @@ namespace Command {
     public static void StaticExecute(VsnArgument[] args){
       VsnUIManager.instance.ShowDialogPanel(true);
       VsnController.instance.state = ExecutionState.WAITINGTOUCH;
+      Debug.LogWarning("SET STATE WAITINGTOUCH - Say");
 
       if (args.Length >= 2) {
         VsnUIManager.instance.SetTextTitle(args[0].GetStringValue());

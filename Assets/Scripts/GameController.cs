@@ -81,15 +81,23 @@ public class GameController : MonoBehaviour {
 
   public void UpdateCouplesPanelContent() {
     int childCount = couplesPanelContent.transform.childCount;
+    GameObject newobj;
 
     // reset couples panel content
     for(int i = 0; i < childCount; i++) {
       Destroy(couplesPanelContent.transform.GetChild(i).gameObject);
     }
 
-    GameObject newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
-    newobj.GetComponent<CoupleEntry>().Initialize(GlobalData.instance.people[0],
-                                                  GlobalData.instance.people[5]);
+    // create viable couples entries
+    for(int i = 0; i < GlobalData.instance.boysToGenerate; i++) {
+      for(int j = 0; j < GlobalData.instance.girlsToGenerate; j++) {
+        if(GlobalData.instance.viableCouple[i, j] == true) {
+          newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
+          newobj.GetComponent<CoupleEntry>().Initialize(GlobalData.instance.people[i],
+                                                        GlobalData.instance.people[j+ GlobalData.instance.boysToGenerate]);
+        }
+      }
+    }
   }
 
 
@@ -295,55 +303,60 @@ public class GameController : MonoBehaviour {
 
   public void SetScreenLayout(string state){
     foreach(PersonCard p in personCards) {
-      p.gameObject.SetActive(p.person.revealed);
+      p.gameObject.SetActive(p.person.state == PersonState.available);
     }
-    //personCards[0].gameObject.SetActive(true);
-    //personCards[1].gameObject.SetActive(true);
+
+    Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
   
     switch (state) {
-      case "hide":
+      case "hide_all":
+        titleText.text = "";
         peoplePanel.HidePanel();
+        couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
-        observationMap.HidePanel();
-        break;
-      case "show":
-        titleText.text = "Escolha quem observar:";
-        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
-        peoplePanel.ShowPanel();
-        buttonsPanel.ShowPanel();
         observationMap.HidePanel();
         break;
       case "choose_observation_target":
         titleText.text = "Escolha quem observar:";
-        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
         peoplePanel.ShowPanel();
+        couplesPanel.HidePanel();
         buttonsPanel.ShowPanel();
         observationMap.HidePanel();
         break;
       case "observation":
         ShowOnlyObservedPerson();
         peoplePanel.ShowPanel();
+        couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
         break;
-      case "during_observation":
-        titleText.text = "Escolha Ações:";
+      case "observation_map":
+        titleText.text = "Escolha ações:";
         peoplePanel.HidePanel();
+        couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
         observationMap.ShowPanel();
         break;
+      case "choose_date_target":
+        titleText.text = "Escolha casal para Encontro:";
+        peoplePanel.HidePanel();
+        UpdateCouplesPanelContent();
+        couplesPanel.ShowPanel();
+        buttonsPanel.ShowPanel();
+        observationMap.HidePanel();
+        break;
       case "date":
-        //personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        //personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
+        titleText.text = "";
         peoplePanel.ShowPanel();
+        couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
         break;
       case "event":
+        titleText.text = "";
         peoplePanel.ShowPanel();
+        couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
         //switch (GetCurrentDateEvent().interactionType) {

@@ -1,9 +1,10 @@
 ﻿fade_out 0
+set_screen "hide_all"
 fade_in 0.7
 
-set_var hide_buttons 0
-update_ui
+
 add_var money minigame_score
 update_ui
 play_sfx "ui_money"
 say "Você ganhou \vsn[minigame_score] Dinheiro Celestial!"
+goto_script "show_people_screen"

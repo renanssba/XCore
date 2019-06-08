@@ -132,6 +132,7 @@ public class VsnController : MonoBehaviour {
   }
 
   public void ResumeVSN() {
+    Debug.LogWarning("SET STATE WAITINGTOUCH - Resume VSN");
     state = ExecutionState.PLAYING;
     CurrentScriptReader().SetArgs();
     StartCoroutine(ExecuteScript());
@@ -193,25 +194,31 @@ public class VsnController : MonoBehaviour {
   public void FinishScript(){
     //Debug.Log("finishing script");
     scriptsStack.RemoveAt(scriptsStack.Count-1);
+
+    // continue script from stack calls
     if(scriptsStack.Count > 0) {
       //Debug.Log("resuming script");
       ResumeVSN();
-    } else {
-      FinishVSN();
+      return;
     }
 
+    // continue script from row calls
     if(nextScripts.Count > 0) {
       scriptsStack.Add(nextScripts[0]);
       nextScripts.RemoveAt(0);
       CleanVsnElements();
       ResumeVSN();
+      return;
     }
+
+    FinishVSN();
   }
 
   void FinishVSN(){
     Debug.LogWarning("Finishing VSN execution!");
 
     state = ExecutionState.STOPPED;
+    Debug.LogWarning("SET STATE STOPPED - FinishVSN");
     if(clearGraphicsWhenStop){
       VsnUIManager.instance.ResetBackground();
       VsnUIManager.instance.ResetAllCharacters();

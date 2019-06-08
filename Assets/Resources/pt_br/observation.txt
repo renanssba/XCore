@@ -1,4 +1,4 @@
-﻿set_screen "hide"
+﻿set_screen "hide_all"
 fade_out 0.7
 wait 0.5
 bg "shopping"
@@ -13,43 +13,19 @@ waypoint start_interaction
 goto_script "\currentObservationEventName" event_statement
 //set_screen "event"
 
+
 if #observationEventType == 0
-  // continue
+  goto_script "observation_person_in_trouble"
+endif
+if #observationEventType == 1
+  goto_script "observation_person_in_trouble"
 endif
 if #observationEventType == 2
   goto next
 endif
 
 
-//say_auto "" "Qual reação \observedPerson deve tomar?"
-choices "Ajudar" sug_help "Ignorar" sug_ignore
 
-
-waypoint sug_help
-event_resolution "observation"
-goto resolution
-
-
-waypoint sug_ignore
-set_var resolution 2
-goto resolution
-
-
-waypoint resolution
-if resolution == 0
-  goto_script "\currentObservationEventName" help_success
-  play_sfx "relationship_up"
-  say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum."
-  say "Eles trocam telefones e concordam que seria legal saírem para um Encontro algum dia."
-endif
-if resolution == 1
-  play_sfx "relationship_down"
-  goto_script "\currentObservationEventName" help_fail
-endif
-if resolution == 2
-  //goto_script "\currentObservationEventName" ignore
-  say "" "\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito."
-endif
 
 
 waypoint next
@@ -61,16 +37,17 @@ if observation_energy <= 0
 endif
 
 
-set_screen "hide"
+set_screen "hide_all"
 fade_out 0.5
 bg null
 update_ui
 fade_in 0.5
 
 if observation_energy > 0
-  set_screen "during_observation"
+  set_screen "observation_map"
 else
-  set_screen "show"
+  set_var observation_played 1
+  goto_script "show_people_screen"
 endif
 
 

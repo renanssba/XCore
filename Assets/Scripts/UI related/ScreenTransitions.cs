@@ -11,29 +11,38 @@ public class ScreenTransitions : MonoBehaviour {
 
   public static float fadeTime = 0.3f;
 
+  public bool isOpen;
+
+  public void Awake() {
+    isOpen = IsOpen();
+  }
+
 
   public void ShowPanel() {
-    if(IsOpen()) {
+    if(IsOpen() && !DOTween.IsTweening(canvasGroup)) {
       return;
     }
+    DOTween.Kill(canvasGroup);
     canvasGroup.alpha = 0f;
     gameObject.SetActive(true);
     canvasGroup.DOFade(1f, fadeTime);
   }
 
   public void HidePanel() {
-    if(!IsOpen()) {
+    if(!IsOpen() && !DOTween.IsTweening(canvasGroup)) {
       return;
     }
+    DOTween.Kill(canvasGroup);
     canvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
       gameObject.SetActive(false);
     });
   }
 
   public void OpenMenuScreen(){
-    if(IsOpen()){
+    if(IsOpen() && !DOTween.IsTweening(canvasGroup)) {
       return;
     }
+    DOTween.Kill(canvasGroup);
     myRect.DOAnchorPos(new Vector2(0f, -200f), 0f).OnComplete( ()=>{
       canvasGroup.alpha = 0f;
       FadeInShade(fadeTime);
@@ -44,9 +53,10 @@ public class ScreenTransitions : MonoBehaviour {
   }
 
   public void CloseMenuScreen(){
-    if(!IsOpen()) {
+    if(!IsOpen() && !DOTween.IsTweening(canvasGroup)) {
       return;
     }
+    DOTween.Kill(canvasGroup);
     FadeOutShade(fadeTime);
     canvasGroup.DOFade(0f, fadeTime);
     myRect.DOAnchorPos(new Vector2(0f, -200f), fadeTime).SetRelative(true).OnComplete( ()=>{

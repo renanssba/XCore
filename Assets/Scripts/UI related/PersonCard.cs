@@ -36,7 +36,7 @@ public class PersonCard : MonoBehaviour {
     string state = VsnSaveSystem.GetStringVariable("people_ui_state");
     if(coupleEntryLayout == false) {
       switch(state) {
-        case "show":
+        case "choose_observation_target":
           SetEquipableItems(true);
           SetObservableButton(true);
           break;

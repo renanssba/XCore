@@ -101,7 +101,7 @@ public enum RandomTastes {
   //arroz,
   //batatas,
   acampar,
-  oSetindoDaVida,
+  oSentidoDaVida,
   hackear,
   imitarTartarugas,
   arquitetura,

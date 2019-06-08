@@ -103,6 +103,12 @@ public class SpecialCodes {
         } else{
           return 0;
         }
+      case "#isEncounterPersonUnrevealed":
+        if(GlobalData.instance.EncounterPerson()!=null) {
+          return GlobalData.instance.EncounterPerson().state == PersonState.unrevealed ? 1 : 0;
+        } else {
+          return -1;
+        }
       case "#ap":
         return GlobalData.instance.ap;
       case "#max_ap":

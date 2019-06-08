@@ -14,6 +14,10 @@ public class CoupleEntry : MonoBehaviour {
     coupleCards[1].Initialize(b);
   }
 
+  public void OnEnable() {
+    UpdateUI();
+  }
+
 
   public void UpdateUI() {
     foreach(PersonCard p in coupleCards) {

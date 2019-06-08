@@ -1,0 +1,36 @@
+﻿//say_auto "" "Qual reação \observedPerson deve tomar?"
+choices "Ajudar" sug_help "Ignorar" sug_ignore
+
+
+waypoint sug_help
+event_resolution "observation"
+goto resolution
+
+
+waypoint sug_ignore
+set_var resolution 2
+goto resolution
+
+
+waypoint resolution
+if resolution == 0
+  goto_script "\currentObservationEventName" help_success
+  play_sfx "relationship_up"
+  say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum."
+  say "Eles trocam telefones e concordam que seria legal saírem para um Encontro algum dia."
+  unlock_couple
+endif
+if resolution == 1
+  play_sfx "relationship_down"
+  goto_script "\currentObservationEventName" help_fail
+endif
+if resolution == 2
+  //goto_script "\currentObservationEventName" ignore
+  say "" "\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito."
+endif
+
+
+if #isEncounterPersonUnrevealed == 1
+  reveal_person
+  say "Você conheceu \encounterPerson! Agora você pode acompanhá-lo(a) e usá-lo(a) para fazer novos casais!"
+endif

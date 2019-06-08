@@ -17,7 +17,7 @@ public class VsnString : VsnArgument{
     bool canReplace = false;
     char[] array = stringValue.ToCharArray();
 
-    Debug.Log("Text: " + new string(array));
+    //Debug.Log("Text: " + new string(array));
 
     for (int i=0; i<stringValue.Length; i++){
       switch(stringValue[i]) {

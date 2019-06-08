@@ -43,8 +43,13 @@ public class ObservationTile : MonoBehaviour {
         break;
       case ObservationEventType.femaleInTrouble:
       case ObservationEventType.maleInTrouble:
-        iconImage.sprite = ResourcesManager.instance.GetFaceSprite(personInEvent.faceId);
-        titleText.text = personInEvent.name;
+        if(personInEvent.state == PersonState.available) {
+          iconImage.sprite = ResourcesManager.instance.GetFaceSprite(personInEvent.faceId);
+          titleText.text = personInEvent.name;
+        } else {
+          iconImage.sprite = ResourcesManager.instance.unknownSprite;
+          titleText.text = "???";
+        }        
         break;
     }
   }
@@ -75,6 +80,9 @@ public class ObservationTile : MonoBehaviour {
   }
 
   public bool IsCloseToToken() {
+    Debug.LogWarning("player token: "+ GameController.instance.playerToken.transform.position+", this tile: "+ transform.position);
+    Debug.LogWarning("TILE Distance: "+ Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position));
+
     return Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) <= 1.6f;
   }
 }

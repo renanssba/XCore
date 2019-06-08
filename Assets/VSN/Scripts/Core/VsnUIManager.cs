@@ -177,7 +177,7 @@ public class VsnUIManager : MonoBehaviour {
     float screenPosition = GetCharacterScreenPositionX(position);
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
-    Debug.LogWarning("Original pos: "+position+", final pos: " + screenPosition);
+    //Debug.LogWarning("Original pos: "+position+", final pos: " + screenPosition);
 
     if(character != null) {
       Vector2 newPosition = new Vector2(screenPosition, character.GetComponent<RectTransform>().anchoredPosition.y);

@@ -32,6 +32,7 @@ public class VsnConsoleSimulator : MonoBehaviour {
       StopCoroutine(showLettersCoroutine);
     }
     showLettersCoroutine = null;
+    Debug.LogWarning("Finished Showing Characters. Autopass is "+autopass);
     if(autopass) {
       VsnUIManager.instance.OnScreenButtonClick();
       autopass = false;

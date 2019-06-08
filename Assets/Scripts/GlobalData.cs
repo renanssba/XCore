@@ -5,6 +5,7 @@ using UnityEngine;
 public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
+  public bool[,] viableCouple;
   public List<int> shippedCouples;
   public Inventory inventory;
 
@@ -14,6 +15,9 @@ public class GlobalData : MonoBehaviour {
   public TextAsset observationEventsFile;
   public List<DateEvent> allDateEvents;
   public TextAsset dateEventsFile;
+
+  public int boysToGenerate = 5;
+  public int girlsToGenerate = 5;
 
   public int maxAp;
   public int ap;
@@ -41,6 +45,12 @@ public class GlobalData : MonoBehaviour {
     DontDestroyOnLoad(gameObject);
 
     observedPeople = new Person[2];
+    viableCouple = new bool[boysToGenerate, girlsToGenerate];
+    for(int i = 0; i < boysToGenerate; i++) {
+      for(int j = 0; j < girlsToGenerate; j++) {
+        viableCouple[i, j] = false;
+      }
+    }
 
     inventory = new Inventory();
   }
@@ -56,11 +66,12 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);
     VsnSaveSystem.SetVariable("max_days", maxDays);
+    VsnSaveSystem.SetVariable("observation_played", 0);
     day = 0;
     inventory.items.Clear();
 
 
-    for (int i = 0; i < 5; i++) {
+    for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
       if(ModsManager.instance.setNames != null){
         auxName = ModsManager.instance.setNames[0];
@@ -69,7 +80,7 @@ public class GlobalData : MonoBehaviour {
       newPerson.Initialize(i);
       people.Add(newPerson);
     }
-    for(int i = 0; i < 5; i++) {
+    for(int i = 0; i < girlsToGenerate; i++) {
       auxName = GetNewName(usedNames, false);
       if(ModsManager.instance.setNames != null) {
         auxName = ModsManager.instance.setNames[1];
@@ -80,8 +91,8 @@ public class GlobalData : MonoBehaviour {
     }
     usedNames.Clear();
 
-    people[0].revealed = true;
-    people[5].revealed = true;
+    people[0].state = PersonState.available;
+    people[5].state = PersonState.available;
 
     InitializeDateEvents();
     InitializeObservationEvents();
@@ -190,6 +201,8 @@ public class GlobalData : MonoBehaviour {
 
   public void ShipCurrentCouple(){
     shippedCouples.Add(Random.Range(0,9999));
+    CurrentBoy().state = PersonState.shipped;
+    CurrentGirl().state = PersonState.shipped;
   }
 
   public void ResetCurrentCouples(){
@@ -268,6 +281,7 @@ public class GlobalData : MonoBehaviour {
   public void PassDay() {
     ap = maxAp;
     day++;
+    VsnSaveSystem.SetVariable("observation_played", 0);
     GameController.instance.UpdateUI();
     VsnController.instance.StartVSN("check_game_end");
   }
@@ -289,5 +303,11 @@ public class GlobalData : MonoBehaviour {
     }
   }
 
-
+  public void UnlockDateableCouple(Person a, Person b) {
+    if(a.isMale) {
+      viableCouple[a.id, b.id - boysToGenerate] = true;
+    } else {
+      viableCouple[b.id - boysToGenerate, a.id] = true;
+    }
+  }
 }

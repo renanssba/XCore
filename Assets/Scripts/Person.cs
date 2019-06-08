@@ -22,6 +22,12 @@ public enum Attributes{
   charisma = 2
 }
 
+public enum PersonState {
+  unrevealed,
+  available,
+  shipped
+}
+
 
 [System.Serializable]
 public class Person {
@@ -29,7 +35,7 @@ public class Person {
   public string name;
   public bool isMale;
 
-  public bool revealed;
+  public PersonState state = PersonState.unrevealed;
 
   public int[] attributes;
   public Personality personality;
@@ -39,10 +45,11 @@ public class Person {
   public RandomTastes favoriteMatter;
   public RandomTastes mostHatedMatter;
 
+  public int id;
   public int faceId;
 
 
-  public void Initialize(int newFaceId) {
+  public void Initialize(int personId) {
     List<int> attValues = new List<int>();
     switch (Random.Range(0, 2)) {
       case 0:
@@ -63,7 +70,7 @@ public class Person {
       attributes[i] = attValues[i];
     }
 
-    revealed = false;
+    state = PersonState.unrevealed;
 
     favoriteMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
     mostHatedMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
@@ -73,7 +80,8 @@ public class Person {
     //} else {
     //  faceId = 5 + Random.Range(0, 5);
     //}
-    faceId = newFaceId;
+    id = personId;
+    faceId = personId;
     personality = (Personality)Random.Range(0, 3);
     equips = new Item[3];
     for(int i=0; i<3; i++){

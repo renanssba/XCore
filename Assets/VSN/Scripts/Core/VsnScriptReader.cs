@@ -58,6 +58,7 @@ public class VsnScriptReader {
   }
 
   public bool HasFinished(){
+    Debug.Log("currentCommandIndex: "+ currentCommandIndex+ ", vsnCommands.Count: "+ vsnCommands.Count);
     return currentCommandIndex >= vsnCommands.Count;
   }
 

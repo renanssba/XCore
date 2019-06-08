@@ -1,6 +1,5 @@
-﻿set_screen "hide"
-set_var show_mini_fertiliel 0
-update_ui
+﻿set_var situation 0
+set_screen "hide_all"
 fade_out 0.5
 bg null
 
@@ -11,7 +10,7 @@ wait 0.3
 play_sfx "sleep"
 play_sfx "sleep"
 wait 5
-spend_time
+pass_day
 update_ui
 wait 0.3
 
@@ -19,10 +18,5 @@ play_music "observacao_intro" "observacao_loop"
 
 bg null
 fade_in 0.5
-set_screen "show"
-set_var show_mini_fertiliel 1
-update_ui
+goto_script "show_people_screen"
 goto_script "check_end_game"
-goto end
-
-waypoint end

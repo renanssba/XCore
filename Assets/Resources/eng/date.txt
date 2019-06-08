@@ -155,7 +155,7 @@ if date_success >= 5
   show_date_ui false
   
   
-  set_screen "hide"
+  set_screen "hide_all"
   wait 0.5
   show_engagement
   say "\couple became an inseparable couple and you know they'll have many children in the future!"
@@ -177,6 +177,6 @@ if date_success >= 5
 endif
 
 goto_script "spend_day"
-set_screen "show"
+goto_script "show_people_screen"
 
 set_var situation 0

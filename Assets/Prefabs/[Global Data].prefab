@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1367346411395778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.4588015, y: 1.4743489, z: 89.4533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 33f7b4832ce127a44b4d214a58e01c18, type: 3}
   - {fileID: 21300002, guid: 33f7b4832ce127a44b4d214a58e01c18, type: 3}
   - {fileID: 21300004, guid: 33f7b4832ce127a44b4d214a58e01c18, type: 3}
+  unknownSprite: {fileID: 21300010, guid: 0cfa2bdc4d2df8145b8ca5f3981c3f80, type: 3}
 --- !u!114 &114215606993469530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,11 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   people: []
-  currentCouple: 0
   shippedCouples: 
   inventory:
     items: []
-  currentObservationPeople: []
+  observedPeople: []
   allObservationEvents: []
   observationEventsFile: {fileID: 4900000, guid: e7348b1cddb49d9468d6c8cb85c45f0e,
     type: 3}
@@ -133,6 +133,6 @@ MonoBehaviour:
   maxAp: 7
   ap: 0
   day: 0
-  maxDays: 5
-  objective: 1
+  maxDays: 10
+  objective: 3
   hideTutorials: 0

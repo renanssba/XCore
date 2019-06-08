@@ -1,9 +1,8 @@
 goto end
 
 set_var hide_buttons 1
-set_var show_mini_fertiliel 0
 update_ui
-set_screen "hide"
+set_screen "hide_all"
 fade_out 0
 wait 0.1
 fade_in 0.5
@@ -41,16 +40,14 @@ say "After every date (or by clicking the <color=yellow>Spend Day</color> button
 
 goto_script "fertiliel_exit"
 
-set_screen "show"
+goto_script "show_people_screen"
 set_var hide_buttons 0
-set_var show_mini_fertiliel 1
 update_ui
 
 wait 0.3
 say "Good luck!"
 
 waypoint end
-set_screen "show"
+goto_script "show_people_screen"
 set_var hide_buttons 0
-set_var show_mini_fertiliel 1
 update_ui

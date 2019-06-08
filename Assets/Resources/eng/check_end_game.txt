@@ -3,14 +3,14 @@ fade_in 0
 
 /// CONDIÇÕES DE FIM DE JOGO
 if #day > max_days
-  set_screen "hide"
+  set_screen "hide_all"
   goto_script "fertiliel_enter"
     
   say "Cupid" "Looks like our time is over!"
   goto end_game
 endif
 if #progress >= objective
-  set_screen "hide"
+  set_screen "hide_all"
   goto_script "fertiliel_enter"
     
   say "Cupid" "Hey, looks like we have brought together the two couples!"
@@ -34,6 +34,6 @@ else
   say "Looks like you didn't complete the mission. That's a shame..."
   say "Please try again. Good luck next time!"
 endif
-set_screen "hide"
+set_screen "hide_all"
 fade_out 2
 load_scene "TitleScreen"

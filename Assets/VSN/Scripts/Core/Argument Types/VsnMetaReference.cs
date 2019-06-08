@@ -10,8 +10,8 @@ public class VsnMetaReference : VsnArgument {
   }
 
   public override string GetReference() {
-    Debug.LogWarning("Meta value: " + metareferenceValue);
-    Debug.LogWarning("Return from meta-reference: " + VsnSaveSystem.GetStringVariable(metareferenceValue));
+    //Debug.LogWarning("Meta value: " + metareferenceValue);
+    //Debug.LogWarning("Return from meta-reference: " + VsnSaveSystem.GetStringVariable(metareferenceValue));
     return VsnSaveSystem.GetStringVariable(metareferenceValue);
   }
 }
