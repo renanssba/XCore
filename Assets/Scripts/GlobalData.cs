@@ -303,11 +303,19 @@ public class GlobalData : MonoBehaviour {
     }
   }
 
+  public ObservationEvent GetEventOfType(ObservationEventType type) {
+    ObservationEvent evt;
+    do {
+      evt = allObservationEvents[Random.Range(0, allObservationEvents.Count)];
+    } while(evt.eventType != type);
+    return evt;
+  }
+
   public void UnlockDateableCouple(Person a, Person b) {
     if(a.isMale) {
       viableCouple[a.id, b.id - boysToGenerate] = true;
     } else {
-      viableCouple[b.id - boysToGenerate, a.id] = true;
+      viableCouple[b.id, a.id - boysToGenerate] = true;
     }
   }
 }

@@ -132,7 +132,6 @@ public class VsnController : MonoBehaviour {
   }
 
   public void ResumeVSN() {
-    Debug.LogWarning("SET STATE WAITINGTOUCH - Resume VSN");
     state = ExecutionState.PLAYING;
     CurrentScriptReader().SetArgs();
     StartCoroutine(ExecuteScript());

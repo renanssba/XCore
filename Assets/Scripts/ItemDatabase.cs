@@ -28,7 +28,7 @@ public class ItemDatabase : MonoBehaviour {
     database = new List<Item>();
     itemsForSale = new List<int>();
     foreach(Dictionary<string, string> entry in data.data){
-      Debug.LogWarning("Importing Item");
+      //Debug.LogWarning("Importing Item");
 
       Item newItem = new Item();
       newItem.id = int.Parse(entry["id"]);

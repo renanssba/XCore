@@ -11,12 +11,6 @@ public class ScreenTransitions : MonoBehaviour {
 
   public static float fadeTime = 0.3f;
 
-  public bool isOpen;
-
-  public void Awake() {
-    isOpen = IsOpen();
-  }
-
 
   public void ShowPanel() {
     if(IsOpen() && !DOTween.IsTweening(canvasGroup)) {

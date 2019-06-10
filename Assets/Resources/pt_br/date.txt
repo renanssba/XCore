@@ -1,15 +1,18 @@
-﻿set_screen "date"
-fade_out 0.7
+﻿fade_out 0.7
 
 say "" "\couple decidem sair para se divertir."
 
+set_screen "date"
+
 generate_segment "date"
 if date_location == 0
-  bg "park morning"
+  bg3d "park morning"
+  date_location_name "Parque"
   play_music "date1_intro" "date1_loop"
 endif
 if date_location == 1
-  bg "shopping"
+  bg3d "shopping"
+  date_location_name "Shopping"
   play_music "date2_intro" "date2_loop"
 endif
 
@@ -38,7 +41,7 @@ if currentDateEvent < #dateLength
 
 waypoint start_interaction
 goto_script "\currentEventName" event_statement
-set_screen "event"
+set_screen "date_challenge"
 
 
 
@@ -64,6 +67,7 @@ if #currentEventInteractionType == 2
 endif
 
 
+position_choices "date_event"
 if #currentPersonality == 0
   choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charisma
 endif
@@ -109,6 +113,7 @@ goto ev_resolution
 
 
 waypoint ev_resolution
+position_choices "base"
 event_resolution "date" selected_attribute
 
 if resolution == 0

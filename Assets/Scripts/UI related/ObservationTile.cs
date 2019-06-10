@@ -16,6 +16,8 @@ public class ObservationTile : MonoBehaviour {
 
   public bool wasUsed = false;
 
+  public const float tileDistanceTolerance = 102f;
+
   void OnEnable() {
     UpdateUI();
   }
@@ -43,12 +45,12 @@ public class ObservationTile : MonoBehaviour {
         break;
       case ObservationEventType.femaleInTrouble:
       case ObservationEventType.maleInTrouble:
-        if(personInEvent.state == PersonState.available) {
-          iconImage.sprite = ResourcesManager.instance.GetFaceSprite(personInEvent.faceId);
-          titleText.text = personInEvent.name;
-        } else {
+        if(personInEvent.state == PersonState.unrevealed) {
           iconImage.sprite = ResourcesManager.instance.unknownSprite;
           titleText.text = "???";
+        } else {
+          iconImage.sprite = ResourcesManager.instance.GetFaceSprite(personInEvent.faceId);
+          titleText.text = personInEvent.name;
         }        
         break;
     }
@@ -83,6 +85,8 @@ public class ObservationTile : MonoBehaviour {
     Debug.LogWarning("player token: "+ GameController.instance.playerToken.transform.position+", this tile: "+ transform.position);
     Debug.LogWarning("TILE Distance: "+ Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position));
 
-    return Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) <= 1.6f;
+    //return true;
+
+    return Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) <= tileDistanceTolerance;
   }
 }

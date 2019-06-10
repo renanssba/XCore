@@ -28,9 +28,3 @@ if resolution == 2
   //goto_script "\currentObservationEventName" ignore
   say "" "\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito."
 endif
-
-
-if #isEncounterPersonUnrevealed == 1
-  reveal_person
-  say "Você conheceu \encounterPerson! Agora você pode acompanhá-lo(a) e usá-lo(a) para fazer novos casais!"
-endif

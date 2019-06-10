@@ -96,7 +96,7 @@ public class PersonCard : MonoBehaviour {
       person.UnequipItemInSlot(slotId);
       return;
     }else{
-      VsnSaveSystem.SetVariable("person_equip_selected", person.isMale ? 1 : 0);
+      VsnSaveSystem.SetVariable("person_equip_selected", person.id);
       VsnSaveSystem.SetVariable("slot_id", slotId);
       ItemSelectorScreen.instance.OpenInput();
     }

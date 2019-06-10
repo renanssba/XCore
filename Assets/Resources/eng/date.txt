@@ -5,11 +5,11 @@ say "" "\couple decide to go out and have some fun."
 
 generate_segment "date"
 if date_location == 0
-  bg "park morning"
+  bg3d "park morning"
   play_music "date1_intro" "date1_loop"
 endif
 if date_location == 1
-  bg "shopping"
+  bg3d "shopping"
   play_music "date2_intro" "date2_loop"
 endif
 
@@ -38,7 +38,7 @@ if currentDateEvent < #dateLength
 
 waypoint start_interaction
 goto_script "\currentEventName" event_statement
-set_screen "event"
+set_screen "date_challenge"
 
 
 

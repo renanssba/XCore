@@ -33,15 +33,19 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI objectiveText;
   public TextMeshProUGUI moneyText;
 
+  public GameObject bgImage;
+  public ScreenTransitions progressPanel;
   public ScreenTransitions peoplePanel;
   public ScreenTransitions couplesPanel;
   public ScreenTransitions buttonsPanel;
   public ScreenTransitions observationMap;
+  public ScreenTransitions actionPersonCard;
   //public GameObject miniFertililel;
 
   public ItemSelectorScreen itemSelectorScreen;
 
   public GameObject dateUiPanel;
+  public TextMeshProUGUI dateTitleText;
   public Toggle[] dateEventToggles;
   public Image[] successIcons;
   public Image[] failIcons;
@@ -81,6 +85,8 @@ public class GameController : MonoBehaviour {
 
   public void UpdateCouplesPanelContent() {
     int childCount = couplesPanelContent.transform.childCount;
+    Person boy;
+    Person girl;
     GameObject newobj;
 
     // reset couples panel content
@@ -91,10 +97,13 @@ public class GameController : MonoBehaviour {
     // create viable couples entries
     for(int i = 0; i < GlobalData.instance.boysToGenerate; i++) {
       for(int j = 0; j < GlobalData.instance.girlsToGenerate; j++) {
-        if(GlobalData.instance.viableCouple[i, j] == true) {
+        boy = GlobalData.instance.people[i];
+        girl = GlobalData.instance.people[j + GlobalData.instance.boysToGenerate];
+        if(GlobalData.instance.viableCouple[i, j] == true &&
+          boy.state != PersonState.shipped &&
+          girl.state != PersonState.shipped) {
           newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
-          newobj.GetComponent<CoupleEntry>().Initialize(GlobalData.instance.people[i],
-                                                        GlobalData.instance.people[j+ GlobalData.instance.boysToGenerate]);
+          newobj.GetComponent<CoupleEntry>().Initialize(boy, girl);
         }
       }
     }
@@ -270,8 +279,8 @@ public class GameController : MonoBehaviour {
   }
 
   public void ShowEngagementScreen(int babies) {
-    engagementScreenImages[0].sprite = personCards[0].faceImage.sprite;
-    engagementScreenImages[1].sprite = personCards[1].faceImage.sprite;
+    engagementScreenImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
+    engagementScreenImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
     babiesParticleGenerator.particlesToGenerate = babies;
     engagementScreen.SetActive(true);
     babiesParticleGenerator.DeleteSons();
@@ -292,9 +301,9 @@ public class GameController : MonoBehaviour {
 
   public void ShowOnlyObservedPerson(){
     foreach(PersonCard p in personCards){
-      if(p.person == GlobalData.instance.ObservedPerson()){
+      if(p.person == GlobalData.instance.ObservedPerson() ||
+        p.person == GlobalData.instance.EncounterPerson()) {
         p.gameObject.SetActive(true);
-        p.GetComponent<CanvasGroup>().alpha = 1f;
       } else{
         p.gameObject.SetActive(false);
       }
@@ -302,77 +311,77 @@ public class GameController : MonoBehaviour {
   }
 
   public void SetScreenLayout(string state){
+    TheaterController theater = TheaterController.instance;
     foreach(PersonCard p in personCards) {
       p.gameObject.SetActive(p.person.state == PersonState.available);
     }
 
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
   
-    switch (state) {
+    switch(state) {
       case "hide_all":
         titleText.text = "";
+        bgImage.SetActive(true);
         peoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
+        progressPanel.ShowPanel();
         observationMap.HidePanel();
         break;
       case "choose_observation_target":
         titleText.text = "Escolha quem observar:";
+        bgImage.SetActive(true);
         peoplePanel.ShowPanel();
         couplesPanel.HidePanel();
         buttonsPanel.ShowPanel();
+        progressPanel.ShowPanel();
         observationMap.HidePanel();
         break;
       case "observation":
+        titleText.text = "";
+        theater.SetEvent(TheaterEvent.observation);
+        bgImage.SetActive(false);
         ShowOnlyObservedPerson();
-        peoplePanel.ShowPanel();
+        peoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
+        progressPanel.HidePanel();
         observationMap.HidePanel();
         break;
       case "observation_map":
         titleText.text = "Escolha ações:";
+        bgImage.SetActive(true);
         peoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
+        progressPanel.ShowPanel();
         observationMap.ShowPanel();
         break;
       case "choose_date_target":
         titleText.text = "Escolha casal para Encontro:";
+        bgImage.SetActive(true);
         peoplePanel.HidePanel();
         UpdateCouplesPanelContent();
         couplesPanel.ShowPanel();
         buttonsPanel.ShowPanel();
+        progressPanel.ShowPanel();
         observationMap.HidePanel();
         break;
       case "date":
+      case "date_challenge":
         titleText.text = "";
-        peoplePanel.ShowPanel();
+        if(state == "date") {
+          theater.SetEvent(TheaterEvent.date);
+        } else {
+          theater.SetEvent(TheaterEvent.dateChallenge);
+        }
+        bgImage.SetActive(false);
+        peoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
+        progressPanel.HidePanel();
         observationMap.HidePanel();
-        break;
-      case "event":
-        titleText.text = "";
-        peoplePanel.ShowPanel();
-        couplesPanel.HidePanel();
-        buttonsPanel.HidePanel();
-        observationMap.HidePanel();
-        //switch (GetCurrentDateEvent().interactionType) {
-        //  case DateEventInteractionType.male:
-        //    personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        //    personCards[1].GetComponent<CanvasGroup>().alpha = 0.65f;
-        //    break;
-        //  case DateEventInteractionType.female:
-        //    personCards[0].GetComponent<CanvasGroup>().alpha = 0.65f;
-        //    personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
-        //    break;
-        //  case DateEventInteractionType.couple:
-        //    personCards[0].GetComponent<CanvasGroup>().alpha = 1f;
-        //    personCards[1].GetComponent<CanvasGroup>().alpha = 1f;
-        //    break;
-        //}
         break;
     }
     UpdateUI();
@@ -385,30 +394,49 @@ public class GameController : MonoBehaviour {
   }
 
   public void SetupObservationSegmentTiles(){
+    GlobalData global = GlobalData.instance;
+    ObservationTile selectedTile;
     List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
     int selectedId;
-    
+    List<ObservationTile> tilesNotSet = new List<ObservationTile>();
+    tilesNotSet.AddRange(observationTiles);
+    tilesNotSet.Remove(observationTiles[14]);
+
+
     allowedEventTypes.Add(ObservationEventType.attributeTraining);
     allowedEventTypes.Add(ObservationEventType.bet);
     allowedEventTypes.Add(ObservationEventType.homeStalking);
     allowedEventTypes.Add(ObservationEventType.itemOnSale);
-    if (GlobalData.instance.ObservedPerson().isMale) {
-      allowedEventTypes.Add(ObservationEventType.femaleInTrouble);
-    } else {
-      allowedEventTypes.Add(ObservationEventType.maleInTrouble);
+
+    // add dateable people to observation board
+    foreach(Person p in global.people) {
+      if(global.ObservedPerson().isMale && !p.isMale && p.state != PersonState.shipped) {
+        selectedTile = tilesNotSet[Random.Range(0, tilesNotSet.Count)];
+        selectedTile.evt = global.GetEventOfType(ObservationEventType.femaleInTrouble);
+        selectedTile.personInEvent = p;
+        selectedTile.wasUsed = false;
+        tilesNotSet.Remove(selectedTile);
+      } else if(!global.ObservedPerson().isMale && p.isMale && p.state != PersonState.shipped) {
+        selectedTile = tilesNotSet[Random.Range(0, tilesNotSet.Count)];
+        selectedTile.evt = global.GetEventOfType(ObservationEventType.maleInTrouble);
+        selectedTile.personInEvent = p;
+        selectedTile.wasUsed = false;
+        tilesNotSet.Remove(selectedTile);
+      }
     }
+    
 
     //SetScreenLayout("during_observation");
 
-    foreach (ObservationTile tile in observationTiles) {
+    foreach(ObservationTile tile in tilesNotSet) {
       do {
-        selectedId = Random.Range(0, GlobalData.instance.allObservationEvents.Count);
-      } while (!allowedEventTypes.Contains(GlobalData.instance.allObservationEvents[selectedId].eventType));
-      tile.evt = GlobalData.instance.allObservationEvents[selectedId];
+        selectedId = Random.Range(0, global.allObservationEvents.Count);
+      } while (!allowedEventTypes.Contains(global.allObservationEvents[selectedId].eventType));
+      tile.evt = global.allObservationEvents[selectedId];
       
       if(tile.evt.eventType == ObservationEventType.femaleInTrouble ||
          tile.evt.eventType == ObservationEventType.maleInTrouble) {
-        tile.personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
+        tile.personInEvent = global.GetDateablePerson(global.ObservedPerson());
         Debug.Log("Dateable Person in tile: " + tile.personInEvent.name);
       }else{
         tile.personInEvent = null;
