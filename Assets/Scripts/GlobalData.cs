@@ -75,8 +75,8 @@ public class GlobalData : MonoBehaviour {
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
-      if(ModsManager.instance.setNames != null){
-        auxName = ModsManager.instance.setNames[0];
+      if(ModsManager.instance.GetName(i) != null){
+        auxName = ModsManager.instance.GetName(2 * i);
       }
       newPerson = new Person { isMale = true, name = auxName};
       newPerson.Initialize(i);
@@ -84,8 +84,8 @@ public class GlobalData : MonoBehaviour {
     }
     for(int i = 0; i < girlsToGenerate; i++) {
       auxName = GetNewName(usedNames, false);
-      if(ModsManager.instance.setNames != null) {
-        auxName = ModsManager.instance.setNames[1];
+      if(ModsManager.instance.GetName(5+i) != null){
+        auxName = ModsManager.instance.GetName(5 + i);
       }
       newPerson = new Person { isMale = false, name = auxName };
       newPerson.Initialize(5 + i);

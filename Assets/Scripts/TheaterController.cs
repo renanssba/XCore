@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 
@@ -30,11 +31,15 @@ public class TheaterController : MonoBehaviour {
   public SpriteRenderer supportActor;
   public SpriteRenderer challengeActor;
 
+  public Slider hpSlider;
+
   public Sprite[] peopleSprites;
 
   public Material[] floorMaterials;
 
   public Color inactiveColor;
+
+  const float animTime = 0.15f;
 
 
   public void Awake() {
@@ -110,6 +115,48 @@ public class TheaterController : MonoBehaviour {
     }
   }
 
+  public void ActorAnimation() {
+    DateEventInteractionType interactionType = GameController.instance.GetCurrentDateEvent().interactionType;
+    switch(interactionType) {
+      case DateEventInteractionType.male:
+        AnimTransform(mainActor.transform);
+        break;
+      case DateEventInteractionType.female:
+        AnimTransform(supportActor.transform);
+        break;
+      case DateEventInteractionType.couple:
+        AnimTransform(mainActor.transform);
+        AnimTransform(supportActor.transform);
+        break;
+    }
+    StartCoroutine(WaitAndShine(animTime));
+  }
+
+  public void AnimTransform(Transform obj) {
+    obj.DOMoveX(1.5f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+  }
+
+  public IEnumerator WaitAndShine(float time) {
+    yield return new WaitForSeconds(time);
+    FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
+
+    yield return new WaitForSeconds(0.4f);
+
+    int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
+
+    hpSlider.value = 0;
+    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficultyForAttribute[selected];
+    hpSlider.gameObject.SetActive(true);
+    hpSlider.DOValue(GlobalData.instance.EventSolvingAttributeLevel(selected), 1f);
+  }
+
+  public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
+    SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+    DOTween.Kill(spriteRenderer.material);
+    spriteRenderer.material.SetFloat("_FlashAmount", minFlash);
+    spriteRenderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
+  }
+
   public void ChallengeEntersScene(Sprite sp) {
     if(challengeActor.gameObject.activeSelf == false) {
       challengeActor.sprite = sp;
@@ -120,6 +167,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void ChallengeLeavesScene() {
+    hpSlider.gameObject.SetActive(false);
     if(challengeActor.gameObject.activeSelf == true) {
       challengeActor.transform.DOLocalMoveX(7f, 0.5f).SetRelative().OnComplete(() => {
         challengeActor.gameObject.SetActive(false);

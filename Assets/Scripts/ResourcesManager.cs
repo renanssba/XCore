@@ -17,13 +17,9 @@ public class ResourcesManager : MonoBehaviour {
   }
 
   public Sprite GetFaceSprite(int index){
-    if (ModsManager.instance.setFaces != null && ModsManager.instance.setFaces.Length >= 2) {
+    if(ModsManager.instance.GetFaceSprite(index) != null) {
       Debug.LogWarning("USING MODDED FACES");
-      if (index < 5) {
-        return ModsManager.instance.setFaces[0];
-      } else {
-        return ModsManager.instance.setFaces[1];
-      }
+      return ModsManager.instance.GetFaceSprite(index);
     }
     return faceSprites[index];
   }

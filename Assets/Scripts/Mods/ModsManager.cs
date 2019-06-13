@@ -124,4 +124,18 @@ public class ModsManager : MonoBehaviour {
       DebugText(s + "\n");
     }
   }
+
+  public Sprite GetFaceSprite(int id) {
+    if(setNames == null) {
+      return null;
+    }
+    return setFaces[id];
+  }
+
+  public string GetName(int id) {
+    if(setNames == null) {
+      return null;
+    }
+    return setNames[id];
+  }
 }

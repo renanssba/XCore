@@ -202,13 +202,17 @@ public class CustomizationController : MonoBehaviour {
   public void ClickPlayButton(){
     ModsManager modsManager = ModsManager.instance;
 
-    modsManager.setFaces = new Sprite[2];
+    modsManager.setFaces = new Sprite[10];
+    modsManager.setNames = new string[10];
+    for(int i = 0; i < 10; i++) {
+      modsManager.setFaces[i] = null;
+      modsManager.setNames[i] = null;
+    }
+
     modsManager.setFaces[0] = characterImages[0].sprite;
-    modsManager.setFaces[1] = characterImages[1].sprite;
-    
-    modsManager.setNames = new string[2];
+    modsManager.setFaces[5] = characterImages[1].sprite;
     modsManager.setNames[0] = char.ToUpper(characterInputNameText[0].text[0]) + characterInputNameText[0].text.Substring(1);;
-    modsManager.setNames[1] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
+    modsManager.setNames[5] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
 
     if(webcam != null) {
       webcam.Stop();
