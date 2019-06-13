@@ -15,7 +15,7 @@ namespace Command {
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
             case DateEventInteractionType.couple:
-              pos = new Vector2(-130f, 731f);
+              pos = new Vector2(-130f, 716f);
               break;
             case DateEventInteractionType.female:
               pos = new Vector2(48f, 636f);

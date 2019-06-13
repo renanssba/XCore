@@ -52,6 +52,8 @@ public class GlobalData : MonoBehaviour {
       }
     }
 
+    viableCouple[0, 0] = true;
+
     inventory = new Inventory();
   }
 
@@ -102,7 +104,7 @@ public class GlobalData : MonoBehaviour {
     allDateEvents = new List<DateEvent>();
 
     int id, guts, intelligence, charisma, stage;
-    string location;
+    string location, spriteName;
     DateEventInteractionType interaction = DateEventInteractionType.male;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
@@ -112,6 +114,7 @@ public class GlobalData : MonoBehaviour {
       intelligence = int.Parse(dic["Dificuldade Intelligence"]);
       charisma = int.Parse(dic["Dificuldade Charisma"]);
       location = dic["Localidade"];
+      spriteName = dic["Nome Sprite"];
       stage = int.Parse(dic["Etapa"]);
       switch (dic["Tipo de Interação"]) {
         case "male":
@@ -127,7 +130,7 @@ public class GlobalData : MonoBehaviour {
           interaction = DateEventInteractionType.compatibility;
           break;
       }
-      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, interaction));
+      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, spriteName, interaction));
     }
   }
 
@@ -181,6 +184,7 @@ public class GlobalData : MonoBehaviour {
         eventType = interaction,
         scriptName = dic["Nome do Script"],
         challengedAttribute = relevantAttribute,
+        location = dic["Localidade"],
         challengeDifficulty = value
       });
     }

@@ -6,7 +6,7 @@ set_screen "date"
 
 generate_segment "date"
 if date_location == 0
-  bg3d "park morning"
+  bg3d "parque"
   date_location_name "Parque"
   play_music "date1_intro" "date1_loop"
 endif
@@ -40,16 +40,9 @@ waypoint new_event
 if currentDateEvent < #dateLength
 
 waypoint start_interaction
-goto_script "\currentEventName" event_statement
 set_screen "date_challenge"
+goto_script "\currentEventName" event_statement
 
-
-
-waypoint ac_interfere
-// if #ap < 1
-  // goto_script "not_enough_ap"
-  // goto start_interaction
-// endif
 
 if tutorial_date2 == 0
   goto_script "tutorial_date2"
@@ -136,6 +129,7 @@ if resolution == 5
 endif
 
 set_screen "date"
+wait 0.5
 if resolution < 3
   add_var date_success 1
   goto_script "set_event_result" "success"

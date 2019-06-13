@@ -29,16 +29,18 @@ public class DateEvent {
   public int[] difficultyForAttribute;
   public int stage;
   public string location;
+  public string spriteName;
   public DateEventInteractionType interactionType;
 
   public RewardType rewardType;
   public int rewardId;
 
-  public DateEvent(int newid, string name, int difGuts, int difInt, int difCha, int stage, string location, DateEventInteractionType interType){
+  public DateEvent(int newid, string name, int difGuts, int difInt, int difCha, int stage, string location, string spriteName, DateEventInteractionType interType){
     id = newid;
     scriptName = name;
     this.stage = stage;
     this.location = location;
+    this.spriteName = spriteName;
     difficultyForAttribute = new int[3];
     difficultyForAttribute[0] = difGuts;
     difficultyForAttribute[1] = difInt;
@@ -64,6 +66,7 @@ public class ObservationEvent{
   public int id;
   public ObservationEventType eventType;
   public string scriptName;
+  public string location;
 
   public Item itemInEvent;
 

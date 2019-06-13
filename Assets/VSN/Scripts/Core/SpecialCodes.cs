@@ -40,6 +40,9 @@ public class SpecialCodes {
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
       }
+      if(GameController.instance.GetCurrentObservationEvent() != null) {
+        currentString = currentString.Replace("\\observation_bg", GameController.instance.GetCurrentObservationEvent().location);
+      }
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
       currentString = currentString.Replace("\\n", "\n");

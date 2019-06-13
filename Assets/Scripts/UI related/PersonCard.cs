@@ -25,13 +25,13 @@ public class PersonCard : MonoBehaviour {
 
 
   public void Initialize(Person p){
-    Debug.Log("initializing " + person.name);
+    //Debug.Log("initializing " + person.name);
     person = p;
     UpdateUI();
   }
 
   public void UpdateUI() {
-    Debug.Log("updating "+person.name);
+    //Debug.Log("updating "+person.name);
 
     string state = VsnSaveSystem.GetStringVariable("people_ui_state");
     if(coupleEntryLayout == false) {

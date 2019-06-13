@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 
 public enum TheaterEvent {
@@ -73,7 +74,6 @@ public class TheaterController : MonoBehaviour {
         mainActor.transform.localPosition = mainPosition;
         mainActor.sprite = GlobalData.instance.CurrentBoy().isMale ? peopleSprites[0] : peopleSprites[1];
         supportActor.sprite = GlobalData.instance.CurrentGirl().isMale ? peopleSprites[0] : peopleSprites[1];
-        challengeActor.gameObject.SetActive(true);
 
         supportActor.gameObject.SetActive(true);
         supportActor.transform.localPosition = supportPosition;
@@ -83,7 +83,9 @@ public class TheaterController : MonoBehaviour {
           GameController.instance.actionPersonCard.HidePanel();
           mainActor.color = Color.white;
           supportActor.color = Color.white;
+          ChallengeLeavesScene();
         } else {
+          ChallengeEntersScene(LoadSprite("Challenges/" + GameController.instance.GetCurrentDateEvent().spriteName));
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
               mainActor.color = Color.white;
@@ -108,8 +110,41 @@ public class TheaterController : MonoBehaviour {
     }
   }
 
+  public void ChallengeEntersScene(Sprite sp) {
+    if(challengeActor.gameObject.activeSelf == false) {
+      challengeActor.sprite = sp;
+      challengeActor.gameObject.SetActive(true);
+      challengeActor.transform.localPosition = challengePosition+new Vector3(7f, 0f, 0f);
+      challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f);
+      }
+  }
+
+  public void ChallengeLeavesScene() {
+    if(challengeActor.gameObject.activeSelf == true) {
+      challengeActor.transform.DOLocalMoveX(7f, 0.5f).SetRelative().OnComplete(() => {
+        challengeActor.gameObject.SetActive(false);
+      });
+    }
+  }
+
+  public Sprite LoadSprite(string sprite) {
+    Sprite backgroundSprite = Resources.Load<Sprite>(sprite);
+    if(backgroundSprite == null) {
+      Debug.LogError("Error loading " + sprite + " sprite. Please check its path");
+    }
+    return backgroundSprite;
+  }
+
+
+  public void SetLocation(string place) {
+    SetBgSprite(LoadSprite("Bg/"+place));
+  }
 
   public void SetBgSprite(Sprite s) {
+    if(s == null) {
+      Debug.LogWarning("Trying to set bg to null");
+      return;
+    }
     bgRenderer.sprite = s;
     bgRenderer.gameObject.SetActive(true);
 
