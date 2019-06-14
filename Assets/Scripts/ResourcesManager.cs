@@ -10,6 +10,8 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] attributeSprites;
   public Sprite unknownSprite;
 
+  public Color[] attributeColor;
+
   public static ResourcesManager instance;
 
   public void Awake() {

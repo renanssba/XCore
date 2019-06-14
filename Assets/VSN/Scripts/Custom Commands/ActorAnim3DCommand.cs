@@ -8,7 +8,7 @@ namespace Command {
   public class ActorAnim3DCommand : VsnCommand {
 
     public override void Execute() {
-      TheaterController.instance.ActorAnimation();
+      TheaterController.instance.ActorAttackAnimation();
       //if(args[0].GetReference() != "null") {
 
       //} else {

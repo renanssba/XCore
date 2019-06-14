@@ -11,6 +11,11 @@ public enum TheaterEvent {
   dateChallenge
 }
 
+public enum CameraPosition {
+  mainCamera,
+  closeupCamera
+}
+
 
 public class TheaterController : MonoBehaviour {
 
@@ -18,19 +23,27 @@ public class TheaterController : MonoBehaviour {
 
   public SpriteRenderer bgRenderer;
 
+  public Vector3 cameraMainPosition;
+  public Vector3 cameraCloseupPosition;
+
   public Vector3 mainPosition;
   public Vector3 supportPosition;
   public Vector3 encounterPosition;
   public Vector3 challengePosition;
 
+  public Vector3 rotationFacingRight;
+  public Vector3 rotationFacingLeft;
+  public Vector3 rotationFacingFront;
+
   public Vector2 mainActiveCardPosition;
   public Vector2 supportActiveCardPosition;
 
   public MeshRenderer floor;
-  public SpriteRenderer mainActor;
-  public SpriteRenderer supportActor;
+  public GameObject mainActor;
+  public GameObject supportActor;
   public SpriteRenderer challengeActor;
 
+  public Image attributeIcon;
   public Slider hpSlider;
 
   public Sprite[] peopleSprites;
@@ -52,61 +65,74 @@ public class TheaterController : MonoBehaviour {
     switch(currentEvent) {
       case TheaterEvent.observation:
         ObservationEventType evtType = GameController.instance.GetCurrentObservationEvent().eventType;
+        PositionCamera(CameraPosition.mainCamera);
         mainActor.transform.localPosition = mainPosition;
-        mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
+        mainActor.transform.localEulerAngles = rotationFacingRight;
+        //mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
         challengeActor.gameObject.SetActive(false);
 
         switch(evtType) {
           case ObservationEventType.attributeTraining:
-            mainActor.transform.Translate(-mainActor.transform.localPosition.x, 0f, 0f);
+            mainActor.transform.localPosition = new Vector3(0f, mainPosition.y, mainPosition.z);
+            //mainActor.transform.localEulerAngles = rotationFacingRight;
             supportActor.gameObject.SetActive(false);
             break;
           case ObservationEventType.femaleInTrouble:
           case ObservationEventType.maleInTrouble:
             supportActor.gameObject.SetActive(true);
             supportActor.transform.localPosition = encounterPosition;
-            supportActor.transform.localEulerAngles = 180f*Vector3.up;
-            if(evtType == ObservationEventType.maleInTrouble) {
-              supportActor.sprite = peopleSprites[0];
-            } else {
-              supportActor.sprite = peopleSprites[1];
-            }
+            supportActor.transform.localEulerAngles = rotationFacingLeft;
+            //if(evtType == ObservationEventType.maleInTrouble) {
+            //  supportActor.sprite = peopleSprites[0];
+            //} else {
+            //  supportActor.sprite = peopleSprites[1];
+            //}
             break;
         }        
         break;
       case TheaterEvent.date:
       case TheaterEvent.dateChallenge:
+        PositionCamera(CameraPosition.mainCamera);
         mainActor.transform.localPosition = mainPosition;
-        mainActor.sprite = GlobalData.instance.CurrentBoy().isMale ? peopleSprites[0] : peopleSprites[1];
-        supportActor.sprite = GlobalData.instance.CurrentGirl().isMale ? peopleSprites[0] : peopleSprites[1];
+        mainActor.transform.localEulerAngles = rotationFacingRight;
 
         supportActor.gameObject.SetActive(true);
         supportActor.transform.localPosition = supportPosition;
-        supportActor.transform.localEulerAngles = Vector3.zero;
+        supportActor.transform.localEulerAngles = rotationFacingRight;
 
         if(currentEvent == TheaterEvent.date) {
+          if(VsnSaveSystem.GetIntVariable("currentDateEvent") >= 7) {
+            PositionCamera(CameraPosition.closeupCamera);
+            PositionActorsCloseup();
+          }
           GameController.instance.actionPersonCard.HidePanel();
-          mainActor.color = Color.white;
-          supportActor.color = Color.white;
           ChallengeLeavesScene();
         } else {
-          ChallengeEntersScene(LoadSprite("Challenges/" + GameController.instance.GetCurrentDateEvent().spriteName));
+          string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
+
+          if(!string.IsNullOrEmpty(spriteName)) {
+            ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
+          } else {
+            PositionCamera(CameraPosition.closeupCamera);
+            PositionActorsCloseup();
+          }
+
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
-              mainActor.color = Color.white;
-              supportActor.color = inactiveColor;
+              //mainActor.color = Color.white;
+              //supportActor.color = inactiveColor;
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
               break;
             case DateEventInteractionType.female:
-              mainActor.color = inactiveColor;
-              supportActor.color = Color.white;
+              //mainActor.color = inactiveColor;
+              //supportActor.color = Color.white;
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
               break;
             case DateEventInteractionType.couple:
-              mainActor.color = Color.white;
-              supportActor.color = Color.white;
+              //mainActor.color = Color.white;
+              //supportActor.color = Color.white;
               break;
           }
           GameController.instance.actionPersonCard.ShowPanel();
@@ -115,7 +141,42 @@ public class TheaterController : MonoBehaviour {
     }
   }
 
-  public void ActorAnimation() {
+  public void SetupActorGraphics(TheaterEvent currentEvent) {
+    switch(currentEvent) {
+      case TheaterEvent.observation:
+        //mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
+        break;
+      case TheaterEvent.date:
+      case TheaterEvent.dateChallenge:
+        //mainActor.sprite = GlobalData.instance.CurrentBoy().isMale ? peopleSprites[0] : peopleSprites[1];
+        //supportActor.sprite = GlobalData.instance.CurrentGirl().isMale ? peopleSprites[0] : peopleSprites[1];
+        break;
+    }
+  }
+
+  public void PositionCamera(CameraPosition camPos) {
+    switch(camPos) {
+      case CameraPosition.mainCamera:
+        Camera.main.transform.position = cameraMainPosition;
+        Camera.main.transform.eulerAngles = Vector3.zero;
+        break;
+      case CameraPosition.closeupCamera:
+        Camera.main.transform.position = cameraCloseupPosition;
+        Camera.main.transform.eulerAngles = 90f*Vector3.down;
+        break;
+    }
+  }
+
+  public void PositionActorsCloseup() {
+    mainActor.transform.localPosition = mainPosition;
+    mainActor.transform.localEulerAngles = rotationFacingFront;
+
+    supportActor.gameObject.SetActive(true);
+    supportActor.transform.localPosition = new Vector3(mainPosition.x, supportPosition.y, supportPosition.z);
+    supportActor.transform.localEulerAngles = rotationFacingFront + new Vector3(0f, 90f, 0f);
+  }
+
+  public void ActorAttackAnimation() {
     DateEventInteractionType interactionType = GameController.instance.GetCurrentDateEvent().interactionType;
     switch(interactionType) {
       case DateEventInteractionType.male:
@@ -144,7 +205,10 @@ public class TheaterController : MonoBehaviour {
 
     int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
 
+    attributeIcon.sprite = ResourcesManager.instance.attributeSprites[selected];
+    attributeIcon.color = ResourcesManager.instance.attributeColor[selected];
     hpSlider.value = 0;
+    hpSlider.fillRect.GetComponent<Image>().color = ResourcesManager.instance.attributeColor[selected];
     hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficultyForAttribute[selected];
     hpSlider.gameObject.SetActive(true);
     hpSlider.DOValue(GlobalData.instance.EventSolvingAttributeLevel(selected), 1f);

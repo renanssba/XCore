@@ -2,8 +2,6 @@
 
 say "" "\couple decidem sair para se divertir."
 
-set_screen "date"
-
 generate_segment "date"
 if date_location == 0
   bg3d "parque"
@@ -26,6 +24,8 @@ set_var date_event_result_3 0
 set_var date_event_result_4 0
 set_var date_event_result_5 0
 set_var date_event_result_6 0
+
+set_screen "date"
 
 wait 0.5
 show_date_ui true
@@ -131,6 +131,8 @@ if resolution == 5
   goto_script "\currentEventName" charisma_fail
 endif
 
+
+add_var currentDateEvent 1
 set_screen "date"
 wait 0.5
 if resolution < 3
@@ -143,13 +145,13 @@ else
   play_sfx "relationship_down"
   say "" "<color=red>Desafio não superado.</color>"
 endif
-add_var currentDateEvent 1
 update_ui
 goto new_event
 
 endif
 
 
+set_screen "date"
 
 waypoint end
 if date_success >= 5
