@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
 using System;
+using System.IO;
 using System.Reflection;
 using Command;
 
@@ -52,7 +53,7 @@ public class VsnController : MonoBehaviour {
   /// </summary>
   /// <param name="scriptPath">Script path from Resources root (e.g \"VSN Scripts/myscript.txt\"</param>
   public void StartVSN(string scriptPath, VsnArgument[] args = null) {
-    scriptPath = VsnSaveSystem.GetStringVariable("language") +"/" + scriptPath;
+    scriptPath = "VSN Scripts/" + scriptPath;
     TextAsset textContent = Resources.Load<TextAsset>(scriptPath);
     if(textContent == null){
       Debug.LogWarning("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");
@@ -263,5 +264,10 @@ public class VsnController : MonoBehaviour {
           break;
       }
     }
+  }
+
+  public void ListAllNewFiles() {
+    scriptsStack.Add(new VsnScriptReader());
+    //scriptsStack[0].ConvertVSNCommands("", );
   }
 }

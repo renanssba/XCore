@@ -4,6 +4,7 @@ using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using Command;
+using System.IO;
 
 
 [System.Serializable]
@@ -27,6 +28,9 @@ public class VsnScriptReader {
 
     ResetWaypoints();
     vsnCommands = ParseVSNCommands(lines);
+
+    ConvertVSNCommands(scriptName, lines);
+
     args = newArgs;
   }
 
@@ -143,8 +147,9 @@ public class VsnScriptReader {
     for(int i=0; i< lines.Length; i++) {
       string line = lines[i].TrimStart();
 
-      if(line == "\r" || String.IsNullOrEmpty(line))
+      if(line == "\r" || String.IsNullOrEmpty(line)) {
         continue;
+      }
 
       List<VsnArgument> vsnArguments = new List<VsnArgument>();
 
@@ -180,6 +185,81 @@ public class VsnScriptReader {
 
     return vsnCommandsFromScript;
   }
+
+
+  public void ConvertVSNCommands(string vsnPath, string[] lines) {
+    List<VsnCommand> vsnCommandsFromScript = new List<VsnCommand>();
+
+    Debug.LogWarning("Calling ConvertVSNCommands");
+
+    string newFilePath = GetConvertedPath(vsnPath);
+    string content = "nova versao";
+
+    Debug.LogWarning("new path: " + newFilePath);
+
+    int commandNumber = 0;
+    for(int i = 0; i < lines.Length; i++) {
+      string line = lines[i].TrimStart();
+
+      if(line == "\r" || String.IsNullOrEmpty(line)) {
+        continue;
+      }
+
+      List<VsnArgument> vsnArguments = new List<VsnArgument>();
+
+      string commandName = Regex.Match(line, "^([\\w\\-]+)").Value;
+
+      MatchCollection valuesMatch = Regex.Matches(line, "[^\\s\"']+|\"[^\"]*\"|'[^']*'");
+
+      List<string> args = new List<string>();
+
+      foreach(Match match in valuesMatch) {
+        args.Add(match.Value);
+      }
+
+      args.RemoveAt(0); // Removes the first match, which is the "commandName"
+
+      foreach(string arg in args) {
+        VsnArgument vsnArgument = ParseArgument(arg);
+        vsnArguments.Add(vsnArgument);
+      }
+
+      VsnCommand vsnCommand = InstantiateVsnCommand(commandName, vsnArguments);
+      if(vsnCommand != null) {
+        if(commandName == "waypoint") {
+          RegisterWaypoint(new VsnWaypoint(vsnArguments[0].GetReference(), commandNumber));
+        }
+
+        vsnCommand.commandIndex = commandNumber;
+        vsnCommand.fileLineId = i + 1;
+        commandNumber++;
+        vsnCommandsFromScript.Add(vsnCommand);
+      }
+    }
+
+
+    if(File.Exists(newFilePath)) {
+      File.Delete(newFilePath);
+    }
+    File.Create(newFilePath).Close();
+    File.WriteAllText(newFilePath, content);
+
+  }
+
+  public string GetConvertedPath(string path) {
+    string newPath = "";
+    string filename = "";
+    int lastBar = path.LastIndexOf('/');
+    newPath = path.Substring(0, lastBar);
+
+    //Debug.LogWarning("new path first: " + newPath);
+    filename = path.Substring(lastBar+1, path.Length - (lastBar + 1));
+    //Debug.LogWarning("filename: " + filename);
+    newPath += "/converted/" + filename+".txt";
+
+    return "Assets/Resources/" + newPath;
+  }
+
 
   /// <summary>
   /// Iterates through all command classes searching for one with the correct CommandAttribute matching the commandName
