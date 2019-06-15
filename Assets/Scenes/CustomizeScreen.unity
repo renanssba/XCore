@@ -417,8 +417,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Redefinir
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
+  m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -523,10 +524,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 111495469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  englishTranslatedText: Reset
+  phrasePath: customization/reset
+  FallbackText: Redefinir
+  Args: []
 --- !u!1 &163346257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,6 +1518,7 @@ GameObject:
   - component: {fileID: 561446220}
   - component: {fileID: 561446222}
   - component: {fileID: 561446221}
+  - component: {fileID: 561446223}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -1559,7 +1563,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Usar Imagem da Webcam
+  m_text: Usar imagem da webcam
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
@@ -1640,7 +1644,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -1659,6 +1663,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 561446219}
+--- !u!114 &561446223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561446219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasePath: customization/use_webcam
+  FallbackText: Usar Imagem da Webcam
+  Args: []
 --- !u!1 &582222116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,8 +2559,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Redefinir
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
+  m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2620,7 +2639,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -2647,10 +2666,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 904421472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  englishTranslatedText: Reset
+  phrasePath: customization/reset
+  FallbackText: Redefinir
+  Args: []
 --- !u!1001 &953942329
 Prefab:
   m_ObjectHideFlags: 0
@@ -3278,7 +3299,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -185}
-  m_SizeDelta: {x: 701.1, y: 186.48}
+  m_SizeDelta: {x: 821, y: 186.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223948719
 MonoBehaviour:
@@ -3288,10 +3309,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1223948717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  englishTranslatedText: 'Couple Customization:'
+  phrasePath: customization/title
+  FallbackText: 'Customize seu Casal:'
+  Args: []
 --- !u!114 &1223948720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3311,7 +3334,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Customize seu Casal:'
+  m_text: 'Customizar personagem:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 42b16f9a92e5aee49a95c99b8cff93a1, type: 2}
@@ -3379,10 +3402,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1223948720}
-    characterCount: 20
+    characterCount: 22
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -3999,7 +4022,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -4026,10 +4049,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1419242819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  englishTranslatedText: PLAY!
+  phrasePath: customization/play
+  FallbackText: JOGAR!
+  Args: []
 --- !u!1 &1540083376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,6 +5352,7 @@ GameObject:
   - component: {fileID: 1935984096}
   - component: {fileID: 1935984098}
   - component: {fileID: 1935984097}
+  - component: {fileID: 1935984099}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -5452,7 +5478,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -5471,6 +5497,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1935984095}
+--- !u!114 &1935984099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1935984095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasePath: customization/search
+  FallbackText: Buscar
+  Args: []
 --- !u!1 &1966730402
 GameObject:
   m_ObjectHideFlags: 0
@@ -5836,7 +5876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.000076293945, y: 0.000061035156}
   m_SizeDelta: {x: -1465.3, y: 256.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2079686754
@@ -5918,10 +5958,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2099235774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  englishTranslatedText: 'Current Couple:'
+  phrasePath: customization/title
+  FallbackText: Customizar personagem
+  Args: []
 --- !u!114 &2099235777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5943,8 +5985,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Customizar personagem
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 715b80e429c437e40867928a4e1fc975, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 42b16f9a92e5aee49a95c99b8cff93a1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 69557af4685f4e743b6be3ea91113f95, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: dda229d9e2bd5334588607f411b5706b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6022,7 +6064,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}

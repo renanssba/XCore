@@ -29,13 +29,13 @@ public class TitleController : MonoBehaviour {
   }
 
   public void ClickPortugueseButton(){
-    VsnSaveSystem.SetVariable("language", "pt_br");
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    Lean.Localization.LeanLocalization.CurrentLanguage = "Portuguese";
   }
 
   public void ClickEnglishButton() {
-    VsnSaveSystem.SetVariable("language", "eng");
-    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    Lean.Localization.LeanLocalization.CurrentLanguage = "English";
   }
 
   public void ClickExit(){

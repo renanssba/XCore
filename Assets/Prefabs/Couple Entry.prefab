@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 224664151468055064}
   - component: {fileID: 222046122006936430}
   - component: {fileID: 114778891605223870}
-  - component: {fileID: 114281952611322020}
+  - component: {fileID: 114627509020144404}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -788,13 +788,14 @@ MonoBehaviour:
   person:
     name: 
     isMale: 0
-    revealed: 0
+    state: 0
     attributes: 
     personality: 0
     traits: 
     equips: []
     favoriteMatter: 0
     mostHatedMatter: 0
+    id: 0
     faceId: 0
   bgImage: {fileID: 0}
   nameText: {fileID: 114376934511565756}
@@ -993,18 +994,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114281952611322020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1941717166452006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0169784fc4c337947b011748534bc2df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  englishTranslatedText: Date
 --- !u!114 &114292517231952330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1019,27 +1008,6 @@ MonoBehaviour:
   coupleCards:
   - {fileID: 114143723824546002}
   - {fileID: 114502806022886784}
-  couple:
-  - name: 
-    isMale: 0
-    revealed: 0
-    attributes: 
-    personality: 0
-    traits: 
-    equips: []
-    favoriteMatter: 0
-    mostHatedMatter: 0
-    faceId: 0
-  - name: 
-    isMale: 0
-    revealed: 0
-    attributes: 
-    personality: 0
-    traits: 
-    equips: []
-    favoriteMatter: 0
-    mostHatedMatter: 0
-    faceId: 0
 --- !u!114 &114332803523225288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1443,13 +1411,14 @@ MonoBehaviour:
   person:
     name: 
     isMale: 0
-    revealed: 0
+    state: 0
     attributes: 
     personality: 0
     traits: 
     equips: []
     favoriteMatter: 0
     mostHatedMatter: 0
+    id: 0
     faceId: 0
   bgImage: {fileID: 0}
   nameText: {fileID: 114207321907997136}
@@ -1685,6 +1654,20 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114627509020144404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941717166452006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasePath: person_card/date
+  FallbackText: Encontro
+  Args: []
 --- !u!114 &114640847700005396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2119,7 +2102,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Encontro
+  m_text: Date
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
   m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
@@ -2188,7 +2171,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 114778891605223870}
-    characterCount: 8
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -2839,9 +2822,9 @@ RectTransform:
   m_Father: {fileID: 224230065628741392}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 220.23334, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224037701555617840
@@ -2955,10 +2938,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 802.95, y: -96}
+  m_SizeDelta: {x: 780, y: 152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224230065628741392
 RectTransform:
@@ -2996,9 +2979,9 @@ RectTransform:
   m_Father: {fileID: 224810511858883744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 44.04667, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224283623983168340
@@ -3106,9 +3089,9 @@ RectTransform:
   m_Father: {fileID: 224230065628741392}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 44.04667, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224601856738526876
@@ -3238,9 +3221,9 @@ RectTransform:
   m_Father: {fileID: 224230065628741392}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 132.14001, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224801478077969010
@@ -3387,9 +3370,9 @@ RectTransform:
   m_Father: {fileID: 224810511858883744}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 132.14001, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224886043622040882
@@ -3427,9 +3410,9 @@ RectTransform:
   m_Father: {fileID: 224810511858883744}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 220.23334, y: -38.77}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224933832449061652

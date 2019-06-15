@@ -140,11 +140,7 @@ public class GameController : MonoBehaviour {
     }
     //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
-    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
-      dayText.text = "Dia " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
-    }else{
-      dayText.text = "Day " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
-    }
+    dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     apText.text = "AP: " + gb.ap + " /" + gb.maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
@@ -152,7 +148,7 @@ public class GameController : MonoBehaviour {
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
 
-    energyText.text = "Energia: " + VsnSaveSystem.GetIntVariable("observation_energy");
+    energyText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/energy")+" " + VsnSaveSystem.GetIntVariable("observation_energy");
     ShowDateProgressUI();
   }
 
@@ -329,7 +325,7 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "choose_observation_target":
-        titleText.text = "Escolha quem observar:";
+        titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_1");
         bgImage.SetActive(true);
         peoplePanel.ShowPanel();
         couplesPanel.HidePanel();
@@ -349,7 +345,7 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "observation_map":
-        titleText.text = "Escolha ações:";
+        titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_2");
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
         couplesPanel.HidePanel();
@@ -359,7 +355,7 @@ public class GameController : MonoBehaviour {
         observationMap.ShowPanel();
         break;
       case "choose_date_target":
-        titleText.text = "Escolha casal para Encontro:";
+        titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_3");
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
         UpdateCouplesPanelContent();

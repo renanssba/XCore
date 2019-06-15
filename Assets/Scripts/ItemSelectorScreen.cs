@@ -44,11 +44,7 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void Initialize(ItemInteractionType type, Inventory currentItems){
-    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
-      SetScreenNamePtBr(type);
-    }else{
-      SetScreenNameEng(type);
-    }
+    SetScreenName(type);
 
     currentMoneyText.transform.parent.gameObject.SetActive(true);
     currentMoneyText.text = VsnSaveSystem.GetIntVariable("money").ToString();
@@ -58,41 +54,24 @@ public class ItemSelectorScreen : MonoBehaviour {
     InitializeItems(currentItems);
   }
 
-  void SetScreenNamePtBr(ItemInteractionType type) {
+  void SetScreenName(ItemInteractionType type) {
     switch (type) {
       case ItemInteractionType.store_buy:
-        screenNameText.text = "Loja - Comprar";
+        screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/buy");
         break;
       case ItemInteractionType.store_sell:
-        screenNameText.text = "Loja - Vender";
+        screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/sell");
         break;
       case ItemInteractionType.input:
-        screenNameText.text = "Escolha item para equipar:";
+        screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/equip");
         break;
       case ItemInteractionType.inventory:
-        screenNameText.text = "Inventário";
+        screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/title");
         break;
     }
   }
 
-  void SetScreenNameEng(ItemInteractionType type) {
-    switch (type) {
-      case ItemInteractionType.store_buy:
-        screenNameText.text = "Store - Buy";
-        break;
-      case ItemInteractionType.store_sell:
-        screenNameText.text = "Store - Sell";
-        break;
-      case ItemInteractionType.input:
-        screenNameText.text = "Choose item to equip:";
-        break;
-      case ItemInteractionType.inventory:
-        screenNameText.text = "Inventory";
-        break;
-    }
-  }
-
-
+  
   void InitializeItems(Inventory currentItems){
     for(int i = 0; i < currentItems.items.Count; i++) {
       CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
