@@ -266,8 +266,9 @@ public class VsnController : MonoBehaviour {
     }
   }
 
-  public void ListAllNewFiles() {
-    scriptsStack.Add(new VsnScriptReader());
-    //scriptsStack[0].ConvertVSNCommands("", );
+  public void PrepareFilesForLocalization() {
+    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
+    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date");
+    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
   }
 }
