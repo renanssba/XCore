@@ -1,0 +1,24 @@
+SEASONS OF LOVE SHADER PACK 0.1A
+
+These are modifications of Unity standard shaders and Taichi's shaders from the Asset Store with the simple objective of making our characters look nicer.
+
+Features:
+
+1- Outlines, with the option of scaling the outlines  in relation to POV or not.
+(Unity's default toon shader doesn't scale the outlines to the camera distance, which makes some models look horrible from a distance.)
+2 - Models can cast shadows.
+3 - Models can receive shadows, although this is not recommended. (Shadows are still full-black, not consistent with an anime look. I'll look into that one day.)
+
+4 - You can use vertex painting to control lighting to some degree.
+Red component adds lighting. 100% red means always  lit. Use this on the eyes and other elements that must be always lit.
+Green component multiplies lighting. You can use this to control how much lighting is needed to fully iluminate a face. Still not working properly, but it's good enough.
+Blue component controls outline width. Working 100%.
+
+(If the model is painted white, all options apply. Please note that a white model has 100% red, thus is always fully lit.)
+
+General guidelines:
+
+1 - For white-ish skin tones, pick shadow colors closer to red.
+2 - For outline colors, pick slightly darker tones from the main texture.
+3 - Paint the whole model cyan (100% green, 100% blue) for a good default experience. Paint eyes red for a more convincing anime look. Tune as needed.
+4 - Have fun!

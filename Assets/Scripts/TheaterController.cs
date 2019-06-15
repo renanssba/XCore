@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using TMPro;
 
 public enum TheaterEvent {
   observation,
@@ -43,12 +43,15 @@ public class TheaterController : MonoBehaviour {
   public GameObject supportActor;
   public SpriteRenderer challengeActor;
 
+  public GameObject damageParticlePrefab;
+
   public Image attributeIcon;
   public Slider hpSlider;
 
-  public Sprite[] peopleSprites;
-
   public Material[] floorMaterials;
+
+  public Color greenColor;
+  public Color redColor;
 
   public Color inactiveColor;
 
@@ -176,6 +179,27 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localEulerAngles = rotationFacingFront + new Vector3(0f, 90f, 0f);
   }
 
+  public void ShowParticleAnimation(int attribute, int attributeLevel) {
+    GameObject newobj = Instantiate(damageParticlePrefab, GameController.instance.bgImage.transform.parent);
+    newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString();
+    newobj.GetComponent<TextMeshProUGUI>().color = ResourcesManager.instance.attributeColor[attribute];
+  }
+
+  public void ShowChallengeResult(bool success) {
+    GameObject newobj = Instantiate(damageParticlePrefab, GameController.instance.bgImage.transform.parent);
+
+    newobj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+    newobj.GetComponent<JumpingParticle>().duration = 1f;
+    if(success == true) {
+      newobj.GetComponent<JumpingParticle>().jumpForce = 10;
+    } else {
+      newobj.GetComponent<JumpingParticle>().jumpForce = 0;
+    }    
+    newobj.GetComponent<TextMeshProUGUI>().text = success ? "Desafio superado!" : "Desafio não superado.";
+    newobj.GetComponent<TextMeshProUGUI>().color = success ? greenColor : redColor;
+  }
+
   public void ActorAttackAnimation() {
     DateEventInteractionType interactionType = GameController.instance.GetCurrentDateEvent().interactionType;
     switch(interactionType) {
@@ -198,12 +222,15 @@ public class TheaterController : MonoBehaviour {
   }
 
   public IEnumerator WaitAndShine(float time) {
+    int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
+    int selectedAttributeLevel = GlobalData.instance.EventSolvingAttributeLevel(selected);
+
     yield return new WaitForSeconds(time);
     FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
 
-    yield return new WaitForSeconds(0.4f);
+    ShowParticleAnimation(selected, selectedAttributeLevel);
 
-    int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
+    yield return new WaitForSeconds(0.4f);
 
     attributeIcon.sprite = ResourcesManager.instance.attributeSprites[selected];
     attributeIcon.color = ResourcesManager.instance.attributeColor[selected];
@@ -211,7 +238,7 @@ public class TheaterController : MonoBehaviour {
     hpSlider.fillRect.GetComponent<Image>().color = ResourcesManager.instance.attributeColor[selected];
     hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficultyForAttribute[selected];
     hpSlider.gameObject.SetActive(true);
-    hpSlider.DOValue(GlobalData.instance.EventSolvingAttributeLevel(selected), 1f);
+    hpSlider.DOValue(selectedAttributeLevel, 1f);
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {

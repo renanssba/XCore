@@ -137,15 +137,16 @@ set_screen "date"
 wait 0.5
 if resolution < 3
   add_var date_success 1
-  goto_script "set_event_result" "success"
+  challenge_result true
+  update_ui
   play_sfx "relationship_up"
-  say "" "<color=green>Desafio superado!</color>"
+  wait 2
 else
-  goto_script "set_event_result" "fail"
+  challenge_result false
+  update_ui
   play_sfx "relationship_down"
-  say "" "<color=red>Desafio não superado.</color>"
+  wait 2
 endif
-update_ui
 goto new_event
 
 endif
