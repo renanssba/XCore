@@ -1,0 +1,12 @@
+if tutorial_observation == 1
+  goto end
+endif
+
+goto_script "fertiliel_enter" 0.14
+say "Fertiliel" "Ao acompanhar um humano no seu dia-a-dia você pode ajudá-lo a decidir quais atividades ele vai fazer."
+say "Certas atividades ajudam a <color=yellow>aumentar os atributos</color> do seu humano, enquanto outras fazem com que ele <color=yellow>conheça novas pessoas</color> para paquerar ou <color=yellow>ganhe itens</color>."
+say "Os humanos gastam sua energia diária ao fazer as atividades, então certifique-se de tomar boas decisões."
+goto_script "fertiliel_exit"
+set_var tutorial_observation 1
+
+waypoint end

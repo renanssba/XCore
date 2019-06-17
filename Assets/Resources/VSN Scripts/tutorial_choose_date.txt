@@ -1,0 +1,17 @@
+if tutorial_choose_date == 1
+  goto end
+endif
+
+goto_script "fertiliel_enter" 0.14
+say "Fertiliel" "Durante a <color=yellow>Tarde</color> você pode influenciar um casal de humanos que já se conhece e se gosta para ir a um <color=yellow>Encontro</color>."
+
+if #availableCouples == 0
+  say "Parece que você não tem nenhum casal disponível no momento..."
+else
+  say "Parabéns, você tem casais nesta situação! Agora é só escolher qual deles você quer que vá para o Encontro."
+endif
+
+goto_script "fertiliel_exit"
+set_var tutorial_choose_date 1
+
+waypoint end

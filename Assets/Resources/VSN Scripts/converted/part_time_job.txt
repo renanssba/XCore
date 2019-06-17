@@ -1,0 +1,19 @@
+if #ap < 2  goto_script "not_enough_ap"  end_scriptendif
+
+set_var hide_buttons 1update_ui
+say_auto "part_time_job/say_0"
+choices "Sim" sim "Não" nao
+
+waypoint simsay_auto "part_time_job/say_1"
+choices "Gastar 2 AP" ap2 "Gastar 3 AP" ap3 "Gastar 4 AP" ap4 "Gastar 5 AP" ap5 "Cancelar" nao
+waypoint ap2set_var ap_spent 2goto start_minigame
+waypoint ap3set_var ap_spent 3goto start_minigame
+waypoint ap4set_var ap_spent 4goto start_minigame
+waypoint ap5set_var ap_spent 5goto start_minigame
+
+
+waypoint start_minigamespend_ap ap_spentupdate_uifade_out 0.7load_scene "Minigame - Ice Cream"wait 0.5goto end
+
+waypoint naogoto end
+
+waypoint endset_var hide_buttons 0update_ui

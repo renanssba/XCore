@@ -8,6 +8,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] cardSprites;
   public Sprite[] itemSprites;
   public Sprite[] attributeSprites;
+  public Sprite[] daytimeSprites;
   public Sprite unknownSprite;
 
   public Color[] attributeColor;

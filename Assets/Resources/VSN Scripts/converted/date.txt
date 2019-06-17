@@ -1,0 +1,38 @@
+fade_out 0.7
+say "char_name/none" "date/say_0"
+
+generate_segment "date"if date_location == 0  bg3d "parque"  date_location_name "Parque"  play_music "date1_intro" "date1_loop"endifif date_location == 1  bg3d "shopping"  date_location_name "Shopping"  play_music "date2_intro" "date2_loop"endif
+set_var situation 2set_var currentDateEvent 0set_var date_success 0set_var date_event_result_0 0set_var date_event_result_1 0set_var date_event_result_2 0set_var date_event_result_3 0set_var date_event_result_4 0set_var date_event_result_5 0set_var date_event_result_6 0
+set_screen "date"
+wait 0.5show_date_ui truefade_in 0.7
+if tutorial_date == 0  goto_script "tutorial_date"endif
+
+waypoint new_eventif currentDateEvent < #dateLength
+waypoint start_interactionset_screen "date_challenge"goto_script "\currentEventName" event_statement
+
+if tutorial_date2 == 0  goto_script "tutorial_date2"endif
+
+if #currentEventInteractionType == 0  say_auto "char_name/none" "date/say_1"
+endifif #currentEventInteractionType == 1  say_auto "char_name/none" "date/say_2"
+endifif #currentEventInteractionType == 2  say_auto "char_name/none" "date/say_3"
+endif
+
+position_choices "date_event"if #currentPersonality == 0  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charismaendifif #currentPersonality == 1  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color>" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charismaendifif #currentPersonality == 2  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color>" sug_charismaendif
+waypoint sug_gutsif #currentPersonality != 0  if #ap < 1    goto_script "not_enough_ap"    goto start_interaction  endif  spend_ap 1endifset_var selected_attribute 0goto ev_resolution
+waypoint sug_intelligenceif #currentPersonality != 1  if #ap < 1    goto_script "not_enough_ap"    goto start_interaction  endif  spend_ap 1endifset_var selected_attribute 1goto ev_resolution
+waypoint sug_charismaif #currentPersonality != 2  if #ap < 1    goto_script "not_enough_ap"    goto start_interaction  endif  spend_ap 1endifset_var selected_attribute 2goto ev_resolution
+
+waypoint ev_resolutionactor_anim3dwait 2
+position_choices "base"event_resolution "date" selected_attribute
+if resolution == 0  goto_script "\currentEventName" guts_successendifif resolution == 1  goto_script "\currentEventName" intelligence_successendifif resolution == 2  goto_script "\currentEventName" charisma_successendifif resolution == 3  goto_script "\currentEventName" guts_failendifif resolution == 4  goto_script "\currentEventName" intelligence_failendifif resolution == 5  goto_script "\currentEventName" charisma_failendif
+
+add_var currentDateEvent 1set_screen "date"wait 0.5if resolution < 3  add_var date_success 1  challenge_result true  update_ui  play_sfx "relationship_up"  wait 2else  challenge_result false  update_ui  play_sfx "relationship_down"  wait 2endifgoto new_event
+endif
+
+set_screen "date"
+waypoint endif date_success >= 5  say "char_name/none" "date/say_4"
+  show_date_ui false
+  show_engagement  say "date/say_5"
+  ship_coupleelse  say "char_name/none" "date/say_6"
+  show_date_ui falseendif
+goto_script "spend_day"

@@ -128,6 +128,12 @@ public class SpecialCodes {
         return (int)GameController.instance.GetCurrentDateEvent().interactionType;
       case "#inventory_empty":
         return GlobalData.instance.inventory.IsEmpty() ? 1f : 0f;
+      case "#availableCouples":
+        if(GameController.instance != null) {
+          return GameController.instance.couplesPanelContent.childCount;
+        } else {
+          return 0;
+        }
       default:
         return 0f;
     }

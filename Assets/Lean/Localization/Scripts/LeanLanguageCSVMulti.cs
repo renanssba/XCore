@@ -58,14 +58,14 @@ namespace Lean.Localization {
       int startingPos =0;
       bool commaOpened = false;
 
-      Debug.Log("Line: " + line);
+      //Debug.Log("Line: " + line);
 
       for(int i=0; i<line.Length; i++) {
-        Debug.Log("i: " + i + ", current char: " + line[i]);
+        //Debug.Log("i: " + i + ", current char: " + line[i]);
 
         // end quotes segment
         if(line[i]=='"' && commaOpened /**/ && IsCharCommaOrEndline(line, i+1)/**/) {
-          Debug.Log("// end quotes segment. i: " + i + ", startingPos: " + startingPos);
+          //Debug.Log("// end quotes segment. i: " + i + ", startingPos: " + startingPos);
           if(i - startingPos - 1 <= 0) {
             parts.Add("");
           } else {
@@ -80,13 +80,13 @@ namespace Lean.Localization {
         // toggle comma opened
         if(line[i] == '"') {
           commaOpened = !commaOpened;
-          Debug.Log("// toggle comma being set to " + commaOpened + ". i: " + i + ", startingPos: " + startingPos);
+          //Debug.Log("// toggle comma being set to " + commaOpened + ". i: " + i + ", startingPos: " + startingPos);
           continue;
         }
 
         // end part if found separator outside comma
         if(line[i] == separator && !commaOpened) {
-          Debug.Log("// end part if found separator outside comma. i: " + i + ", startingPos: " + startingPos);
+          //Debug.Log("// end part if found separator outside comma. i: " + i + ", startingPos: " + startingPos);
           if(i - startingPos <= 0) {
             parts.Add("");
           } else {
@@ -98,7 +98,7 @@ namespace Lean.Localization {
 
         // end part because line ended
         if(i == line.Length - 1) {
-          Debug.Log("// end part because line ended. i: " + i + ", startingPos: " + startingPos);
+          //Debug.Log("// end part because line ended. i: " + i + ", startingPos: " + startingPos);
 
           if(i - startingPos + 1 <= 0) {
             parts.Add("");
@@ -113,7 +113,7 @@ namespace Lean.Localization {
 
       }
 
-      Debug.LogWarning("Parts");
+      //Debug.LogWarning("Parts");
       for(int i = 0; i < parts.Count; i++) {
         parts[i] = parts[i].Replace("\"\"", "\"");
 
@@ -121,7 +121,7 @@ namespace Lean.Localization {
         if(string.IsNullOrEmpty(NewLine) == false) {
           parts[i] = parts[i].Replace(NewLine, System.Environment.NewLine);
         }
-        Debug.LogWarning("part: " + parts[i]);
+        //Debug.LogWarning("part: " + parts[i]);
       }
 
       while(parts.Count < minParts && minParts != -1) {

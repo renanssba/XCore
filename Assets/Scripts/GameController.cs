@@ -78,6 +78,9 @@ public class GameController : MonoBehaviour {
       if(GlobalData.instance.hideTutorials) {
         VsnSaveSystem.SetVariable("tutorial_date", 1);
         VsnSaveSystem.SetVariable("tutorial_date2", 1);
+        //VsnSaveSystem.SetVariable("tutorial_shop", 1);
+        //VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
+        //VsnSaveSystem.SetVariable("tutorial_observation", 1);
       }
       VsnController.instance.StartVSN("tutorial_intro");
     }
@@ -316,7 +319,7 @@ public class GameController : MonoBehaviour {
   
     switch(state) {
       case "hide_all":
-        titleText.text = "";
+        titleText.gameObject.SetActive(false);
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
         couplesPanel.HidePanel();
@@ -325,6 +328,7 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "choose_observation_target":
+        titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_1");
         bgImage.SetActive(true);
         peoplePanel.ShowPanel();
@@ -334,7 +338,7 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "observation":
-        titleText.text = "";
+        titleText.gameObject.SetActive(false);
         theater.SetEvent(TheaterEvent.observation);
         bgImage.SetActive(false);
         ShowOnlyObservedPerson();
@@ -345,6 +349,7 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
       case "observation_map":
+        titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_2");
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
@@ -355,6 +360,7 @@ public class GameController : MonoBehaviour {
         observationMap.ShowPanel();
         break;
       case "choose_date_target":
+        titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_3");
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
@@ -366,7 +372,7 @@ public class GameController : MonoBehaviour {
         break;
       case "date":
       case "date_challenge":
-        titleText.text = "";
+        titleText.gameObject.SetActive(false);
         if(state == "date") {
           theater.SetEvent(TheaterEvent.date);
         } else {
@@ -395,8 +401,10 @@ public class GameController : MonoBehaviour {
     List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
     int selectedId;
     List<ObservationTile> tilesNotSet = new List<ObservationTile>();
+    const int startingTile = 12;
+
     tilesNotSet.AddRange(observationTiles);
-    tilesNotSet.Remove(observationTiles[14]);
+    tilesNotSet.Remove(observationTiles[startingTile]);
 
 
     allowedEventTypes.Add(ObservationEventType.attributeTraining);
@@ -440,8 +448,8 @@ public class GameController : MonoBehaviour {
       tile.wasUsed = false;
     }
 
-    observationTiles[14].wasUsed = true;
-    playerToken.transform.position = observationTiles[14].transform.position; // starting player position
+    observationTiles[startingTile].wasUsed = true;
+    playerToken.transform.position = observationTiles[startingTile].transform.position; // starting player position
   }
 
   public void WalkToObservationTile(ObservationTile tile){

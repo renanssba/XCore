@@ -56,8 +56,7 @@ fade_in 0.4
 if observation_energy > 0
   set_screen "observation_map"
 else
-  set_var observation_played 1
-  goto_script "show_people_screen"
+  goto_script "observation_end" true
 endif
 
 

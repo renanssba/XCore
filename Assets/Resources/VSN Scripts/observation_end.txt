@@ -1,0 +1,8 @@
+﻿if argsCount == 0
+  say "" "Você decidiu desistir de acompanhar \observedPerson em seu dia."
+endif
+
+set_var observation_played 1
+goto_script "show_people_screen"
+
+goto_script "tutorial_choose_date"
