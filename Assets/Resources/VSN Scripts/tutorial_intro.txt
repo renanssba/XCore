@@ -16,14 +16,13 @@ say "Fertiliel" "Seja bem-vindo ao Fertiliel - Simulador de Cupido. Como um comp
 say "Para juntar um casal ele precisa ter um <color=yellow>Encontro</color> bem sucedido."
 say "Sua missão atual é: juntar \vsn[objective] casal em um período de 5 dias."
 
-char_flip fertiliel
 char_move_x fertiliel 0.14 0.5
 wait 0.5
 
-set_screen "date"
+set_screen "choose_observation_target"
 wait 0.5
 say "Este é o casal que você está observando no momento. Perceba que o rapaz e a moça possuem 3 atributos."
-say "Os atributos são: <color=yellow><sprite='Attributes' index=0 tint>Valentia</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> e <color=red><sprite='Attributes' index=2 tint>Carisma</color>. Seus valores vão de 1 (Péssimo) até 5 (Sobrehumano)."
+say "Os atributos são: <color=yellow><sprite='Attributes' index=0 tint>Valentia</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> e <color=red><sprite='Attributes' index=2 tint>Carisma</color>. Seus valores vão de 1 (Péssimo) até 10 (Sobrehumano)."
 say "É interessante que seus humanos tenham valores altos nos atributos, pois é o que eles usarão para vencer os desafios que aparecem durante os <color=yellow>Encontros</color>."
 
 
@@ -33,7 +32,6 @@ update_ui
 wait 0.5
 say "Estas são as ações que você pode tomar diariamente."
 say "Você pode <color=yellow>Fazer Bicos</color> e ir até a <color=yellow>Loja</color> para comprar itens equipáveis que aprimoram os atributos dos seus humanos."
-say "Se não gostar dos seus humanos atuais, você também pode <color=yellow>Trocar o Casal</color>. Mas fique atento que certas ações consomem o seu <color=yellow>AP (Angel Points)</color>."
 
 wait 1
 
@@ -41,12 +39,9 @@ say "Quando estiver se sentindo pronto, clique no botão aqui embaixo para levar
 say "Após cada encontro (ou se preferir, clicando no botão <color=yellow>Passar Dia</color>) você descansa para recuperar seu AP e tentar novamente juntar o casal no dia seguinte."
 
 goto_script "fertiliel_exit"
-
 goto_script "show_people_screen"
 set_var hide_buttons 0
 update_ui
-
-wait 0.3
 say "Boa sorte!"
 
 waypoint end

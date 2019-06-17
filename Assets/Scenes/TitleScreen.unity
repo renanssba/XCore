@@ -1367,6 +1367,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4685759218051828, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1398,6 +1408,51 @@ Prefab:
     - target: {fileID: 4685759218051828, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 2}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].name
+      value: Chinese
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[0]
+      value: ChineseSimplified
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[1]
+      value: ChineseTraditional
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[2]
+      value: zh
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[3]
+      value: zh-TW
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[4]
+      value: zh-CN
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[5]
+      value: zh-HK
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[6]
+      value: zh-SG
+      objectReference: {fileID: 0}
+    - target: {fileID: 114118544279220312, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 2}
+      propertyPath: languages.Array.data[2].cultures.Array.data[7]
+      value: zh-MO
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 2}
@@ -1457,7 +1512,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "Cr\xE9ditos"
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69557af4685f4e743b6be3ea91113f95, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: dda229d9e2bd5334588607f411b5706b, type: 2}
@@ -1525,7 +1580,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 858453326}
-    characterCount: 8
+    characterCount: 7
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -1841,7 +1896,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Sair
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69557af4685f4e743b6be3ea91113f95, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: dda229d9e2bd5334588607f411b5706b, type: 2}
@@ -2459,7 +2514,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Jogar
+  m_text: Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69557af4685f4e743b6be3ea91113f95, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: dda229d9e2bd5334588607f411b5706b, type: 2}
@@ -2527,7 +2582,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1220440207}
-    characterCount: 5
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
     wordCount: 1

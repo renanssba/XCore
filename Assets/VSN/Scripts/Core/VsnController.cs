@@ -90,7 +90,7 @@ public class VsnController : MonoBehaviour {
   }
 
   public void GotoVSNScript(string scriptPath, VsnArgument[] args){
-    scriptPath = VsnSaveSystem.GetStringVariable("language") + "/" + scriptPath;
+    scriptPath = "VSN Scripts/" + scriptPath;
     TextAsset textAsset = Resources.Load<TextAsset>(scriptPath);
     if(textAsset == null){
       Debug.LogWarning("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");
@@ -264,11 +264,5 @@ public class VsnController : MonoBehaviour {
           break;
       }
     }
-  }
-
-  public void PrepareFilesForLocalization() {
-    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
-    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date");
-    VsnScriptReader.PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
   }
 }

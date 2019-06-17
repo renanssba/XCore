@@ -287,7 +287,6 @@ public class GlobalData : MonoBehaviour {
     day++;
     VsnSaveSystem.SetVariable("observation_played", 0);
     GameController.instance.UpdateUI();
-    VsnController.instance.StartVSN("check_game_end");
   }
 
   public Person GetDateablePerson(Person p){

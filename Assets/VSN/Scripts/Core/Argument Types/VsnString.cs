@@ -15,12 +15,17 @@ public class VsnString : VsnArgument{
 
   public string ReplaceSingleQuote(){
     bool canReplace = false;
-    char[] array = stringValue.ToCharArray();
+    string localizedString = Lean.Localization.LeanLocalization.GetTranslationText(stringValue);
+    if(localizedString == null) {
+      localizedString = stringValue;
+    }
+
+    char[] array = localizedString.ToCharArray();
 
     //Debug.Log("Text: " + new string(array));
 
-    for (int i=0; i<stringValue.Length; i++){
-      switch(stringValue[i]) {
+    for (int i=0; i< localizedString.Length; i++){
+      switch(localizedString[i]) {
         case '<':
           canReplace = true;
           break;

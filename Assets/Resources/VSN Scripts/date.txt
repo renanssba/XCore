@@ -156,7 +156,7 @@ set_screen "date"
 
 waypoint end
 if date_success >= 5
-  say "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
+  say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
   show_date_ui false
     
   // set_screen "hide_all"
@@ -166,7 +166,7 @@ if date_success >= 5
   //set_screen "date"
   ship_couple
 else
-  say "O encontro acabou, e foi um <color=red>fracasso</color>!"
+  say "" "O encontro acabou, e foi um <color=red>fracasso</color>!"
   show_date_ui false
 endif
 
