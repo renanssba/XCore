@@ -8,9 +8,6 @@ public class TitleController : MonoBehaviour {
 
   private void Awake() {
     Utils.SelectUiElement(buttons[0]);
-    //if(VsnSaveSystem.GetStringVariable("language")=="") {
-      VsnSaveSystem.SetVariable("language", "pt_br");
-    //}
   }
 
   void Start(){

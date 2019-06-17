@@ -29,62 +29,6 @@ public enum CharacterTraits {
   timido
 };
 
-public enum RandomBoyPtBr {
-  Alberto,
-  Jorge,
-  Daniel,
-  Nando,
-  Pedro,
-  Gustavo,
-  Humberto,
-  Jonas,
-  Luan,
-  Renan,
-  Roberto
-}
-
-public enum RandomGirlPtBr {
-  Amanda,
-  Bianca,
-  Carla,
-  Mariane,
-  Fernanda,
-  Gabriela,
-  Priscila,
-  Larissa,
-  Jade,
-  Valentina,
-  Juliana,
-  Paola
-}
-
-public enum RandomBoyEng {
-  Albert,
-  George,
-  Daniel,
-  Peter,
-  Charlie,
-  Joe,
-  Robert,
-  Oliver,
-  Harry,
-  Jacob
-}
-
-public enum RandomGirlEng {
-  Chloe,
-  Olivia,
-  Emily,
-  Amelia,
-  Sophia,
-  Lily,
-  Charlotte,
-  Jade,
-  Mia,
-  Ruby,
-  Daisy
-}
-
 
 public enum RandomTastes {
   comerMuitoFeijao,
@@ -168,23 +112,13 @@ public class Utils {
   }
 
   public static string GetRandomBoyName() {
-    if (VsnSaveSystem.GetStringVariable("language") == "pt_br") {
-      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomBoyPtBr)).Length);
-      return System.Enum.GetName(typeof(RandomBoyPtBr), selected);
-    } else {
-      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomBoyEng)).Length);
-      return System.Enum.GetName(typeof(RandomBoyEng), selected);
-    }
+    int selected = Random.Range(0, 10);
+    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/npc_boy_"+selected);
   }
 
   public static string GetRandomGirlName() {
-    if(VsnSaveSystem.GetStringVariable("language") == "pt_br"){
-      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomGirlPtBr)).Length);
-      return System.Enum.GetName(typeof(RandomGirlPtBr), selected);
-    } else{
-      int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomGirlEng)).Length);
-      return System.Enum.GetName(typeof(RandomGirlEng), selected);
-    }
+    int selected = Random.Range(0, 10);
+    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/npc_girl_" + selected);
   }
   
   

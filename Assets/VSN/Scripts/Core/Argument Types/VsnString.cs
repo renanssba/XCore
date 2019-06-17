@@ -10,36 +10,18 @@ public class VsnString : VsnArgument{
   }
 
   public override string GetStringValue(){
-    return SpecialCodes.InterpretStrings(ReplaceSingleQuote());
+    return SpecialCodes.InterpretStrings(LocalizedString());
   }
 
-  public string ReplaceSingleQuote(){
-    bool canReplace = false;
+  public string LocalizedString(){
     string localizedString = Lean.Localization.LeanLocalization.GetTranslationText(stringValue);
     if(localizedString == null) {
+      Debug.Log("Couldn't localize string");
       localizedString = stringValue;
     }
+    Debug.Log("Localized string: " + localizedString);
 
-    char[] array = localizedString.ToCharArray();
-
-    //Debug.Log("Text: " + new string(array));
-
-    for (int i=0; i< localizedString.Length; i++){
-      switch(localizedString[i]) {
-        case '<':
-          canReplace = true;
-          break;
-        case '>':
-          canReplace = false;
-          break;
-        case '\'':
-          if(canReplace){
-            array[i] = '\"';
-          }
-          break;
-      }
-    }
-    return new string(array);
+    return localizedString;
   }
 }
 

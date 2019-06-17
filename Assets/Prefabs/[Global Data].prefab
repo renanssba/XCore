@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1367346411395778}
   m_IsPrefabParent: 1
+--- !u!1 &1006723950811734
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4745287507387378}
+  - component: {fileID: 114470239228602882}
+  m_Layer: 0
+  m_Name: none
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1055982013789610
 GameObject:
   m_ObjectHideFlags: 1
@@ -42,17 +58,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1102121629022632
+--- !u!1 &1182003637631056
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4642974914347980}
-  - component: {fileID: 114462945724631578}
+  - component: {fileID: 4191381354780356}
+  - component: {fileID: 114488519086923692}
   m_Layer: 0
-  m_Name: char_0
+  m_Name: quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,37 +84,6 @@ GameObject:
   - component: {fileID: 4527077339986624}
   m_Layer: 0
   m_Name: inventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1298124039008462
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4102444302004684}
-  m_Layer: 0
-  m_Name: tutorial_intro
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1355232231236612
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4784139013138626}
-  - component: {fileID: 114062714170446584}
-  m_Layer: 0
-  m_Name: text_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +261,7 @@ GameObject:
   - component: {fileID: 4287843701387726}
   - component: {fileID: 114715723229652814}
   m_Layer: 0
-  m_Name: quit
+  m_Name: subtitle_tex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,6 +358,21 @@ GameObject:
   - component: {fileID: 114571217534374072}
   m_Layer: 0
   m_Name: search
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1695755477268306
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4757195673124752}
+  m_Layer: 0
+  m_Name: char_name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,21 +594,6 @@ Transform:
   m_Father: {fileID: 4691348973384284}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4102444302004684
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298124039008462}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4642974914347980}
-  - {fileID: 4784139013138626}
-  m_Father: {fileID: 4994434489791510}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4140564151220130
 Transform:
   m_ObjectHideFlags: 1
@@ -650,6 +635,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4722706623794980}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4191381354780356
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182003637631056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4533112952639664}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4202560025168542
 Transform:
@@ -696,12 +694,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541450164633158}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4533112952639664}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4289811351644944
 Transform:
@@ -839,6 +837,7 @@ Transform:
   m_Children:
   - {fileID: 4202560025168542}
   - {fileID: 4384962515435260}
+  - {fileID: 4191381354780356}
   - {fileID: 4287843701387726}
   m_Father: {fileID: 4994434489791510}
   m_RootOrder: 0
@@ -868,19 +867,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4527077339986624}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4642974914347980
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102121629022632}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4102444302004684}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4685759218051828
 Transform:
@@ -959,18 +945,32 @@ Transform:
   m_Father: {fileID: 4722706623794980}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4784139013138626
+--- !u!4 &4745287507387378
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355232231236612}
+  m_GameObject: {fileID: 1006723950811734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4102444302004684}
-  m_RootOrder: 1
+  m_Father: {fileID: 4757195673124752}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4757195673124752
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695755477268306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4745287507387378}
+  m_Father: {fileID: 4994434489791510}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4826776039298496
 Transform:
@@ -1053,7 +1053,7 @@ Transform:
   - {fileID: 4527077339986624}
   - {fileID: 4483353526113668}
   - {fileID: 4722706623794980}
-  - {fileID: 4102444302004684}
+  - {fileID: 4757195673124752}
   m_Father: {fileID: 4685759218051828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1115,25 +1115,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: 'Choose item to equip:'
-    Object: {fileID: 0}
---- !u!114 &114062714170446584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355232231236612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translations:
-  - Language: Portuguese
-    Text: "Seja bem-vindo ao Fertiliel - Simulador de Cupido. Como um companheiro
-      cupido, o seu objetivo \xE9 juntar casais."
-    Object: {fileID: 0}
-  - Language: English
-    Text: Welcome to Fertiliel - Cupid Simulator
     Object: {fileID: 0}
 --- !u!114 &114075602347424450
 MonoBehaviour:
@@ -1433,12 +1414,12 @@ MonoBehaviour:
   - Language: English
     Text: 'Customize character:'
     Object: {fileID: 0}
---- !u!114 &114462945724631578
+--- !u!114 &114470239228602882
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102121629022632}
+  m_GameObject: {fileID: 1006723950811734}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
@@ -1446,10 +1427,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: Fertiliel
+    Text: ','
     Object: {fileID: 0}
   - Language: English
-    Text: Fertiliel
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114488519086923692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182003637631056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Sair
+    Object: {fileID: 0}
+  - Language: English
+    Text: Quit
     Object: {fileID: 0}
 --- !u!114 &114500726771913016
 MonoBehaviour:
@@ -1571,10 +1570,10 @@ MonoBehaviour:
   translations:
   - Language: Portuguese
     Text: Sair
-    Object: {fileID: 0}
+    Object: {fileID: 21300000, guid: c720902dac6d42044a03eae7abd89610, type: 3}
   - Language: English
     Text: Quit
-    Object: {fileID: 0}
+    Object: {fileID: 21300000, guid: bba2af82efa76924e8ac5f8f85d3b7e1, type: 3}
 --- !u!114 &114750197348702324
 MonoBehaviour:
   m_ObjectHideFlags: 1

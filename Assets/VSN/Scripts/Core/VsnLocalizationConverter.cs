@@ -87,7 +87,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
       string line = lines[i].TrimStart();
 
       if(line == "\r" || String.IsNullOrEmpty(line)) {
-        content += lines[i];
+        content += lines[i].TrimEnd() + Environment.NewLine;
         continue;
       }
 

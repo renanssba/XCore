@@ -64,7 +64,7 @@ namespace Lean.Localization {
         Debug.Log("i: " + i + ", current char: " + line[i]);
 
         // end quotes segment
-        if(line[i]=='"' && commaOpened && IsCharComma(line, i+1)) {
+        if(line[i]=='"' && commaOpened /**/ && IsCharCommaOrEndline(line, i+1)/**/) {
           Debug.Log("// end quotes segment. i: " + i + ", startingPos: " + startingPos);
           if(i - startingPos - 1 <= 0) {
             parts.Add("");
@@ -72,14 +72,15 @@ namespace Lean.Localization {
             parts.Add(line.Substring(startingPos + 1, i - startingPos - 1));
           }          
           i++;
+          commaOpened = !commaOpened;
           startingPos = i + 1;
           continue;
         }
 
         // toggle comma opened
         if(line[i] == '"') {
-          Debug.Log("// toggle comma opened. i: " + i + ", startingPos: " + startingPos);
           commaOpened = !commaOpened;
+          Debug.Log("// toggle comma being set to " + commaOpened + ". i: " + i + ", startingPos: " + startingPos);
           continue;
         }
 
@@ -130,8 +131,14 @@ namespace Lean.Localization {
       return parts.ToArray();
     }
 
-    public bool IsCharComma(string line, int id) {
-      if(line[id] == ',') {
+    public bool IsCharCommaOrEndline(string line, int id) {
+      if(id == line.Length) {
+        return true;
+      }
+      if(id > line.Length) {
+        return false;
+      }
+      if(line[id] == ',' || line[id] == '\n' || line[id] == '\r') {
         return true;
       }
       return false;

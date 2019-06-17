@@ -34,8 +34,8 @@ public class ItemUI : MonoBehaviour {
 
 
   public void UpdateUI() {
-    nameText.text = item.name;
-    descriptionText.text = item.description;
+    nameText.text = Lean.Localization.LeanLocalization.GetTranslationText(item.name);
+    descriptionText.text = Lean.Localization.LeanLocalization.GetTranslationText(item.description);
     //    if(item.type == ItemType.mundane) {
     //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.mundaneSprite;
     //    } else {

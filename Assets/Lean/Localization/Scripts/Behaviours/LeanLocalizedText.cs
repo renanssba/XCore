@@ -13,7 +13,7 @@ namespace Lean.Localization
 	public class LeanLocalizedText : LeanLocalizedBehaviour
 	{
 		[Tooltip("If PhraseName couldn't be found, this text will be used")]
-		public string FallbackText;
+		public string FallbackText = "<missing>";
 
 		[Tooltip("This allows you to set the words or numbers to insert into your formatted text.\ne.g. My Name is {0}, nice to meet you!")]
 		public string[] Args;

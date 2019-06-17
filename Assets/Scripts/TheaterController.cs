@@ -122,20 +122,20 @@ public class TheaterController : MonoBehaviour {
 
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
-              //mainActor.color = Color.white;
-              //supportActor.color = inactiveColor;
+              mainActor.GetComponent<Actor3D>().SetColor(Color.white);
+              supportActor.GetComponent<Actor3D>().SetColor(inactiveColor);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
               break;
             case DateEventInteractionType.female:
-              //mainActor.color = inactiveColor;
-              //supportActor.color = Color.white;
+              mainActor.GetComponent<Actor3D>().SetColor(inactiveColor);
+              supportActor.GetComponent<Actor3D>().SetColor(Color.white);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
               break;
             case DateEventInteractionType.couple:
-              //mainActor.color = Color.white;
-              //supportActor.color = Color.white;
+              mainActor.GetComponent<Actor3D>().SetColor(Color.white);
+              supportActor.GetComponent<Actor3D>().SetColor(Color.white);
               break;
           }
           GameController.instance.actionPersonCard.ShowPanel();

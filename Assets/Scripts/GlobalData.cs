@@ -35,9 +35,6 @@ public class GlobalData : MonoBehaviour {
   void Awake () {
     if (instance == null) {
       instance = this;
-      if (VsnSaveSystem.GetStringVariable("language") == "") {
-        VsnSaveSystem.SetVariable("language", "pt_br");
-      }
     } else if (instance != this) {
       Destroy(gameObject);
       return;
@@ -217,11 +214,7 @@ public class GlobalData : MonoBehaviour {
     if(observedPeople[0] == null || observedPeople[1]==null) {
       return "";
     }
-    if(VsnSaveSystem.GetStringVariable("language")=="pt_br"){
-      return CurrentBoy().name + " e " + CurrentGirl().name;
-    }else{
-      return CurrentBoy().name + " and " + CurrentGirl().name;
-    }
+    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple");
   }
 
   public Person CurrentBoy(){
