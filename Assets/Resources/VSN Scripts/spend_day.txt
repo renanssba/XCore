@@ -21,6 +21,7 @@ if observation_played == 1
   goto_script "check_end_game"
 else
   set_var observation_played 1
+  say "Você descansou um pouco até de tarde."
   
   fade_in 0.5
   goto_script "show_people_screen"

@@ -30,15 +30,14 @@ wait 0.3
 
 play_sfx "ui_money"
 if ap_spent == 2
-  add_var money 60
-  update_ui
-  say "Você trabalhou bastante e ganhou 60 Dinheiro Celestial!"
+  set_var gain 60
 endif
 if ap_spent == 3
-  add_var money 120
-  update_ui
-  say "Você trabalhou bastante e ganhou 120 Dinheiro Celestial!"
+  set_var gain 120
 endif
+add_var money gain
+update_ui
+say "Você trabalhou bastante e ganhou \vsn[gain] Dinheiro Celestial!"
 
 fade_in 0.7
 wait 0.5

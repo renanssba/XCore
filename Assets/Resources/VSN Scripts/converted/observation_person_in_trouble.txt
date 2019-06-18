@@ -1,10 +1,0 @@
-choices "Ajudar" sug_help "Ignorar" sug_ignore
-
-waypoint sug_helpevent_resolution "observation"goto resolution
-
-waypoint sug_ignoreset_var resolution 2goto resolution
-
-waypoint resolutionif resolution == 0  goto_script "\currentObservationEventName" help_success  play_sfx "relationship_up"  say "char_name/none" "observation_person_in_trouble/say_0"
-  say "observation_person_in_trouble/say_1"
-  unlock_coupleendifif resolution == 1  play_sfx "relationship_down"  goto_script "\currentObservationEventName" help_failendifif resolution == 2  say "char_name/none" "observation_person_in_trouble/say_2"
-endif

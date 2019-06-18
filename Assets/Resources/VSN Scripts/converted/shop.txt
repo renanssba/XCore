@@ -1,25 +1,0 @@
-set_var hide_buttons 1update_ui
-waypoint store_loopsay_auto "shop/say_0"
-choices "Comprar" buy "Vender" sell "Cancelar" end
-
-waypoint buyshow_shop true "buy"
-if item_id != -1  if item_price <= money    say_auto "shop/say_1"
-    choices "Sim" comprar_sim "Não" voltar  else    say "shop/say_2"
-  endifelse  goto endendifgoto store_loop
-
-waypoint sellif #inventory_empty == 1  say "shop/say_3"
-goto store_loopendif
-show_shop true "sell"if item_id != -1  say_auto "shop/say_4"
-  choices "Sim" vender_sim "Não" voltarelse  goto endendifgoto store_loop
-
-
-waypoint comprar_simsubtract_var money item_priceupdate_uiadd_item item_id 1play_sfx "ui_money"say "shop/say_5"
-goto store_loop
-
-waypoint vender_simadd_var money item_priceupdate_uiplay_sfx "ui_money"add_item item_id -1say "shop/say_6"
-goto store_loop
-
-
-waypoint voltargoto store_loop
-
-waypoint endset_var hide_buttons 0update_ui

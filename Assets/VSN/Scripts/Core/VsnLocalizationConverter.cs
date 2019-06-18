@@ -8,6 +8,7 @@ using UnityEngine;
 public class VsnLocalizationConverter : MonoBehaviour {
 
   Dictionary<string, string> commonCharNames;
+  Dictionary<string, string> commonChoiceTexts;
 
   public void PrepareFilesForLocalization() {
     string metadataFilePath = Application.dataPath + "/Resources/VSN Scripts/converted/strings_table.csv";
@@ -18,6 +19,12 @@ public class VsnLocalizationConverter : MonoBehaviour {
       { "\\boy", "char_name/boy" },
       { "\\girl", "char_name/girl" },
       { "", "char_name/none" }
+    };
+
+    commonChoiceTexts = new Dictionary<string, string> {
+      { "Sim", "choices/yes" },
+      { "Não", "choices/no" },
+      { "Cancelar", "choices/cancel" }
     };
 
     metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
@@ -80,7 +87,8 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
     Debug.LogWarning("new path: " + newFilePath);
 
-    int sayTexts = 0;
+    int sayCommands = 0;
+    int choiceCommands = 0;
     List<string> charNamesList = new List<string>();
 
     for(int i = 0; i < lines.Length; i++) {
@@ -109,7 +117,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
       VsnCommand vsnCommand = VsnScriptReader.InstantiateVsnCommand(commandName, vsnArguments);
       if(vsnCommand != null) {
         if(commandName == "say" || commandName == "say_auto") {
-          string textKey = metadataPath + "/say_" + sayTexts;
+          string textKey = metadataPath + "/say_" + sayCommands;
 
           content += lines[i].Replace(lines[i].TrimStart(), "");
           content += commandName;
@@ -132,10 +140,31 @@ public class VsnLocalizationConverter : MonoBehaviour {
             content += " \"" + textKey + "\"";
             metaContent += textKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"";
           }
-          content += "\n";
-          metaContent += "\n";
+          content += Environment.NewLine;
+          metaContent += Environment.NewLine;
 
-          sayTexts++;
+          sayCommands++;
+        } else if(commandName == "choices") {
+          Debug.LogWarning("TODO: IMPLEMENT THIS");
+          string textKey = metadataPath + "/choices_" + choiceCommands;
+
+          content += lines[i].Replace(lines[i].TrimStart(), "");
+          content += commandName;
+
+          for(int j=0; j<args.Count; j+=2) {
+
+            string commonChoiceKey = GetCommonChoice(args[j].Substring(1, args[j].Length - 2));
+            if(commonChoiceKey != null) {
+              content += " \"" + commonChoiceKey + "\" " + args[j + 1];
+            } else {
+              content += " \"" + textKey + "_" + (j / 2) + "\" " + args[j + 1];
+              metaContent += textKey + "_" + (j / 2) + ", \"" + args[j].Substring(1, args[j].Length - 2) + "\"" + Environment.NewLine;
+            }
+          }
+          content += Environment.NewLine;
+
+          choiceCommands++;
+          //content += lines[i];
         } else {
           content += lines[i];
         }
@@ -178,6 +207,13 @@ public class VsnLocalizationConverter : MonoBehaviour {
       if(charNamesList[i] == name) {
         return metadataPath + "/char_name_" + i;
       }
+    }
+    return null;
+  }
+
+  public string GetCommonChoice(string text) {
+    if(commonChoiceTexts.ContainsKey(text)) {
+      return commonChoiceTexts[text];
     }
     return null;
   }

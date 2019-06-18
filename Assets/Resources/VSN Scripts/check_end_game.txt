@@ -12,7 +12,7 @@ if #progress >= objective
   set_screen "hide_all"
   goto_script "fertiliel_enter"
     
-  say "Fertiliel" "Olha só, parece que já juntamos todos os casais!"
+  say "Fertiliel" "Olha só, parece que você já cumpriu sua missão!"
   goto end_game
 endif
 
@@ -22,8 +22,8 @@ end_script
 
 
 waypoint end_game
-say "Fertiliel" "Vamos ver quão bem eu fui na minha missão..."
-say "" "A sua missão era reunir \vsn[objective] casais dentro de \vsn[max_days] dias."
+say "Fertiliel" "Vamos ver quão bem você foi na sua missão..."
+//say "" "A sua missão era reunir \vsn[objective] casais dentro de \vsn[max_days] dias."
 say "Você conseguiu reunir \progress casais dentro de \day dias."
 if #progress >= objective
   say "Parabéns! Você completou a missão com sucesso!"
@@ -31,7 +31,7 @@ if #progress >= objective
   say "Obrigada por jogar o jogo e me ajudar na missão!"
 else
   say "Que pena, parece que você não conseguiu completar a missão..."
-  say "Por favor, tente novamente. Boa sorte na próxima tentativa!"
+  say "Você poderia tentar novamente. Boa sorte na próxima tentativa!"
 endif
 set_screen "hide_all"
 fade_out 2

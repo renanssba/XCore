@@ -4,27 +4,28 @@ endif
 
 say "Fertiliel" "Certos desafios devem ser solucionados pelo garoto, outros pela garota, vai depender da situação."
 if #currentEventInteractionType == 0
-  say "Fertiliel" "Este é um desafio que o garoto deve resolver. Preste atenção na personalidade dele:"
+  say "Este é um desafio que o garoto deve resolver. Preste atenção nos atributos dele:"
 endif
 if #currentEventInteractionType == 1
-  say "Fertiliel" "Este é um desafio que a garota deve resolver. Preste atenção na personalidade dela:"
+  say "Este é um desafio que a garota deve resolver. Preste atenção nos atributos dela:"
 endif
 
 //wait 0.5
 
 if #currentPersonality == 0
-  say "Sua personalidade é <color=yellow><sprite='Attributes' index=0 tint>Heróico(a)</color>. Pessoas assim sempre tentarão utilizar sua <color=yellow><sprite='Attributes' index=0 tint>Valentia</color> para resolver as situações."
+  set_var attr "<color=yellow><sprite='Attributes' index=0 tint>Valentia(a)</color>"
 endif
 if #currentPersonality == 1
-  say "Sua personalidade é <color=#248BCF><sprite='Attributes' index=1 tint>Racional</color>. Pessoas assim sempre tentarão utilizar sua <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> para resolver as situações."
+  set_var attr "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color>"
 endif
 if #currentPersonality == 2
-  say "Sua personalidade é <color=red><sprite='Attributes' index=2 tint>Emotivo(a)</color>. Pessoas assim sempre tentarão utilizar seu <color=red><sprite='Attributes' index=2 tint>Carisma</color> para resolver as situações."
+  set_var attr "<color=red><sprite='Attributes' index=2 tint>Carisma</color>"
 endif
+say "Há uma estrelinha do lado do atributo \vsn[attr]. Isso quer dizer que ele é o atributo preferido da pessoa, e que ela sempre tentará utilizá-lo sua para resolver as situações."
 
-say "Você pode deixar a pessoa utilizar seu atributo preferido ou sugestioná-la para utilizar outro atributo na situação, mas isso consome <color=yellow>AP</color>."
+say "Você pode deixar a pessoa utilizar seu atributo preferido ou sugestioná-la para utilizar outro atributo na situação, mas isso consome seu <color=yellow>AP</color>."
 
-say "Os desafios podem ser resolvidos com <color=yellow>qualquer um dos atributos</color>, mas o <color=yellow>nível exigido</color> do atributo varia de desafio para desafio."
+say "Os desafios podem ser resolvidos com <color=yellow>qualquer um dos atributos</color>, mas a <color=yellow>eficácia do atributo</color> utilizado varia de desafio para desafio."
 say "Portanto, ajude seus humanos a tomar sempre a atitude que pareça mais certa para a situação!"
 
 

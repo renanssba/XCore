@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
   public GameObject coupleEntryPrefab;
   public CoupleEntry[] coupleEntries;
   public Transform couplesPanelContent;
+  public GameObject couplesPanelEmptyIcon;
   
   public ObservationEvent[] observationSegments;
   public ObservationTile[] observationTiles;
@@ -110,6 +111,8 @@ public class GameController : MonoBehaviour {
         }
       }
     }
+
+    couplesPanelEmptyIcon.SetActive(couplesPanelContent.childCount == 0);
   }
 
 
