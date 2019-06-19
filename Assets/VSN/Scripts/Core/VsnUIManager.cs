@@ -65,6 +65,7 @@ public class VsnUIManager : MonoBehaviour {
 
   public void SetText(string msg) {
     ShowClickMessageIcon(false);
+    Utils.SelectUiElement(screenButton.gameObject);
     if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
       vsnMessageText.text = "\""+msg+ "\"";
     } else{
@@ -127,6 +128,7 @@ public class VsnUIManager : MonoBehaviour {
         bool willSetActive = (i < numberOfChoices);
         choicesButtons[i].gameObject.SetActive(willSetActive);
       }
+      Utils.SelectUiElement(choicesButtons[0].gameObject);
     }
   }
 

@@ -1,0 +1,17 @@
+fade_in 0
+if #day > max_days  set_screen "hide_all"  goto_script "fertiliel_enter"
+  say "char_name/fertiliel" "check_end_game/say_0"
+  goto end_gameendifif #progress >= objective  set_screen "hide_all"  goto_script "fertiliel_enter"
+  say "char_name/fertiliel" "check_end_game/say_1"
+  goto end_gameendif
+say "check_end_game/say_2"
+end_script
+
+waypoint end_gamesay "char_name/fertiliel" "check_end_game/say_3"
+say "check_end_game/say_4"
+if #progress >= objective  say "check_end_game/say_5"
+  say "char_name/fertiliel" "check_end_game/say_6"
+  say "check_end_game/say_7"
+else  say "check_end_game/say_8"
+  say "check_end_game/say_9"
+endifset_screen "hide_all"fade_out 2load_scene "TitleScreen"

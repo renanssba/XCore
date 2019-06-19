@@ -30,6 +30,8 @@ public class CustomizationController : MonoBehaviour {
   public GameObject customizationPanel;
   public GameObject loadingIcon;
 
+  public ScreenContext customScreenContext;
+
 
   public void Awake() {
     instance = this;
@@ -145,6 +147,7 @@ public class CustomizationController : MonoBehaviour {
     imageSearchInputField.text = "";
     ResetSearchResults();
     InitializeWebcam();
+    JoystickController.instance.AddContext(customScreenContext);
   }
 
   public void InitializeWebcam(){
@@ -165,6 +168,7 @@ public class CustomizationController : MonoBehaviour {
   public void CloseCustomizationPanel() {
     customizationPanel.SetActive(false);
     webcam.Stop();
+    JoystickController.instance.RemoveContext();
   }
 
 

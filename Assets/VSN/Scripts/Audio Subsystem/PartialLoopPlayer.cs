@@ -33,12 +33,18 @@ public class PartialLoopPlayer : MonoBehaviour {
       introSource.Play();
       loopSource.time = 0f;
       loopSource.PlayDelayed(introSource.clip.length);
-//      StartCoroutine(WaitIntroEnd());
+      //StartCoroutine(PlayWithDelay(introSource.clip.length));
+      //StartCoroutine(WaitIntroEnd());
     } else if(loopSource.clip != null) {
       loopSource.time = 0f;
       loopSource.Play();
     }
     started = true;
+  }
+
+  public IEnumerator PlayWithDelay(float waitTime) {
+    yield return new WaitForSeconds(waitTime);
+    loopSource.Play();
   }
 
   public void StopPlaying(){

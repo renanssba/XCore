@@ -18,6 +18,8 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   public ScreenTransitions screenTransition;
 
+  public ScreenContext screenContext;
+
   private ItemInteractionType interactionType;
 
   public void Awake() {
@@ -29,18 +31,21 @@ public class ItemSelectorScreen : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
     screenTransition.OpenMenuScreen();
+    JoystickController.instance.AddContext(screenContext);
   }
 
   public void OpenInventory() {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.inventory, GlobalData.instance.inventory);
     screenTransition.OpenMenuScreen();
+    JoystickController.instance.AddContext(screenContext);
   }
 
   public void OpenInput() {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize(ItemInteractionType.input, GlobalData.instance.inventory);
     screenTransition.OpenMenuScreen();
+    JoystickController.instance.AddContext(screenContext);
   }
 
   public void Initialize(ItemInteractionType type, Inventory currentItems){
@@ -110,5 +115,6 @@ public class ItemSelectorScreen : MonoBehaviour {
     VsnSaveSystem.SetVariable("item_id", -1);
     VsnController.instance.GotItemInput();
     screenTransition.CloseMenuScreen();
+    JoystickController.instance.RemoveContext();
   }
 }

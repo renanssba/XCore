@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour {
 
-  public GameObject[] buttons;
+  //public GameObject[] buttons;
+  public GameObject ptBrIcon;
+  public GameObject engIcon;
 
-  private void Awake() {
-    Utils.SelectUiElement(buttons[0]);
-  }
 
   void Start(){
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
@@ -25,14 +24,24 @@ public class TitleController : MonoBehaviour {
     /// TODO: Implement save/load feature
   }
 
+  public void ClickToggleLanguageButton() {
+    if(Lean.Localization.LeanLocalization.CurrentLanguage == "Portuguese") {
+      ClickEnglishButton();
+    } else {
+      ClickPortugueseButton();
+    }
+  }
+
   public void ClickPortugueseButton(){
     VsnAudioManager.instance.PlaySfx("ui_confirm");
     Lean.Localization.LeanLocalization.CurrentLanguage = "Portuguese";
+    JoystickController.instance.SelectStartingObject();
   }
 
   public void ClickEnglishButton() {
     VsnAudioManager.instance.PlaySfx("ui_confirm");
     Lean.Localization.LeanLocalization.CurrentLanguage = "English";
+    JoystickController.instance.SelectStartingObject();
   }
 
   public void ClickExit(){

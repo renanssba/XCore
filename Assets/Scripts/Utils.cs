@@ -265,6 +265,9 @@ public class Utils {
 
   public static void SelectUiElement(GameObject toSelect) {
     EventSystem.current.SetSelectedGameObject(toSelect);
+    if(JoystickController.instance != null) {
+      JoystickController.instance.CurrentContext().lastSelectedObject = toSelect;
+    }
   }
 }
 
