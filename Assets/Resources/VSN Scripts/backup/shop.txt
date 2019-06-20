@@ -1,0 +1,64 @@
+﻿goto_script "tutorial_shop"
+
+waypoint store_loop
+say_auto "" "Bem-vindo à loja!"
+choices "Comprar" buy "Vender" sell "Cancelar" end
+
+
+waypoint buy
+show_shop true "buy"
+
+if item_id != -1
+  if item_price <= money
+    say_auto "Você quer comprar \vsn[item_name] por \vsn[item_price]?"
+    choices "Sim" comprar_sim "Não" voltar
+  else
+    say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
+  endif
+else
+  goto end
+endif
+goto store_loop
+
+
+waypoint sell
+if #inventory_empty == 1
+  say "Você não tem nenhum item para vender."
+goto store_loop
+endif
+
+show_shop true "sell"
+if item_id != -1
+  say_auto "Você quer vender \vsn[item_name] por \vsn[item_price]?"
+  choices "Sim" vender_sim "Não" voltar
+else
+  goto end
+endif
+goto store_loop
+
+
+
+waypoint comprar_sim
+subtract_var money item_price
+update_ui
+add_item item_id 1
+play_sfx "ui_money"
+say "Você adquiriu \vsn[item_name]!"
+goto store_loop
+
+
+waypoint vender_sim
+add_var money item_price
+update_ui
+play_sfx "ui_money"
+add_item item_id -1
+say "Obrigado!"
+goto store_loop
+
+
+
+waypoint voltar
+goto store_loop
+
+
+waypoint end

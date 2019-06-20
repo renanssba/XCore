@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
 [System.Serializable]
@@ -8,8 +9,9 @@ public class ScreenContext {
   public string name;
 
   public GameObject startingSelectedObject;
-
   public GameObject lastSelectedObject;
+
+  public bool preventNoElementSelected = true;
 
   public UnityEvent confirmButtonEvent;
   public UnityEvent menuButtonEvent;
@@ -40,6 +42,18 @@ public class JoystickController : MonoBehaviour {
 
   public void Update () {
     if(CurrentContext() != null) {
+      // prevent from having no UI element selected
+      if(CurrentContext().preventNoElementSelected && EventSystem.current.currentSelectedGameObject == null) {
+        Utils.SelectUiElement(CurrentContext().lastSelectedObject);
+      }
+
+      // set last selected object
+      if(CurrentContext().lastSelectedObject != EventSystem.current.currentSelectedGameObject &&
+         EventSystem.current.currentSelectedGameObject != null) {
+        SfxManager.StaticPlaySelectSfx();
+        CurrentContext().lastSelectedObject = EventSystem.current.currentSelectedGameObject;
+      }
+
       if(Input.GetButtonDown("Submit") && CurrentContext().confirmButtonEvent != null) {
         Debug.LogWarning("Clicked Select button");
         CurrentContext().confirmButtonEvent.Invoke();

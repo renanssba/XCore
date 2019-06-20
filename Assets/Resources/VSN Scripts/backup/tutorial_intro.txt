@@ -1,0 +1,38 @@
+if tutorial_date == 1
+  goto end
+endif
+
+set_var hide_buttons 1
+update_ui
+set_screen "hide_all"
+fade_out 0
+wait 0.1
+fade_in 0.5
+
+
+wait 0.3
+goto_script "fertiliel_enter"
+say "Fertiliel" "Seja bem-vindo ao Fertiliel - Simulador de Cupido. Como um companheiro cupido, o seu objetivo é juntar casais."
+say "Para juntar um casal ele precisa ter um <color=yellow>Encontro</color> bem sucedido."
+say "Nesta versão Alfa a sua missão será: juntar \vsn[objective] casal em um período de 5 dias."
+
+char_move_x fertiliel 0.14 0.5
+wait 0.5
+
+set_screen "choose_observation_target"
+wait 0.5
+say "Você por enquanto conhece e pode observar estes dois humanos. Perceba que o rapaz e a moça possuem 3 atributos."
+say "Os atributos são: <color=yellow><sprite='Attributes' index=0 tint>Valentia</color>, <color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color> e <color=red><sprite='Attributes' index=2 tint>Carisma</color>. Seus valores vão de 1 (Sofrível) até 10 (Sobrehumano)."
+say "É interessante que seus humanos tenham valores altos nos atributos, pois é o que eles usarão para vencer os desafios que aparecem durante os <color=yellow>Encontros</color>."
+say "Você pode aumentar estes atributos através de treino ou itens equipados."
+
+
+say "Todo dia começa pela <color=yellow>Manhã</color>. Neste momento você pode escolher um dos seus humanos para acompanhar durante o dia."
+say "Escolha um deles para continuarmos."
+goto_script "fertiliel_exit"
+goto_script "show_people_screen"
+
+waypoint end
+goto_script "show_people_screen"
+set_var hide_buttons 0
+update_ui

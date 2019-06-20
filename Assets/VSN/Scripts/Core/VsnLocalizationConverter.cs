@@ -130,7 +130,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
             } else {
               charNameKey = metadataPath + "/char_name_" + charNamesList.Count;
               charNamesList.Add(args[0].Substring(1, args[0].Length - 2));
-              metaContentNames += charNameKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"\n";
+              metaContentNames += charNameKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"" + Environment.NewLine;
             }
 
             content += " \"" + charNameKey + "\" \"" + textKey + "\"";

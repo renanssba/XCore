@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 0
+  m_inputSource: 3
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -3279,7 +3279,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1896766290}
   - component: {fileID: 1896766289}
-  - component: {fileID: 1896766291}
   - component: {fileID: 1896766292}
   m_Layer: 0
   m_Name: '[Title Controller]'
@@ -3314,19 +3313,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1896766291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1896766288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45dd1b8a171985a43b74f8a3f15045cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  previousSelected: {fileID: 0}
-  preventNoElementSelected: 1
 --- !u!114 &1896766292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3341,6 +3327,8 @@ MonoBehaviour:
   screenContexts:
   - name: Title Screen
     startingSelectedObject: {fileID: 374759389}
+    lastSelectedObject: {fileID: 0}
+    preventNoElementSelected: 1
     confirmButtonEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -3372,7 +3360,6 @@ MonoBehaviour:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    lastSelectedObject: {fileID: 0}
 --- !u!1 &1897105026
 GameObject:
   m_ObjectHideFlags: 0

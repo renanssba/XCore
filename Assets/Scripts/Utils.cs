@@ -267,12 +267,11 @@ public class Utils {
   public static void SelectUiElement(GameObject toSelect) {
     EventSystem.current.SetSelectedGameObject(toSelect);
     if(JoystickController.instance != null) {
-      if(toSelect != null) {
-        Debug.LogError("setting lastSelectedObject: " + toSelect.name);
-      } else {
-        Debug.LogError("setting lastSelectedObject: null");
-      }
-      
+      //if(toSelect != null) {
+      //  Debug.LogError("setting lastSelectedObject: " + toSelect.name);
+      //} else {
+      //  Debug.LogError("setting lastSelectedObject: null");
+      //}      
       JoystickController.instance.CurrentContext().lastSelectedObject = toSelect;
     }
   }

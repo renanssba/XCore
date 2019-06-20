@@ -104,7 +104,7 @@ public class ItemSelectorScreen : MonoBehaviour {
       } else {
         Utils.SelectUiElement(null);
       }
-      Debug.LogError("item setting lastSelectedObject: " + EventSystem.current.currentSelectedGameObject.name);
+      //Debug.LogError("item setting lastSelectedObject: " + EventSystem.current.currentSelectedGameObject.name);
       JoystickController.instance.CurrentContext().lastSelectedObject = EventSystem.current.currentSelectedGameObject;
     } else {
       emptyIcon.SetActive(true);

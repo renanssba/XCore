@@ -1,3 +1,4 @@
+if tutorial_observation == 0  play_sfx "ui_locked"  end_scriptendif
 set_var situation 0set_screen "hide_all"fade_out 0.5bg null
 if observation_played == 1  say "spend_day/say_0"
   stop_music  wait 0.3  play_sfx "sleep"  play_sfx "sleep"  wait 5  pass_day  update_ui  wait 0.3
