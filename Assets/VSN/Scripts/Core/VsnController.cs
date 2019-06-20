@@ -38,6 +38,8 @@ public class VsnController : MonoBehaviour {
   public List<VsnScriptReader> scriptsStack;
   public List<VsnScriptReader> nextScripts;
 
+  public ScreenContext vsnContext;
+
   void Awake() {
     if(instance == null) {
       instance = this;
@@ -71,6 +73,8 @@ public class VsnController : MonoBehaviour {
   public void StartVSNContent(string content, string scriptPath, VsnArgument[] args = null){
     if(state == ExecutionState.STOPPED) {
       CleanVsnElements();
+
+      JoystickController.instance.AddContext(vsnContext);
 
       scriptsStack.Add(new VsnScriptReader());
       CurrentScriptReader().LoadScriptContent(content, scriptPath, args);
@@ -225,6 +229,7 @@ public class VsnController : MonoBehaviour {
       VsnUIManager.instance.ShowSkipButton(false);
     }
     BlockExternalInput(false);
+    JoystickController.instance.RemoveContext();
   }
 
   public void BlockExternalInput(bool value){

@@ -10,13 +10,17 @@ public class SelectedDecoration : MonoBehaviour {
 
 	void Start () {
     group = GetComponent<CanvasGroup>();
-	}
-	
-	void Update () {
-		if(EventSystem.current.currentSelectedGameObject == selectedObject) {
-      group.alpha = 1f;
-    }else{
-      group.alpha = 0f;
+    StartCoroutine(Check());
+  }
+
+  public IEnumerator Check() {
+    while(true) {
+      yield return new WaitForSeconds(0.1f);
+      if(EventSystem.current.currentSelectedGameObject == selectedObject) {
+        group.alpha = 1f;
+      } else {
+        group.alpha = 0f;
+      }
     }
-	}
+  }
 }

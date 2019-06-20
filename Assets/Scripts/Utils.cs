@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
@@ -266,7 +267,37 @@ public class Utils {
   public static void SelectUiElement(GameObject toSelect) {
     EventSystem.current.SetSelectedGameObject(toSelect);
     if(JoystickController.instance != null) {
+      if(toSelect != null) {
+        Debug.LogError("setting lastSelectedObject: " + toSelect.name);
+      } else {
+        Debug.LogError("setting lastSelectedObject: null");
+      }
+      
       JoystickController.instance.CurrentContext().lastSelectedObject = toSelect;
+    }
+  }
+
+  public static void GenerateNavigation(Button[] navigatableObjects) {
+    Navigation navi = new Navigation {
+      mode = Navigation.Mode.Explicit
+    };
+
+    if(navigatableObjects.Length <= 1) {
+      return;
+    }
+
+    for(int i = 0; i < navigatableObjects.Length; i++) {
+      if(i == 0) {
+        navi.selectOnDown = navigatableObjects[i + 1];
+        navi.selectOnUp = null;
+      } else if(i == navigatableObjects.Length - 1) {
+        navi.selectOnDown = null;
+        navi.selectOnUp = navigatableObjects[i - 1];
+      } else {
+        navi.selectOnUp = navigatableObjects[i - 1];
+        navi.selectOnDown = navigatableObjects[i + 1];
+      }
+      navigatableObjects[i].navigation = navi;
     }
   }
 }

@@ -85,5 +85,6 @@ public class ItemUI : MonoBehaviour {
     VsnController.instance.GotItemInput();
     //UIController.GetInstance().itemSelectorScreen.gameObject.SetActive(false);
     ItemSelectorScreen.instance.screenTransition.CloseMenuScreen();
+    JoystickController.instance.RemoveContext();
   }
 }

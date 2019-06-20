@@ -77,6 +77,7 @@ public class ObservationTile : MonoBehaviour {
     GameController.instance.observationSegments[0] = evt;
 
     Utils.SelectUiElement(null);
+    JoystickController.instance.CurrentContext().lastSelectedObject = gameObject;
     VsnController.instance.StartVSNContent("wait 1", "custom");
     GameController.instance.WalkToObservationTile(this);
   }

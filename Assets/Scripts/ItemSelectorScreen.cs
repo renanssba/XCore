@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -22,30 +23,34 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   private ItemInteractionType interactionType;
 
+  public GameObject emptyIcon;
+
   public void Awake() {
     instance = this;
     gameObject.SetActive(false);
   }
 
-  public void OpenStore() {
-    VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
-    screenTransition.OpenMenuScreen();
-    JoystickController.instance.AddContext(screenContext);
+  public void OpenBuyStore() {
+    OpenItemSelectorGeneric(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
+  }
+
+  public void OpenSellStore() {
+    OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.inventory);
   }
 
   public void OpenInventory() {
-    VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    Initialize(ItemInteractionType.inventory, GlobalData.instance.inventory);
-    screenTransition.OpenMenuScreen();
-    JoystickController.instance.AddContext(screenContext);
+    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.inventory);
   }
 
   public void OpenInput() {
+    OpenItemSelectorGeneric(ItemInteractionType.input, GlobalData.instance.inventory);
+  }
+
+  public void OpenItemSelectorGeneric(ItemInteractionType interType, Inventory inv) {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    Initialize(ItemInteractionType.input, GlobalData.instance.inventory);
-    screenTransition.OpenMenuScreen();
     JoystickController.instance.AddContext(screenContext);
+    Initialize(interType, inv);
+    screenTransition.OpenMenuScreen();
   }
 
   public void Initialize(ItemInteractionType type, Inventory currentItems){
@@ -55,7 +60,7 @@ public class ItemSelectorScreen : MonoBehaviour {
     currentMoneyText.text = VsnSaveSystem.GetIntVariable("money").ToString();
 
     interactionType = type;
-    ResetItems();
+    ClearItems();
     InitializeItems(currentItems);
   }
 
@@ -78,21 +83,45 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   
   void InitializeItems(Inventory currentItems){
+    List<Button> createdObjects = new List<Button>();
+    GameObject current;
+
     for(int i = 0; i < currentItems.items.Count; i++) {
-      CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
+      current = CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
+      if(current != null) {
+        createdObjects.Add(current.GetComponent<Button>());
+      }
+    }
+    Debug.Log("child count: " + itemsHolder.transform.childCount);
+
+    Utils.GenerateNavigation(createdObjects.ToArray());
+
+    if(itemsHolder.transform.childCount > 0) {
+      emptyIcon.SetActive(false);
+      gameObject.SetActive(true);
+      if(createdObjects.Count > 0) {
+        Utils.SelectUiElement(createdObjects[0].gameObject);
+      } else {
+        Utils.SelectUiElement(null);
+      }
+      Debug.LogError("item setting lastSelectedObject: " + EventSystem.current.currentSelectedGameObject.name);
+      JoystickController.instance.CurrentContext().lastSelectedObject = EventSystem.current.currentSelectedGameObject;
+    } else {
+      emptyIcon.SetActive(true);
     }
   }
 
 
-  void CreateItem(int itemId, int amount){
+  GameObject CreateItem(int itemId, int amount){
     if(interactionType == ItemInteractionType.store_buy &&
        Item.GetItem(itemId).type == ItemType.celestial &&
        GlobalData.instance.inventory.HasItem(itemId)){
-      return;
+      return null;
     }
 
     GameObject obj = Instantiate(itemPrefab, itemsHolder.transform) as GameObject;
     obj.GetComponent<ItemUI>().Initialize(itemId, interactionType, amount);
+    return obj;
   }
 
 
@@ -100,13 +129,12 @@ public class ItemSelectorScreen : MonoBehaviour {
     screenNameText.text = name;
   }
 
-  public void ResetItems(){
+  public void ClearItems(){
     int childCount = itemsHolder.transform.childCount;
-
-    Debug.Log("child count: " + childCount);
 
     for(int i=0; i<childCount; i++){
       Destroy(itemsHolder.transform.GetChild(i).gameObject);
+      //itemsHolder.transform.GetChild(i).gameObject.SetActive(false);
     }
   }
 

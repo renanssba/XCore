@@ -128,6 +128,8 @@ public class VsnUIManager : MonoBehaviour {
         bool willSetActive = (i < numberOfChoices);
         choicesButtons[i].gameObject.SetActive(willSetActive);
       }
+
+      Utils.GenerateNavigation(choicesButtons);
       Utils.SelectUiElement(choicesButtons[0].gameObject);
     }
   }

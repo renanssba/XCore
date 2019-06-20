@@ -9,12 +9,13 @@ public class ScreenContext {
 
   public GameObject startingSelectedObject;
 
+  public GameObject lastSelectedObject;
+
   public UnityEvent confirmButtonEvent;
   public UnityEvent menuButtonEvent;
   public UnityEvent squareButtonEvent;
   public UnityEvent backButtonEvent;
 
-  public GameObject lastSelectedObject;
 
   public ScreenContext() {
     lastSelectedObject = startingSelectedObject;
@@ -71,12 +72,33 @@ public class JoystickController : MonoBehaviour {
     SelectStartingObject();
   }
 
+  public ScreenContext GetContext(string name) {
+    for(int i = 0; i < screenContexts.Count; i++) {
+      if(screenContexts[i].name == name) {
+        return screenContexts[i];
+      }
+    }
+    return null;
+  }
+
+  public void RemoveContext(string name) {
+    for(int i=0; i<screenContexts.Count; i++) {
+      if(screenContexts[i].name == name) {
+        screenContexts.RemoveAt(i);
+        return;
+      }
+    }
+  }
+
   public void RemoveContext() {
     screenContexts.RemoveAt(screenContexts.Count-1);
     SelectLastSelectedObject();
   }
 
   public ScreenContext CurrentContext() {
+    if(screenContexts.Count <= 0) {
+      return null;
+    }
     return screenContexts[screenContexts.Count-1];
   }
 }

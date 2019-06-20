@@ -52,6 +52,8 @@ public class GameController : MonoBehaviour {
   public Image[] failIcons;
   public Image[] unresolvedIcons;
 
+  public Button[] menuButton;
+
   public ParticleGenerator babiesParticleGenerator;
   public Image[] engagementScreenImages;
   public GameObject engagementScreen;
@@ -87,11 +89,12 @@ public class GameController : MonoBehaviour {
     }
   }
 
-  public void UpdateCouplesPanelContent() {
+  public Button UpdateCouplesPanelContent() {
     int childCount = couplesPanelContent.transform.childCount;
     Person boy;
     Person girl;
     GameObject newobj;
+    Button first = null;
 
     // reset couples panel content
     for(int i = 0; i < childCount; i++) {
@@ -108,11 +111,18 @@ public class GameController : MonoBehaviour {
           girl.state != PersonState.shipped) {
           newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
           newobj.GetComponent<CoupleEntry>().Initialize(boy, girl);
+
+          if(first == null) {
+            first = newobj.GetComponentInChildren<Button>();
+          }
         }
       }
     }
 
     couplesPanelEmptyIcon.SetActive(couplesPanelContent.childCount == 0);
+
+
+    return first;
   }
 
 
@@ -314,8 +324,12 @@ public class GameController : MonoBehaviour {
 
   public void SetScreenLayout(string state){
     TheaterController theater = TheaterController.instance;
+    Button firstButton = null;
     foreach(PersonCard p in personCards) {
       p.gameObject.SetActive(p.person.state == PersonState.available);
+      if(firstButton == null) {
+        firstButton = p.transform.GetChild(6).GetChild(0).GetComponent<Button>();
+      }
     }
 
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
@@ -367,7 +381,7 @@ public class GameController : MonoBehaviour {
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_3");
         bgImage.SetActive(true);
         peoplePanel.HidePanel();
-        UpdateCouplesPanelContent();
+        firstButton = UpdateCouplesPanelContent();
         couplesPanel.ShowPanel();
         buttonsPanel.ShowPanel();
         progressPanel.ShowPanel();
@@ -389,7 +403,33 @@ public class GameController : MonoBehaviour {
         observationMap.HidePanel();
         break;
     }
+    SetupContext(state, firstButton);
     UpdateUI();
+  }
+
+
+  public void SetupContext(string state, Button firstButton) {
+    if(firstButton != null) {
+      JoystickController.instance.GetContext("Basic Context").lastSelectedObject = firstButton.gameObject;
+    } else {
+      JoystickController.instance.GetContext("Basic Context").lastSelectedObject = menuButton[0].gameObject;
+    }
+    //switch(state) {
+    //  case "choose_observation_target":
+    //    if(firstButton != null) {
+    //      JoystickController.instance.CurrentContext().lastSelectedObject = firstButton.gameObject;
+    //    } else {
+    //      JoystickController.instance.CurrentContext().lastSelectedObject = menuButton[0].gameObject;
+    //    }
+    //    break;
+    //  case "choose_date_target":
+    //    if(firstButton != null) {
+    //      JoystickController.instance.CurrentContext().lastSelectedObject = firstButton.gameObject;
+    //    } else {
+    //      JoystickController.instance.CurrentContext().lastSelectedObject = menuButton[0].gameObject;
+    //    }
+    //    break;
+    //}
   }
 
   public void HidePeople(){
@@ -453,6 +493,8 @@ public class GameController : MonoBehaviour {
 
     observationTiles[startingTile].wasUsed = true;
     playerToken.transform.position = observationTiles[startingTile].transform.position; // starting player position
+
+    JoystickController.instance.AddContext(observationMap.context);
   }
 
   public void WalkToObservationTile(ObservationTile tile){

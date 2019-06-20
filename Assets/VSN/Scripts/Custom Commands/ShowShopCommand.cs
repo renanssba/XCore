@@ -13,14 +13,14 @@ namespace Command {
       if(args[0].GetBooleanValue()) {
         switch (args[1].GetStringValue()) {
           case "buy":
-            itemScreen.Initialize(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
+            itemScreen.OpenBuyStore();// (ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
             break;
           case "sell":
-            itemScreen.Initialize(ItemInteractionType.store_sell, GlobalData.instance.inventory);
+            itemScreen.OpenSellStore();// Initialize(ItemInteractionType.store_sell, GlobalData.instance.inventory);
             break;
         }
-        VsnAudioManager.instance.PlaySfx("ui_menu_open");
-        itemScreen.screenTransition.OpenMenuScreen();
+        //VsnAudioManager.instance.PlaySfx("ui_menu_open");
+        //itemScreen.screenTransition.OpenMenuScreen();
         VsnController.instance.WaitForCustomInput();
       } else {
         itemScreen.gameObject.SetActive(false);

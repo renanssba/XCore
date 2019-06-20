@@ -9,6 +9,8 @@ public class ScreenTransitions : MonoBehaviour {
   public RectTransform myRect;
   public CanvasGroup shadeCanvasGroup;
 
+  public ScreenContext context;
+
   public static float fadeTime = 0.3f;
 
 
