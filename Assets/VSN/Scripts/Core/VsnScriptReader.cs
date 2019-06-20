@@ -16,6 +16,8 @@ public class VsnScriptReader {
   public VsnArgument[] args;
   public int currentCommandIndex;
 
+  public string[] readableLines;
+
   public VsnScriptReader(){
     currentCommandIndex = 0;
     loadedScriptName = "custom";
@@ -23,12 +25,30 @@ public class VsnScriptReader {
 
 
   public void LoadScriptContent(string content, string scriptName, VsnArgument[] newArgs) {
+    string[] divs = new string[3];
+    //divs[0] = "\n";
+    divs[0] = "\r\nbla";
+    divs[1] = "\n\rbla";
+    divs[2] = Environment.NewLine;
+
+    AnalyzeString(content);
+
     loadedScriptName = scriptName;
-    string[] lines = content.Split('\n');
+    string[] lines = content.Split(divs, StringSplitOptions.None);
+
+    readableLines = lines;
 
     ResetWaypoints();
     vsnCommands = ParseVSNCommands(lines);
     args = newArgs;
+  }
+
+  public void AnalyzeString(string text) {
+    for(int i=0; i<text.Length; i++) {
+      if(i == '\r' || i == '\n') {
+        Debug.LogError("char[i]: " + text[i]);
+      }
+    }
   }
 
   public void SetArgs(){
