@@ -254,20 +254,20 @@ public class VsnController : MonoBehaviour {
 
 
   public void Update(){
-    if(Input.GetKeyDown(KeyCode.KeypadEnter) ||
-       Input.GetKeyDown(KeyCode.Return) ||
-       Input.GetKeyDown(KeyCode.Space)){
-      switch(state){
-        case ExecutionState.WAITINGTEXTINPUT:
-          if(Input.GetKeyDown(KeyCode.Space)){
-            break;
-          }
-          VsnUIManager.instance.OnTextInputConfirm();
-          break;
-        case ExecutionState.WAITINGTOUCH:
-          VsnUIManager.instance.OnScreenButtonClick();
-          break;
-      }
-    }
+    //if(Input.GetKeyDown(KeyCode.KeypadEnter) ||
+    //   Input.GetKeyDown(KeyCode.Return) ||
+    //   Input.GetKeyDown(KeyCode.Space)){
+    //  switch(state){
+    //    case ExecutionState.WAITINGTEXTINPUT:
+    //      if(Input.GetKeyDown(KeyCode.Space)){
+    //        break;
+    //      }
+    //      VsnUIManager.instance.OnTextInputConfirm();
+    //      break;
+    //    case ExecutionState.WAITINGTOUCH:
+    //      VsnUIManager.instance.OnScreenButtonClick();
+    //      break;
+    //  }
+    //}
   }
 }

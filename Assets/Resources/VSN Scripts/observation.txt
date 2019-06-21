@@ -14,7 +14,7 @@ if #observationEventType <= 1
   if #isEncounterPersonUnrevealed == 1
     reveal_person
     play_sfx "relationship_up"
-    say "Você encontrou \encounterPerson pela primeira vez!"
+    say "observation/say_0"
   endif
 endif
 
@@ -43,7 +43,7 @@ update_ui
 
 
 if observation_energy <= 0
-  say "" "Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia."
+  say "char_name/none" "observation/say_1"
 endif
 
 
@@ -61,3 +61,4 @@ endif
 
 
 set_var situation 0
+

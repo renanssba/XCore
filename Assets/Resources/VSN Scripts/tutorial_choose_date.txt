@@ -1,23 +1,23 @@
-if tutorial_choose_date == 1
+﻿if tutorial_choose_date == 1
   goto end
 endif
 
 goto_script "fertiliel_enter" 0.14
-say "Fertiliel" "Durante a <color=yellow>Tarde</color> você pode influenciar um casal de humanos que já se conhece e se gosta para ir a um <color=yellow>Encontro</color>."
+say "char_name/fertiliel" "tutorial_choose_date/say_0"
 
 if #availableCouples == 0
-  say "Parece que você não tem nenhum casal disponível no momento..."
-  say "Neste caso seria bom você procurar pessoas para paquerar na manhã do próximo dia."
-  say "Clique em 'Descansar' para passar o dia."
+  say "tutorial_choose_date/say_1"
+  say "tutorial_choose_date/say_2"
+  say "tutorial_choose_date/say_3"
   goto exit
 endif
 if #availableCouples == 1
-  say "Ótimo, você tem casais nesta situação! Agora é só escolher qual deles você quer que vá para o Encontro."
+  say "tutorial_choose_date/say_4"
 endif
 if #availableCouples >= 1
-  say "Ótimo, você tem um casal nesta situação!"
+  say "tutorial_choose_date/say_5"
 endif
-say "Para começar o <color=yellow>Encontro</color>, basta clicar no botão Encontro do casal que você quer unir."
+say "tutorial_choose_date/say_6"
 
 
 waypoint exit
@@ -25,3 +25,4 @@ goto_script "fertiliel_exit"
 set_var tutorial_choose_date 1
 
 waypoint end
+

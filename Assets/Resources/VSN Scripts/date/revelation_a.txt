@@ -1,44 +1,45 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "\boy nota que \girl está distraída e com o olhar vazio."
-say "Conversando com ela, \girl revela que está com problemas pessoais."
+say "char_name/none" "date/revelation_a/say_0"
+say "date/revelation_a/say_1"
 end_script
 
 
 
 waypoint guts_success
-say "" "\boy olha com determinação no fundo dos olhos de \girl e exclama:"
-say "\boy" "Vai dar tudo certo! Eu acredito em você!"
-say "" "\girl se sente motivada!"
+say "char_name/none" "date/revelation_a/say_2"
+say "char_name/boy" "date/revelation_a/say_3"
+say "char_name/none" "date/revelation_a/say_4"
 end_script
 
 waypoint intelligence_success
-say "" "\boy analisa os problemas de \girl, recomendando soluções."
-say "\girl admira a racionalidade de \boy. Tão pragmático!"
+say "char_name/none" "date/revelation_a/say_5"
+say "date/revelation_a/say_6"
 end_script
 
 waypoint charisma_success
-say "" "\boy escuta compreensivamente enquanto \girl explica o que a aflige."
-say "\girl agradece. Às vezes, as pessoas só precisam de um ombro amigo."
+say "char_name/none" "date/revelation_a/say_7"
+say "date/revelation_a/say_8"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\boy olha com determinação no fundo dos olhos de \girl e exclama:"
-say "\boy" "Vai dar tudo certo! Eu acredito em você!"
-say "" "Infelizmente nem todos os problemas se resolvem só com motivação."
+say "char_name/none" "date/revelation_a/say_9"
+say "char_name/boy" "date/revelation_a/say_10"
+say "char_name/none" "date/revelation_a/say_11"
 end_script
 
 waypoint intelligence_fail
-say "" "\boy analisa os problemas de \girl, recomendando soluções."
-say "\girl fica indignada."
+say "char_name/none" "date/revelation_a/say_12"
+say "date/revelation_a/say_13"
 end_script
 
 waypoint charisma_fail
-say "" "\boy escuta compreensivamente enquanto \girl explica o que a aflige."
-say "\girl ainda parece muito triste. Às vezes pessoas precisam de soluções práticas."
+say "char_name/none" "date/revelation_a/say_14"
+say "date/revelation_a/say_15"
 end_script
+
 
 

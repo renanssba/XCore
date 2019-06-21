@@ -9,7 +9,7 @@ fade_out 0.5
 bg null
 
 if observation_played == 1
-  say "Você foi dormir e descansar para o próximo dia."
+  say "spend_day/say_0"
   stop_music
   wait 0.3
   play_sfx "sleep"
@@ -20,16 +20,15 @@ if observation_played == 1
   wait 0.3
 
   play_music "observacao_intro" "observacao_loop"
-  
+
   fade_in 0.5
   goto_script "show_people_screen"
   goto_script "check_end_game"
 else
   set_var observation_played 1
-  say "Você descansou um pouco até de tarde."
-  
+  say "spend_day/say_1"
+
   fade_in 0.5
   goto_script "show_people_screen"
 endif
-  
 

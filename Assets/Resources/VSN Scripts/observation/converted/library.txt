@@ -1,4 +1,9 @@
-goto *arg1
-waypoint event_statementsay "char_name/none" "observation/library/say_0"
-play_sfx "relationship_up"improve_attribute "intelligence" 1say "observation/library/say_1"
-end_script
+﻿goto *arg1
+
+waypoint event_statement
+say "char_name/none" "observation/library/say_0"
+play_sfx "relationship_up"
+improve_attribute "intelligence" 1
+say "observation/library/say_1"
+end_script
+

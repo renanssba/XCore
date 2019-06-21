@@ -1,4 +1,4 @@
-ï»¿if tutorial_observation == 0
+if tutorial_observation == 0
   play_sfx "ui_locked"
   end_script
 endif
@@ -9,7 +9,7 @@ fade_out 0.5
 bg null
 
 if observation_played == 1
-  say "VocÃª foi dormir e descansar para o prÃ³ximo dia."
+  say "Você foi dormir e descansar para o próximo dia."
   stop_music
   wait 0.3
   play_sfx "sleep"
@@ -26,10 +26,8 @@ if observation_played == 1
   goto_script "check_end_game"
 else
   set_var observation_played 1
-  say "VocÃª descansou um pouco atÃ© de tarde."
+  say "Você descansou um pouco até de tarde."
   
   fade_in 0.5
   goto_script "show_people_screen"
 endif
-  
-

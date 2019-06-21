@@ -1,48 +1,49 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "Uma amiga muito tagarela liga para \girl no meio do encontro."
-say "\girl tenta desligar delicadamente, mas a amiga insiste."
+say "char_name/none" "date/call_a/say_0"
+say "date/call_a/say_1"
 end_script
 
 
 
 waypoint guts_success
-say "" "\girl se enfurece e joga o celular no chão! O aparelho se estraçalha."
-say "\girl" "Um celular é substituível, mas um momento com você é sempre único."
-say "" "\boy fica estarrecido."
+say "char_name/none" "date/call_a/say_2"
+say "char_name/girl" "date/call_a/say_3"
+say "char_name/none" "date/call_a/say_4"
 end_script
 
 waypoint intelligence_success
-say "\girl" "Você sabia que falar no celular demais causa câncer?"
-say "Amiga" "Caramba, sabia não!"
-say "" "De posse dessa informação assustadora, a amiga de \girl resolve desligar."
+say "char_name/girl" "date/call_a/say_5"
+say "date/call_a/char_name_0" "date/call_a/say_6"
+say "char_name/none" "date/call_a/say_7"
 end_script
 
 waypoint charisma_success
-say "\girl" "Tchhh, tchhhh, estou entrando num túnel!"
-say "" "Após \girl aplicar esse velho truque, o casal está livre para conversar novamente!"
+say "char_name/girl" "date/call_a/say_8"
+say "char_name/none" "date/call_a/say_9"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\girl se enfurece e joga o celular no chão! O aparelho se estraçalha."
-say "\boy" "Porque você fez isso?"
-say "\girl" "Eu... não sei."
-say "\boy fica assustado."
+say "char_name/none" "date/call_a/say_10"
+say "char_name/boy" "date/call_a/say_11"
+say "char_name/girl" "date/call_a/say_12"
+say "date/call_a/say_13"
 end_script
 
 waypoint intelligence_fail
-say "\girl" "Você sabia que falar no celular demais causa câncer?"
-say "Amiga" "Não, não sabia! Me conta mais sobre isso!"
-say "\girl fica no celular por mais dez minutos. \boy fica muito entediada."
+say "char_name/girl" "date/call_a/say_14"
+say "date/call_a/char_name_0" "date/call_a/say_15"
+say "date/call_a/say_16"
 end_script
 
 waypoint charisma_fail
-say "" "\girl, num momento de desespero, pergunta se a amiga não quer falar com \boy. Imediatamente ela percebe seu erro."
-say "\boy fica no celular com a amiga de \girl por mais dez minutos."
-say "Não foi uma experiência agradável."
+say "char_name/none" "date/call_a/say_17"
+say "date/call_a/say_18"
+say "date/call_a/say_19"
 end_script
+
 
 

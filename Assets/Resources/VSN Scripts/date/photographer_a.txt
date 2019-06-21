@@ -1,49 +1,50 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "???" "Nossa, mas que casal irreverente! *FLASH* Que único! *FLASH*"
-say "Que curioso, curioso! Deem um sorriso para a câmera! *FLASH*"
-say "" "Depois de se recuperar da cegueira temporária, \girl se dá conta de que um fotógrafo está tirando fotos deles por alguma razão."
+say "date/photographer_a/char_name_0" "date/photographer_a/say_0"
+say "date/photographer_a/say_1"
+say "char_name/none" "date/photographer_a/say_2"
 end_script
 
 
 
 waypoint guts_success
-say "\girl" "Pode parar!"
-say "" "\girl tampa a lente da câmera com a mão. O fotógrafo sai resmungando algo sobre censura."
-say "\boy fica aliviado por poder enxergar novamente."
+say "char_name/girl" "date/photographer_a/say_3"
+say "char_name/none" "date/photographer_a/say_4"
+say "date/photographer_a/say_5"
 end_script
 
 waypoint intelligence_success
-say "" "\girl diz que tirar fotos de alguém sem consentimento é crime. O fotógrafo irritante vai embora."
-say "\boy fica aliviado por poder enxergar novamente."
+say "char_name/none" "date/photographer_a/say_6"
+say "date/photographer_a/say_7"
 end_script
 
 waypoint charisma_success
-say "" "\girl começa a posar para as fotos, o que deixa o fotógrafo motivado a continuar."
-say "Fotógrafo" "Isso aí! Linda, super linda!"
-say "" "\girl menciona o custo para o uso de seus direitos de imagem."
-say "O fotógrafo sai correndo. \boy fica aliviado por poder enxergar novamente."
+say "char_name/none" "date/photographer_a/say_8"
+say "date/photographer_a/char_name_1" "date/photographer_a/say_9"
+say "char_name/none" "date/photographer_a/say_10"
+say "date/photographer_a/say_11"
 end_script
 
 
 
 waypoint guts_fail
-say "\girl" "Pode parar!"
-say "" "\girl tenta tampar a lente da câmera com a mão. Ela erra o cálculo e acaba dando um tapão na câmera, que se espatifa no chão."
-say "Fotógrafo" "Ei, essa câmera custa uma fortuna! Exijo reembolso!"
-say "\boy e \girl saem do local com a promessa de receber uma conta salgada pelo correio."
+say "char_name/girl" "date/photographer_a/say_12"
+say "char_name/none" "date/photographer_a/say_13"
+say "date/photographer_a/char_name_1" "date/photographer_a/say_14"
+say "date/photographer_a/say_15"
 end_script
 
 waypoint intelligence_fail
-say "" "\girl tenta pensar em uma boa argumentação para impedir o homem de tirar fotos, mas nada surge na cabeça dela."
-say "A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável."
+say "char_name/none" "date/photographer_a/say_16"
+say "date/photographer_a/say_17"
 end_script
 
 waypoint charisma_fail
-say "" "\girl começa a posar para as fotos."
-say "Fotógrafo" "Não, não! O foco aqui é ele, minha filha!"
-say "" "O fotógrafo aponta para \boy. A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável."
+say "char_name/none" "date/photographer_a/say_18"
+say "date/photographer_a/char_name_1" "date/photographer_a/say_19"
+say "char_name/none" "date/photographer_a/say_20"
 end_script
+
 
 

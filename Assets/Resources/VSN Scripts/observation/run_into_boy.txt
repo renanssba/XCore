@@ -1,16 +1,17 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "\observedPerson está caminhando distraída. Subitamente, a menina ouve barulho de passos apressados virando o corredor."
-say_auto "Antes que ela pudesse reagir, BAM! \encounterPerson colide com ela! Ele parece bem, mas \observedPerson recebeu todo o tranco e está um pouco tonta."
+say "char_name/none" "observation/run_into_boy/say_0"
+say_auto "observation/run_into_boy/say_1"
 end_script
 
 
 
 waypoint help_success
-say "" "\observedPerson se recupera em meio a diversos pedidos de desculpas do menino. Felizmente, ela está bem!"
+say "char_name/none" "observation/run_into_boy/say_2"
 end_script
 
 waypoint help_fail
-say "" "\observedPerson desmaia. Ela acorda na enfermaria alguns minutos depois, sem entender muito bem o que aconteceu."
+say "char_name/none" "observation/run_into_boy/say_3"
 end_script
+

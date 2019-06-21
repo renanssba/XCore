@@ -1,11 +1,12 @@
-if tutorial_shop == 1
+﻿if tutorial_shop == 1
   goto end
 endif
 
 goto_script "fertiliel_enter"
-say "Fertiliel" "Aqui na <color=yellow>Loja</color> você pode comprar itens equipáveis que aprimoram os atributos dos seus humanos ou vender itens que nao queira mais."
-say "Para conseguir dinheiro, clique em <color=yellow>Fazer Bicos</color>."
+say "char_name/fertiliel" "tutorial_shop/say_0"
+say "tutorial_shop/say_1"
 goto_script "fertiliel_exit"
 set_var tutorial_shop 1
 
 waypoint end
+

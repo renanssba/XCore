@@ -1,5 +1,12 @@
-if tutorial_shop == 1  goto endendif
-goto_script "fertiliel_enter"say "char_name/fertiliel" "tutorial_shop/say_0"
+﻿if tutorial_shop == 1
+  goto end
+endif
+
+goto_script "fertiliel_enter"
+say "char_name/fertiliel" "tutorial_shop/say_0"
 say "tutorial_shop/say_1"
-goto_script "fertiliel_exit"set_var tutorial_shop 1
-waypoint end
+goto_script "fertiliel_exit"
+set_var tutorial_shop 1
+
+waypoint end
+

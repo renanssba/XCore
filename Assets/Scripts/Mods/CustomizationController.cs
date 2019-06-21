@@ -30,6 +30,10 @@ public class CustomizationController : MonoBehaviour {
   public GameObject customizationPanel;
   public GameObject loadingIcon;
 
+  public RenderTexture portraitRenderTexture;
+
+  public Texture2D portraitTexture;
+
   public ScreenContext customScreenContext;
 
 
@@ -224,5 +228,18 @@ public class CustomizationController : MonoBehaviour {
 
     //VsnController.instance.StartVSN("got");
     SceneManager.LoadScene(StageName.Gameplay.ToString());
+  }
+
+
+  public void ClickPortraitButton() {
+    Debug.LogWarning("Taking portrait now!");
+
+    RenderTexture.active = portraitRenderTexture;
+    portraitTexture = new Texture2D(portraitRenderTexture.width, portraitRenderTexture.height);
+    portraitTexture.ReadPixels(new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), 0, 0);
+    portraitTexture.Apply();
+
+    Sprite face = Sprite.Create(portraitTexture, new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), Vector2.zero);
+    characterImages[0].sprite = face;
   }
 }

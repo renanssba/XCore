@@ -28,8 +28,8 @@ public class VsnLocalizationConverter : MonoBehaviour {
     };
 
     metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
-    metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date");
-    metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
+    //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date");
+    //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
 
     Debug.LogWarning("METADATA PATH: " + metadataFilePath);
 
@@ -91,13 +91,22 @@ public class VsnLocalizationConverter : MonoBehaviour {
     int choiceCommands = 0;
     List<string> charNamesList = new List<string>();
 
+
     for(int i = 0; i < lines.Length; i++) {
       string line = lines[i].TrimStart();
 
-      if(line == "\r" || String.IsNullOrEmpty(line)) {
+
+      Debug.LogError("line contents: " + line);
+      for(int j = 0; j < line.Length; j++) {
+        Debug.LogWarning("line[" + j + "]: " + line[j]);
+      }
+
+      // if line is empty or just NewLine
+      if(IsNewline(line) || String.IsNullOrEmpty(line)) {
         content += lines[i].TrimEnd() + Environment.NewLine;
         continue;
       }
+
 
       List<VsnArgument> vsnArguments = new List<VsnArgument>();
       string commandName = Regex.Match(line, "^([\\w\\-]+)").Value;
@@ -168,6 +177,8 @@ public class VsnLocalizationConverter : MonoBehaviour {
         } else {
           content += lines[i];
         }
+      } else {
+        content += lines[i].TrimEnd() + Environment.NewLine;
       }
     }
 
@@ -176,10 +187,27 @@ public class VsnLocalizationConverter : MonoBehaviour {
       File.Delete(newFilePath);
     }
     File.Create(newFilePath).Close();
-    File.WriteAllText(newFilePath, content);
+
+    content = content.Replace("\r\n", "\r");
+    content = content.Replace("\n\r", "\r");
+    content = content.Replace("\n", "\r");
+    content = content.Replace("\r", "\r\n");
+
+    File.WriteAllText(newFilePath, content, System.Text.Encoding.UTF8);
 
 
     return metaContentNames + metaContent;
+  }
+
+  public bool IsNewline(string line) {
+    switch(line) {
+      case "\r":
+      case "\n":
+      case "\r\n":
+      case "\n\r":
+        return true;
+  }
+    return false;
   }
 
 

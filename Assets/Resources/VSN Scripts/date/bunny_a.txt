@@ -1,45 +1,46 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "O casal encontra um coelhinho ferido, precisando de ajuda. A garota fica com pena e pede para \boy ajudá-lo."
+say "char_name/none" "date/bunny_a/say_0"
 end_script
 
 
 
 waypoint guts_success
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "Surpreendentemente, o coelho se motiva o suficiente para voltar a andar. \girl fica muito surpresa."
+say "char_name/boy" "date/bunny_a/say_1"
+say "date/bunny_a/say_2"
+say "char_name/none" "date/bunny_a/say_3"
 end_script
 
 waypoint intelligence_success
-say "" "\boy improvisa uma atadura com materiais encontrados na trilha e rapidamente trata do animal."
-say "\girl fica feliz."
+say "char_name/none" "date/bunny_a/say_4"
+say "date/bunny_a/say_5"
 end_script
 
 waypoint charisma_success
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "\girl fica muito tocada."
+say "char_name/none" "date/bunny_a/say_6"
+say "char_name/boy" "date/bunny_a/say_7"
+say "char_name/none" "date/bunny_a/say_8"
 end_script
 
 
 
 waypoint guts_fail
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "O coelho geme baixinho, sentindo muita dor. O discurso motivacional não parece ter surtido efeito. \girl acha que \boy é maluco."
+say "char_name/boy" "date/bunny_a/say_9"
+say "date/bunny_a/say_10"
+say "char_name/none" "date/bunny_a/say_11"
 end_script
 
 waypoint intelligence_fail
-say "" "\boy tenta improvisar uma atadura com materiais encontrados na trilha, mas não consegue."
-say "\girl fica decepcionada."
+say "char_name/none" "date/bunny_a/say_12"
+say "date/bunny_a/say_13"
 end_script
 
 waypoint charisma_fail
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "Infelizmente, \boy tropeça, caindo em cima do coelho. \girl fica horrorizada."
+say "char_name/none" "date/bunny_a/say_14"
+say "char_name/boy" "date/bunny_a/say_15"
+say "char_name/none" "date/bunny_a/say_16"
 end_script
+
 
 

@@ -1,23 +1,64 @@
-set_screen "hide_all"fade_out 0.4wait 0.5bg3d "\observation_bg"set_screen "observation"
-set_var situation 1set_var currentDateEvent 0
-fade_in 0.4
+﻿set_screen "hide_all"
+fade_out 0.4
+wait 0.5
+bg3d "\observation_bg"
+set_screen "observation"
 
-if #observationEventType <= 1  if #isEncounterPersonUnrevealed == 1    reveal_person    play_sfx "relationship_up"    say "observation/say_0"
-  endifendif
+set_var situation 1
+set_var currentDateEvent 0
 
-waypoint start_interactiongoto_script "\currentObservationEventName" event_statement
-
-if #observationEventType == 0  goto_script "observation_person_in_trouble"endifif #observationEventType == 1  goto_script "observation_person_in_trouble"endifif #observationEventType == 2  goto nextendif
-
-
+fade_in 0.4
 
 
-waypoint nextupdate_ui
+if #observationEventType <= 1
+  if #isEncounterPersonUnrevealed == 1
+    reveal_person
+    play_sfx "relationship_up"
+    say "observation/say_0"
+  endif
+endif
 
-if observation_energy <= 0  say "char_name/none" "observation/say_1"
-endif
 
-set_screen "hide_all"fade_out 0.4bg nullupdate_uifade_in 0.4
-if observation_energy > 0  set_screen "observation_map"else  goto_script "observation_end" trueendif
+waypoint start_interaction
+goto_script "\currentObservationEventName" event_statement
+//set_screen "date_challenge"
 
-set_var situation 0
+
+if #observationEventType == 0
+  goto_script "observation_person_in_trouble"
+endif
+if #observationEventType == 1
+  goto_script "observation_person_in_trouble"
+endif
+if #observationEventType == 2
+  goto next
+endif
+
+
+
+
+
+waypoint next
+update_ui
+
+
+if observation_energy <= 0
+  say "char_name/none" "observation/say_1"
+endif
+
+
+set_screen "hide_all"
+fade_out 0.4
+bg null
+update_ui
+fade_in 0.4
+
+if observation_energy > 0
+  set_screen "observation_map"
+else
+  goto_script "observation_end" true
+endif
+
+
+set_var situation 0
+

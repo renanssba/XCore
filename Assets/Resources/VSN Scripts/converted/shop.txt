@@ -1,28 +1,64 @@
-goto_script "tutorial_shop"
-waypoint store_loopsay_auto "char_name/none" "shop/say_0"
+﻿goto_script "tutorial_shop"
+
+waypoint store_loop
+say_auto "char_name/none" "shop/say_0"
 choices "shop/choices_0_0" buy "shop/choices_0_1" sell "choices/cancel" end
 
 
-waypoint buyshow_shop true "buy"
-if item_id != -1  if item_price <= money    say_auto "shop/say_1"
+waypoint buy
+show_shop true "buy"
+
+if item_id != -1
+  if item_price <= money
+    say_auto "shop/say_1"
     choices "choices/yes" comprar_sim "choices/no" voltar
-  else    say "shop/say_2"
-  endifelse  goto endendifgoto store_loop
+  else
+    say "shop/say_2"
+  endif
+else
+  goto end
+endif
+goto store_loop
 
-waypoint sellif #inventory_empty == 1  say "shop/say_3"
-goto store_loopendif
-show_shop true "sell"if item_id != -1  say_auto "shop/say_4"
+
+waypoint sell
+if #inventory_empty == 1
+  say "shop/say_3"
+goto store_loop
+endif
+
+show_shop true "sell"
+if item_id != -1
+  say_auto "shop/say_4"
   choices "choices/yes" vender_sim "choices/no" voltar
-else  goto endendifgoto store_loop
+else
+  goto end
+endif
+goto store_loop
 
 
-waypoint comprar_simsubtract_var money item_priceupdate_uiadd_item item_id 1play_sfx "ui_money"say "shop/say_5"
-goto store_loop
 
-waypoint vender_simadd_var money item_priceupdate_uiplay_sfx "ui_money"add_item item_id -1say "shop/say_6"
-goto store_loop
+waypoint comprar_sim
+subtract_var money item_price
+update_ui
+add_item item_id 1
+play_sfx "ui_money"
+say "shop/say_5"
+goto store_loop
 
 
-waypoint voltargoto store_loop
+waypoint vender_sim
+add_var money item_price
+update_ui
+play_sfx "ui_money"
+add_item item_id -1
+say "shop/say_6"
+goto store_loop
+
+
+
+waypoint voltar
+goto store_loop
+
 
 waypoint end

@@ -1,65 +1,66 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "Dois  vendedores uniformizados saem de uma das lojas e se aproximam de \boy."
-say "Vendedores" "Com licença, senhor, já possui o cartão de nossa loja?"
-say "\boy diz que não está interessado, mas os sujeitos insistem."
+say "char_name/none" "date/vendor_a/say_0"
+say "date/vendor_a/char_name_0" "date/vendor_a/say_1"
+say "date/vendor_a/say_2"
 end_script
 
 
 
 waypoint guts_success
-say "" "\boy se irrita com os vendedores."
-say "\boy" "Porque vocês se sujeitam a um trabalho como esse? Parem de incomodar os transeuntes! Vocês deveriam acreditar no seu potencial! Agarrem o mundo pelos chifres!"
-say "" "Após uma breve pausa, os vendedores começam a chorar."
+say "char_name/none" "date/vendor_a/say_3"
+say "char_name/boy" "date/vendor_a/say_4"
+say "char_name/none" "date/vendor_a/say_5"
 
-say "\girl e o vendedores ficam emocionados com a determinação de \boy."
+say "date/vendor_a/say_6"
 end_script
 
 waypoint intelligence_success
-say "" "\boy tenta argumentar com os vendedores."
-say "\boy" "Fazer esse cartão não parece um bom negócio."
-say "" "Ele analisa friamente as taxas de juros, a anuidade e a atual conjuntura econômica, convencendo os vendedores de que ter o cartão é uma péssima ideia."
-say "Os vendedores ficam confusos e pedem desculpas."
-say "\girl fica impressionada com os conhecimentos de \boy!"
+say "char_name/none" "date/vendor_a/say_7"
+say "char_name/boy" "date/vendor_a/say_8"
+say "char_name/none" "date/vendor_a/say_9"
+say "date/vendor_a/say_10"
+say "date/vendor_a/say_11"
 end_script
 
 waypoint charisma_success
-say "" "\boy tenta ludibriar os vendedores."
-say "\boy" "Ah, este cartão? Eu já tenho!"
-say "" "Os vendedores ficam desconfiados."
-say "Vendedores" "Tem mesmo?"
-say "\boy" "Tenho! É muito bom! Melhor cartão que tem! Adoro ele."
-say "" "Os vendedores parecem satisfeitos e deixam o casal ir embora."
+say "char_name/none" "date/vendor_a/say_12"
+say "char_name/boy" "date/vendor_a/say_13"
+say "char_name/none" "date/vendor_a/say_14"
+say "date/vendor_a/char_name_0" "date/vendor_a/say_15"
+say "char_name/boy" "date/vendor_a/say_16"
+say "char_name/none" "date/vendor_a/say_17"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\boy se irrita com os vendedores."
-say "\boy" "Não tenho, não quero ter e vocês não vão me obrigar!" 
-say "" "\boy arregaça as mangas da camisa em um gesto intimidador."
-say "Um dos vendedores responde rasgando a camisa, revelando músculos de aço."
-say "\boy imediatamente fornece nome, sobrenome, telefone e endereço."
-say "Vendedores" "Obrigado pela atenção, senhor, seu cartão chegará em 15 dias úteis, tenha um bom dia!"
-say "\boy fica se achando um covarde."
+say "char_name/none" "date/vendor_a/say_18"
+say "char_name/boy" "date/vendor_a/say_19"
+say "char_name/none" "date/vendor_a/say_20"
+say "date/vendor_a/say_21"
+say "date/vendor_a/say_22"
+say "date/vendor_a/char_name_0" "date/vendor_a/say_23"
+say "date/vendor_a/say_24"
 end_script
 
 waypoint intelligence_fail
-say "" "\boy tenta argumentar com os vendedores."
-say "\boy"  "Veja bem, apesar, o c-cartão não é adequado, em que pese, considerando a t-t-t-taxa de juros e..."
-say "" "A vergonhosa tentativa de argumentação continua por alguns minutos. Ao final, sem perceber, \boy deu todos os dados necessários para a requisição do cartão."
-say "\girl fica indignada."
+say "char_name/none" "date/vendor_a/say_25"
+say "char_name/boy" "date/vendor_a/say_26"
+say "char_name/none" "date/vendor_a/say_27"
+say "date/vendor_a/say_28"
 end_script
 
 waypoint charisma_fail
-say "" "\boy tenta ludibriar os vendedores."
-say "\boy" "Ah, este cartão? Eu já tenho!"
-say "" "Os vendedores ficam desconfiados."
-say "Vendedores" "Tem mesmo?"
-say "\boy" "Tenho!"
-say "Vendedores" "TEM NÃO!"
-say "\boy" "TENHO SIM!"
-say "" "\boy e os vendedores continuam discutindo por vários minutos, perdendo um tempo precioso."
-say "\girl toma um chá de cadeira."
+say "char_name/none" "date/vendor_a/say_29"
+say "char_name/boy" "date/vendor_a/say_30"
+say "char_name/none" "date/vendor_a/say_31"
+say "date/vendor_a/char_name_0" "date/vendor_a/say_32"
+say "char_name/boy" "date/vendor_a/say_33"
+say "date/vendor_a/char_name_0" "date/vendor_a/say_34"
+say "char_name/boy" "date/vendor_a/say_35"
+say "char_name/none" "date/vendor_a/say_36"
+say "date/vendor_a/say_37"
 end_script
+

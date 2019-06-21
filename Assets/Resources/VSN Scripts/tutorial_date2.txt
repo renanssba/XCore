@@ -1,13 +1,13 @@
-if tutorial_date2 == 1
+﻿if tutorial_date2 == 1
   goto end
 endif
 
-say "Fertiliel" "Certos desafios devem ser solucionados pelo garoto, outros pela garota, vai depender da situação."
+say "char_name/fertiliel" "tutorial_date2/say_0"
 if #currentEventInteractionType == 0
-  say "Este é um desafio que o garoto deve resolver. Preste atenção nos atributos dele:"
+  say "tutorial_date2/say_1"
 endif
 if #currentEventInteractionType == 1
-  say "Este é um desafio que a garota deve resolver. Preste atenção nos atributos dela:"
+  say "tutorial_date2/say_2"
 endif
 
 //wait 0.5
@@ -21,12 +21,12 @@ endif
 if #currentPersonality == 2
   set_var attr "<color=red><sprite='Attributes' index=2 tint>Carisma</color>"
 endif
-say "Há uma estrelinha do lado do atributo \vsn[attr]. Isso quer dizer que ele é o atributo preferido da pessoa, e que ela sempre tentará utilizá-lo sua para resolver as situações."
+say "tutorial_date2/say_3"
 
-say "Você pode deixar a pessoa utilizar seu atributo preferido ou sugestioná-la para utilizar outro atributo na situação, mas isso consome seu <color=yellow>AP</color>."
+say "tutorial_date2/say_4"
 
-say "Os desafios podem ser resolvidos com <color=yellow>qualquer um dos atributos</color>, mas a <color=yellow>eficácia do atributo</color> utilizado varia de desafio para desafio."
-say "Portanto, ajude seus humanos a tomar sempre a atitude que pareça mais certa para a situação!"
+say "tutorial_date2/say_5"
+say "tutorial_date2/say_6"
 
 
 goto_script "fertiliel_exit"
@@ -34,3 +34,4 @@ goto_script "fertiliel_exit"
 waypoint end
 set_var tutorial_date2 1
 update_ui
+

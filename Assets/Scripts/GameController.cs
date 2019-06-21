@@ -81,11 +81,13 @@ public class GameController : MonoBehaviour {
       if(GlobalData.instance.hideTutorials) {
         VsnSaveSystem.SetVariable("tutorial_date", 1);
         VsnSaveSystem.SetVariable("tutorial_date2", 1);
-        //VsnSaveSystem.SetVariable("tutorial_shop", 1);
-        //VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
-        //VsnSaveSystem.SetVariable("tutorial_observation", 1);
+        VsnSaveSystem.SetVariable("tutorial_shop", 1);
+        VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
+        VsnSaveSystem.SetVariable("tutorial_observation", 1);
       }
       VsnController.instance.StartVSN("tutorial_intro");
+      //VsnController.instance.StartVSN("check_end_game");
+      //VsnController.instance.StartVSN("spend_day");
     }
   }
 

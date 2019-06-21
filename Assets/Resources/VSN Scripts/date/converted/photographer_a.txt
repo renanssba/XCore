@@ -1,35 +1,50 @@
-goto *arg1
-waypoint event_statementsay "date/photographer_a/char_name_0" "date/photographer_a/say_0"
+﻿goto *arg1
+
+waypoint event_statement
+say "date/photographer_a/char_name_0" "date/photographer_a/say_0"
 say "date/photographer_a/say_1"
 say "char_name/none" "date/photographer_a/say_2"
-end_script
+end_script
 
 
-waypoint guts_successsay "char_name/girl" "date/photographer_a/say_3"
+
+waypoint guts_success
+say "char_name/girl" "date/photographer_a/say_3"
 say "char_name/none" "date/photographer_a/say_4"
 say "date/photographer_a/say_5"
-end_script
-waypoint intelligence_successsay "char_name/none" "date/photographer_a/say_6"
+end_script
+
+waypoint intelligence_success
+say "char_name/none" "date/photographer_a/say_6"
 say "date/photographer_a/say_7"
-end_script
-waypoint charisma_successsay "char_name/none" "date/photographer_a/say_8"
+end_script
+
+waypoint charisma_success
+say "char_name/none" "date/photographer_a/say_8"
 say "date/photographer_a/char_name_1" "date/photographer_a/say_9"
 say "char_name/none" "date/photographer_a/say_10"
 say "date/photographer_a/say_11"
-end_script
+end_script
 
 
-waypoint guts_failsay "char_name/girl" "date/photographer_a/say_12"
+
+waypoint guts_fail
+say "char_name/girl" "date/photographer_a/say_12"
 say "char_name/none" "date/photographer_a/say_13"
 say "date/photographer_a/char_name_1" "date/photographer_a/say_14"
 say "date/photographer_a/say_15"
-end_script
-waypoint intelligence_failsay "char_name/none" "date/photographer_a/say_16"
+end_script
+
+waypoint intelligence_fail
+say "char_name/none" "date/photographer_a/say_16"
 say "date/photographer_a/say_17"
-end_script
-waypoint charisma_failsay "char_name/none" "date/photographer_a/say_18"
+end_script
+
+waypoint charisma_fail
+say "char_name/none" "date/photographer_a/say_18"
 say "date/photographer_a/char_name_1" "date/photographer_a/say_19"
 say "char_name/none" "date/photographer_a/say_20"
-end_script
+end_script
+
 
 

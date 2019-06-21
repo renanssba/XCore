@@ -1,46 +1,47 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "\girl fica com fome e compra um pacote de salgadinhos numa máquina de venda de alimentos."
-say "Infelizmente o pacote fica preso e não cai na gavetinha de retirada. Frustrada, a garota pede ajuda para \boy."
+say "char_name/none" "date/vending_a/say_0"
+say "date/vending_a/say_1"
 end_script
 
 
 
 waypoint guts_success
-say "" "\boy agarra a máquina pelos lados e surpreende a todos dando um suplex nela."
-say "O salgadinho se desprende e \girl consegue alcançá-lo. Levemente chocada, mas bem alimentada, ela agradece a atitude do rapaz."
+say "char_name/none" "date/vending_a/say_2"
+say "date/vending_a/say_3"
 end_script
 
 waypoint intelligence_success
-say "" " O garoto saca um teclado portátil e começa a digitar rapidamente códigos misteriosos."
-say "Poucos segundos depois, a máquina ejeta o salgadinho nas mãos da garota e fala, com uma voz robótica:"
-say "Máquina de Venda" "Desculpe o incômodo e tenha um bom lanche, senhorita!"
+say "char_name/none" "date/vending_a/say_4"
+say "date/vending_a/say_5"
+say "date/vending_a/char_name_0" "date/vending_a/say_6"
 end_script
 
 waypoint charisma_success
-say "" "\boy percebe que há uma pessoa na fila, logo atrás deles."
-say "Ele conversa com a pessoa e a convence a pedir um refrigerante que fica exposto logo acima do salgadinho enganchado."
-say "A pessoa consente e a máquina derruba o refrigerante, que derruba o salgadinho na bandeja abaixo. O casal reavê o salgadinho e lancha feliz."
+say "char_name/none" "date/vending_a/say_7"
+say "date/vending_a/say_8"
+say "date/vending_a/say_9"
 end_script
 
 
 
 waypoint guts_fail
-say "" "\boy tenta sacudir a máquina para derrubar o salgadinho, mas não consegue."
-say "Ele se enfurece e começa a gritar e dar socos e pontapés na máquina, mas ela não se mexe nem um milímetro."
-say "\girl olha pra ele levemente decepcionada e envergonhada."
+say "char_name/none" "date/vending_a/say_10"
+say "date/vending_a/say_11"
+say "date/vending_a/say_12"
 end_script
 
 waypoint intelligence_fail
-say "" " O garoto saca um teclado portátil e começa a digitar rapidamente códigos para hackear a máquina."
-say "Aparentemente ele erra em algum detalhe, pois a máquina pára de funcionar e desliga completamente."
-say "Parece que agora ninguém mais vai poder lanchar naquela máquina."
+say "char_name/none" "date/vending_a/say_13"
+say "date/vending_a/say_14"
+say "date/vending_a/say_15"
 end_script
 
 waypoint charisma_fail
-say "" "\boy percebe que há uma pessoa na fila, logo atrás deles."
-say "Ele conversa com a pessoa e tenta convencê-la a pedir um refrigerante que fica exposto logo acima do salgadinho enganchado."
-say "A pessoa se irrita com o garoto tentando sugestioná-la e manda \boy para um lugar não muito agradável."
-say "\girl fica decepcionada."
+say "char_name/none" "date/vending_a/say_16"
+say "date/vending_a/say_17"
+say "date/vending_a/say_18"
+say "date/vending_a/say_19"
 end_script
+

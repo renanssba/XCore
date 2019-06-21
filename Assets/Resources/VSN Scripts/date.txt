@@ -1,6 +1,6 @@
 ﻿fade_out 0.7
 
-say "" "\couple decidem sair para se divertir."
+say "char_name/none" "date/say_0"
 
 generate_segment "date"
 if date_location == 0
@@ -50,25 +50,25 @@ endif
 
 
 if #currentEventInteractionType == 0
-  say_auto "" "Qual atitude \boy deve tomar?"
+  say_auto "char_name/none" "date/say_1"
 endif
 if #currentEventInteractionType == 1
-  say_auto "" "Qual atitude \girl deve tomar?"
+  say_auto "char_name/none" "date/say_2"
 endif
 if #currentEventInteractionType == 2
-  say_auto "" "Qual atitude \couple devem tomar?"
+  say_auto "char_name/none" "date/say_3"
 endif
 
 
 position_choices "date_event"
 if #currentPersonality == 0
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color>" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charisma
+  choices "date/choices_0_0" sug_guts "date/choices_0_1" sug_intelligence "date/choices_0_2" sug_charisma
 endif
 if #currentPersonality == 1
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color>" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color> (-1AP)" sug_charisma
+  choices "date/choices_1_0" sug_guts "date/choices_1_1" sug_intelligence "date/choices_1_2" sug_charisma
 endif
 if #currentPersonality == 2
-  choices "<color=#B27535><sprite='Attributes' index=0 tint>Valentia \guts</color> (-1AP)" sug_guts "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência \intelligence</color> (-1AP)" sug_intelligence "<color=#A80218><sprite='Attributes' index=2 tint>Carisma \charisma</color>" sug_charisma
+  choices "date/choices_2_0" sug_guts "date/choices_2_1" sug_intelligence "date/choices_2_2" sug_charisma
 endif
 
 waypoint sug_guts
@@ -156,18 +156,19 @@ set_screen "date"
 
 waypoint end
 if date_success >= 5
-  say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
+  say "char_name/none" "date/say_4"
   show_date_ui false
-    
+
   // set_screen "hide_all"
   // wait 0.5
   show_engagement
-  say "\couple se tornaram um casal inseparável, e você sabe que eles terão muitos filhos no futuro!"
+  say "date/say_5"
   //set_screen "date"
   ship_couple
 else
-  say "" "O encontro acabou, e foi um <color=red>fracasso</color>!"
+  say "char_name/none" "date/say_6"
   show_date_ui false
 endif
 
 goto_script "spend_day"
+

@@ -1,46 +1,47 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "Um vendaval extremamente localizado leva as calças de \boy embora!"
-say "\girl ainda não parece ter notado."
+say "char_name/none" "date/clothing_a/say_0"
+say "date/clothing_a/say_1"
 end_script
 
 
 
 waypoint guts_success
-say "" "Sem hesitar, \boy tira também a camisa e faz rapidamente uma tanga."
-say "A fantasia improvisada o faz parecer extremamente másculo!"
+say "char_name/none" "date/clothing_a/say_2"
+say "date/clothing_a/say_3"
 end_script
 
 waypoint intelligence_success
-say "" "\boy estava usando calças sobressalentes o tempo todo."
-say "A crise foi resolvida antes mesmo de começar. Impressionante!"
+say "char_name/none" "date/clothing_a/say_4"
+say "date/clothing_a/say_5"
 end_script
 
 waypoint charisma_success
-say "" "\boy chama a atenção de \girl."
-say "\boy" "Gostou? É uma nova moda que eu inventei."
-say "\girl" "Até que não é ruim."
-say "" "Outros meninos escutam e começam a tirar as calças também."
+say "char_name/none" "date/clothing_a/say_6"
+say "char_name/boy" "date/clothing_a/say_7"
+say "char_name/girl" "date/clothing_a/say_8"
+say "char_name/none" "date/clothing_a/say_9"
 end_script
 
 
 
 waypoint guts_fail
-say "" "Sem hesitar, \boy tira também a camisa e faz rapidamente uma tanga."
-say "A fantasia improvisada o faz parecer ridículo."
+say "char_name/none" "date/clothing_a/say_10"
+say "date/clothing_a/say_11"
 end_script
 
 waypoint intelligence_fail
-say "" "\boy fica tranquilo, pois sempre costuma colocar um par de calças sobressalentes antes de encontros."
-say "Infelizmente, ele as havia esquecido em casa hoje. \girl fica horrorizada."
+say "char_name/none" "date/clothing_a/say_12"
+say "date/clothing_a/say_13"
 end_script
 
 waypoint charisma_fail
-say "" "\boy chama a atenção de \girl."
-say "\boy" "Gostou? É uma nova moda que eu inventei."
-say "\girl" "Aaaah, tarado!"
-say "" "\girl sai correndo. \boy consegue um par extra de calças de transeuntes compadecidos de sua situação miserável."
+say "char_name/none" "date/clothing_a/say_14"
+say "char_name/boy" "date/clothing_a/say_15"
+say "char_name/girl" "date/clothing_a/say_16"
+say "char_name/none" "date/clothing_a/say_17"
 end_script
+
 
 

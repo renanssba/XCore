@@ -1,28 +1,43 @@
-goto *arg1
-waypoint event_statementsay "char_name/none" "date/escalator_a/say_0"
-end_script
+﻿goto *arg1
+
+waypoint event_statement
+say "char_name/none" "date/escalator_a/say_0"
+end_script
 
 
-waypoint guts_successsay "char_name/none" "date/escalator_a/say_1"
+
+waypoint guts_success
+say "char_name/none" "date/escalator_a/say_1"
 say "date/escalator_a/say_2"
-end_script
-waypoint intelligence_successsay "char_name/none" "date/escalator_a/say_3"
+end_script
+
+waypoint intelligence_success
+say "char_name/none" "date/escalator_a/say_3"
 say "date/escalator_a/say_4"
 say "date/escalator_a/say_5"
-end_script
-waypoint charisma_successsay "char_name/none" "date/escalator_a/say_6"
+end_script
+
+waypoint charisma_success
+say "char_name/none" "date/escalator_a/say_6"
 say "date/escalator_a/say_7"
-end_script
+end_script
 
 
-waypoint guts_failsay "char_name/none" "date/escalator_a/say_8"
+
+waypoint guts_fail
+say "char_name/none" "date/escalator_a/say_8"
 say "date/escalator_a/say_9"
-end_script
-waypoint intelligence_failsay "char_name/none" "date/escalator_a/say_10"
+end_script
+
+waypoint intelligence_fail
+say "char_name/none" "date/escalator_a/say_10"
 say "date/escalator_a/say_11"
-end_script
-waypoint charisma_failsay "char_name/none" "date/escalator_a/say_12"
+end_script
+
+waypoint charisma_fail
+say "char_name/none" "date/escalator_a/say_12"
 say "date/escalator_a/say_13"
-end_script
+end_script
+
 
 

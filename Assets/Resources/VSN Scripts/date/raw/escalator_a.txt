@@ -1,0 +1,42 @@
+goto *arg1
+
+waypoint event_statement
+say "" "Ao tentarem subir para o segundo andar, \boy dá um passo em falso e fica com o pé preso na escada rolante! Ele entra em pânico."
+end_script
+
+
+
+waypoint guts_success
+say "" "\girl segura o braço de \boy com toda a força que pode. Ela puxa, e o pé do menino se desgruda."
+say "Ele parece aliviado."
+end_script
+
+waypoint intelligence_success
+say "" "\girl habilmente faz a escada rolante entrar em ressonância com batidas na frequência perfeita."
+say "A escada começa a tremer, o suficiente para \boy conseguir desprender o pé."
+say "\boy fica impressionado e aliviado."
+end_script
+
+waypoint charisma_success
+say "" "\girl, conciliadora, passa a mão na cabeça de \boy e diz que tudo ficará bem."
+say "Ele relaxa e consegue desprender o pé. \boy fica aliviado."
+end_script
+
+
+
+waypoint guts_fail
+say "" "\girl segura o braço de \boy com toda a força que pode. Ela puxa, porém acaba de desequilibrando e caindo."
+say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
+end_script
+
+waypoint intelligence_fail
+say "" "\girl olha ao redor, pensa muito, mas não consegue formular um plano."
+say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
+end_script
+
+waypoint charisma_fail
+say "" "\girl, conciliadora, passa a mão na cabeça de \boy e diz que tudo ficará bem. Isso não é o suficiente para acalmar o rapaz, que começa a gritar de desespero."
+say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
+end_script
+
+

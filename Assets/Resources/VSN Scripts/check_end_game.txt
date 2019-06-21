@@ -4,35 +4,36 @@
 if #day > max_days
   set_screen "hide_all"
   goto_script "fertiliel_enter"
-    
-  say "Fertiliel" "Olha só, o nosso tempo acabou!"
+
+  say "char_name/fertiliel" "check_end_game/say_0"
   goto end_game
 endif
 if #progress >= objective
   set_screen "hide_all"
   goto_script "fertiliel_enter"
-    
-  say "Fertiliel" "Olha só, parece que você já cumpriu sua missão!"
+
+  say "char_name/fertiliel" "check_end_game/say_1"
   goto end_game
 endif
 
 // IF GAME NOT ENDED
-say "Com suas forças recuperadas, você começa um novo dia para juntar casais!"
+say "check_end_game/say_2"
 end_script
 
 
 waypoint end_game
-say "Fertiliel" "Vamos ver quão bem você foi na sua missão..."
+say "char_name/fertiliel" "check_end_game/say_3"
 //say "" "A sua missão era reunir \vsn[objective] casais dentro de \vsn[max_days] dias."
-say "Você conseguiu reunir \progress casais dentro de \day dias."
+say "check_end_game/say_4"
 if #progress >= objective
-  say "Parabéns! Você completou a missão com sucesso!"
-  say "Fertiliel" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
-  say "Obrigada por jogar o jogo e me ajudar na missão!"
+  say "check_end_game/say_5"
+  say "char_name/fertiliel" "check_end_game/say_6"
+  say "check_end_game/say_7"
 else
-  say "Que pena, parece que você não conseguiu completar a missão..."
-  say "Você poderia tentar novamente. Boa sorte na próxima tentativa!"
+  say "check_end_game/say_8"
+  say "check_end_game/say_9"
 endif
 set_screen "hide_all"
 fade_out 2
 load_scene "TitleScreen"
+

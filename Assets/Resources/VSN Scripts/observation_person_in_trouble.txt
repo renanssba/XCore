@@ -1,5 +1,5 @@
 ﻿//say_auto "" "Qual reação \observedPerson deve tomar?"
-choices "Ajudar" sug_help "Ignorar" sug_ignore
+choices "observation_person_in_trouble/choices_0_0" sug_help "observation_person_in_trouble/choices_0_1" sug_ignore
 
 
 waypoint sug_help
@@ -16,8 +16,8 @@ waypoint resolution
 if resolution == 0
   goto_script "\currentObservationEventName" help_success
   play_sfx "relationship_up"
-  say "" "\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum."
-  say "Eles trocam telefones e concordam que seria legal saírem para um Encontro algum dia."
+  say "char_name/none" "observation_person_in_trouble/say_0"
+  say "observation_person_in_trouble/say_1"
   unlock_couple
 endif
 if resolution == 1
@@ -26,5 +26,6 @@ if resolution == 1
 endif
 if resolution == 2
   //goto_script "\currentObservationEventName" ignore
-  say "" "\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito."
+  say "char_name/none" "observation_person_in_trouble/say_2"
 endif
+

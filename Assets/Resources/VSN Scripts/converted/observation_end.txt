@@ -1,6 +1,13 @@
-remove_context "Observation Context"
-if argsCount == 0  say "char_name/none" "observation_end/say_0"
-endif
-set_var observation_played 1goto_script "show_people_screen"
+﻿remove_context "Observation Context"
 
-goto_script "tutorial_choose_date"
+if argsCount == 0
+  say "char_name/none" "observation_end/say_0"
+endif
+
+set_var observation_played 1
+goto_script "show_people_screen"
+
+//remove_context "Observation Context"
+
+goto_script "tutorial_choose_date"
+

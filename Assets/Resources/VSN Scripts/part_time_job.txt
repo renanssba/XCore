@@ -9,8 +9,8 @@ update_ui
 
 
 waypoint sim
-say_auto "Você pode gastar energia trabalhando para ganhar dinheiro. Quanto AP você quer gastar?"
-choices "Gastar 2 AP -> $60" ap2 "Gastar 3 AP -> $120" ap3 "Cancelar" end
+say_auto "part_time_job/say_0"
+choices "part_time_job/choices_0_0" ap2 "part_time_job/choices_0_1" ap3 "choices/cancel" end
 
 waypoint ap2
 set_var ap_spent 2
@@ -37,7 +37,7 @@ if ap_spent == 3
 endif
 add_var money gain
 update_ui
-say "Você trabalhou bastante e ganhou \vsn[gain] Dinheiro Celestial!"
+say "part_time_job/say_1"
 
 fade_in 0.7
 wait 0.5
@@ -48,3 +48,4 @@ goto end
 waypoint end
 set_var hide_buttons 0
 update_ui
+

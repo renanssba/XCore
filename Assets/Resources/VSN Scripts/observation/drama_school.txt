@@ -1,8 +1,9 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "\observedPerson vai para a sua aula de teatro. Lá ele passa várias horas praticando sua postura, expressão corporal e desenvoltura."
+say "char_name/none" "observation/drama_school/say_0"
 play_sfx "relationship_up"
 improve_attribute "charisma" 1
-say "\observedPerson aumentou seu <color=#A80218><sprite='Attributes' index=2 tint>Carisma</color> em 1 ponto! (Novo valor: \charisma)!"
+say "observation/drama_school/say_1"
 end_script
+

@@ -1,13 +1,28 @@
-if tutorial_choose_date == 1  goto endendif
-goto_script "fertiliel_enter" 0.14say "char_name/fertiliel" "tutorial_choose_date/say_0"
+﻿if tutorial_choose_date == 1
+  goto end
+endif
 
-if #availableCouples == 0  say "tutorial_choose_date/say_1"
+goto_script "fertiliel_enter" 0.14
+say "char_name/fertiliel" "tutorial_choose_date/say_0"
+
+if #availableCouples == 0
+  say "tutorial_choose_date/say_1"
   say "tutorial_choose_date/say_2"
   say "tutorial_choose_date/say_3"
-  goto exitendifif #availableCouples == 1  say "tutorial_choose_date/say_4"
-endifif #availableCouples >= 1  say "tutorial_choose_date/say_5"
-endifsay "tutorial_choose_date/say_6"
+  goto exit
+endif
+if #availableCouples == 1
+  say "tutorial_choose_date/say_4"
+endif
+if #availableCouples >= 1
+  say "tutorial_choose_date/say_5"
+endif
+say "tutorial_choose_date/say_6"
 
 
-waypoint exitgoto_script "fertiliel_exit"set_var tutorial_choose_date 1
-waypoint end
+waypoint exit
+goto_script "fertiliel_exit"
+set_var tutorial_choose_date 1
+
+waypoint end
+

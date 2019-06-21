@@ -1,22 +1,37 @@
-goto *arg1
-waypoint event_statementsay "char_name/none" "date/open_jar_a/say_0"
-end_script
+﻿goto *arg1
+
+waypoint event_statement
+say "char_name/none" "date/open_jar_a/say_0"
+end_script
 
 
-waypoint guts_successsay "char_name/none" "date/open_jar_a/say_1"
-end_script
-waypoint intelligence_successsay "char_name/none" "date/open_jar_a/say_2"
-end_script
-waypoint charisma_successsay "char_name/none" "date/open_jar_a/say_3"
+
+waypoint guts_success
+say "char_name/none" "date/open_jar_a/say_1"
+end_script
+
+waypoint intelligence_success
+say "char_name/none" "date/open_jar_a/say_2"
+end_script
+
+waypoint charisma_success
+say "char_name/none" "date/open_jar_a/say_3"
 say "date/open_jar_a/say_4"
-end_script
+end_script
 
 
-waypoint guts_failsay "char_name/none" "date/open_jar_a/say_5"
-end_script
-waypoint intelligence_failsay "char_name/none" "date/open_jar_a/say_6"
-end_script
-waypoint charisma_failsay "char_name/none" "date/open_jar_a/say_7"
-end_script
+
+waypoint guts_fail
+say "char_name/none" "date/open_jar_a/say_5"
+end_script
+
+waypoint intelligence_fail
+say "char_name/none" "date/open_jar_a/say_6"
+end_script
+
+waypoint charisma_fail
+say "char_name/none" "date/open_jar_a/say_7"
+end_script
+
 
 

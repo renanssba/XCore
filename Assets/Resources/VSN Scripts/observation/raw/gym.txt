@@ -1,0 +1,8 @@
+goto *arg1
+
+waypoint event_statement
+say "" "\observedPerson vai para a academia. Ele passa várias horas praticando exercícios, aumentando sua força física e disposição."
+play_sfx "relationship_up"
+improve_attribute "guts" 1
+say "\observedPerson aumentou sua <color=#B27535><sprite='Attributes' index=0 tint>Valentia</color> em 1 ponto! (Novo valor: \guts)"
+end_script

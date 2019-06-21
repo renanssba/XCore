@@ -1,11 +1,18 @@
-goto *arg1
-waypoint event_statementsay_auto "char_name/none" "observation/gutsy1/say_0"
-end_script
+﻿goto *arg1
+
+waypoint event_statement
+say_auto "char_name/none" "observation/gutsy1/say_0"
+end_script
 
 
-waypoint help_successsay "char_name/none" "observation/gutsy1/say_1"
+
+waypoint help_success
+say "char_name/none" "observation/gutsy1/say_1"
 say "observation/gutsy1/say_2"
-end_script
-waypoint help_failsay "char_name/none" "observation/gutsy1/say_3"
+end_script
+
+waypoint help_fail
+say "char_name/none" "observation/gutsy1/say_3"
 say "observation/gutsy1/say_4"
-end_script
+end_script
+

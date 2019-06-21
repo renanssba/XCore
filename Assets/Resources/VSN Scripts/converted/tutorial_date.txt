@@ -1,8 +1,15 @@
-if tutorial_date == 1  goto endendif
-update_ui
-wait 0.3goto_script "fertiliel_enter" 0.1say "char_name/fertiliel" "tutorial_date/say_0"
+﻿if tutorial_date == 1
+  goto end
+endif
+
+update_ui
+
+wait 0.3
+goto_script "fertiliel_enter" 0.1
+say "char_name/fertiliel" "tutorial_date/say_0"
 say "tutorial_date/say_1"
 say "tutorial_date/say_2"
 
 
-waypoint endset_var tutorial_date 1
+waypoint end
+set_var tutorial_date 1
