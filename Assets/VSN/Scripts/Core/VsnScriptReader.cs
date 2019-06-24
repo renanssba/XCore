@@ -28,7 +28,7 @@ public class VsnScriptReader {
     //AnalyzeString(content);
 
     loadedScriptName = scriptName;
-    string[] lines = content.Split(divs, StringSplitOptions.None);
+    string[] lines = content.Split('\n');
 
     readableLines = lines;
 

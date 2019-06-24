@@ -12,20 +12,19 @@ public class Actor3D : MonoBehaviour {
 
     // TODO: FIX THIS to not create many copies for each material
 
-    Dictionary<Material, Material> dic = new Dictionary<Material, Material>();
+    //Dictionary<Material, Material> dic = new Dictionary<Material, Material>();
 
-    MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
+    SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
-    foreach(MeshRenderer renderer in renderers) {
+    foreach(SkinnedMeshRenderer renderer in renderers) {
       //for(int i = 0; i < renderer.materials.Length; i++) {
       for(int i = renderer.materials.Length - 1; i >= 0; i--) {
-        if( !dic.ContainsKey(renderer.materials[i] ) ) {
-
+        if( !myMaterials.Contains(renderer.materials[i]) ) {
           Material newMat = new Material(renderer.materials[i]);
-          dic.Add(renderer.materials[i], newMat);
+          //dic.Add(renderer.materials[i], newMat);
 
           renderer.materials[i] = newMat;
-          myMaterials.Add(newMat);
+          myMaterials.Add(renderer.materials[i]);
         } else {
           Debug.LogError("did nothing on mat: " + gameObject.name);
         }

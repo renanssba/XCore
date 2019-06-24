@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public enum StageName {
   TitleScreen,
-  Gameplay,
+  Park,
   CustomizeScreen
 };
 

@@ -138,6 +138,12 @@ public class TheaterController : MonoBehaviour {
               supportActor.GetComponent<Actor3D>().SetColor(Color.white);
               break;
           }
+
+          if(string.IsNullOrEmpty(spriteName)) {
+            mainActor.GetComponent<Actor3D>().SetColor(Color.white);
+            supportActor.GetComponent<Actor3D>().SetColor(Color.white);
+          }
+
           GameController.instance.actionPersonCard.ShowPanel();
         }        
         break;
@@ -218,16 +224,18 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void AnimTransform(Transform obj) {
-    obj.DOMoveX(1.5f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    obj.DOMoveX(0.5f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
   public IEnumerator WaitAndShine(float time) {
     int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
     int selectedAttributeLevel = GlobalData.instance.EventSolvingAttributeLevel(selected);
 
-    yield return new WaitForSeconds(time);
-    FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
+    VsnAudioManager.instance.PlaySfx("hit_default");
 
+    yield return new WaitForSeconds(time);
+
+    FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
     ShowParticleAnimation(selected, selectedAttributeLevel);
 
     yield return new WaitForSeconds(0.4f);
@@ -250,17 +258,18 @@ public class TheaterController : MonoBehaviour {
 
   public void ChallengeEntersScene(Sprite sp) {
     if(challengeActor.gameObject.activeSelf == false) {
+      VsnAudioManager.instance.PlaySfx("challenge_default");
       challengeActor.sprite = sp;
       challengeActor.gameObject.SetActive(true);
-      challengeActor.transform.localPosition = challengePosition+new Vector3(7f, 0f, 0f);
+      challengeActor.transform.localPosition = challengePosition+new Vector3(2.5f, 0f, 0f);
       challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f);
-      }
+    }
   }
 
   public void ChallengeLeavesScene() {
     hpSlider.gameObject.SetActive(false);
     if(challengeActor.gameObject.activeSelf == true) {
-      challengeActor.transform.DOLocalMoveX(7f, 0.5f).SetRelative().OnComplete(() => {
+      challengeActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
         challengeActor.gameObject.SetActive(false);
       });
     }
@@ -280,14 +289,17 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void SetBgSprite(Sprite s) {
-    if(s == null) {
-      Debug.LogWarning("Trying to set bg to null");
-      return;
-    }
-    bgRenderer.sprite = s;
-    bgRenderer.gameObject.SetActive(true);
+    /// TODO: Teleport to correct map
+    /// 
 
-    floor.material = GetMaterial(s.name);
+    //if(s == null) {
+    //  Debug.LogWarning("Trying to set bg to null");
+    //  return;
+    //}
+    //bgRenderer.sprite = s;
+    //bgRenderer.gameObject.SetActive(true);
+
+    //floor.material = GetMaterial(s.name);
   }
 
   public Material GetMaterial(string name) {

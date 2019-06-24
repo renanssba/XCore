@@ -41,6 +41,7 @@ if currentDateEvent < #dateLength
 
 waypoint start_interaction
 set_screen "date_challenge"
+wait 0.6
 goto_script "\currentEventName" event_statement
 
 
@@ -106,6 +107,7 @@ goto ev_resolution
 
 
 waypoint ev_resolution
+wait 0.5
 actor_anim3d
 wait 2
 
@@ -139,13 +141,13 @@ if resolution < 3
   add_var date_success 1
   challenge_result true
   update_ui
-  play_sfx "relationship_up"
+  play_sfx "ui_success"
   wait 2
 else
   challenge_result false
   update_ui
-  play_sfx "relationship_down"
   wait 2
+  play_sfx "ui_fail"
 endif
 goto new_event
 

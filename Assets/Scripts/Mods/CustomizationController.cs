@@ -227,7 +227,7 @@ public class CustomizationController : MonoBehaviour {
     }
 
     //VsnController.instance.StartVSN("got");
-    SceneManager.LoadScene(StageName.Gameplay.ToString());
+    SceneManager.LoadScene(StageName.Park.ToString());
   }
 
 

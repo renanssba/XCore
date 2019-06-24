@@ -293,6 +293,8 @@ public class GameController : MonoBehaviour {
   }
 
   public void ShowEngagementScreen(int babies) {
+    VsnAudioManager.instance.PlaySfx("date_success");
+
     engagementScreenImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
     engagementScreenImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
     babiesParticleGenerator.particlesToGenerate = babies;
