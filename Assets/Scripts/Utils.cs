@@ -17,6 +17,12 @@ public enum SongNames {
   conceito_full
 };
 
+public enum LocationBg {
+  Park,
+  Shopping,
+  City
+}
+
 
 public enum CharacterTraits {
   estudioso,

@@ -5,12 +5,12 @@ say "" "\couple decidem sair para se divertir."
 generate_segment "date"
 if date_location == 0
   bg3d "parque"
-  date_location_name "Parque"
+  date_location_name "location/park"
   play_music "date1_intro" "date1_loop"
 endif
 if date_location == 1
   bg3d "shopping"
-  date_location_name "Shopping"
+  date_location_name "location/shopping"
   play_music "date2_intro" "date2_loop"
 endif
 

@@ -21,8 +21,6 @@ public class TheaterController : MonoBehaviour {
 
   public static TheaterController instance;
 
-  public SpriteRenderer bgRenderer;
-
   public Vector3 cameraMainPosition;
   public Vector3 cameraCloseupPosition;
 
@@ -38,7 +36,6 @@ public class TheaterController : MonoBehaviour {
   public Vector2 mainActiveCardPosition;
   public Vector2 supportActiveCardPosition;
 
-  public MeshRenderer floor;
   public GameObject mainActor;
   public GameObject supportActor;
   public SpriteRenderer challengeActor;
@@ -48,7 +45,7 @@ public class TheaterController : MonoBehaviour {
   public Image attributeIcon;
   public Slider hpSlider;
 
-  public Material[] floorMaterials;
+  public GameObject[] bgObjects;
 
   public Color greenColor;
   public Color redColor;
@@ -285,33 +282,24 @@ public class TheaterController : MonoBehaviour {
 
 
   public void SetLocation(string place) {
-    SetBgSprite(LoadSprite("Bg/"+place));
-  }
 
-  public void SetBgSprite(Sprite s) {
+    foreach(GameObject c in bgObjects) {
+      c.SetActive(false);
+    }
+
+    switch(place) {
+      case "parque":
+        bgObjects[0].SetActive(true);
+        break;
+      case "shopping":
+        bgObjects[1].SetActive(true);
+        break;
+      case "rua":
+        bgObjects[2].SetActive(true);
+        break;
+    }
+  
     /// TODO: Teleport to correct map
     /// 
-
-    //if(s == null) {
-    //  Debug.LogWarning("Trying to set bg to null");
-    //  return;
-    //}
-    //bgRenderer.sprite = s;
-    //bgRenderer.gameObject.SetActive(true);
-
-    //floor.material = GetMaterial(s.name);
-  }
-
-  public Material GetMaterial(string name) {
-    foreach(Material m in floorMaterials) {
-      if(m.name == name) {
-        return m;
-      }
-    }
-    return null;
-  }
-
-  public void ResetBgSprite() {
-    bgRenderer.gameObject.SetActive(false);
   }
 }
