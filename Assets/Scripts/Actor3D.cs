@@ -5,9 +5,11 @@ using UnityEngine;
 public class Actor3D : MonoBehaviour {
 
   public List<Material> myMaterials;
+  public List<Color> myColors;
 
-	public void Awake() {
+  public void Awake() {
     myMaterials = new List<Material>();
+    myColors = new List<Color>();
     //List<Material> clonedMaterials = new List<Material>();
 
     // TODO: FIX THIS to not create many copies for each material
@@ -25,6 +27,9 @@ public class Actor3D : MonoBehaviour {
 
           renderer.materials[i] = newMat;
           myMaterials.Add(renderer.materials[i]);
+          myColors.Add(new Color(renderer.materials[i].color.r,
+            renderer.materials[i].color.g,
+            renderer.materials[i].color.b, 1f));
         } else {
           Debug.LogError("did nothing on mat: " + gameObject.name);
         }
@@ -32,9 +37,10 @@ public class Actor3D : MonoBehaviour {
     }
   }
 
-  public void SetColor(Color c) {
-    foreach(Material m in myMaterials) {
-      m.color = c;
+  public void SetBrightness(float value) {
+    for(int i=0; i<myMaterials.Count; i++) {
+      Color c = new Color(myColors[i].r * value, myColors[i].g * value, myColors[i].b * value, 1f);
+      myMaterials[i].color = c;
     }
   }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
 
 public class CustomizationController : MonoBehaviour {
 
@@ -35,6 +36,8 @@ public class CustomizationController : MonoBehaviour {
   public Texture2D portraitTexture;
 
   public ScreenContext customScreenContext;
+
+  public GameObject portraitCamera;
 
 
   public void Awake() {
@@ -217,8 +220,10 @@ public class CustomizationController : MonoBehaviour {
       modsManager.setNames[i] = null;
     }
 
-    modsManager.setFaces[0] = characterImages[0].sprite;
-    modsManager.setFaces[5] = characterImages[1].sprite;
+    StartCoroutine(TakePortraits());
+
+    //modsManager.setFaces[0] = characterImages[0].sprite;
+    //modsManager.setFaces[5] = characterImages[1].sprite;
     modsManager.setNames[0] = char.ToUpper(characterInputNameText[0].text[0]) + characterInputNameText[0].text.Substring(1);;
     modsManager.setNames[5] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
 
@@ -227,7 +232,46 @@ public class CustomizationController : MonoBehaviour {
     }
 
     //VsnController.instance.StartVSN("got");
-    SceneManager.LoadScene(StageName.Park.ToString());
+    //SceneManager.LoadScene(StageName.Park.ToString());
+    VsnController.instance.StartVSN("goto_gameplay");
+  }
+
+  public IEnumerator TakePortraits() {
+    for(int i=0; i<5;i++) {
+      SetPortraitCameraPosition(2);
+      yield return new WaitForEndOfFrame();
+      TakePortrait(i);
+      yield return new WaitForEndOfFrame();
+    }
+    for(int i = 0; i<5; i++) {
+      SetPortraitCameraPosition(3);
+      yield return new WaitForEndOfFrame();
+      TakePortrait(5+i);
+      yield return new WaitForEndOfFrame();
+    }
+    SetPortraitCameraPosition(0);
+    yield return new WaitForEndOfFrame();
+    TakePortrait(0);
+    yield return new WaitForEndOfFrame();
+    SetPortraitCameraPosition(1);
+    yield return new WaitForEndOfFrame();
+    TakePortrait(5);
+  }
+
+  public void SetPortraitCameraPosition(int posx) {
+    Vector3 v = portraitCamera.transform.localPosition;
+    v.x = -1.9f + posx * 3.8f;
+    portraitCamera.transform.localPosition = v;
+  }
+
+  public void TakePortrait(int id) {
+    RenderTexture.active = portraitRenderTexture;
+    portraitTexture = new Texture2D(portraitRenderTexture.width, portraitRenderTexture.height);
+    portraitTexture.ReadPixels(new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), 0, 0);
+    portraitTexture.Apply();
+
+    Sprite face = Sprite.Create(portraitTexture, new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), Vector2.zero);
+    ModsManager.instance.setFaces[id] = face;
   }
 
 

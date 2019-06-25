@@ -50,7 +50,7 @@ public class TheaterController : MonoBehaviour {
   public Color greenColor;
   public Color redColor;
 
-  public Color inactiveColor;
+  public float intensity;
 
   const float animTime = 0.15f;
 
@@ -119,26 +119,26 @@ public class TheaterController : MonoBehaviour {
 
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
-              mainActor.GetComponent<Actor3D>().SetColor(Color.white);
-              supportActor.GetComponent<Actor3D>().SetColor(inactiveColor);
+              mainActor.GetComponent<Actor3D>().SetBrightness(1f);
+              supportActor.GetComponent<Actor3D>().SetBrightness(intensity);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
               break;
             case DateEventInteractionType.female:
-              mainActor.GetComponent<Actor3D>().SetColor(inactiveColor);
-              supportActor.GetComponent<Actor3D>().SetColor(Color.white);
+              mainActor.GetComponent<Actor3D>().SetBrightness(intensity);
+              supportActor.GetComponent<Actor3D>().SetBrightness(1f);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
               break;
             case DateEventInteractionType.couple:
-              mainActor.GetComponent<Actor3D>().SetColor(Color.white);
-              supportActor.GetComponent<Actor3D>().SetColor(Color.white);
+              mainActor.GetComponent<Actor3D>().SetBrightness(1f);
+              supportActor.GetComponent<Actor3D>().SetBrightness(1f);
               break;
           }
 
           if(string.IsNullOrEmpty(spriteName)) {
-            mainActor.GetComponent<Actor3D>().SetColor(Color.white);
-            supportActor.GetComponent<Actor3D>().SetColor(Color.white);
+            mainActor.GetComponent<Actor3D>().SetBrightness(1f);
+            supportActor.GetComponent<Actor3D>().SetBrightness(1f);
           }
 
           GameController.instance.actionPersonCard.ShowPanel();
@@ -298,7 +298,7 @@ public class TheaterController : MonoBehaviour {
         bgObjects[2].SetActive(true);
         break;
     }
-  
+
     /// TODO: Teleport to correct map
     /// 
   }
