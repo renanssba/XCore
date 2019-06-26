@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour {
 
   //public GameObject[] buttons;
-  public GameObject ptBrIcon;
-  public GameObject engIcon;
 
 
   void Start(){

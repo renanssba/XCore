@@ -16,7 +16,7 @@ public class ObservationTile : MonoBehaviour {
 
   public bool wasUsed = false;
 
-  public const float tileDistanceTolerance = 143f;
+  public const float tileDistanceTolerance = 150f;
 
   void OnEnable() {
     UpdateUI();

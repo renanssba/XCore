@@ -62,7 +62,7 @@ public class PersonCard : MonoBehaviour {
         } else {
           equipIcons[i].gameObject.SetActive(false);
         }
-        addEquipIcons[i].gameObject.SetActive(person.EquipsCount() == i && state == "show");
+        addEquipIcons[i].gameObject.SetActive(person.EquipsCount() == i && state == "choose_observation_target");
       }
     }
     //attributeTexts[(int)person.personality].alpha = 1f;

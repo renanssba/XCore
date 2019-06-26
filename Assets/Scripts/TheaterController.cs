@@ -221,7 +221,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void AnimTransform(Transform obj) {
-    obj.DOMoveX(0.5f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    obj.DOMoveX(0.3f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
   public IEnumerator WaitAndShine(float time) {

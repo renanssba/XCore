@@ -46,9 +46,11 @@ public class CustomizationController : MonoBehaviour {
     ClickResetGirl();
   }
 
-  void Start () {
-    characterImages[0].sprite = defaultSprites[0];
-    characterImages[1].sprite = defaultSprites[1];
+  public void Start () {
+    //characterImages[0].sprite = defaultSprites[0];
+    //characterImages[1].sprite = defaultSprites[1];
+
+    StartCoroutine(StartPictures());
   }
 
   public void Update() {
@@ -222,8 +224,6 @@ public class CustomizationController : MonoBehaviour {
 
     StartCoroutine(TakePortraits());
 
-    //modsManager.setFaces[0] = characterImages[0].sprite;
-    //modsManager.setFaces[5] = characterImages[1].sprite;
     modsManager.setNames[0] = char.ToUpper(characterInputNameText[0].text[0]) + characterInputNameText[0].text.Substring(1);;
     modsManager.setNames[5] = char.ToUpper(characterInputNameText[1].text[0]) + characterInputNameText[1].text.Substring(1);
 
@@ -240,22 +240,37 @@ public class CustomizationController : MonoBehaviour {
     for(int i=0; i<5;i++) {
       SetPortraitCameraPosition(2);
       yield return new WaitForEndOfFrame();
-      TakePortrait(i);
+      ModsManager.instance.setFaces[i] = TakePortrait();
       yield return new WaitForEndOfFrame();
     }
     for(int i = 0; i<5; i++) {
       SetPortraitCameraPosition(3);
       yield return new WaitForEndOfFrame();
-      TakePortrait(5+i);
+      ModsManager.instance.setFaces[5+i] = TakePortrait();
       yield return new WaitForEndOfFrame();
     }
-    SetPortraitCameraPosition(0);
+    //yield return StartPictures();
+
+    ModsManager.instance.setFaces[0] = characterImages[0].sprite;
+    ModsManager.instance.setFaces[5] = characterImages[1].sprite;
+  }
+
+  public IEnumerator StartPictures() {
+    yield return null;
+
+    SetPortraitCameraPosition(2);
     yield return new WaitForEndOfFrame();
-    TakePortrait(0);
+    defaultSprites[0] = TakePortrait();
+
+    yield return null;
     yield return new WaitForEndOfFrame();
-    SetPortraitCameraPosition(1);
+
+    SetPortraitCameraPosition(3);
     yield return new WaitForEndOfFrame();
-    TakePortrait(5);
+    defaultSprites[1] = TakePortrait();
+
+    characterImages[0].sprite = defaultSprites[0];
+    characterImages[1].sprite = defaultSprites[1];
   }
 
   public void SetPortraitCameraPosition(int posx) {
@@ -264,14 +279,15 @@ public class CustomizationController : MonoBehaviour {
     portraitCamera.transform.localPosition = v;
   }
 
-  public void TakePortrait(int id) {
+  public Sprite TakePortrait() {
     RenderTexture.active = portraitRenderTexture;
     portraitTexture = new Texture2D(portraitRenderTexture.width, portraitRenderTexture.height);
     portraitTexture.ReadPixels(new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), 0, 0);
     portraitTexture.Apply();
 
     Sprite face = Sprite.Create(portraitTexture, new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), Vector2.zero);
-    ModsManager.instance.setFaces[id] = face;
+    //ModsManager.instance.setFaces[id] = face;
+    return face;
   }
 
 
