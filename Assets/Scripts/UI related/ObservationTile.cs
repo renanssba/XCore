@@ -16,7 +16,7 @@ public class ObservationTile : MonoBehaviour {
 
   public bool wasUsed = false;
 
-  public const float tileDistanceTolerance = 150f;
+  public const float tileDistanceTolerance = 230f;
 
   void OnEnable() {
     UpdateUI();
@@ -83,11 +83,11 @@ public class ObservationTile : MonoBehaviour {
   }
 
   public bool IsCloseToToken() {
-    Debug.LogWarning("player token: "+ GameController.instance.playerToken.transform.position+", this tile: "+ transform.position);
-    Debug.LogWarning("TILE Distance: "+ Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position));
+    Debug.LogWarning("player token: "+ GameController.instance.playerToken.transform.localPosition + ", this tile: "+ transform.localPosition);
+    Debug.LogWarning("TILE Distance: "+ Vector3.Distance(GameController.instance.playerToken.transform.localPosition, transform.localPosition));
 
     //return true;
 
-    return Vector3.Distance(GameController.instance.playerToken.transform.position, transform.position) <= tileDistanceTolerance;
+    return Vector3.Distance(GameController.instance.playerToken.transform.localPosition, transform.localPosition) <= tileDistanceTolerance;
   }
 }

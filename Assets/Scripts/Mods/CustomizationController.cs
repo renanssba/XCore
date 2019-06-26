@@ -32,12 +32,14 @@ public class CustomizationController : MonoBehaviour {
   public GameObject loadingIcon;
 
   public RenderTexture portraitRenderTexture;
+  public RenderTexture portraitRenderTexture2;
 
   public Texture2D portraitTexture;
 
   public ScreenContext customScreenContext;
 
   public GameObject portraitCamera;
+  public GameObject portraitCamera2;
 
 
   public void Awake() {
@@ -62,8 +64,10 @@ public class CustomizationController : MonoBehaviour {
       }
     }
 
-    if (Input.GetKeyDown(KeyCode.F5)) {
-      webcam.Stop();
+    if(Input.GetKeyDown(KeyCode.F5)) {
+      if(webcam != null) {
+        webcam.Stop();
+      }
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
   }
@@ -246,7 +250,7 @@ public class CustomizationController : MonoBehaviour {
     for(int i = 0; i<5; i++) {
       SetPortraitCameraPosition(3);
       yield return new WaitForEndOfFrame();
-      ModsManager.instance.setFaces[5+i] = TakePortrait();
+      ModsManager.instance.setFaces[5+i] = TakePortrait2();
       yield return new WaitForEndOfFrame();
     }
     //yield return StartPictures();
@@ -256,7 +260,9 @@ public class CustomizationController : MonoBehaviour {
   }
 
   public IEnumerator StartPictures() {
-    yield return null;
+    //yield return null;
+    //yield return new WaitForEndOfFrame();
+    yield return new WaitForSeconds(0.2f);
 
     SetPortraitCameraPosition(2);
     yield return new WaitForEndOfFrame();
@@ -267,16 +273,16 @@ public class CustomizationController : MonoBehaviour {
 
     SetPortraitCameraPosition(3);
     yield return new WaitForEndOfFrame();
-    defaultSprites[1] = TakePortrait();
+    defaultSprites[1] = TakePortrait2();
 
     characterImages[0].sprite = defaultSprites[0];
     characterImages[1].sprite = defaultSprites[1];
   }
 
   public void SetPortraitCameraPosition(int posx) {
-    Vector3 v = portraitCamera.transform.localPosition;
-    v.x = -1.9f + posx * 3.8f;
-    portraitCamera.transform.localPosition = v;
+    //Vector3 v = portraitCamera.transform.localPosition;
+    //v.x = -1.9f + posx * 3.8f;
+    //portraitCamera.transform.localPosition = v;
   }
 
   public Sprite TakePortrait() {
@@ -286,6 +292,17 @@ public class CustomizationController : MonoBehaviour {
     portraitTexture.Apply();
 
     Sprite face = Sprite.Create(portraitTexture, new Rect(0, 0, portraitRenderTexture.width, portraitRenderTexture.height), Vector2.zero);
+    //ModsManager.instance.setFaces[id] = face;
+    return face;
+  }
+
+  public Sprite TakePortrait2() {
+    RenderTexture.active = portraitRenderTexture2;
+    portraitTexture = new Texture2D(portraitRenderTexture2.width, portraitRenderTexture2.height);
+    portraitTexture.ReadPixels(new Rect(0, 0, portraitRenderTexture2.width, portraitRenderTexture2.height), 0, 0);
+    portraitTexture.Apply();
+
+    Sprite face = Sprite.Create(portraitTexture, new Rect(0, 0, portraitRenderTexture2.width, portraitRenderTexture2.height), Vector2.zero);
     //ModsManager.instance.setFaces[id] = face;
     return face;
   }

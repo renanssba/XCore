@@ -49,7 +49,7 @@ public class GlobalData : MonoBehaviour {
       }
     }
 
-    viableCouple[0, 0] = true;
+    //viableCouple[0, 0] = true;
 
     inventory = new Inventory();
   }
