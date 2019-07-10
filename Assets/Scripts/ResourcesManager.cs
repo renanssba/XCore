@@ -9,6 +9,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] itemSprites;
   public Sprite[] attributeSprites;
   public Sprite[] daytimeSprites;
+  public GameObject[] baseActorPrefab;
   public Sprite unknownSprite;
 
   public Color[] attributeColor;

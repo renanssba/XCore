@@ -178,7 +178,9 @@ public class CustomizationController : MonoBehaviour {
     camImage.texture = webcam;
   }
 
-  public void CloseCustomizationPanel() {
+  public IEnumerator CloseCustomizationPanel() {
+    yield return new WaitForSeconds(0.15f);
+
     customizationPanel.SetActive(false);
     webcam.Stop();
     JoystickController.instance.RemoveContext();
@@ -199,12 +201,15 @@ public class CustomizationController : MonoBehaviour {
 
   public void ClickUseWebcamSprite(){
     SetImageSprite(characterImages[customizingCharacter]);
-    CloseCustomizationPanel();
+    StartCoroutine(CloseCustomizationPanel());
   }
 
   public void SetCharacterSprite(Sprite sprite){
     characterImages[customizingCharacter].sprite = sprite;
-    CloseCustomizationPanel();
+
+    characterInputNameText[customizingCharacter].text = imageSearchInputField.text;
+
+    StartCoroutine(CloseCustomizationPanel());
   }
 
 

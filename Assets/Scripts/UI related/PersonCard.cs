@@ -78,7 +78,7 @@ public class PersonCard : MonoBehaviour {
 
   public void SetEquipableItems(bool canEquipItems) {
     for(int i=0; i<equipIcons.Length; i++){
-      equipIcons[i].transform.parent.GetComponent<Button>().interactable = canEquipItems && i<=person.EquipsCount();
+      equipIcons[i].transform.parent.gameObject.SetActive(canEquipItems && i <= person.EquipsCount());
     }
     //UpdateUI();
   }

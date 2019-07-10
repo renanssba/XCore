@@ -36,8 +36,8 @@ public class TheaterController : MonoBehaviour {
   public Vector2 mainActiveCardPosition;
   public Vector2 supportActiveCardPosition;
 
-  public GameObject mainActor;
-  public GameObject supportActor;
+  public Actor3D mainActor;
+  public Actor3D supportActor;
   public SpriteRenderer challengeActor;
 
   public GameObject damageParticlePrefab;
@@ -62,10 +62,13 @@ public class TheaterController : MonoBehaviour {
   public void SetEvent(TheaterEvent currentEvent) {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
+    mainActor.SetGraphics(GlobalData.instance.observedPeople[0]);
+
     switch(currentEvent) {
       case TheaterEvent.observation:
         ObservationEventType evtType = GameController.instance.GetCurrentObservationEvent().eventType;
         PositionCamera(CameraPosition.mainCamera);
+
         mainActor.transform.localPosition = mainPosition;
         mainActor.transform.localEulerAngles = rotationFacingRight;
         //mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
@@ -74,29 +77,26 @@ public class TheaterController : MonoBehaviour {
         switch(evtType) {
           case ObservationEventType.attributeTraining:
             mainActor.transform.localPosition = new Vector3(0f, mainPosition.y, mainPosition.z);
-            //mainActor.transform.localEulerAngles = rotationFacingRight;
             supportActor.gameObject.SetActive(false);
             break;
           case ObservationEventType.femaleInTrouble:
           case ObservationEventType.maleInTrouble:
+            supportActor.SetGraphics(GlobalData.instance.observedPeople[1]);
             supportActor.gameObject.SetActive(true);
             supportActor.transform.localPosition = encounterPosition;
             supportActor.transform.localEulerAngles = rotationFacingLeft;
-            //if(evtType == ObservationEventType.maleInTrouble) {
-            //  supportActor.sprite = peopleSprites[0];
-            //} else {
-            //  supportActor.sprite = peopleSprites[1];
-            //}
             break;
         }        
         break;
       case TheaterEvent.date:
       case TheaterEvent.dateChallenge:
         PositionCamera(CameraPosition.mainCamera);
+
         mainActor.transform.localPosition = mainPosition;
         mainActor.transform.localEulerAngles = rotationFacingRight;
 
         supportActor.gameObject.SetActive(true);
+        supportActor.SetGraphics(GlobalData.instance.observedPeople[1]);
         supportActor.transform.localPosition = supportPosition;
         supportActor.transform.localEulerAngles = rotationFacingRight;
 
@@ -119,26 +119,26 @@ public class TheaterController : MonoBehaviour {
 
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
-              mainActor.GetComponent<Actor3D>().SetBrightness(1f);
-              supportActor.GetComponent<Actor3D>().SetBrightness(intensity);
+              mainActor.SetBrightness(1f);
+              supportActor.SetBrightness(intensity);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
               break;
             case DateEventInteractionType.female:
-              mainActor.GetComponent<Actor3D>().SetBrightness(intensity);
-              supportActor.GetComponent<Actor3D>().SetBrightness(1f);
+              mainActor.SetBrightness(intensity);
+              supportActor.SetBrightness(1f);
               GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
               GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
               break;
             case DateEventInteractionType.couple:
-              mainActor.GetComponent<Actor3D>().SetBrightness(1f);
-              supportActor.GetComponent<Actor3D>().SetBrightness(1f);
+              mainActor.SetBrightness(1f);
+              supportActor.SetBrightness(1f);
               break;
           }
 
           if(string.IsNullOrEmpty(spriteName)) {
-            mainActor.GetComponent<Actor3D>().SetBrightness(1f);
-            supportActor.GetComponent<Actor3D>().SetBrightness(1f);
+            mainActor.SetBrightness(1f);
+            supportActor.SetBrightness(1f);
           }
 
           GameController.instance.actionPersonCard.ShowPanel();

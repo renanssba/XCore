@@ -54,13 +54,13 @@ public class Person {
     switch (Random.Range(0, 2)) {
       case 0:
         attValues.Add(6);
+        attValues.Add(6);
         attValues.Add(4);
-        attValues.Add(3);
         break;
       case 1:
-        attValues.Add(5);
-        attValues.Add(4);
-        attValues.Add(4);
+        attValues.Add(8);
+        attValues.Add(6);
+        attValues.Add(2);
         break;
     }
     attValues = attValues.OrderBy(x => Random.value).ToList();

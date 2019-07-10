@@ -29,6 +29,8 @@ public class CoupleEntry : MonoBehaviour {
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
     GlobalData.instance.observedPeople[0] = coupleCards[0].person;
     GlobalData.instance.observedPeople[1] = coupleCards[1].person;
+    //TheaterController.instance.mainActor.GetComponent<Actor3D>().SetGraphics(GlobalData.instance.observedPeople[0]);
+    //TheaterController.instance.supportActor.GetComponent<Actor3D>().SetGraphics(GlobalData.instance.observedPeople[1]);
     VsnController.instance.StartVSN("date");
   }
 }

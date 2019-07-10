@@ -7,23 +7,38 @@ public class Actor3D : MonoBehaviour {
   public List<Material> myMaterials;
   public List<Color> myColors;
 
-  public void Awake() {
-    myMaterials = new List<Material>();
-    myColors = new List<Color>();
-    //List<Material> clonedMaterials = new List<Material>();
-
+  public void Start() {
     // TODO: FIX THIS to not create many copies for each material
 
-    //Dictionary<Material, Material> dic = new Dictionary<Material, Material>();
+    //Initialize(0);
+  }
+
+
+  public void ClearBody() {
+    int childCount = transform.childCount;
+
+    for(int i = 0; i < childCount; i++) {
+      Destroy(transform.GetChild(i).gameObject);
+      //itemsHolder.transform.GetChild(i).gameObject.SetActive(false);
+    }
+  }
+
+  public void SetGraphics(Person person) {
+    ClearBody();
+    GameObject actor = ResourcesManager.instance.baseActorPrefab[person.isMale ? 0 : 1];
+    Instantiate(actor, transform);
+
+
+    myMaterials = new List<Material>();
+    myColors = new List<Color>();
+
 
     SkinnedMeshRenderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
     foreach(SkinnedMeshRenderer renderer in renderers) {
-      //for(int i = 0; i < renderer.materials.Length; i++) {
       for(int i = renderer.materials.Length - 1; i >= 0; i--) {
-        if( !myMaterials.Contains(renderer.materials[i]) ) {
+        if(!myMaterials.Contains(renderer.materials[i])) {
           Material newMat = new Material(renderer.materials[i]);
-          //dic.Add(renderer.materials[i], newMat);
 
           renderer.materials[i] = newMat;
           myMaterials.Add(renderer.materials[i]);
@@ -36,6 +51,7 @@ public class Actor3D : MonoBehaviour {
       }
     }
   }
+
 
   public void SetBrightness(float value) {
     for(int i=0; i<myMaterials.Count; i++) {

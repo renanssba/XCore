@@ -42,15 +42,6 @@ public class GlobalData : MonoBehaviour {
     DontDestroyOnLoad(gameObject);
 
     observedPeople = new Person[2];
-    viableCouple = new bool[boysToGenerate, girlsToGenerate];
-    for(int i = 0; i < boysToGenerate; i++) {
-      for(int j = 0; j < girlsToGenerate; j++) {
-        viableCouple[i, j] = false;
-      }
-    }
-
-    //viableCouple[0, 0] = true;
-
     inventory = new Inventory();
   }
 
@@ -61,6 +52,15 @@ public class GlobalData : MonoBehaviour {
 
     people = new List<Person>();
     ResetCurrentCouples();
+
+
+    viableCouple = new bool[boysToGenerate, girlsToGenerate];
+    for(int i = 0; i < boysToGenerate; i++) {
+      for(int j = 0; j < girlsToGenerate; j++) {
+        viableCouple[i, j] = false;
+      }
+    }
+    //viableCouple[0, 0] = true;
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);
