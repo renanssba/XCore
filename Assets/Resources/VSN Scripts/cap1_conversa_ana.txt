@@ -1,0 +1,42 @@
+
+if ana_heart == 0
+  say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
+  say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+endif
+
+if ana_heart == 1
+  say "Ana" "Valeu por ter vindo..."
+  say "Ricardo" "Ah, eu não tinha nada melhor pra fazer, haha."
+  say "Ana" "..."
+  say "Ricardo" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+  say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
+  say "Ricardo" "Por quê?"
+  say "Ana" "Você sabe... Toda essa coisa da Clara."
+  say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
+  say "Ricardo" "É, sim. Eu espero que sim. É a minha grande chance."
+  say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
+  say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
+  say "Ricardo" "Eu vou sempre ter tempo pra você, sua boba!"
+  say "Ana" "..."
+  say "Ricardo" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+  say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
+  say "Ricardo" "Ei, aquilo doeu!"
+  say "Ana" "Pô, o Tobi era um pug tão pequeninho..."
+  say "Ricardo" "De qualquer forma. Eu não parei de falar contigo, parei?"
+  say "Ana" "Só por uns dois dias."
+  say "Ricardo" "Pois é. Eu não parei naquele dia e não vou parar agora."
+  say "Ana" "..."
+  say "Ana" "Valeu. Você é um bobo, mesmo!"
+
+  wait 1
+  play_sfx "relationship_up"
+  say "" "Ricardo e Ana se tornaram mais próximos! A habilidade <color=red>Memórias Felizes</color> foi desbloqueada!"
+  wait 1
+endif
+
+if ana_heart >= 2
+  say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
+  say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+endif
+
+add_var ana_heart 1

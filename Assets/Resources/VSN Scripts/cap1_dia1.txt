@@ -1,0 +1,255 @@
+play_music "observacao2_intro" "observacao2_loop"
+set_screen "hide_all"
+
+// DEBUGS
+say_auto "" ""
+choices "Intro" intro"Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
+//goto aula
+
+
+
+waypoint intro
+
+fade_out 1
+//goto_script "fertiliel_enter"
+
+say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele é: estudioso, esforçado, mas sem muita sorte com as garotas...)"
+fade_in 1
+say "Delinquente" "Passa agora o dinheiro do lanche, meu chapa!"
+say "Fertiliel" "(...e com os colegas de classe também, aparentemente.)"
+say "Ricardo" "M-Mas eu não tô com dinheiro nenhum dessa vez, cara."
+say "Delinquente" "Ah, é? Então eu vou ter que te ensinar uma lição!"
+say "???" "Por quê você não mexe com alguém do seu tamanho?"
+
+say "" "Ana entra na cena."
+// Ana entra
+
+say "Ricardo" "Ana?!"
+say "Delinquente" "Qual é baixinha, vai encarar?"
+say "Ana" "Eu vou, ó!"
+fade_out 0.5
+play_sfx "hit_default"
+wait 0.5
+fade_in 0.5
+
+say "" "O delinquente sai andando todo ferido."
+
+// delinquente sai todo ferido
+say "Ana" "E não volte a incomodar!"
+say "Ricardo" "Valeu Ana, esse cara me enche o saco toda hora."
+say "Ana" "Eu sei. O que seria de você sem mim, hein?"
+say "Ricardo" "Haha, convencida você."
+
+wait 1.5
+
+say "Ana" "Ei, o professor ficou de passar aquele trabalho de história, né?"
+say "Ricardo" "Sim, ele falou que ia formar as equipes hoje."
+say "Ana" "E você já tem equipe?"
+say "Ricardo" "Eu queria formar dupla com a Clara! Será que seria possível? Meu sonho se tornando realidade!"
+say "Ana" "Você gosta mesmo dela, hein? Tem quantos anos isso?"
+say "Ricardo" "Desde que eu consigo me lembrar."
+say "Ana" "Verdade. Espero que dê certo, vou torcer por você!"
+
+
+waypoint aula
+
+fade_out 1
+wait 1
+say "" "Durante a aula..."
+fade_in 1
+
+say "Professor" "Então por hoje é só, pessoal. E pra completar a nota de vocês, eu vou passar aquele trabalho sobre a matéria de hoje."
+say "Eu escrevi os nomes de vocês nestes papéis e vou sortear duplas..."
+
+say "Fertiliel" "(Eita, eu posso interferir no sorteio se eu quiser. Será que devo interferir agora?)"
+choices "Formar dupla Ricardo e Clara" trabalho_sim "Não interferir" trabalho_nao
+
+waypoint trabalho_sim
+say "(Vou alterar aqui o papel sorteado pelo professor...)"
+wait 1
+set_var fert_ajudou 1
+say "(Pronto!)"
+goto trabalho_resultado
+
+waypoint trabalho_nao
+set_var fert_ajudou 0
+say "(Acho melhor ainda não.)"
+
+waypoint trabalho_resultado
+say "Professor" "E a primeira dupla sorteada é: Ricardo e..."
+wait 1
+say "...Clara!"
+
+say "" "Neste momento pode-se ouvir um sonoro 'Aaah' de descontentamento de vários garotos pela sala. Eles parecem tristes por não terem sido a dupla da Clara."
+
+say "Ricardo" "(Caramba! Que sorte a minha! Vou fazer o trabalho de dupla com a Clara!)"
+
+if fert_ajudou == 1
+  say "Fertiliel" "(De nada, viu..)"
+endif
+
+fade_out 0.5
+say "" "O sorteio continua por alguns minutos, e então chega a hora do intervalo."
+fade_in 0.5
+
+say "" "Clara se levanta e vai adando até Ricardo. Ele começa a suar e fica visivelmente alterado."
+say "Clara" "Oi, você é o Ricardo, né? Acho que vamos fazer esse trabalho juntos."
+say "Ricardo" "Er.. S-sim, sou eu! Estou ansioso para t-trabalharmos juntos..."
+say "Clara" "Ah, que bom! Eu posso ir na sua casa hoje depois da aula, então?"
+
+say "Ricardo" "Minha c-casa?!! C-c-claro! Aqui está meu endereço..."
+say "Clara" "Tá bom então! A gente se vê mais tarde."
+
+
+say "" "Clara sai de cena."
+wait 1
+say "" "Um pouco depois, Ricardo percebe um pequeno envelope sobre sua mesa."
+say "" "Ele abre o envelope e dentro há uma cartinha escrita à mão em um delicado papel de carta. O conteúdo é o seguinte:"
+
+say "Carta" "Olá, peço perdão por escrever-te este convite de forma tão inesperada... mas eu gostaria de conversar contigo sobre um assunto de seu interesse."
+say "Carta" "Por favor, encontre-me na biblioteca durante o intervalo. Sua presença será muito apreciada. Agradeço a atenção.\n-B"
+say "" "O estilo de escrita é um tanto formal e refinado; a letra, muito bonita. A atenção aos detalhes dá a impressão de que o autor ou autora se esforçou para fazer esta cartinha."
+say "Ricardo" "(Hum... 'B'? Quem será que escreveu isso?)"
+
+wait 1
+say "" "Um pouco depois, Ana entra. Ricardo guarda a cartinha rapidamente."
+wait 0.5
+
+say "Ana" "Sutil você, hein.."
+say "Ricardo" "Ah, o quê? Você acha que ficou muito óbvio que eu gosto da Clara?"
+say "Ana" "Com certeza! Só faltou beijar o chão onde ela pisou."
+say "Ricardo" "É, você tá certa. Vou tentar manter a calma quando estiver com ela."
+say "Ana" "Acho bom mesmo, senão você vai estragar suas chances com ela! Como você sempre faz..."
+
+say "Ricardo" "Er.. Valeu pelo apoio."
+wait 1
+say "Ana" "Ei, venha lanchar comigo lá no telhado! Eu trouxe um lanche muito bom hoje. Me encontra por lá!"
+
+say "" "Ana saiu correndo pela porta antes que Ricardo conseguisse responder."
+
+wait 1
+
+waypoint end
+goto_script "show_people_screen"
+update_ui
+end_script
+
+
+say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
+//goto_script "fertiliel_enter"
+say "Fertiliel" "(É agora que eu deveria agir. Posso influenciar sua ação.)"
+
+choices "Ir para a Biblioteca" escolha_biblioteca "Lanchar com Ana" escolha_lanche
+
+waypoint escolha_biblioteca
+set_var lanchou_com_ana 0
+
+fade_out 1
+wait 1
+say "" "Na biblioteca..."
+fade_in 1
+
+say "Ricardo" "(Cheguei aqui. Quem será que enviou aquela carta?)"
+say "" "Ricardo senta-se em uma cadeira ao fundo da biblioteca e fica bem atento, observando se alguém vem falar com ele."
+say "Ricardo" "(A cartinha estava assinada com um 'B'... Eu não lembro de ninguém em particular cujo nome comece com essa letra. Quem será?)"
+say "" "Ricardo fica vários minutos observando ao seu redor, mas ninguém vem falar com ele."
+say "O tempo do intervalo acaba e ele não obtém sua resposta sobre o autor da cartinha."
+say "Ricardo" "(Droga, eu perdi meu tempo aqui. Eu furei de lanchar com a Ana e a pessoa nem apareceu... Que vacilo...)"
+say "" "Ricardo volta para a sala de aula para continuar as próximas lições."
+goto pos_aula
+
+
+waypoint escolha_lanche
+set_var lanchou_com_ana 1
+
+fade_out 1
+wait 1
+say "" "Chegando no telhado..."
+fade_in 1
+say "Ana e Ricardo sentam-se e começam a lanchar."
+
+goto_script "cap1_conversa_ana"
+
+say "" "Ricardo e Ana voltam para a sala de aula para continuar as próximas lições."
+goto pos_aula
+
+
+waypoint pos_aula
+fade_out 1
+wait 1
+say "" "A aula seguiu normalmente, sem grandes ocorrências. Após a aula..."
+fade_in 1
+
+if lanchou_com_ana == 0
+  say "Ana" "Ei Ricardo, por que você furou de lanchar comigo?!"
+  say "Ricardo" "Ah, desculpa... Apareceu algo importante pra eu fazer."
+  say "Ana" "Não tem desculpa! Você não pode ficar me evitando assim. Como retribuição você tem que vir ao clube de tarde comigo."
+  say "Ricardo" "Ah, mas eu tenho outro compromi..."
+  say "Ana" "Não importa, é a sua chance de compensar seu vacilo comigo."
+  say "" "Ana saiu andando emburrada."
+  say "Fertiliel" "(O que o meu humano deveria fazer?)"
+  choices "Ir estudar com Clara" tarde_com_clara "Ir para o clube com Ana" tarde_com_ana
+endif
+
+
+waypoint tarde_com_clara
+
+fade_out 1
+wait 1
+say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
+fade_in 1
+
+goto_script "cap1_conversa_clara"
+
+say "Eles marcam de continuar o trabalho no dia seguinte."
+goto pos_tarde
+
+
+
+waypoint tarde_com_ana
+
+fade_out 1
+wait 1
+say "" "Ricardo e Ana encontram-se no clube esportivo."
+say "Eles jogam futebol e treinam queimada. Ana obriga Ricardo a jogar até ficar esgotado, sob a desculpa de que isso irá aumentar sua resistência física."
+say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
+fade_in 1
+
+goto_script "cap1_conversa_ana"
+
+say "" "Ricardo e Ana voltam para suas casas."
+goto pos_tarde
+
+
+
+waypoint pos_tarde
+fade_out 1
+wait 1
+say "" "Durante a noite Ricardo fica em casa estudando e vendo animes."
+fade_in 1
+
+say "Fertiliel" "(Estou livre agora. O que eu deveria fazer?)"
+choices "Investigar Ana" investigar_ana "Investigar garota da carta" investigar_b "Investigar Clara" investigar_clara
+
+waypoint investigar_ana
+waypoint investigar_b
+waypoint investigar_clara
+say "" "A ser implementado..."
+
+
+waypoint dia_2
+goto_script "cap1_dia2"
+goto_script "show_people_screen"
+end_script
+
+
+waypoint dia_3
+goto_script "cap1_dia3"
+goto_script "show_people_screen"
+end_script
+
+
+waypoint dia_4
+//goto_script "cap1_dia4"
+goto_script "show_people_screen"
+end_script

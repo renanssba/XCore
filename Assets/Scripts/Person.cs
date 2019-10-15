@@ -65,10 +65,10 @@ public class Person {
     }
     attValues = attValues.OrderBy(x => Random.value).ToList();
 
-    attributes = new int[3];
-    for(int i=0; i<3; i++){
-      attributes[i] = attValues[i];
-    }
+    //attributes = new int[3];
+    //for(int i=0; i<3; i++){
+    //  attributes[i] = attValues[i];
+    //}
 
     state = PersonState.unrevealed;
 
@@ -83,10 +83,7 @@ public class Person {
     id = personId;
     faceId = personId;
     personality = (Personality)Random.Range(0, 3);
-    equips = new Item[3];
-    for(int i=0; i<3; i++){
-      equips[i] = null;
-    }
+    equips = new Item[3]{ null, null, null};
   }
 
   public Attributes AttributetoUse(){

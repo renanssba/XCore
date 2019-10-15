@@ -42,6 +42,8 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject damageParticlePrefab;
 
+  public TextMeshPro difficultyText;
+
   public Image attributeIcon;
   public Slider hpSlider;
 
@@ -111,6 +113,7 @@ public class TheaterController : MonoBehaviour {
           string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
 
           if(!string.IsNullOrEmpty(spriteName)) {
+            difficultyText.text = "<size=16>NV </size>"+GameController.instance.GetCurrentDateEvent().difficulty;
             ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
           } else {
             PositionCamera(CameraPosition.closeupCamera);
@@ -227,25 +230,26 @@ public class TheaterController : MonoBehaviour {
   }
 
   public IEnumerator WaitAndShine(float time) {
-    int selected = VsnSaveSystem.GetIntVariable("selected_attribute");
-    int selectedAttributeLevel = GlobalData.instance.EventSolvingAttributeLevel(selected);
+    int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
+    int attributeBaseLevel = GlobalData.instance.EventSolvingAttributeLevel(attributeId);
+    int effectiveAttributeLevel = (int)(attributeBaseLevel * GameController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId]);
 
     VsnAudioManager.instance.PlaySfx("hit_default");
 
     yield return new WaitForSeconds(time);
 
     FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
-    ShowParticleAnimation(selected, selectedAttributeLevel);
+    ShowParticleAnimation(attributeId, effectiveAttributeLevel);
 
     yield return new WaitForSeconds(0.4f);
 
-    attributeIcon.sprite = ResourcesManager.instance.attributeSprites[selected];
-    attributeIcon.color = ResourcesManager.instance.attributeColor[selected];
+    attributeIcon.sprite = ResourcesManager.instance.attributeSprites[attributeId];
+    attributeIcon.color = ResourcesManager.instance.attributeColor[attributeId];
     hpSlider.value = 0;
-    hpSlider.fillRect.GetComponent<Image>().color = ResourcesManager.instance.attributeColor[selected];
-    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficultyForAttribute[selected];
+    hpSlider.fillRect.GetComponent<Image>().color = ResourcesManager.instance.attributeColor[attributeId];
+    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficulty;
     hpSlider.gameObject.SetActive(true);
-    hpSlider.DOValue(selectedAttributeLevel, 1f);
+    hpSlider.DOValue(effectiveAttributeLevel, 1f);
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {

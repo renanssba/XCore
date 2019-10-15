@@ -24,6 +24,8 @@ public class VsnUIManager : MonoBehaviour {
   public Button[] choicesButtons;
   public TextMeshProUGUI[] choicesTexts;
 
+  public Image vsnFaceIcon;
+
   public GameObject letterPanel;
   public TextMeshProUGUI letterTitleText;
   public TextMeshProUGUI letterText;
@@ -67,7 +69,11 @@ public class VsnUIManager : MonoBehaviour {
     ShowClickMessageIcon(false);
     Utils.SelectUiElement(screenButton.gameObject);
     if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
-      vsnMessageText.text = "\""+msg+ "\"";
+      if(msg[0] == '(') {
+        vsnMessageText.text = "(" + msg.Substring(1, msg.Length-2) + ")";
+      } else {
+        vsnMessageText.text = "\"" + msg + "\"";
+      }      
     } else{
       vsnMessageText.text = msg;
     }    
@@ -88,6 +94,12 @@ public class VsnUIManager : MonoBehaviour {
       vsnMessageTitlePanel.gameObject.SetActive(false);
     } else {
       vsnMessageTitlePanel.gameObject.SetActive(true);
+    }
+    if(GlobalData.instance.GetFaceByName(messageTitle) != null) {
+      vsnFaceIcon.transform.parent.gameObject.SetActive(true);
+      vsnFaceIcon.sprite = GlobalData.instance.GetFaceByName(messageTitle);
+    } else {
+      vsnFaceIcon.transform.parent.gameObject.SetActive(false);
     }
   }
 

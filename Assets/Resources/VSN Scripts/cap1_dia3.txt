@@ -1,0 +1,86 @@
+set_screen "hide_all"
+
+
+waypoint dia_3
+
+fade_out 1
+say "" "No dia seguinte, Ricardo vai para o colégio."
+fade_in 1
+
+say "Ana" "Ei Ricardo! Você ficou sabendo da festa na casa da Clara que vai ter hoje de noite?"
+if clara_convidou_festa == 1
+  say "Ricardo" "Fiquei sim, ela me convidou ontem depois do estudo."
+  say "Ana" "Ah.. Ela convidou, foi?"
+  say "Ricardo" "Foi, eu tô tão feliz! E parece que vai ser bem legal, ela contratou banda e vai ter sorvete liberado!"
+  say "Ana" "É, vai sim."
+  say "Ricardo" "Você vem também, não é?"
+  say "Ana" "Claro."
+else
+  say "Ricardo" "Não, não fui convidado."
+  say "Ana" "Vai ser muito legal! Ela contratou banda e vai ter sorvete liberado, além de uma porrada de comida também! Vamos?"
+  say "Ricardo" "Não sei... Eu não acho uma boa ir sem ter sido convidado..."
+  say "Ana" "Eu também não, mas vamo! Comida de graça!"
+  wait 1
+  say "Ricardo" "..."
+  say "Ricardo" "Tá bom, eu vou. Você sabe mesmo me convencer a fazer tudo que quiser."
+  say "Ana" "Ah, é? Então faz minha tarefa de casa de história pra mim?"
+  say "Ricardo" "Não abusa..."
+endif
+
+fade_out 1
+wait 1
+say "" "A aula se passou sem muitos incidentes. Durante o intervalo..."
+fade_in 1
+
+
+choices "Ficar com Ana" ficar_com_ana "Ficar com Beatrice" ficar_com_beatrice
+
+
+waypoint ficar_com_ana
+fade_out 1
+wait 1
+say "" "Chegando no telhado..."
+fade_in 1
+say "Ana e Ricardo sentam-se e começam a lanchar."
+
+goto_script "cap1_conversa_ana"
+goto pos_aula
+
+
+waypoint ficar_com_beatrice
+fade_out 1
+wait 1
+say "" "Chegando na biblioteca..."
+fade_in 1
+
+goto_script "cap1_conversa_beatrice"
+goto pos_aula
+
+
+
+
+
+waypoint pos_aula
+fade_out 1
+wait 1
+say "" "Após a aula..."
+
+waypoint tarde_com_clara
+say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
+fade_in 1
+
+goto_script "cap1_conversa_clara"
+goto pos_tarde
+
+
+
+waypoint pos_tarde
+fade_out 1
+wait 1
+say "" "Durante a noite chega a hora de ir para a festa na casa da Clara. Ricardo se arruma e vai para a festa."
+fade_in 1
+
+
+// waypoint dia_3
+goto_script "cap1_festa"
+goto_script "show_people_screen"

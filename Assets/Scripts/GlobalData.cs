@@ -90,29 +90,83 @@ public class GlobalData : MonoBehaviour {
     }
     usedNames.Clear();
 
-    people[0].state = PersonState.available;
-    people[5].state = PersonState.available;
+    //people[0].state = PersonState.available;
+    //people[5].state = PersonState.available;
+
+    InitializeChapterAlpha();
 
     InitializeDateEvents();
     InitializeObservationEvents();
   }
 
+  public void InitializeChapterAlpha() {
+    boysToGenerate = 1;
+    girlsToGenerate = 3;
+    viableCouple = new bool[boysToGenerate, girlsToGenerate];
+    for(int i = 0; i < boysToGenerate; i++) {
+      for(int j = 0; j < girlsToGenerate; j++) {
+        viableCouple[i, j] = false;
+      }
+    }
+
+    people = new List<Person>();
+    Person p = new Person() {
+      name = "Ricardo",
+      isMale = true,
+      faceId =4,
+      attributes = new int[]{2, 6, 1},
+      equips = new Item[3] { null, null, null }
+  };
+    people.Add(p);
+    p = new Person() {
+      name = "Ana",
+      isMale = false,
+      faceId = 9,
+      attributes = new int[] {8, 2, 1},
+    equips = new Item[3] { null, null, null }
+  };
+    people.Add(p);
+    p = new Person() {
+      name = "Beatrice",
+      isMale = false,
+      faceId = 7,
+      attributes = new int[] {1, 8, 1},
+      equips = new Item[3] { null, null, null }
+  };
+    people.Add(p);
+    p = new Person() {
+      name = "Clara",
+      isMale = false,
+      faceId = 5,
+      attributes = new int[] {2, 2, 7},
+      equips = new Item[3] { null, null, null }
+    };
+    people.Add(p);
+
+
+    viableCouple[0, 0] = true;
+    viableCouple[0, 1] = true;
+    viableCouple[0, 2] = true;
+
+    //PersonCard[] cards = new PersonCard[4];
+    //System.Array.Copy(GameController.instance.personCards, cards, 4);
+    //GameController.instance.personCards = cards;
+    //foreach(PersonCard pcard in GameController.instance.personCards) {
+    //  pcard.gameObject.SetActive(true);
+    //}
+  }
+
   public void InitializeDateEvents() {
     allDateEvents = new List<DateEvent>();
 
-    int id, guts, intelligence, charisma, stage;
-    string location, spriteName;
+    float guts, intelligence, charisma;
     DateEventInteractionType interaction = DateEventInteractionType.male;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
     foreach (Dictionary<string, string> dic in spreadsheetData.data) {
-      id = int.Parse(dic["Id"]);
-      guts = int.Parse(dic["Dificuldade Guts"]);
-      intelligence = int.Parse(dic["Dificuldade Intelligence"]);
-      charisma = int.Parse(dic["Dificuldade Charisma"]);
-      location = dic["Localidade"];
-      spriteName = dic["Nome Sprite"];
-      stage = int.Parse(dic["Etapa"]);
+      guts = GetEffectivityByName(dic["Efetividade Valentia"]);
+      intelligence = GetEffectivityByName(dic["Efetividade Inteligencia"]);
+      charisma = GetEffectivityByName(dic["Efetividade Carisma"]);
       switch (dic["Tipo de Interação"]) {
         case "male":
           interaction = DateEventInteractionType.male;
@@ -127,8 +181,29 @@ public class GlobalData : MonoBehaviour {
           interaction = DateEventInteractionType.compatibility;
           break;
       }
-      allDateEvents.Add(new DateEvent(id, dic["Nome do Script"], guts, intelligence, charisma, stage, location, spriteName, interaction));
+      allDateEvents.Add(new DateEvent {
+        id = int.Parse(dic["Id"]),
+        scriptName = dic["Nome do Script"],
+        difficulty = int.Parse(dic["Dificuldade"]),
+        attributeEffectivity = new float[3] { guts, intelligence, charisma},
+        spriteName = dic["Nome Sprite"],
+        stage = int.Parse(dic["Etapa"]),
+        location = dic["Localidade"],
+        interactionType = interaction
+      });
     }
+  }
+
+  public float GetEffectivityByName(string name) {
+    switch(name) {
+      case "baixa":
+        return 0.5f;
+      case "normal":
+        return 1f;
+      case "super":
+        return 2f;
+    }
+    return 1f;
   }
 
   public void InitializeObservationEvents() {
@@ -267,7 +342,7 @@ public class GlobalData : MonoBehaviour {
           case DateEventInteractionType.female:
             return CurrentGirl().AttributeValue(attr);
           case DateEventInteractionType.couple:
-            return CurrentGirl().AttributeValue(attr) + CurrentBoy().AttributeValue(attr);
+            return (CurrentGirl().AttributeValue(attr) + CurrentBoy().AttributeValue(attr));
         }
         break;
     }
@@ -313,5 +388,17 @@ public class GlobalData : MonoBehaviour {
     } else {
       viableCouple[b.id, a.id - boysToGenerate] = true;
     }
+  }
+
+  public Sprite GetFaceByName(string name) {
+    if(name == "Fertiliel") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[0];
+    }
+    foreach(Person p in people) {
+      if(p.name == name) {
+        return ResourcesManager.instance.faceSprites[p.faceId];
+      }      
+    }
+    return null;
   }
 }

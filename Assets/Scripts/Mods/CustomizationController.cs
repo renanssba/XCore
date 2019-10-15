@@ -250,6 +250,7 @@ public class CustomizationController : MonoBehaviour {
 
     //VsnController.instance.StartVSN("got");
     //SceneManager.LoadScene(StageName.Park.ToString());
+    VsnController.instance.StartVSN("ask_for_email");
     VsnController.instance.StartVSN("goto_gameplay");
   }
 

@@ -26,7 +26,8 @@ public class DateEvent {
 
   public string scriptName;
   public int id;
-  public int[] difficultyForAttribute;
+  public float[] attributeEffectivity;
+  public int difficulty;
   public int stage;
   public string location;
   public string spriteName;
@@ -34,19 +35,6 @@ public class DateEvent {
 
   public RewardType rewardType;
   public int rewardId;
-
-  public DateEvent(int newid, string name, int difGuts, int difInt, int difCha, int stage, string location, string spriteName, DateEventInteractionType interType){
-    id = newid;
-    scriptName = name;
-    this.stage = stage;
-    this.location = location;
-    this.spriteName = spriteName;
-    difficultyForAttribute = new int[3];
-    difficultyForAttribute[0] = difGuts;
-    difficultyForAttribute[1] = difInt;
-    difficultyForAttribute[2] = difCha;
-    interactionType = interType;
-  }
 }
 
 

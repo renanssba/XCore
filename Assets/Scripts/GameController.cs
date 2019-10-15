@@ -75,6 +75,10 @@ public class GameController : MonoBehaviour {
     } else {
       GlobalData.instance.InitializeChapter();
       GlobalData.instance.PassDay();
+
+      //VsnSaveSystem.SetVariable("observation_played", 1);
+      //VsnController.instance.StartVSN("show_people_screen");
+
       UpdateUI();
 
       UpdateCouplesPanelContent();
@@ -86,7 +90,8 @@ public class GameController : MonoBehaviour {
         VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
         VsnSaveSystem.SetVariable("tutorial_observation", 1);
       }
-      VsnController.instance.StartVSN("tutorial_intro");
+      VsnController.instance.StartVSN("cap1_dia1");
+      //VsnController.instance.StartVSN("tutorial_intro");
       //VsnController.instance.StartVSN("check_end_game");
       //VsnController.instance.StartVSN("spend_day");
     }
@@ -155,7 +160,12 @@ public class GameController : MonoBehaviour {
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
     for(int i=0; i<personCards.Length; i++) {
-      personCards[i].Initialize(GlobalData.instance.people[i]);
+      if(i < GlobalData.instance.people.Count) {
+        personCards[i].gameObject.SetActive(true);
+        personCards[i].Initialize(GlobalData.instance.people[i]);
+      } else {
+        personCards[i].gameObject.SetActive(false);
+      }      
     }
     //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);

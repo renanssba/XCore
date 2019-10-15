@@ -1,0 +1,98 @@
+
+say "" "Chegando na entrada, o garoto percebe que a casa de Clara é enorme e está lotada de gente."
+say "Ricardo" "(Uau. Quanta... gente que eu não conheço.)"
+say "" "Ele passeia por alguns cômodos e corredores da casa, sentindo-se deslocado, e não encontra ninguém conhecido."
+say "Ricardo" "(Hum, onde será que tá a Clara?)"
+// say "" "O garoto recebe uma mensagem no celular de Ana."
+// say "Ana" "Eu tô chegando "
+say "" "Ele chega na sala. É um salão grande e barulhento: tem música tocando, muitas pessoas conversando e algumas dando uns amassos pelos cantos."
+say "" "Ricardo avista Clara. Ela está falando animadamente com dois caras populares do colégio e rindo bastante."
+say "Ana está do outro lado da sala, conversando com outro rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
+
+if convidou_beatrice == 1
+  say "Ele percebe que Beatrice também está na sala, sozinha e cabisbaixa num canto, quase como se estivesse se escondendo."
+  say_auto "Ricardo" "(O que eu deveria fazer?)"
+  choices "Ir atrás de Ana" ir_ana "Ir atrás de Beatrice" ir_beatrice "Ir atrás de Clara" ir_clara
+else
+  say_auto "Ricardo" "(O que eu deveria fazer?)"
+  choices "Ir atrás de Ana" ir_ana "Ir atrás de Clara" ir_clara
+endif
+
+waypoint ir_ana
+say "" "Ricardo chega mais perto de Ana e do outro cara. Ele acena para a amiga discretamente, mas ela está distraída com o rapaz."
+say "Ana" "Você é tão lindo, deixa eu te dar um beijo!"
+say "Rapaz" "Sai daqui, para com isso!"
+say "" "O rapaz parece estar resistindo aos avanços de Ana."
+say "Ela parece estar um pouco alterada. Será que ela exagerou no sorvete?"
+say "Ana" "Vem cá, só um beijinho."
+say "Rapaz" "Sai daqui, sua maluca!"
+say "" "O rapaz empurra Ana com força, livrando-se do abraço e derrubando a garota no chão, no meio da sala."
+say "Todos se viram para eles dois neste momento. Ouve-se uma exclamação de surpresa do grupo, seguida de um silêncio desconfortante."
+say "Ricardo" "Ana!"
+say "" "Ricardo corre até Ana e a ajuda a se levantar."
+say "Ricardo" "Você tá bem?"
+say "" "Ela fica em silêncio, cabisbaixa, mas não parece estar machucada. Furioso, Ricardo grita:"
+say "Ricardo" "Qual é, seu covarde! Por quê você fez isso com a minha amiga?!"
+say "Rapaz" "Essa maluca tava tentando me agarrar aqui."
+say "Ricardo" "Não te dá o direito de empurrá-la desse jeito!"
+say "Rapaz" "Fica na tua aí, tu não tem nada a ver com isso."
+say "" "Mais dois amigos fortes do rapaz popular se aproximaram, fazendo uma cara ameaçadora."
+say "" "Ricardo hesita diante dos garotos mais fortes, e em seguida se vira para Ana."
+say "Ela está cabisbaixa e parece estar chorando baixinho."
+say "Ricardo" "Vem, vamo sair daqui."
+say "" "Ele segura a mão da garota e a puxa para fora do salão da festa."
+say "" "Muita gente começa a cochichar coisas e rir baixinho enquanto os dois saem da sala."
+fade_out 1
+wait 1
+say "" "Os dois chegam ao jardim da casa, onde há poucas pessoas e está mais silencioso."
+fade_in 1
+say "Ana continua chorando baixinho. Sem saber o que fazer, Ricardo a abraça."
+say "Ana" "Me desculpa..."
+say "Ricardo" "Calma, vai ficar tudo bem."
+say "Ana" "Me desculpa, desculpa..."
+say "" "Ana não tem o costume de chorar. Alguma coisa deve está-la deixando muito angustiada."
+say "Ricardo" "Tá tudo bem... Não precisa pedir desculpa. Eu não sabia que você gostava daquele idiota."
+say "Ana" "Eu.. Eu não gosto... Mas a pessoa que eu gosto.. *snif* nunca vai ficar comigo..."
+say "" "Ricardo parece surpreso com a frase."
+say "Ricardo" "A pessoa de quem você gosta?"
+say "Ana" "Eu.. *snif* ...só não queria ficar sozinha."
+wait 1
+say "Ricardo" "A... pessoa de quem você gosta?"
+say "Ana" "É! Não me faz falar isso, seu idiota!"
+say "" "Ricardo "
+say "Ricardo" "Q-quem é a pessoa de quem você gosta?"
+say "Ana" "É VOCÊ, SEU BURRO!"
+say "Ricardo" "!!!"
+wait 1
+say "Ricardo" "Eu.. eu não sabia."
+say "Ana" "Eu sempre gostei de você, mas você nunca percebeu. Você só tinha olhos pra Clara."
+say "Ricardo" "Ana..."
+say "Ana" "Embora a gente sempre tivesse junto, você nunca enxergou meus sentimentos, só me via como amiga."
+say "Ricardo" "Você.."
+say "Ana" "... Me desculpa."
+say "Ricardo" "Quem disse que eu só te vejo como amiga?"
+say "Ana" "O quê?"
+say "Ricardo" "Você é muito mais que uma amiga pra mim. Eu jamais aceitaria te perder."
+say "Ana" "O que você tá dizendo?"
+say "Ricardo" "Que.. que eu quero ficar junto contigo pra sempre. Como a gente sempre esteve!"
+say "Ana" "É... sério?"
+say "Ricardo" "Sério!"
+say "Ana" "A gente pode ir.. num encontro?"
+say "Ricardo" "Claro! Quando você quiser."
+
+wait 1
+play_sfx "relationship_up"
+say "" "Ricardo e Ana se tornaram mais próximos! A habilidade <color=red>Confissão</color> foi desbloqueada!"
+wait 1
+goto end
+
+
+waypoint ir_beatrice
+say "" ""
+
+
+waypoint ir_clara
+say "" ""
+
+
+waypoint end

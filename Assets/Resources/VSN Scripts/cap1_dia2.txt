@@ -1,0 +1,114 @@
+set_screen "hide_all"
+
+
+waypoint dia_2
+
+fade_out 1
+say "" "No dia seguinte, Ricardo vai para o colégio."
+say "A manhã se passa sem nenhuma grande ocorrência, mas durante a hora do intervalo..."
+fade_in 1
+
+say "Ricardo" "Ei, o que é isso? Mais uma cartinha na minha mesa?"
+say "" "O garoto pega o envelope e lê a carta. O seguinte conteúdo está escrito numa letra bonita e caprichada:"
+
+if lanchou_com_ana == 0
+  say "Carta" "Olá... Desculpe-me por não ter comparecido à biblioteca ontem. Eu aprecio que você tenha sido tão gentil e atendido ao chamado de uma garota desconhecida..."
+  say "Mas eu.. me acovardei. Sinto muito, muitíssimo mesmo. Obrigada por ter comparecido. Eu sinto que estamos mais próximos só por ter acolhido o meu pedido. Agradeço de coração."
+  
+  wait 1
+  play_sfx "relationship_up"
+  say "" "Ricardo e Beatrice se tornaram mais próximos! A habilidade <color=red>Amigos por Correspondência</color> foi desbloqueada!"
+  wait 1
+  
+  say "Carta" "Ah, e eu nem assinei da última vez. Pelo menos o meu nome eu preciso te dizer... \n-Com carinho, Beatrice."
+  say "Ps: Caso se interesse em me responder, por favor deixe uma carta no meu armário. É o segundo no corredor, com um adesivo de borboleta."
+
+else
+  say "Carta" "Olá... Desculpe-me por ter-te escrito aquela carta ontem. Sou apenas uma garota desconhecida e seria tolice minha achar que você atenderia ao meu chamado inusitado..."
+  say "Perdoe minha falta de cordialidade e permita-me apresentar primeiro. Meu nome é Beatrice."
+  say "Eu... ainda tenho interesse em conversar, se você quiser. Caso não tenha, eu compreendo. Desculpe-me se fui um estorvo."
+  say "Ps: Caso se interesse em me responder, por favor deixe uma carta no meu armário. É o segundo no corredor, com um adesivo de borboleta."
+endif
+
+say "Ricardo" "(Eu acho que deveria respondê-la. Mas o quê?)"
+say_auto "Fertiliel" "(O que o humano deveria responder?)"
+choices "Conhecer Beatrice depois da aula" convidar_beatrice "Apenas agradecer" apenas_agradecer_beatrice
+
+waypoint convidar_beatrice
+set_var convidou_beatrice 1
+say "Ricardo" "(Vou convidá-la para conversar depois da aula.)"
+goto apos_responder_beatrice
+
+
+waypoint apenas_agradecer_beatrice
+set_var convidou_beatrice 0
+say "Ricardo" "(Vou apenas agradecer as cartinhas, mas não quero me envolver mais.)"
+
+waypoint apos_responder_beatrice
+say "" "Ricardo guarda sua resposta em um envelope e vai até o armário deixar a cartinha."
+say "Ricardo" "(Espero que ela receba...)"
+
+wait 1
+say "" "Ana aparece e chama Ricardo para lanchar com ela novamente. O garoto a segue."
+
+fade_out 1
+wait 1
+say "" "Chegando no telhado..."
+fade_in 1
+say "Ana e Ricardo sentam-se e começam a lanchar."
+
+goto_script "cap1_conversa_ana"
+goto pos_aula
+
+
+waypoint pos_aula
+fade_out 1
+wait 1
+say "" "Após a aula..."
+
+if convidou_beatrice == 1
+  goto conhecendo_beatrice
+else
+  goto tarde_com_clara
+endif
+
+
+waypoint conhecendo_beatrice
+say "" "Ricardo vai para entrada do colégio, onde marcou de se encontrar com Beatrice."
+fade_in 1
+
+goto_script "cap1_conversa_beatrice"
+goto pos_tarde
+
+
+
+
+waypoint tarde_com_clara
+say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
+fade_in 1
+
+goto_script "cap1_conversa_clara"
+
+say "Eles marcam de continuar o trabalho no dia seguinte."
+goto pos_tarde
+
+
+
+waypoint pos_tarde
+fade_out 1
+wait 1
+say "" "Durante a noite Ricardo fica em casa estudando e vendo animes."
+fade_in 1
+
+say "Fertiliel" "(Estou livre agora. O que eu deveria fazer?)"
+choices "Investigar Ana" investigar_ana "Investigar Beatrice" investigar_beatrice "Investigar Clara" investigar_clara
+
+waypoint investigar_ana
+waypoint investigar_beatrice
+waypoint investigar_clara
+say "" "A ser implementado..."
+
+waypoint dia_3
+goto_script "cap1_dia3"
+goto_script "show_people_screen"
+end_script

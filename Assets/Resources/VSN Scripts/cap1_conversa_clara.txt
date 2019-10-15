@@ -1,0 +1,66 @@
+if #day == 3
+  say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
+  say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
+  say "Clara" "Oi! Eu fiquei organizando umas coisas pra festa de mais tarde e nem me lembrei de te avisar... Desculpa!"
+  end_script
+endif
+
+
+if clara_heart == 0
+  say "Ricardo" "(Será que ela vem mesmo?)"
+  say "(Pode ser a única vez na vida que ela virá aqui em casa. Hoje é o dia que eu devo me declarar!)"
+
+  wait 1
+  say "" "A campainha toca e Ricardo tem um leve infarto."
+  say "Ele anda até a entrada da casa. Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
+  say "Ricardo" "C-Clara! Q-que bom que você veio!"
+  say "Clara" "E aí?"
+  say "" "Ricardo fica em silêncio, pois não sabe como reagir."
+  say "Um silêncio constrangedor se segue."
+  say "Clara" "Vou entrando, viu?"
+  say "" "A garota entra na casa, dá uma olhada ao redor e senta-se à mesa da sala. Ricardo a segue em silêncio e se senta à mesa. Eles pegam os livros e cadernos."
+  say "" "Ricardo não tira os olhos do livro. Um silêncio constrangedor se segue."
+  wait 2
+  say "Clara" "Bonitinha essa sua casa."
+  say "Ricardo" "V-valeu!"
+  wait 2
+  say "" "O garoto permanece olhando para o livro fixamente, suando muito."
+  say "Ricardo" "(Eu deveria me declarar pra ela agora! Pode ser minha única chance.)"
+  say "Ricardo" "C-Clara! É-é que, na verdade..."
+  say "Ricardo" "Eu..."
+  say "" "Um ronco estomacal é ouvido bem alto pela sala."
+  wait 1
+  say "Ricardo" "(Quê?)"
+  say "Clara" "Er.. Desculpa, você tem algo pra comer?"
+  say "" "Ricardo engole em seco mais uma vez. Não foi dessa vez."
+  say "Ricardo" "E-eu sei fazer omelete... Você gosta de omelete?"
+  say "Clara" "Ah, eu adoro! Café da manhã é a melhor refeição! Mesmo durante a tarde."
+  say "" "Ricardo sorriu e se dirigiu até a cozinha para preparar a refeição."
+  say "Em alguns minutos ele volta com duas bonitas omeletes em pratinhos decorados. Ele põe os pratos sobre a mesa e se senta."
+  say "Ricardo" "Espero que goste."
+  say "" "Clara balança a cabeça em confirmação e começa a comer. Pode-se ver a tensão nos olhos de Ricardo enquanto ele aguarda a avaliação da garota. Até que..."
+  say "Clara" "Nossa, que delícia! Você cozinha muito bem."
+  say "Ricardo" "Sério, você gostou?"
+  say "Clara" "Claro, isso aqui tá bom demais. Você já pensou em ser cozinheiro?"
+  say "" "Ricardo fica muito feliz e consegue se acalmar. Após terminarem de comer, eles conversam muito sobre omeletes e tipos de café da manhã."
+
+  wait 1
+  play_sfx "relationship_up"
+  say "" "Ricardo e Clara se tornaram mais próximos! A habilidade <color=red>Amantes de Omelete</color> foi desbloqueada!"
+  wait 1
+endif
+
+if clara_heart >= 1
+  say "Clara chega e os dois estudam por umas duas horas. Eles conseguem avançar um pouco mais no trabalho do colégio."
+  say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+endif
+
+
+add_var clara_heart 1
+
+if #day == 2
+  say "" "Antes de ir embora, Clara convida Ricardo para uma festa que ocorrerá na sua casa amanhã de noite."
+  say "Clara" "Você pode vir?"
+  say "Ricardo" "Claro, adoraria."
+  set_var clara_convidou_festa 1
+endif

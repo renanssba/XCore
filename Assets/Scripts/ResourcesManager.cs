@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ResourcesManager : MonoBehaviour {
   public Sprite[] faceSprites;
+  public Sprite[] fixedCharactersFaceSprites;
   public Sprite[] cardSprites;
   public Sprite[] itemSprites;
   public Sprite[] attributeSprites;

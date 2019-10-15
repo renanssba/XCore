@@ -39,7 +39,7 @@ namespace Command {
       }
 
       result = attributeToUse;
-      if (p.AttributeValue(attributeToUse) < currentEvent.difficultyForAttribute[attributeToUse]) {
+      if (p.AttributeValue(attributeToUse) * currentEvent.attributeEffectivity[attributeToUse] < currentEvent.difficulty) {
         result += 3;
       }
       VsnSaveSystem.SetVariable("resolution", result);
