@@ -1,5 +1,10 @@
-﻿say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
+﻿if #isCurrentPersonMale == 1
+  say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
+else
+  say "" "Você decide acompanhar \observedPerson no seu dia-a-dia."
+endif
 set_screen "observation_map"
+set_var currentDateEvent 0
 
 goto_script "tutorial_observation"
 

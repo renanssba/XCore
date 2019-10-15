@@ -1,7 +1,11 @@
 ﻿remove_context "Observation Context"
 
 if argsCount == 0
-  say "char_name/none" "observation_end/say_0"
+  if #isCurrentPersonMale == 1
+    say "char_name/none" "observation_end/say_0"
+  else
+    say "char_name/none" "observation_end/say_1"
+  endif
 endif
 
 set_var observation_played 1

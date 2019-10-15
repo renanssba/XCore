@@ -27,6 +27,8 @@ namespace Command {
           break;
       }
 
+      GameController.instance.observedPersonCard.UpdateUI();
+
       GameController.instance.UpdateUI();
     }
 

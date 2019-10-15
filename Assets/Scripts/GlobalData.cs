@@ -60,7 +60,7 @@ public class GlobalData : MonoBehaviour {
         viableCouple[i, j] = false;
       }
     }
-    //viableCouple[0, 0] = true;
+    viableCouple[0, 0] = true;
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);

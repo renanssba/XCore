@@ -43,7 +43,11 @@ update_ui
 
 
 if observation_energy <= 0
-  say "char_name/none" "observation/say_1"
+  if #isCurrentPersonMale == 1
+    say "char_name/none" "observation/say_1"
+  else
+    say "char_name/none" "observation/say_2"
+  endif
 endif
 
 

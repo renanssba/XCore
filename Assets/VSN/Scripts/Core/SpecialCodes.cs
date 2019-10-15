@@ -25,11 +25,11 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
-        currentString = currentString.Replace("\\favoriteMatter1", Utils.GetPrintableString(GlobalData.instance.ObservedPerson().favoriteMatter.ToString(), false));
+        currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
       }
       if (GlobalData.instance.EncounterPerson() != null) {
         currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().name);
-        currentString = currentString.Replace("\\favoriteMatter2", Utils.GetPrintableString(GlobalData.instance.EncounterPerson().favoriteMatter.ToString(), false));
+        currentString = currentString.Replace("\\favoriteMatter2", GlobalData.instance.EncounterPerson().favoriteMatter);
       }
       if (GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
@@ -122,6 +122,8 @@ public class SpecialCodes {
         return GlobalData.instance.maxDays;
       case "#progress":
         return GlobalData.instance.shippedCouples.Count;
+      case "#isCurrentPersonMale":
+        return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
       case "#currentPersonality":
         return (int)GlobalData.instance.CurrentPersonPersonality();
       case "#currentEventInteractionType":

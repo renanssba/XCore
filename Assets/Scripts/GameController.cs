@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour {
   public ScreenTransitions buttonsPanel;
   public ScreenTransitions observationMap;
   public ScreenTransitions actionPersonCard;
+  public PersonCard observedPersonCard;
   //public GameObject miniFertililel;
 
   public ItemSelectorScreen itemSelectorScreen;
@@ -449,6 +450,8 @@ public class GameController : MonoBehaviour {
     int selectedId;
     List<ObservationTile> tilesNotSet = new List<ObservationTile>();
     const int startingTile = 12;
+
+    observedPersonCard.Initialize(GlobalData.instance.observedPeople[0]);
 
     tilesNotSet.AddRange(observationTiles);
     tilesNotSet.Remove(observationTiles[startingTile]);

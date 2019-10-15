@@ -33,6 +33,10 @@ public class PersonCard : MonoBehaviour {
   public void UpdateUI() {
     //Debug.Log("updating "+person.name);
 
+    if(person == null) {
+      return;
+    }
+
     string state = VsnSaveSystem.GetStringVariable("people_ui_state");
     if(coupleEntryLayout == false) {
       switch(state) {
@@ -106,7 +110,7 @@ public class PersonCard : MonoBehaviour {
     //Debug.LogWarning("Observe button clicked");
     GlobalData.instance.observedPeople[0] = person;
     GameController.instance.SetupObservationSegmentTiles();
-    VsnSaveSystem.SetVariable("observation_energy", 5);
+    VsnSaveSystem.SetVariable("observation_energy", 3);
     VsnController.instance.StartVSN("observation_intro");
 
     SfxManager.StaticPlayConfirmSfx();

@@ -13,13 +13,13 @@ endif
 //wait 0.5
 
 if #currentPersonality == 0
-  set_var attr "<color=yellow><sprite='Attributes' index=0 tint>Valentia(a)</color>"
+  set_var attr "attribute/guts"
 endif
 if #currentPersonality == 1
-  set_var attr "<color=#248BCF><sprite='Attributes' index=1 tint>Inteligência</color>"
+  set_var attr "attribute/intelligence"
 endif
 if #currentPersonality == 2
-  set_var attr "<color=red><sprite='Attributes' index=2 tint>Carisma</color>"
+  set_var attr "attribute/charisma"
 endif
 say "Há uma estrelinha do lado do atributo \vsn[attr]. Isso quer dizer que ele é o atributo preferido da pessoa, e que ela sempre tentará utilizá-lo sua para resolver as situações."
 

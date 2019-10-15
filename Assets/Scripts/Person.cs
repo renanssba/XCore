@@ -42,8 +42,8 @@ public class Person {
   public List<Trait> traits;
   public Item[] equips;
 
-  public RandomTastes favoriteMatter;
-  public RandomTastes mostHatedMatter;
+  public string favoriteMatter;
+  public string mostHatedMatter;
 
   public int id;
   public int faceId;
@@ -72,8 +72,8 @@ public class Person {
 
     state = PersonState.unrevealed;
 
-    favoriteMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
-    mostHatedMatter = (RandomTastes)Random.Range(0, (int)RandomTastes.count - 1);
+    favoriteMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
+    mostHatedMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
 
     //if (isMale) {
     //  faceId = Random.Range(0, 5);

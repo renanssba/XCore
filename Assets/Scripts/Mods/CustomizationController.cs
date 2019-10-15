@@ -31,6 +31,8 @@ public class CustomizationController : MonoBehaviour {
   public GameObject customizationPanel;
   public GameObject loadingIcon;
 
+  public Toggle tutorialToggle;
+
   public RenderTexture portraitRenderTexture;
   public RenderTexture portraitRenderTexture2;
 
@@ -178,6 +180,10 @@ public class CustomizationController : MonoBehaviour {
     camImage.texture = webcam;
   }
 
+  public void StartCloseCustomizationPanel() {
+    StartCoroutine(CloseCustomizationPanel());
+  }
+
   public IEnumerator CloseCustomizationPanel() {
     yield return new WaitForSeconds(0.15f);
 
@@ -239,6 +245,8 @@ public class CustomizationController : MonoBehaviour {
     if(webcam != null) {
       webcam.Stop();
     }
+
+    GlobalData.instance.hideTutorials = !tutorialToggle.isOn;
 
     //VsnController.instance.StartVSN("got");
     //SceneManager.LoadScene(StageName.Park.ToString());

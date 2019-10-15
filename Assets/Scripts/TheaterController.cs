@@ -198,8 +198,10 @@ public class TheaterController : MonoBehaviour {
       newobj.GetComponent<JumpingParticle>().jumpForce = 10;
     } else {
       newobj.GetComponent<JumpingParticle>().jumpForce = 0;
-    }    
-    newobj.GetComponent<TextMeshProUGUI>().text = success ? "Desafio superado!" : "Desafio não superado.";
+    }
+    newobj.GetComponent<TextMeshProUGUI>().text = success ?
+      Lean.Localization.LeanLocalization.GetTranslationText("date/success_message") :
+      Lean.Localization.LeanLocalization.GetTranslationText("date/failure_message");
     newobj.GetComponent<TextMeshProUGUI>().color = success ? greenColor : redColor;
   }
 

@@ -1,4 +1,4 @@
-Language,Portuguese,English
+ca,Portuguese,English
 title_screen/play,Jogar,Play
 title_screen/credits,Créditos,Credits
 title_screen/quit,Sair,Quit
@@ -7,6 +7,8 @@ customization/play,JOGAR!,PLAY!
 customization/title,Customizar personagem:,Customize character:
 customization/use_webcam,Usar imagem da webcam,Use webcam image
 customization/search,Buscar,Search
+customization/tutorial,Mostrar tutorial,Show tutorial
+customization/soon,Em breve: mais opções de customização,Soon: new customization options
 person_card/equipment,Equipamento,Equipment
 person_card/observe,Observar,Observe
 person_card/date,Encontro,Date
@@ -54,6 +56,29 @@ char_name/npc_girl_6,Priscila,Charlotte
 char_name/npc_girl_7,Larissa,Jade
 char_name/npc_girl_8,Jade,Mia
 char_name/npc_girl_9,Valentina,Ruby
+random_taste/taste_0,comer muito feijão,eating lots of beans
+random_taste/taste_1,praticar ocultismo,practicing occultism
+random_taste/taste_2,assistir tokusatsu,watching tokusatsu
+random_taste/taste_3,acampar,camping
+random_taste/taste_4,o sentido da vida,the meaning of life
+random_taste/taste_5,hackear,hacking
+random_taste/taste_6,pescaria,fishing
+random_taste/taste_7,observar pássaros,bird watching
+random_taste/taste_8,arquitetura,architecture
+random_taste/taste_9,fazer tricô,knitting
+random_taste/taste_10,artesanato,handicraft
+random_taste/taste_11,andar a cavalo,horseback riding
+random_taste/taste_12,rezar,praying
+random_taste/taste_13,meditação,meditation
+random_taste/taste_14,memes,memes
+random_taste/taste_15,enfrentar ninjas,fighting ninjas
+random_taste/taste_16,yaoi,yaoi
+random_taste/taste_17,waifus,waifus
+random_taste/taste_18,caridade,charity
+random_taste/taste_19,relacionamentos,relationships
+attribute/guts,<color=yellow>Valentia</color>,<color=yellow>Guts</color>
+attribute/intelligence,<color=#248BCF>Inteligência</color>,<color=#248BCF>Intelligence</color>
+attribute/charisma,<color=red>Carisma</color>,<color=red>Charisma</color>
 choices/yes,Sim,Yes
 choices/no,Não,No
 choices/cancel,Cancelar,Cancel
@@ -75,7 +100,7 @@ check_end_game/say_0,"Olha só, o nosso tempo acabou!","Look, our time is up!"
 check_end_game/say_1,"Olha só, parece que você já cumpriu sua missão!","Look, it seems like you've already accomplished your mission!"
 check_end_game/say_2,"Com suas forças recuperadas, você começa um novo dia para juntar casais!","Having your strength restored, you start a new day to form couples!"
 check_end_game/say_3,Vamos ver quão bem você foi na sua missão...,Let's see if you did well on your mission...
-check_end_game/say_4,Você conseguiu reunir \progress casais dentro de \day dias.,You managed to form \progress couples within \day days.
+check_end_game/say_4,Você conseguiu reunir \progress casal dentro de \day dias.,You managed to form \progress couple within \day days.
 check_end_game/say_5,Parabéns! Você completou a missão com sucesso!,Congratulations! You have successfully completed the mission!
 check_end_game/say_6,Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?,How about joining Supernova Games on Facebook and Twitter to keep an eye on game updates?
 check_end_game/say_7,Obrigada por jogar o jogo e me ajudar na missão!,Thanks for playing the game and help me on the mission!
@@ -101,14 +126,17 @@ ending/say_0,Seja bem-vindo ao Cupid Game - Dungeon Crawler. Este é um de 3 pro
 ending/say_1,Nós da Supernova Games agradecemos muito se puder jogar os outros protótipos e nos contar seu feedback sobre eles.,We at Supernova Games will be very grateful if you play the other prototypes and give us your feedback on them.
 not_enough_ap/say_0,Você não tem AP suficiente para fazer esta ação.,You do not have enough AP to do this action.
 observation/say_0,Você encontrou \encounterPerson pela primeira vez!,You met \encounterPerson for the first time!
-observation/say_1,"Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia.","After that,  \encounterPerson went to rest. You have stopped keeping track of his/her day."
-observation_clicked_far/say_0,Esta casa está longe demais de \observedPerson.,This house is way too far from \observedPerson.
+observation/say_1,"Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia.","After that, \observedPerson went to rest. You have stopped keeping track of his day."
+observation/say_2,"Depois disso, \observedPerson foi descansar. Você parou de acompanhar seu dia.","After that, \observedPerson went to rest. You have stopped keeping track of her day."
+observation_clicked_far/say_0,Esta casa está longe demais de \observedPerson.,This tile is way too far from \observedPerson.
 observation_clicked_used/say_0,Este evento já foi utilizado.,This event has already been used.
-observation_end/say_0,Você decidiu desistir de acompanhar \observedPerson em seu dia.,You've decided to give up keeping track of \observedPerson on his/her day.
-observation_intro/say_0,Você decide acompanhar \observedPerson no seu dia-a-dia.,You decide to accompany \observedPerson in his/her day-to-day life.
+observation_end/say_0,Você decidiu desistir de acompanhar \observedPerson em seu dia.,You've decided to give up keeping track of \observedPerson on his day.
+observation_end/say_1,Você decidiu desistir de acompanhar \observedPerson em seu dia.,You've decided to give up keeping track of \observedPerson on her day.
+observation_intro/say_0,Você decide acompanhar \observedPerson no seu dia-a-dia.,You decide to accompany \observedPerson in his day-to-day life.
+observation_intro/say_1,Você decide acompanhar \observedPerson no seu dia-a-dia.,You decide to accompany \observedPerson in her day-to-day life.
 observation_person_in_trouble/choices_0_0,Ajudar,Help
 observation_person_in_trouble/choices_0_1,Ignorar,Ignore
-observation_person_in_trouble/say_0,\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum.,"\observedPerson and \encounterPerson talk for a long time about \favoriteMatter1 and \favoriteMatter2, and realize that they have a lot in common."
+observation_person_in_trouble/say_0,\observedPerson e \encounterPerson conversam durante bastante tempo sobre \favoriteMatter1 e \favoriteMatter2 e percebem que têm muita coisa em comum.,"\observedPerson and \encounterPerson talk for a long time about \favoriteMatter1 and \favoriteMatter2, and realize they have a lot in common."
 observation_person_in_trouble/say_1,Eles trocam telefones e concordam que seria legal saírem para um Encontro algum dia.,They exchange phone numbers and agree it would be nice to go out for a Date someday.
 observation_person_in_trouble/say_2,\observedPerson olha para a situação e simplesmente decide não fazer nada a respeito.,\observedPerson looks at the situation and simply decides to do nothing about it.
 part_time_job/say_0,Você pode gastar energia trabalhando para ganhar dinheiro. Quanto AP você quer gastar?,You can spend energy working to make money. How much AP do you want to spend?
@@ -126,37 +154,39 @@ shop/say_5,Você adquiriu \vsn[item_name]!,You purchased \vsn[item_name]!
 shop/say_6,Obrigado!,Thank you!
 spend_day/say_0,Você foi dormir e descansar para o próximo dia.,You went to sleep and rest for the next day.
 spend_day/say_1,Você descansou um pouco até de tarde.,You rested a little until afternoon.
-tutorial_choose_date/say_0,Durante a <color=yellow>Tarde</color> você pode influenciar um casal de humanos que já se conhece e se gosta para ir a um <color=yellow>Encontro</color>.,During the <color=yellow>Afternoon</color> you can influence a couple of humans who already know and like each other to go to a <color=yellow> Date </color>.
+tutorial_choose_date/say_0,Durante a <color=yellow>Tarde</color> você pode influenciar um casal de humanos que já se conhece e se gosta para ir a um <color=yellow>Encontro</color>.,During the <color=yellow>Afternoon</color> you can influence a couple of humans who already know and like each other to go on a <color=yellow>Date</color>.
 tutorial_choose_date/say_1,Parece que você não tem nenhum casal disponível no momento...,It looks like you do not have any couples available at the moment...
-tutorial_choose_date/say_2,Neste caso seria bom você procurar pessoas para paquerar na manhã do próximo dia.,"In this case, it would be good for you to look for people to flirt the next day in the morning."
+tutorial_choose_date/say_2,Neste caso seria bom você procurar pessoas para paquerar na manhã do próximo dia.,"In this case, you should look for people to flirt tomorrow in the morning."
 tutorial_choose_date/say_3,"Clique em ""Descansar"" para passar o dia.","Click ""Rest"" to go to the next day."
 tutorial_choose_date/say_4,"Ótimo, você tem casais nesta situação! Agora é só escolher qual deles você quer que vá para o Encontro.","Great, you have couples in this situation! Now just choose which one you want to go to the Date."
 tutorial_choose_date/say_5,"Ótimo, você tem um casal nesta situação!","Great, you have a couple in this situation!"
-tutorial_choose_date/say_6,"Para começar o <color=yellow>Encontro</color>, basta clicar no botão Encontro do casal que você quer unir.","To start the <color=yellow>Date</color>, simply click the Date button for the couple you want to match."
-tutorial_date/say_0,Agora é a hora da verdade! Para juntar este casal ele precisa vencer os desafios deste <color=yellow>Encontro</color>.,"Now is the moment of truth! To match this couple, they must overcome the challenges of this <color=yellow>Date</color>."
-tutorial_date/say_1,"Cada Encontro consiste em 7 desafios, e o seu casal precisa <color=yellow>superar pelo menos 5</color> deles. As bolinhas ali em cima mostram seus resultados.","Each Date consists of 7 challenges, and your couple needs to <color=yellow>overcome at least 5</ color> of them. The balls up there show their results."
-tutorial_date/say_2,Vamos ao primeiro desafio:,Let's go to the first challenge:
+tutorial_choose_date/say_6,"Para começar o <color=yellow>Encontro</color>, basta clicar no botão Encontro do casal que você quer unir.","To start the <color=yellow>Date</color>, simply click the Date button for the couple you want to bring together."
+tutorial_date/say_0,Agora é a hora da verdade! Para juntar este casal ele precisa vencer os desafios deste <color=yellow>Encontro</color>.,"Now is the moment of truth! To bring this couple together, they must overcome the challenges of this <color=yellow>Date</color>."
+tutorial_date/say_1,"Cada Encontro consiste em 7 desafios, e o seu casal precisa <color=yellow>superar pelo menos 5</color> deles. As bolinhas ali em cima mostram seus resultados.","Each Date consists of 7 challenges, and your couple needs to <color=yellow>overcome at least 5</color> of them. The dots up there show your results."
+tutorial_date/say_2,Vamos ao primeiro desafio:,Let's see the first challenge:
 tutorial_date2/say_0,"Certos desafios devem ser solucionados pelo garoto, outros pela garota, vai depender da situação.","Some challenges must be solved by the boy, others by the girl. It will depend on the situation."
 tutorial_date2/say_1,Este é um desafio que o garoto deve resolver. Preste atenção nos atributos dele:,This is a challenge the boy must solve. Pay attention to his attributes:
 tutorial_date2/say_2,Este é um desafio que a garota deve resolver. Preste atenção nos atributos dela:,This is a challenge the girl must solve. Pay attention to her attributes:
 tutorial_date2/say_3,"Há uma estrelinha do lado do atributo \vsn[attr]. Isso quer dizer que ele é o atributo preferido da pessoa, e que ela sempre tentará utilizá-lo sua para resolver as situações.","There is a little star on the side of the \vsn[attr] attribute. This means that it is the person's favorite attribute, and that they will always try to use it to solve situations."
 tutorial_date2/say_4,"Você pode deixar a pessoa utilizar seu atributo preferido ou sugestioná-la para utilizar outro atributo na situação, mas isso consome seu <color=yellow>AP</color>.","You can either let the person use their favorite attribute or suggest that they use another attribute in the situation, but this consumes your <color=yellow>AP</color>."
-tutorial_date2/say_5,"Os desafios podem ser resolvidos com <color=yellow>qualquer um dos atributos</color>, mas a <color=yellow>eficácia do atributo</color> utilizado varia de desafio para desafio.","Challenges can be solved with <color=yellow>any attribute</color> , but the <color=yellow>effectiveness of the attribute</color> used ranges from challenge to challenge."
-tutorial_date2/say_6,"Portanto, ajude seus humanos a tomar sempre a atitude que pareça mais certa para a situação!","So, help your humans to always take the attitude that seems right for the situation!"
-tutorial_intro/say_0,"Seja bem-vindo ao Fertiliel - Simulador de Cupido. Como um companheiro cupido, o seu objetivo é juntar casais.","Welcome to Fertiliel - Cupid Simulator. As a cupid companion, your goal is to form couples."
+tutorial_date2/say_5,"Os desafios podem ser resolvidos com <color=yellow>qualquer um dos atributos</color>, mas a <color=yellow>eficácia do atributo</color> utilizado varia de desafio para desafio.","Challenges can be solved with <color=yellow>any attribute</color> , but the <color=yellow>effectiveness of the attribute</color> used varies according to each challenge."
+tutorial_date2/say_6,"Portanto, ajude seus humanos a tomar sempre a atitude que pareça mais certa para a situação!",So help your humans taking the attitude that seems right for the situation!
+tutorial_intro/say_0,"Seja bem-vindo ao Fertiliel - Simulador de Cupido. Como um companheiro cupido, o seu objetivo é juntar casais.","Welcome to Fertiliel - Cupid Simulator. As a fellow cupid, your goal is to bring couples together."
 tutorial_intro/say_1,Para juntar um casal ele precisa ter um <color=yellow>Encontro</color> bem sucedido.,"To form a couple, they must have a successful <color=yellow>Date</color>."
 tutorial_intro/say_2,Nesta versão Alfa a sua missão será: juntar \vsn[objective] casal em um período de 5 dias.,"In this Alpha version, your mission will be: form \vsn[objective] couple in a 5 day period."
-tutorial_intro/say_3,Você por enquanto conhece e pode observar estes dois humanos. Perceba que o rapaz e a moça possuem 3 atributos.,"For now, you know and you can observe these two humans. Note that the boy and the girl have 3 attributes."
-tutorial_intro/say_4,"Os atributos são: <color=yellow><sprite=""Attributes"" index=0 tint>Valentia</color>, <color=#248BCF><sprite=""Attributes"" index=1 tint>Inteligência</color> e <color=red><sprite=""Attributes"" index=2 tint>Carisma</color>. Seus valores vão de 1 (Sofrível) até 10 (Sobrehumano).","The attributes are: <color=yellow><sprite=""Attributes"" index=0 tint>Guts</color>, <color=#248BCF><sprite=""Attributes"" index=1 tint>Intelligence</color> and <color=red><sprite=""Attributes"" index=2 tint>Charisma</color>. Their values ​​range from 1 (Insufficient ) to 10 (Superhuman)."
-tutorial_intro/say_5,"É interessante que seus humanos tenham valores altos nos atributos, pois é o que eles usarão para vencer os desafios que aparecem durante os <color=yellow>Encontros</color>.","It's interesting that your humans have high attribute values, which is what they will use to overcome the challenges that appear during the <color=yellow>Dates</color>."
-tutorial_intro/say_6,Você pode aumentar estes atributos através de treino ou itens equipados.,You can increase these attributes through training or equipped items.
-tutorial_intro/say_7,Todo dia começa pela <color=yellow>Manhã</color>. Neste momento você pode escolher um dos seus humanos para acompanhar durante o dia.,"Every day begins with the <color=yellow>Morning</color>. At this point, you can choose one of your humans to monitor during the day."
+tutorial_intro/say_3,Você por enquanto conhece e pode observar estes dois humanos. Perceba que o rapaz e a moça possuem 3 atributos.,"For now, you know and can observe these two humans. Note that the boy and the girl have 3 attributes."
+tutorial_intro/say_4,"Os atributos são: <color=yellow><sprite=""Attributes"" index=0 tint>Valentia</color>, <color=#248BCF><sprite=""Attributes"" index=1 tint>Inteligência</color> e <color=red><sprite=""Attributes"" index=2 tint>Carisma</color>. Seus valores vão de 1 (Sofrível) até 10 (Sobrehumano).","The attributes are: <color=yellow><sprite=""Attributes"" index=0 tint>Guts</color>, <color=#248BCF><sprite=""Attributes"" index=1 tint>Intelligence</color> and <color=red><sprite=""Attributes"" index=2 tint>Charisma</color>. Their values ​​range from 1 (Awful) to 10 (Superhuman)."
+tutorial_intro/say_5,"É interessante que seus humanos tenham valores altos nos atributos, que eles usarão para vencer os desafios que aparecem durante os <color=yellow>Encontros</color>.","It's desirable for your humans to have high attribute values, which they will use to overcome the challenges that appear during the <color=yellow>Dates</color>."
+tutorial_intro/say_6,Você pode aumentar estes atributos através de treino ou itens equipados.,You can increase these attributes through training or equipping items.
+tutorial_intro/say_7,Todo dia começa pela <color=yellow>Manhã</color>. Neste momento você pode escolher um dos seus humanos para acompanhar durante o dia.,"Every day begins in the <color=yellow>Morning</color>. At this point, you can choose one of your humans to monitor during the day."
 tutorial_intro/say_8,Escolha um deles para continuarmos.,"Choose one of them, so we can continue."
 tutorial_observation/say_0,Ao acompanhar um humano no seu dia-a-dia você pode ajudá-lo a decidir quais atividades ele vai fazer.,"By following a human's day-to-day life, you can help him/her decide what activities he/she will do."
-tutorial_observation/say_1,"Certas atividades ajudam a <color=yellow>aumentar os atributos</color> do seu humano, enquanto outras fazem com que ele <color=yellow>conheça novas pessoas</color> para paquerar ou <color=yellow>ganhe itens</color>.","Some activities help <color=yellow>increase the attributes</color> of your human, while others make him/her <color=yellow>meet new people</color> to flirt or <color=yellow>earn items</color>."
+tutorial_observation/say_1,"Certas atividades ajudam a <color=yellow>aumentar os atributos</color> do seu humano, enquanto outras fazem com que ele <color=yellow>conheça novas pessoas</color> para paquerar ou <color=yellow>ganhe itens</color>.","Some activities help <color=yellow>increase the attributes</color> of your human, while others make them <color=yellow>meet new people</color> to flirt or <color=yellow>earn items</color>."
 tutorial_observation/say_2,"Os humanos gastam sua energia diária ao fazer estas atividades, então certifique-se de tomar boas decisões.","Humans spend their daily energy doing these activities, so make sure you make good decisions."
 tutorial_shop/say_0,Aqui na <color=yellow>Loja</color> você pode comprar itens equipáveis que aprimoram os atributos dos seus humanos ou vender itens que nao queira mais.,Here at the <color=yellow>Shop</color> you can buy equipable items that enhance the attributes of your humans or sell items you do not want anymore.
 tutorial_shop/say_1,"Para conseguir dinheiro, clique em <color=yellow>Fazer Bicos</color>.","To get money, click <color=yellow>Moonlight</color>."
+date/success_message,Desafio superado!,Challenge overcome!
+date/failure_message,Desafio não superado.,Challenge failed.
 date/ball_a/say_0,Uma bola de futebol vem vindo em alta velocidade na direção de \boy e ele não percebeu!,A soccer ball is coming at a high speed in the direction of \boy and he did not notice!
 date/ball_a/say_1,"\girl age rapidamente e dá um socão na bola, quando ela estava prestes a atingir o rosto do garoto!",\girl acts quickly and hits the ball as it is about to hit the boy's face!
 date/ball_a/say_2,"\boy se assusta com o movimento, mas logo agradece.","\boy is startled by the movement, but then says ""thank you""."
@@ -326,11 +356,11 @@ date/photographer_a/say_18,\girl começa a posar para as fotos.,\girl begins to 
 date/photographer_a/say_19,"Não, não! O foco aqui é ele, minha filha!","No, no! I'm focusing on him!"
 date/photographer_a/say_20,O fotógrafo aponta para \boy. A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável.,The photographer points the camera to \boy. The flashing continues for several minutes. It was not a pleasant experience.
 date/revelation_a/say_0,\boy nota que \girl está distraída e com o olhar vazio.,\boy notices that \girl is distracted and with a blank look.
-date/revelation_a/say_1,"Conversando com ela, \girl revela que está com problemas pessoais.","Talking to her, \girl reveals that she is having personal problems."
+date/revelation_a/say_1,"Conversando com ela, ele descobre que \girl está tendo problemas pessoais.","Talking to her, he finds out she is having personal problems."
 date/revelation_a/say_2,\boy olha com determinação no fundo dos olhos de \girl e exclama:,\boy looks with determination into the eyes of \girl and says:
-date/revelation_a/say_3,Vai dar tudo certo! Eu acredito em você!,Will be all right! I believe you!
+date/revelation_a/say_3,Vai dar tudo certo! Eu acredito em você!,Everything is gonna be all right! I believe in you!
 date/revelation_a/say_4,\girl se sente motivada!,\girl feels motivated!
-date/revelation_a/say_5,"\boy analisa os problemas de \girl, recomendando soluções.","\boy analyzes the problems of \girl, offering solutions."
+date/revelation_a/say_5,"\boy analisa os problemas de \girl, recomendando soluções.","\boy analyzes \girl's problems, offering solutions."
 date/revelation_a/say_6,\girl admira a racionalidade de \boy. Tão pragmático!,\girl admires the rationality of \boy. So pragmatic!
 date/revelation_a/say_7,\boy escuta compreensivamente enquanto \girl explica o que a aflige.,\boy listens sympathetically as \girl explains what distresses her.
 date/revelation_a/say_8,"\girl agradece. Às vezes, as pessoas só precisam de um ombro amigo.",\girl thanks him. Sometimes people only need a friend.
@@ -429,7 +459,7 @@ observation/angry_dog/say_0,"\observedPerson escuta latidos em uma parte da tril
 observation/angry_dog/say_1,"\observedPerson se aproxima com cuidado, e tenta resolver a situação acalmando o animal.","\observedPerson approaches carefully, and tries to solve the situation by calming the animal."
 observation/angry_dog/say_2,"\observedPerson acalma o cachorro, que só estava assustado. O menino agradece.","\observedPerson calms the dog, who was only frightened. The boy says ""thank you""."
 observation/angry_dog/say_3,"O cachorro não vai muito com a cara de \observedPerson. No momento em que ela se aproxima, o cão rosna e avança na direção dela. Ela sai de fininho.","The dog does not get along with \observedPerson. As she approaches, the dog growls and advances toward her. She gets out of the way."
-observation/charming1/say_0,"Passando pela trilha, \observedPerson avista uma menina sentada em um banquinho. É \encounterPerson. Ela parece solitária.","Passing through the trail, \observedPerson spots a girl sitting on a stool. It's \encounterPerson. She seems lonely."
+observation/charming1/say_0,"Passando pela trilha, \observedPerson avista \encounterPerson sentada em um banquinho. Ela parece solitária.","Passing through the trail, \observedPerson spots \encounterPerson sitting on a stool. She seems lonely."
 observation/charming1/say_1,\observedPerson decide se aproximar. A menina parece receptiva.,\observedPerson decides to approach. The girl seems receptive.
 observation/charming1/say_2,\observedPerson não se importa muito e continua tranquilamente seguindo seu caminho.,\observedPerson does not care much and continues quietly on his way.
 observation/drama_school/say_0,"\observedPerson vai para a sua aula de teatro. Lá ele passa várias horas praticando sua postura, expressão corporal e desenvoltura.","\observedPerson goes to his theater class. There he spends several hours practicing his posture, body expression and resourcefulness."
@@ -439,7 +469,7 @@ observation/gutsy1/say_1,"\observedPerson age com <color=#B27535><sprite=""Attri
 observation/gutsy1/say_2,"A gata fica com medo e faz vários arranhões no rosto do garoto, mas mesmo assim o resgate é bem-sucedido.","The cat gets scared and makes several scratches on the boy's face, but even so the rescue is successful."
 observation/gutsy1/say_3,"\observedPerson tenta subir a árvore para ajudar, mas quando olha pra baixo fica com medo, se desequilibra e cai sobre \encounterPerson.","\observedPerson tries to climb up the tree to help, but when he looks down he gets scared, gets unbalanced and falls on \encounterPerson."
 observation/gutsy1/say_4,"A garota fica com raiva dele e diz que se era pra atrapalhar, seria melhor nem ter tentado ajudar.","The girl gets mad at him and says that if it was to mess up, it would have been better not to have tried to help."
-observation/gym/say_0,"\observedPerson vai para a academia. Ele passa várias horas praticando exercícios, aumentando sua força física e disposição.","\observedPerson goes to the gym. He spends several hours practicing exercises, increasing his physical strength and disposition."
+observation/gym/say_0,"\observedPerson vai para a academia. Ele passa várias horas praticando exercícios, aumentando sua força física e disposição.","\observedPerson goes to the gym. He spends several hours exercising, increasing his body strength and stamina."
 observation/gym/say_1,"\observedPerson aumentou sua <color=#B27535><sprite=""Attributes"" index=0 tint>Valentia</color> em 1 ponto! (Novo valor: \guts)","\observedPerson's <color=#B27535><sprite=""Attributes"" index=0 tint>Guts</color> raised by 1 point! (New value: \guts)!"
 observation/intelligent1/say_0,\observedPerson observa uma menina estudando. É \encounterPerson. Ela coça a cabeça e parece em dúvida. Deve ser uma tarefa difícil.,\observedPerson observes a girl studying. It's \encounterPerson. She scratches her head and looks doubtful. It must be a difficult exercise.
 observation/intelligent1/say_1,A menina pede ajuda para a primeira pessoa que vê.,The girl asks for help for the first person that shows up.
