@@ -3,27 +3,31 @@ set_screen "hide_all"
 fade_out 0.5
 bg null
 
-if observation_played == 1
-  say "spend_day/say_0"
-  stop_music
-  wait 0.3
-  play_sfx "sleep"
-  play_sfx "sleep"
-  wait 5
-  pass_day
-  update_ui
-  wait 0.3
+pass_day
+fade_in 0.5
+end_script
 
-  play_music "observacao_intro" "observacao_loop"
 
-  fade_in 0.5
-  goto_script "show_people_screen"
-  goto_script "check_end_game"
-else
-  set_var observation_played 1
-  say "spend_day/say_1"
+// if observation_played == 1
+  // say "spend_day/say_0"
+  // stop_music
+  // wait 0.3
+  // play_sfx "sleep"
+  // play_sfx "sleep"
+  // wait 5
+  // pass_day
+  // update_ui
+  // wait 0.3
 
-  fade_in 0.5
-  goto_script "show_people_screen"
-endif
+  // play_music "observacao_intro" "observacao_loop"
 
+  // fade_in 0.5
+  // goto_script "show_people_screen"
+  // goto_script "check_end_game"
+// else
+  // set_var observation_played 1
+  // say "spend_day/say_1"
+
+  // fade_in 0.5
+  // goto_script "show_people_screen"
+// endif

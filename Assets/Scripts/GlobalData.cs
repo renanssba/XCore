@@ -352,8 +352,13 @@ public class GlobalData : MonoBehaviour {
 
   public void PassDay() {
     ap = maxAp;
-    day++;
-    VsnSaveSystem.SetVariable("observation_played", 0);
+    int daytime = VsnSaveSystem.GetIntVariable("daytime");
+    if(daytime >= 2) {
+      VsnSaveSystem.SetVariable("daytime", 0);
+      day++;
+    } else {
+      VsnSaveSystem.SetVariable("daytime", daytime+1);
+    }
     GameController.instance.UpdateUI();
   }
 

@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour {
   public PersonCard observedPersonCard;
   //public GameObject miniFertililel;
 
+  public GameObject[] observationBoards;
+
+
   public ItemSelectorScreen itemSelectorScreen;
 
   public GameObject dateUiPanel;
@@ -167,6 +170,13 @@ public class GameController : MonoBehaviour {
         personCards[i].gameObject.SetActive(false);
       }      
     }
+
+    for(int i=0; i<3; i++) {
+      observationBoards[i].SetActive(false);
+    }
+    int currentDaytime = VsnSaveSystem.GetIntVariable("daytime");
+    observationBoards[currentDaytime].SetActive(true);
+
     //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
