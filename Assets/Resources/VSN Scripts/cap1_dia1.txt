@@ -13,7 +13,7 @@ choices "Intro" intro"Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
 waypoint intro
 
 fade_out 1
-//goto_script "fertiliel_enter"
+bg "school morning"
 
 say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele é: estudioso, esforçado, mas sem muita sorte com as garotas...)"
 fade_in 1
@@ -110,7 +110,7 @@ say "" "Ele abre o envelope e dentro há uma cartinha escrita à mão em um deli
 
 say "Carta" "Olá, peço perdão por escrever-te este convite de forma tão inesperada... mas eu gostaria de conversar contigo sobre um assunto de seu interesse."
 say "Carta" "Por favor, encontre-me na biblioteca durante o intervalo. Sua presença será muito apreciada. Agradeço a atenção.\n-B"
-say "" "O estilo de escrita é um tanto formal e refinado; a letra, muito bonita. A atenção aos detalhes dá a impressão de que o autor ou autora se esforçou para fazer esta cartinha."
+say "" "O estilo de escrita é um tanto formal e refinado; a letra, muito bonita. A atenção aos detalhes dá a impressão de que o autor ou autora fez esta cartinha com muito capricho."
 say "Ricardo" "(Hum... 'B'? Quem será que escreveu isso?)"
 
 wait 1
@@ -132,12 +132,19 @@ say "" "Ana saiu correndo pela porta antes que Ricardo conseguisse responder."
 wait 1
 
 waypoint end
+fade_out 1
+bg null
 goto_script "show_people_screen"
 update_ui
+fade_in 1
+
+say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
 end_script
 
 
-say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
+
+
+
 //goto_script "fertiliel_enter"
 say "Fertiliel" "(É agora que eu deveria agir. Posso influenciar sua ação.)"
 
@@ -187,8 +194,8 @@ if lanchou_com_ana == 0
   say "Ricardo" "Ah, desculpa... Apareceu algo importante pra eu fazer."
   say "Ana" "Não tem desculpa! Você não pode ficar me evitando assim. Como retribuição você tem que vir ao clube de tarde comigo."
   say "Ricardo" "Ah, mas eu tenho outro compromi..."
-  say "Ana" "Não importa, é a sua chance de compensar seu vacilo comigo."
-  say "" "Ana saiu andando emburrada."
+  say "Ana" "Não importa, é a sua chance de compensar seu vacilo."
+  say "" "Ana sai andando emburrada."
   say "Fertiliel" "(O que o meu humano deveria fazer?)"
   choices "Ir estudar com Clara" tarde_com_clara "Ir para o clube com Ana" tarde_com_ana
 endif

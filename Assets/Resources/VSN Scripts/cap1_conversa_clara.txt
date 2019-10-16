@@ -1,3 +1,10 @@
+fade_out 1
+bg "house-afternoon"
+wait 1
+say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
+fade_in 1
+
+
 if #day == 3
   say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
@@ -64,3 +71,6 @@ if #day == 2
   say "Ricardo" "Claro, adoraria."
   set_var clara_convidou_festa 1
 endif
+
+say "Eles marcam de continuar o trabalho no dia seguinte."
+goto_script "cap1_pos_tarde"

@@ -66,7 +66,7 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("objective", objective);
     VsnSaveSystem.SetVariable("max_days", maxDays);
     VsnSaveSystem.SetVariable("observation_played", 0);
-    day = 0;
+    day = 1;
     inventory.items.Clear();
 
 

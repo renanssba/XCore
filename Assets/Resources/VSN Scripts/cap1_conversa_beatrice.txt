@@ -1,3 +1,26 @@
+if #day == 1
+  set_var lanchou_com_ana 0
+    
+  fade_out 1
+  wait 1
+  bg "school morning"
+  say "" "Na biblioteca..."
+  fade_in 1
+
+  say "Ricardo" "(Cheguei aqui. Quem será que enviou aquela carta?)"
+  say "" "Ricardo senta-se em uma cadeira ao fundo da biblioteca e fica bem atento, observando se alguém vem falar com ele."
+  say "Ricardo" "(A cartinha estava assinada com um 'B'... Eu não lembro de ninguém em particular cujo nome comece com essa letra. Quem será?)"
+  say "" "Ricardo fica vários minutos observando ao seu redor, mas ninguém vem falar com ele."
+  say "O tempo do intervalo acaba e ele não obtém sua resposta sobre o autor da cartinha."
+  say "Ricardo" "(Droga, eu perdi meu tempo aqui. Eu furei de lanchar com a Ana e a pessoa nem apareceu... Que vacilo...)"
+  say "" "Ricardo volta para a sala de aula para continuar as próximas lições."
+  goto_script "cap1_pos_aula"
+  end_script
+endif
+
+
+
+
 if beatrice_heart == 0
   say "" "Ele fica esperando por vários minutos."
   say "Ricardo" "(Será que ela vai vir dessa vez?)"
