@@ -12,13 +12,13 @@ endif
 
 waypoint manha
 reset_pins_board "school-map"
-set_interaction_pin 0 true "cap1_conversa_ana"
+set_interaction_pin 0 true "cap1_conversa_ana" "Telhado"
 
 if #day == 1
-  set_interaction_pin 1 true "cap1_conversa_beatrice"
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 if conhece_beatrice == 1
-  set_interaction_pin 1 true "cap1_conversa_beatrice"
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 
 set_interaction_pin 2 false
@@ -29,25 +29,26 @@ goto end
 waypoint tarde
 reset_pins_board "city map"
 if lanchou_com_ana_hoje == 0
-  set_interaction_pin 0 true "cap1_conversa_ana"
+  set_interaction_pin 0 true "cap1_conversa_ana" "Clube Esportivo"
 endif
 
 if #day == 2
   if convidou_beatrice == 1
-    set_interaction_pin 1 true "cap1_conversa_beatrice"
+    set_interaction_pin_sprite 1 "love letter"
+    set_interaction_pin 1 true "cap1_conversa_beatrice" "Saída do Colégio"
   endif
 endif
 
-set_interaction_pin 2 true "cap1_conversa_clara"
+set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
 goto end
 
 
 
 waypoint noite
 reset_pins_board "city map night"
-set_interaction_pin 0 true "cap1_investigar"
-set_interaction_pin 1 true "cap1_investigar"
-set_interaction_pin 2 true "cap1_investigar"
+set_interaction_pin 0 true "cap1_investigar" "Investigar"
+set_interaction_pin 1 true "cap1_investigar" "Investigar"
+set_interaction_pin 2 true "cap1_investigar" "Investigar"
 goto end
 
 

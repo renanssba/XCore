@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour {
   public Image[] unresolvedIcons;
 
   public Image interactionPinsBoardImage;
-  public GameObject[] interactionPins;
+  public InteractionPin[] interactionPins;
 
   public Button[] menuButton;
 
@@ -533,13 +533,23 @@ public class GameController : MonoBehaviour {
 
   public void ResetPinsBoard(string bgName) {
     interactionPinsBoardImage.sprite = Resources.Load<Sprite>("Bg/" + bgName);
-    foreach(GameObject obj in interactionPins) {
-      obj.gameObject.SetActive(false);
+    foreach(InteractionPin pin in interactionPins) {
+      pin.gameObject.SetActive(false);
     }
   }
 
-  public void SetInteractionPin(int id, bool active, string scriptToLoad = "") {
+  public void SetInteractionPin(int id, bool active, string scriptToLoad = "", string location = "") {
     interactionPins[id].gameObject.SetActive(active);
-    interactionPins[id].GetComponent<ExampleEntryPoint>().scriptToPlay = scriptToLoad;
+    if(active) {
+      interactionPins[id].SetPinContent(scriptToLoad, location);
+      interactionPins[id].ResetSprite();
+    }
+  }
+
+  public void SetInteractionPinSprite(int id, string spriteName) {
+    Sprite s = Resources.Load<Sprite>("Characters/" + spriteName);
+    if(s != null) {
+      interactionPins[id].SetSprite(s);
+    }    
   }
 }

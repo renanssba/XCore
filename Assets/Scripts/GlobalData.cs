@@ -127,9 +127,9 @@ public class GlobalData : MonoBehaviour {
   };
     people.Add(p);
     p = new Person() {
-      name = "Beatrice",
+      name = "'B'",
       isMale = false,
-      faceId = 7,
+      faceId = 10,
       attributes = new int[] {1, 8, 1},
       equips = new Item[3] { null, null, null }
   };
@@ -398,6 +398,9 @@ public class GlobalData : MonoBehaviour {
   public Sprite GetFaceByName(string name) {
     if(name == "Fertiliel") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[0];
+    }
+    if(name == "Carta") {
+      return ResourcesManager.instance.faceSprites[10];
     }
     foreach(Person p in people) {
       if(p.name == name) {

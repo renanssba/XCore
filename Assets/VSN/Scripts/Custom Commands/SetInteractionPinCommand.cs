@@ -9,7 +9,7 @@ namespace Command {
 
     public override void Execute() {
       if(args.Length >= 3) {
-        GameController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue(), args[2].GetStringValue());
+        GameController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue(), args[2].GetStringValue(), args[3].GetStringValue());
       } else {
         GameController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue());
       }      
@@ -23,6 +23,7 @@ namespace Command {
       signatures.Add(new VsnArgType[] {
         VsnArgType.numberArg,
         VsnArgType.booleanArg,
+        VsnArgType.stringArg,
         VsnArgType.stringArg
       });
     }
