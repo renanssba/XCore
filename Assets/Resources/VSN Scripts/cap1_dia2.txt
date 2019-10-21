@@ -1,8 +1,5 @@
-set_screen "hide_all"
-
 waypoint dia_2
 
-fade_out 1
 bg "school morning"
 say "" "No dia seguinte, Ricardo vai para o colégio."
 say "A manhã se passa sem nenhuma grande ocorrência, mas durante a hora do intervalo..."
@@ -49,64 +46,19 @@ say "" "Ricardo guarda sua resposta em um envelope e vai até o armário deixar 
 say "Ricardo" "(Espero que ela receba...)"
 
 wait 1
-say "" "Ana aparece e chama Ricardo para lanchar com ela novamente. O garoto a segue."
+say "" "Ana aparece e chama Ricardo para lanchar com ela novamente."
 
+waypoint end
 fade_out 1
-wait 1
-say "" "Chegando no telhado..."
+bg null
+goto_script "show_people_screen"
+update_ui
 fade_in 1
-say "Ana e Ricardo sentam-se e começam a lanchar."
-
-goto_script "cap1_conversa_ana"
-goto pos_aula
-
-
-waypoint pos_aula
-fade_out 1
-wait 1
-say "" "Após a aula..."
-
-if convidou_beatrice == 1
-  goto conhecendo_beatrice
-else
-  goto tarde_com_clara
-endif
-
-
-waypoint conhecendo_beatrice
-say "" "Ricardo vai para entrada do colégio, onde marcou de se encontrar com Beatrice."
-fade_in 1
-
-goto_script "cap1_conversa_beatrice"
-goto pos_tarde
+end_script
 
 
 
 
-waypoint tarde_com_clara
-say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
-fade_in 1
-
-goto_script "cap1_conversa_clara"
-
-say "Eles marcam de continuar o trabalho no dia seguinte."
-goto pos_tarde
-
-
-
-waypoint pos_tarde
-fade_out 1
-wait 1
-say "" "Durante a noite Ricardo fica em casa estudando e vendo animes."
-fade_in 1
-
-say "Fertiliel" "(Estou livre agora. O que eu deveria fazer?)"
-choices "Investigar Ana" investigar_ana "Investigar Beatrice" investigar_beatrice "Investigar Clara" investigar_clara
-
-waypoint investigar_ana
-waypoint investigar_beatrice
-waypoint investigar_clara
-say "" "A ser implementado..."
 
 waypoint dia_3
 goto_script "cap1_dia3"

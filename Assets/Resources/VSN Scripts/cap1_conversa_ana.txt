@@ -1,22 +1,24 @@
+if daytime == 0
+  fade_out 1
+  wait 1
+  bg "school morning"
+  say "" "Chegando no telhado..."
+  fade_in 1
+  say "Ana e Ricardo sentam-se e começam a lanchar."
+endif
+if daytime == 1
+  fade_out 1
+  wait 1
+  bg "school morning"
+  say "" "Ricardo e Ana encontram-se no clube esportivo."
+  say "Eles jogam futebol e treinam queimada. Ana obriga Ricardo a jogar até ficar esgotado, sob a desculpa de que isso irá aumentar sua resistência física."
+  say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
+  fade_in 1
+endif
+
 if #day == 1
   if daytime == 0
     set_var lanchou_com_ana 1
-    
-    fade_out 1
-    wait 1
-    bg "school morning"
-    say "" "Chegando no telhado..."
-    fade_in 1
-    say "Ana e Ricardo sentam-se e começam a lanchar."
-  endif
-  if daytime == 1
-    fade_out 1
-    wait 1
-    bg "school morning"
-    say "" "Ricardo e Ana encontram-se no clube esportivo."
-    say "Eles jogam futebol e treinam queimada. Ana obriga Ricardo a jogar até ficar esgotado, sob a desculpa de que isso irá aumentar sua resistência física."
-    say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
-    fade_in 1
   endif
 endif
 
@@ -63,13 +65,10 @@ endif
 add_var ana_heart 1
 
 
-if #day == 1
-  if daytime == 0
-    say "" "Ricardo e Ana voltam para a sala de aula para continuar as próximas lições."
-    goto_script "cap1_pos_aula"
-  endif
-  if daytime == 1
-    say "" "Ricardo e Ana voltam para suas casas."
-    goto_script "cap1_pos_tarde"
-  endif
+if daytime == 0
+  say "" "Ricardo e Ana voltam para a sala de aula para continuar as próximas lições."
 endif
+if daytime == 1
+  say "" "Ricardo e Ana voltam para suas casas."
+endif
+goto_script "pass_time"

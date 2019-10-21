@@ -350,7 +350,7 @@ public class GlobalData : MonoBehaviour {
     return 0;
   }
 
-  public void PassDay() {
+  public void PassTime() {
     ap = maxAp;
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     if(daytime >= 2) {

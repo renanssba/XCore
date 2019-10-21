@@ -1,0 +1,21 @@
+if daytime == 0
+  goto manha
+endif
+if daytime == 1
+  goto tarde
+endif
+if daytime == 2
+  goto noite
+endif
+
+waypoint manha
+goto end
+
+waypoint tarde
+goto end
+
+waypoint noite
+goto end
+
+
+waypoint end

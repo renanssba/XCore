@@ -1,0 +1,22 @@
+fade_out 0
+goto_script "cap1_interaction_pins"
+set_var daytime 0
+play_music "observacao2_intro" "observacao2_loop"
+set_screen "hide_all"
+
+if #day == 1
+  goto_script "cap1_dia1"
+  end_script
+endif
+if #day == 2
+  goto_script "cap1_dia2"
+  end_script
+endif
+if #day == 3
+  goto_script "cap1_dia3"
+  end_script
+endif
+if #day >= 4
+  fade_in 1
+  end_script
+endif

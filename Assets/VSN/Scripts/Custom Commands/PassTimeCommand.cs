@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Command {
 
-  [CommandAttribute(CommandString = "pass_day")]
-  public class PassDayCommand : VsnCommand {
+  [CommandAttribute(CommandString = "pass_time")]
+  public class PassTimeCommand : VsnCommand {
 
     public override void Execute() {
-      GlobalData.instance.PassDay();
+      GlobalData.instance.PassTime();
     }
 
     public override void AddSupportedSignatures() {

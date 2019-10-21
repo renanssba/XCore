@@ -1,9 +1,6 @@
-set_screen "hide_all"
-
-
 waypoint dia_3
 
-fade_out 1
+bg "school morning"
 say "" "No dia seguinte, Ricardo vai para o colégio."
 fade_in 1
 
@@ -30,57 +27,14 @@ endif
 fade_out 1
 wait 1
 say "" "A aula se passou sem muitos incidentes. Durante o intervalo..."
-fade_in 1
-
-
-choices "Ficar com Ana" ficar_com_ana "Ficar com Beatrice" ficar_com_beatrice
-
-
-waypoint ficar_com_ana
-fade_out 1
-wait 1
-say "" "Chegando no telhado..."
-fade_in 1
-say "Ana e Ricardo sentam-se e começam a lanchar."
-
-goto_script "cap1_conversa_ana"
-goto pos_aula
-
-
-waypoint ficar_com_beatrice
-fade_out 1
-wait 1
-say "" "Chegando na biblioteca..."
-fade_in 1
-
-goto_script "cap1_conversa_beatrice"
-goto pos_aula
+//fade_in 1
 
 
 
-
-
-waypoint pos_aula
-fade_out 1
-wait 1
-say "" "Após a aula..."
-
-waypoint tarde_com_clara
-say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
-fade_in 1
-
-goto_script "cap1_conversa_clara"
-goto pos_tarde
-
-
-
-waypoint pos_tarde
-fade_out 1
-wait 1
-say "" "Durante a noite chega a hora de ir para a festa na casa da Clara. Ricardo se arruma e vai para a festa."
-fade_in 1
-
-
-// waypoint dia_3
-goto_script "cap1_festa"
+waypoint end
+//fade_out 1
+bg null
 goto_script "show_people_screen"
+update_ui
+fade_in 1
+end_script

@@ -1,6 +1,18 @@
+if #day == 3
+  fade_out 1
+  wait 1
+  say "" "Ricardo se arruma e vai para a festa."
+  fade_in 1
+
+  goto_script "cap1_festa"
+  end_script
+endif
+
 waypoint investigar_ana
-waypoint investigar_b
+waypoint investigar_beatrice
 waypoint investigar_clara
+fade_out 1
+wait 1
 say "" "A ser implementado..."
 
-goto_script "cap1_pos_noite"
+goto_script "pass_time"

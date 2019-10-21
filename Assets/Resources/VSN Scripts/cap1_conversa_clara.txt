@@ -9,6 +9,7 @@ if #day == 3
   say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
   say "Clara" "Oi! Eu fiquei organizando umas coisas pra festa de mais tarde e nem me lembrei de te avisar... Desculpa!"
+  goto_script "pass_time"
   end_script
 endif
 
@@ -73,4 +74,4 @@ if #day == 2
 endif
 
 say "Eles marcam de continuar o trabalho no dia seguinte."
-goto_script "cap1_pos_tarde"
+goto_script "pass_time"

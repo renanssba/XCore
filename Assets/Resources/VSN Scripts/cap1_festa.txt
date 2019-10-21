@@ -1,3 +1,9 @@
+fade_out 1
+fade_music 0 1
+wait 1.5
+play_music "date2_intro" "date2_loop"
+bg "house-afternoon"
+fade_in 1
 
 say "" "Chegando na entrada, o garoto percebe que a casa de Clara é enorme e está lotada de gente."
 say "Ricardo" "(Uau. Quanta... gente que eu não conheço.)"
@@ -9,10 +15,11 @@ say "" "Ele chega na sala. É um salão grande e barulhento: tem música tocando
 say "" "Ricardo avista Clara. Ela está falando animadamente com dois caras populares do colégio e rindo bastante."
 say "Ana está do outro lado da sala, conversando com outro rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
 
-if convidou_beatrice == 1
-  say "Ele percebe que Beatrice também está na sala, sozinha e cabisbaixa num canto, quase como se estivesse se escondendo."
+if convidou_beatrice == 0 /// DEBUG
+//if convidou_beatrice == 1
+  say "Ele percebe que beatrice também está na sala, sozinha e cabisbaixa num canto, quase como se estivesse se escondendo."
   say_auto "Ricardo" "(O que eu deveria fazer?)"
-  choices "Ir atrás de Ana" ir_ana "Ir atrás de Beatrice" ir_beatrice "Ir atrás de Clara" ir_clara
+  choices "Ir atrás de Ana" ir_ana "Ir atrás de beatrice" ir_beatrice "Ir atrás de Clara" ir_clara
 else
   say_auto "Ricardo" "(O que eu deveria fazer?)"
   choices "Ir atrás de Ana" ir_ana "Ir atrás de Clara" ir_clara
@@ -32,7 +39,7 @@ say "Ricardo" "Ana!"
 say "" "Ricardo corre até Ana e a ajuda a se levantar."
 say "Ricardo" "Você tá bem?"
 say "" "Ela fica em silêncio, cabisbaixa, mas não parece estar machucada. Furioso, Ricardo grita:"
-say "Ricardo" "Qual é, seu covarde! Por quê você fez isso com a minha amiga?!"
+say "Ricardo" "Qual é, seu covarde! Por quê você fez isso com ela?!"
 say "Rapaz" "Essa maluca tava tentando me agarrar aqui."
 say "Ricardo" "Não te dá o direito de empurrá-la desse jeito!"
 say "Rapaz" "Fica na tua aí, tu não tem nada a ver com isso."
@@ -55,11 +62,11 @@ say "Ricardo" "Tá tudo bem... Não precisa pedir desculpa. Eu não sabia que vo
 say "Ana" "Eu.. Eu não gosto... Mas a pessoa que eu gosto.. *snif* nunca vai ficar comigo..."
 say "" "Ricardo parece surpreso com a frase."
 say "Ricardo" "A pessoa de quem você gosta?"
-say "Ana" "Eu.. *snif* ...só não queria ficar sozinha."
+say "Ana" "Eu... *snif* só não queria ficar sozinha..."
 wait 1
 say "Ricardo" "A... pessoa de quem você gosta?"
 say "Ana" "É! Não me faz falar isso, seu idiota!"
-say "" "Ricardo "
+say "" "Ricardo fica apreensivo."
 say "Ricardo" "Q-quem é a pessoa de quem você gosta?"
 say "Ana" "É VOCÊ, SEU BURRO!"
 say "Ricardo" "!!!"
@@ -69,7 +76,7 @@ say "Ana" "Eu sempre gostei de você, mas você nunca percebeu. Você só tinha 
 say "Ricardo" "Ana..."
 say "Ana" "Embora a gente sempre tivesse junto, você nunca enxergou meus sentimentos, só me via como amiga."
 say "Ricardo" "Você.."
-say "Ana" "... Me desculpa."
+say "Ana" "...Me desculpa."
 say "Ricardo" "Quem disse que eu só te vejo como amiga?"
 say "Ana" "O quê?"
 say "Ricardo" "Você é muito mais que uma amiga pra mim. Eu jamais aceitaria te perder."
@@ -88,7 +95,37 @@ goto end
 
 
 waypoint ir_beatrice
-say "" ""
+say "" "Ricardo chega mais perto de Beatrice, que está cabisbaixa."
+say "" "Oi, que bom que veio! Eu não sabia se você viria"
+say "" "A garota não responde."
+say "Ricardo" "Hum.. Beatrice?"
+say "" "Beatrice levanta o rosto com uma certa dificuldade."
+say "Beatrice" "Ricardo..."
+say "" "Ele percebe que ela está respirando com dificuldade e com uma mão fechada sobre a outra, ambas apoiadas sobre o peito."
+say "Ricardo" "Beatrice, tá tudo bem com você?"
+say "" "A garota parece estar passando mal. Ela se encosta na parede e escorrega até o chão, caindo sentada."
+say "Beatrice" "Re-respirar..."
+say "" "Ricardo se apressa e a leva para fora da sala em seus braços."
+say "Ricardo" "Por favor, abram espaço!"
+say "" "Os dois se sentam na escadinha que dá acesso à casa e Ricardo tenta acalmar Beatrice."
+say "Ricardo" "Calma eu tô aqui com você. Respira..."
+say "" "A garota olha pra ele com dificuldade, ofegante. Ela o abraça com força e fecha os olhos."
+say "" "Ricardo consegue sentir os batimentos cardíacos fortes e muito acelerados de Beatrice, como se ele fosse sair pela boca."
+say "" "Suas mãos estavam tremendo e suadas."
+say "Beatrice" "Eu vou morrer, Ricardo... eu vou morrer..."
+say "Ricardo" "Calma, eu tô aqui com você. Vai ficar tudo bem."
+say "" "Ricardo continua tranquilizando a garota."
+say "A crise de ansiedade perdura por mais alguns angustiantes minutos que parecem não ter fim."
+say "Felizmente, Beatrice consegue retomar o controle de si e a crise tem fim."
+say "Beatrice" "Muito obrigada, Ricardo. Desculpe-me, eu peço perdão por arruinar a sua festa."
+say "Ricardo" "Relaxa, não precisa se desculpar."
+say "Beatrice" "Eu... não me sinto muito bem em lugares muito lotados."
+say "Ricardo" "É, imaginei. Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal."
+say "Beatrice" "Tudo bem. Passar tempo junto a ti tem feito a minha ansiedade social diminuir, pouco a pouco."
+say "Quando estamos juntos eu me sinto mais segura. Mas creio que vir a um local tão lotado ainda seja demais para mim."
+say "Ricardo" "Obrigado. Eu também me sinto bem quando estamos juntos."
+
+
 
 
 waypoint ir_clara
@@ -96,3 +133,6 @@ say "" ""
 
 
 waypoint end
+fade_music 0 2
+wait 2
+goto_script "pass_time"

@@ -1,6 +1,6 @@
 if #day == 1
   set_var lanchou_com_ana 0
-    
+  
   fade_out 1
   wait 1
   bg "school morning"
@@ -14,14 +14,19 @@ if #day == 1
   say "O tempo do intervalo acaba e ele não obtém sua resposta sobre o autor da cartinha."
   say "Ricardo" "(Droga, eu perdi meu tempo aqui. Eu furei de lanchar com a Ana e a pessoa nem apareceu... Que vacilo...)"
   say "" "Ricardo volta para a sala de aula para continuar as próximas lições."
-  goto_script "cap1_pos_aula"
+  goto_script "pass_time"
   end_script
 endif
 
 
 
 
-if beatrice_heart == 0
+if #day == 2
+  fade_out 1
+  wait 1
+  bg "school morning"
+  say "" "Ricardo vai para entrada do colégio, onde marcou de se encontrar com Beatrice."
+  fade_in 1
   say "" "Ele fica esperando por vários minutos."
   say "Ricardo" "(Será que ela vai vir dessa vez?)"
   say "" "O garoto pega um livro e começa a dar uma lida para passar o tempo. Quando ele percebe, a maioria dos estudantes já saiu do colégio."
@@ -46,7 +51,7 @@ if beatrice_heart == 0
   say "Beatrice" "Desde pequena sou uma grande amante da literatura e, portanto, uma ávida frequentadora da biblioteca."
   say "Por várias vezes tenho te visto por lá também, o que me leva a crer que temos interesses em comum."
   say "Ricardo" "Er... Acho que sim, eu leio bastante."
-  say "Beatrice" "Também me chamou a atenção um outro detalhe. Percebi que muitos dos livros que pego emprestado só foram pegos por outra pessoa além de mim este ano: você."
+  say "Beatrice" "Também me chamou a atenção um outro detalhe. Percebi que muitos dos livros que pego emprestado só foram pegos por outra pessoa além de mim: você."
   say "Ricardo" "É, faz sentido... Acho que pouca gente da nossa idade se interessa por esse tipo de livro."
   say "Beatrice" "E... Você já leu o volume final da série Poço da Perdição?"
   say "Ricardo" "Não, a série foi cancelada e o final nunca foi publicado, não é?"
@@ -60,17 +65,21 @@ if beatrice_heart == 0
   say "Beatrice" "Eu imaginei que tivesse ficado tão curioso com o desfecho quanto eu, e resolvi entrar em contato."
   say "Ricardo" "Sério? Obrigado, é muito gentil da sua parte!"
   say "Beatrice" "De nada. Espero que aprecie..."
-  
+
   wait 1
   play_sfx "relationship_up"
   say "" "Ricardo e Beatrice se tornaram mais próximos! A habilidade <color=red>Companheiros de Leitura</color> foi desbloqueada!"
   wait 1
-  
+
   say "Beatrice" "Por favor, me conte o que achou quando terminar sua leitura."
   say "Ricardo" "Claro, com prazer!"
   say "" "A garota abaixa novamente a cabeça, evitando contato visual."
   say "Beatrice" "E... Se quiser discutir sobre outros livros, eu ficaria muito contente. Normalmente estou disponível durante os intervalos na biblioteca."
   say "" "Ricardo consente. Os dois ficam conversando por mais algum tempo antes de ambos voltarem para casa."
+
+  add_var beatrice_heart 1
+  goto_script "pass_time"
+  end_script
 endif
 
 
@@ -79,4 +88,7 @@ if beatrice_heart >= 1
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 endif
 
+
 add_var beatrice_heart 1
+goto_script "pass_time"
+end_script

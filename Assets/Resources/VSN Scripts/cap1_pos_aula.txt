@@ -1,5 +1,3 @@
-fade_out 1
-wait 1
 say "" "A aula seguiu normalmente, sem grandes ocorrências. Após a aula..."
 fade_in 1
 
@@ -9,10 +7,10 @@ if #day == 1
     say "Ricardo" "Ah, desculpa... Apareceu algo importante pra eu fazer."
     say "Ana" "Não tem desculpa! Você não pode ficar me evitando assim. Como retribuição você tem que vir ao clube de tarde comigo."
     say "Ricardo" "Ah, mas eu tenho outro compromi..."
-    say "Ana" "Não importa, é a sua chance de compensar seu vacilo comigo."
+    say "Ana" "Não importa, é a sua chance de compensar seu vacilo."
     say "" "Ana sai andando emburrada."
   endif
 endif
 
+
 waypoint end
-goto_script "pass_time"
