@@ -8,13 +8,46 @@ if daytime == 2
   goto noite
 endif
 
+
+
 waypoint manha
+reset_pins_board "school-map"
+set_interaction_pin 0 true "cap1_conversa_ana"
+
+if #day == 1
+  set_interaction_pin 1 true "cap1_conversa_beatrice"
+endif
+if conhece_beatrice == 1
+  set_interaction_pin 1 true "cap1_conversa_beatrice"
+endif
+
+set_interaction_pin 2 false
 goto end
+
+
 
 waypoint tarde
+reset_pins_board "city map"
+if lanchou_com_ana_hoje == 0
+  set_interaction_pin 0 true "cap1_conversa_ana"
+endif
+
+if #day == 2
+  if convidou_beatrice == 1
+    set_interaction_pin 1 true "cap1_conversa_beatrice"
+  endif
+endif
+
+set_interaction_pin 2 true "cap1_conversa_clara"
 goto end
 
+
+
 waypoint noite
+reset_pins_board "city map night"
+set_interaction_pin 0 true "cap1_investigar"
+set_interaction_pin 1 true "cap1_investigar"
+set_interaction_pin 2 true "cap1_investigar"
 goto end
 
 

@@ -1,5 +1,5 @@
 if #day == 1
-  set_var lanchou_com_ana 0
+  set_var foi_na_biblioteca 1
   
   fade_out 1
   wait 1
@@ -76,6 +76,7 @@ if #day == 2
   say "" "A garota abaixa novamente a cabeça, evitando contato visual."
   say "Beatrice" "E... Se quiser discutir sobre outros livros, eu ficaria muito contente. Normalmente estou disponível durante os intervalos na biblioteca."
   say "" "Ricardo consente. Os dois ficam conversando por mais algum tempo antes de ambos voltarem para casa."
+  set_var conhece_beatrice 1
 
   add_var beatrice_heart 1
   goto_script "pass_time"
@@ -84,6 +85,11 @@ endif
 
 
 if beatrice_heart >= 1
+  fade_out 1
+  wait 1
+  bg "school morning"
+  say "" "Chegando na biblioteca..."
+  fade_in 1
   say "" "Ricardo e Beatrice conversam sobre os livros que eles leram recentemente."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 endif

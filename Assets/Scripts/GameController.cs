@@ -44,9 +44,6 @@ public class GameController : MonoBehaviour {
   public PersonCard observedPersonCard;
   //public GameObject miniFertililel;
 
-  public GameObject[] observationBoards;
-
-
   public ItemSelectorScreen itemSelectorScreen;
 
   public GameObject dateUiPanel;
@@ -55,6 +52,9 @@ public class GameController : MonoBehaviour {
   public Image[] successIcons;
   public Image[] failIcons;
   public Image[] unresolvedIcons;
+
+  public Image interactionPinsBoardImage;
+  public GameObject[] interactionPins;
 
   public Button[] menuButton;
 
@@ -171,11 +171,11 @@ public class GameController : MonoBehaviour {
       }
     }
 
-    for(int i=0; i<3; i++) {
-      observationBoards[i].SetActive(false);
-    }
-    int currentDaytime = VsnSaveSystem.GetIntVariable("daytime");
-    observationBoards[currentDaytime].SetActive(true);
+    //for(int i=0; i<3; i++) {
+    //  observationBoards[i].SetActive(false);
+    //}
+    //int currentDaytime = VsnSaveSystem.GetIntVariable("daytime");
+    //observationBoards[currentDaytime].SetActive(true);
 
     //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
     //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
@@ -529,5 +529,17 @@ public class GameController : MonoBehaviour {
       tile.wasUsed = true;
       VsnController.instance.StartVSN("observation");
     } );
+  }
+
+  public void ResetPinsBoard(string bgName) {
+    interactionPinsBoardImage.sprite = Resources.Load<Sprite>("Bg/" + bgName);
+    foreach(GameObject obj in interactionPins) {
+      obj.gameObject.SetActive(false);
+    }
+  }
+
+  public void SetInteractionPin(int id, bool active, string scriptToLoad = "") {
+    interactionPins[id].gameObject.SetActive(active);
+    interactionPins[id].GetComponent<ExampleEntryPoint>().scriptToPlay = scriptToLoad;
   }
 }

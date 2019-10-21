@@ -16,10 +16,8 @@ if daytime == 1
   fade_in 1
 endif
 
-if #day == 1
-  if daytime == 0
-    set_var lanchou_com_ana 1
-  endif
+if daytime == 0
+  set_var lanchou_com_ana_hoje 1
 endif
 
 if ana_heart == 0
