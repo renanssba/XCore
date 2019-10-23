@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114870770494650630}
   - component: {fileID: 114251324344939302}
   - component: {fileID: 114794020109527700}
+  - component: {fileID: 95981447126714568}
   m_Layer: 5
   m_Name: Character Interaction Pin
   m_TagString: Untagged
@@ -103,6 +104,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95981447126714568
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371046009021982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c5db1b6f89bfa044afecee6af1b3e27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114009633245714694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,6 +164,7 @@ MonoBehaviour:
   descriptionPanel: {fileID: 225853086305585040}
   descriptionText: {fileID: 114308048682651896}
   vsnEntryPoint: {fileID: 114794020109527700}
+  charId: 1
 --- !u!114 &114048890187107798
 MonoBehaviour:
   m_ObjectHideFlags: 1

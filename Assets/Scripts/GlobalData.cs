@@ -5,7 +5,8 @@ using UnityEngine;
 public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
-  public bool[,] viableCouple;
+  //public bool[,] viableCouple;
+  public Relationship[] relationships;
   public List<int> shippedCouples;
   public Inventory inventory;
 
@@ -54,13 +55,7 @@ public class GlobalData : MonoBehaviour {
     ResetCurrentCouples();
 
 
-    viableCouple = new bool[boysToGenerate, girlsToGenerate];
-    for(int i = 0; i < boysToGenerate; i++) {
-      for(int j = 0; j < girlsToGenerate; j++) {
-        viableCouple[i, j] = false;
-      }
-    }
-    viableCouple[0, 0] = true;
+    relationships = new Relationship[boysToGenerate + girlsToGenerate -1];
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);
@@ -102,51 +97,53 @@ public class GlobalData : MonoBehaviour {
   public void InitializeChapterAlpha() {
     boysToGenerate = 1;
     girlsToGenerate = 3;
-    viableCouple = new bool[boysToGenerate, girlsToGenerate];
-    for(int i = 0; i < boysToGenerate; i++) {
-      for(int j = 0; j < girlsToGenerate; j++) {
-        viableCouple[i, j] = false;
-      }
-    }
 
     people = new List<Person>();
     Person p = new Person() {
       name = "Ricardo",
       isMale = true,
+      id = 0,
       faceId =4,
-      attributes = new int[]{2, 6, 1},
-      equips = new Item[3] { null, null, null }
+      attributes = new int[]{3, 6, 2},
+      skill = Skill.Sensor
   };
     people.Add(p);
     p = new Person() {
       name = "Ana",
       isMale = false,
+      id = 1,
       faceId = 9,
       attributes = new int[] {8, 2, 1},
-    equips = new Item[3] { null, null, null }
-  };
+      skill = Skill.Bravura
+    };
     people.Add(p);
     p = new Person() {
       name = "'B'",
       isMale = false,
+      id = 2,
       faceId = 10,
-      attributes = new int[] {1, 8, 1},
-      equips = new Item[3] { null, null, null }
-  };
+      attributes = new int[] {2, 8, 1},
+      skill = Skill.Fugir
+    };
     people.Add(p);
     p = new Person() {
       name = "Clara",
       isMale = false,
+      id = 3,
       faceId = 5,
-      attributes = new int[] {2, 2, 7},
-      equips = new Item[3] { null, null, null }
+      attributes = new int[] {3, 3, 7},
+      skill = Skill.Gula
     };
     people.Add(p);
 
 
-    viableCouple[0, 0] = true;
-    viableCouple[0, 1] = true;
-    viableCouple[0, 2] = true;
+    relationships = new Relationship[3];
+    for(int i = 0; i < girlsToGenerate; i++) {
+      relationships[i] = new Relationship {
+        people = new Person[] {people[0], people[i+1]}
+      };
+    }
+    relationships[0].hearts = 1;
 
     //PersonCard[] cards = new PersonCard[4];
     //System.Array.Copy(GameController.instance.personCards, cards, 4);
@@ -388,11 +385,19 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void UnlockDateableCouple(Person a, Person b) {
-    if(a.isMale) {
-      viableCouple[a.id, b.id - boysToGenerate] = true;
-    } else {
-      viableCouple[b.id, a.id - boysToGenerate] = true;
-    }
+    //if(a.isMale) {
+    //  viableCouple[a.id, b.id - boysToGenerate] = true;
+    //} else {
+    //  viableCouple[b.id, a.id - boysToGenerate] = true;
+    //}
+  }
+
+  public void AddHeart(int relationshipId) {
+    relationships[relationshipId].hearts++;
+  }
+
+  public void AddBondSkill(int relationshipId, string skillName) {
+    //relationships[relationshipId].bondSkills;
   }
 
   public Sprite GetFaceByName(string name) {

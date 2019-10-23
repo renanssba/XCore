@@ -35,8 +35,10 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public GameObject bgImage;
-  public ScreenTransitions progressPanel;
-  public ScreenTransitions peoplePanel;
+  //public ScreenTransitions progressPanel;
+
+  public ScreenTransitions peopleButtonPanel;
+  public ScreenTransitions peopleInfoPanel;
   public ScreenTransitions couplesPanel;
   public ScreenTransitions buttonsPanel;
   public ScreenTransitions observationMap;
@@ -53,7 +55,7 @@ public class GameController : MonoBehaviour {
   public Image[] failIcons;
   public Image[] unresolvedIcons;
 
-  public Image interactionPinsBoardImage;
+  public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
   public Button[] menuButton;
@@ -113,22 +115,22 @@ public class GameController : MonoBehaviour {
     }
 
     // create viable couples entries
-    for(int i = 0; i < GlobalData.instance.boysToGenerate; i++) {
-      for(int j = 0; j < GlobalData.instance.girlsToGenerate; j++) {
-        boy = GlobalData.instance.people[i];
-        girl = GlobalData.instance.people[j + GlobalData.instance.boysToGenerate];
-        if(GlobalData.instance.viableCouple[i, j] == true &&
-          boy.state != PersonState.shipped &&
-          girl.state != PersonState.shipped) {
-          newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
-          newobj.GetComponent<CoupleEntry>().Initialize(boy, girl);
+    //for(int i = 0; i < GlobalData.instance.boysToGenerate; i++) {
+    //  for(int j = 0; j < GlobalData.instance.girlsToGenerate; j++) {
+    //    boy = GlobalData.instance.people[i];
+    //    girl = GlobalData.instance.people[j + GlobalData.instance.boysToGenerate];
+    //    if(GlobalData.instance.viableCouple[i, j] == true &&
+    //      boy.state != PersonState.shipped &&
+    //      girl.state != PersonState.shipped) {
+    //      newobj = Instantiate(coupleEntryPrefab, couplesPanelContent);
+    //      newobj.GetComponent<CoupleEntry>().Initialize(boy, girl);
 
-          if(first == null) {
-            first = newobj.GetComponentInChildren<Button>();
-          }
-        }
-      }
-    }
+    //      if(first == null) {
+    //        first = newobj.GetComponentInChildren<Button>();
+    //      }
+    //    }
+    //  }
+    //}
 
     couplesPanelEmptyIcon.SetActive(couplesPanelContent.childCount == 0);
 
@@ -246,6 +248,15 @@ public class GameController : MonoBehaviour {
     }
     System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
                                   (event1, event2) => event1.stage.CompareTo(event2.stage) ));
+    for(int i=0; i<dateSize; i++) {
+      if(i < 3) {
+        dateSegments[i].difficulty = 4;
+      } else if(i >= 5) {
+        dateSegments[i].difficulty = 6;
+      } else {
+        dateSegments[i].difficulty = 5;
+      }
+    }
   }
   
   public void GenerateObservation() {
@@ -353,7 +364,7 @@ public class GameController : MonoBehaviour {
     foreach(PersonCard p in personCards) {
       p.gameObject.SetActive(p.person.state == PersonState.available);
       if(firstButton == null) {
-        firstButton = p.transform.GetChild(6).GetChild(0).GetComponent<Button>();
+        firstButton = p.equipIcon.transform.parent.GetComponent<Button>();
       }
     }
 
@@ -363,54 +374,55 @@ public class GameController : MonoBehaviour {
       case "hide_all":
         titleText.gameObject.SetActive(false);
         bgImage.SetActive(true);
-        peoplePanel.HidePanel();
+        //peopleButtonPanel.HidePanel();
+        //peopleInfoPanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
-        progressPanel.ShowPanel();
         observationMap.HidePanel();
+        interactionPinsBoard.HidePanel();
         break;
       case "choose_observation_target":
         titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_1");
         bgImage.SetActive(true);
-        peoplePanel.ShowPanel();
+        //peopleButtonPanel.HidePanel();
+        //peopleInfoPanel.ShowPanel();
         couplesPanel.HidePanel();
         buttonsPanel.ShowPanel();
-        progressPanel.ShowPanel();
         observationMap.HidePanel();
+        interactionPinsBoard.ShowPanel();
         break;
       case "observation":
         titleText.gameObject.SetActive(false);
         theater.SetEvent(TheaterEvent.observation);
         bgImage.SetActive(false);
         ShowOnlyObservedPerson();
-        peoplePanel.HidePanel();
+        //peopleInfoPanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
-        progressPanel.HidePanel();
         observationMap.HidePanel();
+        interactionPinsBoard.HidePanel();
         break;
       case "observation_map":
         titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_2");
         bgImage.SetActive(true);
-        peoplePanel.HidePanel();
+        //peopleInfoPanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
-        progressPanel.ShowPanel();
         observationMap.ShowPanel();
         break;
       case "choose_date_target":
         titleText.gameObject.SetActive(true);
         titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_3");
         bgImage.SetActive(true);
-        peoplePanel.HidePanel();
+        //peopleInfoPanel.HidePanel();
         firstButton = UpdateCouplesPanelContent();
-        couplesPanel.ShowPanel();
+        couplesPanel.HidePanel();
         buttonsPanel.ShowPanel();
-        progressPanel.ShowPanel();
         observationMap.HidePanel();
+        interactionPinsBoard.ShowPanel();
         break;
       case "date":
       case "date_challenge":
@@ -421,11 +433,11 @@ public class GameController : MonoBehaviour {
           theater.SetEvent(TheaterEvent.dateChallenge);
         }
         bgImage.SetActive(false);
-        peoplePanel.HidePanel();
+        //peopleInfoPanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
-        progressPanel.HidePanel();
         observationMap.HidePanel();
+        interactionPinsBoard.HidePanel();
         break;
     }
     SetupContext(state, firstButton);
@@ -532,7 +544,7 @@ public class GameController : MonoBehaviour {
   }
 
   public void ResetPinsBoard(string bgName) {
-    interactionPinsBoardImage.sprite = Resources.Load<Sprite>("Bg/" + bgName);
+    interactionPinsBoard.GetComponent<Image>().sprite = Resources.Load<Sprite>("Bg/" + bgName);
     foreach(InteractionPin pin in interactionPins) {
       pin.gameObject.SetActive(false);
     }

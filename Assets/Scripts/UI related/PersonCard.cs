@@ -12,12 +12,13 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI nameText;
   public Image faceImage;
   public TextMeshProUGUI[] attributeTexts;
-  public TextMeshProUGUI[] traitTexts;
-  public Image[] favoriteAttributeIcons;
-  public Image[] equipIcons;
-  public Image[] addEquipIcons;
+  public TextMeshProUGUI skillText;
+  public Image equipIcon;
+  public TextMeshProUGUI equipmentText;
+  public Image addEquipIcon;
 
-  public Button observationButton;
+  public GameObject heartsPanel;
+  public Image[] heartIcons;
 
   public bool canEquipItems = true;
 
@@ -37,58 +38,71 @@ public class PersonCard : MonoBehaviour {
       return;
     }
 
+
+    /// BG AND FACE / NAME
+    if(coupleEntryLayout == false) {
+      bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
+    }
+    RectTransform rect = GetComponent<RectTransform>();
+    if(heartsPanel != null) {
+      if(person.isMale) {
+        heartsPanel.SetActive(false);
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 166f);
+      } else {
+        heartsPanel.SetActive(true);
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 206f);
+        for(int i = 0; i < heartIcons.Length; i++) {
+          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id-1].hearts?Color.white: new Color(0f, 0f, 0f, 0.5f));
+        }
+      }
+    }
+    nameText.text = person.name;
+    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
+
+
+    /// ATTRIBUTES
+    for (int i=0; i<3; i++){
+      attributeTexts[i].text = person.AttributeValue(i).ToString();
+    }
+    Debug.Log("Person: " + person.name);
+
+    /// SKILL
+    if(skillText != null) {
+      if(person.skill != Skill.Nenhum) {
+        skillText.text = person.skill.ToString();
+      } else {
+        skillText.text = "---";
+      }
+    }        
+
+    /// EQUIPMENT
     string state = VsnSaveSystem.GetStringVariable("people_ui_state");
     if(coupleEntryLayout == false) {
       switch(state) {
         case "choose_observation_target":
           SetEquipableItems(true);
-          SetObservableButton(true);
           break;
         default:
-          SetEquipableItems(false);
-          SetObservableButton(false);
+          SetEquipableItems(true);
           break;
       }
     }
-    
 
-    nameText.text = person.name;
-    for (int i=0; i<3; i++){
-      attributeTexts[i].text = person.AttributeValue(i).ToString();
-      favoriteAttributeIcons[i].gameObject.SetActive(false);
-      //attributeTexts[i].alpha = 0.4f;
-      //attributeTexts[i].transform.parent.GetComponent<Image>().DOFade(0.5f, 0f);
-
-      if(coupleEntryLayout == false) {
-        if(person.equips[i] != null) {
-          equipIcons[i].sprite = person.equips[i].sprite;
-          equipIcons[i].gameObject.SetActive(true);
-        } else {
-          equipIcons[i].gameObject.SetActive(false);
-        }
-        addEquipIcons[i].gameObject.SetActive(person.EquipsCount() == i && state == "choose_observation_target");
-      }
-    }
-    //attributeTexts[(int)person.personality].alpha = 1f;
-    //attributeTexts[(int)person.personality].transform.parent.GetComponent<Image>().DOFade(1f, 0f);
-    favoriteAttributeIcons[(int)person.personality].gameObject.SetActive(true);
-
-    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
     if(coupleEntryLayout == false) {
-      bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
+      if(person.equipment != null) {
+        equipIcon.sprite = person.equipment.sprite;
+        equipIcon.gameObject.SetActive(true);
+        equipmentText.text = person.equipment.name;
+      } else {
+        equipIcon.gameObject.SetActive(false);
+        equipmentText.text = "---";
+      }
+      addEquipIcon.gameObject.SetActive(person.EquipsCount() == 0);
     }
-    //traitTexts[0].text = person.PersonalityString();
   }
 
   public void SetEquipableItems(bool canEquipItems) {
-    for(int i=0; i<equipIcons.Length; i++){
-      equipIcons[i].transform.parent.gameObject.SetActive(canEquipItems && i <= person.EquipsCount());
-    }
-    //UpdateUI();
-  }
-
-  public void SetObservableButton(bool value){
-    observationButton.gameObject.SetActive(value);
+    equipIcon.transform.parent.gameObject.SetActive(canEquipItems && 0 <= person.EquipsCount());
   }
 
   public void ClickPersonSlot(int slotId){
@@ -96,7 +110,7 @@ public class PersonCard : MonoBehaviour {
       return;
     }
 
-    if(person.equips[slotId] != null){
+    if(person.equipment != null){
       person.UnequipItemInSlot(slotId);
       return;
     }else{

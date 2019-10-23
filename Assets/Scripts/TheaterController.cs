@@ -185,9 +185,15 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localEulerAngles = rotationFacingFront + new Vector3(0f, 90f, 0f);
   }
 
-  public void ShowParticleAnimation(int attribute, int attributeLevel) {
+  public void ShowParticleAnimation(int attribute, int attributeLevel, float effectivity) {
+    string effectivityString = "";
+    if(effectivity > 1f) {
+      effectivityString = "\n<size=40>SUPER!</size>";
+    } else if(effectivity < 1f) {
+      effectivityString = "\n<size=40>fraco</size>";
+    }
     GameObject newobj = Instantiate(damageParticlePrefab, GameController.instance.bgImage.transform.parent);
-    newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString();
+    newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString() + effectivityString;
     newobj.GetComponent<TextMeshProUGUI>().color = ResourcesManager.instance.attributeColor[attribute];
   }
 
@@ -232,14 +238,15 @@ public class TheaterController : MonoBehaviour {
   public IEnumerator WaitAndShine(float time) {
     int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
     int attributeBaseLevel = GlobalData.instance.EventSolvingAttributeLevel(attributeId);
-    int effectiveAttributeLevel = (int)(attributeBaseLevel * GameController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId]);
+    float effectivity = GameController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId];
+    int effectiveAttributeLevel = (int)(attributeBaseLevel * effectivity);
 
     VsnAudioManager.instance.PlaySfx("hit_default");
 
     yield return new WaitForSeconds(time);
 
     FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
-    ShowParticleAnimation(attributeId, effectiveAttributeLevel);
+    ShowParticleAnimation(attributeId, effectiveAttributeLevel, effectivity);
 
     yield return new WaitForSeconds(0.4f);
 

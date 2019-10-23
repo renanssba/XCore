@@ -9,11 +9,17 @@ public enum Personality{
   emotivo
 }
 
-public enum Trait{
-  mirror,
-  adaptative,
-  simpleton,
-  unpredictable
+public enum SkillType {
+  character,
+  couple
+}
+
+public enum Skill{
+  Sensor,
+  Fugir,
+  Gula,
+  Bravura,
+  Nenhum
 }
 
 public enum Attributes{
@@ -39,8 +45,8 @@ public class Person {
 
   public int[] attributes;
   public Personality personality;
-  public List<Trait> traits;
-  public Item[] equips;
+  public Skill skill = Skill.Nenhum;
+  public Item equipment = null;
 
   public string favoriteMatter;
   public string mostHatedMatter;
@@ -83,7 +89,6 @@ public class Person {
     id = personId;
     faceId = personId;
     personality = (Personality)Random.Range(0, 3);
-    equips = new Item[3]{ null, null, null};
   }
 
   public Attributes AttributetoUse(){
@@ -100,38 +105,38 @@ public class Person {
 
   public int AttributeValue(int att){
     int sum = attributes[att];
-    for(int i=0; i<equips.Length; i++){
-      if(equips[i] != null){
-        sum += equips[i].attribute_bonus[att];
+    //for(int i=0; i<equipment.Length; i++){
+      if(equipment != null){
+        sum += equipment.attribute_bonus[att];
       }
-    }
+    //}
     return Mathf.Max(sum, 0);
   }
   
   public void EquipItemInSlot(int slotId, Item item){
     VsnAudioManager.instance.PlaySfx("inventory_equip");
-    equips[slotId] = item;
-    GlobalData.instance.inventory.ConsumeItem(equips[slotId].id, 1);
+    equipment = item;
+    GlobalData.instance.inventory.ConsumeItem(equipment.id, 1);
     GameController.instance.UpdateUI();
   }
 
   public void UnequipItemInSlot(int slotId) {
-    if (equips[slotId] != null) {
+    if (equipment != null) {
       VsnAudioManager.instance.PlaySfx("inventory_equip");
-      Debug.LogWarning("Unequiping item: " + equips[slotId].id +", " + equips[slotId].name);
-      GlobalData.instance.inventory.AddItem(equips[slotId].id, 1);
-      equips[slotId] = null;
+      Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.name);
+      GlobalData.instance.inventory.AddItem(equipment.id, 1);
+      equipment = null;
       GameController.instance.UpdateUI();
     }
   }
 
   public int EquipsCount(){
     int count = 0;
-    for (int i = 0; i < equips.Length; i++) {
-      if (equips[i] != null) {
+    //for (int i = 0; i < equipment.Length; i++) {
+      if (equipment != null) {
         count++;
       }
-    }
+    //}
     return count;
   }
 
@@ -141,5 +146,29 @@ public class Person {
     }else{
       return 'a';
     }
+  }
+}
+
+
+public class Relationship {
+  public Person[] people;
+  public int hearts = 0;
+  public Skill[] bondSkills;
+
+  public Relationship() {
+    hearts = 0;
+    bondSkills = new Skill[3];
+    bondSkills[0] = Skill.Nenhum;
+    bondSkills[1] = Skill.Nenhum;
+    bondSkills[2] = Skill.Nenhum;
+  }
+
+
+  public Person GetBoy() {
+    return people[0];
+  }
+
+  public Person GetGirl() {
+    return people[1];
   }
 }
