@@ -19,6 +19,7 @@ public enum Skill{
   Fugir,
   Gula,
   Bravura,
+  BondSkill,
   Nenhum
 }
 
@@ -153,14 +154,11 @@ public class Person {
 public class Relationship {
   public Person[] people;
   public int hearts = 0;
-  public Skill[] bondSkills;
+  public List<Skill> bondSkills;
 
   public Relationship() {
     hearts = 0;
-    bondSkills = new Skill[3];
-    bondSkills[0] = Skill.Nenhum;
-    bondSkills[1] = Skill.Nenhum;
-    bondSkills[2] = Skill.Nenhum;
+    bondSkills = new List<Skill>();
   }
 
 

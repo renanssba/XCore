@@ -376,6 +376,18 @@ public class GlobalData : MonoBehaviour {
     }
   }
 
+  public Relationship[] GetCurrentDateableCouples() {
+    List<Relationship> availableCouples = new List<Relationship>();
+
+    foreach(Relationship r in relationships) {
+      if(r.hearts >= 3) {
+        availableCouples.Add(r);
+      }
+    }
+
+    return availableCouples.ToArray();
+  }
+
   public ObservationEvent GetEventOfType(ObservationEventType type) {
     ObservationEvent evt;
     do {
@@ -397,7 +409,7 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void AddBondSkill(int relationshipId, string skillName) {
-    //relationships[relationshipId].bondSkills;
+    relationships[relationshipId].bondSkills.Add(Skill.BondSkill);
   }
 
   public Sprite GetFaceByName(string name) {

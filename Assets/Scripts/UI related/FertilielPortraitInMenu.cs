@@ -8,28 +8,55 @@ using DG.Tweening;
 public enum FertilielPortraitExpression {
   intrigued,
   happy,
-  sad  
+  sad,
+  none
 }
+
 
 public class FertilielPortraitInMenu : MonoBehaviour {
   public Sprite[] sprites;
   public Image baseImage;
   public Image animImage;
   public float crossFadeTime = 0.1f;
+  public float minExpressionTime = 1f;
+  public float changeExpressionDelay;
+
+  public GameObject sighPrefab;
+
+  public FertilielPortraitExpression currentExpression = FertilielPortraitExpression.intrigued;
+  public FertilielPortraitExpression nextExpression;
+
 
   public void BecomeIntrigued() {
-    AnimateToSprite(baseImage.sprite, sprites[(int)FertilielPortraitExpression.intrigued]);
+    nextExpression = FertilielPortraitExpression.intrigued;
+    changeExpressionDelay = minExpressionTime;
   }
 
   public void BecomeHappy() {
-    AnimateToSprite(baseImage.sprite, sprites[(int)FertilielPortraitExpression.happy]);
+    nextExpression = FertilielPortraitExpression.happy;
+    changeExpressionDelay = 0f;
   }
 
   public void BecomeSad() {
-    AnimateToSprite(baseImage.sprite, sprites[(int)FertilielPortraitExpression.sad]);
+    nextExpression = FertilielPortraitExpression.sad;
+    changeExpressionDelay = 0f;
   }
 
-  public void AnimateToSprite(Sprite old, Sprite final) {
+  public void Update() {
+    if(changeExpressionDelay > 0f) {
+      changeExpressionDelay -= Time.unscaledDeltaTime;
+      
+    }
+
+    if(changeExpressionDelay <= 0f && currentExpression != nextExpression) {
+      AnimateToSprite(nextExpression);
+      changeExpressionDelay = minExpressionTime;
+    }
+  }
+
+  public void AnimateToSprite(FertilielPortraitExpression newExpression) {
+    Sprite old = baseImage.sprite;
+    Sprite final = sprites[(int)newExpression];
     baseImage.sprite = final;
     animImage.sprite = old;
 
@@ -41,5 +68,11 @@ public class FertilielPortraitInMenu : MonoBehaviour {
 
     baseImage.DOFade(1f, crossFadeTime);
     animImage.DOFade(0f, crossFadeTime);
+
+    if(newExpression == FertilielPortraitExpression.sad) {
+      Instantiate(sighPrefab, transform);
+    }
+
+    currentExpression = newExpression;
   }
 }

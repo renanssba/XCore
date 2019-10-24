@@ -45,14 +45,14 @@ public class PersonCard : MonoBehaviour {
     }
     RectTransform rect = GetComponent<RectTransform>();
     if(heartsPanel != null) {
-      if(person.isMale) {
+      if(person.id == 0 || coupleEntryLayout) {
         heartsPanel.SetActive(false);
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, 166f);
       } else {
         heartsPanel.SetActive(true);
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, 206f);
         for(int i = 0; i < heartIcons.Length; i++) {
-          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id-1].hearts?Color.white: new Color(0f, 0f, 0f, 0.5f));
+          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id - 1].hearts ? Color.white : new Color(0f, 0f, 0f, 0.5f));
         }
       }
     }
@@ -76,16 +76,12 @@ public class PersonCard : MonoBehaviour {
     }        
 
     /// EQUIPMENT
-    string state = VsnSaveSystem.GetStringVariable("people_ui_state");
-    if(coupleEntryLayout == false) {
-      switch(state) {
-        case "choose_observation_target":
-          SetEquipableItems(true);
-          break;
-        default:
-          SetEquipableItems(true);
-          break;
-      }
+    if(person.id == 0 && coupleEntryLayout) {
+      SetEquipableItems(true);
+      addEquipIcon.gameObject.SetActive(person.EquipsCount() == 0);
+    } else {
+      SetEquipableItems(false);
+      addEquipIcon.gameObject.SetActive(false);
     }
 
     if(coupleEntryLayout == false) {
@@ -97,7 +93,6 @@ public class PersonCard : MonoBehaviour {
         equipIcon.gameObject.SetActive(false);
         equipmentText.text = "---";
       }
-      addEquipIcon.gameObject.SetActive(person.EquipsCount() == 0);
     }
   }
 

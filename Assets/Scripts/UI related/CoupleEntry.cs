@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CoupleEntry : MonoBehaviour {
 
+  public Relationship relationship;
   public PersonCard[] coupleCards;
-  //public Person[] couple;
+  public Image[] heartIcons;
+  public Image[] skillIcons;
+  public TextMeshProUGUI[] skillNameTexts;
 
-  public void Initialize(Person a, Person b) {
-    //couple[0] = a;
-    //couple[1] = b;
-    coupleCards[0].Initialize(a);
-    coupleCards[1].Initialize(b);
+  public void Initialize(Relationship rel) {
+    relationship = rel;
+    coupleCards[0].Initialize(rel.GetBoy());
+    coupleCards[1].Initialize(rel.GetGirl());
   }
 
   public void OnEnable() {
@@ -22,6 +26,19 @@ public class CoupleEntry : MonoBehaviour {
   public void UpdateUI() {
     foreach(PersonCard p in coupleCards) {
       p.UpdateUI();
+    }
+    // heart icons
+    for(int i = 0; i < heartIcons.Length; i++) {
+      heartIcons[i].color = (i < relationship.hearts ? Color.white : new Color(0f, 0f, 0f, 0.5f));
+    }
+
+    for(int i=0; i<3; i++) {
+      skillIcons[i].gameObject.SetActive(i<relationship.bondSkills.Count);
+      if(i < relationship.bondSkills.Count) {
+        skillNameTexts[i].text = relationship.bondSkills[i].ToString();
+      } else {
+        skillNameTexts[i].text = "---";
+      }      
     }
   }
 
