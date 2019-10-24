@@ -5,6 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
+public enum PersonCardLayout {
+  single,
+  couple,
+  date
+}
+
+
+
 public class PersonCard : MonoBehaviour {
 
   public Person person;
@@ -16,13 +24,14 @@ public class PersonCard : MonoBehaviour {
   public Image equipIcon;
   public TextMeshProUGUI equipmentText;
   public Image addEquipIcon;
+  public GameObject shade;
 
   public GameObject heartsPanel;
   public Image[] heartIcons;
 
   public bool canEquipItems = true;
 
-  public bool coupleEntryLayout = false;
+  public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
 
 
   public void Initialize(Person p){
@@ -40,12 +49,12 @@ public class PersonCard : MonoBehaviour {
 
 
     /// BG AND FACE / NAME
-    if(coupleEntryLayout == false) {
+    if(coupleEntryLayout == PersonCardLayout.couple) {
       bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
     }
     RectTransform rect = GetComponent<RectTransform>();
     if(heartsPanel != null) {
-      if(person.id == 0 || coupleEntryLayout) {
+      if(person.id == 0 || coupleEntryLayout != PersonCardLayout.single) {
         heartsPanel.SetActive(false);
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, 166f);
       } else {
@@ -61,22 +70,22 @@ public class PersonCard : MonoBehaviour {
 
 
     /// ATTRIBUTES
-    for (int i=0; i<3; i++){
+    for(int i=0; i<3; i++){
       attributeTexts[i].text = person.AttributeValue(i).ToString();
     }
     Debug.Log("Person: " + person.name);
 
     /// SKILL
     if(skillText != null) {
-      if(person.skill != Skill.Nenhum) {
-        skillText.text = person.skill.ToString();
+      if(person.skillId != -1) {
+        skillText.text =  CardsDatabase.instance.GetCardById(person.skillId).name;
       } else {
         skillText.text = "---";
       }
     }        
 
     /// EQUIPMENT
-    if(person.id == 0 && coupleEntryLayout) {
+    if(person.id == 0 && coupleEntryLayout == PersonCardLayout.couple) {
       SetEquipableItems(true);
       addEquipIcon.gameObject.SetActive(person.EquipsCount() == 0);
     } else {
@@ -84,7 +93,7 @@ public class PersonCard : MonoBehaviour {
       addEquipIcon.gameObject.SetActive(false);
     }
 
-    if(coupleEntryLayout == false) {
+    if(coupleEntryLayout == PersonCardLayout.single) {
       if(person.equipment != null) {
         equipIcon.sprite = person.equipment.sprite;
         equipIcon.gameObject.SetActive(true);
@@ -98,6 +107,10 @@ public class PersonCard : MonoBehaviour {
 
   public void SetEquipableItems(bool canEquipItems) {
     equipIcon.transform.parent.gameObject.SetActive(canEquipItems && 0 <= person.EquipsCount());
+  }
+
+  public void ShowShade(bool active) {
+    shade.SetActive(active);
   }
 
   public void ClickPersonSlot(int slotId){

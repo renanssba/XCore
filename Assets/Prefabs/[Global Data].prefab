@@ -3161,6 +3161,7 @@ GameObject:
   - component: {fileID: 114027273821295224}
   - component: {fileID: 114215606993469530}
   - component: {fileID: 114598216140051406}
+  - component: {fileID: 114097425295570548}
   m_Layer: 0
   m_Name: '[Global Data]'
   m_TagString: Untagged
@@ -16803,6 +16804,7 @@ MonoBehaviour:
   cardSprites:
   - {fileID: 21300000, guid: 3779f651261efde45b4799d3bc247398, type: 3}
   - {fileID: 21300000, guid: 694e173149f0cfc4aae79987403d5dc1, type: 3}
+  - {fileID: 21300000, guid: bc185a61b0b4c60409c28672eadf5a1d, type: 3}
   itemSprites:
   - {fileID: 21300000, guid: f99c4a028a63fb449a7f801bc3330eb7, type: 3}
   - {fileID: 21300006, guid: e3d9682b109b8664093ae8f7c74d5006, type: 3}
@@ -17572,6 +17574,18 @@ MonoBehaviour:
     Text: \observedPerson goes to the city library. There he spends several hours
       reading books of interesting and varied subjects.
     Object: {fileID: 0}
+--- !u!114 &114097425295570548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1367346411395778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70896b09e4fb4f40b78868d8f22642e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: []
 --- !u!114 &114099032538108238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -23372,6 +23386,8 @@ MonoBehaviour:
   day: 0
   maxDays: 5
   objective: 1
+  currentDateHearts: 0
+  maxDateHearts: 0
   hideTutorials: 1
 --- !u!114 &114752158138908312
 MonoBehaviour:

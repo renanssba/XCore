@@ -305,5 +305,17 @@ public class Utils {
       navigatableObjects[i].navigation = navi;
     }
   }
+
+  public static Attributes GetAttributeByString(string attrName) {
+    switch(attrName) {
+      case "guts":
+        return Attributes.guts;
+      case "intelligence":
+        return Attributes.intelligence;
+      case "charisma":
+        return Attributes.charisma;
+    }
+    return Attributes.guts;
+  }
 }
 

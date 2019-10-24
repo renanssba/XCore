@@ -108,7 +108,7 @@ public class GlobalData : MonoBehaviour {
       id = 0,
       faceId =4,
       attributes = new int[]{3, 6, 2},
-      skill = Skill.Sensor
+      skillId = 10
   };
     people.Add(p);
     p = new Person() {
@@ -116,8 +116,8 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 9,
-      attributes = new int[] {8, 2, 1},
-      skill = Skill.Bravura
+      attributes = new int[] {8, 2, 2},
+      skillId = 11
     };
     people.Add(p);
     p = new Person() {
@@ -125,8 +125,8 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] {2, 8, 1},
-      skill = Skill.Fugir
+      attributes = new int[] {2, 8, 2},
+      skillId = 12
     };
     people.Add(p);
     p = new Person() {
@@ -135,7 +135,7 @@ public class GlobalData : MonoBehaviour {
       id = 3,
       faceId = 5,
       attributes = new int[] {3, 3, 7},
-      skill = Skill.Gula
+      skillId = 13
     };
     people.Add(p);
 

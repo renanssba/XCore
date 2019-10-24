@@ -101,18 +101,20 @@ public class TheaterController : MonoBehaviour {
             case DateEventInteractionType.male:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(intensity);
-              //GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
-              //GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
+              GameController.instance.datingPeopleCards[0].ShowShade(false);
+              GameController.instance.datingPeopleCards[1].ShowShade(true);
               break;
             case DateEventInteractionType.female:
               mainActor.SetBrightness(intensity);
               supportActor.SetBrightness(1f);
-              //GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
-              //GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
+              GameController.instance.datingPeopleCards[0].ShowShade(true);
+              GameController.instance.datingPeopleCards[1].ShowShade(false);
               break;
             case DateEventInteractionType.couple:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(1f);
+              GameController.instance.datingPeopleCards[0].ShowShade(false);
+              GameController.instance.datingPeopleCards[1].ShowShade(false);
               break;
           }
 
@@ -120,7 +122,6 @@ public class TheaterController : MonoBehaviour {
             mainActor.SetBrightness(1f);
             supportActor.SetBrightness(1f);
           }
-
           GameController.instance.datingPeoplePanel.ShowPanel();
         }        
         break;
@@ -214,7 +215,7 @@ public class TheaterController : MonoBehaviour {
 
   public IEnumerator WaitAndShine(float time) {
     int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
-    int attributeBaseLevel = GlobalData.instance.EventSolvingAttributeLevel(attributeId);
+    int attributeBaseLevel = VsnSaveSystem.GetIntVariable("attribute_effective_level");
     float effectivity = GameController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId];
     int effectiveAttributeLevel = (int)(attributeBaseLevel * effectivity);
 
@@ -288,8 +289,5 @@ public class TheaterController : MonoBehaviour {
         bgObjects[2].SetActive(true);
         break;
     }
-
-    /// TODO: Teleport to correct map
-    /// 
   }
 }

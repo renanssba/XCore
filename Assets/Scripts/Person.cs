@@ -46,7 +46,7 @@ public class Person {
 
   public int[] attributes;
   public Personality personality;
-  public Skill skill = Skill.Nenhum;
+  public int skillId = -1;
   public Item equipment = null;
 
   public string favoriteMatter;

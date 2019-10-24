@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,10 @@ public class GameController : MonoBehaviour {
   public Transform couplesPanelContent;
 
   public DateEvent[] dateSegments;
+
+  public List<DateCardContent> cardsDeck;
+  public List<DateCardContent> cardsHand;
+  public List<DateCardContent> cardsDiscard;
 
   public Slider progressSlider;
   public TextMeshProUGUI progressText;
@@ -249,6 +254,8 @@ public class GameController : MonoBehaviour {
         dateSegments[i].difficulty = 5;
       }
     }
+
+    GenerateDateDeck();
   }
   
   public void GenerateObservation() {
@@ -454,6 +461,31 @@ public class GameController : MonoBehaviour {
     Sprite s = Resources.Load<Sprite>("Characters/" + spriteName);
     if(s != null) {
       interactionPins[id].SetSprite(s);
-    }    
+    }
+  }
+
+  public void GenerateDateDeck() {
+    cardsDeck = new List<DateCardContent>();
+    for(int i = 0; i <= 9; i++) {
+      cardsDeck.Add(CardsDatabase.instance.GetCardById(i));
+    }
+    cardsDeck.Add(CardsDatabase.instance.GetCardById(GlobalData.instance.observedPeople[0].skillId));
+    cardsDeck.Add(CardsDatabase.instance.GetCardById(GlobalData.instance.observedPeople[1].skillId));
+  }
+
+  public void ShuffleNewCardHand() {
+    cardsHand = new List<DateCardContent>();
+    cardsDeck = cardsDeck.OrderBy(x => Random.value).ToList();
+
+    for(int i = 0; i < Mathf.Min(7, cardsDeck.Count); i++) {
+      cardsHand.Add(cardsDeck[i]);
+      dateCards[i].Initialize(cardsDeck[i]);
+    }
+  }
+
+  public void DiscardCard(DateCardContent card) {
+     //= cardsHand[idInHand];
+    cardsDiscard.Add(card);
+    cardsDeck.Remove(card);
   }
 }
