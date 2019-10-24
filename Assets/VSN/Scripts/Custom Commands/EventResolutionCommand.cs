@@ -11,7 +11,7 @@ namespace Command {
       if(args[0].GetStringValue() == "date"){
         ResolveDate();
       }else{
-        ResolveObservation();
+        //ResolveObservation();
       }
     }
 
@@ -52,19 +52,19 @@ namespace Command {
     }
 
 
-    public void ResolveObservation() {
-      ObservationEvent currentEvent = GameController.instance.GetCurrentObservationEvent();
-      Person person = GlobalData.instance.ObservedPerson();
-      int attributeToUse = (int)currentEvent.challengedAttribute;
-      int result = 0;
+    //public void ResolveObservation() {
+    //  ObservationEvent currentEvent = GameController.instance.GetCurrentObservationEvent();
+    //  Person person = GlobalData.instance.ObservedPerson();
+    //  int attributeToUse = (int)currentEvent.challengedAttribute;
+    //  int result = 0;
 
-      if (person.AttributeValue(attributeToUse) >= currentEvent.challengeDifficulty) {
-        result = 0;
-      }else{
-        result = 1;
-      }
-      VsnSaveSystem.SetVariable("resolution", result);
-    }
+    //  if (person.AttributeValue(attributeToUse) >= currentEvent.challengeDifficulty) {
+    //    result = 0;
+    //  }else{
+    //    result = 1;
+    //  }
+    //  VsnSaveSystem.SetVariable("resolution", result);
+    //}
 
 
     public override void AddSupportedSignatures() {

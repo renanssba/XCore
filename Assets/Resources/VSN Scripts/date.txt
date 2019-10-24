@@ -50,18 +50,23 @@ if tutorial_date2 == 0
 endif
 
 
-if #currentEventInteractionType == 0
-  say_auto "char_name/none" "date/say_1"
-endif
-if #currentEventInteractionType == 1
-  say_auto "char_name/none" "date/say_2"
-endif
-if #currentEventInteractionType == 2
-  say_auto "char_name/none" "date/say_3"
-endif
+// if #currentEventInteractionType == 0
+  // say_auto "char_name/none" "date/say_1"
+// endif
+// if #currentEventInteractionType == 1
+  // say_auto "char_name/none" "date/say_2"
+// endif
+// if #currentEventInteractionType == 2
+  // say_auto "char_name/none" "date/say_3"
+// endif
 
 
 position_choices "date_event"
+card_input
+//set_screen "choose_card"
+//wait 5
+goto ev_resolution
+
 if #currentPersonality == 0
   choices "date/choices_0_0" sug_guts "date/choices_0_1" sug_intelligence "date/choices_0_2" sug_charisma
 endif

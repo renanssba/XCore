@@ -105,12 +105,13 @@ public class Person {
   }
 
   public int AttributeValue(int att){
+    if(attributes == null) {
+      return 0;
+    }
     int sum = attributes[att];
-    //for(int i=0; i<equipment.Length; i++){
-      if(equipment != null){
-        sum += equipment.attribute_bonus[att];
-      }
-    //}
+    if(equipment != null){
+      sum += equipment.attribute_bonus[att];
+    }
     return Mathf.Max(sum, 0);
   }
   
@@ -132,13 +133,10 @@ public class Person {
   }
 
   public int EquipsCount(){
-    int count = 0;
-    //for (int i = 0; i < equipment.Length; i++) {
-      if (equipment != null) {
-        count++;
-      }
-    //}
-    return count;
+    if (equipment != null) {
+      return 1;
+    }
+    return 0;
   }
 
   public char GenderedVowel(){

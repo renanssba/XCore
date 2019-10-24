@@ -18,13 +18,6 @@ public class GameController : MonoBehaviour {
   public GameObject coupleEntryPrefab;
   public CoupleEntry[] coupleEntries;
   public Transform couplesPanelContent;
-  
-  public ObservationEvent[] observationSegments;
-  public ObservationTile[] observationTiles;
-  public GameObject playerToken;
-  public TextMeshProUGUI energyText;
-  public Image playerTokenImage;
-  public Color[] observationTilesColors;
 
   public DateEvent[] dateSegments;
 
@@ -34,16 +27,18 @@ public class GameController : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public GameObject bgImage;
-  //public ScreenTransitions progressPanel;
 
   public ScreenTransitions peopleButtonPanel;
   public ScreenTransitions peopleInfoPanel;
   public ScreenTransitions couplesPanel;
   public ScreenTransitions buttonsPanel;
   public ScreenTransitions observationMap;
-  public ScreenTransitions actionPersonCard;
-  public PersonCard observedPersonCard;
-  //public GameObject miniFertililel;
+  public ScreenTransitions datingPeoplePanel;
+  public PersonCard[] datingPeopleCards;
+
+  public ScreenTransitions dateCardsPanel;
+  public DateCard[] dateCards;
+  public TextMeshProUGUI dateHeartsCountText;
 
   public ItemSelectorScreen itemSelectorScreen;
 
@@ -168,6 +163,8 @@ public class GameController : MonoBehaviour {
       dateButton.SetActive(false);
     }
 
+    dateHeartsCountText.text = GlobalData.instance.currentDateHearts + " /" + GlobalData.instance.maxDateHearts;
+
     //for(int i=0; i<3; i++) {
     //  observationBoards[i].SetActive(false);
     //}
@@ -184,7 +181,7 @@ public class GameController : MonoBehaviour {
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
 
-    energyText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/energy")+" " + VsnSaveSystem.GetIntVariable("observation_energy");
+    //energyText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/energy")+" " + VsnSaveSystem.GetIntVariable("observation_energy");
     ShowDateProgressUI();
   }
 
@@ -269,19 +266,6 @@ public class GameController : MonoBehaviour {
     } else{
       allowedEventTypes.Add(ObservationEventType.maleInTrouble);
     }
-
-    observationSegments = new ObservationEvent[observationSize];
-    for (int i = 0; i < observationSize; i++) {
-      do {
-        selectedId = Random.Range(0, GlobalData.instance.allObservationEvents.Count);
-      } while (selectedEvents.Contains(selectedId) || !allowedEventTypes.Contains(GlobalData.instance.allObservationEvents[selectedId].eventType));
-      selectedEvents.Add(selectedId);
-      observationSegments[i] = GlobalData.instance.allObservationEvents[selectedId];
-      if(observationSegments[i].eventType == ObservationEventType.femaleInTrouble ||
-         observationSegments[i].eventType == ObservationEventType.maleInTrouble) {
-        //observationSegments[i].personInEvent = GlobalData.instance.GetDateablePerson(GlobalData.instance.ObservedPerson());
-      }
-    }
   }
 
   public DateEvent GetCurrentDateEvent(){
@@ -292,26 +276,11 @@ public class GameController : MonoBehaviour {
     return dateSegments[currentDateEvent];
   }
 
-  public ObservationEvent GetCurrentObservationEvent() {
-    int currentEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if (observationSegments.Length <= currentEvent) {
-      return null;
-    }
-    return observationSegments[currentEvent];
-  }
-
   public string GetCurrentDateEventName() {
     if(GetCurrentDateEvent() == null) {
       return "";
     }
     return dateSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
-  }
-
-  public string GetCurrentObservationEventName() {
-    if (GetCurrentObservationEvent() == null) {
-      return "";
-    }
-    return observationSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
   public void ShowDateUiPanel(bool value) {
@@ -362,7 +331,6 @@ public class GameController : MonoBehaviour {
         firstButton = p.equipIcon.transform.parent.GetComponent<Button>();
       }
     }
-    UpdateCouplesPanelContent();
 
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
   
@@ -370,8 +338,7 @@ public class GameController : MonoBehaviour {
       case "hide_all":
         titleText.gameObject.SetActive(false);
         bgImage.SetActive(true);
-        //peopleButtonPanel.HidePanel();
-        //peopleInfoPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
@@ -381,8 +348,10 @@ public class GameController : MonoBehaviour {
         titleText.gameObject.SetActive(true);
         SetTitleText();
         bgImage.SetActive(true);
-        //peopleButtonPanel.HidePanel();
-        //peopleInfoPanel.ShowPanel();
+        if(VsnSaveSystem.GetIntVariable("daytime") == 2) {
+          UpdateCouplesPanelContent();
+        }
+        datingPeoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.ShowPanel();
         observationMap.HidePanel();
@@ -393,7 +362,7 @@ public class GameController : MonoBehaviour {
         theater.SetEvent(TheaterEvent.observation);
         bgImage.SetActive(false);
         ShowOnlyObservedPerson();
-        //peopleInfoPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
@@ -403,10 +372,9 @@ public class GameController : MonoBehaviour {
         titleText.gameObject.SetActive(true);
         SetTitleText();
         bgImage.SetActive(true);
-        //peopleInfoPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
-        playerTokenImage.sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.ObservedPerson().faceId);
         observationMap.ShowPanel();
         break;
       case "date":
@@ -418,7 +386,7 @@ public class GameController : MonoBehaviour {
           theater.SetEvent(TheaterEvent.dateChallenge);
         }
         bgImage.SetActive(false);
-        //peopleInfoPanel.HidePanel();
+        datingPeoplePanel.ShowPanel();
         couplesPanel.HidePanel();
         buttonsPanel.HidePanel();
         observationMap.HidePanel();
@@ -465,74 +433,7 @@ public class GameController : MonoBehaviour {
       p.gameObject.SetActive(false);
     }
   }
-
-  public void SetupObservationSegmentTiles(){
-    GlobalData global = GlobalData.instance;
-    ObservationTile selectedTile;
-    List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
-    int selectedId;
-    List<ObservationTile> tilesNotSet = new List<ObservationTile>();
-    const int startingTile = 12;
-
-    observedPersonCard.Initialize(GlobalData.instance.observedPeople[0]);
-
-    tilesNotSet.AddRange(observationTiles);
-    tilesNotSet.Remove(observationTiles[startingTile]);
-
-
-    allowedEventTypes.Add(ObservationEventType.attributeTraining);
-    allowedEventTypes.Add(ObservationEventType.bet);
-    allowedEventTypes.Add(ObservationEventType.homeStalking);
-    allowedEventTypes.Add(ObservationEventType.itemOnSale);
-
-    // add dateable people to observation board
-    foreach(Person p in global.people) {
-      if(global.ObservedPerson().isMale && !p.isMale && p.state != PersonState.shipped) {
-        selectedTile = tilesNotSet[Random.Range(0, tilesNotSet.Count)];
-        selectedTile.evt = global.GetEventOfType(ObservationEventType.femaleInTrouble);
-        selectedTile.personInEvent = p;
-        selectedTile.wasUsed = false;
-        tilesNotSet.Remove(selectedTile);
-      } else if(!global.ObservedPerson().isMale && p.isMale && p.state != PersonState.shipped) {
-        selectedTile = tilesNotSet[Random.Range(0, tilesNotSet.Count)];
-        selectedTile.evt = global.GetEventOfType(ObservationEventType.maleInTrouble);
-        selectedTile.personInEvent = p;
-        selectedTile.wasUsed = false;
-        tilesNotSet.Remove(selectedTile);
-      }
-    }
-    
-
-    //SetScreenLayout("during_observation");
-
-    foreach(ObservationTile tile in tilesNotSet) {
-      do {
-        selectedId = Random.Range(0, global.allObservationEvents.Count);
-      } while (!allowedEventTypes.Contains(global.allObservationEvents[selectedId].eventType));
-      tile.evt = global.allObservationEvents[selectedId];
-      
-      if(tile.evt.eventType == ObservationEventType.femaleInTrouble ||
-         tile.evt.eventType == ObservationEventType.maleInTrouble) {
-        tile.personInEvent = global.GetDateablePerson(global.ObservedPerson());
-        Debug.Log("Dateable Person in tile: " + tile.personInEvent.name);
-      }else{
-        tile.personInEvent = null;
-      }
-      tile.wasUsed = false;
-    }
-
-    observationTiles[startingTile].wasUsed = true;
-    playerToken.transform.position = observationTiles[startingTile].transform.position; // starting player position
-
-    JoystickController.instance.AddContext(observationMap.context);
-  }
-
-  public void WalkToObservationTile(ObservationTile tile){
-    playerToken.transform.DOMove(tile.transform.position, 1f).OnComplete( ()=> {
-      tile.wasUsed = true;
-      VsnController.instance.StartVSN("observation");
-    } );
-  }
+  
 
   public void ResetPinsBoard(string bgName) {
     interactionPinsBoard.GetComponent<Image>().sprite = Resources.Load<Sprite>("Bg/" + bgName);

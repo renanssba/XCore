@@ -67,29 +67,6 @@ public class TheaterController : MonoBehaviour {
     mainActor.SetGraphics(GlobalData.instance.observedPeople[0]);
 
     switch(currentEvent) {
-      case TheaterEvent.observation:
-        ObservationEventType evtType = GameController.instance.GetCurrentObservationEvent().eventType;
-        PositionCamera(CameraPosition.mainCamera);
-
-        mainActor.transform.localPosition = mainPosition;
-        mainActor.transform.localEulerAngles = rotationFacingRight;
-        //mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
-        challengeActor.gameObject.SetActive(false);
-
-        switch(evtType) {
-          case ObservationEventType.attributeTraining:
-            mainActor.transform.localPosition = new Vector3(0f, mainPosition.y, mainPosition.z);
-            supportActor.gameObject.SetActive(false);
-            break;
-          case ObservationEventType.femaleInTrouble:
-          case ObservationEventType.maleInTrouble:
-            supportActor.SetGraphics(GlobalData.instance.observedPeople[1]);
-            supportActor.gameObject.SetActive(true);
-            supportActor.transform.localPosition = encounterPosition;
-            supportActor.transform.localEulerAngles = rotationFacingLeft;
-            break;
-        }        
-        break;
       case TheaterEvent.date:
       case TheaterEvent.dateChallenge:
         PositionCamera(CameraPosition.mainCamera);
@@ -107,7 +84,7 @@ public class TheaterController : MonoBehaviour {
             PositionCamera(CameraPosition.closeupCamera);
             PositionActorsCloseup();
           }
-          GameController.instance.actionPersonCard.HidePanel();
+          //GameController.instance.actionPersonCard.HidePanel();
           ChallengeLeavesScene();
         } else {
           string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
@@ -124,14 +101,14 @@ public class TheaterController : MonoBehaviour {
             case DateEventInteractionType.male:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(intensity);
-              GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
-              GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
+              //GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = mainActiveCardPosition;
+              //GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentBoy());
               break;
             case DateEventInteractionType.female:
               mainActor.SetBrightness(intensity);
               supportActor.SetBrightness(1f);
-              GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
-              GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
+              //GameController.instance.actionPersonCard.GetComponent<RectTransform>().anchoredPosition = supportActiveCardPosition;
+              //GameController.instance.actionPersonCard.GetComponent<PersonCard>().Initialize(GlobalData.instance.CurrentGirl());
               break;
             case DateEventInteractionType.couple:
               mainActor.SetBrightness(1f);
@@ -144,7 +121,7 @@ public class TheaterController : MonoBehaviour {
             supportActor.SetBrightness(1f);
           }
 
-          GameController.instance.actionPersonCard.ShowPanel();
+          GameController.instance.datingPeoplePanel.ShowPanel();
         }        
         break;
     }

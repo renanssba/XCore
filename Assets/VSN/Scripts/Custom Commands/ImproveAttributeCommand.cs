@@ -11,10 +11,6 @@ namespace Command {
       Person p = GlobalData.instance.ObservedPerson();
       int improve_value = (int)args[1].GetNumberValue();
 
-      //if(args.Length > 2){
-      //  p = args[2].GetNumberValue();
-      //}
-
       switch(args[0].GetStringValue()){
         case "guts":
           p.attributes[(int)Attributes.guts] += improve_value;
@@ -27,8 +23,6 @@ namespace Command {
           break;
       }
 
-      GameController.instance.observedPersonCard.UpdateUI();
-
       GameController.instance.UpdateUI();
     }
 
@@ -38,12 +32,6 @@ namespace Command {
         VsnArgType.stringArg,
         VsnArgType.numberArg
       });
-      
-      //signatures.Add(new VsnArgType[] {
-      //  VsnArgType.stringArg,
-      //  VsnArgType.numberArg,
-      //  VsnArgType.numberArg
-      //});
     }
   }
 }

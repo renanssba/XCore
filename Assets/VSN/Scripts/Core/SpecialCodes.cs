@@ -22,7 +22,6 @@ public class SpecialCodes {
       
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date/" + GameController.instance.GetCurrentDateEventName());
-      currentString = currentString.Replace("\\currentObservationEventName", "observation/" + GameController.instance.GetCurrentObservationEventName());
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
@@ -39,9 +38,6 @@ public class SpecialCodes {
       }
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
-      }
-      if(GameController.instance.GetCurrentObservationEvent() != null) {
-        currentString = currentString.Replace("\\observation_bg", GameController.instance.GetCurrentObservationEvent().location);
       }
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
@@ -98,14 +94,6 @@ public class SpecialCodes {
         return Random.Range(0, 100);
       case "#dateLength":
         return GameController.instance.dateSegments.Length;
-      case "#observationLength":
-        return GameController.instance.observationSegments.Length;
-      case "#observationEventType":
-        if(GameController.instance.GetCurrentObservationEvent() != null) {
-          return (int)GameController.instance.GetCurrentObservationEvent().eventType;
-        } else{
-          return 0;
-        }
       case "#isEncounterPersonUnrevealed":
         if(GlobalData.instance.EncounterPerson()!=null) {
           return GlobalData.instance.EncounterPerson().state == PersonState.unrevealed ? 1 : 0;

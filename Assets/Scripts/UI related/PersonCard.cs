@@ -114,14 +114,4 @@ public class PersonCard : MonoBehaviour {
       ItemSelectorScreen.instance.OpenInput();
     }
   }
-
-  public void ClickObserveButton(){
-    //Debug.LogWarning("Observe button clicked");
-    GlobalData.instance.observedPeople[0] = person;
-    GameController.instance.SetupObservationSegmentTiles();
-    VsnSaveSystem.SetVariable("observation_energy", 3);
-    VsnController.instance.StartVSN("observation_intro");
-
-    SfxManager.StaticPlayConfirmSfx();
-  }
 }

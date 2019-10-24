@@ -27,6 +27,9 @@ public class GlobalData : MonoBehaviour {
   public int maxDays;
   public int objective;
 
+  public int currentDateHearts;
+  public int maxDateHearts;
+
   public bool hideTutorials = false;
 
 
@@ -380,7 +383,7 @@ public class GlobalData : MonoBehaviour {
     List<Relationship> availableCouples = new List<Relationship>();
 
     foreach(Relationship r in relationships) {
-      if(r.hearts >= 3) {
+      if(r.hearts >= 1) {
         availableCouples.Add(r);
       }
     }
