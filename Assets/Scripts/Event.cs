@@ -35,6 +35,26 @@ public class DateEvent {
 
   public RewardType rewardType;
   public int rewardId;
+
+  public Attributes[] GetWeaknesses() {
+    List<Attributes> att = new List<Attributes>();
+    for(int i=0; i<3; i++) {
+      if(attributeEffectivity[i] > 1f) {
+        att.Add((Attributes)i);
+      }
+    }
+    return att.ToArray();
+  }
+
+  public Attributes[] GetResistances() {
+    List<Attributes> att = new List<Attributes>();
+    for(int i = 0; i < 3; i++) {
+      if(attributeEffectivity[i] < 1f) {
+        att.Add((Attributes)i);
+      }
+    }
+    return att.ToArray();
+  }
 }
 
 

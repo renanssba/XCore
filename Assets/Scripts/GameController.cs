@@ -168,16 +168,7 @@ public class GameController : MonoBehaviour {
       dateButton.SetActive(false);
     }
 
-    dateHeartsCountText.text = GlobalData.instance.currentDateHearts + " /" + GlobalData.instance.maxDateHearts;
 
-    //for(int i=0; i<3; i++) {
-    //  observationBoards[i].SetActive(false);
-    //}
-    //int currentDaytime = VsnSaveSystem.GetIntVariable("daytime");
-    //observationBoards[currentDaytime].SetActive(true);
-
-    //personCards[0].Initialize(GlobalData.instance.people[coupleId * 2]);
-    //personCards[1].Initialize(GlobalData.instance.people[coupleId * 2 + 1]);
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
     apText.text = "AP: " + gb.ap + " /" + gb.maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
@@ -186,7 +177,25 @@ public class GameController : MonoBehaviour {
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
     moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
 
-    //energyText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/energy")+" " + VsnSaveSystem.GetIntVariable("observation_energy");
+    UpdateDateUI();
+  }
+
+
+  public void UpdateDateUI() {
+    if(GlobalData.instance.CurrentBoy() == null ||
+       GlobalData.instance.CurrentGirl() == null) {
+      return;
+    }
+
+    for(int i = 0; i < 2; i++) {
+      datingPeopleCards[i].UpdateUI();
+    }
+    for(int i = 0; i < 7; i++) {
+      dateCards[i].UpdateUI();
+    }
+
+    dateHeartsCountText.text = GlobalData.instance.currentDateHearts + " /" + GlobalData.instance.maxDateHearts;
+
     ShowDateProgressUI();
   }
 
@@ -223,29 +232,40 @@ public class GameController : MonoBehaviour {
   public void GenerateDate(int location){
     int dateSize = Mathf.Min(GlobalData.instance.allDateEvents.Count, 7);
     List<int> selectedEvents = new List<int>();
-    int selectedId;
     int dateLocation = Random.Range(0, 2);
-    //int dateLocation = Random.Range(0, 1);
-
     VsnSaveSystem.SetVariable("date_location", dateLocation);
 
     dateSegments = new DateEvent[dateSize];
     for(int i=0; i<dateSize; i++){
-      do {
-        selectedId = Random.Range(0, GlobalData.instance.allDateEvents.Count);
-
-        Debug.LogWarning("selected location: " + GlobalData.instance.allDateEvents[selectedId].location);
-        Debug.LogWarning("date location: " + ((DateLocation)dateLocation).ToString());
-
-      } while (selectedEvents.Contains(selectedId) ||
-              (string.Compare(GlobalData.instance.allDateEvents[selectedId].location, ((DateLocation)dateLocation).ToString())!=0 &&
-               string.Compare(GlobalData.instance.allDateEvents[selectedId].location, "generico")!=0) );
+      int selectedId = GetNewDateEvent(selectedEvents);
       dateSegments[i] = GlobalData.instance.allDateEvents[selectedId];
       selectedEvents.Add(selectedId);
     }
     System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
                                   (event1, event2) => event1.stage.CompareTo(event2.stage) ));
-    for(int i=0; i<dateSize; i++) {
+    SetDifficultyForEvents();
+
+    GenerateDateDeck();
+  }
+
+  public int GetNewDateEvent(List<int> selectedEvents) {
+    int selectedId;
+    string dateLocationName = ((DateLocation)VsnSaveSystem.GetIntVariable("date_location")).ToString();
+    do {
+      selectedId = Random.Range(0, GlobalData.instance.allDateEvents.Count);
+
+      Debug.LogWarning("selected location: " + GlobalData.instance.allDateEvents[selectedId].location);
+      Debug.LogWarning("date location: " + dateLocationName);
+
+    } while(selectedEvents.Contains(selectedId) ||
+              (string.Compare(GlobalData.instance.allDateEvents[selectedId].location, dateLocationName) != 0 &&
+               string.Compare(GlobalData.instance.allDateEvents[selectedId].location, "generico") != 0));
+
+    return selectedId;
+  } 
+
+  public void SetDifficultyForEvents() {
+    for(int i = 0; i < 7; i++) {
       if(i < 3) {
         dateSegments[i].difficulty = 4;
       } else if(i >= 5) {
@@ -254,15 +274,30 @@ public class GameController : MonoBehaviour {
         dateSegments[i].difficulty = 5;
       }
     }
+  }
 
-    GenerateDateDeck();
+  public void FleeDateSegment(int positionId) {
+    List<int> currentUsedEvents = new List<int>();
+    foreach(DateEvent d in dateSegments) {
+      currentUsedEvents.Add(d.id);
+    }
+
+    Debug.LogWarning("currentUsedEvents: ");
+    foreach(int i in currentUsedEvents) {
+      Debug.Log("i: " + i);
+    }
+
+    int selectedId = GetNewDateEvent(currentUsedEvents);
+    dateSegments[positionId] = GlobalData.instance.allDateEvents[selectedId];
+    currentUsedEvents.Clear();
+
+    SetDifficultyForEvents();
   }
   
   public void GenerateObservation() {
     int observationSize = Mathf.Min(GlobalData.instance.allObservationEvents.Count, 3);
     List<int> selectedEvents = new List<int>();
     List<ObservationEventType> allowedEventTypes = new List<ObservationEventType>();
-    int selectedId;
 
     allowedEventTypes.Add(ObservationEventType.attributeTraining);
     allowedEventTypes.Add(ObservationEventType.bet);
@@ -487,5 +522,12 @@ public class GameController : MonoBehaviour {
      //= cardsHand[idInHand];
     cardsDiscard.Add(card);
     cardsDeck.Remove(card);
+  }
+
+  public void EndTurn() {
+    foreach(Person p in GlobalData.instance.observedPeople) {
+      p.EndTurn();
+    }
+    UpdateDateUI();
   }
 }

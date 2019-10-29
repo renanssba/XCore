@@ -15,12 +15,12 @@ public enum SkillType {
 }
 
 public enum Skill{
-  Sensor,
-  Fugir,
-  Gula,
-  Bravura,
-  BondSkill,
-  Nenhum
+  sensor,
+  raiseAttribute,
+  flee,
+  gluttony,
+  bondSkill,
+  none
 }
 
 public enum Attributes{
@@ -45,6 +45,8 @@ public class Person {
   public PersonState state = PersonState.unrevealed;
 
   public int[] attributes;
+  public int[] attributeBonuses;
+
   public Personality personality;
   public int skillId = -1;
   public Item equipment = null;
@@ -54,6 +56,11 @@ public class Person {
 
   public int id;
   public int faceId;
+
+
+  public Person() {
+    attributeBonuses = new int[] { 0, 0, 0 };
+  }
 
 
   public void Initialize(int personId) {
@@ -71,11 +78,7 @@ public class Person {
         break;
     }
     attValues = attValues.OrderBy(x => Random.value).ToList();
-
-    //attributes = new int[3];
-    //for(int i=0; i<3; i++){
-    //  attributes[i] = attValues[i];
-    //}
+    attributeBonuses = new int[] {0, 0, 0};
 
     state = PersonState.unrevealed;
 
@@ -112,6 +115,9 @@ public class Person {
     if(equipment != null){
       sum += equipment.attribute_bonus[att];
     }
+    if(attributeBonuses != null) {
+      sum += attributeBonuses[att];
+    }
     return Mathf.Max(sum, 0);
   }
   
@@ -146,17 +152,28 @@ public class Person {
       return 'a';
     }
   }
+
+  public void GetAttributeBonus(Attributes attr, int bonus) {
+    attributeBonuses[(int)attr] += bonus;
+  }
+
+  public void EndTurn() {
+    /// remove attributes bonus
+    for(int i=0; i<3; i++) {
+      attributeBonuses[i] = 0;
+    }
+  }
 }
 
 
 public class Relationship {
   public Person[] people;
   public int hearts = 0;
-  public List<Skill> bondSkills;
+  public List<int> bondSkills;
 
   public Relationship() {
     hearts = 0;
-    bondSkills = new List<Skill>();
+    bondSkills = new List<int>();
   }
 
 

@@ -16,10 +16,14 @@ public class DateCardContent {
   public string name;
   public string description;
   public Sprite sprite;
+  public DateCardType type;
 
   public Attributes attribute;
   public float multiplier;
-  public DateCardType type;
+
+  public Skill skill;
+  public int duration;
+  public int cost;
 }
 
 
@@ -56,13 +60,24 @@ public class CardsDatabase : MonoBehaviour {
       newCard.name = entry["name"];
       newCard.description = entry["description"];
       newCard.type = GetDateCardTypeByString(entry["type"]);
-      if(newCard.type == DateCardType.actionCard) {
-        newCard.attribute = Utils.GetAttributeByString(entry["attribute"]);
+
+      newCard.attribute = Utils.GetAttributeByString(entry["attribute"]);
+      if(!string.IsNullOrEmpty(entry["multiplier"]) ) {
         newCard.multiplier = float.Parse(entry["multiplier"]);
+      }
+      if(!string.IsNullOrEmpty(entry["duration"])) {
+        newCard.duration = int.Parse(entry["duration"]);
+      }
+      if(!string.IsNullOrEmpty(entry["cost"])) {
+        newCard.cost = int.Parse(entry["cost"]);
+      }
+
+      if(newCard.type == DateCardType.actionCard) {
         newCard.sprite = ResourcesManager.instance.attributeSprites[(int)newCard.attribute];
       } else {
         newCard.sprite = Resources.Load<Sprite>("Cards/"+entry["sprite"]);
       }
+      newCard.skill = GetSkillByString(entry["skill"]);
 
       database.Add(newCard);
     }
@@ -82,6 +97,14 @@ public class CardsDatabase : MonoBehaviour {
     return DateCardType.actionCard;
   }
 
+  public Skill GetSkillByString(string name) {
+    for(int i=0; i<=(int)Skill.none; i++) {
+      if( ((Skill)i).ToString() == name ) {
+        return (Skill)i;
+      }
+    }
+    return Skill.none;
+  }
   
   public DateCardContent GetCardById(int id) {
     foreach(DateCardContent card in database) {

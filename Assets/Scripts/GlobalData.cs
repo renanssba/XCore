@@ -45,7 +45,7 @@ public class GlobalData : MonoBehaviour {
     }
     DontDestroyOnLoad(gameObject);
 
-    observedPeople = new Person[2];
+    observedPeople = new Person[] {null, null};
     inventory = new Inventory();
   }
 
@@ -148,12 +148,11 @@ public class GlobalData : MonoBehaviour {
     }
     relationships[0].hearts = 1;
 
-    //PersonCard[] cards = new PersonCard[4];
-    //System.Array.Copy(GameController.instance.personCards, cards, 4);
-    //GameController.instance.personCards = cards;
-    //foreach(PersonCard pcard in GameController.instance.personCards) {
-    //  pcard.gameObject.SetActive(true);
-    //}
+
+    ///TESTING SKILLS IN BATTLE
+    relationships[0].hearts = 3;
+    relationships[1].hearts = 3;
+    relationships[2].hearts = 3;
   }
 
   public void InitializeDateEvents() {
@@ -383,7 +382,7 @@ public class GlobalData : MonoBehaviour {
     List<Relationship> availableCouples = new List<Relationship>();
 
     foreach(Relationship r in relationships) {
-      if(r.hearts >= 1) {
+      if(r.hearts >= 3) {
         availableCouples.Add(r);
       }
     }
@@ -411,8 +410,8 @@ public class GlobalData : MonoBehaviour {
     relationships[relationshipId].hearts++;
   }
 
-  public void AddBondSkill(int relationshipId, string skillName) {
-    relationships[relationshipId].bondSkills.Add(Skill.BondSkill);
+  public void AddBondSkill(int relationshipId, int skillId) {
+    relationships[relationshipId].bondSkills.Add(skillId);
   }
 
   public Sprite GetFaceByName(string name) {

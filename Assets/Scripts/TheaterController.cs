@@ -52,6 +52,9 @@ public class TheaterController : MonoBehaviour {
   public Color greenColor;
   public Color redColor;
 
+  public GameObject weaknessCard;
+  public TextMeshPro weaknessCardText;
+
   public float intensity;
 
   const float animTime = 0.15f;
@@ -65,6 +68,7 @@ public class TheaterController : MonoBehaviour {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
     mainActor.SetGraphics(GlobalData.instance.observedPeople[0]);
+
 
     switch(currentEvent) {
       case TheaterEvent.date:
@@ -85,6 +89,10 @@ public class TheaterController : MonoBehaviour {
             PositionActorsCloseup();
           }
           //GameController.instance.actionPersonCard.HidePanel();
+          GameController.instance.datingPeopleCards[0].ShowShade(false);
+          GameController.instance.datingPeopleCards[1].ShowShade(false);
+          ShowWeaknessCard(false);
+
           ChallengeLeavesScene();
         } else {
           string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
@@ -289,5 +297,38 @@ public class TheaterController : MonoBehaviour {
         bgObjects[2].SetActive(true);
         break;
     }
+  }
+
+  public void ShowWeaknessCard(bool activate) {
+    weaknessCard.SetActive(activate);
+    if(activate) {
+      VsnAudioManager.instance.PlaySfx("relationship_up");
+      SetWeaknessCardText();
+    }
+  }
+
+  public void SetWeaknessCardText() {
+    string text = "";
+    DateEvent dateChallenge = GameController.instance.GetCurrentDateEvent();
+    Attributes[] weak = dateChallenge.GetWeaknesses();
+    Attributes[] resistant = dateChallenge.GetResistances();
+
+    if(weak.Length>0) {
+      text += "Fraqueza:\n";
+      for(int i=0; i<weak.Length; i++) {
+        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + weak[i].ToString()) + "\n";
+      }
+    }
+    if(resistant.Length > 0) {
+      if(!string.IsNullOrEmpty(text)) {
+        text += "\n";
+      }
+      text += "Resistência:\n";
+      for(int i = 0; i < resistant.Length; i++) {
+        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + resistant[i].ToString()) + "\n";
+      }
+    }
+
+    weaknessCardText.text = text;
   }
 }

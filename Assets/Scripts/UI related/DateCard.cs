@@ -18,7 +18,10 @@ public class DateCard : MonoBehaviour {
   public Image attributeValuePanel;
   public TextMeshProUGUI attributeValueText;
 
+  public GameObject shadeImage;
+
   public DateCardContent content;
+  public Color defaultColor;
 
 
   public void Initialize(DateCardContent cont) {
@@ -29,18 +32,28 @@ public class DateCard : MonoBehaviour {
   public void UpdateUI() {
     Color attributeColor = ResourcesManager.instance.attributeColor[(int)content.attribute];
     cardNameText.text = content.name;
-    cardNameText.color = attributeColor;
+    cardNameText.color = defaultColor;
     descriptionText.text = content.description;
 
     cardIlustration.sprite = content.sprite;
     cardIlustration.color = attributeColor;
 
+    shadeImage.SetActive(!IsCardUsable());
+
+
     if(content.type == DateCardType.actionCard) {
+      cardNameText.color = attributeColor;
+
       attributeValuePanel.gameObject.SetActive(true);
       attributeValuePanel.color = attributeColor;
       attributeValueText.text = GetEffectivePower().ToString();
       cardBgImage.sprite = ResourcesManager.instance.cardSprites[2];
     } else {
+      if(content.type == DateCardType.characterSkillCard ||
+         content.type == DateCardType.bondSkillCard) {
+        descriptionText.text += "\n<color=#842042>-" + content.cost + "<sprite=\"attributes\" index=5></color>";
+      }      
+
       Person ownerOfSkill;
       if(GlobalData.instance.observedPeople[0].skillId == content.id) {
         ownerOfSkill = GlobalData.instance.observedPeople[0];
@@ -56,7 +69,7 @@ public class DateCard : MonoBehaviour {
       } else {
         cardBgImage.sprite = ResourcesManager.instance.cardSprites[1];
       }
-    }    
+    }
   }
 
   public int GetEffectivePower() {
@@ -65,27 +78,89 @@ public class DateCard : MonoBehaviour {
 
 
   public void ClickDateCard() {
-    Debug.LogWarning("Clicked date card! Selected attribute: " + content.attribute);
+    if(!IsCardUsable()) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
 
     switch(content.type) {
       case DateCardType.actionCard:
-        VsnSaveSystem.SetVariable("attribute_effective_level", GetEffectivePower());
-        VsnSaveSystem.SetVariable("selected_attribute", (int)content.attribute);
-        VsnController.instance.GotCustomInput();
-        GameController.instance.dateCardsPanel.HidePanel();
-        GameController.instance.DiscardCard(content);
+        UseActionCard();
         break;
-      //case DateCardType.itemCard:
-      //  break;
-      //case DateCardType.characterSkillCard:
-      //  break;
-      //case DateCardType.bondSkillCard:
-      //  break;
+      case DateCardType.itemCard:
+        UseItemCard();
+        break;
+      case DateCardType.characterSkillCard:
+      case DateCardType.bondSkillCard:
+        UseSkillCard();
+        break;
       default:
         gameObject.SetActive(false);
         break;
     }
+  }
 
-    
+  public bool IsCardUsable() {
+    if((content.type == DateCardType.bondSkillCard ||
+        content.type == DateCardType.characterSkillCard) && GlobalData.instance.currentDateHearts < content.cost) {
+      return false;
+    }
+    return true;
+  }
+
+  public void UseActionCard() {
+    Debug.LogWarning("Clicked action card! Selected attribute: " + content.attribute);
+
+    VsnSaveSystem.SetVariable("attribute_effective_level", GetEffectivePower());
+    VsnSaveSystem.SetVariable("selected_attribute", (int)content.attribute);
+    VsnController.instance.GotCustomInput();
+    GameController.instance.dateCardsPanel.HidePanel();
+    GameController.instance.DiscardCard(content);
+  }
+
+  public void UseSkillCard() {
+    GlobalData.instance.currentDateHearts -= content.cost;
+
+    switch(content.skill) {
+      case Skill.raiseAttribute:
+        VsnAudioManager.instance.PlaySfx("relationship_up");
+
+        DateEvent evt = GameController.instance.GetCurrentDateEvent();
+        switch(evt.interactionType) {
+          case DateEventInteractionType.male:
+            GlobalData.instance.CurrentBoy().GetAttributeBonus(content.attribute, (int)content.multiplier);
+            break;
+          case DateEventInteractionType.female:
+            GlobalData.instance.CurrentGirl().GetAttributeBonus(content.attribute, (int)content.multiplier);
+            break;
+        }
+        break;
+      case Skill.sensor:
+        TheaterController.instance.ShowWeaknessCard(true);
+        break;
+      case Skill.flee:
+        Debug.LogWarning("Flee from event!");
+        VsnAudioManager.instance.PlaySfx("relationship_up");
+        GameController.instance.FleeDateSegment(VsnSaveSystem.GetIntVariable("currentDateEvent"));
+
+        GameController.instance.SetScreenLayout("date");
+        GameController.instance.dateCardsPanel.HidePanel();
+        GameController.instance.StartCoroutine(WaitThenContinueFromFlee());
+        break;
+    }
+
+    GameController.instance.UpdateDateUI();
+
+    gameObject.SetActive(false);
+  }
+
+  public IEnumerator WaitThenContinueFromFlee() {
+    yield return new WaitForSeconds(1f);
+    VsnController.instance.CurrentScriptReader().GotoWaypoint("start_interaction");
+    VsnController.instance.GotCustomInput();
+  }
+
+  public void UseItemCard() {
+    gameObject.SetActive(false);
   }
 }

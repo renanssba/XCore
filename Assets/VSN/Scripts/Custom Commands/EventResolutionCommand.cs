@@ -49,6 +49,7 @@ namespace Command {
       //  VsnSaveSystem.SetVariable("date_event_result_" + currentEventId, 2);
       //}
       //GameController.instance.UpdateUI();
+      GameController.instance.EndTurn();
     }
 
 

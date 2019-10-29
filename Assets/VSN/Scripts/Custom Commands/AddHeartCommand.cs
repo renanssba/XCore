@@ -10,7 +10,7 @@ namespace Command {
     public override void Execute() {
       GlobalData.instance.AddHeart((int)args[0].GetNumberValue());
       if(args.Length > 1) {
-        GlobalData.instance.AddBondSkill((int)args[0].GetNumberValue(), args[1].GetStringValue());
+        GlobalData.instance.AddBondSkill((int)args[0].GetNumberValue(), (int)args[1].GetNumberValue());
       }
     }
 
@@ -21,7 +21,7 @@ namespace Command {
       });
       signatures.Add(new VsnArgType[] {
         VsnArgType.numberArg,
-        VsnArgType.stringArg
+        VsnArgType.numberArg
       });
     }
   }

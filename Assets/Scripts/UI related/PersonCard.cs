@@ -15,7 +15,7 @@ public enum PersonCardLayout {
 
 public class PersonCard : MonoBehaviour {
 
-  public Person person;
+  public Person person = null;
   public Image bgImage;
   public TextMeshProUGUI nameText;
   public Image faceImage;
@@ -34,8 +34,8 @@ public class PersonCard : MonoBehaviour {
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
 
 
+
   public void Initialize(Person p){
-    //Debug.Log("initializing " + person.name);
     person = p;
     UpdateUI();
   }
@@ -43,7 +43,7 @@ public class PersonCard : MonoBehaviour {
   public void UpdateUI() {
     //Debug.Log("updating "+person.name);
 
-    if(person == null) {
+    if(person == null || gameObject.activeSelf == false) {
       return;
     }
 

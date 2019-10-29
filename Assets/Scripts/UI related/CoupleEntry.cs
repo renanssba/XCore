@@ -35,7 +35,7 @@ public class CoupleEntry : MonoBehaviour {
     for(int i=0; i<3; i++) {
       skillIcons[i].gameObject.SetActive(i<relationship.bondSkills.Count);
       if(i < relationship.bondSkills.Count) {
-        skillNameTexts[i].text = relationship.bondSkills[i].ToString();
+        skillNameTexts[i].text = CardsDatabase.instance.GetCardById(relationship.bondSkills[i]).name;
       } else {
         skillNameTexts[i].text = "---";
       }      
