@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,7 +73,7 @@ public class PersonCard : MonoBehaviour {
     for(int i=0; i<3; i++){
       attributeTexts[i].text = person.AttributeValue(i).ToString();
     }
-    Debug.Log("Person: " + person.name);
+    //Debug.Log("Person: " + person.name);
 
     /// SKILL
     if(skillText != null) {

@@ -23,8 +23,11 @@ public class DateCard : MonoBehaviour {
   public DateCardContent content;
   public Color defaultColor;
 
+  public int handId;
 
-  public void Initialize(DateCardContent cont) {
+
+  public void Initialize(int id, DateCardContent cont) {
+    handId = id;
     content = cont;
     UpdateUI();
   }
@@ -88,8 +91,8 @@ public class DateCard : MonoBehaviour {
         UseActionCard();
         break;
       case DateCardType.itemCard:
-        UseItemCard();
-        break;
+        //UseItemCard();
+        //break;
       case DateCardType.characterSkillCard:
       case DateCardType.bondSkillCard:
         UseSkillCard();
@@ -98,6 +101,8 @@ public class DateCard : MonoBehaviour {
         gameObject.SetActive(false);
         break;
     }
+
+    GameController.instance.UpdateDateUI();
   }
 
   public bool IsCardUsable() {
@@ -121,6 +126,10 @@ public class DateCard : MonoBehaviour {
   public void UseSkillCard() {
     GlobalData.instance.currentDateHearts -= content.cost;
 
+    Debug.LogWarning("Using skill " + content.skill.ToString());
+
+    gameObject.SetActive(false);
+
     switch(content.skill) {
       case Skill.raiseAttribute:
         VsnAudioManager.instance.PlaySfx("relationship_up");
@@ -139,7 +148,6 @@ public class DateCard : MonoBehaviour {
         TheaterController.instance.ShowWeaknessCard(true);
         break;
       case Skill.flee:
-        Debug.LogWarning("Flee from event!");
         VsnAudioManager.instance.PlaySfx("relationship_up");
         GameController.instance.FleeDateSegment(VsnSaveSystem.GetIntVariable("currentDateEvent"));
 
@@ -147,11 +155,14 @@ public class DateCard : MonoBehaviour {
         GameController.instance.dateCardsPanel.HidePanel();
         GameController.instance.StartCoroutine(WaitThenContinueFromFlee());
         break;
+      case Skill.gluttony:
+        VsnAudioManager.instance.PlaySfx("relationship_up");
+        DateCardContent cont = CardsDatabase.instance.GetCardById(Random.Range(23, 26));
+        GameController.instance.cardsHand[handId] = cont;
+        Initialize(handId, cont);
+        gameObject.SetActive(true);
+        break;
     }
-
-    GameController.instance.UpdateDateUI();
-
-    gameObject.SetActive(false);
   }
 
   public IEnumerator WaitThenContinueFromFlee() {

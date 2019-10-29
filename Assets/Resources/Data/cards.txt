@@ -8,11 +8,11 @@ id	name	description	type	sprite	skill	attribute	multiplier	duration	cost	debug
 6	Valentia <sprite="stars" index=0 tint><sprite="stars" index=0 tint><sprite="stars" index=0 tint>	Ação de Valentia x 1.5	action			guts	1.5			
 7	Inteligência <sprite="stars" index=0 tint><sprite="stars" index=0 tint><sprite="stars" index=0 tint>	Ação de Inteligência x 1.5	action			intelligence	1.5			
 8	Carisma <sprite="stars" index=0 tint><sprite="stars" index=0 tint><sprite="stars" index=0 tint>	Ação de Carisma x 1.5	action			charisma	1.5			
-9	Mochila	Permite usar um item da mochila	item	mochila						
+9	Mochila	Permite usar um item da mochila	item	mochila	backpack					
 10	Sensor	Descobre a fraqueza de um Desafio	character_skill	magnifying glass	sensor				1	
-11	Encorajar	Aumenta a Valentia em 2 (dura 1 turno)	character_skill	gutsy aura	raiseAttribute	guts	2	1	1	
+11	Encorajar	Aumenta a Valentia em 3 (dura 1 turno)	character_skill	gutsy aura	raiseAttribute	guts	4	1	1	
 12	Fugir	Escapa do Desafio atual	character_skill	run	flee				1	
-13	Gula	???	character_skill	eating	gluttony				1	
+13	Gula	Adiciona algum item de comida à mão	character_skill	eating	gluttony				1	
 14	Memórias Felizes		bond_skill	gutsy aura	bondSkill				1	
 15	Confissão		bond_skill	gutsy aura	bondSkill				1	
 16			bond_skill	gutsy aura	bondSkill				1	
@@ -22,3 +22,6 @@ id	name	description	type	sprite	skill	attribute	multiplier	duration	cost	debug
 20	Amantes de Omelete		bond_skill	gutsy aura	bondSkill				1	
 21			bond_skill	gutsy aura	bondSkill				1	
 22			bond_skill	gutsy aura	bondSkill				1	
+23	Hambúrguer	Aumenta Valentia em 2 (dura 1 turno)	item	hamburger	raiseAttribute	guts	2	1		
+24	Café	Aumenta Inteligência em 2 (dura 1 turno)	item	coffee mug	raiseAttribute	intelligence	2	1		
+25	Nachos Picantes	Aumenta Carisma em 2 (dura 1 turno)	item	nachos	raiseAttribute	charisma	2	1		

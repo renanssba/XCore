@@ -188,7 +188,9 @@ public class GameController : MonoBehaviour {
     }
 
     for(int i = 0; i < 2; i++) {
-      datingPeopleCards[i].UpdateUI();
+      if(GlobalData.instance.observedPeople[i] != null) {
+        datingPeopleCards[i].Initialize(GlobalData.instance.observedPeople[i]);
+      }
     }
     for(int i = 0; i < 7; i++) {
       dateCards[i].UpdateUI();
@@ -258,8 +260,8 @@ public class GameController : MonoBehaviour {
       Debug.LogWarning("date location: " + dateLocationName);
 
     } while(selectedEvents.Contains(selectedId) ||
-              (string.Compare(GlobalData.instance.allDateEvents[selectedId].location, dateLocationName) != 0 &&
-               string.Compare(GlobalData.instance.allDateEvents[selectedId].location, "generico") != 0));
+            (string.Compare(GlobalData.instance.allDateEvents[selectedId].location, dateLocationName) != 0 &&
+             string.Compare(GlobalData.instance.allDateEvents[selectedId].location, "generico") != 0));
 
     return selectedId;
   } 
@@ -501,7 +503,8 @@ public class GameController : MonoBehaviour {
 
   public void GenerateDateDeck() {
     cardsDeck = new List<DateCardContent>();
-    for(int i = 0; i <= 9; i++) {
+    for(int i = 0; i <= 8; i++) { /// NO ITEMS FOR NOW
+    //for(int i = 0; i <= 9; i++) {
       cardsDeck.Add(CardsDatabase.instance.GetCardById(i));
     }
     cardsDeck.Add(CardsDatabase.instance.GetCardById(GlobalData.instance.observedPeople[0].skillId));
@@ -511,10 +514,11 @@ public class GameController : MonoBehaviour {
   public void ShuffleNewCardHand() {
     cardsHand = new List<DateCardContent>();
     cardsDeck = cardsDeck.OrderBy(x => Random.value).ToList();
+    cardsHand.AddRange(cardsDeck.GetRange(0, Mathf.Min(cardsDeck.Count, 7)));
+    cardsHand = cardsHand.OrderBy(content => content.type).ToList();
 
-    for(int i = 0; i < Mathf.Min(7, cardsDeck.Count); i++) {
-      cardsHand.Add(cardsDeck[i]);
-      dateCards[i].Initialize(cardsDeck[i]);
+    for(int i = 0; i < cardsHand.Count; i++) {
+      dateCards[i].Initialize(i, cardsHand[i]);
     }
   }
 

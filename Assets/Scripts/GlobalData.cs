@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -88,9 +88,6 @@ public class GlobalData : MonoBehaviour {
     }
     usedNames.Clear();
 
-    //people[0].state = PersonState.available;
-    //people[5].state = PersonState.available;
-
     InitializeChapterAlpha();
 
     InitializeDateEvents();
@@ -150,9 +147,9 @@ public class GlobalData : MonoBehaviour {
 
 
     ///TESTING SKILLS IN BATTLE
-    relationships[0].hearts = 3;
-    relationships[1].hearts = 3;
-    relationships[2].hearts = 3;
+    //relationships[0].hearts = 3;
+    //relationships[1].hearts = 3;
+    //relationships[2].hearts = 3;
   }
 
   public void InitializeDateEvents() {
@@ -382,7 +379,7 @@ public class GlobalData : MonoBehaviour {
     List<Relationship> availableCouples = new List<Relationship>();
 
     foreach(Relationship r in relationships) {
-      if(r.hearts >= 3) {
+      if(r.hearts >= 2) {
         availableCouples.Add(r);
       }
     }

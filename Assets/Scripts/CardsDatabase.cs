@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum DateCardType {
   actionCard,
+  itemCard,
   characterSkillCard,
-  bondSkillCard,
-  itemCard
+  bondSkillCard
 }
 
 [System.Serializable]
