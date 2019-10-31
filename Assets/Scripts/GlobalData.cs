@@ -20,9 +20,6 @@ public class GlobalData : MonoBehaviour {
   public int boysToGenerate = 5;
   public int girlsToGenerate = 5;
 
-  public int maxAp;
-  public int ap;
-
   public int day;
   public int maxDays;
   public int objective;
@@ -359,7 +356,6 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void PassTime() {
-    ap = maxAp;
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     if(daytime >= 2) {
       VsnSaveSystem.SetVariable("daytime", 0);

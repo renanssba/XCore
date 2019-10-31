@@ -102,10 +102,6 @@ public class SpecialCodes {
         } else {
           return -1;
         }
-      case "#ap":
-        return GlobalData.instance.ap;
-      case "#max_ap":
-        return GlobalData.instance.maxAp;
       case "#day":
         return GlobalData.instance.day;
       case "#max_days":

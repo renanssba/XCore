@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
 
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
-  public TextMeshProUGUI apText;
 
   public GameObject coupleEntryPrefab;
   public CoupleEntry[] coupleEntries;
@@ -144,17 +143,6 @@ public class GameController : MonoBehaviour {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
   }
-
-
-  public bool SpendAP(int cost){
-    GlobalData gb = GlobalData.instance;
-    if(gb.ap < cost){
-      return false;
-    }
-    gb.ap -= cost;
-    UpdateUI();
-    return true;
-  }
   
 
   public void UpdateUI() {
@@ -177,7 +165,6 @@ public class GameController : MonoBehaviour {
 
 
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day + " /" + VsnSaveSystem.GetIntVariable("max_days");
-    apText.text = "AP: " + gb.ap + " /" + gb.maxAp;
     progressText.text = GlobalData.instance.shippedCouples.Count.ToString();
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
     progressSlider.maxValue = VsnSaveSystem.GetIntVariable("objective");
