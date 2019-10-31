@@ -20,6 +20,7 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI nameText;
   public Image faceImage;
   public TextMeshProUGUI[] attributeTexts;
+  public Image skillIcon;
   public TextMeshProUGUI skillText;
   public Image equipIcon;
   public TextMeshProUGUI equipmentText;
@@ -82,7 +83,8 @@ public class PersonCard : MonoBehaviour {
       } else {
         skillText.text = "---";
       }
-    }        
+    }
+    skillIcon.sprite = CardsDatabase.instance.GetCardById(person.skillId).sprite;
 
     /// EQUIPMENT
     if(person.id == 0 && coupleEntryLayout == PersonCardLayout.couple) {

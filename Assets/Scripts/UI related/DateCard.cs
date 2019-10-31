@@ -50,28 +50,21 @@ public class DateCard : MonoBehaviour {
       attributeValuePanel.gameObject.SetActive(true);
       attributeValuePanel.color = attributeColor;
       attributeValueText.text = GetEffectivePower().ToString();
-      cardBgImage.sprite = ResourcesManager.instance.cardSprites[2];
+      cardBgImage.sprite = ResourcesManager.instance.cardSprites[4];
     } else {
       if(content.type == DateCardType.characterSkillCard ||
          content.type == DateCardType.bondSkillCard) {
         descriptionText.text += "\n<color=#842042>-" + content.cost + "<sprite=\"attributes\" index=5></color>";
-      }      
-
-      Person ownerOfSkill;
-      if(GlobalData.instance.observedPeople[0].skillId == content.id) {
-        ownerOfSkill = GlobalData.instance.observedPeople[0];
-      } else {
-        ownerOfSkill = GlobalData.instance.observedPeople[1];
       }
 
       cardIlustration.color = Color.white;
 
       attributeValuePanel.gameObject.SetActive(false);
-      if(ownerOfSkill.isMale) {
-        cardBgImage.sprite = ResourcesManager.instance.cardSprites[0];
-      } else {
-        cardBgImage.sprite = ResourcesManager.instance.cardSprites[1];
-      }
+      cardBgImage.sprite = ResourcesManager.instance.cardSprites[5];
+    }
+
+    if(content.type == DateCardType.itemCard) {
+      cardBgImage.sprite = ResourcesManager.instance.cardSprites[2];
     }
   }
 
@@ -91,14 +84,14 @@ public class DateCard : MonoBehaviour {
         UseActionCard();
         break;
       case DateCardType.itemCard:
-        //UseItemCard();
-        //break;
+        UseItemCard();
+        break;
       case DateCardType.characterSkillCard:
       case DateCardType.bondSkillCard:
         UseSkillCard();
         break;
       default:
-        gameObject.SetActive(false);
+        CardGoToEndOfHand();
         break;
     }
 
@@ -120,16 +113,36 @@ public class DateCard : MonoBehaviour {
     VsnSaveSystem.SetVariable("selected_attribute", (int)content.attribute);
     VsnController.instance.GotCustomInput();
     GameController.instance.dateCardsPanel.HidePanel();
-    GameController.instance.DiscardCard(content);
+    GameController.instance.DiscardCardFromHand(content);
+  }
+
+  public void UseItemCard() {
+    CardGoToEndOfHand();
+    ExecuteSkillEffect();
+    GameController.instance.DiscardCardFromHand(content);
   }
 
   public void UseSkillCard() {
+    DateCardContent cont = content;
     GlobalData.instance.currentDateHearts -= content.cost;
 
     Debug.LogWarning("Using skill " + content.skill.ToString());
 
-    gameObject.SetActive(false);
+    CardGoToEndOfHand();
 
+    ExecuteSkillEffect();
+
+    GameController.instance.CardFromHandToDeck(content);
+
+    if(cont.skill == Skill.gluttony) {
+      DateCardContent item = CardsDatabase.instance.GetCardById(Random.Range(23, 26));
+      GameController.instance.cardsHand.Add(item);
+      Initialize(handId, item);
+      gameObject.SetActive(true);
+    }
+  }
+
+  public void ExecuteSkillEffect() {
     switch(content.skill) {
       case Skill.raiseAttribute:
         VsnAudioManager.instance.PlaySfx("relationship_up");
@@ -157,21 +170,25 @@ public class DateCard : MonoBehaviour {
         break;
       case Skill.gluttony:
         VsnAudioManager.instance.PlaySfx("relationship_up");
-        DateCardContent cont = CardsDatabase.instance.GetCardById(Random.Range(23, 26));
-        GameController.instance.cardsHand[handId] = cont;
-        Initialize(handId, cont);
-        gameObject.SetActive(true);
+        //DateCardContent cont = CardsDatabase.instance.GetCardById(Random.Range(23, 26));
+        //GameController.instance.cardsHand[handId] = cont;
+        //GameController.instance.cardsDeck.Add(cont);
+        //Initialize(handId, cont);
+        //gameObject.SetActive(true);
         break;
     }
+  }
+
+  public void CardGoToEndOfHand() {
+    gameObject.SetActive(false);
+    Transform cardsPanel = transform.parent.parent;
+    transform.parent.SetParent(null);
+    transform.parent.SetParent(cardsPanel);
   }
 
   public IEnumerator WaitThenContinueFromFlee() {
     yield return new WaitForSeconds(1f);
     VsnController.instance.CurrentScriptReader().GotoWaypoint("start_interaction");
     VsnController.instance.GotCustomInput();
-  }
-
-  public void UseItemCard() {
-    gameObject.SetActive(false);
   }
 }

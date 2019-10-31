@@ -42,6 +42,7 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
       currentString = currentString.Replace("\\n", "\n");
+      currentString = currentString.Replace("\\q", "\"");
     } while (currentString != initialString);
 
     return currentString;

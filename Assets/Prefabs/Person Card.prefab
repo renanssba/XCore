@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09411766, g: 0.33333334, b: 0.48235297, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -863,8 +863,9 @@ MonoBehaviour:
     isMale: 0
     state: 0
     attributes: 
+    attributeBonuses: 000000000000000000000000
     personality: 0
-    skill: 0
+    skillId: -1
     equipment:
       id: 0
       name: 
@@ -884,6 +885,7 @@ MonoBehaviour:
   - {fileID: 114449564538703908}
   - {fileID: 114700458046897838}
   - {fileID: 114498511851109894}
+  skillIcon: {fileID: 114191041661043060}
   skillText: {fileID: 114355267749264890}
   equipIcon: {fileID: 114936506098599704}
   equipmentText: {fileID: 114526483655660088}

@@ -42,7 +42,7 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject damageParticlePrefab;
 
-  public TextMeshPro difficultyText;
+  public TextMeshProUGUI difficultyText;
 
   public Image attributeIcon;
   public Slider hpSlider;
@@ -53,7 +53,7 @@ public class TheaterController : MonoBehaviour {
   public Color redColor;
 
   public GameObject weaknessCard;
-  public TextMeshPro weaknessCardText;
+  public TextMeshProUGUI weaknessCardText;
 
   public float intensity;
 
@@ -98,7 +98,7 @@ public class TheaterController : MonoBehaviour {
           string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
 
           if(!string.IsNullOrEmpty(spriteName)) {
-            difficultyText.text = "<size=16>NV </size>"+GameController.instance.GetCurrentDateEvent().difficulty;
+            difficultyText.text = "<size=68>NV </size>"+GameController.instance.GetCurrentDateEvent().difficulty;
             ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
           } else {
             PositionCamera(CameraPosition.closeupCamera);

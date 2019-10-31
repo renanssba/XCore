@@ -41,10 +41,6 @@ public class GameController : MonoBehaviour {
   public ScreenTransitions datingPeoplePanel;
   public PersonCard[] datingPeopleCards;
 
-  public ScreenTransitions dateCardsPanel;
-  public DateCard[] dateCards;
-  public TextMeshProUGUI dateHeartsCountText;
-
   public ItemSelectorScreen itemSelectorScreen;
 
   public GameObject dateUiPanel;
@@ -53,6 +49,14 @@ public class GameController : MonoBehaviour {
   public Image[] successIcons;
   public Image[] failIcons;
   public Image[] unresolvedIcons;
+
+  public ScreenTransitions dateCardsPanel;
+  public DateCard[] dateCards;
+  public TextMeshProUGUI dateHeartsCountText;
+
+  public TextMeshProUGUI deckCountText;
+  public CanvasGroup discardCanvasGroup;
+  public TextMeshProUGUI discardCountText;
 
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
@@ -194,6 +198,15 @@ public class GameController : MonoBehaviour {
     }
     for(int i = 0; i < 7; i++) {
       dateCards[i].UpdateUI();
+    }
+
+    deckCountText.text = cardsDeck.Count.ToString();
+    if(cardsDiscard.Count > 0) {
+      discardCanvasGroup.alpha = 1f;
+      discardCountText.text = cardsDiscard.Count.ToString();
+    } else {
+      discardCanvasGroup.alpha = 0.5f;
+      discardCountText.text = "";
     }
 
     dateHeartsCountText.text = GlobalData.instance.currentDateHearts + " /" + GlobalData.instance.maxDateHearts;
@@ -502,6 +515,8 @@ public class GameController : MonoBehaviour {
   }
 
   public void GenerateDateDeck() {
+    cardsHand = new List<DateCardContent>();
+    cardsDiscard = new List<DateCardContent>();
     cardsDeck = new List<DateCardContent>();
     for(int i = 0; i <= 8; i++) { /// NO ITEMS FOR NOW
     //for(int i = 0; i <= 9; i++) {
@@ -512,20 +527,45 @@ public class GameController : MonoBehaviour {
   }
 
   public void ShuffleNewCardHand() {
+
+    // reshuffle hand back to deck
+    if(cardsHand != null) {
+      cardsDeck.AddRange(cardsHand);
+    }
+
     cardsHand = new List<DateCardContent>();
     cardsDeck = cardsDeck.OrderBy(x => Random.value).ToList();
+
     cardsHand.AddRange(cardsDeck.GetRange(0, Mathf.Min(cardsDeck.Count, 7)));
     cardsHand = cardsHand.OrderBy(content => content.type).ToList();
 
-    for(int i = 0; i < cardsHand.Count; i++) {
-      dateCards[i].Initialize(i, cardsHand[i]);
+    cardsDeck.RemoveRange(0, cardsHand.Count);
+
+    for(int i = 0; i < 7; i++) {
+      if(i < cardsHand.Count){
+        dateCards[i].Initialize(i, cardsHand[i]);
+      }      
+      dateCards[i].CardGoToEndOfHand();
     }
+    UpdateDateUI();
   }
 
-  public void DiscardCard(DateCardContent card) {
-     //= cardsHand[idInHand];
+  public void CardFromHandToDeck(DateCardContent card) {
+    cardsDeck.Add(card);
+    cardsHand.Remove(card);
+    UpdateDateUI();
+  }
+
+  public void DiscardCardFromDeck(DateCardContent card) {
     cardsDiscard.Add(card);
     cardsDeck.Remove(card);
+    UpdateDateUI();
+  }
+
+  public void DiscardCardFromHand(DateCardContent card) {
+    cardsDiscard.Add(card);
+    cardsHand.Remove(card);
+    UpdateDateUI();
   }
 
   public void EndTurn() {

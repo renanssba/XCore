@@ -104,7 +104,7 @@ public class GlobalData : MonoBehaviour {
       isMale = true,
       id = 0,
       faceId =4,
-      attributes = new int[]{3, 6, 2},
+      attributes = new int[]{2, 3, 1},
       skillId = 10
   };
     people.Add(p);
@@ -113,7 +113,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 9,
-      attributes = new int[] {8, 2, 2},
+      attributes = new int[] {4, 1, 1},
       skillId = 11
     };
     people.Add(p);
@@ -122,7 +122,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] {2, 8, 2},
+      attributes = new int[] {1, 4, 1},
       skillId = 12
     };
     people.Add(p);
@@ -131,7 +131,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 3,
       faceId = 5,
-      attributes = new int[] {3, 3, 7},
+      attributes = new int[] {2, 2, 3},
       skillId = 13
     };
     people.Add(p);
@@ -147,9 +147,9 @@ public class GlobalData : MonoBehaviour {
 
 
     ///TESTING SKILLS IN BATTLE
-    //relationships[0].hearts = 3;
-    //relationships[1].hearts = 3;
-    //relationships[2].hearts = 3;
+    relationships[0].hearts = 3;
+    relationships[1].hearts = 3;
+    relationships[2].hearts = 3;
   }
 
   public void InitializeDateEvents() {
