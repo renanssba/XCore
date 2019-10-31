@@ -14,6 +14,20 @@ if #day == 3
 endif
 
 
+
+
+if clara_heart >= 1
+  say "Clara chega e se senta à mesa com Ricardo."
+  
+  waypoint action_choice
+  choices "Conversar" continue "Dar presente" give_gift
+  waypoint continue
+  
+  say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
+  say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+endif
+
+
 if clara_heart == 0
   say "Ricardo" "(Será que ela vem mesmo?)"
   say "(Pode ser a única vez na vida que ela virá aqui em casa. Hoje é o dia que eu devo me declarar!)"
@@ -59,11 +73,6 @@ if clara_heart == 0
   wait 1
 endif
 
-if clara_heart >= 1
-  say "Clara chega e os dois estudam por umas duas horas. Eles conseguem avançar um pouco mais no trabalho do colégio."
-  say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
-endif
-
 
 add_var clara_heart 1
 
@@ -74,5 +83,31 @@ if #day == 2
   set_var clara_convidou_festa 1
 endif
 
+
+waypoint end
 say "Eles marcam de continuar o trabalho no dia seguinte."
 goto_script "pass_time"
+end_script
+
+
+
+waypoint give_gift
+say "" "Escolha qual item dar para Clara:"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "Ricardo" "Ei Clara, eu tenho uma coisinha para te dar."
+add_item item_id -1
+play_sfx "relationship_up"
+say "" "Ricardo entrega \item_name para Clara."
+say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+say "Ricardo" "Que bom que você gostou!"
+
+wait 1
+add_heart 2
+play_sfx "relationship_up"
+say "" "Ricardo e Clara se tornaram mais próximos!"
+wait 1
+goto end

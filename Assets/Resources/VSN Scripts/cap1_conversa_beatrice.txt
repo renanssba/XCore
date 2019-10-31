@@ -90,13 +90,43 @@ if beatrice_heart >= 1
   fade_out 1
   wait 1
   bg "school morning"
-  say "" "Chegando na biblioteca..."
+  say "" "Chegando na biblioteca, Ricardo encontra Beatrice lendo."
   fade_in 1
-  say "" "Ricardo e Beatrice conversam sobre os livros que eles leram recentemente."
+  
+  waypoint action_choice
+  choices "Conversar" continue "Dar presente" give_gift
+  waypoint continue  
+  
+  say "" "Os dois conversam sobre os livros que eles leram recentemente."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 endif
 
-
 add_var beatrice_heart 1
+
+waypoint end
+say "" "Os dois se despedem e voltam para suas aulas."
 goto_script "pass_time"
 end_script
+
+
+
+waypoint give_gift
+say "" "Escolha qual item dar para Beatrice:"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "Ricardo" "Ei Beatrice, eu tenho uma coisinha para te dar."
+add_item item_id -1
+play_sfx "relationship_up"
+say "" "Ricardo entrega \item_name para Beatrice."
+say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+say "Ricardo" "Que bom que você gostou!"
+
+wait 1
+add_heart 1
+play_sfx "relationship_up"
+say "" "Ricardo e Beatrice se tornaram mais próximos!"
+wait 1
+goto end

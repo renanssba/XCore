@@ -129,6 +129,9 @@ public class ModsManager : MonoBehaviour {
     if(setNames == null) {
       return null;
     }
+    if(setFaces.Length <= id) {
+      return null;
+    }
     return setFaces[id];
   }
 

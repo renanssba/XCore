@@ -6,9 +6,10 @@ using TMPro;
 
 public enum ItemInteractionType{
   store_buy,
-  input,
+  equip_item,
   inventory,
-  store_sell
+  store_sell,
+  give_gift
 }
 
 public class ItemUI : MonoBehaviour {
@@ -76,9 +77,12 @@ public class ItemUI : MonoBehaviour {
       case ItemInteractionType.store_sell:
         VsnSaveSystem.SetVariable("item_price", item.price/2);
         break;
-      case ItemInteractionType.input:
+      case ItemInteractionType.equip_item:
         Person p = GlobalData.instance.people[VsnSaveSystem.GetIntVariable("person_equip_selected")];
         p.EquipItemInSlot(VsnSaveSystem.GetIntVariable("slot_id"), item);
+        break;
+      case ItemInteractionType.give_gift:
+        // do nothing
         break;
     }
 

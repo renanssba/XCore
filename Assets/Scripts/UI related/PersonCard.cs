@@ -35,7 +35,6 @@ public class PersonCard : MonoBehaviour {
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
 
 
-
   public void Initialize(Person p){
     person = p;
     UpdateUI();
@@ -126,7 +125,7 @@ public class PersonCard : MonoBehaviour {
     }else{
       VsnSaveSystem.SetVariable("person_equip_selected", person.id);
       VsnSaveSystem.SetVariable("slot_id", slotId);
-      ItemSelectorScreen.instance.OpenInput();
+      ItemSelectorScreen.instance.OpenEquipSelect();
     }
   }
 }

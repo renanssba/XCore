@@ -38,12 +38,16 @@ public class ItemSelectorScreen : MonoBehaviour {
     OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.inventory);
   }
 
-  public void OpenInventory() {
-    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.inventory);
+  public void OpenEquipSelect() {
+    OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.inventory);
   }
 
-  public void OpenInput() {
-    OpenItemSelectorGeneric(ItemInteractionType.input, GlobalData.instance.inventory);
+  public void OpenGiftSelect() {
+    OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.inventory);
+  }
+
+  public void OpenInventory() {
+    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.inventory);
   }
 
   public void OpenItemSelectorGeneric(ItemInteractionType interType, Inventory inv) {
@@ -57,7 +61,7 @@ public class ItemSelectorScreen : MonoBehaviour {
     SetScreenName(type);
 
     currentMoneyText.transform.parent.gameObject.SetActive(true);
-    currentMoneyText.text = VsnSaveSystem.GetIntVariable("money").ToString();
+    currentMoneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
 
     interactionType = type;
     ClearItems();
@@ -72,8 +76,11 @@ public class ItemSelectorScreen : MonoBehaviour {
       case ItemInteractionType.store_sell:
         screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/sell");
         break;
-      case ItemInteractionType.input:
+      case ItemInteractionType.equip_item:
         screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/equip");
+        break;
+      case ItemInteractionType.give_gift:
+        screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/gift");
         break;
       case ItemInteractionType.inventory:
         screenNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("inventory/title");

@@ -78,6 +78,9 @@ public class GameController : MonoBehaviour {
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
 
     if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
+      //datingPeopleCards[0].Initialize(GlobalData.instance.people[0]);
+      //datingPeopleCards[1].Initialize(GlobalData.instance.people[1]);
+
       VsnSaveSystem.SetVariable("minigame_ended", 0);
       UpdateUI();
       VsnController.instance.StartVSN("back_from_minigame");
@@ -179,7 +182,7 @@ public class GameController : MonoBehaviour {
     progressSlider.value = GlobalData.instance.shippedCouples.Count;
     progressSlider.maxValue = VsnSaveSystem.GetIntVariable("objective");
     objectiveText.text = "/"+ VsnSaveSystem.GetIntVariable("objective");
-    moneyText.text = (VsnSaveSystem.GetIntVariable("money")).ToString();
+    moneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
 
     UpdateDateUI();
   }
@@ -191,10 +194,11 @@ public class GameController : MonoBehaviour {
       return;
     }
 
-    for(int i = 0; i < 2; i++) {
-      if(GlobalData.instance.observedPeople[i] != null) {
-        datingPeopleCards[i].Initialize(GlobalData.instance.observedPeople[i]);
-      }
+    if(GlobalData.instance.ObservedPerson() != null) {
+      datingPeopleCards[0].Initialize(GlobalData.instance.ObservedPerson());
+    }
+    if(GlobalData.instance.EncounterPerson() != null) {
+      datingPeopleCards[1].Initialize(GlobalData.instance.EncounterPerson());
     }
     for(int i = 0; i < 7; i++) {
       dateCards[i].UpdateUI();

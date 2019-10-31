@@ -44,7 +44,6 @@ public class TheaterController : MonoBehaviour {
 
   public TextMeshProUGUI difficultyText;
 
-  public Image attributeIcon;
   public Slider hpSlider;
 
   public GameObject[] bgObjects;
@@ -54,6 +53,9 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject weaknessCard;
   public TextMeshProUGUI weaknessCardText;
+
+  public GameObject[] turnIndicators;
+  public Image[] faceImages;
 
   public float intensity;
 
@@ -68,6 +70,8 @@ public class TheaterController : MonoBehaviour {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
     mainActor.SetGraphics(GlobalData.instance.observedPeople[0]);
+    faceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
+    faceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
 
 
     switch(currentEvent) {
@@ -91,6 +95,8 @@ public class TheaterController : MonoBehaviour {
           //GameController.instance.actionPersonCard.HidePanel();
           GameController.instance.datingPeopleCards[0].ShowShade(false);
           GameController.instance.datingPeopleCards[1].ShowShade(false);
+          turnIndicators[0].SetActive(false);
+          turnIndicators[1].SetActive(false);
           ShowWeaknessCard(false);
 
           ChallengeLeavesScene();
@@ -103,6 +109,7 @@ public class TheaterController : MonoBehaviour {
           } else {
             PositionCamera(CameraPosition.closeupCamera);
             PositionActorsCloseup();
+            ShowLevelAndHp();
           }
 
           switch(GameController.instance.GetCurrentDateEvent().interactionType) {
@@ -111,18 +118,24 @@ public class TheaterController : MonoBehaviour {
               supportActor.SetBrightness(intensity);
               GameController.instance.datingPeopleCards[0].ShowShade(false);
               GameController.instance.datingPeopleCards[1].ShowShade(true);
+              turnIndicators[0].SetActive(true);
+              turnIndicators[1].SetActive(false);
               break;
             case DateEventInteractionType.female:
               mainActor.SetBrightness(intensity);
               supportActor.SetBrightness(1f);
               GameController.instance.datingPeopleCards[0].ShowShade(true);
               GameController.instance.datingPeopleCards[1].ShowShade(false);
+              turnIndicators[0].SetActive(false);
+              turnIndicators[1].SetActive(true);
               break;
             case DateEventInteractionType.couple:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(1f);
               GameController.instance.datingPeopleCards[0].ShowShade(false);
               GameController.instance.datingPeopleCards[1].ShowShade(false);
+              turnIndicators[0].SetActive(true);
+              turnIndicators[1].SetActive(true);
               break;
           }
 
@@ -234,15 +247,8 @@ public class TheaterController : MonoBehaviour {
     FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
     ShowParticleAnimation(attributeId, effectiveAttributeLevel, effectivity);
 
-    yield return new WaitForSeconds(0.4f);
-
-    attributeIcon.sprite = ResourcesManager.instance.attributeSprites[attributeId];
-    attributeIcon.color = ResourcesManager.instance.attributeColor[attributeId];
-    hpSlider.value = 0;
-    hpSlider.fillRect.GetComponent<Image>().color = ResourcesManager.instance.attributeColor[attributeId];
-    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficulty;
-    hpSlider.gameObject.SetActive(true);
-    hpSlider.DOValue(effectiveAttributeLevel, 1f);
+    yield return new WaitForSeconds(1f);
+    hpSlider.DOValue(hpSlider.maxValue - effectiveAttributeLevel, 1f);
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
@@ -257,9 +263,17 @@ public class TheaterController : MonoBehaviour {
       VsnAudioManager.instance.PlaySfx("challenge_default");
       challengeActor.sprite = sp;
       challengeActor.gameObject.SetActive(true);
-      challengeActor.transform.localPosition = challengePosition+new Vector3(2.5f, 0f, 0f);
-      challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f);
+      challengeActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
+      challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(()=> {
+        ShowLevelAndHp();
+      });
     }
+  }
+
+  public void ShowLevelAndHp() {
+    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficulty;
+    hpSlider.value = hpSlider.maxValue;
+    hpSlider.gameObject.SetActive(true);
   }
 
   public void ChallengeLeavesScene() {

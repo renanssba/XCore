@@ -44,8 +44,8 @@ public class CoupleEntry : MonoBehaviour {
 
   public void ClickedDateButton() {
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
-    GlobalData.instance.observedPeople[0] = coupleCards[0].person;
-    GlobalData.instance.observedPeople[1] = coupleCards[1].person;
+    GlobalData.instance.observedPeople = new Person[] {coupleCards[0].person,
+                                                       coupleCards[1].person};
     GameController.instance.datingPeopleCards[0].Initialize(coupleCards[0].person);
     GameController.instance.datingPeopleCards[1].Initialize(coupleCards[1].person);
 

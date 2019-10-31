@@ -3,8 +3,8 @@ if daytime == 0
   wait 1
   bg "school morning"
   say "" "Chegando no telhado..."
+  say "Ana e Ricardo sentam-se para lanchar."
   fade_in 1
-  say "Ana e Ricardo sentam-se e começam a lanchar."
 endif
 if daytime == 1
   fade_out 1
@@ -15,6 +15,12 @@ if daytime == 1
   say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
   fade_in 1
 endif
+
+
+waypoint action_choice
+choices "Conversar" continue "Dar presente" give_gift
+waypoint continue
+
 
 if daytime == 0
   set_var lanchou_com_ana_hoje 1
@@ -62,8 +68,10 @@ if ana_heart >= 2
 endif
 
 add_var ana_heart 1
+goto end
 
 
+waypoint end
 if daytime == 0
   say "" "Ricardo e Ana voltam para a sala de aula para continuar as próximas lições."
 endif
@@ -71,3 +79,27 @@ if daytime == 1
   say "" "Ricardo e Ana voltam para suas casas."
 endif
 goto_script "pass_time"
+end_script
+
+
+
+waypoint give_gift
+say "" "Escolha qual item dar para Ana:"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
+add_item item_id -1
+play_sfx "relationship_up"
+say "" "Ricardo entrega \item_name para Ana."
+say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+say "Ricardo" "Que bom que você gostou!"
+
+wait 1
+add_heart 0
+play_sfx "relationship_up"
+say "" "Ricardo e Ana se tornaram mais próximos!"
+wait 1
+goto end

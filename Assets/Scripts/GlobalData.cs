@@ -45,7 +45,7 @@ public class GlobalData : MonoBehaviour {
     }
     DontDestroyOnLoad(gameObject);
 
-    observedPeople = new Person[] {null, null};
+    observedPeople = new Person[0];
     inventory = new Inventory();
   }
 
@@ -103,7 +103,7 @@ public class GlobalData : MonoBehaviour {
       name = "Ricardo",
       isMale = true,
       id = 0,
-      faceId =4,
+      faceId = 4,
       attributes = new int[]{2, 3, 1},
       skillId = 10
   };
@@ -144,6 +144,10 @@ public class GlobalData : MonoBehaviour {
       };
     }
     relationships[0].hearts = 1;
+
+    inventory.AddItem(0, 1);
+    inventory.AddItem(1, 1);
+    inventory.AddItem(2, 1);
 
 
     ///TESTING SKILLS IN BATTLE
@@ -282,30 +286,38 @@ public class GlobalData : MonoBehaviour {
   }
 
   public string CurrentCoupleName(){
-    if(observedPeople[0] == null || observedPeople[1]==null) {
+    if(observedPeople.Length < 2) {
       return "";
     }
     return Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple");
   }
 
   public Person CurrentBoy(){
+    if(observedPeople.Length < 1) {
+      return null;
+    }
     return observedPeople[0];
   }
 
   public Person CurrentGirl() {
+    if(observedPeople.Length < 2) {
+      return null;
+    }
     return observedPeople[1];
   }
 
   public Person ObservedPerson(){
+    if(observedPeople.Length<1) {
+      return null;
+    }
     return observedPeople[0];
   }
 
   public Person EncounterPerson() {
-    if(observedPeople[1] != null) {
-      return observedPeople[1];
-    } else{
+    if(observedPeople.Length < 2) {
       return null;
-    }    
+    }
+    return observedPeople[1];
   }
 
   public Personality CurrentPersonPersonality(){

@@ -1,10 +1,11 @@
 ﻿fade_out 0
-set_screen "hide_all"
+//set_screen "hide_all"
+goto_script "show_people_screen"
 fade_in 0.7
 
 
 add_var money minigame_score
 update_ui
 play_sfx "ui_money"
-say "Você ganhou <sprite=\qAttributes\q index=0>\vsn[minigame_score]!"
-goto_script "show_people_screen"
+say "Você ganhou <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn[minigame_score]</color>!"
+goto_script "pass_time"

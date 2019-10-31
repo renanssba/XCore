@@ -1995,6 +1995,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1217901585233644
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4273288681198462}
+  - component: {fileID: 114939347979178286}
+  m_Layer: 0
+  m_Name: gift
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1224945702745470
 GameObject:
   m_ObjectHideFlags: 1
@@ -11012,6 +11028,19 @@ Transform:
   m_Father: {fileID: 4472893560532070}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4273288681198462
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217901585233644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4527077339986624}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4273603797545644
 Transform:
   m_ObjectHideFlags: 1
@@ -12560,6 +12589,7 @@ Transform:
   - {fileID: 4640688712132890}
   - {fileID: 4572986493527880}
   - {fileID: 4371918535137138}
+  - {fileID: 4273288681198462}
   m_Father: {fileID: 4994434489791510}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25065,6 +25095,24 @@ MonoBehaviour:
   - Language: English
     Text: \girl holds the arm of \boy as hard as she can. She pulls him, but ends
       up getting unbalanced and falling.
+    Object: {fileID: 0}
+--- !u!114 &114939347979178286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217901585233644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: 'Escolha item para entregar:'
+    Object: {fileID: 0}
+  - Language: English
+    Text: 'Choose item to give:'
     Object: {fileID: 0}
 --- !u!114 &114940364187557902
 MonoBehaviour:
