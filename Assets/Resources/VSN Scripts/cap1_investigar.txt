@@ -1,12 +1,81 @@
-if #day == 3
-  goto_script "cap1_festa"
-  end_script
+set_var partes_investigadas 0
+
+fade_out 1
+bg "house night"
+
+if #currentGirlId == 1
+  goto investigar_ana
+endif
+if #currentGirlId == 2
+  goto investigar_beatrice
+endif
+if #currentGirlId == 3
+  goto investigar_clara
 endif
 
+
 waypoint investigar_ana
+say "" "Vou até a casa da Ana e entro em seu quarto pela janela, sem ser percebida."
+fade_in 1
+
+say "" "Há várias bandeiras de times penduradas pelas paredes."
+say "Fertiliel" "(Ela não está no quarto. Eu escuto um barulho vindo da sala, ela deve estar por lá.)"
+say "(Vou aproveitar enquanto ela não volta para dar uma investigada em suas coisas.)"
+
+waypoint ana_escolha
+say_auto "Fertiliel" "(O que eu deveria investigar?)"
+choices "Armário" ana_armario "Mesa" ana_mesa "Guarda-roupas" ana_roupas "Checar Ana" ana_checar "Ir Embora" exit
+
+waypoint ana_armario
+goto depois_investigar
+
+waypoint ana_mesa
+goto depois_investigar
+
+waypoint ana_roupas
+say "" "Abrindo o guarda-roupas encontro muitas roupas coloridas."
+say "Este tipo de roupas parece ser boa para fazer esportes."
+say_auto "Eu deveria pegar uma dessas?"
+choices "Sim" pegar_roupa_ana "Não" depois_investigar
+waypoint pegar_roupa_ana
+add_item "sports_clothes" 1
+goto depois_investigar
+
+waypoint ana_checar
+say "" "Vou devagarzinho até a porta do quarto observar Ana na sala. Ela está assistindo tv."
+say "Está passando um programa com humanos altos vestindo uniformes de duas cores diferentes e disputando uma bola."
+say "A garota está muito animada, torcendo para um dos times."
+goto depois_investigar
+
+
+
+
 waypoint investigar_beatrice
 waypoint investigar_clara
-fade_out 1
+
 say "" "Cenas de investigação ainda serão implementadas..."
 
-goto_script "pass_time"
+
+
+waypoint depois_investigar
+add_var partes_investigadas 1
+if partes_investigadas >= 2
+  goto exit
+endif
+
+waypoint voltar_para_escolha
+if #currentGirlId == 1
+  goto ana_escolha
+endif
+if #currentGirlId == 2
+  goto beatrice_escolha
+endif
+if #currentGirlId == 3
+  goto clara_escolha
+endif
+
+
+waypoint exit
+say "Fertiliel" "(Eu escuto barulhos de passos, acho que ela está voltando para seu quarto. Vou dar o fora antes que ela me veja.)"
+/// DEBUG
+//goto_script "pass_time"

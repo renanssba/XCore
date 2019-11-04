@@ -39,4 +39,15 @@ public class InteractionPin : MonoBehaviour {
     }
     return GlobalData.instance.people[charId];
   }
+
+
+  public void ClickInteractionPin() {
+    if(charId < GlobalData.instance.people.Count) {
+      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
+                                                         GlobalData.instance.people[charId]};
+    } else {
+      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0]};
+    }    
+    vsnEntryPoint.LoadScript();
+  }
 }

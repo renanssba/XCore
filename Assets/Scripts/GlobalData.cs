@@ -397,10 +397,8 @@ public class GlobalData : MonoBehaviour {
 
   public Relationship GetCurrentRelationship() {
     if(CurrentGirl() == null) {
-      Debug.LogWarning("current girl is null");
       return null;
     }
-    Debug.LogWarning("current girl is: "+CurrentGirl().name);
     foreach(Relationship relationship in relationships) {
       if(relationship.GetGirl() == CurrentGirl()) {
         return relationship;

@@ -38,6 +38,13 @@ public class Item {
     return GetItem(id).name;
   }
 
+  public static string GetPrintableName(int id) {
+    if(id == -1) {
+      return "";
+    }
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).name);
+  }
+
   public static string GetDescription(int id){
     if(id == -1){
       return "";

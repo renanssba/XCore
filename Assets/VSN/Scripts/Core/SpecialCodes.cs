@@ -41,7 +41,7 @@ public class SpecialCodes {
       }
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
-      currentString = currentString.Replace("\\item_name", Item.GetName(VsnSaveSystem.GetIntVariable("item_id")));
+      currentString = currentString.Replace("\\item_name", Item.GetPrintableName(VsnSaveSystem.GetIntVariable("item_id")));
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
     } while (currentString != initialString);
@@ -121,6 +121,20 @@ public class SpecialCodes {
           return GameController.instance.couplesPanelContent.childCount;
         } else {
           return 0;
+        }
+      case "#currentGirlId":
+        Person girl = GlobalData.instance.CurrentGirl();
+        if(girl != null) {
+          return girl.id;
+        } else {
+          return -1;
+        }
+      case "#currentBoyId":
+        Person boy = GlobalData.instance.CurrentBoy();
+        if(boy != null) {
+          return boy.id;
+        } else {
+          return -1;
         }
       default:
         return 0f;

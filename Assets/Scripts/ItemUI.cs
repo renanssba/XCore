@@ -35,8 +35,8 @@ public class ItemUI : MonoBehaviour {
 
 
   public void UpdateUI() {
-    nameText.text = item.name;
-    descriptionText.text = item.description;
+    nameText.text = Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + item.name);
+    descriptionText.text = Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + item.description);
     //    if(item.type == ItemType.mundane) {
     //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.mundaneSprite;
     //    } else {
@@ -45,9 +45,9 @@ public class ItemUI : MonoBehaviour {
     typeImage.sprite = item.sprite;
 
     if (interactionType == ItemInteractionType.store_buy){ 
-      costText.text = item.price.ToString();
+      costText.text = "<sprite=\"Attributes\" index=4>" + item.price.ToString();
     }else{
-      costText.text = (item.price/2).ToString();
+      costText.text = "<sprite=\"Attributes\" index=4>" + (item.price/2).ToString();
     }
     quantityText.text = "x" + amount;
     if(interactionType == ItemInteractionType.store_buy ||
