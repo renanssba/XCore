@@ -9,7 +9,11 @@ namespace Command {
 
     public override void Execute() {
       Debug.Log("arg0: "+args[0].GetReference());
-      VsnController.instance.CurrentScriptReader().GotoWaypoint(args[0].GetReference());
+      ExecuteGoto(args[0].GetReference());
+    }
+
+    public static void ExecuteGoto(string waypointName) {
+      VsnController.instance.CurrentScriptReader().GotoWaypoint(waypointName);
     }
 
 

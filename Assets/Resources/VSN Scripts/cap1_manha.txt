@@ -2,22 +2,28 @@ fade_out 0
 set_var daytime 0
 set_var lanchou_com_ana_hoje 0
 goto_script "cap1_interaction_pins"
-play_music "observacao2_intro" "observacao2_loop"
+//play_music "observacao2_intro" "observacao2_loop"
+play_music "" "intermission"
 //set_screen "hide_all"
 
 if #day == 1
   goto_script "cap1_dia1"
+  play_music "" "intermission"
   end_script
 endif
 if #day == 2
   goto_script "cap1_dia2"
+  play_music "" "intermission"
   end_script
 endif
 if #day == 3
   goto_script "cap1_dia3"
+  play_music "" "intermission"
   end_script
 endif
 if #day >= 4
   fade_in 1
+  play_music "" "intermission"
   end_script
 endif
+

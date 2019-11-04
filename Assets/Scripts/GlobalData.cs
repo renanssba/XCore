@@ -395,6 +395,20 @@ public class GlobalData : MonoBehaviour {
     return availableCouples.ToArray();
   }
 
+  public Relationship GetCurrentRelationship() {
+    if(CurrentGirl() == null) {
+      Debug.LogWarning("current girl is null");
+      return null;
+    }
+    Debug.LogWarning("current girl is: "+CurrentGirl().name);
+    foreach(Relationship relationship in relationships) {
+      if(relationship.GetGirl() == CurrentGirl()) {
+        return relationship;
+      }
+    }
+    return null;
+  }
+
   public ObservationEvent GetEventOfType(ObservationEventType type) {
     ObservationEvent evt;
     do {

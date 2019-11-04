@@ -166,6 +166,7 @@ public class Person {
 }
 
 
+[System.Serializable]
 public class Relationship {
   public Person[] people;
   public int hearts = 0;

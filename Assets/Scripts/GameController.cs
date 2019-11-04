@@ -49,6 +49,9 @@ public class GameController : MonoBehaviour {
   public Image[] failIcons;
   public Image[] unresolvedIcons;
 
+  public ScreenTransitions girlInteractionPanel;
+  public CoupleEntry coupleEntry;
+
   public ScreenTransitions dateCardsPanel;
   public DateCard[] dateCards;
   public TextMeshProUGUI dateHeartsCountText;
@@ -59,7 +62,6 @@ public class GameController : MonoBehaviour {
 
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
-  public GameObject dateButton;
 
   public Button[] menuButton;
 
@@ -69,12 +71,13 @@ public class GameController : MonoBehaviour {
 
 
 
+
   public void Awake() {
     instance = this;
   }
 
   public void Start() {
-    VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
+    //VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
 
     if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
       //datingPeopleCards[0].Initialize(GlobalData.instance.people[0]);
@@ -154,13 +157,6 @@ public class GameController : MonoBehaviour {
       } else {
         personCards[i].gameObject.SetActive(false);
       }
-    }
-
-    if(VsnSaveSystem.GetIntVariable("daytime")==2 &&
-       GlobalData.instance.GetCurrentDateableCouples().Length >= 1) {
-      dateButton.SetActive(true);
-    } else {
-      dateButton.SetActive(false);
     }
 
 
@@ -481,7 +477,21 @@ public class GameController : MonoBehaviour {
       p.gameObject.SetActive(false);
     }
   }
-  
+
+
+  public void ShowGirlInteractionScreen() {
+    Relationship r = GlobalData.instance.GetCurrentRelationship();
+    if(r == null){
+      Debug.LogError("Error getting current relationship");
+    }
+    coupleEntry.Initialize(r);
+    girlInteractionPanel.ShowPanel();
+  }
+
+  public void HideGirlInteractionScreen() {
+    girlInteractionPanel.HidePanel();
+  }
+
 
   public void ResetPinsBoard(string bgName) {
     interactionPinsBoard.GetComponent<Image>().sprite = Resources.Load<Sprite>("Bg/" + bgName);
@@ -564,5 +574,23 @@ public class GameController : MonoBehaviour {
       p.EndTurn();
     }
     UpdateDateUI();
+  }
+
+  public void ClickConversationButton() {
+    SfxManager.StaticPlayConfirmSfx();
+    HideGirlInteractionScreen();
+    Command.GotoCommand.ExecuteGoto("continue");
+    VsnController.instance.GotCustomInput();
+  }
+
+  public void ClickGiveGiftButton() {
+    SfxManager.StaticPlayConfirmSfx();
+    HideGirlInteractionScreen();
+    Command.GotoCommand.ExecuteGoto("give_gift");
+    VsnController.instance.GotCustomInput();
+  }
+
+  public void ClickDateButton() {
+    SfxManager.StaticPlayForbbidenSfx();
   }
 }

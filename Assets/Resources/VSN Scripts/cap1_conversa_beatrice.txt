@@ -1,9 +1,7 @@
+goto_script "enter_observation" "school morning"
+
 if #day == 1
   set_var foi_na_biblioteca 1
-  
-  fade_out 1
-  wait 1
-  bg "school morning"
   say "" "Na biblioteca..."
   fade_in 1
 
@@ -22,9 +20,6 @@ endif
 
 
 if #day == 2
-  fade_out 1
-  wait 1
-  bg "school morning"
   say "" "Ricardo vai para entrada do colégio, onde marcou de se encontrar com Beatrice."
   fade_in 1
   say "" "Ele fica esperando por vários minutos."
@@ -87,13 +82,12 @@ endif
 
 
 if beatrice_heart >= 1
-  fade_out 1
-  wait 1
-  bg "school morning"
   say "" "Chegando na biblioteca, Ricardo encontra Beatrice lendo."
   fade_in 1
   
   waypoint action_choice
+  girl_interaction 2
+  
   choices "Conversar" continue "Dar presente" give_gift
   waypoint continue  
   

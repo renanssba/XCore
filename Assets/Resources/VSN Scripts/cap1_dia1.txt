@@ -9,8 +9,7 @@ choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
 
 waypoint intro
 
-fade_out 1
-bg "school morning"
+goto_script "enter_observation" "school morning"
 
 say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele é: estudioso, esforçado, mas sem muita sorte com as garotas...)"
 fade_in 1

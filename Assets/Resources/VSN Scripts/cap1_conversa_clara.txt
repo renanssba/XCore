@@ -1,6 +1,4 @@
-fade_out 1
-bg "house-afternoon"
-wait 1
+goto_script "enter_observation" "house afternoon"
 say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
 fade_in 1
 
@@ -20,6 +18,8 @@ if clara_heart >= 1
   say "Clara chega e se senta à mesa com Ricardo."
   
   waypoint action_choice
+  girl_interaction 3
+  
   choices "Conversar" continue "Dar presente" give_gift
   waypoint continue
   

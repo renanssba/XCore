@@ -1,15 +1,10 @@
+goto_script "enter_observation" "school morning"
 if daytime == 0
-  fade_out 1
-  wait 1
-  bg "school morning"
   say "" "Chegando no telhado..."
   say "Ana e Ricardo sentam-se para lanchar."
   fade_in 1
 endif
 if daytime == 1
-  fade_out 1
-  wait 1
-  bg "school morning"
   say "" "Ricardo e Ana encontram-se no clube esportivo."
   say "Eles jogam futebol e treinam queimada. Ana obriga Ricardo a jogar até ficar esgotado, sob a desculpa de que isso irá aumentar sua resistência física."
   say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
@@ -17,7 +12,10 @@ if daytime == 1
 endif
 
 
+
 waypoint action_choice
+girl_interaction 1
+
 choices "Conversar" continue "Dar presente" give_gift
 waypoint continue
 
