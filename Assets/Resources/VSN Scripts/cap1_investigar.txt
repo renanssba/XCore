@@ -18,27 +18,52 @@ waypoint investigar_ana
 say "" "Vou até a casa da Ana e entro em seu quarto pela janela, sem ser percebida."
 fade_in 1
 
-say "" "Há várias bandeiras de times penduradas pelas paredes."
+//say "" "Há várias bandeiras de times penduradas pelas paredes."
 say "Fertiliel" "(Ela não está no quarto. Eu escuto um barulho vindo da sala, ela deve estar por lá.)"
 say "(Vou aproveitar enquanto ela não volta para dar uma investigada em suas coisas.)"
 
 waypoint ana_escolha
 say_auto "Fertiliel" "(O que eu deveria investigar?)"
-choices "Armário" ana_armario "Mesa" ana_mesa "Guarda-roupas" ana_roupas "Checar Ana" ana_checar "Ir Embora" exit
+choices "Armário" ana_armario "Mesa" ana_mesa "Guarda-roupas" ana_roupas "Cama" ana_cama "Checar Ana" ana_checar "Ir Embora" exit
 
 waypoint ana_armario
+say "No armário eu encontro vários materiais do colégio, além de um porta-retrato."
+say "Na foto há Ana e Ricardo crianças. Ambos estão abraçando um pequeno cachorrinho pug."
+if #char[1]item_count[delicate_key] >= 1
+  say "Também encontro uma chave. Eu deveria pegá-la?"
+  choices "Sim" null "Não" ana_escolha
+  take_item 1 "delicate_key" 1
+endif
 goto depois_investigar
 
 waypoint ana_mesa
+say "" "Em cima da mesa eu encontro um pequeno livro escrito\qDiário\q. Devo abrí-lo para ler?"
+choices "Sim" null "Não" ana_escolha
+if #char[0]item_count[delicate_key]from[1] >= 1
+  say "" "Ele está trancado, mas eu consigo destrancá-lo usando a Chave delicada."
+  say "" "Eu leio o diário dela. Não encontro nenhuma informação interessante."
+else
+  say "" "Ele está trancado. A chave deve estar por aqui em algum lugar..."
+endif
 goto depois_investigar
 
 waypoint ana_roupas
 say "" "Abrindo o guarda-roupas encontro muitas roupas coloridas."
 say "Este tipo de roupas parece ser boa para fazer esportes."
-say_auto "Eu deveria pegar uma dessas?"
-choices "Sim" pegar_roupa_ana "Não" depois_investigar
-waypoint pegar_roupa_ana
-add_item "sports_clothes" 1
+if #char[1]item_count[sports_clothes] >= 1
+  say_auto "Eu deveria pegar uma dessas?"
+  choices "Sim" null "Não" depois_investigar
+  take_item 1 "sports_clothes" 1
+endif
+goto depois_investigar
+
+waypoint ana_cama
+say "A cama está bagunçada, tem algumas roupas jogadas por cima dela."
+if #char[1]item_count[old_teddy_bear] >= 1
+  say "Também tem um ursinho de pelúcia antigo. Eu deveria pegá-lo?"
+  choices "Sim" null "Não" depois_investigar
+  take_item 1 "old_teddy_bear" 1
+endif
 goto depois_investigar
 
 waypoint ana_checar
@@ -59,7 +84,7 @@ say "" "Cenas de investigação ainda serão implementadas..."
 
 waypoint depois_investigar
 add_var partes_investigadas 1
-if partes_investigadas >= 2
+if partes_investigadas >= 3
   goto exit
 endif
 

@@ -85,24 +85,19 @@ choices/no,Não,No
 choices/cancel,Cancelar,Cancel
 location/park,Parque,Park
 location/shopping,Shopping,Mall
-item/name/biker_jacket,Jaqueta de Motoqueiro,Biker Jacket
-item/name/science_book,Livro de Ciências,Science Book
-item/name/perfume,Perfume,Perfume
-item/name/baseball_bat,Taco de Baseball,Baseball Bat
-item/name/glasses,Óculos de Grau,Eyeglasses
-item/name/red_rose,Rosa Vermelha,Red Rose
+item/give/message,\boy entrega <color=yellow>\vsn[item_name]</color> para \girl.,\boy gives \girl a <color=yellow>\vsn[item_name]</color>.
 item/name/sports_clothes,Roupas Esportivas,Fitness Clothing
+item/description/sports_clothes,Um conjunto de roupas ideal para se exercitar.,
 item/name/dark_dress,Vestido Preto,Black Dress
+item/description/dark_dress,Um vestido preto bem gótico.,
 item/name/flower_dress,Vestido Florido,Floral Dress
-item/description/biker_jacket, +1 Valentia, +1 Guts
-item/description/science_book, +1 Inteligência, +1 Intelligence
-item/description/perfume, +1 Carisma, +1 Charisma
-item/description/baseball_bat," +2 Valentia, -1 Inteligência"," +2 Guts, -1 Intelligence"
-item/description/glasses," +2 Inteligência, -1 Carisma"," +2 Intelligence, -1 Charisma"
-item/description/red_rose," +2 Carisma, -1 Valentia"," +2 Charisma, -1 Guts"
-item/description/sports_clothes,Um conjunto de roupas ideal para se exercitar,
-item/description/dark_dress,Um vestido preto bem gótico,
-item/description/flower_dress,Um bonito vestido florido,
+item/description/flower_dress,Um bonito vestido florido.,
+item/name/teddy_bear,Ursinho de Pelúcia,Teddy Bear
+item/description/teddy_bear,Um ursinho de pelúcia muito fofo.,
+item/name/old_teddy_bear,Ursinho Antigo,Old Teddy Bear
+item/description/old_teddy_bear,"Um ursinho de pelúcia antigo, com um olho faltando e retalhos pelo corpo.",
+item/name/delicate_key,Chave Delicada,Delicate Key
+item/description/delicate_key,Uma chave usada para abrir algum cadeado delicado.,
 check_end_game/say_0,"Olha só, o nosso tempo acabou!","Look, our time is up!"
 check_end_game/say_1,"Olha só, parece que você já cumpriu sua missão!","Look, it seems like you've already accomplished your mission!"
 check_end_game/say_2,"Com suas forças recuperadas, você começa um novo dia para juntar casais!","Having your strength restored, you start a new day to form couples!"
@@ -149,15 +144,15 @@ observation_person_in_trouble/say_2,\observedPerson olha para a situação e sim
 part_time_job/say_0,Você pode gastar energia trabalhando para ganhar dinheiro. Quanto AP você quer gastar?,You can spend energy working to make money. How much AP do you want to spend?
 part_time_job/choices_0_0,Gastar 2 AP -> $60,Spend 2 AP -> $60
 part_time_job/choices_0_1,Gastar 3 AP -> $120,Spend 3 AP -> $120
-part_time_job/say_1,Você trabalhou bastante e ganhou \vsn[gain] Dinheiro Celestial!,You worked hard and won \vsn[gain] Heavenly Money!
+part_time_job/say_1,"Você trabalhou bastante e ganhou <sprite=""Attributes"" index=4>\vsn[gain]!",You worked hard and won \vsn[gain] Heavenly Money!
 shop/say_0,Bem-vindo à loja!,Welcome to the shop!
 shop/choices_0_0,Comprar,Purchase
 shop/choices_0_1,Vender,Sell
-shop/say_1,Você quer comprar \vsn[item_name] por \vsn[item_price]?,Do you want to buy \vsn[item_name] for \vsn[item_price]?
+shop/say_1,"Você quer comprar <color=yellow>\vsn[item_name]</color> por <sprite=""Attributes"" index=4><color=yellow>\vsn[item_price]</color>?",Do you want to buy \vsn[item_name] for \vsn[item_price]?
 shop/say_2,"Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item.","I'm sorry, it looks like you do not have enough money to buy this item."
 shop/say_3,Você não tem nenhum item para vender.,You have no items to sell.
-shop/say_4,Você quer vender \vsn[item_name] por \vsn[item_price]?,Do you want to sell \vsn [item_name] for \vsn[item_price]?
-shop/say_5,Você adquiriu \vsn[item_name]!,You purchased \vsn[item_name]!
+shop/say_4,"Você quer vender <color=yellow>\vsn[item_name]</color> por <sprite=""Attributes"" index=4><color=yellow>\vsn[item_price]</color>?",Do you want to sell \vsn [item_name] for \vsn[item_price]?
+shop/say_5,Você adquiriu <color=yellow>\vsn[item_name]</color>!,You purchased \vsn[item_name]!
 shop/say_6,Obrigado!,Thank you!
 spend_day/say_0,Você foi dormir e descansar para o próximo dia.,You went to sleep and rest for the next day.
 spend_day/say_1,Você descansou um pouco até de tarde.,You rested a little until afternoon.

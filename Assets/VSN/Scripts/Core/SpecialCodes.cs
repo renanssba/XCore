@@ -41,7 +41,6 @@ public class SpecialCodes {
       }
       currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
-      currentString = currentString.Replace("\\item_name", Item.GetPrintableName(VsnSaveSystem.GetIntVariable("item_id")));
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
     } while (currentString != initialString);
@@ -91,7 +90,24 @@ public class SpecialCodes {
   }
 
   static float InterpretSpecialNumber(string keycode){
-    switch (keycode){
+    if(keycode.Contains("#char[") && keycode.Contains("]item_count[") &&
+       keycode.Contains("]from[")) {
+      int result = InterpretIfCharactersHasItemFromOtherChar(keycode);
+      if(result == -1) {
+        Debug.LogError("Error parsing item check! Keycode: " + keycode);
+      }
+      return result;
+    }
+
+    if(keycode.Contains("#char[") && keycode.Contains("]item_count[")) {
+      int result = InterpretIfCharactersHasItem(keycode);
+      if(result == -1) {
+        Debug.LogError("Error parsing item check! Keycode: " + keycode);
+      }
+      return result;
+    }
+
+    switch(keycode){
       case "#random100":
         return Random.Range(0, 100);
       case "#dateLength":
@@ -115,7 +131,7 @@ public class SpecialCodes {
       case "#currentEventInteractionType":
         return (int)GameController.instance.GetCurrentDateEvent().interactionType;
       case "#inventory_empty":
-        return GlobalData.instance.inventory.IsEmpty() ? 1f : 0f;
+        return GlobalData.instance.CurrentBoy().inventory.IsEmpty() ? 1f : 0f;
       case "#availableCouples":
         if(GameController.instance != null) {
           return GameController.instance.couplesPanelContent.childCount;
@@ -140,5 +156,57 @@ public class SpecialCodes {
         return 0f;
     }
     return 0f;
+  }
+
+  static int InterpretIfCharactersHasItem(string keycode) {
+    string[] divisors = { "#char[", "]item_count[", "]" };
+    string[] parts = keycode.Split(divisors, System.StringSplitOptions.RemoveEmptyEntries);
+
+    if(parts.Length < 2) {
+      return -1;
+    }
+    int id;
+    int itemId;
+    Item toCheck;
+    if(int.TryParse(parts[0], out id) == false) {
+      return -1;
+    }
+    if(int.TryParse(parts[1], out itemId)) {
+      toCheck = ItemDatabase.instance.GetItemById(itemId);
+    } else {
+      toCheck = ItemDatabase.instance.GetItemByName(parts[1]);
+    }
+    if(toCheck == null) {
+      return -1;
+    }
+
+    return GlobalData.instance.people[id].inventory.ItemCount(toCheck.id);
+  }
+
+  static int InterpretIfCharactersHasItemFromOtherChar(string keycode) {
+    string[] divisors = { "#char[", "]item_count[", "]from[", "]" };
+    string[] parts = keycode.Split(divisors, System.StringSplitOptions.RemoveEmptyEntries);
+
+    if(parts.Length < 3) {
+      return -1;
+    }
+    int personId, itemId, ownerId;
+    Item toCheck;
+    if(int.TryParse(parts[0], out personId) == false) {
+      return -1;
+    }
+    if(int.TryParse(parts[2], out ownerId) == false) {
+      return -1;
+    }
+    if(int.TryParse(parts[1], out itemId)) {
+      toCheck = ItemDatabase.instance.GetItemById(itemId);
+    } else {
+      toCheck = ItemDatabase.instance.GetItemByName(parts[1]);
+    }
+    if(toCheck == null) {
+      return -1;
+    }
+
+    return GlobalData.instance.people[personId].inventory.ItemCountFromOwner(toCheck.id, ownerId);
   }
 }

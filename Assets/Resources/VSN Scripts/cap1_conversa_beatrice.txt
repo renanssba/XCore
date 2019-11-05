@@ -88,8 +88,8 @@ if beatrice_heart >= 1
   waypoint action_choice
   girl_interaction
   
-  choices "Conversar" continue "Dar presente" give_gift
-  waypoint continue  
+  
+  waypoint conversation
   
   say "" "Os dois conversam sobre os livros que eles leram recentemente."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
@@ -112,9 +112,9 @@ if item_id == -1
 endif
 
 say "Ricardo" "Ei Beatrice, eu tenho uma coisinha para te dar."
-add_item item_id -1
+give_item 2 item_id 1
 play_sfx "relationship_up"
-say "" "Ricardo entrega \item_name para Beatrice."
+//say "" "Ricardo entrega \vsn[item_name] para Beatrice."
 say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 

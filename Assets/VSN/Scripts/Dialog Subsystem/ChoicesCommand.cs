@@ -14,6 +14,9 @@ namespace Command {
       for(int i=0; i < args.Length/2; i++) {
         choices[i] = args[i*2].GetStringValue();
         labels[i] = args[i*2+1].GetReference();
+        if(labels[i] == "null") {
+          labels[i] = null;
+        }
       }
 
       VsnUIManager.instance.SetChoicesTexts(choices);

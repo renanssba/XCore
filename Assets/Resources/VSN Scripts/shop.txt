@@ -1,5 +1,8 @@
 ﻿goto_script "tutorial_shop"
 
+/// DEBUG: GET MUCH MONEY
+add_var money 1000
+
 waypoint store_loop
 say_auto "char_name/none" "shop/say_0"
 choices "shop/choices_0_0" buy "shop/choices_0_1" sell "choices/cancel" end
@@ -51,7 +54,7 @@ waypoint vender_sim
 add_var money item_price
 update_ui
 play_sfx "ui_money"
-add_item item_id -1
+add_item item_id -1 false
 say "shop/say_6"
 goto store_loop
 

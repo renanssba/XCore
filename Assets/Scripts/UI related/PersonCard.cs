@@ -98,7 +98,7 @@ public class PersonCard : MonoBehaviour {
       if(person.equipment != null) {
         equipIcon.sprite = person.equipment.sprite;
         equipIcon.gameObject.SetActive(true);
-        equipmentText.text = person.equipment.name;
+        equipmentText.text = person.equipment.nameKey;
       } else {
         equipIcon.gameObject.SetActive(false);
         equipmentText.text = "---";

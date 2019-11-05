@@ -35,19 +35,19 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void OpenSellStore() {
-    OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.CurrentBoy().inventory);
   }
 
   public void OpenEquipSelect() {
-    OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.CurrentBoy().inventory);
   }
 
   public void OpenGiftSelect() {
-    OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.CurrentBoy().inventory);
   }
 
   public void OpenInventory() {
-    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.CurrentBoy().inventory);
   }
 
   public void OpenItemSelectorGeneric(ItemInteractionType interType, Inventory inv) {
@@ -93,8 +93,8 @@ public class ItemSelectorScreen : MonoBehaviour {
     List<Button> createdObjects = new List<Button>();
     GameObject current;
 
-    for(int i = 0; i < currentItems.items.Count; i++) {
-      current = CreateItem(currentItems.items[i].id, currentItems.items[i].amount);
+    for(int i = 0; i < currentItems.itemListings.Count; i++) {
+      current = CreateItem(currentItems.itemListings[i]);
       if(current != null) {
         createdObjects.Add(current.GetComponent<Button>());
       }
@@ -119,15 +119,15 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
 
-  GameObject CreateItem(int itemId, int amount){
+  GameObject CreateItem(ItemListing listing){
     if(interactionType == ItemInteractionType.store_buy &&
-       Item.GetItem(itemId).type == ItemType.celestial &&
-       GlobalData.instance.inventory.HasItem(itemId)){
+       Item.GetItem(listing.id).type == ItemType.celestial &&
+       GlobalData.instance.CurrentBoy().inventory.HasItem(listing.id)){
       return null;
     }
 
     GameObject obj = Instantiate(itemPrefab, itemsHolder.transform) as GameObject;
-    obj.GetComponent<ItemUI>().Initialize(itemId, interactionType, amount);
+    obj.GetComponent<ItemUI>().Initialize(listing, interactionType);
     return obj;
   }
 

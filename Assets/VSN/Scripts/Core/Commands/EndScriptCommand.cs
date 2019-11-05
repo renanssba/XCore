@@ -8,9 +8,13 @@ namespace Command {
   public class EndScriptCommand : VsnCommand {
 
     public override void Execute() {
+      StaticExecute(args);
+    }
+
+    public static void StaticExecute(VsnArgument[] args) {
       VsnController.instance.CurrentScriptReader().GotoEnd();
-      if (args.Length >= 1) {
-        if(VsnController.instance.PreviousScriptReaderInStack() != null){
+      if(args.Length >= 1) {
+        if(VsnController.instance.PreviousScriptReaderInStack() != null) {
           Debug.LogWarning("Resuming previous script in waypoint: " + args[0].GetReference());
           VsnController.instance.PreviousScriptReaderInStack().GotoWaypoint(args[0].GetReference());
         }

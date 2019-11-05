@@ -18,8 +18,8 @@ public enum ItemCategory{
 public class Item {
 
   public int id;
-  public string name;
-  public string description;
+  public string nameKey;
+  public string descriptionKey;
 
   public int[] attribute_bonus;
 
@@ -35,21 +35,22 @@ public class Item {
     if(id == -1){
       return "";
     }
-    return GetItem(id).name;
+    return GetItem(id).nameKey;
   }
 
-  public static string GetPrintableName(int id) {
+  public string GetPrintableName() {
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).nameKey);
+  }
+
+  public string GetPrintableDescription(){
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + descriptionKey);
+  }
+
+  public static string GetPrintableNameById(int id) {
     if(id == -1) {
       return "";
     }
-    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).name);
-  }
-
-  public static string GetDescription(int id){
-    if(id == -1){
-      return "";
-    }
-    return GetItem(id).description;
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).nameKey);
   }
 
   public static ItemType GetType(int id){
@@ -78,61 +79,78 @@ public class Item {
 
 [System.Serializable]
 public class Inventory{
-  public List<ItemListing> items;
+  public Person owner;
+  public List<ItemListing> itemListings;
 
   public Inventory(){
-    items = new List<ItemListing>();
+    itemListings = new List<ItemListing>();
+    itemListings.Clear();
   }
 
   public Inventory(List<int> ids){
-    items = new List<ItemListing>();
+    itemListings = new List<ItemListing>();
     foreach(int id in ids){
       AddItem(id, 1);
     }
   }
 
   public Inventory(List<Item> ids){
-    items = new List<ItemListing>();
+    itemListings = new List<ItemListing>();
     foreach(Item item in ids){
       AddItem(item.id, 1);
     }
   }
 
-  public void AddItem(int id, int amount){
-    if(id == -1){
+
+  void EffectiveAddItem(int id, int amount, int ownerId) {
+    if(id == -1) {
       Debug.LogError("No item to add");
       return;
     }
 
-    for(int i=0; i<items.Count; i++){
-      if(items[i].id == id){
-        items[i].amount += amount;
+    for(int i = 0; i < itemListings.Count; i++) {
+      if(itemListings[i].id == id && itemListings[i].ownerId == ownerId) {
+        itemListings[i].amount += amount;
         SortItems();
         return;
       }
     }
 
-    for(int i=0; i<items.Count; i++){
-      if(items[i].id > id){
-        items.Insert(i, new ItemListing(id, amount));
-        SortItems();
-        return;
-      }
-    }
-    items.Add(new ItemListing(id, amount));
+    itemListings.Add(new ItemListing() {
+      id = id,
+      amount = amount,
+      ownerId = ownerId
+    });
     SortItems();
   }
+
+  public void AddItem(int id, int amount){
+    EffectiveAddItem(id, amount, -1);
+  }
+
+  public void AddItem(string itemName, int amount) {
+    AddItem(ItemDatabase.instance.GetItemByName(itemName).id, amount);
+  }
+
+  public void AddItemWithOwnership(string itemName, int amount, int ownerId) {
+    EffectiveAddItem(ItemDatabase.instance.GetItemByName(itemName).id, amount, ownerId);
+  }
+
+  public void AddItemWithOwnership(int id, int amount, int ownerId) {
+    EffectiveAddItem(id, amount, ownerId);
+  }
+
 
   public void ConsumeItem(int id, int amount){
     if(Item.GetType(id) == ItemType.celestial){
       return;
     }
 
-    for(int i=0; i<items.Count; i++){
-      if(items[i].id == id){
-        items[i].amount -= amount;
-        if(items[i].amount <= 0){
-          items.RemoveAt(i);
+    for(int i=0; i<itemListings.Count; i++){
+      if(itemListings[i].id == id){
+        itemListings[i].amount -= amount;
+        if(itemListings[i].amount <= 0){
+          itemListings.RemoveAt(i);
         }
         SortItems();
         return;
@@ -140,12 +158,21 @@ public class Inventory{
     }
   }
 
+  public ItemListing GetItemListingById(int id) {
+    for(int i = 0; i < itemListings.Count; i++) {
+      if(itemListings[i].id == id) {
+        return itemListings[i];
+      }
+    }
+    return null;
+  }
+
   public void SortItems(){
-  items = items.OrderBy(o => o.id).ToList();
+    itemListings = itemListings.OrderBy(o => o.id).ToList();
   }
 
   public bool HasItem(int id){
-    foreach(ItemListing item in items){
+    foreach(ItemListing item in itemListings){
       if(item.id == id){
         return true;
       }
@@ -153,8 +180,34 @@ public class Inventory{
     return false;
   }
 
+  public int ItemCount(int id) {
+    foreach(ItemListing item in itemListings) {
+      if(item.id == id) {
+        return item.amount;
+      }
+    }
+    return 0;
+  }
+
+  public int ItemCountFromOwner(int id, int ownerId) {
+    foreach(ItemListing item in itemListings) {
+      if(item.id == id && item.ownerId == ownerId) {
+        return item.amount;
+      }
+    }
+    return 0;
+  }
+
+  public int ItemCount(string name) {
+    Item tocheck = ItemDatabase.instance.GetItemByName(name);
+    if(tocheck == null) {
+      return 0;
+    }
+    return ItemCount(tocheck.id);
+  }
+
   public bool IsEmpty(){
-    if(items.Count <= 0){
+    if(itemListings.Count <= 0){
       return true;
     }
     return false;
@@ -166,9 +219,9 @@ public class Inventory{
 public class ItemListing{
   public int id;
   public int amount;
+  public int ownerId;
 
-  public ItemListing(int arg1, int arg2){
-    id = arg1;
-    amount = arg2;
+  public ItemListing(){
+    ownerId = -1;
   }
 }

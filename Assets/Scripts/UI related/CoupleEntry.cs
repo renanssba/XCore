@@ -38,11 +38,18 @@ public class CoupleEntry : MonoBehaviour {
         skillNameTexts[i].text = CardsDatabase.instance.GetCardById(relationship.bondSkills[i]).name;
       } else {
         skillNameTexts[i].text = "---";
-      }      
+      }
     }
   }
 
   public void ClickedDateButton() {
+
+    /// IF CANNOT GO TO DATE RIGHT NOW
+    if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
     GlobalData.instance.observedPeople = new Person[] {coupleCards[0].person,
                                                        coupleCards[1].person};
@@ -52,6 +59,10 @@ public class CoupleEntry : MonoBehaviour {
     GlobalData.instance.currentDateHearts = relationship.hearts;
     GlobalData.instance.maxDateHearts = relationship.hearts;
 
+    SfxManager.StaticPlayBigConfirmSfx();
+    GameController.instance.HideGirlInteractionScreen();
+    Command.EndScriptCommand.StaticExecute(new VsnArgument[0]);
+    VsnController.instance.GotCustomInput();
     VsnController.instance.StartVSN("date");
   }
 }

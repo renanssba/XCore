@@ -14,7 +14,7 @@ public enum ItemInteractionType{
 
 public class ItemUI : MonoBehaviour {
 
-  public Item item;
+  //public Item item;
 
   public TextMeshProUGUI nameText;
   public TextMeshProUGUI descriptionText;
@@ -23,33 +23,36 @@ public class ItemUI : MonoBehaviour {
   public TextMeshProUGUI quantityText;
   public Button button;
 
+  public ItemListing itemListing;
   public ItemInteractionType interactionType;
-  public int amount;
 
-  public void Initialize(int itemId, ItemInteractionType interaction, int qtty){
-    item = Item.GetItem(itemId);
+  public void Initialize(ItemListing listing, ItemInteractionType interaction){
+    itemListing = listing;
     interactionType = interaction;
-    amount = qtty;
     UpdateUI();
   }
 
 
   public void UpdateUI() {
-    nameText.text = Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + item.name);
-    descriptionText.text = Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + item.description);
-    //    if(item.type == ItemType.mundane) {
-    //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.mundaneSprite;
-    //    } else {
-    //      typeImage.sprite = UIController.GetInstance().itemSelectorScreen.celestialSprite;
-    //    }
+    Item item = Item.GetItem(itemListing.id);
+    string name_suffix = "";
+    string description_suffix = "";
+    if(itemListing.ownerId != -1) {
+      Person owner = GlobalData.instance.people[itemListing.ownerId];
+      name_suffix = " d" + (owner.isMale ? "o" : "a") + " " + owner.name;
+      description_suffix = " Pertence a " + owner.name + ".";
+    }
+
+    nameText.text = item.GetPrintableName() + name_suffix;
+    descriptionText.text = item.GetPrintableDescription() + description_suffix;
     typeImage.sprite = item.sprite;
 
-    if (interactionType == ItemInteractionType.store_buy){ 
+    if(interactionType == ItemInteractionType.store_buy) {
       costText.text = "<sprite=\"Attributes\" index=4>" + item.price.ToString();
-    }else{
-      costText.text = "<sprite=\"Attributes\" index=4>" + (item.price/2).ToString();
+    } else {
+      costText.text = "<sprite=\"Attributes\" index=4>" + (item.price / 2).ToString();
     }
-    quantityText.text = "x" + amount;
+    quantityText.text = "x" + itemListing.amount;
     if(interactionType == ItemInteractionType.store_buy ||
        interactionType == ItemInteractionType.store_sell) {
       quantityText.gameObject.SetActive(false);
@@ -57,7 +60,7 @@ public class ItemUI : MonoBehaviour {
       costText.gameObject.SetActive(false);
     }
 
-    if(interactionType == ItemInteractionType.inventory){
+    if(interactionType == ItemInteractionType.inventory) {
       button.interactable = false;
     }
 
@@ -67,9 +70,10 @@ public class ItemUI : MonoBehaviour {
   }
 
   public void Clicked(){
+    Item item = Item.GetItem(itemListing.id);
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
-    VsnSaveSystem.SetVariable("item_name", Item.GetName(item.id));
+    VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(item.id));
     switch (interactionType) {
       case ItemInteractionType.store_buy:
         VsnSaveSystem.SetVariable("item_price", item.price);

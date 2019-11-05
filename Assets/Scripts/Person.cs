@@ -54,12 +54,16 @@ public class Person {
   public string favoriteMatter;
   public string mostHatedMatter;
 
+  public Inventory inventory;
+
   public int id;
   public int faceId;
 
 
   public Person() {
     attributeBonuses = new int[] { 0, 0, 0 };
+    inventory = new Inventory();
+    inventory.owner = this;
   }
 
 
@@ -124,15 +128,15 @@ public class Person {
   public void EquipItemInSlot(int slotId, Item item){
     VsnAudioManager.instance.PlaySfx("inventory_equip");
     equipment = item;
-    GlobalData.instance.inventory.ConsumeItem(equipment.id, 1);
+    GlobalData.instance.CurrentBoy().inventory.ConsumeItem(equipment.id, 1);
     GameController.instance.UpdateUI();
   }
 
   public void UnequipItemInSlot(int slotId) {
     if (equipment != null) {
       VsnAudioManager.instance.PlaySfx("inventory_equip");
-      Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.name);
-      GlobalData.instance.inventory.AddItem(equipment.id, 1);
+      Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.nameKey);
+      GlobalData.instance.CurrentBoy().inventory.AddItem(equipment.id, 1);
       equipment = null;
       GameController.instance.UpdateUI();
     }

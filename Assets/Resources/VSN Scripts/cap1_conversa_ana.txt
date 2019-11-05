@@ -16,9 +16,8 @@ endif
 waypoint action_choice
 girl_interaction
 
-choices "Conversar" continue "Dar presente" give_gift
-waypoint continue
 
+waypoint conversation
 
 if daytime == 0
   set_var lanchou_com_ana_hoje 1
@@ -89,9 +88,9 @@ if item_id == -1
 endif
 
 say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
-add_item item_id -1
+give_item 1 item_id 1
 play_sfx "relationship_up"
-say "" "Ricardo entrega \item_name para Ana."
+//say "" "Ricardo entrega \vsn[item_name] para Ana."
 say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 

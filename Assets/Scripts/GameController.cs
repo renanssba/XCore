@@ -579,14 +579,14 @@ public class GameController : MonoBehaviour {
   public void ClickConversationButton() {
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
-    Command.GotoCommand.ExecuteGoto("continue");
+    Command.GotoCommand.StaticExecute("conversation");
     VsnController.instance.GotCustomInput();
   }
 
   public void ClickGiveGiftButton() {
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
-    Command.GotoCommand.ExecuteGoto("give_gift");
+    Command.GotoCommand.StaticExecute("give_gift");
     VsnController.instance.GotCustomInput();
   }
 

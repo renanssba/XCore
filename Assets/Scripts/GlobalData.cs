@@ -5,10 +5,8 @@ using UnityEngine;
 public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
-  //public bool[,] viableCouple;
   public Relationship[] relationships;
   public List<int> shippedCouples;
-  public Inventory inventory;
 
   public Person[] observedPeople;
 
@@ -42,8 +40,7 @@ public class GlobalData : MonoBehaviour {
     }
     DontDestroyOnLoad(gameObject);
 
-    observedPeople = new Person[0];
-    inventory = new Inventory();
+    observedPeople = new Person[1];
   }
 
   public void InitializeChapter(){
@@ -62,8 +59,6 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("max_days", maxDays);
     VsnSaveSystem.SetVariable("observation_played", 0);
     day = 1;
-    inventory.items.Clear();
-
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
@@ -86,6 +81,8 @@ public class GlobalData : MonoBehaviour {
     usedNames.Clear();
 
     InitializeChapterAlpha();
+
+    observedPeople[0] = people[0];
 
     InitializeDateEvents();
     InitializeObservationEvents();
@@ -140,14 +137,26 @@ public class GlobalData : MonoBehaviour {
         people = new Person[] {people[0], people[i+1]}
       };
     }
-    relationships[0].hearts = 1;
-
-    inventory.AddItem(0, 1);
-    inventory.AddItem(1, 1);
-    inventory.AddItem(2, 1);
+    //relationships[0].hearts = 1;
 
 
-    ///TESTING SKILLS IN BATTLE
+    /// INITIAL INVENTORIES
+    /// ANA
+    people[1].inventory.AddItemWithOwnership("old_teddy_bear", 1, 1);
+    people[1].inventory.AddItemWithOwnership("delicate_key", 1, 1);
+    people[1].inventory.AddItem("sports_clothes", 1);
+    //people[1].inventory.AddItemWithOwnership("sports_clothes", 2, 1);
+
+    /// BEATRICE
+    //people[2].inventory.AddItemWithOwnership("delicate_key", 1, 1);
+    //people[2].inventory.AddItem("dark_dress", 1);
+
+    /// CLARA
+    //people[3].inventory.AddItemWithOwnership("delicate_key", 1, 1);
+    people[3].inventory.AddItem("flower_dress", 2);
+
+
+    /// DEBUG: TESTING SKILLS IN BATTLE
     relationships[0].hearts = 3;
     relationships[1].hearts = 3;
     relationships[2].hearts = 3;

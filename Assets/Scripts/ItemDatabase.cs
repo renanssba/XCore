@@ -24,7 +24,7 @@ public class ItemDatabase : MonoBehaviour {
 
   void InitializeItemDatabase(){
     SpreadsheetData data;
-    data = SpreadsheetReader.ReadSpreadsheet("Data\\items", 1);
+    data = SpreadsheetReader.ReadSpreadsheet("Data\\items database", 1);
 
     database = new List<Item>();
     itemsForSale = new List<int>();
@@ -33,8 +33,8 @@ public class ItemDatabase : MonoBehaviour {
 
       Item newItem = new Item();
       newItem.id = int.Parse(entry["id"]);
-      newItem.name = entry["name"];
-      newItem.description = entry["description"];
+      newItem.nameKey = entry["name"];
+      newItem.descriptionKey = entry["description"];
       newItem.type = (entry["type"] == "c") ? ItemType.celestial : ItemType.mundane;
       newItem.attribute_bonus[0] = int.Parse(entry["guts_bonus"]);
       newItem.attribute_bonus[1] = int.Parse(entry["intelligence_bonus"]);
@@ -43,7 +43,7 @@ public class ItemDatabase : MonoBehaviour {
       newItem.price = int.Parse(entry["price"]);
       //newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
       newItem.sprite = Resources.Load<Sprite>("Cards/" + entry["sprite"]);
-      if(entry["sellable"] == "yes"){
+      if(entry["sells_in_store"] == "yes"){
         itemsForSale.Add(newItem.id);
       }
       database.Add(newItem);
@@ -62,7 +62,7 @@ public class ItemDatabase : MonoBehaviour {
 
   public Item GetItemByName(string name) {
     foreach(Item it in database) {
-      if(it.name == name) {
+      if(it.nameKey == name) {
         return it;
       }
     }

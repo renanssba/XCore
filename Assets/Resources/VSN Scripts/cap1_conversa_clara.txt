@@ -20,8 +20,8 @@ if clara_heart >= 1
   waypoint action_choice
   girl_interaction
   
-  choices "Conversar" continue "Dar presente" give_gift
-  waypoint continue
+  
+  waypoint conversation
   
   say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
   say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
@@ -99,9 +99,9 @@ if item_id == -1
 endif
 
 say "Ricardo" "Ei Clara, eu tenho uma coisinha para te dar."
-add_item item_id -1
+give_item 3 item_id 1
 play_sfx "relationship_up"
-say "" "Ricardo entrega \item_name para Clara."
+//say "" "Ricardo entrega \vsn[item_name] para Clara."
 say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 

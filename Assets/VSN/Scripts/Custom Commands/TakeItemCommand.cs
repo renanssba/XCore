@@ -4,34 +4,38 @@ using UnityEngine;
 
 namespace Command {
 
-  [CommandAttribute(CommandString = "add_item")]
-  public class AddItemCommand : VsnCommand {
+  [CommandAttribute(CommandString = "take_item")]
+  public class TakeItemCommand : VsnCommand {
 
     public override void Execute() {
+      Person personWhoLoses = GlobalData.instance.people[(int)args[0].GetNumberValue()];
       Item itemToAdd = null;
-
-      if(args[0].GetType() == typeof(VsnString)) {
-        itemToAdd = ItemDatabase.instance.GetItemByName(args[0].GetStringValue());
+      if(args[1].GetType() == typeof(VsnString)) {
+        itemToAdd = ItemDatabase.instance.GetItemByName(args[1].GetStringValue());
       } else {
-        itemToAdd = ItemDatabase.instance.GetItemById((int)args[0].GetNumberValue());
+        itemToAdd = ItemDatabase.instance.GetItemById((int)args[1].GetNumberValue());
       }
-      int amount = (int)args[1].GetNumberValue();
+      int amount = (int)args[2].GetNumberValue();
 
+      ItemListing il = personWhoLoses.inventory.GetItemListingById(itemToAdd.id);
 
+      Debug.Log("Item selected to add: " + itemToAdd.nameKey);
       Debug.LogWarning("Adding " + amount + " to item " + itemToAdd.id + "!");
 
       Inventory inventory = GlobalData.instance.CurrentBoy().inventory;
 
-      if (amount >= 0) {
-        inventory.AddItem(itemToAdd.id, amount);
+      if(amount >= 0) {
+        inventory.AddItemWithOwnership(il.id, amount, il.ownerId);
       } else {
         inventory.ConsumeItem(itemToAdd.id, -amount);
       }
 
+      personWhoLoses.inventory.ConsumeItem(itemToAdd.id, amount);
+
       VsnSaveSystem.SetVariable("item_id", itemToAdd.id);
       VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(itemToAdd.id));
 
-      if(args.Length < 3 || args[2].GetBooleanValue() == true) {
+      if(args.Length < 4 || args[3].GetBooleanValue() == true) {
         VsnArgument[] sayargs = new VsnArgument[2];
         sayargs[0] = new VsnString("char_name/none");
         sayargs[1] = new VsnString("shop/say_5");
@@ -42,21 +46,13 @@ namespace Command {
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg,
         VsnArgType.stringArg,
         VsnArgType.numberArg
       });
       signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg,
         VsnArgType.stringArg,
-        VsnArgType.numberArg,
-        VsnArgType.booleanArg
-      });
-
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg,
-        VsnArgType.numberArg
-      });
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg,
         VsnArgType.numberArg,
         VsnArgType.booleanArg
       });
