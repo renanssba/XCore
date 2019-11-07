@@ -11,7 +11,8 @@ waypoint intro
 
 goto_script "enter_observation" "school morning"
 
-say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele é: estudioso, esforçado, mas sem muita sorte com as garotas...)"
+say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele não é particularmente forte, inteligente nem carismático. Seus hobbies incluem: ler livros e cozinhar.)"
+say "(Aparentemente ele também não tem muita sorte com as garotas...)"
 fade_in 1
 say "Delinquente" "Passa agora o dinheiro do lanche, meu chapa!"
 say "Fertiliel" "(...e com os colegas de classe também, aparentemente.)"
@@ -143,8 +144,7 @@ end_script
 waypoint dia_2
 pass_time
 pass_time
-pass_time
-goto_script "cap1_manha"
+goto_script "pass_time"
 end_script
 
 
@@ -154,8 +154,7 @@ pass_time
 pass_time
 pass_time
 pass_time
-pass_time
-goto_script "cap1_manha"
+goto_script "pass_time"
 end_script
 
 
@@ -168,7 +167,5 @@ pass_time
 pass_time
 pass_time
 pass_time
-pass_time
-update_ui
-goto_script "cap1_manha"
+goto_script "pass_time"
 end_script

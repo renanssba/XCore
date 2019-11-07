@@ -103,8 +103,9 @@ public class TheaterController : MonoBehaviour {
         } else {
           string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
 
+          difficultyText.text = "<size=68>NV </size>" + GameController.instance.GetCurrentDateEvent().difficulty;
+
           if(!string.IsNullOrEmpty(spriteName)) {
-            difficultyText.text = "<size=68>NV </size>"+GameController.instance.GetCurrentDateEvent().difficulty;
             ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
           } else {
             PositionCamera(CameraPosition.closeupCamera);

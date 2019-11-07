@@ -1,13 +1,55 @@
-if #day != 3
-  say "" "Durante a noite Ricardo fica em casa lendo alguns livros e vendo tv."
-  fade_in 1
-
-  //say "Fertiliel" "(Estou livre agora. O que eu deveria fazer?)"
-else
+if #day == 3
   say "" "A noite cai e chega a hora da festa na casa da Clara."
   fade_in 1
+  goto end
 endif
+
+say "" "Cai a noite e Ricardo fica em casa."
+bg "house afternoon"
+fade_in 1
+
+waypoint interact_with_item
+say "Fertiliel" "(Eu posso escolher algum item para o Ricardo utilizar durante esse período! O que ele deve fazer?)"
+item_choice
+if item_id == -1
+  say "" "Ricardo fica em casa vendo programas de culinária na tv."
+  goto after_item_interaction
+endif
+if item_key == "book_draft"
+  say "" "Ricardo fica em casa lendo os rascunhos que recebeu da Beatrice."
+  set_var leu_rascunho_livro 1
+  goto after_item_interaction
+endif
+if item_key == "cake_batter"
+  add_item "cake_batter" -1 false
+  say "" "Ricardo decide fazer um bolo com a massa que ele percebe que tem."
+  say "Que tipo de bolo ele deveria fazer?"
+  choices "Chocolate" cake_choco "Morango" cake_strawberry "Pimenta" cake_pepper
+  waypoint cake_choco
+  set_var cake_chosen 1
+  goto make_cake
+  
+  waypoint cake_strawberry
+  set_var cake_chosen 2
+  goto make_cake
+  
+  waypoint cake_pepper
+  set_var cake_chosen 3
+  goto make_cake
+endif
+say "" "Ricardo fica em casa vendo programas de culinária na tv."
+goto after_item_interaction
+
+waypoint make_cake
+say "" "Ricardo arregaça as mangas e põe a mão na massa."
+
+waypoint after_item_interaction
+set_var interacted_item_key item_key
+fade_out 0.5
+bg null
+fade_in 0.5
+say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
 
 
 waypoint end
-play_music "" "intermission"
+play_music "intermission_intro" "intermission_loop"

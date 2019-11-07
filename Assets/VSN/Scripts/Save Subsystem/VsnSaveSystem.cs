@@ -64,7 +64,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, float value) {
-    Debug.Log("Variable " + key + " saved with float value " + value);
+    //Debug.Log("Variable " + key + " saved with float value " + value);
     string savedKey = GetVariableFloatPrefix(key);
 
     if(savedDataDictionary.ContainsKey(savedKey)) {

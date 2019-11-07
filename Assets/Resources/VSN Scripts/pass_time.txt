@@ -1,4 +1,10 @@
 ﻿fade_out 1
+
+if daytime == 2
+  goto_script "cap1_late_night"
+endif
+
+
 pass_time
 bg null
 goto_script "cap1_interaction_pins"

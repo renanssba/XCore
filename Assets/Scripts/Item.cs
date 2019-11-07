@@ -31,7 +31,7 @@ public class Item {
     attribute_bonus = new int[3];
   }
 
-  public static string GetName(int id){
+  public static string GetKeyById(int id){
     if(id == -1){
       return "";
     }

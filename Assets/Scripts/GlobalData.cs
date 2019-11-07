@@ -148,8 +148,10 @@ public class GlobalData : MonoBehaviour {
     //people[1].inventory.AddItemWithOwnership("sports_clothes", 2, 1);
 
     /// BEATRICE
-    //people[2].inventory.AddItemWithOwnership("delicate_key", 1, 1);
-    //people[2].inventory.AddItem("dark_dress", 1);
+    people[2].inventory.AddItemWithOwnership("delicate_key", 1, 2);
+    people[2].inventory.AddItemWithOwnership("script_drafts", 1, 2);
+    people[2].inventory.AddItemWithOwnership("fancy_dagger", 1, 2);
+    people[2].inventory.AddItem("dark_dress", 1);
 
     /// CLARA
     //people[3].inventory.AddItemWithOwnership("delicate_key", 1, 1);

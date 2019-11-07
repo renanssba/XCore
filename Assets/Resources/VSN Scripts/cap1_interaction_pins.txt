@@ -53,7 +53,9 @@ if #day == 3
   set_interaction_pin 2 true "cap1_festa" "Festa"
 else
   set_interaction_pin 0 true "cap1_investigar" "Investigar"
-  set_interaction_pin 1 true "cap1_investigar" "Investigar"
+  if conhece_beatrice == 1
+    set_interaction_pin 1 true "cap1_investigar" "Investigar"
+  endif
   set_interaction_pin 2 true "cap1_investigar" "Investigar"
 endif
 

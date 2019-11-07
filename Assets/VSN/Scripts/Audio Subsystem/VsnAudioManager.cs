@@ -162,7 +162,7 @@ public class VsnAudioManager : MonoBehaviour {
   }
 
   public void PlaySfx(string clipName){
-    Debug.LogWarning("PLAY: " + clipName);
+    //Debug.LogWarning("PLAY: " + clipName);
     PlaySfx(clipName, 0f);
   }
 

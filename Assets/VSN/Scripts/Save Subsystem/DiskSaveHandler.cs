@@ -18,7 +18,7 @@ class DiskSaveHandler : IVsnSaveHandler{
 		Dictionary<string, string> savedDictionary = dictionary;
 		string savedVariables = GenerateSavedVariables (savedDictionary);
 		//savedDictionary = PrefixDictionary(dictionary, saveSlot);
-		Debug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
+		//Debug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
 		PlayerPrefs.SetString(GetSaveSlotPrefix(saveSlot), savedVariables);
 
 

@@ -45,10 +45,10 @@ public class CoupleEntry : MonoBehaviour {
   public void ClickedDateButton() {
 
     /// IF CANNOT GO TO DATE RIGHT NOW
-    if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
-      SfxManager.StaticPlayForbbidenSfx();
-      return;
-    }
+    //if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
+    //  SfxManager.StaticPlayForbbidenSfx();
+    //  return;
+    //}
 
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
     GlobalData.instance.observedPeople = new Person[] {coupleCards[0].person,

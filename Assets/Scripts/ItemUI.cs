@@ -74,6 +74,7 @@ public class ItemUI : MonoBehaviour {
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
     VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(item.id));
+    VsnSaveSystem.SetVariable("item_key", Item.GetKeyById(item.id));
     switch (interactionType) {
       case ItemInteractionType.store_buy:
         VsnSaveSystem.SetVariable("item_price", item.price);

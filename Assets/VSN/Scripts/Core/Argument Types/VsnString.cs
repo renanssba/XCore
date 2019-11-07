@@ -16,10 +16,10 @@ public class VsnString : VsnArgument{
   public string LocalizedString(){
     string localizedString = Lean.Localization.LeanLocalization.GetTranslationText(stringValue);
     if(localizedString == null) {
-      Debug.Log("Couldn't localize string");
+      //Debug.Log("Couldn't localize string");
       localizedString = stringValue;
     }
-    Debug.Log("Localized string: " + localizedString);
+    //Debug.Log("Localized string: " + localizedString);
 
     return localizedString;
   }
