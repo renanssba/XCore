@@ -12,7 +12,7 @@ namespace Command {
 
       switch(args[0].GetStringValue()) {
         case "date_event":
-          switch(GameController.instance.GetCurrentDateEvent().interactionType) {
+          switch(BattleController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
             case DateEventInteractionType.couple:
               pos = new Vector2(-130f, 716f);

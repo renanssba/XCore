@@ -35,7 +35,8 @@ public class CoupleEntry : MonoBehaviour {
     for(int i=0; i<3; i++) {
       skillIcons[i].gameObject.SetActive(i<relationship.bondSkills.Count);
       if(i < relationship.bondSkills.Count) {
-        skillNameTexts[i].text = CardsDatabase.instance.GetCardById(relationship.bondSkills[i]).name;
+        // print bond skill name
+        //skillNameTexts[i].text = "skill name";
       } else {
         skillNameTexts[i].text = "---";
       }
@@ -53,8 +54,8 @@ public class CoupleEntry : MonoBehaviour {
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
     GlobalData.instance.observedPeople = new Person[] {coupleCards[0].person,
                                                        coupleCards[1].person};
-    GameController.instance.datingPeopleCards[0].Initialize(coupleCards[0].person);
-    GameController.instance.datingPeopleCards[1].Initialize(coupleCards[1].person);
+    UIController.instance.datingPeopleCards[0].Initialize(coupleCards[0].person);
+    UIController.instance.datingPeopleCards[1].Initialize(coupleCards[1].person);
 
     GlobalData.instance.currentDateHearts = relationship.hearts;
     GlobalData.instance.maxDateHearts = relationship.hearts;

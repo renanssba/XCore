@@ -9,9 +9,9 @@ namespace Command {
 
     public override void Execute() {
       if(args.Length >= 3) {
-        GameController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue(), args[2].GetStringValue(), args[3].GetStringValue());
+        UIController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue(), args[2].GetStringValue(), args[3].GetStringValue());
       } else {
-        GameController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue());
+        UIController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue());
       }      
     }
 

@@ -138,7 +138,14 @@ goto end
 
 
 waypoint ir_clara
-say "" ""
+say "" "Esta cena da festa (com a Clara) ainda não está implementada... Por favor teste as cenas com as demais garotas."
+
+wait 1
+add_heart 2 15
+play_sfx "relationship_up"
+say "" "Ricardo e Clara se tornaram mais próximos! A habilidade <color=red>Confissão</color> foi desbloqueada!"
+wait 1
+goto end
 
 
 waypoint end

@@ -70,7 +70,7 @@ public class ObservationTile : MonoBehaviour {
  //   }
 
  //   VsnSaveSystem.SetVariable("observation_energy", VsnSaveSystem.GetIntVariable("observation_energy")-1);
- //   GameController.instance.UpdateUI();
+ //   UIController.instance.UpdateUI();
 
  //   GameController.instance.observationSegments = new ObservationEvent[1];
  //   GlobalData.instance.observedPeople[1] = personInEvent;

@@ -38,7 +38,7 @@ public class DateEvent {
 
   public Attributes[] GetWeaknesses() {
     List<Attributes> att = new List<Attributes>();
-    for(int i=0; i<3; i++) {
+    for(int i=0; i<4; i++) {
       if(attributeEffectivity[i] > 1f) {
         att.Add((Attributes)i);
       }
@@ -48,7 +48,7 @@ public class DateEvent {
 
   public Attributes[] GetResistances() {
     List<Attributes> att = new List<Attributes>();
-    for(int i = 0; i < 3; i++) {
+    for(int i = 0; i < 4; i++) {
       if(attributeEffectivity[i] < 1f) {
         att.Add((Attributes)i);
       }

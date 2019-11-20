@@ -83,8 +83,8 @@ public class ItemUI : MonoBehaviour {
         VsnSaveSystem.SetVariable("item_price", item.price/2);
         break;
       case ItemInteractionType.equip_item:
-        Person p = GlobalData.instance.people[VsnSaveSystem.GetIntVariable("person_equip_selected")];
-        p.EquipItemInSlot(VsnSaveSystem.GetIntVariable("slot_id"), item);
+        //Person p = GlobalData.instance.people[VsnSaveSystem.GetIntVariable("person_equip_selected")];
+        //p.EquipItemInSlot(VsnSaveSystem.GetIntVariable("slot_id"), item);
         break;
       case ItemInteractionType.give_gift:
         // do nothing

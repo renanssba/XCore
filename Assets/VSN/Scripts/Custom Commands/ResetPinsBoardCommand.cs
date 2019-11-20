@@ -8,7 +8,7 @@ namespace Command {
   public class ResetPinsBoardCommand : VsnCommand {
 
     public override void Execute() {
-      GameController.instance.ResetPinsBoard(args[0].GetStringValue());
+      UIController.instance.ResetPinsBoard(args[0].GetStringValue());
     }
 
     public override void AddSupportedSignatures() {

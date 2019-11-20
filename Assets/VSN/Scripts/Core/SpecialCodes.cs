@@ -21,7 +21,7 @@ public class SpecialCodes {
       currentString = InterpretVariableValue(currentString);
       
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date/" + GameController.instance.GetCurrentDateEventName());
+      currentString = currentString.Replace("\\currentEventName", "date/" + BattleController.instance.GetCurrentDateEventName());
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
@@ -35,6 +35,7 @@ public class SpecialCodes {
         currentString = currentString.Replace("\\guts", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.charisma).ToString());
+        currentString = currentString.Replace("\\magic", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.magic).ToString());
       }
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
@@ -111,7 +112,7 @@ public class SpecialCodes {
       case "#random100":
         return Random.Range(0, 100);
       case "#dateLength":
-        return GameController.instance.dateSegments.Length;
+        return BattleController.instance.dateLength;
       case "#isEncounterPersonUnrevealed":
         if(GlobalData.instance.EncounterPerson()!=null) {
           return GlobalData.instance.EncounterPerson().state == PersonState.unrevealed ? 1 : 0;
@@ -126,18 +127,10 @@ public class SpecialCodes {
         return GlobalData.instance.shippedCouples.Count;
       case "#isCurrentPersonMale":
         return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
-      case "#currentPersonality":
-        return (int)GlobalData.instance.CurrentPersonPersonality();
       case "#currentEventInteractionType":
-        return (int)GameController.instance.GetCurrentDateEvent().interactionType;
+        return (int)BattleController.instance.GetCurrentDateEvent().interactionType;
       case "#inventory_empty":
         return GlobalData.instance.CurrentBoy().inventory.IsEmpty() ? 1f : 0f;
-      case "#availableCouples":
-        if(GameController.instance != null) {
-          return GameController.instance.couplesPanelContent.childCount;
-        } else {
-          return 0;
-        }
       case "#currentGirlId":
         Person girl = GlobalData.instance.CurrentGirl();
         if(girl != null) {

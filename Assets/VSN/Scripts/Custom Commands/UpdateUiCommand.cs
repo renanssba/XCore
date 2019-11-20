@@ -8,7 +8,7 @@ namespace Command {
   public class UpdateUiCommand : VsnCommand {
 
     public override void Execute() {
-      GameController.instance.UpdateUI();
+      UIController.instance.UpdateUI();
     }
 
 

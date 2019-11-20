@@ -10,7 +10,7 @@ namespace Command {
     public override void Execute() {
 
       VsnSaveSystem.SetVariable("people_ui_state", args[0].GetStringValue());
-      GameController.instance.SetScreenLayout(args[0].GetStringValue());
+      UIController.instance.SetScreenLayout(args[0].GetStringValue());
     }
 
     public override void AddSupportedSignatures() {

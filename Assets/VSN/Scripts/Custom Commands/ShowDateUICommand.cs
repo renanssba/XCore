@@ -9,9 +9,9 @@ namespace Command {
 
     public override void Execute() {
       if(args.Length > 0){
-        GameController.instance.ShowDateUiPanel(args[0].GetBooleanValue());
+        UIController.instance.ShowDateUiPanel(args[0].GetBooleanValue());
       } else{
-        GameController.instance.ShowDateUiPanel(true);
+        UIController.instance.ShowDateUiPanel(true);
       }
     }
 

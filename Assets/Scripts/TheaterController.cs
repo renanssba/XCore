@@ -93,17 +93,17 @@ public class TheaterController : MonoBehaviour {
             PositionActorsCloseup();
           }
           //GameController.instance.actionPersonCard.HidePanel();
-          GameController.instance.datingPeopleCards[0].ShowShade(false);
-          GameController.instance.datingPeopleCards[1].ShowShade(false);
+          UIController.instance.datingPeopleCards[0].ShowShade(false);
+          UIController.instance.datingPeopleCards[1].ShowShade(false);
           turnIndicators[0].SetActive(false);
           turnIndicators[1].SetActive(false);
           ShowWeaknessCard(false);
 
           ChallengeLeavesScene();
         } else {
-          string spriteName = GameController.instance.GetCurrentDateEvent().spriteName;
+          string spriteName = BattleController.instance.GetCurrentDateEvent().spriteName;
 
-          difficultyText.text = "<size=68>NV </size>" + GameController.instance.GetCurrentDateEvent().difficulty;
+          difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().difficulty;
 
           if(!string.IsNullOrEmpty(spriteName)) {
             ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
@@ -113,28 +113,28 @@ public class TheaterController : MonoBehaviour {
             ShowLevelAndHp();
           }
 
-          switch(GameController.instance.GetCurrentDateEvent().interactionType) {
+          switch(BattleController.instance.GetCurrentDateEvent().interactionType) {
             case DateEventInteractionType.male:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(intensity);
-              GameController.instance.datingPeopleCards[0].ShowShade(false);
-              GameController.instance.datingPeopleCards[1].ShowShade(true);
+              UIController.instance.datingPeopleCards[0].ShowShade(false);
+              UIController.instance.datingPeopleCards[1].ShowShade(true);
               turnIndicators[0].SetActive(true);
               turnIndicators[1].SetActive(false);
               break;
             case DateEventInteractionType.female:
               mainActor.SetBrightness(intensity);
               supportActor.SetBrightness(1f);
-              GameController.instance.datingPeopleCards[0].ShowShade(true);
-              GameController.instance.datingPeopleCards[1].ShowShade(false);
+              UIController.instance.datingPeopleCards[0].ShowShade(true);
+              UIController.instance.datingPeopleCards[1].ShowShade(false);
               turnIndicators[0].SetActive(false);
               turnIndicators[1].SetActive(true);
               break;
             case DateEventInteractionType.couple:
               mainActor.SetBrightness(1f);
               supportActor.SetBrightness(1f);
-              GameController.instance.datingPeopleCards[0].ShowShade(false);
-              GameController.instance.datingPeopleCards[1].ShowShade(false);
+              UIController.instance.datingPeopleCards[0].ShowShade(false);
+              UIController.instance.datingPeopleCards[1].ShowShade(false);
               turnIndicators[0].SetActive(true);
               turnIndicators[1].SetActive(true);
               break;
@@ -144,7 +144,7 @@ public class TheaterController : MonoBehaviour {
             mainActor.SetBrightness(1f);
             supportActor.SetBrightness(1f);
           }
-          GameController.instance.datingPeoplePanel.ShowPanel();
+          UIController.instance.datingPeoplePanel.ShowPanel();
         }        
         break;
     }
@@ -192,13 +192,13 @@ public class TheaterController : MonoBehaviour {
     } else if(effectivity < 1f) {
       effectivityString = "\n<size=40>fraco</size>";
     }
-    GameObject newobj = Instantiate(damageParticlePrefab, GameController.instance.bgImage.transform.parent);
+    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
     newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString() + effectivityString;
     newobj.GetComponent<TextMeshProUGUI>().color = ResourcesManager.instance.attributeColor[attribute];
   }
 
   public void ShowChallengeResult(bool success) {
-    GameObject newobj = Instantiate(damageParticlePrefab, GameController.instance.bgImage.transform.parent);
+    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
 
     newobj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
@@ -215,7 +215,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void ActorAttackAnimation() {
-    DateEventInteractionType interactionType = GameController.instance.GetCurrentDateEvent().interactionType;
+    DateEventInteractionType interactionType = BattleController.instance.GetCurrentDateEvent().interactionType;
     switch(interactionType) {
       case DateEventInteractionType.male:
         AnimTransform(mainActor.transform);
@@ -238,7 +238,7 @@ public class TheaterController : MonoBehaviour {
   public IEnumerator WaitAndShine(float time) {
     int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
     int attributeBaseLevel = VsnSaveSystem.GetIntVariable("attribute_effective_level");
-    float effectivity = GameController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId];
+    float effectivity = BattleController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId];
     int effectiveAttributeLevel = (int)(attributeBaseLevel * effectivity);
 
     VsnAudioManager.instance.PlaySfx("hit_default");
@@ -272,7 +272,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void ShowLevelAndHp() {
-    hpSlider.maxValue = GameController.instance.GetCurrentDateEvent().difficulty;
+    hpSlider.maxValue = BattleController.instance.GetCurrentDateEvent().difficulty;
     hpSlider.value = hpSlider.maxValue;
     hpSlider.gameObject.SetActive(true);
   }
@@ -324,7 +324,7 @@ public class TheaterController : MonoBehaviour {
 
   public void SetWeaknessCardText() {
     string text = "";
-    DateEvent dateChallenge = GameController.instance.GetCurrentDateEvent();
+    DateEvent dateChallenge = BattleController.instance.GetCurrentDateEvent();
     Attributes[] weak = dateChallenge.GetWeaknesses();
     Attributes[] resistant = dateChallenge.GetResistances();
 

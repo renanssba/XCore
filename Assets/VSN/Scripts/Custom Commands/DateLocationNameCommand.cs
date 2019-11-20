@@ -8,7 +8,7 @@ namespace Command {
   public class DateLocationNameCommand : VsnCommand {
 
     public override void Execute() {
-      GameController.instance.dateTitleText.text = args[0].GetStringValue();
+      UIController.instance.dateTitleText.text = args[0].GetStringValue();
     }
 
 

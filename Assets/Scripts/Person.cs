@@ -3,12 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Personality{
-  heroico,
-  racional,
-  emotivo
-}
-
 public enum SkillType {
   character,
   couple
@@ -26,7 +20,8 @@ public enum Skill{
 public enum Attributes{
   guts = 0,
   intelligence = 1,
-  charisma = 2
+  charisma = 2,
+  magic = 3
 }
 
 public enum PersonState {
@@ -47,9 +42,7 @@ public class Person {
   public int[] attributes;
   public int[] attributeBonuses;
 
-  public Personality personality;
-  public int skillId = -1;
-  public Item equipment = null;
+  public int[] skillIds;
 
   public string favoriteMatter;
   public string mostHatedMatter;
@@ -61,7 +54,7 @@ public class Person {
 
 
   public Person() {
-    attributeBonuses = new int[] { 0, 0, 0 };
+    attributeBonuses = new int[] { 0, 0, 0, 0 };
     inventory = new Inventory();
     inventory.owner = this;
   }
@@ -96,19 +89,6 @@ public class Person {
     //}
     id = personId;
     faceId = personId;
-    personality = (Personality)Random.Range(0, 3);
-  }
-
-  public Attributes AttributetoUse(){
-    switch(personality){
-      case Personality.heroico:
-        return Attributes.guts;
-      case Personality.racional:
-        return Attributes.intelligence;
-      case Personality.emotivo:
-        return Attributes.charisma;
-    }
-    return Attributes.guts;
   }
 
   public int AttributeValue(int att){
@@ -116,38 +96,38 @@ public class Person {
       return 0;
     }
     int sum = attributes[att];
-    if(equipment != null){
-      sum += equipment.attribute_bonus[att];
-    }
+    //if(equipment != null){
+    //  sum += equipment.attribute_bonus[att];
+    //}
     if(attributeBonuses != null) {
       sum += attributeBonuses[att];
     }
     return Mathf.Max(sum, 0);
   }
   
-  public void EquipItemInSlot(int slotId, Item item){
-    VsnAudioManager.instance.PlaySfx("inventory_equip");
-    equipment = item;
-    GlobalData.instance.CurrentBoy().inventory.ConsumeItem(equipment.id, 1);
-    GameController.instance.UpdateUI();
-  }
+  //public void EquipItemInSlot(int slotId, Item item){
+  //  VsnAudioManager.instance.PlaySfx("inventory_equip");
+  //  equipment = item;
+  //  GlobalData.instance.CurrentBoy().inventory.ConsumeItem(equipment.id, 1);
+  //  UIController.instance.UpdateUI();
+  //}
 
-  public void UnequipItemInSlot(int slotId) {
-    if (equipment != null) {
-      VsnAudioManager.instance.PlaySfx("inventory_equip");
-      Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.nameKey);
-      GlobalData.instance.CurrentBoy().inventory.AddItem(equipment.id, 1);
-      equipment = null;
-      GameController.instance.UpdateUI();
-    }
-  }
+  //public void UnequipItemInSlot(int slotId) {
+  //  if (equipment != null) {
+  //    VsnAudioManager.instance.PlaySfx("inventory_equip");
+  //    Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.nameKey);
+  //    GlobalData.instance.CurrentBoy().inventory.AddItem(equipment.id, 1);
+  //    equipment = null;
+  //    UIController.instance.UpdateUI();
+  //  }
+  //}
 
-  public int EquipsCount(){
-    if (equipment != null) {
-      return 1;
-    }
-    return 0;
-  }
+  //public int EquipsCount(){
+  //  if (equipment != null) {
+  //    return 1;
+  //  }
+  //  return 0;
+  //}
 
   public char GenderedVowel(){
     if(isMale){

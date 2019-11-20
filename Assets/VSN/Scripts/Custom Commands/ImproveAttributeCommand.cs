@@ -21,9 +21,12 @@ namespace Command {
         case "charisma":
           p.attributes[(int)Attributes.charisma] += improve_value;
           break;
+        case "magic":
+          p.attributes[(int)Attributes.magic] += improve_value;
+          break;
       }
 
-      GameController.instance.UpdateUI();
+      UIController.instance.UpdateUI();
     }
 
 

@@ -22,15 +22,10 @@ public class PersonCard : MonoBehaviour {
   public TextMeshProUGUI[] attributeTexts;
   public Image skillIcon;
   public TextMeshProUGUI skillText;
-  public Image equipIcon;
-  public TextMeshProUGUI equipmentText;
-  public Image addEquipIcon;
   public GameObject shade;
 
   public GameObject heartsPanel;
   public Image[] heartIcons;
-
-  public bool canEquipItems = true;
 
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
 
@@ -56,10 +51,10 @@ public class PersonCard : MonoBehaviour {
     if(heartsPanel != null) {
       if(person.id == 0 || coupleEntryLayout != PersonCardLayout.single) {
         heartsPanel.SetActive(false);
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 166f);
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 144f);
       } else {
         heartsPanel.SetActive(true);
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 206f);
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 184f);
         for(int i = 0; i < heartIcons.Length; i++) {
           heartIcons[i].color = (i < GlobalData.instance.relationships[person.id - 1].hearts ? Color.white : new Color(0f, 0f, 0f, 0.5f));
         }
@@ -70,62 +65,23 @@ public class PersonCard : MonoBehaviour {
 
 
     /// ATTRIBUTES
-    for(int i=0; i<3; i++){
+    for(int i=0; i<4; i++){
       attributeTexts[i].text = person.AttributeValue(i).ToString();
     }
     //Debug.Log("Person: " + person.name);
 
     /// SKILL
-    if(skillText != null) {
-      if(person.skillId != -1) {
-        skillText.text =  CardsDatabase.instance.GetCardById(person.skillId).name;
-      } else {
-        skillText.text = "---";
-      }
-    }
-    skillIcon.sprite = CardsDatabase.instance.GetCardById(person.skillId).sprite;
-
-    /// EQUIPMENT
-    if(person.id == 0 && coupleEntryLayout == PersonCardLayout.couple) {
-      SetEquipableItems(true);
-      addEquipIcon.gameObject.SetActive(person.EquipsCount() == 0);
-    } else {
-      SetEquipableItems(false);
-      addEquipIcon.gameObject.SetActive(false);
-    }
-
-    if(coupleEntryLayout == PersonCardLayout.single) {
-      if(person.equipment != null) {
-        equipIcon.sprite = person.equipment.sprite;
-        equipIcon.gameObject.SetActive(true);
-        equipmentText.text = person.equipment.nameKey;
-      } else {
-        equipIcon.gameObject.SetActive(false);
-        equipmentText.text = "---";
-      }
-    }
-  }
-
-  public void SetEquipableItems(bool canEquipItems) {
-    equipIcon.transform.parent.gameObject.SetActive(canEquipItems && 0 <= person.EquipsCount());
+    //if(skillText != null) {
+    //  if(person.skillIds != -1) {
+    //    skillText.text =  CardsDatabase.instance.GetCardById(person.skillIds).name;
+    //  } else {
+    //    skillText.text = "---";
+    //  }
+    //}
+    //skillIcon.sprite = CardsDatabase.instance.GetCardById(person.skillIds).sprite;
   }
 
   public void ShowShade(bool active) {
     shade.SetActive(active);
-  }
-
-  public void ClickPersonSlot(int slotId){
-    if(!canEquipItems){
-      return;
-    }
-
-    if(person.equipment != null){
-      person.UnequipItemInSlot(slotId);
-      return;
-    }else{
-      VsnSaveSystem.SetVariable("person_equip_selected", person.id);
-      VsnSaveSystem.SetVariable("slot_id", slotId);
-      ItemSelectorScreen.instance.OpenEquipSelect();
-    }
   }
 }
