@@ -36,30 +36,19 @@ public class TheaterController : MonoBehaviour {
   public Vector2 mainActiveCardPosition;
   public Vector2 supportActiveCardPosition;
 
-  public Actor3D mainActor;
-  public Actor3D supportActor;
-  public SpriteRenderer challengeActor;
-
-  public GameObject damageParticlePrefab;
-
-  public TextMeshProUGUI difficultyText;
-
-  public Slider hpSlider;
+  public Actor2D mainActor;
+  public Actor2D supportActor;
+  public Actor2D angelActor;
+  public Actor2D challengeActor;
 
   public GameObject[] bgObjects;
-
-  public Color greenColor;
-  public Color redColor;
 
   public GameObject weaknessCard;
   public TextMeshProUGUI weaknessCardText;
 
-  public GameObject[] turnIndicators;
   public Image[] faceImages;
 
   public float intensity;
-
-  const float animTime = 0.15f;
 
 
   public void Awake() {
@@ -69,7 +58,7 @@ public class TheaterController : MonoBehaviour {
   public void SetEvent(TheaterEvent currentEvent) {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
-    mainActor.SetGraphics(GlobalData.instance.observedPeople[0]);
+    mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
     faceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
     faceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
 
@@ -79,86 +68,36 @@ public class TheaterController : MonoBehaviour {
       case TheaterEvent.dateChallenge:
         PositionCamera(CameraPosition.mainCamera);
 
-        mainActor.transform.localPosition = mainPosition;
-        mainActor.transform.localEulerAngles = rotationFacingRight;
+        //mainActor.transform.localPosition = mainPosition;
+        //mainActor.transform.localEulerAngles = rotationFacingRight;
 
         supportActor.gameObject.SetActive(true);
-        supportActor.SetGraphics(GlobalData.instance.observedPeople[1]);
-        supportActor.transform.localPosition = supportPosition;
-        supportActor.transform.localEulerAngles = rotationFacingRight;
+        supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
+        //supportActor.transform.localPosition = supportPosition;
+        //supportActor.transform.localEulerAngles = rotationFacingRight;
 
         if(currentEvent == TheaterEvent.date) {
-          if(VsnSaveSystem.GetIntVariable("currentDateEvent") >= 7) {
-            PositionCamera(CameraPosition.closeupCamera);
-            PositionActorsCloseup();
-          }
-          //GameController.instance.actionPersonCard.HidePanel();
-          UIController.instance.datingPeopleCards[0].ShowShade(false);
-          UIController.instance.datingPeopleCards[1].ShowShade(false);
-          turnIndicators[0].SetActive(false);
-          turnIndicators[1].SetActive(false);
+          //if(VsnSaveSystem.GetIntVariable("currentDateEvent") >= 7) {
+          //  PositionCamera(CameraPosition.closeupCamera);
+          //  PositionActorsCloseup();
+          //}
           ShowWeaknessCard(false);
 
           ChallengeLeavesScene();
         } else {
-          string spriteName = BattleController.instance.GetCurrentDateEvent().spriteName;
+          DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
+          BattleController.instance.difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().difficulty;
 
-          difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().difficulty;
-
-          if(!string.IsNullOrEmpty(spriteName)) {
-            ChallengeEntersScene(LoadSprite("Challenges/" + spriteName));
+          challengeActor.SetChallengeGraphics(dateEvent);
+          if(!string.IsNullOrEmpty(dateEvent.spriteName)) {
+            ChallengeEntersScene();
           } else {
-            PositionCamera(CameraPosition.closeupCamera);
-            PositionActorsCloseup();
-            ShowLevelAndHp();
-          }
-
-          switch(BattleController.instance.GetCurrentDateEvent().interactionType) {
-            case DateEventInteractionType.male:
-              mainActor.SetBrightness(1f);
-              supportActor.SetBrightness(intensity);
-              UIController.instance.datingPeopleCards[0].ShowShade(false);
-              UIController.instance.datingPeopleCards[1].ShowShade(true);
-              turnIndicators[0].SetActive(true);
-              turnIndicators[1].SetActive(false);
-              break;
-            case DateEventInteractionType.female:
-              mainActor.SetBrightness(intensity);
-              supportActor.SetBrightness(1f);
-              UIController.instance.datingPeopleCards[0].ShowShade(true);
-              UIController.instance.datingPeopleCards[1].ShowShade(false);
-              turnIndicators[0].SetActive(false);
-              turnIndicators[1].SetActive(true);
-              break;
-            case DateEventInteractionType.couple:
-              mainActor.SetBrightness(1f);
-              supportActor.SetBrightness(1f);
-              UIController.instance.datingPeopleCards[0].ShowShade(false);
-              UIController.instance.datingPeopleCards[1].ShowShade(false);
-              turnIndicators[0].SetActive(true);
-              turnIndicators[1].SetActive(true);
-              break;
-          }
-
-          if(string.IsNullOrEmpty(spriteName)) {
-            mainActor.SetBrightness(1f);
-            supportActor.SetBrightness(1f);
+            //PositionCamera(CameraPosition.closeupCamera);
+            //PositionActorsCloseup();
+            InitializeChallengeLevelAndHp();
           }
           UIController.instance.datingPeoplePanel.ShowPanel();
         }        
-        break;
-    }
-  }
-
-  public void SetupActorGraphics(TheaterEvent currentEvent) {
-    switch(currentEvent) {
-      case TheaterEvent.observation:
-        //mainActor.sprite = GlobalData.instance.ObservedPerson().isMale ? peopleSprites[0] : peopleSprites[1];
-        break;
-      case TheaterEvent.date:
-      case TheaterEvent.dateChallenge:
-        //mainActor.sprite = GlobalData.instance.CurrentBoy().isMale ? peopleSprites[0] : peopleSprites[1];
-        //supportActor.sprite = GlobalData.instance.CurrentGirl().isMale ? peopleSprites[0] : peopleSprites[1];
         break;
     }
   }
@@ -185,72 +124,38 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localEulerAngles = rotationFacingFront + new Vector3(0f, 90f, 0f);
   }
 
-  public void ShowParticleAnimation(int attribute, int attributeLevel, float effectivity) {
-    string effectivityString = "";
-    if(effectivity > 1f) {
-      effectivityString = "\n<size=40>SUPER!</size>";
-    } else if(effectivity < 1f) {
-      effectivityString = "\n<size=40>fraco</size>";
-    }
-    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
-    newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString() + effectivityString;
-    newobj.GetComponent<TextMeshProUGUI>().color = ResourcesManager.instance.attributeColor[attribute];
-  }
-
-  public void ShowChallengeResult(bool success) {
-    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
-
-    newobj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-    newobj.GetComponent<JumpingParticle>().duration = 1f;
-    if(success == true) {
-      newobj.GetComponent<JumpingParticle>().jumpForce = 10;
-    } else {
-      newobj.GetComponent<JumpingParticle>().jumpForce = 0;
-    }
-    newobj.GetComponent<TextMeshProUGUI>().text = success ?
-      Lean.Localization.LeanLocalization.GetTranslationText("date/success_message") :
-      Lean.Localization.LeanLocalization.GetTranslationText("date/failure_message");
-    newobj.GetComponent<TextMeshProUGUI>().color = success ? greenColor : redColor;
-  }
-
-  public void ActorAttackAnimation() {
-    DateEventInteractionType interactionType = BattleController.instance.GetCurrentDateEvent().interactionType;
-    switch(interactionType) {
-      case DateEventInteractionType.male:
-        AnimTransform(mainActor.transform);
+  public void CharacterAttackAnimation(int actorId, int animId) {
+    switch(actorId) {
+      case 0:
+        mainActor.CharacterAttackAnim();
         break;
-      case DateEventInteractionType.female:
-        AnimTransform(supportActor.transform);
+      case 1:
+        supportActor.CharacterAttackAnim();
         break;
-      case DateEventInteractionType.couple:
-        AnimTransform(mainActor.transform);
-        AnimTransform(supportActor.transform);
+      case 2:
+        angelActor.CharacterAttackAnim();
         break;
     }
-    StartCoroutine(WaitAndShine(animTime));
   }
 
-  public void AnimTransform(Transform obj) {
-    obj.DOMoveX(0.3f, animTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+  public void EnemyAttackAnimation() {
+    challengeActor.EnemyAttackAnim();
   }
 
-  public IEnumerator WaitAndShine(float time) {
-    int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
-    int attributeBaseLevel = VsnSaveSystem.GetIntVariable("attribute_effective_level");
-    float effectivity = BattleController.instance.GetCurrentDateEvent().attributeEffectivity[attributeId];
-    int effectiveAttributeLevel = (int)(attributeBaseLevel * effectivity);
-
-    VsnAudioManager.instance.PlaySfx("hit_default");
-
-    yield return new WaitForSeconds(time);
-
-    FlashRenderer(challengeActor.transform, 0.1f, 0.8f, 0.2f);
-    ShowParticleAnimation(attributeId, effectiveAttributeLevel, effectivity);
-
-    yield return new WaitForSeconds(1f);
-    hpSlider.DOValue(hpSlider.maxValue - effectiveAttributeLevel, 1f);
+  public void ShineCharacter(int actorId) {
+    switch(actorId) {
+      case 0:
+        mainActor.Shine();
+        break;
+      case 1:
+        supportActor.Shine();
+        break;
+      case 2:
+        angelActor.Shine();
+        break;
+    }
   }
+
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
     SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
@@ -259,39 +164,34 @@ public class TheaterController : MonoBehaviour {
     spriteRenderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
   }
 
-  public void ChallengeEntersScene(Sprite sp) {
+  public void ChallengeEntersScene() {
+    DateEvent currentChallenge = BattleController.instance.GetCurrentDateEvent();
+
+    currentChallenge.hp = currentChallenge.maxHp;
+
     if(challengeActor.gameObject.activeSelf == false) {
       VsnAudioManager.instance.PlaySfx("challenge_default");
-      challengeActor.sprite = sp;
       challengeActor.gameObject.SetActive(true);
       challengeActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
       challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(()=> {
-        ShowLevelAndHp();
+        InitializeChallengeLevelAndHp();
       });
     }
   }
 
-  public void ShowLevelAndHp() {
-    hpSlider.maxValue = BattleController.instance.GetCurrentDateEvent().difficulty;
-    hpSlider.value = hpSlider.maxValue;
-    hpSlider.gameObject.SetActive(true);
+  public void InitializeChallengeLevelAndHp() {
+    BattleController.instance.enemyHpSlider.maxValue = BattleController.instance.GetCurrentDateEvent().maxHp;
+    BattleController.instance.enemyHpSlider.value = BattleController.instance.enemyHpSlider.maxValue;
+    BattleController.instance.enemyHpSlider.gameObject.SetActive(true);
   }
 
   public void ChallengeLeavesScene() {
-    hpSlider.gameObject.SetActive(false);
+    BattleController.instance.enemyHpSlider.gameObject.SetActive(false);
     if(challengeActor.gameObject.activeSelf == true) {
       challengeActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
         challengeActor.gameObject.SetActive(false);
       });
     }
-  }
-
-  public Sprite LoadSprite(string sprite) {
-    Sprite backgroundSprite = Resources.Load<Sprite>(sprite);
-    if(backgroundSprite == null) {
-      Debug.LogError("Error loading " + sprite + " sprite. Please check its path");
-    }
-    return backgroundSprite;
   }
 
 

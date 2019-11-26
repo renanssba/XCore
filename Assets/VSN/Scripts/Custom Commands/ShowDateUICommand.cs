@@ -9,9 +9,9 @@ namespace Command {
 
     public override void Execute() {
       if(args.Length > 0){
-        UIController.instance.ShowDateUiPanel(args[0].GetBooleanValue());
+        UIController.instance.ShowDateProgressPanel(args[0].GetBooleanValue());
       } else{
-        UIController.instance.ShowDateUiPanel(true);
+        UIController.instance.ShowDateProgressPanel(true);
       }
     }
 

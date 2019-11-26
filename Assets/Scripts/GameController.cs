@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour {
 
 
 
-
   public void Awake() {
     instance = this;
   }
@@ -63,11 +62,9 @@ public class GameController : MonoBehaviour {
 
   public void Update() {
     if(Input.GetKeyDown(KeyCode.F4)){
-      GlobalData.instance.ResetCurrentCouples();
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
     if (Input.GetKeyDown(KeyCode.F5)) {
-      GlobalData.instance.ResetCurrentCouples();
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
   }

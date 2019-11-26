@@ -12,7 +12,6 @@ public enum PersonCardLayout {
 }
 
 
-
 public class PersonCard : MonoBehaviour {
 
   public Person person = null;
@@ -23,6 +22,8 @@ public class PersonCard : MonoBehaviour {
   public Image skillIcon;
   public TextMeshProUGUI skillText;
   public GameObject shade;
+
+  public TextMeshProUGUI spText;
 
   public GameObject heartsPanel;
   public Image[] heartIcons;
@@ -42,11 +43,18 @@ public class PersonCard : MonoBehaviour {
       return;
     }
 
-
     /// BG AND FACE / NAME
-    if(coupleEntryLayout == PersonCardLayout.couple) {
-      bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
+    bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
+    nameText.text = person.name;
+    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
+
+
+    if(coupleEntryLayout == PersonCardLayout.date) {
+      spText.text = person.sp + "<size=16>/" + person.maxSp+ "</size>";
+      return;
     }
+
+
     RectTransform rect = GetComponent<RectTransform>();
     if(heartsPanel != null) {
       if(person.id == 0 || coupleEntryLayout != PersonCardLayout.single) {
@@ -60,8 +68,6 @@ public class PersonCard : MonoBehaviour {
         }
       }
     }
-    nameText.text = person.name;
-    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
 
 
     /// ATTRIBUTES

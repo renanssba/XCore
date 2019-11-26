@@ -14,7 +14,7 @@ namespace Command {
       } else {
         VsnSaveSystem.SetVariable("date_event_result_" + (value - 1), 2);
       }
-      TheaterController.instance.ShowChallengeResult(args[0].GetBooleanValue());
+      BattleController.instance.ShowChallengeResult(args[0].GetBooleanValue());
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UIController : MonoBehaviour {
   public static UIController instance;
@@ -10,6 +11,7 @@ public class UIController : MonoBehaviour {
 
   public TextMeshProUGUI titleText;
 
+  public ScreenTransitions uiControllerPanel;
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
 
@@ -26,9 +28,10 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions peopleInfoPanel;
   public ScreenTransitions mapMenuButtonsPanel;
   public ScreenTransitions datingPeoplePanel;
-  public PersonCard[] datingPeopleCards;
+  public Slider partyHpSlider;
+  public TextMeshProUGUI partyHpText;
 
-  public GameObject dateUiPanel;
+  public ScreenTransitions dateProgressPanel;
   public TextMeshProUGUI dateTitleText;
   public Toggle[] dateEventToggles;
   public Image[] successIcons;
@@ -36,12 +39,18 @@ public class UIController : MonoBehaviour {
   public Image[] unresolvedIcons;
 
   public ScreenTransitions actionsPanel;
+  public Transform actionButtonsContent;
+  public GameObject[] actionButtons;
 
   public ScreenTransitions datingPeopleInfoPanel;
   public PersonCard[] partyPeopleCards;
 
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
+
+  public GameObject fertilielInMenu;
+
+  public GameObject[] turnIndicators;
 
 
 
@@ -75,17 +84,28 @@ public class UIController : MonoBehaviour {
       return;
     }
 
-    if(GlobalData.instance.ObservedPerson() != null) {
-      datingPeopleCards[0].Initialize(GlobalData.instance.ObservedPerson());
-    }
-    if(GlobalData.instance.EncounterPerson() != null) {
-      datingPeopleCards[1].Initialize(GlobalData.instance.EncounterPerson());
-    }
-    if(GlobalData.instance.EncounterPerson() != null) {
-      datingPeopleCards[2].Initialize(GlobalData.instance.people[4]);
-    }
+    partyHpSlider.maxValue = BattleController.instance.maxHp;
+    partyHpSlider.value = BattleController.instance.hp;
+    partyHpText.text = BattleController.instance.hp.ToString();
 
+
+    for(int i=0; i<3; i++) {
+      if(BattleController.instance.partyMembers.Length > i) {
+        partyPeopleCards[i].Initialize(BattleController.instance.partyMembers[i]);
+        partyPeopleCards[i].gameObject.SetActive(true);
+      } else {
+        partyPeopleCards[i].gameObject.SetActive(false);
+      }
+    }
     ShowDateProgressUI();
+  }
+
+  public void AnimateHpDamage(int initialHp, int finalHp) {
+    float currentShownHp = initialHp;
+    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
+      partyHpSlider.value = currentShownHp;
+      partyHpText.text = ((int)currentShownHp).ToString();
+    } );    
   }
 
   public void ShowDateProgressUI() {
@@ -141,31 +161,31 @@ public class UIController : MonoBehaviour {
 
     switch(state) {
       case "hide_all":
+        uiControllerPanel.HidePanel();
         titleText.gameObject.SetActive(false);
         bgImage.SetActive(true);
+        peopleInfoPanel.HidePanel();
+        peopleButtonPanel.HidePanel();
         datingPeoplePanel.HidePanel();
         mapMenuButtonsPanel.HidePanel();
         interactionPinsBoard.HidePanel();
+        fertilielInMenu.SetActive(false);
         break;
       case "interact_with_board":
+        uiControllerPanel.ShowPanel();
         titleText.gameObject.SetActive(true);
         SetTitleText();
         bgImage.SetActive(true);
+        peopleInfoPanel.HidePanel();
+        peopleButtonPanel.ShowPanel();
         datingPeoplePanel.HidePanel();
         mapMenuButtonsPanel.ShowPanel();
         interactionPinsBoard.ShowPanel();
-        break;
-      case "observation":
-        titleText.gameObject.SetActive(false);
-        theater.SetEvent(TheaterEvent.observation);
-        bgImage.SetActive(false);
-        ShowOnlyObservedPerson();
-        datingPeoplePanel.HidePanel();
-        mapMenuButtonsPanel.HidePanel();
-        interactionPinsBoard.HidePanel();
+        fertilielInMenu.SetActive(true);
         break;
       case "date":
       case "date_challenge":
+        uiControllerPanel.HidePanel();
         titleText.gameObject.SetActive(false);
         if(state == "date") {
           theater.SetEvent(TheaterEvent.date);
@@ -174,10 +194,11 @@ public class UIController : MonoBehaviour {
         }
         bgImage.SetActive(false);
         peopleInfoPanel.HidePanel();
-        peopleButtonPanel.ShowPanel();
+        peopleButtonPanel.HidePanel();
         datingPeoplePanel.ShowPanel();
         mapMenuButtonsPanel.HidePanel();
         interactionPinsBoard.HidePanel();
+        fertilielInMenu.SetActive(false);
         break;
     }
     SetupContext(state, firstButton);
@@ -191,6 +212,28 @@ public class UIController : MonoBehaviour {
     } else {
       JoystickController.instance.GetContext("Basic Context").lastSelectedObject = menuButtons[0].gameObject;
     }
+  }
+
+
+  public void SetupCurrentCharacterUi(int currentPartyMember) {
+    int dateLength = BattleController.instance.partyMembers.Length;
+
+    // action buttons
+    for(int i=0; i<3; i++) {
+      actionButtons[i].SetActive(BattleController.instance.partyMembers[currentPartyMember].isHuman);
+    }
+    actionButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[guts_action_name]");
+    actionButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[intelligence_action_name]");
+    actionButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[charisma_action_name]");
+    actionButtons[3].SetActive(!BattleController.instance.partyMembers[currentPartyMember].isHuman);
+
+    // turn characters UI
+    for(int i = 0; i < 3; i++) {
+      partyPeopleCards[i].ShowShade(true);
+      turnIndicators[i].SetActive(false);
+    }
+    partyPeopleCards[currentPartyMember].ShowShade(false);
+    turnIndicators[currentPartyMember].SetActive(true);
   }
 
 
@@ -237,8 +280,12 @@ public class UIController : MonoBehaviour {
     }
   }
 
-  public void ShowDateUiPanel(bool value) {
-    dateUiPanel.SetActive(value);
+  public void ShowDateProgressPanel(bool value) {
+    if(value) {
+      dateProgressPanel.ShowPanel();
+    } else {
+      dateProgressPanel.HidePanel();
+    }
     UpdateUI();
   }
 }

@@ -1,0 +1,65 @@
+goto *arg1
+
+waypoint event_statement
+say "" "Dois  vendedores uniformizados saem de uma das lojas e se aproximam de \boy."
+say "Vendedores" "Com licença, senhor, já possui o cartão de nossa loja?"
+say "" "\boy diz que não está interessado, mas os sujeitos insistem."
+end_script
+
+
+
+waypoint guts_success
+say "" "\boy se irrita com os vendedores."
+say "\boy" "Porque vocês se sujeitam a um trabalho como esse? Parem de incomodar os transeuntes! Vocês deveriam acreditar no seu potencial! Agarrem o mundo pelos chifres!"
+say "" "Após uma breve pausa, os vendedores começam a chorar."
+
+say "\girl e o vendedores ficam emocionados com a determinação de \boy."
+end_script
+
+waypoint intelligence_success
+say "" "\boy tenta argumentar com os vendedores."
+say "\boy" "Fazer esse cartão não parece um bom negócio."
+say "" "Ele analisa friamente as taxas de juros, a anuidade e a atual conjuntura econômica, convencendo os vendedores de que ter o cartão é uma péssima ideia."
+say "Os vendedores ficam confusos e pedem desculpas."
+say "\girl fica impressionada com os conhecimentos de \boy!"
+end_script
+
+waypoint charisma_success
+say "" "\boy tenta ludibriar os vendedores."
+say "\boy" "Ah, este cartão? Eu já tenho!"
+say "" "Os vendedores ficam desconfiados."
+say "Vendedores" "Tem mesmo?"
+say "\boy" "Tenho! É muito bom! Melhor cartão que tem! Adoro ele."
+say "" "Os vendedores parecem satisfeitos e deixam o casal ir embora."
+end_script
+
+
+
+waypoint guts_fail
+say "" "\boy se irrita com os vendedores."
+say "\boy" "Não tenho, não quero ter e vocês não vão me obrigar!" 
+say "" "\boy arregaça as mangas da camisa em um gesto intimidador."
+say "Um dos vendedores responde rasgando a camisa, revelando músculos de aço."
+say "\boy imediatamente fornece nome, sobrenome, telefone e endereço."
+say "Vendedores" "Obrigado pela atenção, senhor, seu cartão chegará em 15 dias úteis, tenha um bom dia!"
+say "\boy fica se achando um covarde."
+end_script
+
+waypoint intelligence_fail
+say "" "\boy tenta argumentar com os vendedores."
+say "\boy"  "Veja bem, apesar, o c-cartão não é adequado, em que pese, considerando a t-t-t-taxa de juros e..."
+say "" "A vergonhosa tentativa de argumentação continua por alguns minutos. Ao final, sem perceber, \boy deu todos os dados necessários para a requisição do cartão."
+say "\girl fica indignada."
+end_script
+
+waypoint charisma_fail
+say "" "\boy tenta ludibriar os vendedores."
+say "\boy" "Ah, este cartão? Eu já tenho!"
+say "" "Os vendedores ficam desconfiados."
+say "Vendedores" "Tem mesmo?"
+say "\boy" "Tenho!"
+say "Vendedores" "TEM NÃO!"
+say "\boy" "TENHO SIM!"
+say "" "\boy e os vendedores continuam discutindo por vários minutos, perdendo um tempo precioso."
+say "\girl toma um chá de cadeira."
+end_script

@@ -36,11 +36,15 @@ public class Person {
 
   public string name;
   public bool isMale;
+  public bool isHuman = true;
 
   public PersonState state = PersonState.unrevealed;
 
   public int[] attributes;
   public int[] attributeBonuses;
+
+  public int maxSp;
+  public int sp;
 
   public int[] skillIds;
 
@@ -57,6 +61,8 @@ public class Person {
     attributeBonuses = new int[] { 0, 0, 0, 0 };
     inventory = new Inventory();
     inventory.owner = this;
+    maxSp = 5;
+    sp = 5;
   }
 
 
@@ -104,7 +110,14 @@ public class Person {
     }
     return Mathf.Max(sum, 0);
   }
-  
+
+
+  public void HealSp(int value) {
+    sp += value;
+    sp = Mathf.Min(sp, maxSp);
+    sp = Mathf.Max(sp, 0);
+  }
+
   //public void EquipItemInSlot(int slotId, Item item){
   //  VsnAudioManager.instance.PlaySfx("inventory_equip");
   //  equipment = item;

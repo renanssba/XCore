@@ -1,12 +1,13 @@
 if #day == 3
   say "" "A noite cai e chega a hora da festa na casa da Clara."
+  play_music "intermission_intro" "intermission_loop"
   fade_in 1
   goto end
 endif
 
 say "" "Cai a noite e Ricardo fica em casa."
 bg "house afternoon"
-fade_in 1
+fade_in 0.5
 
 waypoint interact_with_item
 say "Fertiliel" "(Eu posso escolher algum item para o Ricardo utilizar durante esse período! O que ele deve fazer?)"
@@ -47,9 +48,9 @@ waypoint after_item_interaction
 set_var interacted_item_key item_key
 fade_out 0.5
 bg null
-fade_in 0.5
+play_music "intermission_intro" "intermission_loop"
+fade_in 1
 say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
 
 
 waypoint end
-play_music "intermission_intro" "intermission_loop"

@@ -1,0 +1,44 @@
+goto *arg1
+
+waypoint event_statement
+say "" "Uma bola de futebol vem vindo em alta velocidade na direção de \boy e ele não percebeu!"
+
+set_var guts_action_name "Socar"
+set_var intelligence_action_name "Calcular"
+set_var charisma_action_name "Pedir Ajuda"
+end_script
+
+
+
+waypoint guts_action
+say "" "\girl age rapidamente e dá um socão na bola, quando ela estava prestes a atingir o rosto do garoto!"
+say "\boy se assusta com o movimento, mas logo agradece."
+end_script
+
+waypoint intelligence_action
+say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \girl faz complexos cálculos de física e grita '\boy!' na hora perfeita."
+say "O garoto se vira no momento exato e a bola passa raspando ao lado da sua cabeça."
+end_script
+
+waypoint charisma_action
+say "" "\girl utiliza um olhar 43 furtivo para tentar convencer um transeunte a pular na trajetória da bola."
+say "Milagrosamente, funciona!"
+end_script
+
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica no alvo, tornando as coisas melhores!"
+end_script
+
+
+
+waypoint attack_boy
+say "" "A bola atinge \boy em cheio, machucando-o!"
+end_script
+
+waypoint attack_girl
+say "" "A bola atinge \girl em cheio, machucando-a!"
+end_script
+
+waypoint defeated
+say "" "A bola foi desviada com sucesso!"
+end_script

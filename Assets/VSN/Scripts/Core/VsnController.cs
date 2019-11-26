@@ -97,7 +97,7 @@ public class VsnController : MonoBehaviour {
     scriptPath = "VSN Scripts/" + scriptPath;
     TextAsset textAsset = Resources.Load<TextAsset>(scriptPath);
     if(textAsset == null){
-      Debug.LogWarning("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");
+      Debug.LogError("Error loading VSN Script: " + scriptPath + ". Please verify the provided path.");
       return;
     }
 //    CurrentScriptReader().currentCommandIndex++;

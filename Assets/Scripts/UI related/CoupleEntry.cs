@@ -52,13 +52,8 @@ public class CoupleEntry : MonoBehaviour {
     //}
 
     Debug.LogWarning("Clicked date button to "+ coupleCards[0].person.name +" and " + coupleCards[1].person.name);
-    GlobalData.instance.observedPeople = new Person[] {coupleCards[0].person,
-                                                       coupleCards[1].person};
-    UIController.instance.datingPeopleCards[0].Initialize(coupleCards[0].person);
-    UIController.instance.datingPeopleCards[1].Initialize(coupleCards[1].person);
 
-    GlobalData.instance.currentDateHearts = relationship.hearts;
-    GlobalData.instance.maxDateHearts = relationship.hearts;
+    BattleController.instance.StartBattle(coupleCards[0].person, coupleCards[1].person);
 
     SfxManager.StaticPlayBigConfirmSfx();
     GameController.instance.HideGirlInteractionScreen();

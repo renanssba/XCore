@@ -17,13 +17,6 @@ endif
 set_var situation 2
 set_var currentDateEvent 0
 set_var date_success 0
-set_var date_event_result_0 0
-set_var date_event_result_1 0
-set_var date_event_result_2 0
-set_var date_event_result_3 0
-set_var date_event_result_4 0
-set_var date_event_result_5 0
-set_var date_event_result_6 0
 
 set_screen "date"
 
@@ -107,11 +100,11 @@ goto ev_resolution
 
 waypoint ev_resolution
 wait 0.5
-actor_anim3d
+character_attack
 wait 2
 
 position_choices "base"
-event_resolution "date" selected_attribute
+resolve_action selected_attribute
 
 if resolution == 0
   goto_script "\currentEventName" guts_success

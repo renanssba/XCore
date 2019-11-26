@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum DateEventInteractionType{
   male,
   female,
-  couple,
-  compatibility
+  couple
 }
+
 
 public enum RewardType{
   none,
@@ -15,11 +16,13 @@ public enum RewardType{
   money
 }
 
+
 public enum DateLocation{
   parque,
   shopping,
   generico
 }
+
 
 [System.Serializable]
 public class DateEvent {
@@ -32,6 +35,12 @@ public class DateEvent {
   public string location;
   public string spriteName;
   public DateEventInteractionType interactionType;
+
+  public int maxHp;
+  public int hp;
+
+  public Attributes attackAttribute;
+  public int attackDamage;
 
   public RewardType rewardType;
   public int rewardId;
@@ -55,31 +64,4 @@ public class DateEvent {
     }
     return att.ToArray();
   }
-}
-
-
-
-public enum ObservationEventType{
-  femaleInTrouble = 0,
-  maleInTrouble = 1,
-  attributeTraining = 2,
-  bet = 3,
-  itemOnSale = 4,
-  homeStalking = 5
-}
-
-
-[System.Serializable]
-public class ObservationEvent{
-  public int id;
-  public ObservationEventType eventType;
-  public string scriptName;
-  public string location;
-
-  public Item itemInEvent;
-
-  public ItemCategory itemCategory;
-  public Attributes challengedAttribute;
-  public int challengeDifficulty;
-  public int discountPercent;
 }

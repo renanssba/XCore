@@ -2,6 +2,7 @@
 // pass_time
 // pass_time
 //goto dia_4
+fade_music 0 0
 choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
 //goto aula
 
@@ -10,6 +11,7 @@ choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
 waypoint intro
 
 goto_script "enter_observation" "school morning"
+play_music "observacao2_intro" "observacao2_loop"
 
 say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Ricardo. Tá dizendo aqui que ele não é particularmente forte, inteligente nem carismático. Seus hobbies incluem: ler livros e cozinhar.)"
 say "(Aparentemente ele também não tem muita sorte com as garotas...)"
@@ -132,6 +134,7 @@ waypoint end
 fade_out 1
 bg null
 goto_script "show_people_screen"
+play_music "intermission_intro" "intermission_loop"
 fade_in 1
 
 say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"

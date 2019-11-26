@@ -15,21 +15,13 @@ if date_location == 1
   play_music "date2_intro" "date2_loop"
 endif
 
-set_var situation 2
 set_var currentDateEvent 0
 set_var date_success 0
-set_var date_event_result_0 0
-set_var date_event_result_1 0
-set_var date_event_result_2 0
-set_var date_event_result_3 0
-set_var date_event_result_4 0
-set_var date_event_result_5 0
-set_var date_event_result_6 0
 
 set_screen "date"
 
-wait 0.5
-show_date_ui true
+//wait 0.5
+//show_date_ui true
 fade_in 0.7
 
 if tutorial_date == 0
@@ -51,74 +43,106 @@ if tutorial_date2 == 0
 endif
 
 
+set_var currentPlayerTurn 0
+
+
+waypoint new_player_turn
+
+set_var resolution 0
+
+
 // wait for action input
 action_input
 
 
 wait 0.5
-actor_anim3d
-wait 2
+character_action currentPlayerTurn
+//wait 2.5
 
-event_resolution "date" selected_attribute
+//resolve_action selected_attribute
 
-if resolution == 0
-  goto_script "\currentEventName" guts_success
+if selected_attribute == 0
+  goto_script "\currentEventName" guts_action
 endif
-if resolution == 1
-  goto_script "\currentEventName" intelligence_success
+if selected_attribute == 1
+  goto_script "\currentEventName" intelligence_action
 endif
-if resolution == 2
-  goto_script "\currentEventName" charisma_success
+if selected_attribute == 2
+  goto_script "\currentEventName" charisma_action
 endif
-if resolution == 3
-  goto_script "\currentEventName" guts_fail
-endif
-if resolution == 4
-  goto_script "\currentEventName" intelligence_fail
-endif
-if resolution == 5
-  goto_script "\currentEventName" charisma_fail
+if selected_attribute == 3
+  goto_script "\currentEventName" magic_action
 endif
 
 
-add_var currentDateEvent 1
-set_screen "date"
-wait 0.5
-if resolution < 3
+// if oponent is defeated, go to new event
+if #currentChallengeHp <= 0
+  goto_script "\currentEventName" defeated
+  add_var currentDateEvent 1
+  set_screen "date"
+  wait 0.5
   add_var date_success 1
   challenge_result true
   update_ui
   play_sfx "ui_success"
   wait 2
+  goto new_event
+endif
+
+
+/// go to next player turn
+add_var currentPlayerTurn 1
+if currentPlayerTurn < #partyLength
+  goto new_player_turn
 else
-  challenge_result false
-  update_ui
-  play_sfx "ui_fail"
-  wait 2
+  // enemy turn
+  set_var currentPlayerTurn 0
+  enemy_attack
+  if enemyAttackTargetId == 0
+    goto_script "\currentEventName" attack_boy
+  else
+    goto_script "\currentEventName" attack_girl
+  endif
+  
+  if #currentHp <= 0
+    say "SUA PARTY FOI DERROTADA!"
+    challenge_result false
+    update_ui
+    play_sfx "ui_fail"
+    wait 2
+    goto fail_date
+  endif
+  goto new_player_turn
 endif
-goto new_event
+
+
 
 endif
 
 
+
+
+waypoint win_date
 set_screen "date"
+say "char_name/none" "date/say_4"
+// show_date_ui false
+
+// set_screen "hide_all"
+fade_music 0 0.5
+show_engagement
+fade_music 1 1
+say "date/say_5"
+//set_screen "date"
+goto end
+
+
+waypoint fail_date
+set_screen "date"
+say "char_name/none" "date/say_6"
+// show_date_ui false
+goto end
+
+
 
 waypoint end
-if date_success >= 5
-  say "char_name/none" "date/say_4"
-  show_date_ui false
-
-  // set_screen "hide_all"
-  fade_music 0 0.5
-  show_engagement
-  fade_music 1 1
-  say "date/say_5"
-  //set_screen "date"
-  ship_couple
-else
-  say "char_name/none" "date/say_6"
-  show_date_ui false
-endif
-
-goto_script "spend_day"
-
+goto_script "pass_time"

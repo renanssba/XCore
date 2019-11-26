@@ -101,7 +101,7 @@ public class PartialLoopPlayer : MonoBehaviour {
   } 
 
   public void FadeMusic(float fadeValue, float fadeTime){
-    //Debug.LogWarning("Fading music volume to " + fadeValue + " in " + fadeTime + " seconds.");
+    Debug.LogWarning("Fading music volume to " + fadeValue + " in " + fadeTime + " seconds.");
     DOTween.Kill(introSource); 
     DOTween.Kill(loopSource); 
 

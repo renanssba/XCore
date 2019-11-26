@@ -113,7 +113,8 @@ public class VsnAudioManager : MonoBehaviour {
 
   public void PlayMusic(string introMusic, string loopMusic, bool storeLastPlayed = true){
     //    Debug.LogWarning("Trying to play music: " + introMusic + " and " + loopMusic);
-    if (GetPlayingMusicName() == GetNameFromPath(loopMusic) ) {
+    if(GetPlayingMusicName() == GetNameFromPath(loopMusic) &&
+       musicPlayer.introSource.volume!=0f && musicPlayer.loopSource.volume != 0f ) {
       Debug.LogWarning("wont play the same music");
       return;
     }

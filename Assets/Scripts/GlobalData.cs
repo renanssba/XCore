@@ -6,7 +6,6 @@ public class GlobalData : MonoBehaviour {
 
   public List<Person> people;
   public Relationship[] relationships;
-  public List<int> shippedCouples;
 
   public Person[] observedPeople;
 
@@ -16,9 +15,6 @@ public class GlobalData : MonoBehaviour {
   public int day;
   public int maxDays;
   public int objective;
-
-  public int currentDateHearts;
-  public int maxDateHearts;
 
   public bool hideTutorials = false;
 
@@ -44,9 +40,6 @@ public class GlobalData : MonoBehaviour {
     string auxName;
 
     people = new List<Person>();
-    ResetCurrentCouples();
-
-
     relationships = new Relationship[boysToGenerate + girlsToGenerate -1];
 
     VsnSaveSystem.SetVariable("money", 0);
@@ -125,6 +118,7 @@ public class GlobalData : MonoBehaviour {
     p = new Person() {
       name = "Fertiliel",
       isMale = false,
+      isHuman = false,
       id = 10,
       faceId = 11,
       attributes = new int[] { 1, 1, 1, 2 },
@@ -179,16 +173,6 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void ShipCurrentCouple(){
-    shippedCouples.Add(Random.Range(0,9999));
-    CurrentBoy().state = PersonState.shipped;
-    CurrentGirl().state = PersonState.shipped;
-  }
-
-  public void ResetCurrentCouples(){
-    shippedCouples.Clear();
-  }
-
   public string CurrentCoupleName(){
     if(observedPeople.Length < 2) {
       return "";
@@ -224,30 +208,16 @@ public class GlobalData : MonoBehaviour {
     return observedPeople[1];
   }
 
-  public int EventSolvingAttributeLevel(int attr){
+  public int CurrentCharacterAttribute(int attr){
 
-    switch(VsnSaveSystem.GetIntVariable("situation")) {
-      case 1:
-        if (ObservedPerson() != null) {
-          return ObservedPerson().attributes[attr];
-        }
-        break;
-      case 2:
-        if (BattleController.instance.GetCurrentDateEvent() == null) {
-          return 0;
-        }
-        switch (BattleController.instance.GetCurrentDateEvent().interactionType) {
-          case DateEventInteractionType.male:
-            return CurrentBoy().AttributeValue(attr);
-          case DateEventInteractionType.female:
-            return CurrentGirl().AttributeValue(attr);
-          case DateEventInteractionType.couple:
-            return (CurrentGirl().AttributeValue(attr) + CurrentBoy().AttributeValue(attr));
-        }
-        break;
+    if(BattleController.instance.GetCurrentDateEvent() == null) {
+      return 0;
     }
-    
-    return 0;
+
+    int personId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    Person currentCharacter = BattleController.instance.partyMembers[personId];
+
+    return currentCharacter.AttributeValue(attr);
   }
 
   public void PassTime() {

@@ -84,7 +84,6 @@ public class ICGameController : MonoBehaviour {
   
   public void Update() {
     if (Input.GetKeyDown(KeyCode.F5)) {
-      GlobalData.instance.ResetCurrentCouples();
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
   }

@@ -21,7 +21,7 @@ public class SpecialCodes {
       currentString = InterpretVariableValue(currentString);
       
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date/" + BattleController.instance.GetCurrentDateEventName());
+      currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentDateEventName());
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
@@ -32,15 +32,14 @@ public class SpecialCodes {
       }
       if (GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
-        currentString = currentString.Replace("\\guts", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.guts).ToString());
-        currentString = currentString.Replace("\\intelligence", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.intelligence).ToString());
-        currentString = currentString.Replace("\\charisma", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.charisma).ToString());
-        currentString = currentString.Replace("\\magic", GlobalData.instance.EventSolvingAttributeLevel((int)Attributes.magic).ToString());
+        currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
+        currentString = currentString.Replace("\\intelligence", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.intelligence).ToString());
+        currentString = currentString.Replace("\\charisma", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.charisma).ToString());
+        currentString = currentString.Replace("\\magic", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.magic).ToString());
       }
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
       }
-      currentString = currentString.Replace("\\progress", GlobalData.instance.shippedCouples.Count.ToString());
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
@@ -113,6 +112,8 @@ public class SpecialCodes {
         return Random.Range(0, 100);
       case "#dateLength":
         return BattleController.instance.dateLength;
+      case "#partyLength":
+        return BattleController.instance.partyMembers.Length;
       case "#isEncounterPersonUnrevealed":
         if(GlobalData.instance.EncounterPerson()!=null) {
           return GlobalData.instance.EncounterPerson().state == PersonState.unrevealed ? 1 : 0;
@@ -123,8 +124,10 @@ public class SpecialCodes {
         return GlobalData.instance.day;
       case "#max_days":
         return GlobalData.instance.maxDays;
-      case "#progress":
-        return GlobalData.instance.shippedCouples.Count;
+      case "#currentChallengeHp":
+        return BattleController.instance.GetCurrentDateEvent().hp;
+      case "#currentHp":
+        return BattleController.instance.hp;
       case "#isCurrentPersonMale":
         return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
       case "#currentEventInteractionType":
