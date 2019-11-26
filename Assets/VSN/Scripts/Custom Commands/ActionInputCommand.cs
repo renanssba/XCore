@@ -17,6 +17,7 @@ namespace Command {
     public void SetupCurrentCharacter() {
       int currentCharacter = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
       int dateLength = BattleController.instance.partyMembers.Length;
+      BattleController.instance.SetupCharacterActions(currentCharacter);
       UIController.instance.SetupCurrentCharacterUi(currentCharacter);
     }
 

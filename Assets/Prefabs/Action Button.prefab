@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222701552344537074}
   - component: {fileID: 114161240715444656}
   m_Layer: 5
-  m_Name: Mp Cost Text
+  m_Name: Sp Cost Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'MP: 2'
+  m_text: 'SP: 2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
   m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
@@ -276,10 +276,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fa33e83a54250458b85151c6efbfe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  person:
+    name: 
+    isMale: 0
+    isHuman: 1
+    state: 0
+    attributes: 
+    attributeBonuses: 00000000000000000000000000000000
+    maxSp: 5
+    sp: 5
+    skillIds: 
+    favoriteMatter: 
+    mostHatedMatter: 
+    inventory:
+      owner:
+        name: 
+        isMale: 0
+        isHuman: 1
+        state: 0
+        attributes: 
+        attributeBonuses: 00000000000000000000000000000000
+        maxSp: 5
+        sp: 5
+        skillIds: 
+        favoriteMatter: 
+        mostHatedMatter: 
+        inventory:
+          owner:
+            name: 
+            isMale: 0
+            isHuman: 1
+            state: 0
+            attributes: 
+            attributeBonuses: 00000000000000000000000000000000
+            maxSp: 5
+            sp: 5
+            skillIds: 
+            favoriteMatter: 
+            mostHatedMatter: 
+            inventory:
+              owner:
+                name: 
+                isMale: 0
+                isHuman: 1
+                state: 0
+                attributes: 
+                attributeBonuses: 00000000000000000000000000000000
+                maxSp: 5
+                sp: 5
+                skillIds: 
+                favoriteMatter: 
+                mostHatedMatter: 
+                id: 0
+                faceId: 0
+              itemListings: []
+            id: 0
+            faceId: 0
+          itemListings: []
+        id: 0
+        faceId: 0
+      itemListings: []
+    id: 0
+    faceId: 0
+  skill:
+    name: 
+    id: 0
+    description: 
+    sprite: {fileID: 0}
+    type: 0
+    attribute: 0
+    multiplier: 0
+    skillEffect: 0
+    duration: 0
+    spCost: 0
   nameText: {fileID: 114508472886700832}
-  mpCostText: {fileID: 114161240715444656}
+  spCostText: {fileID: 114161240715444656}
   iconImage: {fileID: 114831299110261528}
   improvementIconImage: {fileID: 114998365056616212}
+  shade: {fileID: 1323483446728116}
 --- !u!114 &114275397529056292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,7 +396,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114227069880889732}
         m_MethodName: ClickedActionButton
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -584,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.65882355, g: 0.007843138, b: 0.09411766, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

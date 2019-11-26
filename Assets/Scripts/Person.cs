@@ -3,20 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillType {
-  character,
-  couple
-}
-
-public enum Skill{
-  sensor,
-  raiseAttribute,
-  flee,
-  gluttony,
-  bondSkill,
-  none
-}
-
 public enum Attributes{
   guts = 0,
   intelligence = 1,
@@ -61,8 +47,8 @@ public class Person {
     attributeBonuses = new int[] { 0, 0, 0, 0 };
     inventory = new Inventory();
     inventory.owner = this;
-    maxSp = 5;
-    sp = 5;
+    maxSp = 3;
+    sp = 3;
   }
 
 

@@ -12,10 +12,14 @@ public class BattleController : MonoBehaviour {
   public List<DateEvent> allDateEvents;
   public TextAsset dateEventsFile;
 
+  public List<Skill> allSkills;
+  public TextAsset skillsFile;
+
   public int maxHp = 10;
   public int hp = 10;
 
   public Person[] partyMembers;
+  public Skill[] selectedSkills;
   public int dateLength;
 
   public DateEvent[] dateSegments;
@@ -23,7 +27,7 @@ public class BattleController : MonoBehaviour {
   public GameObject damageParticlePrefab;
   public TextMeshProUGUI difficultyText;
   public Slider enemyHpSlider;
-  const float animTime = 0.15f;
+  const float attackAnimationTime = 0.15f;
 
   public Color greenColor;
   public Color redColor;
@@ -32,6 +36,7 @@ public class BattleController : MonoBehaviour {
   public void Awake() {
     instance = this;
     LoadAllDateEvents();
+    LoadAllSkills();
     dateLength = 3;
   }
 
@@ -39,6 +44,7 @@ public class BattleController : MonoBehaviour {
     GlobalData.instance.observedPeople = new Person[] {boy, girl};
 
     partyMembers = new Person[] {boy, girl, GlobalData.instance.people[4]};
+    selectedSkills = new Skill[partyMembers.Length];
 
     maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 10;
 
@@ -77,25 +83,47 @@ public class BattleController : MonoBehaviour {
   }
 
 
+
+  public void SetupCharacterActions(int currentPartyMember) {
+    Person currentChar = partyMembers[currentPartyMember];
+
+    for(int i=0; i<UIController.instance.actionButtons.Length; i++) {
+      if(i < currentChar.skillIds.Length) {
+        UIController.instance.actionButtons[i].Initialize(partyMembers[currentPartyMember],
+                                                          GetSkillById(currentChar.skillIds[i]) );
+        UIController.instance.actionButtons[i].gameObject.SetActive(true);
+      } else {
+        UIController.instance.actionButtons[i].gameObject.SetActive(false);
+      }
+    }
+  }
+
   public void CharacterAction(int partyMemberId) {
     VsnController.instance.state = ExecutionState.WAITING;
-    StartCoroutine(ExecuteCharacterAttack(partyMemberId, animTime));
+
+    switch(selectedSkills[partyMemberId].type) {
+      case SkillType.attack:
+        StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedSkills[partyMemberId]));
+        break;
+      case SkillType.active:
+        StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedSkills[partyMemberId]));
+        break;
+      case SkillType.passive:
+        Debug.LogError("Passive skill "+ selectedSkills[partyMemberId].name +" used actively.");
+        break;
+    }
   }
 
-  public void EnemyAttack() {
-    int targetId = Random.Range(0, 2);
-    VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
-    VsnController.instance.state = ExecutionState.WAITING;
-    StartCoroutine(ExecuteEnemyAttack(targetId, animTime));
-  }
 
-
-  public IEnumerator ExecuteCharacterAttack(int partyMemberId, float time) {
+  public IEnumerator ExecuteCharacterAttack(int partyMemberId, Skill usedSkill) {
     // damage event HP
-    int attributeId = VsnSaveSystem.GetIntVariable("selected_attribute");
-    int actionPowerLevel = VsnSaveSystem.GetIntVariable("attribute_effective_level");
+    int attributeId = (int)usedSkill.attribute;
+    int actionPowerLevel = (int)(partyMembers[partyMemberId].AttributeValue((int)usedSkill.attribute) * usedSkill.multiplier);
     float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
     int effectiveActionPower = (int)(actionPowerLevel * effectivity);
+
+    VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
+
 
     DamageEnemyHp(effectiveActionPower);
 
@@ -104,10 +132,10 @@ public class BattleController : MonoBehaviour {
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("hit_default");
 
-    yield return new WaitForSeconds(time);
+    yield return new WaitForSeconds(attackAnimationTime);
 
     TheaterController.instance.challengeActor.Shine();
-    ShowParticleAnimation(attributeId, effectiveActionPower, effectivity);
+    TheaterController.instance.challengeActor.ShowDamageParticle(attributeId, effectiveActionPower, effectivity);
 
     yield return new WaitForSeconds(1f);
     enemyHpSlider.maxValue = currentEvent.maxHp;
@@ -115,6 +143,39 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(1.2f);
     VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
+  public IEnumerator ExecuteCharacterSkill(int partyMemberId, Skill usedSkill) {
+    TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+
+    DateEvent currentEvent = GetCurrentDateEvent();
+    VsnAudioManager.instance.PlaySfx("hit_default");
+
+    yield return new WaitForSeconds(attackAnimationTime);
+
+    switch(usedSkill.skillEffect) {
+      case SkillEffect.sensor:
+        TheaterController.instance.challengeActor.Shine();
+        TheaterController.instance.challengeActor.ShowWeaknessCard(true);
+        break;
+      case SkillEffect.raiseAttribute:
+        TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+        TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowEmpowerParticle(usedSkill.attribute, (int)usedSkill.multiplier);
+        break;
+    }    
+    
+    yield return new WaitForSeconds(1.5f);
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
+
+  public void EnemyAttack() {
+    int targetId = Random.Range(0, 2);
+    VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
+    VsnController.instance.state = ExecutionState.WAITING;
+    StartCoroutine(ExecuteEnemyAttack(targetId, attackAnimationTime));
   }
 
   public IEnumerator ExecuteEnemyAttack(int targetId, float time) {
@@ -133,43 +194,30 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(time);
 
     TheaterController.instance.ShineCharacter(targetId);
-    ShowParticleAnimation(attributeId, effectiveAttackDamage, 1f);
+    TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
 
     yield return new WaitForSeconds(1f);
-    UIController.instance.AnimateHpDamage(initialHp, hp);
+    UIController.instance.AnimateHpChange(initialHp, hp);
 
     yield return new WaitForSeconds(1.2f);
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
-
-  public void ShowParticleAnimation(int attribute, int attributeLevel, float effectivity) {
-    string effectivityString = "";
-    if(effectivity > 1f) {
-      effectivityString = "\n<size=40>SUPER!</size>";
-    } else if(effectivity < 1f) {
-      effectivityString = "\n<size=40>fraco</size>";
-    }
-    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
-    newobj.GetComponent<TextMeshProUGUI>().text = attributeLevel.ToString() + effectivityString;
-    newobj.GetComponent<TextMeshProUGUI>().color = ResourcesManager.instance.attributeColor[attribute];
-  }
-
   public void ShowChallengeResult(bool success) {
-    GameObject newobj = Instantiate(damageParticlePrefab, UIController.instance.bgImage.transform.parent);
+    Vector3 v = damageParticlePrefab.transform.localPosition;
+    GameObject newParticle = Instantiate(damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, transform);
+    //newParticle.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
-    newobj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-    newobj.GetComponent<JumpingParticle>().duration = 1f;
+    newParticle.GetComponent<JumpingParticle>().duration = 1f;
     if(success == true) {
-      newobj.GetComponent<JumpingParticle>().jumpForce = 10;
+      newParticle.GetComponent<JumpingParticle>().jumpForce = 0.01f;
     } else {
-      newobj.GetComponent<JumpingParticle>().jumpForce = 0;
+      newParticle.GetComponent<JumpingParticle>().jumpForce = 0;
     }
-    newobj.GetComponent<TextMeshProUGUI>().text = success ?
+    newParticle.GetComponent<TextMeshPro>().text = success ?
       Lean.Localization.LeanLocalization.GetTranslationText("date/success_message") :
       Lean.Localization.LeanLocalization.GetTranslationText("date/failure_message");
-    newobj.GetComponent<TextMeshProUGUI>().color = success ? greenColor : redColor;
+    newParticle.GetComponent<TextMeshPro>().color = success ? greenColor : redColor;
   }
 
 
@@ -230,6 +278,7 @@ public class BattleController : MonoBehaviour {
 
     return selectedId;
   }
+
 
   public void SetDifficultyForEvents() {
     for(int i = 0; i < dateLength; i++) {
@@ -313,5 +362,83 @@ public class BattleController : MonoBehaviour {
         return 2f;
     }
     return 1f;
+  }
+  
+  public void LoadAllSkills() {
+    SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(skillsFile, 1);
+
+    allSkills = new List<Skill>();
+    foreach(Dictionary<string, string> entry in data.data) {
+      //Debug.LogWarning("Importing Card: ");
+
+      Skill newSkill = new Skill();
+
+      newSkill.id = int.Parse(entry["id"]);
+
+      newSkill.name = entry["name"];
+      newSkill.description = entry["description"];
+      newSkill.type = GetSkillTypeByString(entry["type"]);
+
+      newSkill.attribute = Utils.GetAttributeByString(entry["attribute"]);
+      if(!string.IsNullOrEmpty(entry["multiplier"])) {
+        newSkill.multiplier = float.Parse(entry["multiplier"]);
+      }
+      if(!string.IsNullOrEmpty(entry["duration"])) {
+        newSkill.duration = int.Parse(entry["duration"]);
+      }
+      if(!string.IsNullOrEmpty(entry["sp cost"])) {
+        newSkill.spCost = int.Parse(entry["sp cost"]);
+      }
+
+      if(newSkill.type == SkillType.attack) {
+        newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.attribute];
+      } else {
+        newSkill.sprite = Resources.Load<Sprite>("Cards/" + entry["sprite"]);
+      }
+      
+      newSkill.skillEffect = GetSkillEffectByString(entry["skill"]);
+
+      allSkills.Add(newSkill);
+    }
+  }
+
+  public SkillEffect GetSkillEffectByString(string name) {
+    for(int i = 0; i <= (int)SkillEffect.none; i++) {
+      if(((SkillEffect)i).ToString() == name) {
+        return (SkillEffect)i;
+      }
+    }
+    return SkillEffect.none;
+  }
+
+  public SkillType GetSkillTypeByString(string name) {
+    switch(name) {
+      case "attack":
+        return SkillType.attack;
+      case "active":
+        return SkillType.active;
+      case "passive":
+        return SkillType.passive;
+      default:
+        return SkillType.active;
+    }
+  }
+
+  public Skill GetSkillById(int id) {
+    foreach(Skill skill in allSkills) {
+      if(skill.id == id) {
+        return skill;
+      }
+    }
+    return null;
+  }
+
+  public Skill GetSkillByName(string name) {
+    foreach(Skill skill in allSkills) {
+      if(skill.name == name) {
+        return skill;
+      }
+    }
+    return null;
   }
 }

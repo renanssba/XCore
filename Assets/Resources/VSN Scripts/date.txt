@@ -15,9 +15,8 @@ if date_location == 1
   play_music "date2_intro" "date2_loop"
 endif
 
-set_var currentDateEvent 0
-set_var date_success 0
 
+set_var currentDateEvent 0
 set_screen "date"
 
 //wait 0.5
@@ -48,8 +47,7 @@ set_var currentPlayerTurn 0
 
 waypoint new_player_turn
 
-set_var resolution 0
-
+set_var selected_attribute -1
 
 // wait for action input
 action_input
@@ -58,8 +56,6 @@ action_input
 wait 0.5
 character_action currentPlayerTurn
 //wait 2.5
-
-//resolve_action selected_attribute
 
 if selected_attribute == 0
   goto_script "\currentEventName" guts_action
@@ -81,7 +77,6 @@ if #currentChallengeHp <= 0
   add_var currentDateEvent 1
   set_screen "date"
   wait 0.5
-  add_var date_success 1
   challenge_result true
   update_ui
   play_sfx "ui_success"

@@ -48,12 +48,10 @@ public class PersonCard : MonoBehaviour {
     nameText.text = person.name;
     faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
 
-
     if(coupleEntryLayout == PersonCardLayout.date) {
-      spText.text = person.sp + "<size=16>/" + person.maxSp+ "</size>";
+      spText.text = "SP: "+person.sp + "<size=16>/" + person.maxSp+ "</size>";
       return;
     }
-
 
     RectTransform rect = GetComponent<RectTransform>();
     if(heartsPanel != null) {

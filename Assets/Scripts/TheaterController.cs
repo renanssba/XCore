@@ -11,30 +11,16 @@ public enum TheaterEvent {
   dateChallenge
 }
 
-public enum CameraPosition {
-  mainCamera,
-  closeupCamera
-}
-
 
 public class TheaterController : MonoBehaviour {
 
   public static TheaterController instance;
 
-  public Vector3 cameraMainPosition;
-  public Vector3 cameraCloseupPosition;
-
   public Vector3 mainPosition;
   public Vector3 supportPosition;
+  public Vector3 angelPosition;
   public Vector3 encounterPosition;
   public Vector3 challengePosition;
-
-  public Vector3 rotationFacingRight;
-  public Vector3 rotationFacingLeft;
-  public Vector3 rotationFacingFront;
-
-  public Vector2 mainActiveCardPosition;
-  public Vector2 supportActiveCardPosition;
 
   public Actor2D mainActor;
   public Actor2D supportActor;
@@ -42,9 +28,6 @@ public class TheaterController : MonoBehaviour {
   public Actor2D challengeActor;
 
   public GameObject[] bgObjects;
-
-  public GameObject weaknessCard;
-  public TextMeshProUGUI weaknessCardText;
 
   public Image[] faceImages;
 
@@ -66,22 +49,14 @@ public class TheaterController : MonoBehaviour {
     switch(currentEvent) {
       case TheaterEvent.date:
       case TheaterEvent.dateChallenge:
-        PositionCamera(CameraPosition.mainCamera);
-
         //mainActor.transform.localPosition = mainPosition;
-        //mainActor.transform.localEulerAngles = rotationFacingRight;
 
         supportActor.gameObject.SetActive(true);
         supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
         //supportActor.transform.localPosition = supportPosition;
-        //supportActor.transform.localEulerAngles = rotationFacingRight;
 
         if(currentEvent == TheaterEvent.date) {
-          //if(VsnSaveSystem.GetIntVariable("currentDateEvent") >= 7) {
-          //  PositionCamera(CameraPosition.closeupCamera);
-          //  PositionActorsCloseup();
-          //}
-          ShowWeaknessCard(false);
+          challengeActor.ShowWeaknessCard(false);
 
           ChallengeLeavesScene();
         } else {
@@ -92,8 +67,6 @@ public class TheaterController : MonoBehaviour {
           if(!string.IsNullOrEmpty(dateEvent.spriteName)) {
             ChallengeEntersScene();
           } else {
-            //PositionCamera(CameraPosition.closeupCamera);
-            //PositionActorsCloseup();
             InitializeChallengeLevelAndHp();
           }
           UIController.instance.datingPeoplePanel.ShowPanel();
@@ -102,26 +75,11 @@ public class TheaterController : MonoBehaviour {
     }
   }
 
-  public void PositionCamera(CameraPosition camPos) {
-    switch(camPos) {
-      case CameraPosition.mainCamera:
-        Camera.main.transform.position = cameraMainPosition;
-        Camera.main.transform.eulerAngles = Vector3.zero;
-        break;
-      case CameraPosition.closeupCamera:
-        Camera.main.transform.position = cameraCloseupPosition;
-        Camera.main.transform.eulerAngles = 90f*Vector3.down;
-        break;
-    }
-  }
-
   public void PositionActorsCloseup() {
     mainActor.transform.localPosition = mainPosition;
-    mainActor.transform.localEulerAngles = rotationFacingFront;
 
     supportActor.gameObject.SetActive(true);
     supportActor.transform.localPosition = new Vector3(mainPosition.x, supportPosition.y, supportPosition.z);
-    supportActor.transform.localEulerAngles = rotationFacingFront + new Vector3(0f, 90f, 0f);
   }
 
   public void CharacterAttackAnimation(int actorId, int animId) {
@@ -154,6 +112,18 @@ public class TheaterController : MonoBehaviour {
         angelActor.Shine();
         break;
     }
+  }
+
+  public Actor2D GetActorByIdInParty(int actorId) {
+    switch(actorId) {
+      case 0:
+        return mainActor;
+      case 1:
+        return supportActor;
+      case 2:
+        return angelActor;
+    }
+    return null;
   }
 
 
@@ -212,38 +182,5 @@ public class TheaterController : MonoBehaviour {
         bgObjects[2].SetActive(true);
         break;
     }
-  }
-
-  public void ShowWeaknessCard(bool activate) {
-    weaknessCard.SetActive(activate);
-    if(activate) {
-      VsnAudioManager.instance.PlaySfx("relationship_up");
-      SetWeaknessCardText();
-    }
-  }
-
-  public void SetWeaknessCardText() {
-    string text = "";
-    DateEvent dateChallenge = BattleController.instance.GetCurrentDateEvent();
-    Attributes[] weak = dateChallenge.GetWeaknesses();
-    Attributes[] resistant = dateChallenge.GetResistances();
-
-    if(weak.Length>0) {
-      text += "Fraqueza:\n";
-      for(int i=0; i<weak.Length; i++) {
-        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + weak[i].ToString()) + "\n";
-      }
-    }
-    if(resistant.Length > 0) {
-      if(!string.IsNullOrEmpty(text)) {
-        text += "\n";
-      }
-      text += "Resistência:\n";
-      for(int i = 0; i < resistant.Length; i++) {
-        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + resistant[i].ToString()) + "\n";
-      }
-    }
-
-    weaknessCardText.text = text;
   }
 }

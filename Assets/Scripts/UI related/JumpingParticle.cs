@@ -12,10 +12,10 @@ public class JumpingParticle : MonoBehaviour {
 
 	public void Start() {
     transform.DOJump(transform.position, jumpForce, 1, duration).OnComplete(()=> {
-      TextMeshProUGUI t = GetComponent<TextMeshProUGUI>();
+      TextMeshPro t = GetComponent<TextMeshPro>();
       t.DOFade(0f, fadeDuration).OnComplete(() => {
-        //Destroy(gameObject);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
       });
     });
   }

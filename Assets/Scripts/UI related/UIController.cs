@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour {
 
   public ScreenTransitions actionsPanel;
   public Transform actionButtonsContent;
-  public GameObject[] actionButtons;
+  public ActionButton[] actionButtons;
 
   public ScreenTransitions datingPeopleInfoPanel;
   public PersonCard[] partyPeopleCards;
@@ -100,7 +100,7 @@ public class UIController : MonoBehaviour {
     ShowDateProgressUI();
   }
 
-  public void AnimateHpDamage(int initialHp, int finalHp) {
+  public void AnimateHpChange(int initialHp, int finalHp) {
     float currentShownHp = initialHp;
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
       partyHpSlider.value = currentShownHp;
@@ -218,14 +218,8 @@ public class UIController : MonoBehaviour {
   public void SetupCurrentCharacterUi(int currentPartyMember) {
     int dateLength = BattleController.instance.partyMembers.Length;
 
-    // action buttons
-    for(int i=0; i<3; i++) {
-      actionButtons[i].SetActive(BattleController.instance.partyMembers[currentPartyMember].isHuman);
-    }
-    actionButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[guts_action_name]");
-    actionButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[intelligence_action_name]");
-    actionButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = SpecialCodes.InterpretStrings("\\vsn[charisma_action_name]");
-    actionButtons[3].SetActive(!BattleController.instance.partyMembers[currentPartyMember].isHuman);
+    // position actions panel
+    actionsPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f*currentPartyMember, 0f, 0f);
 
     // turn characters UI
     for(int i = 0; i < 3; i++) {
