@@ -91,6 +91,11 @@ public class VsnScriptReader {
     }
   }
 
+  public void GotoCommandId(int commandId) {
+    currentCommandIndex = commandId;
+  }
+
+
   public void GotoNextElseOrEndif(){
     int commandIndex = FindNextElseOrEndifCommand();
 
@@ -127,6 +132,147 @@ public class VsnScriptReader {
       }
     }
     return -1;
+  }
+
+
+  public void GotoNextEndwhile() {
+    int commandIndex = FindNextEndwhileCommand();
+
+    if(commandIndex == -1) {
+      Debug.LogError("Invalid while/endwhile structure. Please check the command number " + commandIndex);
+      currentCommandIndex = 999999999;
+    } else {
+      currentCommandIndex = commandIndex + 1;
+    }
+  }
+
+  public int FindNextEndwhileCommand() {
+    int index = currentCommandIndex;
+    int nestedWhileCommandsFound = 0;
+
+    for(int i = index; i < vsnCommands.Count; i++) {
+      VsnCommand command = vsnCommands[i];
+
+      if(command.GetType() == typeof(WhileCommand)) {
+        nestedWhileCommandsFound++;
+      }
+
+      if(command.GetType() == typeof(EndWhileCommand)) {
+        if(nestedWhileCommandsFound == 0) {
+          return command.commandIndex;
+        } else {
+          nestedWhileCommandsFound -= 1;
+        }
+      }
+    }
+    return -1;
+  }
+
+  public void GotoPreviousWhile() {
+    int commandIndex = FindPreviousWhileCommand();
+
+    if(commandIndex == -1) {
+      Debug.LogError("Invalid while/endwhile structure. Please check the command number " + commandIndex);
+      currentCommandIndex = 999999999;
+    } else {
+      currentCommandIndex = commandIndex;
+    }
+  }
+
+  public int FindPreviousWhileCommand() {
+    int index = currentCommandIndex-2;
+    int nestedWhileCommandsFound = 0;
+
+    for(int i = index; i >= 0; i--) {
+      VsnCommand command = vsnCommands[i];
+
+      if(command.GetType() == typeof(EndWhileCommand)) {
+        nestedWhileCommandsFound++;
+      }
+
+      if(command.GetType() == typeof(WhileCommand)) {
+        if(nestedWhileCommandsFound == 0) {
+          return command.commandIndex;
+        } else {
+          nestedWhileCommandsFound -= 1;
+        }
+      }
+    }
+    return -1;
+  }
+
+
+
+  public void GotoNextEndfor() {
+    int commandIndex = FindNextEndforCommand();
+
+    if(commandIndex == -1) {
+      Debug.LogError("Invalid for/endfor structure. Please check the command number " + commandIndex);
+      currentCommandIndex = 999999999;
+    } else {
+      currentCommandIndex = commandIndex + 1;
+    }
+  }
+
+  public int FindNextEndforCommand() {
+    int index = currentCommandIndex;
+    int nestedForCommandsFound = 0;
+
+    for(int i = index; i < vsnCommands.Count; i++) {
+      VsnCommand command = vsnCommands[i];
+
+      if(command.GetType() == typeof(ForCommand)) {
+        nestedForCommandsFound++;
+      }
+
+      if(command.GetType() == typeof(EndForCommand)) {
+        if(nestedForCommandsFound == 0) {
+          return command.commandIndex;
+        } else {
+          nestedForCommandsFound -= 1;
+        }
+      }
+    }
+    return -1;
+  }
+
+  public VsnCommand ReturnPreviousForCommand() {
+    int index = currentCommandIndex - 2;
+    int nestedForCommandsFound = 0;
+
+    for(int i = index; i >= 0; i--) {
+      VsnCommand command = vsnCommands[i];
+
+      if(command.GetType() == typeof(EndForCommand)) {
+        nestedForCommandsFound++;
+      }
+
+      if(command.GetType() == typeof(ForCommand)) {
+        if(nestedForCommandsFound == 0) {
+          return command;
+        } else {
+          nestedForCommandsFound -= 1;
+        }
+      }
+    }
+    return null;
+  }
+
+
+  public VsnCommand FindNextEndwhileOrEndforCommand() {
+    int index = currentCommandIndex;
+
+    for(int i = index; i < vsnCommands.Count; i++) {
+      VsnCommand command = vsnCommands[i];
+
+      if(command.GetType() == typeof(EndForCommand)) {
+        return command;
+      }
+      if(command.GetType() == typeof(EndWhileCommand)) {
+        return command;
+      }
+    }
+    return null;
   }
 
   public void GotoEnd(){

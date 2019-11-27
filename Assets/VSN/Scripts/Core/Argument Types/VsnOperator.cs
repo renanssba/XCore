@@ -11,6 +11,12 @@ public class VsnOperator : VsnArgument{
 
 
   public bool EvaluateComparison(VsnArgument first, VsnArgument second){
+    if((first.GetType() == typeof(VsnBoolean) && second.GetType() == typeof(VsnBoolean)) ||
+       (first.GetType() == typeof(VsnReference) && second.GetType() == typeof(VsnBoolean)) ||
+       (first.GetType() == typeof(VsnBoolean) && second.GetType() == typeof(VsnReference))) {
+      return CompareBooleans(first.GetBooleanValue(), second.GetBooleanValue());
+    }
+
     if((first.GetType() == typeof(VsnNumber) && second.GetType() == typeof(VsnNumber)) ||
        (first.GetType() == typeof(VsnReference) && second.GetType() == typeof(VsnNumber)) ||
        (first.GetType() == typeof(VsnNumber) && second.GetType() == typeof(VsnReference)) ){
@@ -85,10 +91,31 @@ public class VsnOperator : VsnArgument{
   }
 
 
+  private bool CompareBooleans(bool op1, bool op2) {
+    Debug.Log("Comparing booleans");
+
+    switch(operatorType) {
+      case "==":
+        if(op1 == op2) {
+          return true;
+        }
+        break;
+      case "!=":
+        if(op1 != op2) {
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
+
+
   private bool CompareVariables(VsnArgument op1, VsnArgument op2){
     /// TODO: also implement when the two variables are different types
     /// or when they're both strings
 
-    return CompareFloats(op1.GetNumberValue(), op2.GetNumberValue());
+    return CompareFloats(op1.GetNumberValue(), op2.GetNumberValue()) &&
+           CompareStrings(op1.GetStringValue(), op2.GetStringValue()) &&
+           CompareBooleans(op1.GetBooleanValue(), op2.GetBooleanValue());
   }
 }
