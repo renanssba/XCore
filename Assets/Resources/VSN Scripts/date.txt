@@ -1,95 +1,81 @@
 ﻿fade_out 0.7
 bg null
-
 say "char_name/none" "date/say_0"
 
 generate_date
-if date_location == 0
-  bg3d "parque"
-  date_location_name "location/park"
-  play_music "date1_intro" "date1_loop"
-endif
-if date_location == 1
-  bg3d "shopping"
-  date_location_name "location/shopping"
-  play_music "date2_intro" "date2_loop"
-endif
+goto_script "set_date_location"
 
-
-set_var currentDateEvent 0
 set_screen "date"
+set_current_character_turn -1
 
 //wait 0.5
 //show_date_ui true
 fade_in 0.7
 
-if tutorial_date == 0
-  goto_script "tutorial_date"
-endif
+
+/// DATE TUTORIAL (?)
+// if tutorial_date == 0
+  // goto_script "tutorial_date"
+// endif
 
 
-waypoint new_event
-if currentDateEvent < #dateLength
-
-waypoint start_interaction
-set_screen "date_challenge"
-wait 0.6
-goto_script "\currentEventName" event_statement
+for currentDateEvent #dateLength
+  set_screen "date_challenge"
+  wait 0.6
+  goto_script "\currentEventName" event_statement
 
 
-if tutorial_date2 == 0
-  goto_script "tutorial_date2"
-endif
+  if tutorial_date2 == 0
+    goto_script "tutorial_date2"
+  endif
 
 
-set_var currentPlayerTurn 0
+  waypoint start_new_turn
 
-
-waypoint new_player_turn
-
-set_var selected_attribute -1
-
-// wait for action input
-action_input
-
-
-wait 0.5
-character_action currentPlayerTurn
-//wait 2.5
-
-if selected_attribute == 0
-  goto_script "\currentEventName" guts_action
-endif
-if selected_attribute == 1
-  goto_script "\currentEventName" intelligence_action
-endif
-if selected_attribute == 2
-  goto_script "\currentEventName" charisma_action
-endif
-if selected_attribute == 3
-  goto_script "\currentEventName" magic_action
-endif
-
-
-// if oponent is defeated, go to new event
-if #currentChallengeHp <= 0
-  goto_script "\currentEventName" defeated
-  add_var currentDateEvent 1
-  set_screen "date"
+  // character action inputs
+  for currentPlayerTurn #partyLength
+    action_input currentPlayerTurn
+  endfor
+  
+  set_current_character_turn -1
   wait 0.5
-  challenge_result true
-  update_ui
-  play_sfx "ui_success"
-  wait 2
-  goto new_event
-endif
+
+  // execute player actions
+  for currentPlayerTurn #partyLength
+    character_action currentPlayerTurn
+    if selected_attribute == 0
+      goto_script "\currentEventName" guts_action
+    endif
+    if selected_attribute == 1
+      goto_script "\currentEventName" intelligence_action
+    endif
+    if selected_attribute == 2
+      goto_script "\currentEventName" charisma_action
+    endif
+    if selected_attribute == 3
+      goto_script "\currentEventName" magic_action
+    endif
+    wait 0.5
+    
+    // if oponent is defeated, stop attacking
+    if #currentChallengeHp <= 0
+      break
+    endif
+  endfor  
+  
+  // if oponent is defeated, go to new event
+  if #currentChallengeHp <= 0
+    goto_script "\currentEventName" defeated
+    set_screen "date"
+    wait 0.5
+    challenge_result true
+    update_ui
+    play_sfx "ui_success"
+    wait 2
+    continue
+  endif
 
 
-/// go to next player turn
-add_var currentPlayerTurn 1
-if currentPlayerTurn < #partyLength
-  goto new_player_turn
-else
   // enemy turn
   set_var currentPlayerTurn 0
   enemy_attack
@@ -98,7 +84,7 @@ else
   else
     goto_script "\currentEventName" attack_girl
   endif
-  
+
   if #currentHp <= 0
     say "SUA PARTY FOI DERROTADA!"
     challenge_result false
@@ -107,12 +93,8 @@ else
     wait 2
     goto fail_date
   endif
-  goto new_player_turn
-endif
-
-
-
-endif
+  goto start_new_turn
+endfor
 
 
 

@@ -4,10 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+public enum TurnActionType {
+  useSkill,
+  useItem,
+  flee
+}
+
+
 public class ActionButton : MonoBehaviour {
+
+  public TurnActionType actionType = TurnActionType.useSkill;
 
   public Person person;
   public Skill skill;
+
+  public ItemListing itemListing;
 
   public TextMeshProUGUI nameText;
   public TextMeshProUGUI spCostText;
@@ -16,13 +28,31 @@ public class ActionButton : MonoBehaviour {
   public GameObject shade;
 
 
-  public void Initialize(Person p, Skill newSkill) {
+  public void InitializeAsSkill(Person p, Skill newSkill) {
     person = p;
     skill = newSkill;
+    actionType = TurnActionType.useSkill;
+    UpdateUI();
+  }
+
+  public void InitializeAsItem(ItemListing newItem) {
+    itemListing = newItem;
+    actionType = TurnActionType.useItem;
     UpdateUI();
   }
 
   public void UpdateUI() {
+    switch(actionType) {
+      case TurnActionType.useSkill:
+        UpdateUIAsSkill();
+        break;
+      case TurnActionType.useItem:
+        UpdateUIAsItem();
+        break;
+    }    
+  }
+
+  public void UpdateUIAsSkill() {
     nameText.text = skill.name;
     if(skill.type == SkillType.attack && skill.id != 9) {
       nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action_name]");
@@ -34,13 +64,28 @@ public class ActionButton : MonoBehaviour {
     }
 
     if(skill.spCost > 0) {
-      spCostText.text = "SP: "+skill.spCost;
+      spCostText.text = "SP: " + skill.spCost;
       spCostText.gameObject.SetActive(true);
       shade.gameObject.SetActive(!SkillCanBeUsed());
     } else {
       spCostText.gameObject.SetActive(false);
       shade.gameObject.SetActive(false);
     }
+  }
+
+  public void UpdateUIAsItem() {
+    Item item = ItemDatabase.instance.GetItemById(itemListing.id);
+
+    /// name
+    nameText.text = item.GetPrintableName();
+
+    /// icon
+    iconImage.sprite = item.sprite;
+    iconImage.color = Color.white;
+
+    /// quantity
+    spCostText.text = "x" + itemListing.amount;
+    spCostText.gameObject.SetActive(true);
   }
 
 
@@ -50,11 +95,11 @@ public class ActionButton : MonoBehaviour {
       return;
     }
 
+    SfxManager.StaticPlayConfirmSfx();
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
 
     BattleController.instance.selectedSkills[currentPlayerTurn] = skill;
-
-    UIController.instance.actionsPanel.HidePanel();
+    UIController.instance.actionsPanel.EndActionSelect();
     VsnController.instance.GotCustomInput();
   }
 

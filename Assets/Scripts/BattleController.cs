@@ -84,22 +84,13 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public void SetupCharacterActions(int currentPartyMember) {
-    Person currentChar = partyMembers[currentPartyMember];
-
-    for(int i=0; i<UIController.instance.actionButtons.Length; i++) {
-      if(i < currentChar.skillIds.Length) {
-        UIController.instance.actionButtons[i].Initialize(partyMembers[currentPartyMember],
-                                                          GetSkillById(currentChar.skillIds[i]) );
-        UIController.instance.actionButtons[i].gameObject.SetActive(true);
-      } else {
-        UIController.instance.actionButtons[i].gameObject.SetActive(false);
-      }
-    }
-  }
-
   public void CharacterAction(int partyMemberId) {
     VsnController.instance.state = ExecutionState.WAITING;
+    VsnSaveSystem.SetVariable("selected_attribute", -1);
+
+    // spend SP
+    partyMembers[partyMemberId].SpendSp(selectedSkills[partyMemberId].spCost);
+    UIController.instance.UpdateDateUI();
 
     switch(selectedSkills[partyMemberId].type) {
       case SkillType.attack:

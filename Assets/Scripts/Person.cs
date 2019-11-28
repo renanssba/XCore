@@ -104,6 +104,12 @@ public class Person {
     sp = Mathf.Max(sp, 0);
   }
 
+  public void SpendSp(int value) {
+    sp -= value;
+    sp = Mathf.Min(sp, maxSp);
+    sp = Mathf.Max(sp, 0);
+  }
+
   //public void EquipItemInSlot(int slotId, Item item){
   //  VsnAudioManager.instance.PlaySfx("inventory_equip");
   //  equipment = item;

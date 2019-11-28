@@ -8,22 +8,21 @@ namespace Command {
   public class ActionInputCommand : VsnCommand {
 
     public override void Execute() {
-      SetupCurrentCharacter();
-
-      UIController.instance.actionsPanel.ShowPanel();
-      VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;
+      int currentPlayer = (int)args[0].GetNumberValue();
+      WaitForCharacterInput(currentPlayer);
     }
 
-    public void SetupCurrentCharacter() {
-      int currentCharacter = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
-      int dateLength = BattleController.instance.partyMembers.Length;
-      BattleController.instance.SetupCharacterActions(currentCharacter);
-      UIController.instance.SetupCurrentCharacterUi(currentCharacter);
+    public static void WaitForCharacterInput(int currentPlayer) {
+      UIController.instance.SetupCurrentCharacterUi(currentPlayer);
+      UIController.instance.actionsPanel.Initialize(currentPlayer);
+      VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;
     }
 
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[0]);
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg
+      });
     }
   }
 }
