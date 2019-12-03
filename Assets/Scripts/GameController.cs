@@ -104,19 +104,15 @@ public class GameController : MonoBehaviour {
     if(r == null){
       Debug.LogError("Error getting current relationship");
     }
+    UIController.instance.boyInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[0].name);
+    UIController.instance.girlInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[1].name);
+
     coupleEntry.Initialize(r);
     girlInteractionPanel.ShowPanel();
   }
 
   public void HideGirlInteractionScreen() {
     girlInteractionPanel.HidePanel();
-  }
-
-  public void EndTurn() {
-    foreach(Person p in GlobalData.instance.observedPeople) {
-      p.EndTurn();
-    }
-    UIController.instance.UpdateDateUI();
   }
 
   public void ClickConversationButton() {

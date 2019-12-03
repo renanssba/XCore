@@ -8,7 +8,7 @@ namespace Command {
   public class CharacterActionCommand : VsnCommand {
 
     public override void Execute() {
-      BattleController.instance.CharacterAction((int)args[0].GetNumberValue());
+      BattleController.instance.CharacterTurn((int)args[0].GetNumberValue());
     }
 
     public override void AddSupportedSignatures() {

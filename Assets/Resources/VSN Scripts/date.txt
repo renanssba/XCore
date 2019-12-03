@@ -6,6 +6,7 @@ generate_date
 goto_script "set_date_location"
 
 set_screen "date"
+enable_input true
 set_current_character_turn -1
 
 //wait 0.5
@@ -31,6 +32,13 @@ for currentDateEvent #dateLength
 
 
   waypoint start_new_turn
+  
+  // end turn (to pass time on status conditions and take poison damage)
+  end_turn
+  if #currentHp <= 0
+    goto fail_date
+  endif
+  
 
   // character action inputs
   for currentPlayerTurn #partyLength
@@ -42,26 +50,10 @@ for currentDateEvent #dateLength
 
   // execute player actions
   for currentPlayerTurn #partyLength
+    character_action_description currentPlayerTurn
     character_action currentPlayerTurn
-    if selected_attribute == 0
-      goto_script "\currentEventName" guts_action
-    endif
-    if selected_attribute == 1
-      goto_script "\currentEventName" intelligence_action
-    endif
-    if selected_attribute == 2
-      goto_script "\currentEventName" charisma_action
-    endif
-    if selected_attribute == 3
-      goto_script "\currentEventName" magic_action
-    endif
     wait 0.5
-    
-    // if oponent is defeated, stop attacking
-    if #currentChallengeHp <= 0
-      break
-    endif
-  endfor  
+  endfor
   
   // if oponent is defeated, go to new event
   if #currentChallengeHp <= 0
@@ -78,21 +70,13 @@ for currentDateEvent #dateLength
 
   // enemy turn
   set_var currentPlayerTurn 0
+  enemy_attack_description
   enemy_attack
-  if enemyAttackTargetId == 0
-    goto_script "\currentEventName" attack_boy
-  else
-    goto_script "\currentEventName" attack_girl
-  endif
 
   if #currentHp <= 0
-    say "SUA PARTY FOI DERROTADA!"
-    challenge_result false
-    update_ui
-    play_sfx "ui_fail"
-    wait 2
     goto fail_date
   endif
+  
   goto start_new_turn
 endfor
 
@@ -101,6 +85,7 @@ endfor
 
 waypoint win_date
 set_screen "date"
+enable_input false
 say "char_name/none" "date/say_4"
 // show_date_ui false
 
@@ -114,7 +99,13 @@ goto end
 
 
 waypoint fail_date
+say "SUA PARTY FOI DERROTADA!"
+challenge_result false
+update_ui
+play_sfx "ui_fail"
+wait 2
 set_screen "date"
+enable_input false
 say "char_name/none" "date/say_6"
 // show_date_ui false
 goto end

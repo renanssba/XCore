@@ -20,7 +20,11 @@ public class Actor2D : MonoBehaviour {
 
   public void SetCharacterGraphics(Person p) {
     person = p;
-    /// TODO: implement
+    if(!string.IsNullOrEmpty(person.name)) {
+      renderer.sprite = LoadSprite("People/" + person.name);
+    } else {
+      gameObject.SetActive(false);
+    }
   }
 
   public void SetChallengeGraphics(DateEvent currentEvent) {
@@ -32,12 +36,12 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public Sprite LoadSprite(string sprite) {
-    Sprite backgroundSprite = Resources.Load<Sprite>(sprite);
-    if(backgroundSprite == null) {
-      Debug.LogError("Error loading " + sprite + " sprite. Please check its path");
+  public Sprite LoadSprite(string spriteName) {
+    Sprite sprite = Resources.Load<Sprite>(spriteName);
+    if(sprite == null) {
+      Debug.LogError("Error loading " + spriteName + " sprite. Please check its path");
     }
-    return backgroundSprite;
+    return sprite;
   }
 
 
@@ -54,7 +58,6 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
-    //SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
     DOTween.Kill(renderer.material);
     renderer.material.SetFloat("_FlashAmount", minFlash);
     renderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
@@ -98,8 +101,8 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public void ShowDamageParticle(int attribute, int attributeLevel, float effectivity) {
-    string particleString = attributeLevel.ToString();
+  public void ShowDamageParticle(int attribute, int damage, float effectivity) {
+    string particleString = damage.ToString();
     Color particleColor = ResourcesManager.instance.attributeColor[attribute];
 
     if(effectivity > 1f) {
@@ -112,10 +115,20 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowEmpowerParticle(Attributes attribute, int value) {
-    string particleString = "+" + value + " "+ attribute.ToString();
+    string particleString = "+" + value + " "+ Lean.Localization.LeanLocalization.GetTranslationText("attribute/"+ attribute.ToString());
     Color particleColor = ResourcesManager.instance.attributeColor[(int)attribute];
 
     ShowParticleAnimation(particleString, particleColor);
+  }
+
+  public void ShowHealHpParticle(int value) {
+    string particleString = "+" + value + " HP";
+    ShowParticleAnimation(particleString, Color.green);
+  }
+
+  public void ShowHealSpParticle(int value) {
+    string particleString = "+" + value + " SP";
+    ShowParticleAnimation(particleString, Color.green);
   }
 
   public void ShowParticleAnimation(string text, Color color) {

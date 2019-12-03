@@ -22,6 +22,12 @@ public class SpecialCodes {
       
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentDateEventName());
+      if(BattleController.instance.GetCurrentPlayer() != null) {
+        currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().name);
+      }
+      if(BattleController.instance.GetCurrentTarget() != null) {
+        currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().name);
+      }
       if(GlobalData.instance.ObservedPerson() != null) {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);

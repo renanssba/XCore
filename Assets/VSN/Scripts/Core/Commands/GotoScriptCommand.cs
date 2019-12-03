@@ -12,7 +12,12 @@ namespace Command {
       for(int i=1; i<args.Length; i++){
         newArgs[i-1] = args[i];
       }
-      VsnController.instance.GotoVSNScript(args[0].GetStringValue(), newArgs);
+      StaticExecute(args[0].GetStringValue(), newArgs);
+    }
+
+
+    public static void StaticExecute(string scriptToRead, VsnArgument[] args) {
+      VsnController.instance.GotoVSNScript(scriptToRead, args);
     }
 
 

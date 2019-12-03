@@ -29,8 +29,6 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject[] bgObjects;
 
-  public Image[] faceImages;
-
   public float intensity;
 
 
@@ -42,9 +40,6 @@ public class TheaterController : MonoBehaviour {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
     mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
-    faceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
-    faceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
-
 
     switch(currentEvent) {
       case TheaterEvent.date:

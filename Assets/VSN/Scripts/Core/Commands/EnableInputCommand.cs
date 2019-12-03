@@ -8,18 +8,12 @@ namespace Command {
   public class EnableInputCommand : VsnCommand {
 
     public override void Execute() {
-      if(args[0].GetStringValue() == "true") {
-        VsnController.instance.BlockExternalInput(false);
-      } else if(args[0].GetStringValue() == "false") {
-        VsnController.instance.BlockExternalInput(true);
-      } else {
-        Debug.LogError("Invalid parameter");
-      }
+      VsnController.instance.BlockExternalInput(!args[0].GetBooleanValue());
     }
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
-        VsnArgType.stringArg
+        VsnArgType.booleanArg
       });
     }
   }

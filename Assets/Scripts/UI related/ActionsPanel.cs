@@ -59,10 +59,10 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void SetupItemButtons() {
-    Inventory inventory = GlobalData.instance.people[0].inventory;
-    for(int i = 0; i < skillButtons.Length; i++) {
-      if(i < inventory.itemListings.Count) {
-        itemButtons[i].InitializeAsItem(inventory.itemListings[i]);
+    List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
+    for(int i = 0; i < itemButtons.Length; i++) {
+      if(i < battleItems.Count) {
+        itemButtons[i].InitializeAsItem(battleItems[i]);
         itemButtons[i].gameObject.SetActive(true);
       } else {
         itemButtons[i].gameObject.SetActive(false);
@@ -79,6 +79,7 @@ public class ActionsPanel : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.HidePanel();
     skillsPanel.ShowPanel();
+    UIController.instance.ShowHelpMessagePanel("");
   }
 
   public void ClickItemsPanel() {
@@ -90,6 +91,7 @@ public class ActionsPanel : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.HidePanel();
     itemsPanel.ShowPanel();
+    UIController.instance.ShowHelpMessagePanel("");
   }
 
   public void ClickFleeButton() {
@@ -108,7 +110,8 @@ public class ActionsPanel : MonoBehaviour {
 
 
   public bool ThereAreItemsAvailable() {
-    return GlobalData.instance.people[0].inventory.itemListings.Count > 0;
+    List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
+    return battleItems.Count > 0;
   }
 
   public void ClickBackToBaseActionsPanel() {
@@ -116,6 +119,7 @@ public class ActionsPanel : MonoBehaviour {
     skillsPanel.HidePanel();
     itemsPanel.HidePanel();
     baseActionsPanel.ShowPanel();
+    UIController.instance.HideHelpMessagePanel();
   }
 
   public IEnumerator WaitAndShowBaseActionsPanel(ScreenTransitions panel) {

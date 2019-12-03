@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum SkillEffect {
   sensor,
-  raiseAttribute,
+  giveStatusCondition,
+  healStatusCondition,
   flee,
   gluttony,
   bondSkill,
@@ -30,8 +31,23 @@ public class Skill {
   public float multiplier;
 
   public SkillEffect skillEffect;
+  public string[] healsConditionNames;
+  public string[] givesConditionNames;
   public int duration;
+  public int healHp;
+
   public int spCost;
+
+
+  public string GetPrintableName() {
+    //return Lean.Localization.LeanLocalization.GetTranslationText("skill/name/" + nameKey);
+    return SpecialCodes.InterpretStrings(name);
+  }
+
+  public string GetPrintableDescription() {
+    //return Lean.Localization.LeanLocalization.GetTranslationText("skill/description/" + descriptionKey);
+    return SpecialCodes.InterpretStrings(description);
+  }
 }
 
 

@@ -15,11 +15,17 @@ public class BattleController : MonoBehaviour {
   public List<Skill> allSkills;
   public TextAsset skillsFile;
 
+  public List<StatusCondition> allStatusConditions;
+  public TextAsset statusConditionsFile;
+
   public int maxHp = 10;
   public int hp = 10;
 
   public Person[] partyMembers;
+  public TurnActionType[] selectedActionType;
   public Skill[] selectedSkills;
+  public Item[] selectedItems;
+  public int[] selectedTargetPartyId;
   public int dateLength;
 
   public DateEvent[] dateSegments;
@@ -35,8 +41,11 @@ public class BattleController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
+    partyMembers = new Person[0];
+    selectedTargetPartyId = new int[0];
     LoadAllDateEvents();
     LoadAllSkills();
+    LoadAllStatusConditions();
     dateLength = 3;
   }
 
@@ -45,6 +54,9 @@ public class BattleController : MonoBehaviour {
 
     partyMembers = new Person[] {boy, girl, GlobalData.instance.people[4]};
     selectedSkills = new Skill[partyMembers.Length];
+    selectedItems = new Item[partyMembers.Length];
+    selectedActionType = new TurnActionType[partyMembers.Length];
+    selectedTargetPartyId = new int[partyMembers.Length];
 
     maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 10;
 
@@ -62,9 +74,11 @@ public class BattleController : MonoBehaviour {
   }
 
   public void HealPartyHp(int value) {
+    int initialHp = hp;
     hp += value;
     hp = Mathf.Min(hp, maxHp);
     hp = Mathf.Max(hp, 0);
+    UIController.instance.AnimateHpChange(initialHp, hp);
   }
 
   public DateEvent GetCurrentDateEvent() {
@@ -82,15 +96,38 @@ public class BattleController : MonoBehaviour {
     return dateSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
+  public int GetPartyMemberPosition(Person p) {
+    for(int i=0; i<partyMembers.Length; i++) {
+      if(partyMembers[i].id == p.id) {
+        return i;
+      }
+    }
+    return -1;
+  }
 
 
-  public void CharacterAction(int partyMemberId) {
+
+  public void CharacterTurn(int partyMemberId) {
     VsnController.instance.state = ExecutionState.WAITING;
     VsnSaveSystem.SetVariable("selected_attribute", -1);
 
+    switch(selectedActionType[partyMemberId]) {
+      case TurnActionType.useSkill:
+        CharacterUseAction(partyMemberId);
+        break;
+      case TurnActionType.useItem:
+        StartCoroutine(ExecuteUseItem(partyMemberId, selectedItems[partyMemberId]));
+        break;
+      case TurnActionType.defend:
+        break;
+      case TurnActionType.flee:
+        break;
+    }
+  }
+
+  public void CharacterUseAction(int partyMemberId) {
     // spend SP
     partyMembers[partyMemberId].SpendSp(selectedSkills[partyMemberId].spCost);
-    UIController.instance.UpdateDateUI();
 
     switch(selectedSkills[partyMemberId].type) {
       case SkillType.attack:
@@ -100,7 +137,7 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedSkills[partyMemberId]));
         break;
       case SkillType.passive:
-        Debug.LogError("Passive skill "+ selectedSkills[partyMemberId].name +" used actively.");
+        Debug.LogError("Passive skill " + selectedSkills[partyMemberId].name + " used actively.");
         break;
     }
   }
@@ -141,7 +178,7 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
     DateEvent currentEvent = GetCurrentDateEvent();
-    VsnAudioManager.instance.PlaySfx("hit_default");
+    VsnAudioManager.instance.PlaySfx("ui_success");
 
     yield return new WaitForSeconds(attackAnimationTime);
 
@@ -150,21 +187,66 @@ public class BattleController : MonoBehaviour {
         TheaterController.instance.challengeActor.Shine();
         TheaterController.instance.challengeActor.ShowWeaknessCard(true);
         break;
-      case SkillEffect.raiseAttribute:
+      case SkillEffect.giveStatusCondition:
+        partyMembers[partyMemberId].ReceiveStatusConditionBySkill(usedSkill);
         TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
-        TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowEmpowerParticle(usedSkill.attribute, (int)usedSkill.multiplier);
         break;
-    }    
+      case SkillEffect.healStatusCondition:
+        partyMembers[partyMemberId].RemoveStatusConditionBySkill(usedSkill);
+        TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+        break;
+    }
     
     yield return new WaitForSeconds(1.5f);
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
 
+  public IEnumerator ExecuteUseItem(int partyMemberId, Item usedItem) {
+    TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+
+    DateEvent currentEvent = GetCurrentDateEvent();
+    VsnAudioManager.instance.PlaySfx("ui_success");
+
+    yield return new WaitForSeconds(attackAnimationTime);
+
+    // spend item
+    Inventory ivt = GlobalData.instance.people[0].inventory;
+    ivt.ConsumeItem(usedItem.id, 1);
+
+
+    // heal HP and SP
+    if(usedItem.healHp > 0) {
+      HealPartyHp(usedItem.healHp);
+      TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowHealHpParticle(usedItem.healHp);
+    }
+    if(usedItem.healSp > 0) {
+      partyMembers[partyMemberId].HealSp(usedItem.healSp);
+      TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowHealSpParticle(usedItem.healSp);
+    }
+
+    // give status condition
+    if(usedItem.GivesStatusCondition()) {
+      partyMembers[partyMemberId].ReceiveStatusConditionByItem(usedItem);
+    }
+
+    // heal status condition
+    if(usedItem.HealsStatusCondition()) {
+      foreach(string condName in usedItem.healsConditionNames) {
+        partyMembers[partyMemberId].RemoveStatusCondition(condName);
+      }
+    }
+
+    TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+
+
+    yield return new WaitForSeconds(1.5f);
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
 
   public void EnemyAttack() {
-    int targetId = Random.Range(0, 2);
-    VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
+    int targetId = VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
     StartCoroutine(ExecuteEnemyAttack(targetId, attackAnimationTime));
   }
@@ -175,8 +257,8 @@ public class BattleController : MonoBehaviour {
     int attributeId = (int)currentEvent.attackAttribute;
     int baseDamage = currentEvent.attackDamage;
     int effectiveAttackDamage = (int)(baseDamage - partyMembers[targetId].AttributeValue(attributeId));
+    effectiveAttackDamage = Mathf.Max(1, effectiveAttackDamage);
     int initialHp = hp;
-    DamagePartyHp(effectiveAttackDamage);
 
     TheaterController.instance.EnemyAttackAnimation();
 
@@ -187,8 +269,12 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.ShineCharacter(targetId);
     TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
 
+    string[] options = new string[]{ "bleeding" , "sad", "unclothed" };
+    StatusCondition sc = GetStatusConditionByName(options[Random.Range(0, 3)]);
+    partyMembers[targetId].ReceiveStatusCondition(sc);
+
     yield return new WaitForSeconds(1f);
-    UIController.instance.AnimateHpChange(initialHp, hp);
+    DamagePartyHp(effectiveAttackDamage);
 
     yield return new WaitForSeconds(1.2f);
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -219,8 +305,17 @@ public class BattleController : MonoBehaviour {
   }
 
   public void DamagePartyHp(int dmg) {
+    int initialHp = hp;
     hp -= dmg;
     hp = Mathf.Max(hp, 0);
+    UIController.instance.AnimateHpChange(initialHp, hp);
+  }
+
+
+  public void EndTurn() {
+    foreach(Person p in partyMembers) {
+      p.EndTurn();
+    }
   }
 
 
@@ -268,6 +363,25 @@ public class BattleController : MonoBehaviour {
              string.Compare(allDateEvents[selectedId].location, "generico") != 0));
 
     return selectedId;
+  }
+
+  public Person GetCurrentPlayer() {
+    int currentPlayer = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    if(currentPlayer < partyMembers.Length) {
+      return partyMembers[currentPlayer];
+    }
+    return null;
+  }
+
+  public Person GetCurrentTarget() {
+    int currentPlayer = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    if(currentPlayer < partyMembers.Length) {
+      int target = selectedTargetPartyId[currentPlayer];
+      if(target < partyMembers.Length) {
+        return partyMembers[target];
+      }
+    }
+    return null;
   }
 
 
@@ -355,6 +469,7 @@ public class BattleController : MonoBehaviour {
     return 1f;
   }
   
+
   public void LoadAllSkills() {
     SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(skillsFile, 1);
 
@@ -374,9 +489,6 @@ public class BattleController : MonoBehaviour {
       if(!string.IsNullOrEmpty(entry["multiplier"])) {
         newSkill.multiplier = float.Parse(entry["multiplier"]);
       }
-      if(!string.IsNullOrEmpty(entry["duration"])) {
-        newSkill.duration = int.Parse(entry["duration"]);
-      }
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
       }
@@ -384,26 +496,32 @@ public class BattleController : MonoBehaviour {
       if(newSkill.type == SkillType.attack) {
         newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.attribute];
       } else {
-        newSkill.sprite = Resources.Load<Sprite>("Cards/" + entry["sprite"]);
+        newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
       
-      newSkill.skillEffect = GetSkillEffectByString(entry["skill"]);
+      newSkill.skillEffect = GetSkillEffectByString(entry["skill effect"]);
+      newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
+      newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
+      if(!string.IsNullOrEmpty(entry["duration"])) {
+        newSkill.duration = int.Parse(entry["duration"]);
+      }
+      newSkill.healHp = int.Parse(entry["heal hp"]);
 
       allSkills.Add(newSkill);
     }
   }
 
-  public SkillEffect GetSkillEffectByString(string name) {
+  public SkillEffect GetSkillEffectByString(string skillEffect) {
     for(int i = 0; i <= (int)SkillEffect.none; i++) {
-      if(((SkillEffect)i).ToString() == name) {
+      if(((SkillEffect)i).ToString() == skillEffect) {
         return (SkillEffect)i;
       }
     }
     return SkillEffect.none;
   }
 
-  public SkillType GetSkillTypeByString(string name) {
-    switch(name) {
+  public SkillType GetSkillTypeByString(string skillType) {
+    switch(skillType) {
       case "attack":
         return SkillType.attack;
       case "active":
@@ -428,6 +546,64 @@ public class BattleController : MonoBehaviour {
     foreach(Skill skill in allSkills) {
       if(skill.name == name) {
         return skill;
+      }
+    }
+    return null;
+  }
+
+
+  public void LoadAllStatusConditions() {
+    SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(statusConditionsFile, 1);
+
+    allStatusConditions = new List<StatusCondition>();
+    foreach(Dictionary<string, string> entry in data.data) {
+      StatusCondition newStatusCondition = new StatusCondition();
+
+      newStatusCondition.id = int.Parse(entry["id"]);
+      newStatusCondition.name = entry["name"];
+      //newStatusCondition.description = entry["description"];
+      newStatusCondition.stackable = (entry["stackable"] == "TRUE" ? true : false);
+
+      newStatusCondition.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
+
+      List<StatusConditionEffect> effects = new List<StatusConditionEffect>();
+      List<int> effectsPower = new List<int>();
+      for(int i=1; i<=3; i++) {
+        if(!string.IsNullOrEmpty(entry["effect "+i])) {
+          effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
+          effectsPower.Add(int.Parse(entry["effect " + i+" power"]));
+        }
+      }
+      newStatusCondition.statusEffect = effects.ToArray();
+      newStatusCondition.statusEffectPower = effectsPower.ToArray();
+
+      allStatusConditions.Add(newStatusCondition);
+    }
+  }
+
+  public StatusConditionEffect GetStatusConditionEffectByString(string effect) {
+    for(int i = 0; i <= (int)StatusConditionEffect.count; i++) {
+      if(((StatusConditionEffect)i).ToString() == effect) {
+        return (StatusConditionEffect)i;
+      }
+    }
+    return StatusConditionEffect.raiseGuts;
+  }
+
+
+  public StatusCondition GetStatusConditionByName(string name) {
+    foreach(StatusCondition c in allStatusConditions) {
+      if(c.name == name) {
+        return c;
+      }
+    }
+    return null;
+  }
+
+  public StatusCondition GetStatusConditionById(int id) {
+    foreach(StatusCondition c in allStatusConditions) {
+      if(c.id == id) {
+        return c;
       }
     }
     return null;

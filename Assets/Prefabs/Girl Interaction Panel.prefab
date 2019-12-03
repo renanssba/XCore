@@ -670,6 +670,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1506801960942720
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224599427493668628}
+  - component: {fileID: 222408184660286542}
+  - component: {fileID: 114696109566376962}
+  m_Layer: 5
+  m_Name: Boy Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1516637229550446
 GameObject:
   m_ObjectHideFlags: 1
@@ -963,6 +980,23 @@ GameObject:
   - component: {fileID: 114667256680621822}
   m_Layer: 5
   m_Name: Skill Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1747808271544632
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224303806540514652}
+  - component: {fileID: 222498243217554480}
+  - component: {fileID: 114443543020302612}
+  m_Layer: 5
+  m_Name: Girl Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1698,7 +1732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.69803923, g: 0.4597323, b: 0.20784314, a: 1}
+  m_Color: {r: 0.65882355, g: 0.007843138, b: 0.09411765, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2036,81 +2070,63 @@ MonoBehaviour:
   person:
     name: 
     isMale: 0
+    isHuman: 1
     state: 0
     attributes: 
-    attributeBonuses: 
+    maxSp: 3
+    sp: 3
     skillIds: 
-    equipment:
-      id: 0
-      nameKey: 
-      descriptionKey: 
-      attribute_bonus: 000000000000000000000000
-      type: 0
-      price: 0
-      sprite: {fileID: 0}
     favoriteMatter: 
     mostHatedMatter: 
     inventory:
       owner:
         name: 
         isMale: 0
+        isHuman: 1
         state: 0
         attributes: 
-        attributeBonuses: 
+        maxSp: 3
+        sp: 3
         skillIds: 
-        equipment:
-          id: 0
-          nameKey: 
-          descriptionKey: 
-          attribute_bonus: 000000000000000000000000
-          type: 0
-          price: 0
-          sprite: {fileID: 0}
         favoriteMatter: 
         mostHatedMatter: 
         inventory:
           owner:
             name: 
             isMale: 0
+            isHuman: 1
             state: 0
             attributes: 
-            attributeBonuses: 
+            maxSp: 3
+            sp: 3
             skillIds: 
-            equipment:
-              id: 0
-              nameKey: 
-              descriptionKey: 
-              attribute_bonus: 000000000000000000000000
-              type: 0
-              price: 0
-              sprite: {fileID: 0}
             favoriteMatter: 
             mostHatedMatter: 
             inventory:
               owner:
                 name: 
                 isMale: 0
+                isHuman: 1
                 state: 0
                 attributes: 
-                attributeBonuses: 
+                maxSp: 3
+                sp: 3
                 skillIds: 
-                equipment:
-                  id: 0
-                  nameKey: 
-                  descriptionKey: 
-                  type: 0
-                  price: 0
                 favoriteMatter: 
                 mostHatedMatter: 
+                statusConditions: []
                 id: 0
                 faceId: 4
               itemListings: []
+            statusConditions: []
             id: 0
             faceId: 4
           itemListings: []
+        statusConditions: []
         id: 0
         faceId: 4
       itemListings: []
+    statusConditions: []
     id: 0
     faceId: 4
   bgImage: {fileID: 114282343791715838}
@@ -2124,6 +2140,7 @@ MonoBehaviour:
   skillIcon: {fileID: 114799115966461818}
   skillText: {fileID: 114826470032380824}
   shade: {fileID: 0}
+  spText: {fileID: 0}
   heartsPanel: {fileID: 1657609482680852}
   heartIcons:
   - {fileID: 114268201580233246}
@@ -2132,7 +2149,7 @@ MonoBehaviour:
   - {fileID: 114163157268134732}
   - {fileID: 114098523521586152}
   - {fileID: 114732621602978120}
-  canEquipItems: 1
+  statusConditionsContent: {fileID: 0}
   coupleEntryLayout: 1
 --- !u!114 &114100868243685272
 MonoBehaviour:
@@ -2287,7 +2304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.65882355, g: 0.007843147, b: 0.09557665, a: 1}
+  m_Color: {r: 0.7647059, g: 0.47843137, b: 0.20392157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2314,7 +2331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.69803923, g: 0.4597323, b: 0.20784314, a: 1}
+  m_Color: {r: 0.65882355, g: 0.007843138, b: 0.09411765, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3555,6 +3572,33 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114443543020302612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747808271544632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: a77b1a6284929ca4b8521a5a73ba44a8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114463433420095996
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4616,6 +4660,33 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114696109566376962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506801960942720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 5480e4378bf75af46bdc72e3624182fc, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114697574607209822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5068,7 +5139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.65882355, g: 0.007843147, b: 0.09557665, a: 1}
+  m_Color: {r: 0.7647059, g: 0.47843137, b: 0.20392157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5505,81 +5576,63 @@ MonoBehaviour:
   person:
     name: 
     isMale: 0
+    isHuman: 1
     state: 0
     attributes: 
-    attributeBonuses: 
+    maxSp: 3
+    sp: 3
     skillIds: 
-    equipment:
-      id: 0
-      nameKey: 
-      descriptionKey: 
-      attribute_bonus: 000000000000000000000000
-      type: 0
-      price: 0
-      sprite: {fileID: 0}
     favoriteMatter: 
     mostHatedMatter: 
     inventory:
       owner:
         name: 
         isMale: 0
+        isHuman: 1
         state: 0
         attributes: 
-        attributeBonuses: 
+        maxSp: 3
+        sp: 3
         skillIds: 
-        equipment:
-          id: 0
-          nameKey: 
-          descriptionKey: 
-          attribute_bonus: 000000000000000000000000
-          type: 0
-          price: 0
-          sprite: {fileID: 0}
         favoriteMatter: 
         mostHatedMatter: 
         inventory:
           owner:
             name: 
             isMale: 0
+            isHuman: 1
             state: 0
             attributes: 
-            attributeBonuses: 
+            maxSp: 3
+            sp: 3
             skillIds: 
-            equipment:
-              id: 0
-              nameKey: 
-              descriptionKey: 
-              attribute_bonus: 000000000000000000000000
-              type: 0
-              price: 0
-              sprite: {fileID: 0}
             favoriteMatter: 
             mostHatedMatter: 
             inventory:
               owner:
                 name: 
                 isMale: 0
+                isHuman: 1
                 state: 0
                 attributes: 
-                attributeBonuses: 
+                maxSp: 3
+                sp: 3
                 skillIds: 
-                equipment:
-                  id: 0
-                  nameKey: 
-                  descriptionKey: 
-                  type: 0
-                  price: 0
                 favoriteMatter: 
                 mostHatedMatter: 
+                statusConditions: []
                 id: 0
                 faceId: 4
               itemListings: []
+            statusConditions: []
             id: 0
             faceId: 4
           itemListings: []
+        statusConditions: []
         id: 0
         faceId: 4
       itemListings: []
+    statusConditions: []
     id: 0
     faceId: 4
   bgImage: {fileID: 114714000212123378}
@@ -5593,6 +5646,7 @@ MonoBehaviour:
   skillIcon: {fileID: 114803073698332754}
   skillText: {fileID: 114103574654466084}
   shade: {fileID: 0}
+  spText: {fileID: 0}
   heartsPanel: {fileID: 1825824507261684}
   heartIcons:
   - {fileID: 114194344583529514}
@@ -5601,7 +5655,7 @@ MonoBehaviour:
   - {fileID: 114564041971874498}
   - {fileID: 114718987386444110}
   - {fileID: 114361252061696072}
-  canEquipItems: 1
+  statusConditionsContent: {fileID: 0}
   coupleEntryLayout: 1
 --- !u!114 &114844841445676934
 MonoBehaviour:
@@ -6161,6 +6215,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1243852324982062}
+--- !u!222 &222408184660286542
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506801960942720}
 --- !u!222 &222411739351922144
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -6245,6 +6305,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470874504093954}
+--- !u!222 &222498243217554480
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747808271544632}
 --- !u!222 &222510028795700714
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -6973,7 +7039,7 @@ RectTransform:
   - {fileID: 224053641845198066}
   - {fileID: 224863776939453592}
   m_Father: {fileID: 224640957651330118}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -7087,12 +7153,30 @@ RectTransform:
   - {fileID: 224186947974424330}
   - {fileID: 224719366471071362}
   m_Father: {fileID: 224640957651330118}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 440, y: 118}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224303806540514652
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1747808271544632}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224640957651330118}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1600, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224331534715950166
 RectTransform:
@@ -7489,6 +7573,24 @@ RectTransform:
   m_AnchoredPosition: {x: 17.155, y: -18.25}
   m_SizeDelta: {x: 28, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224599427493668628
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1506801960942720}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224640957651330118}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -580, y: 0}
+  m_SizeDelta: {x: 1600, y: 1600}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224631656938439510
 RectTransform:
   m_ObjectHideFlags: 1
@@ -7542,6 +7644,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 224599427493668628}
+  - {fileID: 224303806540514652}
   - {fileID: 224784734068932336}
   - {fileID: 224290493343988846}
   - {fileID: 224246214293547702}
@@ -7771,7 +7875,7 @@ RectTransform:
   - {fileID: 224700872052572652}
   - {fileID: 224379891335483082}
   m_Father: {fileID: 224640957651330118}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}

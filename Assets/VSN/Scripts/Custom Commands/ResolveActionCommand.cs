@@ -26,7 +26,7 @@ namespace Command {
       //  result += 3;
       //}
       VsnSaveSystem.SetVariable("resolution", attributeToUse);
-      GameController.instance.EndTurn();
+      BattleController.instance.EndTurn();
     }
 
 

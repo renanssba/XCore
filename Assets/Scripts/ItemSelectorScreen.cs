@@ -121,7 +121,6 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   GameObject CreateItem(ItemListing listing){
     if(interactionType == ItemInteractionType.store_buy &&
-       Item.GetItem(listing.id).type == ItemType.celestial &&
        GlobalData.instance.CurrentBoy().inventory.HasItem(listing.id)){
       return null;
     }

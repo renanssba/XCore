@@ -34,7 +34,7 @@ public class ItemUI : MonoBehaviour {
 
 
   public void UpdateUI() {
-    Item item = Item.GetItem(itemListing.id);
+    Item item = Item.GetItemById(itemListing.id);
     string name_suffix = "";
     string description_suffix = "";
     if(itemListing.ownerId != -1) {
@@ -64,13 +64,13 @@ public class ItemUI : MonoBehaviour {
       button.interactable = false;
     }
 
-    if(item.type == ItemType.celestial) {
+    if(item.HasType(ItemType.key)) {
       quantityText.gameObject.SetActive(false);
     }
   }
 
   public void Clicked(){
-    Item item = Item.GetItem(itemListing.id);
+    Item item = Item.GetItemById(itemListing.id);
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
     VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(item.id));

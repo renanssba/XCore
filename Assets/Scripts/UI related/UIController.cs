@@ -8,14 +8,12 @@ using DG.Tweening;
 public class UIController : MonoBehaviour {
   public static UIController instance;
 
-
   public TextMeshProUGUI titleText;
 
   public ScreenTransitions uiControllerPanel;
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
 
-  public GameObject coupleEntryPrefab;
   public CoupleEntry[] coupleEntries;
 
   public TextMeshProUGUI moneyText;
@@ -38,17 +36,25 @@ public class UIController : MonoBehaviour {
   public Image[] failIcons;
   public Image[] unresolvedIcons;
 
-  public ActionsPanel actionsPanel;
-
   public ScreenTransitions datingPeopleInfoPanel;
   public PersonCard[] partyPeopleCards;
+
+  public ActionsPanel actionsPanel;
+
+  public ScreenTransitions helpMessagePanel;
+  public TextMeshProUGUI helpMessageText;
 
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
+  public Image girlInteractionImage;
+  public Image boyInteractionImage;
+
   public GameObject fertilielInMenu;
 
   public GameObject[] turnIndicators;
+
+  public GameObject statusConditionIconPrefab;
 
 
 
@@ -237,6 +243,15 @@ public class UIController : MonoBehaviour {
     }
     partyPeopleCards[currentPartyMember].ShowShade(false);
     turnIndicators[currentPartyMember].SetActive(true);
+  }
+
+  public void ShowHelpMessagePanel(string helpMessage) {
+    helpMessageText.text = helpMessage;
+    helpMessagePanel.ShowPanel();
+  }
+
+  public void HideHelpMessagePanel() {
+    helpMessagePanel.HidePanel();
   }
 
 

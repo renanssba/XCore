@@ -114,8 +114,6 @@ public class VsnOperator : VsnArgument{
     /// TODO: also implement when the two variables are different types
     /// or when they're both strings
 
-    return CompareFloats(op1.GetNumberValue(), op2.GetNumberValue()) &&
-           CompareStrings(op1.GetStringValue(), op2.GetStringValue()) &&
-           CompareBooleans(op1.GetBooleanValue(), op2.GetBooleanValue());
+    return CompareFloats(op1.GetNumberValue(), op2.GetNumberValue());
   }
 }

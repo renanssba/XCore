@@ -137,6 +137,12 @@ public class GlobalData : MonoBehaviour {
 
 
     /// INITIAL INVENTORIES
+    /// RICARDO
+    people[0].inventory.AddItem("sports_clothes", 5);
+    people[0].inventory.AddItem("chocolate_cake", 5);
+    people[0].inventory.AddItem("strawberry_cake", 5);
+    people[0].inventory.AddItem("pepper_cake", 5);
+
     /// ANA
     people[1].inventory.AddItemWithOwnership("old_teddy_bear", 1, 1);
     people[1].inventory.AddItemWithOwnership("delicate_key", 1, 1);
@@ -215,6 +221,10 @@ public class GlobalData : MonoBehaviour {
     }
 
     int personId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    if(personId >= BattleController.instance.partyMembers.Length) {
+      return 0;
+    }
+
     Person currentCharacter = BattleController.instance.partyMembers[personId];
 
     return currentCharacter.AttributeValue(attr);

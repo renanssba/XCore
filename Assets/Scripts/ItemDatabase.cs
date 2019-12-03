@@ -18,13 +18,13 @@ public class ItemDatabase : MonoBehaviour {
 
   void Start(){
     Debug.LogWarning("START ITEMDATABASE");
-    InitializeItemDatabase();
+    LoadAllItems();
   }
 
 
-  void InitializeItemDatabase(){
+  void LoadAllItems(){
     SpreadsheetData data;
-    data = SpreadsheetReader.ReadSpreadsheet("Data\\items database", 1);
+    data = SpreadsheetReader.ReadSpreadsheet("Data\\items", 1);
 
     database = new List<Item>();
     itemsForSale = new List<int>();
@@ -35,19 +35,55 @@ public class ItemDatabase : MonoBehaviour {
       newItem.id = int.Parse(entry["id"]);
       newItem.nameKey = entry["name"];
       newItem.descriptionKey = entry["description"];
-      newItem.type = (entry["type"] == "c") ? ItemType.celestial : ItemType.mundane;
-      newItem.attribute_bonus[0] = int.Parse(entry["guts_bonus"]);
-      newItem.attribute_bonus[1] = int.Parse(entry["intelligence_bonus"]);
-      newItem.attribute_bonus[2] = int.Parse(entry["charisma_bonus"]);
+      newItem.types = GetItemTypes(entry["types"]);
+      newItem.duration = int.Parse(entry["duration"]);
+      newItem.healsConditionNames = GetStatusConditionNamesByString(entry["heals status conditions"]);
+      newItem.givesConditionNames = GetStatusConditionNamesByString(entry["gives status conditions"]);
+      newItem.healHp = int.Parse(entry["heal hp"]);
+      newItem.healSp = int.Parse(entry["heal sp"]);
 
       newItem.price = int.Parse(entry["price"]);
       //newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
-      newItem.sprite = Resources.Load<Sprite>("Cards/" + entry["sprite"]);
+      newItem.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       if(entry["sells_in_store"] == "yes"){
         itemsForSale.Add(newItem.id);
       }
       database.Add(newItem);
     }
+  }
+
+  public static string[] GetStatusConditionNamesByString(string effects) {
+    if(string.IsNullOrEmpty(effects)) {
+      return new string[0];
+    }
+    string[] parts = effects.Split(',');
+    for(int i=0; i<parts.Length; i++) {
+      parts[i] = parts[i].Trim();
+    }
+    return parts;
+  }
+
+  public List<ItemType> GetItemTypes(string typesString) {
+    List<ItemType> types = new List<ItemType>();
+    string[] parts = typesString.Split(',');
+
+    foreach(string part in parts) {
+      switch(part.Trim()) {
+        case "battle":
+          types.Add(ItemType.battle);
+          break;
+        case "gift":
+          types.Add(ItemType.gift);
+          break;
+        case "key":
+          types.Add(ItemType.key);
+          break;
+        case "night":
+          types.Add(ItemType.night);
+          break;
+      }
+    }
+    return types;
   }
 
 

@@ -21,7 +21,6 @@ namespace Command {
       VsnSaveSystem.SetVariable(args[0].GetReference(), currentValue);
 
       if(currentValue < FinalValue()) {
-        Debug.LogWarning("Back to new FOR iteration");
         VsnController.instance.CurrentScriptReader().GotoCommandId(commandIndex+1);
       }
     }

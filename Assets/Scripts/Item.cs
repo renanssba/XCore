@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum ItemType{
-  mundane,
-  celestial
+  gift,
+  battle,
+  night,
+  key
 }
 
 public enum ItemCategory{
@@ -21,25 +23,30 @@ public class Item {
   public string nameKey;
   public string descriptionKey;
 
-  public int[] attribute_bonus;
+  public List<ItemType> types;
 
-  public ItemType type;
+  public string[] healsConditionNames;
+  public string[] givesConditionNames;
+  public int duration;
+  public int healSp;
+  public int healHp;
+
   public int price;
   public Sprite sprite;
 
   public Item(){
-    attribute_bonus = new int[3];
+    types = new List<ItemType>();
   }
 
   public static string GetKeyById(int id){
     if(id == -1){
       return "";
     }
-    return GetItem(id).nameKey;
+    return GetItemById(id).nameKey;
   }
 
   public string GetPrintableName() {
-    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).nameKey);
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItemById(id).nameKey);
   }
 
   public string GetPrintableDescription(){
@@ -50,17 +57,31 @@ public class Item {
     if(id == -1) {
       return "";
     }
-    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItem(id).nameKey);
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItemById(id).nameKey);
   }
 
-  public static ItemType GetType(int id){
+  public bool HasType(ItemType type) {
+    return types.Contains(type);
+  }
+
+  public bool HealsStatusCondition() {
+    return healsConditionNames.Length > 0;
+  }
+
+  public bool GivesStatusCondition() {
+    return givesConditionNames.Length > 0;
+  }
+
+
+
+  public static bool HasType(int id, ItemType type) {
     if(id == -1){
-      return ItemType.mundane;
+      return false;
     }
-    return GetItem(id).type;
+    return GetItemById(id).types.Contains(type);
   }
 
-  public static Item GetItem(int id){
+  public static Item GetItemById(int id){
     foreach(Item it in ItemDatabase.instance.database){
       if(it.id == id){
         return it;
@@ -142,9 +163,9 @@ public class Inventory{
 
 
   public void ConsumeItem(int id, int amount){
-    if(Item.GetType(id) == ItemType.celestial){
-      return;
-    }
+    //if(Item.GetType(id) == ItemType.battle){
+    //  return;
+    //}
 
     for(int i=0; i<itemListings.Count; i++){
       if(itemListings[i].id == id){
@@ -204,6 +225,27 @@ public class Inventory{
       return 0;
     }
     return ItemCount(tocheck.id);
+  }
+
+  public int CountItemListingsByType(ItemType type) {
+    int count = 0;
+    foreach(ItemListing il in itemListings) {
+      if(Item.GetItemById(il.id).HasType(type)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public List<ItemListing> GetItemListingsByType(ItemType type) {
+    List<ItemListing> items = new List<ItemListing>();
+
+    foreach(ItemListing il in itemListings) {
+      if(Item.GetItemById(il.id).HasType(type)) {
+        items.Add(il);
+      }
+    }
+    return items;
   }
 
   public bool IsEmpty(){

@@ -28,6 +28,8 @@ public class PersonCard : MonoBehaviour {
   public GameObject heartsPanel;
   public Image[] heartIcons;
 
+  public Transform statusConditionsContent;
+
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
 
 
@@ -50,6 +52,8 @@ public class PersonCard : MonoBehaviour {
 
     if(coupleEntryLayout == PersonCardLayout.date) {
       spText.text = "SP: "+person.sp + "<size=16>/" + person.maxSp+ "</size>";
+
+      UpdateStatusConditions();
       return;
     }
 
@@ -74,6 +78,7 @@ public class PersonCard : MonoBehaviour {
     }
     //Debug.Log("Person: " + person.name);
 
+
     /// SKILL
     //if(skillText != null) {
     //  if(person.skillIds != -1) {
@@ -83,6 +88,23 @@ public class PersonCard : MonoBehaviour {
     //  }
     //}
     //skillIcon.sprite = CardsDatabase.instance.GetCardById(person.skillIds).sprite;
+  }
+
+  public void UpdateStatusConditions() {
+    ClearStatusConditionIcons();
+
+    for(int i = 0; i < person.statusConditions.Count; i++) {
+      GameObject newObj = Instantiate(UIController.instance.statusConditionIconPrefab, statusConditionsContent);
+      newObj.GetComponent<StatusConditionIcon>().Initialize(person.statusConditions[i]);
+    }
+  }
+
+  public void ClearStatusConditionIcons() {
+    int childCount = statusConditionsContent.transform.childCount;
+
+    for(int i = 0; i < childCount; i++) {
+      Destroy(statusConditionsContent.transform.GetChild(i).gameObject);
+    }
   }
 
   public void ShowShade(bool active) {
