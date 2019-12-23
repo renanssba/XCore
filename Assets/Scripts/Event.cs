@@ -30,7 +30,7 @@ public class DateEvent {
   public string scriptName;
   public int id;
   public float[] attributeEffectivity;
-  public int difficulty;
+  public int level;
   public int stage;
   public string location;
   public string spriteName;
@@ -41,6 +41,8 @@ public class DateEvent {
 
   public Attributes attackAttribute;
   public int attackDamage;
+  public string[] givesConditionNames;
+  public int giveStatusConditionChance;
 
   public RewardType rewardType;
   public int rewardId;

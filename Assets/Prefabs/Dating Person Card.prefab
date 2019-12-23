@@ -106,7 +106,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224648012760137110}
   - component: {fileID: 222060248373949268}
-  - component: {fileID: 114526798218977712}
   - component: {fileID: 114922145180700098}
   m_Layer: 5
   m_Name: Status Conditions Grid
@@ -124,7 +123,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224837795439840328}
   - component: {fileID: 222262277696631288}
-  - component: {fileID: 114831321108469004}
   m_Layer: 5
   m_Name: Sp Panel
   m_TagString: Untagged
@@ -364,33 +362,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114526798218977712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606059794553888}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.14901961}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!114 &114567016198921710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -522,7 +493,6 @@ MonoBehaviour:
     isHuman: 1
     state: 0
     attributes: 
-    attributeBonuses: 000000000000000000000000
     maxSp: 0
     sp: 0
     skillIds: 
@@ -535,7 +505,6 @@ MonoBehaviour:
         isHuman: 1
         state: 0
         attributes: 
-        attributeBonuses: 000000000000000000000000
         maxSp: 0
         sp: 0
         skillIds: 
@@ -548,7 +517,6 @@ MonoBehaviour:
             isHuman: 1
             state: 0
             attributes: 
-            attributeBonuses: 000000000000000000000000
             maxSp: 0
             sp: 0
             skillIds: 
@@ -561,21 +529,24 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                attributeBonuses: 000000000000000000000000
                 maxSp: 0
                 sp: 0
                 skillIds: 
                 favoriteMatter: 0
                 mostHatedMatter: 0
+                statusConditions: []
                 id: 0
                 faceId: 0
               itemListings: []
+            statusConditions: []
             id: 0
             faceId: 0
           itemListings: []
+        statusConditions: []
         id: 0
         faceId: 0
       itemListings: []
+    statusConditions: []
     id: 0
     faceId: 0
   bgImage: {fileID: 114306490561339704}
@@ -660,33 +631,6 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 3779f651261efde45b4799d3bc247398, type: 3}
   m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!114 &114831321108469004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1733701906448258}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

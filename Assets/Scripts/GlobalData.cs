@@ -82,7 +82,7 @@ public class GlobalData : MonoBehaviour {
       name = "Ricardo",
       isMale = true,
       id = 0,
-      faceId = 4,
+      faceId = 0,
       attributes = new int[]{3, 3, 3, 0},
       skillIds = new int[] {0, 1, 2, 10}
     };
@@ -91,7 +91,7 @@ public class GlobalData : MonoBehaviour {
       name = "Ana",
       isMale = false,
       id = 1,
-      faceId = 9,
+      faceId = 5,
       attributes = new int[] {5, 2, 2, 0},
       skillIds = new int[] { 0, 1, 2, 11}
     };
@@ -109,7 +109,7 @@ public class GlobalData : MonoBehaviour {
       name = "Clara",
       isMale = false,
       id = 3,
-      faceId = 5,
+      faceId = 7,
       attributes = new int[] {2, 2, 5, 0},
       skillIds = new int[] {0, 1, 2, 13}
     };

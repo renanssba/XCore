@@ -1,27 +1,24 @@
-id	name	description	type	sprite	skill effect	heals status conditions	gives status conditions	duration	attribute	multiplier	heal hp	sp cost	debug
-0	Valentia	Causa dano baseado em Valentia (\guts)	attack						guts	1	0		
-1	Inteligência	Causa dano baseado em Inteligência (\intelligence)	attack						intelligence	1	0		
-2	Carisma	Causa dano baseado em Carisma (\charisma)	attack						charisma	1	0		
-3	Super Valentia	Causa muito dano baseado em Valentia	attack						guts	2	0		
-4	Super Inteligência	Causa muito dano baseado em Inteligência	attack						intelligence	2	0		
-5	Super Carisma	Causa muito dano baseado em Carisma	attack						charisma	2	0		
-6	Mega Valentia	Causa dano MASSIVO baseado em Valentia	attack						guts	5	0		
-7	Mega Inteligência	Causa dano MASSIVO baseado em Inteligência	attack						intelligence	5	0		
-8	Mega Carisma	Causa dano MASSIVO baseado em Carisma	attack						charisma	5	0		
-9	Flecha Mágica	Causa dano baseado em Magia (\magic)	attack						magic	1	0		
-10	Sensor	Descobre a fraqueza de um Desafio	active	magnifying glass	sensor				intelligence		0	1	
-11	Encorajar	Aumenta a Valentia em 2 (dura 3 turnos)	active	gutsy aura	giveStatusCondition		encouraged	3	guts	2	0	1	
-12	Fugir	Escapa do Desafio atual	active	run	flee				intelligence		0	1	
-13	Gula	Adiciona algum item de comida à mão	active	eating	healStatusCondition				charisma		0	1	
-14	Memórias Felizes		passive	gutsy aura	bondSkill						0	1	
-15	Confissão		passive	gutsy aura	bondSkill						0	1	
-16			passive	gutsy aura	bondSkill						0	1	
-17	Amigos por Correspondência		passive	gutsy aura	bondSkill						0	1	
-18	Companheiros de Leitura		passive	gutsy aura	bondSkill						0	1	
-19			passive	gutsy aura	bondSkill						0	1	
-20	Amantes de Omelete		passive	gutsy aura	bondSkill						0	1	
-21			passive	gutsy aura	bondSkill						0	1	
-22			passive	gutsy aura	bondSkill						0	1	
-23	Hambúrguer	Aumenta Valentia em 1 (dura 1 turno)	item	hamburger	raiseAttribute			1	guts	1	0		
-24	Café	Aumenta Inteligência em 1 (dura 1 turno)	item	coffee mug	raiseAttribute			1	intelligence	1	0		
-25	Nachos Picantes	Aumenta Carisma em 1 (dura 1 turno)	item	nachos	raiseAttribute			1	charisma	1	0		
+id	name	description	type	range	sprite	skill effect	heals status conditions	gives status conditions	duration	attribute	multiplier	heal hp	sp cost	debug
+0	Valentia	Causa dano baseado em Valentia (\guts)	attack	one_enemy						guts	1	0		
+1	Inteligência	Causa dano baseado em Inteligência (\intelligence)	attack	one_enemy						intelligence	1	0		
+2	Carisma	Causa dano baseado em Carisma (\charisma)	attack	one_enemy						charisma	1	0		
+3	Super Valentia	Causa muito dano baseado em Valentia	attack	one_enemy						guts	2	0		
+4	Super Inteligência	Causa muito dano baseado em Inteligência	attack	one_enemy						intelligence	2	0		
+5	Super Carisma	Causa muito dano baseado em Carisma	attack	one_enemy						charisma	2	0		
+6	Mega Valentia	Causa dano MASSIVO baseado em Valentia	attack	one_enemy						guts	5	0		
+7	Mega Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy						intelligence	5	0		
+8	Mega Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy						charisma	5	0		
+9	Flecha Mágica	Causa dano baseado em Magia (\magic)	attack	one_enemy						magic	1	0		
+10	Sensor	Descobre a fraqueza de um Desafio	active	one_enemy	magnifying glass	sensor				intelligence		0	1	
+11	Encorajar	Aumenta a Valentia em 2 (dura 3 turnos)	active	one_ally	gutsy aura	giveStatusCondition		encouraged	3	guts	2	0	1	
+12	Fugir	Escapa do Desafio atual	active	one_enemy	run	flee				intelligence		0	1	
+13	Gula	Adiciona algum item de comida à mão	active	one_ally	eating	healStatusCondition				charisma		0	1	
+14	Memórias Felizes		passive		gutsy aura	bondSkill						0	1	
+15	Confissão		passive		gutsy aura	bondSkill						0	1	
+16			passive		gutsy aura	bondSkill						0	1	
+17	Amigos por Correspondência		passive		gutsy aura	bondSkill						0	1	
+18	Companheiros de Leitura		passive		gutsy aura	bondSkill						0	1	
+19			passive		gutsy aura	bondSkill						0	1	
+20	Amantes de Omelete		passive		gutsy aura	bondSkill						0	1	
+21			passive		gutsy aura	bondSkill						0	1	
+22			passive		gutsy aura	bondSkill						0	1	

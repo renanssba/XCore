@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ActionRange {
+  self,
+  oneAlly,
+  oneEnemy,
+  allAllies,
+  allEnemies,
+  randomEnemy
+}
+
 public enum SkillEffect {
   sensor,
   giveStatusCondition,
@@ -26,6 +35,7 @@ public class Skill {
   public string description;
   public Sprite sprite;
   public SkillType type;
+  public ActionRange range;
 
   public Attributes attribute;
   public float multiplier;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
@@ -13,6 +14,8 @@ public class Actor2D : MonoBehaviour {
 
   public DateEvent dateChallenge;
   public Person person;
+
+  public Button targetSelectButton;
 
 
   const float attackAnimTime = 0.18f;
@@ -27,7 +30,7 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public void SetChallengeGraphics(DateEvent currentEvent) {
+  public void SetEnemyGraphics(DateEvent currentEvent) {
     dateChallenge = currentEvent;
     if(!string.IsNullOrEmpty(currentEvent.spriteName)) {
       renderer.sprite = LoadSprite("Challenges/" + currentEvent.spriteName);
@@ -60,7 +63,9 @@ public class Actor2D : MonoBehaviour {
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
     DOTween.Kill(renderer.material);
     renderer.material.SetFloat("_FlashAmount", minFlash);
-    renderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
+    renderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(()=> {
+      renderer.material.SetFloat("_FlashAmount", 0f);
+    });
   }
 
 
@@ -136,5 +141,20 @@ public class Actor2D : MonoBehaviour {
     GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, BattleController.instance.transform);
     newParticle.GetComponent<TextMeshPro>().color = color;
     newParticle.GetComponent<TextMeshPro>().text = text;
+  }
+
+  public void ClickedTargetSelectButton() {
+    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+
+    Debug.LogWarning("clicked person: " + person.name);
+
+    for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
+      if(BattleController.instance.partyMembers[i] == person) {
+        BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = i;
+      }
+    }
+    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.selectTargetPanel.SetActive(false);
+    VsnController.instance.GotCustomInput();
   }
 }

@@ -36,11 +36,11 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupBaseActionButtons(int currentPartyMember) {
     if(currentPartyMember == 0) {
-      baseActionButtons[2].SetActive(true);
-      baseActionButtons[3].SetActive(false);
-    } else {
-      baseActionButtons[2].SetActive(false);
       baseActionButtons[3].SetActive(true);
+      baseActionButtons[4].SetActive(false);
+    } else {
+      baseActionButtons[3].SetActive(false);
+      baseActionButtons[4].SetActive(true);
     }
 
     baseActionButtonShades[1].SetActive(!ThereAreItemsAvailable());
@@ -94,9 +94,13 @@ public class ActionsPanel : MonoBehaviour {
     UIController.instance.ShowHelpMessagePanel("");
   }
 
-  public void ClickFleeButton() {
-    Debug.LogWarning("clicked FLEE button");
-  }
+  //public void ClickDefendButton() {
+  //  Debug.LogWarning("clicked DEFEND button");
+  //}
+
+  //public void ClickFleeButton() {
+  //  Debug.LogWarning("clicked FLEE button");
+  //}
 
   public void ClickBackButton() {
     Debug.LogWarning("clicked BACK button");
@@ -119,6 +123,7 @@ public class ActionsPanel : MonoBehaviour {
     skillsPanel.HidePanel();
     itemsPanel.HidePanel();
     baseActionsPanel.ShowPanel();
+    UIController.instance.selectTargetPanel.SetActive(false);
     UIController.instance.HideHelpMessagePanel();
   }
 

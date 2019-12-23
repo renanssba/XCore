@@ -151,7 +151,8 @@ public class Person {
     for(int i=0; i<usedSkill.givesConditionNames.Length; i++) {
       newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[i]);
       newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedSkill.duration;
+      newCondition.duration = usedSkill.duration + 1;
+      newCondition.maxDurationShowable = usedSkill.duration;
       newCondition.name = usedSkill.GetPrintableName();
       newCondition.sprite = usedSkill.sprite;
       ReceiveStatusCondition(newCondition);
@@ -163,7 +164,8 @@ public class Person {
     foreach(string condName in usedItem.givesConditionNames) {
       newCondition = BattleController.instance.GetStatusConditionByName(condName);
       newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedItem.duration;
+      newCondition.duration = usedItem.duration + 1;
+      newCondition.maxDurationShowable = usedItem.duration;
       newCondition.name = usedItem.GetPrintableName();
       newCondition.sprite = usedItem.sprite;
       ReceiveStatusCondition(newCondition);
@@ -177,6 +179,8 @@ public class Person {
     } else {
       statusConditions[i].duration = Mathf.Max(statusConditions[i].duration,
                                                newCondition.duration);
+      statusConditions[i].maxDurationShowable = Mathf.Max(statusConditions[i].maxDurationShowable,
+                                                          newCondition.maxDurationShowable);
     }
     UIController.instance.UpdateDateUI();
   }

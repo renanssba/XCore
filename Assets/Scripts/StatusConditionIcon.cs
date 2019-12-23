@@ -25,6 +25,7 @@ public class StatusCondition {
   //public string description;
   public int id;
   public int duration;
+  public int maxDurationShowable;
   public Sprite sprite;
 
   public StatusConditionEffect[] statusEffect;
@@ -36,6 +37,14 @@ public class StatusCondition {
   }
 
 
+  public string GetPrintableName() {
+    string s = Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/"+name);
+    if(string.IsNullOrEmpty(s)) {
+      return name;
+    }
+    return s;
+  }
+
   public string GetStatusDescription() {
     string desc = "";
 
@@ -46,8 +55,8 @@ public class StatusCondition {
       }
     }
     if(duration > 0) {
-      desc += "\n<color=#AAAA>(" + duration + " turnos)</color>";
-    }    
+      desc += "\n<color=#AAAA>(" + Mathf.Min(duration, maxDurationShowable) + " turnos)</color>";
+    }
 
     return desc;
   }
@@ -123,13 +132,13 @@ public class StatusConditionIcon : MonoBehaviour {
   public void UpdateUI() {
     imageIcon.sprite = status.sprite;
     if(status.duration > 0) {
-      durationText.text = status.duration.ToString();
+      durationText.text = Mathf.Min(status.duration, status.maxDurationShowable).ToString();
     } else {
       durationText.text = "";
     }    
     descriptionPanel.gameObject.SetActive(false);
 
-    nameText.text = status.name;
+    nameText.text = status.GetPrintableName();
     descriptionText.text = status.GetStatusDescription();
   }
 

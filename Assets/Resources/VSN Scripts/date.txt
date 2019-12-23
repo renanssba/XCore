@@ -1,18 +1,22 @@
-﻿fade_out 0.7
+fade_out 0.7
 bg null
 say "char_name/none" "date/say_0"
 
 generate_date
 goto_script "set_date_location"
+play_music "battle1_intro" "battle1_loop"
 
+set_var currentDateEvent 0
+theater_animation "setup_date"
 set_screen "date"
 enable_input true
 set_current_character_turn -1
 
-//wait 0.5
-//show_date_ui true
 fade_in 0.7
 
+
+theater_animation "party_enters"
+wait 0.7
 
 /// DATE TUTORIAL (?)
 // if tutorial_date == 0
@@ -21,17 +25,18 @@ fade_in 0.7
 
 
 for currentDateEvent #dateLength
-  set_screen "date_challenge"
-  wait 0.6
+  waypoint new_enemy_appears
+  theater_animation "enemy_enters"
+  wait 0.7
   goto_script "\currentEventName" event_statement
 
 
-  if tutorial_date2 == 0
-    goto_script "tutorial_date2"
-  endif
+  // if tutorial_date2 == 0
+    // goto_script "tutorial_date2"
+  // endif
 
 
-  waypoint start_new_turn
+  waypoint start_new_turn  
   
   // end turn (to pass time on status conditions and take poison damage)
   end_turn
@@ -58,8 +63,8 @@ for currentDateEvent #dateLength
   // if oponent is defeated, go to new event
   if #currentChallengeHp <= 0
     goto_script "\currentEventName" defeated
-    set_screen "date"
-    wait 0.5
+    theater_animation "enemy_leaves"
+    wait 0.7
     challenge_result true
     update_ui
     play_sfx "ui_success"
@@ -84,27 +89,23 @@ endfor
 
 
 waypoint win_date
-set_screen "date"
 enable_input false
 say "char_name/none" "date/say_4"
 // show_date_ui false
 
-// set_screen "hide_all"
 fade_music 0 0.5
 show_engagement
 fade_music 1 1
 say "date/say_5"
-//set_screen "date"
 goto end
 
 
 waypoint fail_date
-say "SUA PARTY FOI DERROTADA!"
+//say "SUA EQUIPE FOI DERROTADA!"
 challenge_result false
 update_ui
 play_sfx "ui_fail"
 wait 2
-set_screen "date"
 enable_input false
 say "char_name/none" "date/say_6"
 // show_date_ui false

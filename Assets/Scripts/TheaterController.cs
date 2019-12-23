@@ -25,7 +25,7 @@ public class TheaterController : MonoBehaviour {
   public Actor2D mainActor;
   public Actor2D supportActor;
   public Actor2D angelActor;
-  public Actor2D challengeActor;
+  public Actor2D enemyActor;
 
   public GameObject[] bgObjects;
 
@@ -39,41 +39,36 @@ public class TheaterController : MonoBehaviour {
   public void SetEvent(TheaterEvent currentEvent) {
     Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
-    mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
+    //mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
+    //supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
 
-    switch(currentEvent) {
-      case TheaterEvent.date:
-      case TheaterEvent.dateChallenge:
-        //mainActor.transform.localPosition = mainPosition;
+    //mainActor.transform.localPosition = mainPosition;
+    //supportActor.gameObject.SetActive(true);
+    //supportActor.transform.localPosition = supportPosition;
 
-        supportActor.gameObject.SetActive(true);
-        supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
-        //supportActor.transform.localPosition = supportPosition;
+    //if(currentEvent == TheaterEvent.date) {
+    //  enemyActor.ShowWeaknessCard(false);
 
-        if(currentEvent == TheaterEvent.date) {
-          challengeActor.ShowWeaknessCard(false);
+    //  EnemyLeavesScene();
+    //} else {
+    //  SetupEnemySprites();
+    //}
+  }
 
-          ChallengeLeavesScene();
-        } else {
-          DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
-          BattleController.instance.difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().difficulty;
+  public void SetupEnemySprites() {
+    DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
+    BattleController.instance.difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().level;
 
-          challengeActor.SetChallengeGraphics(dateEvent);
-          if(!string.IsNullOrEmpty(dateEvent.spriteName)) {
-            ChallengeEntersScene();
-          } else {
-            InitializeChallengeLevelAndHp();
-          }
-          UIController.instance.datingPeoplePanel.ShowPanel();
-        }        
-        break;
-    }
+    enemyActor.SetEnemyGraphics(dateEvent);
+    //if(!string.IsNullOrEmpty(dateEvent.spriteName)) {
+    //  EnemyEntersScene();
+    //} else {
+    //  InitializeChallengeLevelAndHp();
+    //}
   }
 
   public void PositionActorsCloseup() {
     mainActor.transform.localPosition = mainPosition;
-
-    supportActor.gameObject.SetActive(true);
     supportActor.transform.localPosition = new Vector3(mainPosition.x, supportPosition.y, supportPosition.z);
   }
 
@@ -92,7 +87,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void EnemyAttackAnimation() {
-    challengeActor.EnemyAttackAnim();
+    enemyActor.EnemyAttackAnim();
   }
 
   public void ShineCharacter(int actorId) {
@@ -129,19 +124,39 @@ public class TheaterController : MonoBehaviour {
     spriteRenderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
   }
 
-  public void ChallengeEntersScene() {
+  public void SetupDate() {
+    Vector3 distance = new Vector3(3f, 0f, 0f);
+    mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
+    supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
+
+    mainActor.transform.localPosition = mainPosition - distance;
+    supportActor.transform.localPosition = supportPosition - distance;
+    angelActor.transform.localPosition = angelPosition - distance;
+
+    enemyActor.transform.localPosition = challengePosition + distance;
+    enemyActor.ShowWeaknessCard(false);
+  }
+
+  public void PartyEntersScene() {
+    // TODO: implement
+    mainActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
+    supportActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
+    angelActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
+  }
+
+  public void EnemyEntersScene() {
     DateEvent currentChallenge = BattleController.instance.GetCurrentDateEvent();
+
+    SetupEnemySprites();
 
     currentChallenge.hp = currentChallenge.maxHp;
 
-    if(challengeActor.gameObject.activeSelf == false) {
-      VsnAudioManager.instance.PlaySfx("challenge_default");
-      challengeActor.gameObject.SetActive(true);
-      challengeActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
-      challengeActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(()=> {
-        InitializeChallengeLevelAndHp();
-      });
-    }
+    VsnAudioManager.instance.PlaySfx("challenge_default");
+    enemyActor.gameObject.SetActive(true);
+    enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
+    enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
+      InitializeChallengeLevelAndHp();
+    });
   }
 
   public void InitializeChallengeLevelAndHp() {
@@ -150,13 +165,14 @@ public class TheaterController : MonoBehaviour {
     BattleController.instance.enemyHpSlider.gameObject.SetActive(true);
   }
 
-  public void ChallengeLeavesScene() {
+  public void EnemyLeavesScene() {
     BattleController.instance.enemyHpSlider.gameObject.SetActive(false);
-    if(challengeActor.gameObject.activeSelf == true) {
-      challengeActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
-        challengeActor.gameObject.SetActive(false);
-      });
-    }
+
+    enemyActor.ShowWeaknessCard(false);
+
+    enemyActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
+      enemyActor.gameObject.SetActive(false);
+    });
   }
 
 

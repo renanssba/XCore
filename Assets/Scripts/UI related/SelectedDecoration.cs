@@ -8,7 +8,7 @@ public class SelectedDecoration : MonoBehaviour {
   public GameObject selectedObject;
   CanvasGroup group;
 
-	void Start () {
+	void OnEnable () {
     group = GetComponent<CanvasGroup>();
     StartCoroutine(Check());
   }

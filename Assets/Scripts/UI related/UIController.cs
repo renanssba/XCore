@@ -40,6 +40,7 @@ public class UIController : MonoBehaviour {
   public PersonCard[] partyPeopleCards;
 
   public ActionsPanel actionsPanel;
+  public GameObject selectTargetPanel;
 
   public ScreenTransitions helpMessagePanel;
   public TextMeshProUGUI helpMessageText;
@@ -191,11 +192,11 @@ public class UIController : MonoBehaviour {
       case "date_challenge":
         uiControllerPanel.HidePanel();
         titleText.gameObject.SetActive(false);
-        if(state == "date") {
-          theater.SetEvent(TheaterEvent.date);
-        } else {
-          theater.SetEvent(TheaterEvent.dateChallenge);
-        }
+        //if(state == "date") {
+        //  theater.SetEvent(TheaterEvent.date);
+        //} else {
+        //  theater.SetEvent(TheaterEvent.dateChallenge);
+        //}
         bgImage.SetActive(false);
         peopleInfoPanel.HidePanel();
         peopleButtonPanel.HidePanel();

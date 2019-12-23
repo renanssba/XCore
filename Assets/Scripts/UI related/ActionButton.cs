@@ -55,8 +55,10 @@ public class ActionButton : MonoBehaviour {
 
   public void UpdateUIAsSkill() {
     nameText.text = skill.GetPrintableName();
-    if(skill.type == SkillType.attack && skill.id != 9) {
-      nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action_name]");
+    if(skill.type == SkillType.attack) {
+      if(skill.id != 9) {
+        nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action_name]");
+      }
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];
     } else {
@@ -90,6 +92,26 @@ public class ActionButton : MonoBehaviour {
   }
 
 
+  public void SetHelpText() {
+    string s = "";
+    switch(actionType) {
+      case TurnActionType.useSkill:
+        s = skill.GetPrintableDescription();
+        break;
+      case TurnActionType.useItem:
+        Item it = Item.GetItemById(itemListing.id);
+        s = it.GetPrintableDescription();
+        break;
+    }
+    UIController.instance.ShowHelpMessagePanel(s);
+  }
+
+  public void SetBackHelpText() {
+    string s = Lean.Localization.LeanLocalization.GetTranslationText("choices/cancel");
+    UIController.instance.ShowHelpMessagePanel(s);
+  }
+
+
   public void ClickedActionButton() {
     if(!SkillCanBeUsed()) {
       SfxManager.StaticPlayForbbidenSfx();
@@ -109,31 +131,10 @@ public class ActionButton : MonoBehaviour {
         break;
     }
 
-    UIController.instance.actionsPanel.EndActionSelect();
-    VsnController.instance.GotCustomInput();
-    UIController.instance.HideHelpMessagePanel();
+    BattleController.instance.FinishSelectingCharacterAction();
   }
 
   public bool SkillCanBeUsed() {
     return person.sp >= skill.spCost;
-  }
-
-  public void SetHelpText() {
-    string s = "";
-    switch(actionType) {
-      case TurnActionType.useSkill:
-        s = skill.GetPrintableDescription();
-        break;
-      case TurnActionType.useItem:
-        Item it = Item.GetItemById(itemListing.id);
-        s = it.GetPrintableDescription();
-        break;
-    }
-    UIController.instance.ShowHelpMessagePanel(s);
-  }
-
-  public void SetBackHelpText() {
-    string s = Lean.Localization.LeanLocalization.GetTranslationText("choices/cancel");
-    UIController.instance.ShowHelpMessagePanel(s);
   }
 }

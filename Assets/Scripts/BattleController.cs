@@ -107,6 +107,43 @@ public class BattleController : MonoBehaviour {
 
 
 
+  public void FinishSelectingCharacterAction() {
+    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+
+    switch(selectedActionType[currentPlayerTurn]) {
+      case TurnActionType.useItem:
+        WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
+        return;
+      case TurnActionType.useSkill:
+        if(selectedSkills[currentPlayerTurn].range == ActionRange.oneAlly) {
+          WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
+          return;
+        }
+        break;
+      case TurnActionType.flee:
+        VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
+        break;
+    }
+
+    UIController.instance.actionsPanel.EndActionSelect();
+    VsnController.instance.GotCustomInput();
+    UIController.instance.HideHelpMessagePanel();
+  }
+
+  public void WaitToSelectAllyTarget(TurnActionType actionType) {
+    UIController.instance.actionsPanel.EndActionSelect();
+    if(actionType == TurnActionType.useItem) {
+      UIController.instance.ShowHelpMessagePanel("Escolha um aliado para usar o item:");
+    } else if(actionType == TurnActionType.useSkill) {
+      UIController.instance.ShowHelpMessagePanel("Escolha um aliado para usar a habilidade:");
+    }    
+    UIController.instance.selectTargetPanel.SetActive(true);
+  }
+
+  public void WaitToSelectEnemyTarget() {
+    UIController.instance.selectTargetPanel.SetActive(true);
+  }
+
   public void CharacterTurn(int partyMemberId) {
     VsnController.instance.state = ExecutionState.WAITING;
     VsnSaveSystem.SetVariable("selected_attribute", -1);
@@ -116,11 +153,13 @@ public class BattleController : MonoBehaviour {
         CharacterUseAction(partyMemberId);
         break;
       case TurnActionType.useItem:
-        StartCoroutine(ExecuteUseItem(partyMemberId, selectedItems[partyMemberId]));
+        StartCoroutine(ExecuteUseItem(partyMemberId, selectedTargetPartyId[partyMemberId], selectedItems[partyMemberId]));
         break;
       case TurnActionType.defend:
+        VsnController.instance.state = ExecutionState.PLAYING;
         break;
       case TurnActionType.flee:
+        StartCoroutine(ExecuteTryToFlee());
         break;
     }
   }
@@ -134,7 +173,7 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedSkills[partyMemberId]));
         break;
       case SkillType.active:
-        StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedSkills[partyMemberId]));
+        StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
       case SkillType.passive:
         Debug.LogError("Passive skill " + selectedSkills[partyMemberId].name + " used actively.");
@@ -162,8 +201,8 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(attackAnimationTime);
 
-    TheaterController.instance.challengeActor.Shine();
-    TheaterController.instance.challengeActor.ShowDamageParticle(attributeId, effectiveActionPower, effectivity);
+    TheaterController.instance.enemyActor.Shine();
+    TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveActionPower, effectivity);
 
     yield return new WaitForSeconds(1f);
     enemyHpSlider.maxValue = currentEvent.maxHp;
@@ -174,7 +213,7 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteCharacterSkill(int partyMemberId, Skill usedSkill) {
+  public IEnumerator ExecuteCharacterSkill(int partyMemberId, int targetId, Skill usedSkill) {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
     DateEvent currentEvent = GetCurrentDateEvent();
@@ -184,16 +223,16 @@ public class BattleController : MonoBehaviour {
 
     switch(usedSkill.skillEffect) {
       case SkillEffect.sensor:
-        TheaterController.instance.challengeActor.Shine();
-        TheaterController.instance.challengeActor.ShowWeaknessCard(true);
+        TheaterController.instance.enemyActor.Shine();
+        TheaterController.instance.enemyActor.ShowWeaknessCard(true);
         break;
       case SkillEffect.giveStatusCondition:
-        partyMembers[partyMemberId].ReceiveStatusConditionBySkill(usedSkill);
-        TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+        partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
+        TheaterController.instance.GetActorByIdInParty(targetId).Shine();
         break;
       case SkillEffect.healStatusCondition:
-        partyMembers[partyMemberId].RemoveStatusConditionBySkill(usedSkill);
-        TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+        partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
+        TheaterController.instance.GetActorByIdInParty(targetId).Shine();
         break;
     }
     
@@ -202,7 +241,7 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteUseItem(int partyMemberId, Item usedItem) {
+  public IEnumerator ExecuteUseItem(int partyMemberId, int targetId, Item usedItem) {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
     DateEvent currentEvent = GetCurrentDateEvent();
@@ -218,30 +257,53 @@ public class BattleController : MonoBehaviour {
     // heal HP and SP
     if(usedItem.healHp > 0) {
       HealPartyHp(usedItem.healHp);
-      TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowHealHpParticle(usedItem.healHp);
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedItem.healHp);
     }
     if(usedItem.healSp > 0) {
-      partyMembers[partyMemberId].HealSp(usedItem.healSp);
-      TheaterController.instance.GetActorByIdInParty(partyMemberId).ShowHealSpParticle(usedItem.healSp);
+      partyMembers[targetId].HealSp(usedItem.healSp);
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedItem.healSp);
     }
 
     // give status condition
     if(usedItem.GivesStatusCondition()) {
-      partyMembers[partyMemberId].ReceiveStatusConditionByItem(usedItem);
+      partyMembers[targetId].ReceiveStatusConditionByItem(usedItem);
     }
 
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
       foreach(string condName in usedItem.healsConditionNames) {
-        partyMembers[partyMemberId].RemoveStatusCondition(condName);
+        partyMembers[targetId].RemoveStatusCondition(condName);
       }
     }
 
-    TheaterController.instance.GetActorByIdInParty(partyMemberId).Shine();
+    TheaterController.instance.GetActorByIdInParty(targetId).Shine();
 
 
     yield return new WaitForSeconds(1.5f);
     VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
+  public IEnumerator ExecuteTryToFlee() {
+    VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
+
+    bool fleeSuccess = Random.Range(0, 100) < 60;
+
+    if(fleeSuccess) {
+      yield return new WaitForSeconds(0.5f);
+      int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
+      TheaterController.instance.EnemyLeavesScene();
+      FleeDateSegment(currentDateEvent);
+
+      yield return new WaitForSeconds(1f);
+      Command.GotoCommand.StaticExecute("new_enemy_appears");
+      VsnController.instance.state = ExecutionState.PLAYING;
+    } else {
+      yield return new WaitForSeconds(0.5f);
+      VsnArgument[] args = new VsnArgument[1];
+      args[0] = new VsnString("flee_fail");
+      Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
+    }    
   }
 
 
@@ -257,6 +319,7 @@ public class BattleController : MonoBehaviour {
     int attributeId = (int)currentEvent.attackAttribute;
     int baseDamage = currentEvent.attackDamage;
     int effectiveAttackDamage = (int)(baseDamage - partyMembers[targetId].AttributeValue(attributeId));
+    effectiveAttackDamage /= (selectedActionType[targetId] == TurnActionType.defend ? 2 : 1);
     effectiveAttackDamage = Mathf.Max(1, effectiveAttackDamage);
     int initialHp = hp;
 
@@ -269,9 +332,21 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.ShineCharacter(targetId);
     TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
 
-    string[] options = new string[]{ "bleeding" , "sad", "unclothed" };
-    StatusCondition sc = GetStatusConditionByName(options[Random.Range(0, 3)]);
-    partyMembers[targetId].ReceiveStatusCondition(sc);
+    // chance to receive status condition
+    int effectiveStatusConditionChance = currentEvent.giveStatusConditionChance;
+    if(selectedActionType[targetId] == TurnActionType.defend) {
+      if(effectiveStatusConditionChance == 100) {
+        effectiveStatusConditionChance -= 30;
+      } else {
+        effectiveStatusConditionChance /= 2;
+      }
+    }
+    if(Random.Range(0, 100) < effectiveStatusConditionChance) {
+      foreach(string statusConditionName in currentEvent.givesConditionNames) {
+        StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
+        partyMembers[targetId].ReceiveStatusCondition(statusCondition);
+      }
+    }
 
     yield return new WaitForSeconds(1f);
     DamagePartyHp(effectiveAttackDamage);
@@ -343,8 +418,8 @@ public class BattleController : MonoBehaviour {
       selectedEvents.Add(selectedId);
     }
     System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
-                                  (event1, event2) => event1.stage.CompareTo(event2.stage)));
-    SetDifficultyForEvents();
+                      (event1, event2) => event1.stage.CompareTo(event2.stage)));
+    RecoverEnemiesHp();
   }
 
   public int GetNewDateEvent(List<int> selectedEvents) {
@@ -385,16 +460,8 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public void SetDifficultyForEvents() {
+  public void RecoverEnemiesHp() {
     for(int i = 0; i < dateLength; i++) {
-      //if(i < 3) {
-      //  dateSegments[i].difficulty = 4;
-      //} else if(i < 5) {
-      //  dateSegments[i].difficulty = 5;
-      //} else {
-      //  dateSegments[i].difficulty = 6;
-      //}
-      dateSegments[i].maxHp = dateSegments[i].difficulty;
       dateSegments[i].hp = dateSegments[i].maxHp;
     }
   }
@@ -410,11 +477,12 @@ public class BattleController : MonoBehaviour {
       Debug.Log("i: " + i);
     }
 
-    int selectedId = GetNewDateEvent(currentUsedEvents);
+    int selectedId = 1;
+    //int selectedId = GetNewDateEvent(currentUsedEvents);
     dateSegments[positionId] = allDateEvents[selectedId];
     currentUsedEvents.Clear();
 
-    SetDifficultyForEvents();
+    RecoverEnemiesHp();
   }
 
 
@@ -445,15 +513,18 @@ public class BattleController : MonoBehaviour {
       allDateEvents.Add(new DateEvent {
         id = int.Parse(dic["Id"]),
         scriptName = dic["Nome do Script"],
-        difficulty = int.Parse(dic["Dificuldade"]),
+        level = int.Parse(dic["Level"]),
+        maxHp = int.Parse(dic["Max HP"]),
         attributeEffectivity = new float[] { guts, intelligence, charisma, magic },
         spriteName = dic["Nome Sprite"],
         stage = int.Parse(dic["Etapa"]),
         location = dic["Localidade"],
         interactionType = interaction,
         attackAttribute = Utils.GetAttributeByString(dic["Atributo Ataque"]),
-        attackDamage = int.Parse(dic["Dano"])
-      });
+        attackDamage = int.Parse(dic["Dano"]),
+        givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
+        giveStatusConditionChance = int.Parse(dic["give status chance"])
+    });
     }
   }
 
@@ -484,6 +555,27 @@ public class BattleController : MonoBehaviour {
       newSkill.name = entry["name"];
       newSkill.description = entry["description"];
       newSkill.type = GetSkillTypeByString(entry["type"]);
+
+      switch(entry["range"]) {
+        case "self":
+          newSkill.range = ActionRange.self;
+          break;
+        case "one_ally":
+          newSkill.range = ActionRange.oneAlly;
+          break;
+        case "one_enemy":
+          newSkill.range = ActionRange.oneEnemy;
+          break;
+        case "all_allies":
+          newSkill.range = ActionRange.allAllies;
+          break;
+        case "all_enemies":
+          newSkill.range = ActionRange.allEnemies;
+          break;
+        case "random_enemy":
+          newSkill.range = ActionRange.randomEnemy;
+          break;
+      }
 
       newSkill.attribute = Utils.GetAttributeByString(entry["attribute"]);
       if(!string.IsNullOrEmpty(entry["multiplier"])) {
