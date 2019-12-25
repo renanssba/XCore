@@ -288,7 +288,6 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
 
     bool fleeSuccess = Random.Range(0, 100) < 60;
-
     if(fleeSuccess) {
       yield return new WaitForSeconds(0.5f);
       int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
