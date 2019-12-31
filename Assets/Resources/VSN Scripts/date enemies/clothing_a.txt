@@ -1,46 +1,44 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Um vendaval extremamente localizado leva as calças de \boy embora!"
-say "\girl ainda não parece ter notado."
+say "" "Um vendaval extremamente localizado se aproxima em alta velocidade!"
+
+set_var guts_action_name "Resistir"
+set_var intelligence_action_name "Calcular"
+set_var charisma_action_name ""
+end_script
+
+waypoint guts_action
+say "" "\active finca os pés no chão e resiste bravamente ao vento!"
+say "" " O vendaval desacelera!"
+end_script
+
+//Ação de inteligencia do furacão desnudador se beneficiaria de variações de texto escolhidas aleatoriamente
+waypoint intelligence_action
+say "" "\active percebe que, segundo as leis meteorológicas, um vendaval extremamente localizado que rouba roupas não deveria existir!"
+say "" "O vendaval existe um pouco menos!"
+end_script
+
+waypoint charisma_action
+say "" "\active aponta para o furacão e sorri calorosamente!"
+say "" " O vendaval fica com pena de envergonhar uma pessoa tão bonita."
+end_script
+
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica no alvo!"
 end_script
 
 
-
-waypoint guts_success
-say "" "Sem hesitar, \boy tira também a camisa e faz rapidamente uma tanga."
-say "A fantasia improvisada o faz parecer extremamente másculo!"
+waypoint attack_boy
+say "" "\boy  é envolvido pelo vendaval! Vestimentas voam pelo ar!"
+//say "" " \boy perdeu 'peca_de_roupa'"
 end_script
 
-waypoint intelligence_success
-say "" "\boy estava usando calças sobressalentes o tempo todo."
-say "A crise foi resolvida antes mesmo de começar. Impressionante!"
+waypoint attack_girl
+say "" "\girl  é envolvida pelo vendaval! Vestimentas voam pelo ar!"
+//say "" " \girl perdeu 'peca_de_roupa'"
 end_script
 
-waypoint charisma_success
-say "" "\boy chama a atenção de \girl."
-say "\boy" "Gostou? É uma nova moda que eu inventei."
-say "\girl" "Até que não é ruim."
-say "" "Outros meninos escutam e começam a tirar as calças também."
+waypoint defeated
+say "" "O vendaval se desfaz subitamente!"
 end_script
-
-
-
-waypoint guts_fail
-say "" "Sem hesitar, \boy tira também a camisa e faz rapidamente uma tanga."
-say "A fantasia improvisada o faz parecer ridículo."
-end_script
-
-waypoint intelligence_fail
-say "" "\boy fica tranquilo, pois sempre costuma colocar um par de calças sobressalentes antes de encontros."
-say "Infelizmente, ele as havia esquecido em casa hoje. \girl fica horrorizada."
-end_script
-
-waypoint charisma_fail
-say "" "\boy chama a atenção de \girl."
-say "\boy" "Gostou? É uma nova moda que eu inventei."
-say "\girl" "Aaaah, tarado!"
-say "" "\girl sai correndo. \boy consegue um par extra de calças de transeuntes compadecidos de sua situação miserável."
-end_script
-
-

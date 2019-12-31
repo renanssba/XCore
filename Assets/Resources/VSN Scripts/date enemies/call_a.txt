@@ -1,48 +1,41 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Uma amiga muito tagarela liga para \girl no meio do encontro."
-say "\girl tenta desligar delicadamente, mas a amiga insiste."
+say "" "\active recebe uma ligação inconveniente de um parente distante!"
+set_var guts_action_name "Desligar"
+set_var intelligence_action_name "Apresentar"
+set_var charisma_action_name "Enrolar"
 end_script
 
-
-
-waypoint guts_success
-say "" "\girl se enfurece e joga o celular no chão! O aparelho se estraçalha."
-say "\girl" "Um celular é substituível, mas um momento com você é sempre único."
-say "" "\boy fica estarrecido."
+waypoint guts_action
+say "" "\active vai direto ao ponto e diz que precisa desligar!"
+say "" " A voz do outro lado da linha parece ofendida!"
 end_script
 
-waypoint intelligence_success
-say "\girl" "Você sabia que falar no celular demais causa câncer?"
-say "Amiga" "Caramba, sabia não!"
-say "" "De posse dessa informação assustadora, a amiga de \girl resolve desligar."
+waypoint intelligence_action
+say "" "\active discorre sobre como falar ao telefone pode fazer mal à saúde!"
+say "" "A voz do outro lado da linha parece alarmada!"
 end_script
 
-waypoint charisma_success
-say "\girl" "Tchhh, tchhhh, estou entrando num túnel!"
-say "" "Após \girl aplicar esse velho truque, o casal está livre para conversar novamente!"
+waypoint charisma_action
+say "" "\active aplica uma desculpa esfarrapada!"
+say "" "A voz do outro lado da linha parece acreditar um pouco!"
 end_script
 
-
-
-waypoint guts_fail
-say "" "\girl se enfurece e joga o celular no chão! O aparelho se estraçalha."
-say "\boy" "Porque você fez isso?"
-say "\girl" "Eu... não sei."
-say "\boy fica assustado."
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica no telefone!"
 end_script
 
-waypoint intelligence_fail
-say "\girl" "Você sabia que falar no celular demais causa câncer?"
-say "Amiga" "Não, não sabia! Me conta mais sobre isso!"
-say "\girl fica no celular por mais dez minutos. \boy fica muito entediada."
+waypoint attack_boy
+say "" "\boy fica entediado com o lenga-lenga do telefone!"
 end_script
 
-waypoint charisma_fail
-say "" "\girl, num momento de desespero, pergunta se a amiga não quer falar com \boy. Imediatamente ela percebe seu erro."
-say "\boy fica no celular com a amiga de \girl por mais dez minutos."
-say "Não foi uma experiência agradável."
+waypoint attack_girl
+say "" "\girl fica entediada com o lenga-lenga do telefone!"
+end_script
+
+waypoint defeated
+say "" "O parente distante resolve desligar!"
 end_script
 
 

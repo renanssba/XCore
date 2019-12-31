@@ -1,20 +1,26 @@
 goto *arg1
 
 waypoint event_statement
-say "" "O casal encontra um coelhinho ferido, precisando de ajuda. A garota fica com pena e pede para \boy ajudá-lo."
+say "" "O casal encontra um coelhinho ferido, precisando de ajuda!"
+
+set_var guts_action_name "Encorajar"
+set_var intelligence_action_name "Tratar"
+set_var charisma_action_name "Tranquilizar"
 end_script
 
-
-
-waypoint guts_success
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "Surpreendentemente, o coelho se motiva o suficiente para voltar a andar. \girl fica muito surpresa."
+waypoint guts_action
+say "" "\active faz um discurso inspirador!"
+say "" "O coelhinho se sente mais motivado!"
 end_script
 
-waypoint intelligence_success
-say "" "\boy improvisa uma atadura com materiais encontrados na trilha e rapidamente trata do animal."
-say "\girl fica feliz."
+waypoint intelligence_action
+say "" "\active improvisa um curativo!"
+say "" "O coelhinho se sente um pouco melhor!"
+end_script
+
+waypoint charisma_action
+say "" "\active tranquiliza o coelhinho com um gesto acolhedor!"
+say "" "O pobre animal se emociona!"
 end_script
 
 waypoint charisma_success

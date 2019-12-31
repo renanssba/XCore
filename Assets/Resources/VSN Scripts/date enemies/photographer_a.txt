@@ -1,49 +1,43 @@
 goto *arg1
 
 waypoint event_statement
-say "???" "Nossa, mas que casal irreverente! *FLASH* Que único! *FLASH*"
-say "Que curioso, curioso! Deem um sorriso para a câmera! *FLASH*"
-say "" "Depois de se recuperar da cegueira temporária, \girl se dá conta de que um fotógrafo está tirando fotos deles por alguma razão."
+say "" " FLASH! Um fotógrafo sem-noção aparece e começa a tirar fotos!"
+
+set_var guts_action_name "Reclamar"
+set_var intelligence_action_name "Argumentar"
+set_var charisma_action_name "Fazer Pose"
+end_script
+
+waypoint guts_action
+say "" "\active enche o ouvido do fotógrafo de poucas e boas!"
+say "" "O fotógrafo considera seriamente deixar o casal em paz!"
+end_script
+
+waypoint intelligence_action
+say "" "\active conversa com o fotógrafo sobre privacidade e direitos de imagem!"
+say "" "O fotógrafo considera seriamente deixar o casal em paz!"
+end_script
+
+waypoint charisma_action
+say "" "\active faz uma pose maneira!"
+say "" "A beleza extrema danifica a câmera do fotógrafo!"
+end_script
+
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica na câmera!"
 end_script
 
 
-
-waypoint guts_success
-say "\girl" "Pode parar!"
-say "" "\girl tampa a lente da câmera com a mão. O fotógrafo sai resmungando algo sobre censura."
-say "\boy fica aliviado por poder enxergar novamente."
+waypoint attack_boy
+say "" "FLASH! O fotógrafo bate uma foto!"
+say "" "\boy é incomodado pela luz forte!"
 end_script
 
-waypoint intelligence_success
-say "" "\girl diz que tirar fotos de alguém sem consentimento é crime. O fotógrafo irritante vai embora."
-say "\boy fica aliviado por poder enxergar novamente."
+waypoint attack_girl
+say "" "FLASH! O fotógrafo bate uma foto!"
+say "" "\girl é incomodada pela luz forte!"
 end_script
 
-waypoint charisma_success
-say "" "\girl começa a posar para as fotos, o que deixa o fotógrafo motivado a continuar."
-say "Fotógrafo" "Isso aí! Linda, super linda!"
-say "" "\girl menciona o custo para o uso de seus direitos de imagem."
-say "O fotógrafo sai correndo. \boy fica aliviado por poder enxergar novamente."
+waypoint defeated
+say "" "O fotógrafo foge frustrado!"
 end_script
-
-
-
-waypoint guts_fail
-say "\girl" "Pode parar!"
-say "" "\girl tenta tampar a lente da câmera com a mão. Ela erra o cálculo e acaba dando um tapão na câmera, que se espatifa no chão."
-say "Fotógrafo" "Ei, essa câmera custa uma fortuna! Exijo reembolso!"
-say "\boy e \girl saem do local com a promessa de receber uma conta salgada pelo correio."
-end_script
-
-waypoint intelligence_fail
-say "" "\girl tenta pensar em uma boa argumentação para impedir o homem de tirar fotos, mas nada surge na cabeça dela."
-say "A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável."
-end_script
-
-waypoint charisma_fail
-say "" "\girl começa a posar para as fotos."
-say "Fotógrafo" "Não, não! O foco aqui é ele, minha filha!"
-say "" "O fotógrafo aponta para \boy. A saraivada de flashes continua por vários minutos. Não foi uma experiência agradável."
-end_script
-
-

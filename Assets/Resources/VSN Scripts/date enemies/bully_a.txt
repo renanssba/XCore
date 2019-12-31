@@ -1,44 +1,42 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas de infância."
-say "O valentão se surpreende por \boy estar saindo com uma garota. \girl fica irritada e o defende."
+say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
+
+set_var guts_action_name "Agredir"
+set_var intelligence_action_name "Argumentar"
+set_var charisma_action_name "Blefar"
 end_script
 
 
-
-waypoint guts_success
-say "" "\girl não perde tempo e chuta o saco do valentão."
-say "Valentão" "Que isso, mermão, tua namorada é forte!"
-say "" "Ele sai mancando e gemendo. \boy fica aliviado."
+waypoint guts_action
+say "" "\active se utiliza de violência!"
+say "" "O valentão é atingido por uma saraivada de golpes!"
 end_script
 
-waypoint intelligence_success
-say "" "\girl faz uma exemplar argumentação lógica que prova sem sombra de dúvida que o valentão é um lixo humano e jamais obterá sucesso na vida."
-say "Embasbacado, ele vai embora, com lágrimas nos olhos."
+waypoint intelligence_action
+say "" "\active discursa com fatos e argumentos!"
+say "" "O valentão se sente confuso!"
 end_script
 
-waypoint charisma_success
-say "" "\girl concorda com o valentão e diz que prefere sair com ele, que vai embora satisfeito com o número de telefone dela."
-say "\boy se surpreende, mas \girl explica que deu o número errado só pra ele ir embora."
+waypoint charisma_action
+say "" "\active conta uma mentira elaborada!"
+say "" "O valentão se sente intimidado!"
 end_script
 
-
-
-waypoint guts_fail
-say "" "\girl fica com raiva e tenta agredir o valentão, mas é facilmente dominada."
-say "Valentão" "Deixando sua namorada lutar por você? Fracote!"
-say "" "O valentão vai embora rindo. \boy fica se achando um lixo."
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica no alvo."
 end_script
 
-waypoint intelligence_fail
-say "" "\girl tenta argumentar que o valentão não deve bater em \boy."
-say "A escolha de palavras não é muito convincente. O valentão empurra \boy no chão e vai embora rindo."
+waypoint attack_boy
+say "" "O valentão humilha \boy com apelidos!"
 end_script
 
-waypoint charisma_fail
-say "" "\girl tenta apaziguar os ânimos, mas falha."
-say "O valentão derruba \boy e vai embora rindo."
+waypoint attack_girl
+say "" " O valentão aplica uma cantada de mau-gosto em \girl!"
 end_script
 
+waypoint defeated
+say "" "O valentão foge com o orgulho ferido."
+end_script
 
