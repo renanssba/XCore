@@ -17,6 +17,9 @@ public class VsnUIManager : MonoBehaviour {
   public TextMeshProUGUI vsnMessageText;
   public TextMeshProUGUI vsnMessageTitle;
   public Image vsnMessageTitlePanel;
+  public GameObject talkingDialogArrow;
+  public Image[] dialogBoxImages;
+
   public Button screenButton;
   public RectTransform charactersPanel;
   public Image backgroundImage;
@@ -336,6 +339,42 @@ public class VsnUIManager : MonoBehaviour {
       VsnSaveSystem.SetVariable("text_input", textInputField.text);
     }
     ShowTextInput(false);
+  }
+
+  public void SetDialogBoxPosition(string position) {
+    RectTransform rect = vsnMessagePanel.GetComponent<RectTransform>();
+
+    switch(position) {
+      case "center":
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        break;
+      case "up":
+        rect.pivot = new Vector2(0.5f, 1f);
+        rect.anchorMin = new Vector2(0.5f, 1f);
+        rect.anchorMax = new Vector2(0.5f, 1f);
+        break;
+      case "down":
+        rect.pivot = new Vector2(0.5f, 0f);
+        rect.anchorMin = new Vector2(0.5f, 0f);
+        rect.anchorMax = new Vector2(0.5f, 0f);
+        break;
+    }
+  }
+
+  public void SetTextBaseColor(Color color) {
+    vsnMessageText.color = color;
+  }
+
+  public void SetDialogBoxInvisible(bool isInvisible) {
+    foreach(Image img in dialogBoxImages) {
+      if(isInvisible) {
+        img.enabled = false;
+      } else {
+        img.enabled = true;
+      }      
+    }
   }
 }
 

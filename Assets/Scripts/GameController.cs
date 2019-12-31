@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
         VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
         VsnSaveSystem.SetVariable("tutorial_observation", 1);
       }
-      VsnController.instance.StartVSN("cap1_intro");
+      VsnController.instance.StartVSN("cap0_intro");
       //VsnController.instance.StartVSN("cap1_manha");
       //VsnController.instance.StartVSN("tutorial_intro");
       //VsnController.instance.StartVSN("check_end_game");

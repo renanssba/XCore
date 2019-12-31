@@ -1,130 +1,79 @@
-﻿
+﻿fade_out 0
+wait 1
+dialog_style "faded_screen_message"
+say "" "No dia seguinte, no escritório da Supervisora Hardiel..."
+
+dialog_style "normal"
 fade_out 0
 play_music null null
 //play_music "date1_intro" "date1_loop"
 wait 1
 bg "heaven"
-fade_in 1
-
-goto_script "fertiliel_enter" 0.25
-
-fertiliel entra na cena
-say "Fertiliel" "Ok, aqui estou. Espero não ter me atrasado..."
-say "Graciel" "EEEEEEI, FERTILIEEEEL! Que BOM te encontrar aqui!"
-
-play_music "date1_intro" "date1_loop"
-wait 1
-graciel entra na cena
-goto_script "char_right_enter" "graciel"
-
-say "Fertiliel" "Oi Graciel. Só tenta não gritar tanto durante a manhã, minha cabeça dói."
-say "Graciel" "E aí, você tá animada para o resultado dos Exames Admissionais?"
-say "Eu sei que eu tôoooo, vai dar tudo certo, vou conseguir minha vaga em um emprego super super incrível!"
-say "Fertiliel" "Eu tô... receosa. Algo me diz que as coisas não vão ser bem como eu tô esperando..."
-say "Graciel" "Não fica assim! Você é tão inteligente, com certeza vai dar tudo certo!"
-say "Fertiliel" "Queira o Amor que você esteja certa!"
-
-wait 0.5
-say "Atendente" "Srta Fertiliel, por favor dirija-se à sala seguinte."
-
-say "Fertiliel" "Ok, agora é a minha hora."
-say "Graciel" "Boa sorte!"
-
-fertiliel sai de cena
-goto_script "fertiliel_exit"
-wait 0.5
-
-fade_out 0.7
-wait 1
+play_music "observacao2_intro" "observacao2_loop"
 
 char_reset_all
 character char_right "hardiel"
 char_move_x char_right 0.75
 
-fade_in 0.7
+fade_in 1
 
-hardiel está na tela
-fertiliel entra na cena
 goto_script "fertiliel_enter" 0.25
 wait 1
 
-say "Fertiliel" "Oi, boa tarde."
-say "Hardiel" "Presumo que seja a novata, Fertiliel."
-say "Meu nome é Hardiel, e estou encarregada de informar-lhe o resultado dos seus exames."
-say "Fertiliel" "Sim, sou eu. Prazer em conhecê-la!"
-say "Hardiel" "Não há prazer algum em exercer sua função. Nós anjos fazemos isso apenas para cumprir nosso dever, e nada mais."
-say "Fertiliel" "(...Nossa.)"
-say "Hardiel" "Nos seus Exames consta que você se inscreveu para a função de Anjo da Guarda."
-say "Fertiliel" "É, eu quero muito ser um Anjo da Guarda!"
-say "Hardiel" "Correto. Infelizmente, suas vontades aqui são irrelevantes. A única coisa que importa são seus resultados."
-say "Fertiliel" "Hum... E como eu me saí nos exames?"
-say "Hardiel" "Como deve saber, há pouquíssimas vagas para Anjo da Guarda atualmente."
+say "Fertiliel" "Bom dia Supervisora Hardiel, estou me apresentando para meu primeiro dia de trabalho."
+say "Hardiel" "Está atrasada 2 minutos, Fertiliel."
+say "Fertiliel" "De-desculpa..."
+say "Hardiel" "Antes de iniciar seus trabalhos, devo informá-la de suas atribuições como Cupido."
+say "Em cada missão na Terra, você terá um humano designado e deve encontrar um parceiro ou parceira para ele."
+say "Hardiel" "Devido a uma crise populacional grave que está ocorrendo na Terra, estamos focando atualmente em <b>fertilidade</b>."
+say "Portanto seu foco deve ser formar casais que gerem muito filhos."
 
-say "Fertiliel" "(Droga... Será que eu falhei?)"
-say "Hardiel" "Mesmo assim, suas notas foram..."
-wait 0.5
-say "...Suficientes."
-say "Fertiliel" "O quê? É SÉRIO?"
-say "Aeeee! Eu tô TÃO FELIZ!"
-say "Hardiel" "Permita-me continuar, por favor..."
-say "Fertiliel" "Desculpa."
-say "Hardiel" "Nós também levamos seu histórico passado e outros fatores psicológicos em consideração..."
-say "Fertiliel" "(Droga!)"
-say "Hardiel" "E chegamos à conclusão que Anjo da Guarda é uma atribuição muito além das suas capacidades."
-say "Fertiliel" "NÃO!"
-say "Hardiel" "Portanto iremos alocá-la em uma outra função que esteja dentro dos seus limites."
-say "Fertiliel" "Po-por favor, me deixa ser um Anjo da Guarda! Eu consigo melhorar! Vou me esforçar!"
-say "Hardiel" "Eu já falei que suas vontades aqui são irrelevantes, garota."
-say "Após analisarmos seu histórico, decidimos que uma atribuição mais 'apropriada' para você seria de Cupido."
-say "Fertiliel" "Cupido? Blergh!"
-say "Hardiel" "E tem mais. Devido ao seu histórico, você possui uma dívida muito grande com a Sociedade dos Anjos."
-say "Você deve pagar por seus erros ajudando a gerar bebês humanos. Um total de 100 bebês será o suficiente para quitar sua dívida."
-say "Fertiliel" "Eca, bebês humanos? E logo CEM deles?"
-say "Hardiel" "Você sabe muito bem o que fez. Agradeça por te darmos esta oportunidade de pagar por seus erros."
+say "Fertiliel" "Certo. E como eu faço isso?"
+
+say "Hardiel" "Aqui está um par de Flechas do Amor Eterno, leve-as com você."
+say "Para formar casais, voce precisa que os humanos se gostem, saiam algumas vezes e abram seus corações para serem um casal."
+say "Quando os corações estiverem completamente abertos você deve atingí-los com as Flechas do Amor Eterno, e eles se tornarão um casal inseparável."
+
+say "Fertiliel" "E onde entram os bebês nessa história?"
+say "Hardiel" "Quando um casal inseparável se torna adulto, ele se casa e tem filhos."
+
+say "Fertiliel" "Certo. E os filhos que eles gerarem vão ajudar a pagar minha dívida?"
+say "Hardiel" "Precisamente."
+
+say "Fertiliel" "Entendi. Saírem juntos, flechas, bebês. Pagar dívida."
+say "Hardiel" "Por último, o protocolo manda que eu a informe das Regras de Conduta dos Anjos no Mundo Humano."
+say "Regra N1: Um anjo jamais deve aparecer para um humano, sob nenhuma circunstância."
+say "Regra N2: Foque apenas em sua função, interferindo o mínimo possível no Mundo Humano."
+say "Regra N3: Limite-se a auxiliar apenas o seu humano designado."
+say "Regra N4: Influencie os humanos apenas para realizar sua função."
+
+say "Fertiliel" "Ok, eu conheço as regras."
+say "Hardiel" "Não custa nada repetir. Ainda mais pra alguém como você."
 say "Fertiliel" "..."
-say "Hardiel" "Quando terminar de pagar sua dívida, podemos reavaliá-la. Quem sabe você poderá mudar de função, caso demonstre dedicação e eficiência."
-say "Fertiliel" "(Certo, pelo menos isso...)"
-say "Hardiel" "Alguma dúvida?"
+say "Supervisora, vai ser um pouco difícil eu não ser vista por humanos e cumprir a missão com meus poderes limitados..."
+say "Eu não estou conseguindo ficar invisível nem voar atualmente."
+say "Hardiel" "Aí não é problema meu. Foi você quem quis retornar ao trabalho. Arque com as consequências dos seus atos."
+say "Fertiliel" "(Droga...)"
+say "Tudo bem, eu vou dar algum jeito."
+say "Hardiel" "Seu primeiro humano designado se chama Ricardo."
+// TODO: show character card when it exists
+say "Ele gosta de cozinhar e de ler, e possui um alto potencial fértil."
+say "Você precisa encontrar uma parceira para ele dentro de 14 dias."
+say "Fertiliel" "Ok. Só mais uma coisa..."
+say "Hardiel" "Isso é tudo. Pode se retirar agora."
+say "Fertiliel" "Não, espera, eu..."
+say "Hardiel" "Está dispensada, Fertiliel."
 say "Fertiliel" "..."
-say "(Se eu pagar essa dívida, eu tenho pelo menos uma chance...)"
-say "Não, acho que isso é tudo. Obrigada, Hardiel."
-say "Hardiel" "E por último, eu serei sua supervisora. Pode me chamar de Supervisora Hardiel a partir de agora."
-say "Fertiliel" "Sim, Supervisora Hardiel."
 
 
-fade_out 0.7
-wait 1
-char_reset_all
-character char_right "graciel"
-char_move_x char_right 0.75
-fade_in 0.7
-
-
-
-goto_script "fertiliel_enter" 0.25
-say "Fertiliel" "(Ai, eu tô muito ferrada...)"
-
-say "Graciel" "E aí, amiga? Como foi lá?"
-say "Fertiliel" "Foi péssimo. Eu fui designada como Cupido. E ainda tenho que pagar uma dívida de 100 bebês humanos..."
-say "Graciel" "Juntar casais humanos? E fazer 100 bebês? Que fofura!"
-say "Fertiliel" "Que 'fofura', o quê! Os relacionamentos humanos são a coisa mais confusa e difícil de lidar que existe! Eu nunca vou conseguir."
-say "Graciel" "Ah, relaxa. Eu tenho certeza que você vai tirar de letra!"
-say "Fertiliel" "Vamos ver... Valeu pelo apoio de qualquer maneira."
-say "E o seu resultado, como foi? Conseguiu seu emprego super super incrível?"
-say "Graciel" "Siiiim!!! Consegui! Eu vou ser gari."
-say "Fertiliel" "Pera, 'gari'? Tipo... cuidar do lixo?"
-say "Graciel" "Éeeeee! Vou ficar responsável por me livrar de todo o lixo que os anjos trouxerem do Mundo dos Humanos."
-say "Fertiliel" "Nossa... E você tá feliz?"
-say "Graciel" "Claro! Eu vou poder ficar com todo tipo de objeto que os humanos usam!"
-say "Fertiliel" "Táaa bom então, se você diz..."
-say "(Cada doido com sua mania.)"
-say "Graciel" "É isso aí, vamos dar o nosso melhor!"
-
-fade_music 0 1
 fade_out 1
 char_reset_all
 bg null
 wait 1
+say "Fertiliel" "(Tudo bem, eu me viro...)"
+say "(Eu consigo fazer isso... Eu consigo fazer isso...)"
 
+fade_music 0 1
+wait 1
 
 goto_script "cap1_manha"
