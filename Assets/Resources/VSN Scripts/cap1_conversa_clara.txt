@@ -66,11 +66,7 @@ if clara_heart == 0
   say "Clara" "Claro, isso aqui tá bom demais. Você já pensou em ser cozinheiro?"
   say "" "Ricardo fica muito feliz e consegue se acalmar. Após terminarem de comer, eles conversam muito sobre omeletes e tipos de café da manhã."
 
-  wait 1
-  add_heart 2 20
-  play_sfx "relationship_up"
-  say "" "Ricardo e Clara se tornaram mais próximos! A habilidade <color=red>Amantes de Omelete</color> foi desbloqueada!"
-  wait 1
+  add_heart 2
 endif
 
 
@@ -105,9 +101,5 @@ play_sfx "relationship_up"
 say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
-wait 1
 add_heart 2
-play_sfx "relationship_up"
-say "" "Ricardo e Clara se tornaram mais próximos!"
-wait 1
 goto end

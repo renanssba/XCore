@@ -14,6 +14,8 @@ public class UIController : MonoBehaviour {
   public PersonCard[] personCards;
   public TextMeshProUGUI dayText;
 
+  public RelationshipCard relationshipCard;
+
   public CoupleEntry[] coupleEntries;
 
   public TextMeshProUGUI moneyText;

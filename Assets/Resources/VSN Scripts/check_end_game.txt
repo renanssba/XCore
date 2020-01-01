@@ -1,39 +1,21 @@
-﻿fade_in 0
-
-/// CONDIÇÕES DE FIM DE JOGO
-if #day > max_days
+﻿/// CONDIÇÕES DE FIM DE JOGO
+if #currentRelationshipProgress >= 6
   set_screen "hide_all"
   goto_script "fertiliel_enter"
-
-  say "char_name/fertiliel" "check_end_game/say_0"
-  goto end_game
-endif
-if #progress >= objective
+    
+  say "Fertiliel" "Olha só, parece que você já cumpriu sua missão!"
+  
+  // MARRYING ANIMATION
+  fade_music 0 0.5
+  show_engagement
+  fade_music 1 1
+  say "date/say_5"
+  
+  say "Fertiliel" "Vamos ver quão bem você foi na sua missão..."
+  say "Parabéns! Você completou a missão com sucesso!"
+  say "Fertiliel" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
+  say "Obrigada por jogar o jogo e me ajudar na missão!"
   set_screen "hide_all"
-  goto_script "fertiliel_enter"
-
-  say "char_name/fertiliel" "check_end_game/say_1"
-  goto end_game
+  fade_out 2
+  load_scene "TitleScreen"
 endif
-
-// IF GAME NOT ENDED
-say "check_end_game/say_2"
-end_script
-
-
-waypoint end_game
-say "char_name/fertiliel" "check_end_game/say_3"
-//say "" "A sua missão era reunir \vsn[objective] casais dentro de \vsn[max_days] dias."
-say "check_end_game/say_4"
-if #progress >= objective
-  say "check_end_game/say_5"
-  say "char_name/fertiliel" "check_end_game/say_6"
-  say "check_end_game/say_7"
-else
-  say "check_end_game/say_8"
-  say "check_end_game/say_9"
-endif
-set_screen "hide_all"
-fade_out 2
-load_scene "TitleScreen"
-

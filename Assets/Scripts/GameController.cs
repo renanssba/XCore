@@ -55,8 +55,6 @@ public class GameController : MonoBehaviour {
       VsnController.instance.StartVSN("cap0_intro");
       //VsnController.instance.StartVSN("cap1_manha");
       //VsnController.instance.StartVSN("tutorial_intro");
-      //VsnController.instance.StartVSN("check_end_game");
-      //VsnController.instance.StartVSN("spend_day");
     }
   }
 
@@ -101,14 +99,15 @@ public class GameController : MonoBehaviour {
 
 
   public void ShowGirlInteractionScreen() {
-    Relationship r = GlobalData.instance.GetCurrentRelationship();
-    if(r == null){
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+    if(currentRelationship == null){
       Debug.LogError("Error getting current relationship");
     }
     UIController.instance.boyInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[0].name);
     UIController.instance.girlInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[1].name);
+    UIController.instance.relationshipCard.Initialize(currentRelationship);
 
-    coupleEntry.Initialize(r);
+    coupleEntry.Initialize(currentRelationship);
     girlInteractionPanel.ShowPanel();
   }
 

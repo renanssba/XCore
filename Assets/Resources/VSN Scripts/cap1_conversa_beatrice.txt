@@ -63,11 +63,7 @@ if #day == 2
   say "Ricardo" "Sério? Obrigado, é muito gentil da sua parte!"
   say "Beatrice" "De nada. Espero que aprecie..."
 
-  wait 1
-  add_heart 1 18
-  play_sfx "relationship_up"
-  say "" "Ricardo e Beatrice se tornaram mais próximos! A habilidade <color=red>Companheiros de Leitura</color> foi desbloqueada!"
-  wait 1
+  add_heart 1
 
   say "Beatrice" "Por favor, me conte o que achou quando terminar sua leitura."
   say "Ricardo" "Claro, com prazer!"
@@ -119,9 +115,5 @@ play_sfx "relationship_up"
 say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
-wait 1
 add_heart 1
-play_sfx "relationship_up"
-say "" "Ricardo e Beatrice se tornaram mais próximos!"
-wait 1
 goto end

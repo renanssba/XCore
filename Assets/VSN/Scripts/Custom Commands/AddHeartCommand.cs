@@ -8,10 +8,12 @@ namespace Command {
   public class AddHeartCommand : VsnCommand {
 
     public override void Execute() {
-      GlobalData.instance.AddHeart((int)args[0].GetNumberValue());
+      int hearts = 1;
       if(args.Length > 1) {
-        GlobalData.instance.AddBondSkill((int)args[0].GetNumberValue(), (int)args[1].GetNumberValue());
+        hearts = (int)args[1].GetNumberValue();
       }
+      GlobalData.instance.AddHearts((int)args[0].GetNumberValue(), hearts);
+      VsnController.instance.WaitForCustomInput();
     }
 
 

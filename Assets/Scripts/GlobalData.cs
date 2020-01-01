@@ -283,8 +283,9 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void AddHeart(int relationshipId) {
-    relationships[relationshipId].hearts++;
+  public void AddHearts(int relationshipId, int hearts) {
+    UIController.instance.relationshipCard.RaiseHeartsAnimation(hearts);
+    relationships[relationshipId].hearts += hearts;
   }
 
   public void AddBondSkill(int relationshipId, int skillId) {

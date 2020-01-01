@@ -46,8 +46,9 @@ public class InteractionPin : MonoBehaviour {
       GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
                                                          GlobalData.instance.people[charId]};
     } else {
-      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0]};
-    }    
+      GlobalData.instance.observedPeople = new Person[] { GlobalData.instance.people[0] };
+    }
+    UIController.instance.relationshipCard.Initialize(GlobalData.instance.GetCurrentRelationship());
     vsnEntryPoint.LoadScript();
   }
 }
