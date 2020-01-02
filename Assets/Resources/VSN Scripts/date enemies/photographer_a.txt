@@ -8,23 +8,24 @@ set_var intelligence_action_name "Argumentar"
 set_var charisma_action_name "Fazer Pose"
 end_script
 
-
-
 waypoint guts_action
 say "" "\active enche o ouvido do fotógrafo de poucas e boas!"
-say "" "O fotógrafo considera seriamente deixar o casal em paz!"
+say "" "O fotógrafo considera deixar o casal em paz!"
 end_script
 
 waypoint intelligence_action
-say "" "\active conversa com o fotógrafo sobre privacidade e direitos de imagem!"
-say "" "O fotógrafo considera seriamente deixar o casal em paz!"
+say "" "\active argumenta sobre direitos de imagem!"
+say "" "O fotógrafo considera deixar o casal em paz!"
 end_script
 
 waypoint charisma_action
 say "" "\active faz uma pose maneira!"
-say "" "A beleza extrema danifica a câmera do fotógrafo!"
+say "" "O carisma danifica a câmera do fotógrafo!"
 end_script
 
+waypoint magic_action
+say "" "Fertiliel atira uma flecha mágica na câmera!"
+end_script
 
 
 waypoint attack_boy

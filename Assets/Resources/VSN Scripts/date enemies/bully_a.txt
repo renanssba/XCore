@@ -5,7 +5,7 @@ say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas d
 
 set_var guts_action_name "Agredir"
 set_var intelligence_action_name "Argumentar"
-set_var charisma_action_name "Blefar"
+set_var charisma_action_name "Elogiar"
 end_script
 
 
@@ -21,8 +21,8 @@ say "" "O valentão se sente confuso!"
 end_script
 
 waypoint charisma_action
-say "" "\active conta uma mentira elaborada!"
-say "" "O valentão se sente intimidado!"
+say "" "\active puxa o saco do valentão!"
+say "" "O valentão se sente satisfeito!"
 end_script
 
 
@@ -36,6 +36,6 @@ say "" " O valentão aplica uma cantada de mau-gosto em \girl!"
 end_script
 
 waypoint defeated
-say "" "O valentão foge com o orgulho ferido."
+say "" "O valentão vai embora!"
 end_script
 

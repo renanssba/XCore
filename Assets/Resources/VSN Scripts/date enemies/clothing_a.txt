@@ -1,29 +1,28 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Um vendaval extremamente localizado se aproxima em alta velocidade!"
+say "" "Um vendaval extremamente localizado se aproxima em alta velocidade! Várias roupas rodopiam pelo ar!"
 
 set_var guts_action_name "Resistir"
 set_var intelligence_action_name "Calcular"
-set_var charisma_action_name "Sorrir"
+set_var charisma_action_name "Elogiar"
 end_script
 
 
 
 waypoint guts_action
-say "" "\active finca os pés no chão e resiste bravamente ao vento!"
+say "" "\active finca os pés no chão e se joga no furacão!"
 say "" "O vendaval desacelera!"
 end_script
 
-//Ação de inteligencia do furacão desnudador se beneficiaria de variações de texto escolhidas aleatoriamente
 waypoint intelligence_action
-say "" "\active percebe que, segundo as leis meteorológicas, um vendaval extremamente localizado que rouba roupas não deveria existir!"
+say "" "\active duvida da existência do vendaval!"
 say "" "O vendaval existe um pouco menos!"
 end_script
 
 waypoint charisma_action
-say "" "\active aponta para o furacão e sorri calorosamente!"
-say "" "O vendaval fica com pena de envergonhar uma pessoa tão bonita."
+say "" "\active elogia as roupas que o vendaval está usando!"
+say "" "O vendaval fica satisfeito!"
 end_script
 
 

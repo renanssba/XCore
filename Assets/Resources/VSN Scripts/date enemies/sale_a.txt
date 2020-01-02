@@ -1,7 +1,7 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Centenas de consumidores se aproximam, sedentos por produtos!"
+say "" "Uma liquidação-relâmpago! Centenas de consumidores cercam o casal, sedentos por produtos!"
 
 set_var guts_action_name "Enfrentar"
 set_var intelligence_action_name "Debater"
@@ -11,18 +11,18 @@ end_script
 
 
 waypoint guts_action
-say "" "\active encara o bando de consumidores com uma aura de coragem!"
+say "" "\active encara a multidão!"
 say "" "Parte da multidão fica com medo e foge!"
 end_script
 
 waypoint intelligence_action
-say "" "\active engata em um discurso sobre o consumismo e a exploração da classe operária!"
-say "" "A multidão fica desiludida com a conjuntura econômica!"
+say "" "\active argumenta com os consumidores!"
+say "" "A multidão fica confusa!"
 end_script
 
 waypoint charisma_action
 say "" "\active grita '75% de desconto!', apontando para o lado oposto!"
-say "" "Parte da multidão corre para o outro corredor!"
+say "" "Pessoas correm para o outro corredor!"
 end_script
 
 
