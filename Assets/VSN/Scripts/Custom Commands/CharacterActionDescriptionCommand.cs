@@ -16,8 +16,13 @@ namespace Command {
         case TurnActionType.useSkill:
           Skill usedSkill = BattleController.instance.selectedSkills[partyMemberId];
           if(usedSkill.type == SkillType.attack) {
-            scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentDateEventName();
-            newArgs[0] = new VsnString( usedSkill.attribute.ToString() + "_action");
+            if(usedSkill.attribute != Attributes.magic) {
+              scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentDateEventName();
+              newArgs[0] = new VsnString(usedSkill.attribute.ToString() + "_action");
+            } else {
+              scriptToLoadPath = "action_descriptions";
+              newArgs[0] = new VsnString("magic_arrow_action");
+            }
           } else {
             newArgs[0] = new VsnString(usedSkill.name + "_skill");
           }

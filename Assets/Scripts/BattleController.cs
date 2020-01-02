@@ -187,7 +187,8 @@ public class BattleController : MonoBehaviour {
     int attributeId = (int)usedSkill.attribute;
     int actionPowerLevel = (int)(partyMembers[partyMemberId].AttributeValue((int)usedSkill.attribute) * usedSkill.multiplier);
     float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
-    int effectiveActionPower = (int)(actionPowerLevel * effectivity);
+    float damageMultiplier = partyMembers[partyMemberId].DamageMultiplier();
+    int effectiveActionPower = (int)(actionPowerLevel * effectivity * damageMultiplier);
 
     VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
 
@@ -399,6 +400,9 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("date_location", dateLocation);
 
     switch(dateNumber) {
+      case 0:
+        dateLength = 1;
+        break;
       case 1:
         dateLength = 3;
         break;
@@ -422,7 +426,9 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewDateEvent(List<int> selectedEvents) {
-    return 0;
+    return 7;
+    return Random.Range(0, 9);
+    //return 0;
 
     int selectedId;
     string dateLocationName = ((DateLocation)VsnSaveSystem.GetIntVariable("date_location")).ToString();
@@ -658,11 +664,11 @@ public class BattleController : MonoBehaviour {
       newStatusCondition.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
 
       List<StatusConditionEffect> effects = new List<StatusConditionEffect>();
-      List<int> effectsPower = new List<int>();
+      List<float> effectsPower = new List<float>();
       for(int i=1; i<=3; i++) {
         if(!string.IsNullOrEmpty(entry["effect "+i])) {
           effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
-          effectsPower.Add(int.Parse(entry["effect " + i+" power"]));
+          effectsPower.Add(float.Parse(entry["effect " + i+" power"]));
         }
       }
       newStatusCondition.statusEffect = effects.ToArray();

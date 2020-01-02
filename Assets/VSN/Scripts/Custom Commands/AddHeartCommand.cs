@@ -12,7 +12,7 @@ namespace Command {
       if(args.Length > 1) {
         hearts = (int)args[1].GetNumberValue();
       }
-      GlobalData.instance.AddHearts((int)args[0].GetNumberValue(), hearts);
+      GlobalData.instance.AddHeartsWithGirlId((int)args[0].GetNumberValue(), hearts);
       VsnController.instance.WaitForCustomInput();
     }
 

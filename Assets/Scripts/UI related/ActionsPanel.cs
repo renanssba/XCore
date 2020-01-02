@@ -50,7 +50,7 @@ public class ActionsPanel : MonoBehaviour {
     for(int i = 0; i < skillButtons.Length; i++) {
       if(i < currentCharacter.skillIds.Length) {
         skillButtons[i].InitializeAsSkill(currentCharacter,
-                                             BattleController.instance.GetSkillById(currentCharacter.skillIds[i]));
+                                          BattleController.instance.GetSkillById(currentCharacter.skillIds[i]));
         skillButtons[i].gameObject.SetActive(true);
       } else {
         skillButtons[i].gameObject.SetActive(false);

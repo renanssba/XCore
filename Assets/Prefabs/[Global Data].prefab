@@ -1485,6 +1485,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1167420919651032
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4955704534262468}
+  - component: {fileID: 114239986742097378}
+  m_Layer: 0
+  m_Name: hunger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1170825579769182
 GameObject:
   m_ObjectHideFlags: 1
@@ -6413,6 +6429,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1699728845441830
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4780039389761784}
+  m_Layer: 0
+  m_Name: description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1699737557912066
 GameObject:
   m_ObjectHideFlags: 1
@@ -7413,6 +7444,22 @@ GameObject:
   - component: {fileID: 114654886530972556}
   m_Layer: 0
   m_Name: say_12
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1823174086914616
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4064694807699438}
+  - component: {fileID: 114826267608155410}
+  m_Layer: 0
+  m_Name: hunger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9720,6 +9767,19 @@ Transform:
   m_Father: {fileID: 4565191566217702}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4064694807699438
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823174086914616}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4310617539689972}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4067322320771310
 Transform:
   m_ObjectHideFlags: 1
@@ -11604,6 +11664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4310617539689972}
+  - {fileID: 4780039389761784}
   m_Father: {fileID: 4994434489791510}
   m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11888,6 +11949,7 @@ Transform:
   - {fileID: 4642705721417644}
   - {fileID: 4690049879289338}
   - {fileID: 4927376225864608}
+  - {fileID: 4064694807699438}
   m_Father: {fileID: 4271588664524880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15356,6 +15418,20 @@ Transform:
   m_Father: {fileID: 4980112936385542}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4780039389761784
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699728845441830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4955704534262468}
+  m_Father: {fileID: 4271588664524880}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4781399948789438
 Transform:
   m_ObjectHideFlags: 1
@@ -16912,6 +16988,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4742842175383344}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4955704534262468
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167420919651032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4780039389761784}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4962863876515604
 Transform:
@@ -19716,6 +19805,24 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: In this case, you should look for people to flirt tomorrow in the morning.
+    Object: {fileID: 0}
+--- !u!114 &114239986742097378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167420919651032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Diminui o dano de todo ataque realizado pela metade
+    Object: {fileID: 0}
+  - Language: English
+    Text: Halves every executed attack's damage by half
     Object: {fileID: 0}
 --- !u!114 &114246786345078210
 MonoBehaviour:
@@ -25479,6 +25586,24 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: ???
+    Object: {fileID: 0}
+--- !u!114 &114826267608155410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823174086914616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Faminto
+    Object: {fileID: 0}
+  - Language: English
+    Text: Hungry
     Object: {fileID: 0}
 --- !u!114 &114832111450544986
 MonoBehaviour:

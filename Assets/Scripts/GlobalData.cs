@@ -161,9 +161,9 @@ public class GlobalData : MonoBehaviour {
 
 
     /// DEBUG: TESTING SKILLS IN BATTLE
-    relationships[0].hearts = 3;
-    relationships[1].hearts = 3;
-    relationships[2].hearts = 3;
+    relationships[0].hearts = 4;
+    relationships[1].hearts = 4;
+    relationships[2].hearts = 4;
   }
 
 
@@ -283,9 +283,9 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void AddHearts(int relationshipId, int hearts) {
+  public void AddHeartsWithGirlId(int girlId, int hearts) {
     UIController.instance.relationshipCard.RaiseHeartsAnimation(hearts);
-    relationships[relationshipId].hearts += hearts;
+    relationships[girlId-1].hearts += hearts;
   }
 
   public void AddBondSkill(int relationshipId, int skillId) {

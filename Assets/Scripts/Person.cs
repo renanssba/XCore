@@ -96,6 +96,16 @@ public class Person {
     return Mathf.Max(sum, 0);
   }
 
+  public float DamageMultiplier() {
+    float modifier = 1f;
+    if(statusConditions != null) {
+      foreach(StatusCondition sc in statusConditions) {
+        modifier *= sc.DamageMultiplier();
+      }
+    }
+    return modifier;
+  }
+
 
   public void HealSp(int value) {
     sp += value;
@@ -223,7 +233,7 @@ public class Person {
       if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
          sc.statusEffect[i] <= StatusConditionEffect.turnDamageMagic) {
         //Debug.LogWarning("Activating "+ sc.statusEffect[i]);
-        int damage = sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i]) - 4)/2;
+        int damage = (int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i]) - 4)/2;
         damage = Mathf.Max(1, damage);
         BattleController.instance.DamagePartyHp(damage);
         GetActor2D().ShowDamageParticle(((int)sc.statusEffect[i])-4, damage, 1f);

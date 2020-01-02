@@ -8,6 +8,8 @@ set_var intelligence_action_name "Tratar"
 set_var charisma_action_name "Tranquilizar"
 end_script
 
+
+
 waypoint guts_action
 say "" "\active faz um discurso inspirador!"
 say "" "O coelhinho se sente mais motivado!"
@@ -23,29 +25,16 @@ say "" "\active tranquiliza o coelhinho com um gesto acolhedor!"
 say "" "O pobre animal se emociona!"
 end_script
 
-waypoint charisma_success
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "\girl fica muito tocada."
+
+
+waypoint attack_boy
+say "" "WORK IN PROGRESS"
 end_script
 
-
-
-waypoint guts_fail
-say "\boy" "REAJA, COELHO! Você é melhor do que este machucado!"
-say "LEVANTA!!!"
-say "" "O coelho geme baixinho, sentindo muita dor. O discurso motivacional não parece ter surtido efeito. \girl acha que \boy é maluco."
+waypoint attack_girl
+say "" "WORK IN PROGRESS"
 end_script
 
-waypoint intelligence_fail
-say "" "\boy tenta improvisar uma atadura com materiais encontrados na trilha, mas não consegue."
-say "\girl fica decepcionada."
+waypoint defeated
+say "" "WORK IN PROGRESS"
 end_script
-
-waypoint charisma_fail
-say "" "Carinhosa e cuidadosamente, \boy coloca o coelho em seus braços."
-say "\boy" "Vamos levá-lo até um veterinário. Não se preocupe, amiguinho, você vai ficar bem."
-say "" "Infelizmente, \boy tropeça, caindo em cima do coelho. \girl fica horrorizada."
-end_script
-
-

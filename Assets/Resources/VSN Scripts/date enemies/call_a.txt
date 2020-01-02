@@ -2,10 +2,13 @@ goto *arg1
 
 waypoint event_statement
 say "" "\active recebe uma ligação inconveniente de um parente distante!"
+
 set_var guts_action_name "Desligar"
 set_var intelligence_action_name "Apresentar"
 set_var charisma_action_name "Enrolar"
 end_script
+
+
 
 waypoint guts_action
 say "" "\active vai direto ao ponto e diz que precisa desligar!"
@@ -22,9 +25,7 @@ say "" "\active aplica uma desculpa esfarrapada!"
 say "" "A voz do outro lado da linha parece acreditar um pouco!"
 end_script
 
-waypoint magic_action
-say "" "Fertiliel atira uma flecha mágica no telefone!"
-end_script
+
 
 waypoint attack_boy
 say "" "\boy fica entediado com o lenga-lenga do telefone!"
@@ -37,5 +38,3 @@ end_script
 waypoint defeated
 say "" "O parente distante resolve desligar!"
 end_script
-
-

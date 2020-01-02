@@ -45,7 +45,10 @@ public class RelationshipCard : MonoBehaviour {
   public IEnumerator ShowRaiseHeartsAnimation(int initValue, int heartsToAdd) {
     yield return new WaitForSeconds(0.8f);
 
-    for(int i=1; i<=heartsToAdd; i++) {
+    int finalValue = Mathf.Min(initValue + heartsToAdd, 6);
+    int actualRaise = finalValue - initValue;
+
+    for(int i=1; i<= actualRaise; i++) {
       VsnAudioManager.instance.PlaySfx("relationship_up");
       UpdateHeartIcons(initValue + i);
       heartIcons[initValue+i-1].transform.DOScale(1.4f, 0.4f).SetRelative().SetLoops(2, LoopType.Yoyo);
@@ -59,8 +62,8 @@ public class RelationshipCard : MonoBehaviour {
 
     VsnArgument[] sayArgs = new VsnArgument[2];
     sayArgs[0] = new VsnString("char_name/none");
-    if(heartsToAdd > 1) {
-      sayArgs[1] = new VsnString("add_heart/say_0");
+    if(actualRaise > 1) {
+      sayArgs[1] = new VsnString("add_heart/say_1");
     } else {
       sayArgs[1] = new VsnString("add_heart/say_0");
     }

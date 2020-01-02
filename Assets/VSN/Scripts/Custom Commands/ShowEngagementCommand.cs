@@ -9,6 +9,7 @@ namespace Command {
 
     public override void Execute() {
       int babies = Random.Range(4, 9);
+      babies = 6;
       GameController.instance.ShowEngagementScreen(babies);
     }
 

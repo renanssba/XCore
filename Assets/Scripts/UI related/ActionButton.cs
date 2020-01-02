@@ -54,6 +54,7 @@ public class ActionButton : MonoBehaviour {
   }
 
   public void UpdateUIAsSkill() {
+    string isBoy = "_boy";
     nameText.text = skill.GetPrintableName();
     if(skill.type == SkillType.attack) {
       if(skill.id != 9) {

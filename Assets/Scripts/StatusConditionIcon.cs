@@ -15,6 +15,7 @@ public enum StatusConditionEffect {
   turnDamageIntelligence,
   turnDamageCharisma,
   turnDamageMagic,
+  damageMultiplier,
   count
 }
 
@@ -29,7 +30,7 @@ public class StatusCondition {
   public Sprite sprite;
 
   public StatusConditionEffect[] statusEffect;
-  public int[] statusEffectPower;
+  public float[] statusEffectPower;
   public bool stackable = false;
 
   public StatusCondition() {
@@ -93,6 +94,9 @@ public class StatusCondition {
       case StatusConditionEffect.turnDamageMagic:
         desc += "Receive " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/magic") + "-based damage every turn.";
         break;
+      case StatusConditionEffect.damageMultiplier:
+        desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
+        break;
     }
     return desc;
   }
@@ -101,10 +105,20 @@ public class StatusCondition {
     int sum = 0;
     for(int i=0; i < statusEffect.Length; i++) {
       if((int)statusEffect[i] == (int)attributeId) {
-        sum += statusEffectPower[i];
+        sum += (int)statusEffectPower[i];
       }
     }
     return sum;
+  }
+
+  public float DamageMultiplier() {
+    float modifier = 1f;
+    for(int i = 0; i < statusEffect.Length; i++) {
+      if(statusEffect[i] == StatusConditionEffect.damageMultiplier) {
+        modifier *= statusEffectPower[i];
+      }
+    }
+    return modifier;
   }
 
   public StatusCondition GenerateClone() {

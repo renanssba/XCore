@@ -1,21 +1,81 @@
 ﻿/// CONDIÇÕES DE FIM DE JOGO
 if #currentRelationshipProgress >= 6
+  set_var game_has_ended 1
   set_screen "hide_all"
   goto_script "fertiliel_enter"
     
-  say "Fertiliel" "Olha só, parece que você já cumpriu sua missão!"
+  say "Fertiliel" "Olha só, eles estão próximos o bastante agora. Vou atingí-los com a Flecha do Amor Eterno!"
   
   // MARRYING ANIMATION
   fade_music 0 0.5
   show_engagement
   fade_music 1 1
-  say "date/say_5"
+  say "" "date/say_5"
   
-  say "Fertiliel" "Vamos ver quão bem você foi na sua missão..."
-  say "Parabéns! Você completou a missão com sucesso!"
-  say "Fertiliel" "Que tal curtir o Facebook e Twitter da Supernova Games para ficar de olho nas atualizações do jogo?"
-  say "Obrigada por jogar o jogo e me ajudar na missão!"
+  say "Fertiliel" "Ótimo! Vou reportar o desfecho da missão à Supervisora."
+  
+  
+  fade_music 0 1
+  fade_out 1
+  char_reset_all
+  
+  wait 1
+  dialog_style "faded_screen_message"
+  say "" "Mais tarde, no escritório da Hardiel..."
+
+  dialog_style "normal"
+  fade_out 0
+  //play_music null null
+  //play_music "date1_intro" "date1_loop"
+  wait 1
+  bg "heaven"
+  play_music "observacao2_intro" "observacao2_loop"
+
+  char_reset_all
+  character char_right "hardiel"
+  char_move_x char_right 0.75
+
+  fade_in 1
+
+  goto_script "fertiliel_enter" 0.25
+  wait 1
+  
+  say "Hardiel" "Muito bem, Fertiliel. Vejo que conseguiu cumprir sua primeira missão."
+  say "Fertiliel" "Muito obrigada!"
+  say "Hardiel" "De acordo com nosso Diário do Futuro, seu casal inseparável se casará e produzirá 6 filhos."
+  say "Isso diminui um pouco a sua dívida. Ficam faltando 94 bebês para a conclusão."
+  say "Fertiliel" "Yes! Muito obrigada, um dia eu chego lá!"
+  say "Até lá eu vou continuar dando tudo de mim!"
+  
+  fade_out 1
+  dialog_style "faded_screen_message"
+  
+  say "" "Obrigado por jogar esta versão alfa de Fertiliel - Simulador de Cupido."
+  say "Muitas funcionalidades e conteúdos novos estão sendo produzidos nesse momento!"
+  say "Que tal curtir nossas redes sociais para ficar de olho nas atualizações do jogo?"
+  
+  
+  waypoint social_media_links
+  choices "Discord" link_discord "Twitter" link_twitter "Instagram" link_instagram "Nenhum" end
+  
+  waypoint link_discord
+  open_url "http://discord.link/fertiliel"
+  goto social_media_links
+  
+  waypoint link_twitter
+  open_url "https://twitter.com/fertiliel"
+  goto social_media_links
+  
+  waypoint link_instagram
+  open_url "https://www.instagram.com/fertiliel/"
+  goto social_media_links
+  
+  
+  waypoint end
+  say "Obrigado por jogar o jogo e por favor divulgue o jogo para amigos/as que gostariam de jogá-lo!"
+  say "Um grande abraço de todos na Supernova Games!"
   set_screen "hide_all"
+  fade_music 0 2
   fade_out 2
   load_scene "TitleScreen"
 endif
