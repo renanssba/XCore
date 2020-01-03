@@ -3,24 +3,30 @@ goto *arg1
 waypoint event_statement
 say "" "Um vendaval extremamente localizado se aproxima em alta velocidade! Várias roupas rodopiam pelo ar!"
 
-set_var guts_action_name "Resistir"
-set_var intelligence_action_name "Calcular"
-set_var charisma_action_name "Elogiar"
+set_var guts_action_boy_name "Resistir"
+set_var guts_action_girl_name "Resistir"
+set_var intelligence_action_boy_name "Calcular"
+set_var intelligence_action_girl_name "Calcular"
+set_var charisma_action_boy_name "Elogiar"
+set_var charisma_action_girl_name "Elogiar"
 end_script
 
 
 
-waypoint guts_action
+waypoint guts_action_boy
+waypoint guts_action_girl
 say "" "\active finca os pés no chão e se joga no furacão!"
 say "" "O vendaval desacelera!"
 end_script
 
-waypoint intelligence_action
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
 say "" "\active duvida da existência do vendaval!"
 say "" "O vendaval existe um pouco menos!"
 end_script
 
-waypoint charisma_action
+waypoint charisma_action_boy
+waypoint charisma_action_girl
 say "" "\active elogia as roupas que o vendaval está usando!"
 say "" "O vendaval fica satisfeito!"
 end_script

@@ -3,24 +3,30 @@ goto *arg1
 waypoint event_statement
 say "" "O casal tenta comprar comida. Oh não! A máquina de salgadinhos ficou fora de controle!"
 
-set_var guts_action_name "Vandalizar"
-set_var intelligence_action_name "Hackear"
-set_var charisma_action_name "Aproveitar"
+set_var guts_action_boy_name "Vandalizar"
+set_var guts_action_girl_name "Vandalizar"
+set_var intelligence_action_boy_name "Hackear"
+set_var intelligence_action_girl_name "Hackear"
+set_var charisma_action_boy_name "Aproveitar"
+set_var charisma_action_girl_name "Aproveitar"
 end_script
 
 
 
-waypoint guts_action
+waypoint guts_action_boy
+waypoint guts_action_girl
 say "" "\active chuta a lateral da máquina com toda a força que pode!"
 say "" "A máquina guincha com som metálico!"
 end_script
 
-waypoint intelligence_action
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
 say "" "\active puxa um teclado do bolso e começa a digitar!"
 say "" "A máquina parece travar por alguns segundos!"
 end_script
 
-waypoint charisma_action
+waypoint charisma_action_boy
+waypoint charisma_action_girl
 say "" "\active surrupia um salgadinho da máquina!"
 end_script
 

@@ -54,11 +54,11 @@ public class ActionButton : MonoBehaviour {
   }
 
   public void UpdateUIAsSkill() {
-    string isBoy = "_boy";
+    string sexModifier = (person.isMale ? "_boy" : "_girl");
     nameText.text = skill.GetPrintableName();
     if(skill.type == SkillType.attack) {
       if(skill.id != 9) {
-        nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action_name]");
+        nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action" +sexModifier+ "_name]");
       }
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];

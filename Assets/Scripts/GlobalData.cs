@@ -161,9 +161,9 @@ public class GlobalData : MonoBehaviour {
 
 
     /// DEBUG: TESTING SKILLS IN BATTLE
-    relationships[0].hearts = 4;
-    relationships[1].hearts = 4;
-    relationships[2].hearts = 4;
+    relationships[0].hearts = 1;
+    relationships[1].hearts = 1;
+    relationships[2].hearts = 1;
   }
 
 

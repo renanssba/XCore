@@ -58,7 +58,7 @@ public class BattleController : MonoBehaviour {
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedTargetPartyId = new int[partyMembers.Length];
 
-    maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 10;
+    maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 5 + 10;
 
     FullHealParty();
     UIController.instance.ShowPartyPeopleCards();
@@ -426,7 +426,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewDateEvent(List<int> selectedEvents) {
-    return 7;
+    //return 7;
     return Random.Range(0, 9);
     //return 0;
 
@@ -482,8 +482,8 @@ public class BattleController : MonoBehaviour {
       Debug.Log("i: " + i);
     }
 
-    int selectedId = 1;
-    //int selectedId = GetNewDateEvent(currentUsedEvents);
+    int selectedId = GetNewDateEvent(currentUsedEvents);
+    //selectedId = 1;
     dateSegments[positionId] = allDateEvents[selectedId];
     currentUsedEvents.Clear();
 

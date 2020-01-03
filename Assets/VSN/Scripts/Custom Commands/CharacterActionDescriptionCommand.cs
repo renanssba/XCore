@@ -18,7 +18,7 @@ namespace Command {
           if(usedSkill.type == SkillType.attack) {
             if(usedSkill.attribute != Attributes.magic) {
               scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentDateEventName();
-              newArgs[0] = new VsnString(usedSkill.attribute.ToString() + "_action");
+              newArgs[0] = new VsnString(usedSkill.attribute.ToString() + "_action"+(BattleController.instance.partyMembers[partyMemberId].isMale ? "_boy":"_girl") );
             } else {
               scriptToLoadPath = "action_descriptions";
               newArgs[0] = new VsnString("magic_arrow_action");

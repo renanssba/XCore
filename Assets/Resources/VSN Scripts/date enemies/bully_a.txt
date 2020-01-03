@@ -3,24 +3,30 @@ goto *arg1
 waypoint event_statement
 say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
 
-set_var guts_action_name "Agredir"
-set_var intelligence_action_name "Argumentar"
-set_var charisma_action_name "Elogiar"
+set_var guts_action_boy_name "Agredir"
+set_var guts_action_girl_name "Agredir"
+set_var intelligence_action_boy_name "Argumentar"
+set_var intelligence_action_girl_name "Argumentar"
+set_var charisma_action_boy_name "Elogiar"
+set_var charisma_action_girl_name "Elogiar"
 end_script
 
 
 
-waypoint guts_action
+waypoint guts_action_boy
+waypoint guts_action_girl
 say "" "\active se utiliza de violência!"
 say "" "O valentão é atingido por uma saraivada de golpes!"
 end_script
 
-waypoint intelligence_action
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
 say "" "\active discursa com fatos e argumentos!"
 say "" "O valentão se sente confuso!"
 end_script
 
-waypoint charisma_action
+waypoint charisma_action_boy
+waypoint charisma_action_girl
 say "" "\active puxa o saco do valentão!"
 say "" "O valentão se sente satisfeito!"
 end_script
@@ -38,4 +44,3 @@ end_script
 waypoint defeated
 say "" "O valentão vai embora!"
 end_script
-

@@ -3,22 +3,28 @@ goto *arg1
 waypoint event_statement
 say "" "Uma bola de futebol vem vindo em alta velocidade na direção de \boy e ele não percebeu!"
 
-set_var guts_action_name "Socar"
-set_var intelligence_action_name "Calcular"
-set_var charisma_action_name "Pedir Ajuda"
+set_var guts_action_boy_name "Socar"
+set_var guts_action_girl_name "Socar"
+set_var intelligence_action_boy_name "Calcular"
+set_var intelligence_action_girl_name "Calcular"
+set_var charisma_action_boy_name "Tranquilizar"
+set_var charisma_action_girl_name "Tranquilizar"
 end_script
 
 
 
-waypoint guts_action
+waypoint guts_action_boy
+waypoint guts_action_girl
 say "" "\active age rapidamente e dá um socão na bola!"
 end_script
 
-waypoint intelligence_action
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
 say "" "Considerando a velocidade do vento, a massa e trajetória da bola, \active faz complexos cálculos e desvia na hora perfeita."
 end_script
 
-waypoint charisma_action
+waypoint charisma_action_boy
+waypoint charisma_action_girl
 say "" "\active convence transeuntes a entrar na trajetória da bola, protegendo o casal."
 end_script
 
