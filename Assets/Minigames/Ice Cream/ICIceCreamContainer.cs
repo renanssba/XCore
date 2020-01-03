@@ -19,7 +19,7 @@ public class ICInteractable : MonoBehaviour {
 
   public void OnTriggerExit(Collider other) {
     Debug.Log("Exited interactable object.");
-    ICGameController.instance.DeselectInteractable();
+    ICGameController.instance.DeselectInteractable(this);
   }
 
   public virtual void Interact(){

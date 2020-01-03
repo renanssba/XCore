@@ -103,7 +103,7 @@ public class ICGameController : MonoBehaviour {
 
 
   public void SelectInteractable(ICInteractable interactable) {
-    DeselectInteractable();
+    DeselectInteractable(selectedInteractable);
     selectedInteractable = interactable;
 
     ICIceCreamContainer selectedContainer = interactable.GetComponent<ICIceCreamContainer>();
@@ -119,14 +119,13 @@ public class ICGameController : MonoBehaviour {
     //}
   }
 
-  public void DeselectInteractable() {
-    foreach (GameObject obj in containerIcons) {
-      obj.SetActive(false);
-    }
-    //foreach (GameObject obj in clientIcons) {
-    //  obj.SetActive(false);
-    //}
-    selectedInteractable = null;
+  public void DeselectInteractable(ICInteractable interactableLeft) {
+    if(selectedInteractable == interactableLeft) {
+      foreach(GameObject obj in containerIcons) {
+        obj.SetActive(false);
+      }
+      selectedInteractable = null;
+    }    
   }
 
 

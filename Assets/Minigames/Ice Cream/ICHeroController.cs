@@ -6,13 +6,11 @@ public class ICHeroController : MonoBehaviour {
 
   public Rigidbody body;
   public float walkingSpeed;
-  public float runningSpeed;
-  float baseWalkingSpeed;
   public float facingTolerance = 0f;
 
-  void Awake() {
-    baseWalkingSpeed = walkingSpeed;
-  }
+  //void Awake() {
+  //
+  //}
 
 
   void Update () {
@@ -24,20 +22,12 @@ public class ICHeroController : MonoBehaviour {
     SetWalkingSpeed();
 
     /// If is moving, change facing
-    if(body.velocity.sqrMagnitude > facingTolerance) {
-      ChangeFacingDirection();
-    }
+    //if(body.velocity.sqrMagnitude > facingTolerance) {
+    //  ChangeFacingDirection();
+    //}
 
     if (Input.GetButtonDown("Jump") || Input.GetButtonDown("Fire2")) {
       ICGameController.instance.ClickInteraction();     
-    }
-    if (Input.GetAxis("Fire1") > 0f){
-      //SfxManager.StaticPlaySelectSfx();
-      //Debug.Log("Running...");
-      walkingSpeed = runningSpeed;
-    }else{
-      //Debug.Log("Walking...");
-      walkingSpeed = baseWalkingSpeed;
     }
   }
 
