@@ -24,7 +24,7 @@ public class Actor2D : MonoBehaviour {
   public void SetCharacterGraphics(Person p) {
     person = p;
     if(!string.IsNullOrEmpty(person.name)) {
-      renderer.sprite = LoadSprite("People/" + person.name);
+      renderer.sprite = LoadSprite("Characters/" + person.name);
     } else {
       gameObject.SetActive(false);
     }

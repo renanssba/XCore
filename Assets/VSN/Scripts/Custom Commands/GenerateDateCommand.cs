@@ -8,11 +8,7 @@ namespace Command {
   public class GenerateDateCommand : VsnCommand {
 
     public override void Execute() {
-      if(args.Length >= 1) {
-        BattleController.instance.GenerateDate((int)args[0].GetNumberValue());
-      } else {
-        BattleController.instance.GenerateDate();
-      }
+      BattleController.instance.GenerateDateEnemies();
     }
 
     public override void AddSupportedSignatures() {

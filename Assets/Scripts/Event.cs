@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum DateEventInteractionType{
-  male,
-  female,
-  couple
-}
+//public enum DateEventInteractionType{
+//  male,
+//  female,
+//  couple
+//}
 
 
 public enum RewardType{
@@ -18,9 +18,9 @@ public enum RewardType{
 
 
 public enum DateLocation{
-  parque,
+  park,
   shopping,
-  generico
+  generic
 }
 
 
@@ -34,7 +34,7 @@ public class DateEvent {
   public int stage;
   public string location;
   public string spriteName;
-  public DateEventInteractionType interactionType;
+  //public DateEventInteractionType interactionType;
 
   public int maxHp;
   public int hp;

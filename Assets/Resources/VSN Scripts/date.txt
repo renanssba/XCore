@@ -2,8 +2,6 @@ fade_out 0.7
 bg null
 say "char_name/none" "date/say_0"
 
-generate_date
-goto_script "set_date_location"
 play_music "battle1_intro" "battle1_loop"
 
 set_var currentDateEvent 0
@@ -93,7 +91,7 @@ enable_input false
 say "char_name/none" "date/say_4"
 // show_date_ui false
 
-add_heart #currentGirlId 2
+add_heart #currentGirlId #currentDateId
 goto end
 
 

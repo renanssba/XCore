@@ -183,13 +183,13 @@ public class TheaterController : MonoBehaviour {
     }
 
     switch(place) {
-      case "parque":
+      case "park":
         bgObjects[0].SetActive(true);
         break;
       case "shopping":
         bgObjects[1].SetActive(true);
         break;
-      case "rua":
+      case "street":
         bgObjects[2].SetActive(true);
         break;
     }

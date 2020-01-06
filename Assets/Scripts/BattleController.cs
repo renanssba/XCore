@@ -29,6 +29,8 @@ public class BattleController : MonoBehaviour {
   public int dateLength;
 
   public DateEvent[] dateSegments;
+  public DateLocation currentDateLocation;
+  public int currentDateId;
 
   public GameObject damageParticlePrefab;
   public TextMeshProUGUI difficultyText;
@@ -49,8 +51,10 @@ public class BattleController : MonoBehaviour {
     dateLength = 3;
   }
 
-  public void StartBattle(Person boy, Person girl) {
+  public void StartBattle(Person boy, Person girl, int dateId) {
     GlobalData.instance.observedPeople = new Person[] {boy, girl};
+
+    currentDateId = dateId;
 
     partyMembers = new Person[] {boy, girl, GlobalData.instance.people[4]};
     selectedSkills = new Skill[partyMembers.Length];
@@ -63,6 +67,10 @@ public class BattleController : MonoBehaviour {
     FullHealParty();
     UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
+
+    SetDateLengthAndLocation();
+    GenerateDateEnemies();
+    SetupDateLocation();
   }
 
 
@@ -318,7 +326,7 @@ public class BattleController : MonoBehaviour {
     DateEvent currentEvent = GetCurrentDateEvent();
     int attributeId = (int)currentEvent.attackAttribute;
     int baseDamage = currentEvent.attackDamage;
-    int effectiveAttackDamage = (int)(baseDamage - partyMembers[targetId].AttributeValue(attributeId));
+    int effectiveAttackDamage = (int)(baseDamage * partyMembers[targetId].defenses[attributeId]);
     effectiveAttackDamage /= (selectedActionType[targetId] == TurnActionType.defend ? 2 : 1);
     effectiveAttackDamage = Mathf.Max(1, effectiveAttackDamage);
     int initialHp = hp;
@@ -393,56 +401,63 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-
-  public void GenerateDate(int dateNumber = 1) {
-    List<int> selectedEvents = new List<int>();
-    int dateLocation = Random.Range(0, 2);
-    VsnSaveSystem.SetVariable("date_location", dateLocation);
-
-    switch(dateNumber) {
-      case 0:
-        dateLength = 1;
-        break;
+  public void SetDateLengthAndLocation() {
+    switch(currentDateId) {
       case 1:
         dateLength = 3;
+        currentDateLocation = DateLocation.park;
         break;
       case 2:
         dateLength = 5;
+        currentDateLocation = DateLocation.shopping;
         break;
       case 3:
         dateLength = 7;
+        currentDateLocation = DateLocation.park;
+        break;
+      default:
+        dateLength = 1;
+        currentDateLocation = DateLocation.park;
         break;
     }
+  }
 
+  public void GenerateDateEnemies() {
+    List<int> selectedEnemies = new List<int>();
+    
     dateSegments = new DateEvent[dateLength];
     for(int i = 0; i < dateLength; i++) {
-      int selectedId = GetNewDateEvent(selectedEvents);
+      int selectedId = GetNewEnemy(selectedEnemies);
       dateSegments[i] = allDateEvents[selectedId];
-      selectedEvents.Add(selectedId);
+      selectedEnemies.Add(selectedId);
     }
     System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
                       (event1, event2) => event1.stage.CompareTo(event2.stage)));
     RecoverEnemiesHp();
   }
 
-  public int GetNewDateEvent(List<int> selectedEvents) {
+  public void SetupDateLocation(){
+    TheaterController.instance.SetLocation(currentDateLocation.ToString());
+    UIController.instance.dateTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("location/" + currentDateLocation.ToString());
+  }
+
+  public int GetNewEnemy(List<int> selectedEvents) {
     //return 7;
-    return Random.Range(0, 9);
-    //return 0;
+    //return Random.Range(0, 9);
 
-    int selectedId;
-    string dateLocationName = ((DateLocation)VsnSaveSystem.GetIntVariable("date_location")).ToString();
+    int selectedEnemyId;
     do {
-      selectedId = Random.Range(0, allDateEvents.Count);
+      //selectedId = Random.Range(0, allDateEvents.Count);
+      selectedEnemyId = Random.Range(0, 9);
 
-      Debug.LogWarning("selected location: " + allDateEvents[selectedId].location);
-      Debug.LogWarning("date location: " + dateLocationName);
+      Debug.LogWarning("selected location: " + allDateEvents[selectedEnemyId].location);
+      Debug.LogWarning("date location: " + currentDateLocation.ToString());
 
-    } while(selectedEvents.Contains(selectedId) ||
-            (string.Compare(allDateEvents[selectedId].location, dateLocationName) != 0 &&
-             string.Compare(allDateEvents[selectedId].location, "generico") != 0));
+    } while(selectedEvents.Contains(selectedEnemyId) ||
+            (string.Compare(allDateEvents[selectedEnemyId].location, currentDateLocation.ToString()) != 0 &&
+             string.Compare(allDateEvents[selectedEnemyId].location, DateLocation.generic.ToString()) != 0));
 
-    return selectedId;
+    return selectedEnemyId;
   }
 
   public Person GetCurrentPlayer() {
@@ -482,7 +497,7 @@ public class BattleController : MonoBehaviour {
       Debug.Log("i: " + i);
     }
 
-    int selectedId = GetNewDateEvent(currentUsedEvents);
+    int selectedId = GetNewEnemy(currentUsedEvents);
     //selectedId = 1;
     dateSegments[positionId] = allDateEvents[selectedId];
     currentUsedEvents.Clear();
@@ -496,7 +511,6 @@ public class BattleController : MonoBehaviour {
     allDateEvents = new List<DateEvent>();
 
     float guts, intelligence, charisma, magic;
-    DateEventInteractionType interaction = DateEventInteractionType.male;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
@@ -504,17 +518,6 @@ public class BattleController : MonoBehaviour {
       intelligence = GetEffectivityByName(dic["Efetividade Inteligencia"]);
       charisma = GetEffectivityByName(dic["Efetividade Carisma"]);
       magic = GetEffectivityByName(dic["Efetividade Magia"]);
-      switch(dic["Tipo de Interação"]) {
-        case "male":
-          interaction = DateEventInteractionType.male;
-          break;
-        case "female":
-          interaction = DateEventInteractionType.female;
-          break;
-        case "couple":
-          interaction = DateEventInteractionType.couple;
-          break;
-      }
       allDateEvents.Add(new DateEvent {
         id = int.Parse(dic["Id"]),
         scriptName = dic["Nome do Script"],
@@ -524,7 +527,6 @@ public class BattleController : MonoBehaviour {
         spriteName = dic["Nome Sprite"],
         stage = int.Parse(dic["Etapa"]),
         location = dic["Localidade"],
-        interactionType = interaction,
         attackAttribute = Utils.GetAttributeByString(dic["Atributo Ataque"]),
         attackDamage = int.Parse(dic["Dano"]),
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),

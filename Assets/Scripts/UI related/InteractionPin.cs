@@ -42,6 +42,7 @@ public class InteractionPin : MonoBehaviour {
 
 
   public void ClickInteractionPin() {
+    SfxManager.StaticPlayConfirmSfx();
     if(charId < GlobalData.instance.people.Count) {
       GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
                                                          GlobalData.instance.people[charId]};

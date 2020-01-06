@@ -132,12 +132,14 @@ public class SpecialCodes {
         return GlobalData.instance.maxDays;
       case "#currentChallengeHp":
         return BattleController.instance.GetCurrentDateEvent().hp;
+      case "#currentDateId":
+        return BattleController.instance.currentDateId;
+      case "#currentDateLocation":
+        return (int)BattleController.instance.currentDateLocation;
       case "#currentHp":
         return BattleController.instance.hp;
       case "#isCurrentPersonMale":
         return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
-      case "#currentEventInteractionType":
-        return (int)BattleController.instance.GetCurrentDateEvent().interactionType;
       case "#inventory_empty":
         return GlobalData.instance.CurrentBoy().inventory.IsEmpty() ? 1f : 0f;
       case "#currentGirlId":

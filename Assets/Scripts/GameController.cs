@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour {
   public ItemSelectorScreen itemSelectorScreen;
 
   public ScreenTransitions girlInteractionPanel;
+  public ScreenTransitions girlInteractionButtonsPanel;
+  public ScreenTransitions dateSelectPanel;
   public CoupleEntry coupleEntry;
 
   public ParticleGenerator babiesParticleGenerator;
@@ -103,12 +105,25 @@ public class GameController : MonoBehaviour {
     if(currentRelationship == null){
       Debug.LogError("Error getting current relationship");
     }
-    UIController.instance.boyInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[0].name);
-    UIController.instance.girlInteractionImage.sprite = Resources.Load<Sprite>("People/" + GlobalData.instance.observedPeople[1].name);
+    UIController.instance.boyInteractionImage.sprite = Resources.Load<Sprite>("Characters/" + GlobalData.instance.observedPeople[0].name);
+    UIController.instance.girlInteractionImage.sprite = Resources.Load<Sprite>("Characters/" + GlobalData.instance.observedPeople[1].name);
     UIController.instance.relationshipCard.Initialize(currentRelationship);
 
     coupleEntry.Initialize(currentRelationship);
     girlInteractionPanel.ShowPanel();
+    girlInteractionButtonsPanel.gameObject.SetActive(true);
+    girlInteractionButtonsPanel.canvasGroup.alpha = 1f;
+    dateSelectPanel.gameObject.SetActive(false);
+  }
+
+  public void ShowDateSelectionPanel() {
+    girlInteractionButtonsPanel.HidePanel();
+    dateSelectPanel.ShowPanel();
+  }
+
+  public void ExitDateSelectionPanel() {
+    girlInteractionButtonsPanel.ShowPanel();
+    dateSelectPanel.HidePanel();
   }
 
   public void HideGirlInteractionScreen() {
@@ -129,7 +144,25 @@ public class GameController : MonoBehaviour {
     VsnController.instance.GotCustomInput();
   }
 
-  public void ClickDateButton() {
-    SfxManager.StaticPlayForbbidenSfx();
+
+  public void ClickedDateButton(int dateId) {
+
+    /// IF CANNOT GO TO DATE RIGHT NOW
+    //if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
+    //  SfxManager.StaticPlayForbbidenSfx();
+    //  return;
+    //}
+
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+
+    Debug.LogWarning("Clicked date button to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
+
+    BattleController.instance.StartBattle(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
+
+    SfxManager.StaticPlayBigConfirmSfx();
+    GameController.instance.HideGirlInteractionScreen();
+    Command.EndScriptCommand.StaticExecute(new VsnArgument[0]);
+    VsnController.instance.GotCustomInput();
+    VsnController.instance.StartVSN("date");
   }
 }

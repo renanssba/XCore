@@ -27,6 +27,7 @@ public class Person {
   public PersonState state = PersonState.unrevealed;
 
   public int[] attributes;
+  public int[] defenses;
 
   public int maxSp;
   public int sp;

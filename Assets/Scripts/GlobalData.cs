@@ -83,7 +83,8 @@ public class GlobalData : MonoBehaviour {
       isMale = true,
       id = 0,
       faceId = 0,
-      attributes = new int[]{3, 3, 3, 0},
+      attributes = new int[]{5, 5, 5, 0},
+      defenses = new int[] {2, 2, 2, 2},
       skillIds = new int[] {0, 1, 2, 10}
     };
     people.Add(p);
@@ -92,7 +93,8 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] {5, 2, 2, 0},
+      attributes = new int[] {7, 4, 4, 0},
+      defenses = new int[] { 5, 4, 4, 4 },
       skillIds = new int[] { 0, 1, 2, 11}
     };
     people.Add(p);
@@ -101,7 +103,8 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] {2, 5, 2, 0},
+      attributes = new int[] {5, 9, 5, 0},
+      defenses = new int[] { 1, 15, 1, 1 },
       skillIds = new int[] {0, 1, 2, 12}
     };
     people.Add(p);
@@ -110,7 +113,8 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 3,
       faceId = 7,
-      attributes = new int[] {2, 2, 5, 0},
+      attributes = new int[] {4, 4, 6, 0},
+      defenses = new int[] { 2, 2, 2, 2 },
       skillIds = new int[] {0, 1, 2, 13}
     };
     people.Add(p);
@@ -121,7 +125,8 @@ public class GlobalData : MonoBehaviour {
       isHuman = false,
       id = 10,
       faceId = 11,
-      attributes = new int[] {1, 1, 1, 2},
+      attributes = new int[] {2, 2, 2, 2},
+      defenses = new int[] { 1, 1, 1, 1 },
       skillIds = new int[] {9}
     };
     people.Add(p);
