@@ -4,7 +4,42 @@ waypoint event_statement
 say "" "Ao tentarem subir para o segundo andar, \boy dá um passo em falso e fica com o pé preso na escada rolante! Ele entra em pânico."
 end_script
 
+et_var guts_action_boy_name "Puxar"
+set_var guts_action_girl_name "Puxar"
+set_var intelligence_action_boy_name "Improvisar"
+set_var intelligence_action_girl_name "Improvisar"
+set_var charisma_action_boy_name "Conversar"
+set_var charisma_action_girl_name "Acalmar"
+end_script
 
+
+
+waypoint guts_action_boy
+say "" "\boy tenta se libertar puxando com força!"
+say "A armadilha da escada-rolante se afrouxa!"
+end_script
+waypoint guts_action_girl
+say "" "\girl puxa o braço de \boy com toda a força que pode!"
+say "A armadilha da escada-rolante se afrouxa!"
+end_script
+
+waypoint intelligence_action_boy
+say "" "\boy joga água no vão da escada rolante!"
+say "" "O motor da escada começa a pifar!"
+end_script
+waypoint intelligence_action_girl
+say "" "\girl joga água no vão da escada rolante!"
+say "" "O motor da escada começa a pifar!"
+end_script
+
+waypoint charisma_action_boy
+say "" "\boy  puxa assunto com \girl para passar o tempo!"
+say "A armadilha da escada-rolante se afrouxa!"
+end_script
+waypoint charisma_action_girl
+say "" "\girl passa a mão na cabeça de \boy e diz que tudo ficará bem!"
+say "A armadilha da escada-rolante se afrouxa!"
+end_script
 
 waypoint guts_success
 say "" "\girl segura o braço de \boy com toda a força que pode. Ela puxa, e o pé do menino se desgruda."

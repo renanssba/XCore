@@ -1,50 +1,61 @@
 goto *arg1
 
 waypoint event_statement
-say "" "O pai de \girl aparece de surpresa. Ele é mal-encarado e parece muito exigente. Após olhar feio para \boy, ele pergunta:"
-say "Pai da \girl" "Quais são suas intenções com a minha filha?"
+say "" "O pai de \girl aparece de surpresa! Ele parece avaliar o garoto. Será que \boy é um bom partido?"
+
+set_var guts_action_boy_name "Ousar"
+set_var guts_action_girl_name "Ousar"
+set_var intelligence_action_boy_name "Argumentar"
+set_var intelligence_action_girl_name "Argumentar"
+set_var charisma_action_boy_name "Bajular"
+set_var charisma_action_girl_name "Bajular"
 end_script
 
 
-
-waypoint guts_success
-say "\boy" "Meu objetivo com sua filha é fazer muitos filhos, senhor!"
-say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
-say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+waypoint guts_action_boy
+say "" "\boy olha nos olhos do pai de \girl e diz algo ousado!"
+say "" "O pai de \girl fica surpreso!"
 end_script
 
-waypoint intelligence_success
-say "\boy" "Eu quero dar um futuro confortável para ela, senhor!"
-say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
-say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+waypoint guts_action_girl
+say "" "\girl olha nos olhos de seu pai e diz algo ousado!"
+say "" "O pai de \girl fica surpreso!"
 end_script
 
-waypoint charisma_success
-say "\boy" "Eu quero fazê-la muito feliz, senhor!"
-say "" "Após um momento de deliberação, um sorriso se abre no rosto do pai."
-say "Pai da \girl" "Falou como um homem de verdade, meu futuro genro. Tem a minha benção!"
+waypoint intelligence_action_boy
+say "" "\boy tenta convencer o pai de \girl de que ele é um bom partido!"
+say "" "O pai de \girl considera a ideia!"
+end_script
+
+waypoint intelligence_action_girl
+say "" "\girl tenta convencer o pai de que \boy é um bom partido!"
+say "" "O pai de \girl considera a ideia!"
+end_script
+
+waypoint charisma_action_boy
+say "" "\boy elogia o pai de \girl!"
+say "" "O pai de \girl se sente satisfeito!"
+end_script
+
+waypoint charisma_action_girl
+say "" "\girl elogia o pai!"
+say "" "O pai de \girl se sente satisfeito!"
 end_script
 
 
-
-waypoint guts_fail
-say "\boy" "Meu objetivo com sua filha é fazer muitos filhos, senhor!"
-say "" "Após um momento de deliberação, o senhor enche \boy de porrada."
-say "\girl se pergunta o que ele estava pensando..."
+waypoint attack_boy
+say "" "O pai duvida da capacidade de \boy!"
+say "" "\boy fica receoso!"
 end_script
 
-waypoint intelligence_fail
-say "\boy" "Eu quero dar um futuro confortável para ela, senhor!"
-say "" "O senhor analisa \boy de cima a baixo."
-say "Pai da \girl" "Você não parece o tipo de homem que vai ter sucesso na vida."
-say "\girl fica decepcionada."
+waypoint attack_girl
+say "" "O pai reclama das escolhas amorosas de \girl!"
+say "" "\girl fica receosa!"
 end_script
 
-waypoint charisma_fail
-say "\boy" "Eu quero fazê-la muito feliz, senhor!"
-say "" "O senhor analisa \boy de cima a baixo."
-say "Pai da \girl" "Você não parece o tipo de homem que minha filha merece."
-say "\girl fica decepcionada."
+waypoint defeated
+say "" "O pai vai embora reclamando!"
 end_script
+
 
 

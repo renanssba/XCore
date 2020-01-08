@@ -3,9 +3,9 @@ goto *arg1
 waypoint event_statement
 say "" "\girl recebe uma ligação inconveniente de um parente distante!"
 
-set_var guts_action_boy_name "Desligar"
+set_var guts_action_boy_name "Gritar"
 set_var guts_action_girl_name "Desligar"
-set_var intelligence_action_boy_name "Apresentar"
+set_var intelligence_action_boy_name "Hackear"
 set_var intelligence_action_girl_name "Apresentar"
 set_var charisma_action_boy_name "Enrolar"
 set_var charisma_action_girl_name "Enrolar"
@@ -14,18 +14,27 @@ end_script
 
 
 waypoint guts_action_boy
+say "" "\boy grita para que a pessoa desligue o telefone imediatamente!"
+say "" "A voz do outro lado da linha reclama!"
+end_script
 waypoint guts_action_girl
 say "" "\active vai direto ao ponto e diz que precisa desligar!"
 say "" "A voz do outro lado da linha reclama!"
 end_script
 
 waypoint intelligence_action_boy
+say "" "\boy usa seu próprio telefone para causar interferência na ligação!"
+say "" "A voz do outro lado da linha reclama!"
+end_script
 waypoint intelligence_action_girl
 say "" "\active discorre sobre como falar ao telefone pode fazer mal à saúde!"
 say "" "A voz do outro lado da linha reclama!"
 end_script
 
 waypoint charisma_action_boy
+say "" "\boy ajuda \girl a elaborar uma desculpa!"
+say "" "A voz do outro lado da linha reclama!"
+end_script
 waypoint charisma_action_girl
 say "" "\active aplica uma desculpa qualquer!"
 say "" "A voz do outro lado da linha reclama!"
