@@ -38,7 +38,7 @@ public class Skill {
   public ActionRange range;
 
   public Attributes attribute;
-  public float multiplier;
+  public int power;
 
   public SkillEffect skillEffect;
   public string[] healsConditionNames;

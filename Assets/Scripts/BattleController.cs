@@ -45,7 +45,7 @@ public class BattleController : MonoBehaviour {
     instance = this;
     partyMembers = new Person[0];
     selectedTargetPartyId = new int[0];
-    LoadAllDateEvents();
+    LoadAllEnemies();
     LoadAllSkills();
     LoadAllStatusConditions();
     dateLength = 3;
@@ -62,7 +62,7 @@ public class BattleController : MonoBehaviour {
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedTargetPartyId = new int[partyMembers.Length];
 
-    maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 5 + 10;
+    maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 8 + 26;
 
     FullHealParty();
     UIController.instance.ShowPartyPeopleCards();
@@ -76,6 +76,7 @@ public class BattleController : MonoBehaviour {
 
   public void FullHealParty() {
     HealPartyHp(maxHp);
+    RemovePartyStatusConditions();
     for(int i=0; i < partyMembers.Length; i++) {
       partyMembers[i].HealSp(partyMembers[i].maxSp);
     }
@@ -87,6 +88,12 @@ public class BattleController : MonoBehaviour {
     hp = Mathf.Min(hp, maxHp);
     hp = Mathf.Max(hp, 0);
     UIController.instance.AnimateHpChange(initialHp, hp);
+  }
+
+  public void RemovePartyStatusConditions() {
+    for(int i = 0; i < partyMembers.Length; i++) {
+      partyMembers[i].RemoveAllStatusConditions();
+    }
   }
 
   public DateEvent GetCurrentDateEvent() {
@@ -190,18 +197,40 @@ public class BattleController : MonoBehaviour {
   }
 
 
+
+  public int CalculateCharacterDamage(Person attacker, Skill usedSkill, DateEvent defender) {
+    float damage;
+
+    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f*defender.attributes[4] + defender.attributes[(int)usedSkill.attribute], 1f));
+
+    Debug.LogWarning("Character Hits! Damage:");
+    Debug.Log("Defensive ratio (ATK/DEF):" + damage);
+
+    damage *= (float)usedSkill.power * Random.Range(0.9f, 1.1f);
+
+    damage *= defender.attributeEffectivity[(int)usedSkill.attribute];
+    Debug.Log("Final damage: " + damage);
+
+    // defend?
+    //damage /= (selectedActionType[targetId] == TurnActionType.defend ? 2f : 1f);
+
+    return Mathf.Max(1, Mathf.RoundToInt(damage));
+  }
+
   public IEnumerator ExecuteCharacterAttack(int partyMemberId, Skill usedSkill) {
     // damage event HP
     int attributeId = (int)usedSkill.attribute;
-    int actionPowerLevel = (int)(partyMembers[partyMemberId].AttributeValue((int)usedSkill.attribute) * usedSkill.multiplier);
     float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
-    float damageMultiplier = partyMembers[partyMemberId].DamageMultiplier();
-    int effectiveActionPower = (int)(actionPowerLevel * effectivity * damageMultiplier);
+    //int actionPowerLevel = (int)(partyMembers[partyMemberId].AttributeValue((int)usedSkill.attribute) * usedSkill.power);
+    //float damageMultiplier = partyMembers[partyMemberId].DamageMultiplier();
+    //int effectiveAttackDamage = (int)(actionPowerLevel * effectivity * damageMultiplier);
+    int effectiveAttackDamage = CalculateCharacterDamage(partyMembers[partyMemberId], usedSkill, GetCurrentDateEvent());
+    int initialHp = hp;
 
     VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
 
 
-    DamageEnemyHp(effectiveActionPower);
+    DamageEnemyHp(effectiveAttackDamage);
 
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
@@ -211,7 +240,7 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(attackAnimationTime);
 
     TheaterController.instance.enemyActor.Shine();
-    TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveActionPower, effectivity);
+    TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
 
     yield return new WaitForSeconds(1f);
     enemyHpSlider.maxValue = currentEvent.maxHp;
@@ -297,6 +326,7 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
 
     bool fleeSuccess = Random.Range(0, 100) < 60;
+    fleeSuccess = true; // DEBUG TO TEST DAMAGE
     if(fleeSuccess) {
       yield return new WaitForSeconds(0.5f);
       int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
@@ -321,15 +351,33 @@ public class BattleController : MonoBehaviour {
     StartCoroutine(ExecuteEnemyAttack(targetId, attackAnimationTime));
   }
 
+  public int CalculateEnemyDamage(DateEvent attacker, int targetId) {
+    float damage;
+    Person defender = partyMembers[targetId];
+
+    damage = (3f * attacker.attributes[((int)attacker.attackAttribute)] / Mathf.Max(2f * defender.AttributeValue(4) + defender.AttributeValue((int)attacker.attackAttribute), 1) );
+
+    Debug.LogWarning("Enemy Hits! Damage:");
+    Debug.Log("Defensive ratio (ATK/DEF):" + damage);
+
+    damage *= (float)attacker.attackPower * Random.Range(0.9f, 1.1f);
+    Debug.Log("Final damage: " + damage);
+
+    // defend?
+    damage /= (selectedActionType[targetId] == TurnActionType.defend ? 2f : 1f);
+
+    return Mathf.Max(1, Mathf.RoundToInt(damage));
+  }
+
   public IEnumerator ExecuteEnemyAttack(int targetId, float time) {
     // damage party HP
     DateEvent currentEvent = GetCurrentDateEvent();
     int attributeId = (int)currentEvent.attackAttribute;
-    int baseDamage = currentEvent.attackDamage;
-    int effectiveAttackDamage = (int)(baseDamage * partyMembers[targetId].defenses[attributeId]);
-    effectiveAttackDamage /= (selectedActionType[targetId] == TurnActionType.defend ? 2 : 1);
-    effectiveAttackDamage = Mathf.Max(1, effectiveAttackDamage);
+    //int baseDamage = currentEvent.attackDamage;
+    //int effectiveAttackDamage = (int)(baseDamage * partyMembers[targetId].defenses[attributeId]);
+    int effectiveAttackDamage = CalculateEnemyDamage(currentEvent, targetId);
     int initialHp = hp;
+    bool causeDamage = (currentEvent.attackPower != 0);
 
     TheaterController.instance.EnemyAttackAnimation();
 
@@ -338,7 +386,9 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(time);
 
     TheaterController.instance.ShineCharacter(targetId);
-    TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
+    if(causeDamage) {
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
+    }
 
     // chance to receive status condition
     int effectiveStatusConditionChance = currentEvent.giveStatusConditionChance;
@@ -356,8 +406,10 @@ public class BattleController : MonoBehaviour {
       }
     }
 
-    yield return new WaitForSeconds(1f);
-    DamagePartyHp(effectiveAttackDamage);
+    if(causeDamage) {
+      yield return new WaitForSeconds(1f);
+      DamagePartyHp(effectiveAttackDamage);
+    }
 
     yield return new WaitForSeconds(1.2f);
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -443,7 +495,7 @@ public class BattleController : MonoBehaviour {
 
   public int GetNewEnemy(List<int> selectedEvents) {
     //return 7;
-    //return Random.Range(0, 9);
+    return Random.Range(0, 10);
 
     int selectedEnemyId;
     do {
@@ -507,28 +559,31 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public void LoadAllDateEvents() {
+  public void LoadAllEnemies() {
     allDateEvents = new List<DateEvent>();
 
     float guts, intelligence, charisma, magic;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
-      guts = GetEffectivityByName(dic["Efetividade Valentia"]);
-      intelligence = GetEffectivityByName(dic["Efetividade Inteligencia"]);
-      charisma = GetEffectivityByName(dic["Efetividade Carisma"]);
-      magic = GetEffectivityByName(dic["Efetividade Magia"]);
+      guts = GetEffectivityByName(dic["guts effectivity"]);
+      intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
+      charisma = GetEffectivityByName(dic["charisma effectivity"]);
+      magic = GetEffectivityByName(dic["magic effectivity"]);
       allDateEvents.Add(new DateEvent {
-        id = int.Parse(dic["Id"]),
-        scriptName = dic["Nome do Script"],
-        level = int.Parse(dic["Level"]),
-        maxHp = int.Parse(dic["Max HP"]),
+        id = int.Parse(dic["id"]),
+        name = dic["name"],
+        scriptName = dic["script name"],
+        level = int.Parse(dic["level"]),
+        maxHp = int.Parse(dic["max hp"]),
         attributeEffectivity = new float[] { guts, intelligence, charisma, magic },
-        spriteName = dic["Nome Sprite"],
-        stage = int.Parse(dic["Etapa"]),
-        location = dic["Localidade"],
-        attackAttribute = Utils.GetAttributeByString(dic["Atributo Ataque"]),
-        attackDamage = int.Parse(dic["Dano"]),
+        spriteName = dic["sprite name"],
+        stage = int.Parse(dic["stage"]),
+        location = dic["location"],
+        attackAttribute = Utils.GetAttributeByString(dic["attack attribute"]),
+        attackPower = int.Parse(dic["attack power"]),
+        attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
+          int.Parse(dic["charisma"]), int.Parse(dic["magic"]), int.Parse(dic["endurance"])},
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
         giveStatusConditionChance = int.Parse(dic["give status chance"])
     });
@@ -585,8 +640,8 @@ public class BattleController : MonoBehaviour {
       }
 
       newSkill.attribute = Utils.GetAttributeByString(entry["attribute"]);
-      if(!string.IsNullOrEmpty(entry["multiplier"])) {
-        newSkill.multiplier = float.Parse(entry["multiplier"]);
+      if(!string.IsNullOrEmpty(entry["power"])) {
+        newSkill.power = int.Parse(entry["power"]);
       }
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
@@ -604,7 +659,6 @@ public class BattleController : MonoBehaviour {
       if(!string.IsNullOrEmpty(entry["duration"])) {
         newSkill.duration = int.Parse(entry["duration"]);
       }
-      newSkill.healHp = int.Parse(entry["heal hp"]);
 
       allSkills.Add(newSkill);
     }

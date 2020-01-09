@@ -22,6 +22,7 @@ public class ScreenTransitions : MonoBehaviour {
     canvasGroup.alpha = 0f;
     gameObject.SetActive(true);
     canvasGroup.DOFade(1f, fadeTime);
+    canvasGroup.interactable = true;
   }
 
   public void HidePanel() {
@@ -29,6 +30,7 @@ public class ScreenTransitions : MonoBehaviour {
       return;
     }
     DOTween.Kill(canvasGroup);
+    canvasGroup.interactable = false;
     canvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
       gameObject.SetActive(false);
     });

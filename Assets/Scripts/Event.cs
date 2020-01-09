@@ -27,6 +27,7 @@ public enum DateLocation{
 [System.Serializable]
 public class DateEvent {
 
+  public string name;
   public string scriptName;
   public int id;
   public float[] attributeEffectivity;
@@ -39,8 +40,9 @@ public class DateEvent {
   public int maxHp;
   public int hp;
 
+  public int[] attributes;
   public Attributes attackAttribute;
-  public int attackDamage;
+  public int attackPower;
   public string[] givesConditionNames;
   public int giveStatusConditionChance;
 

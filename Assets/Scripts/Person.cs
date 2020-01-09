@@ -27,7 +27,6 @@ public class Person {
   public PersonState state = PersonState.unrevealed;
 
   public int[] attributes;
-  public int[] defenses;
 
   public int maxSp;
   public int sp;
@@ -209,6 +208,11 @@ public class Person {
         statusConditions.RemoveAt(i);
       }
     }
+    UIController.instance.UpdateDateUI();
+  }
+
+  public void RemoveAllStatusConditions() {
+    statusConditions.Clear();
     UIController.instance.UpdateDateUI();
   }
 
