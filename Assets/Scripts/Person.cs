@@ -238,7 +238,7 @@ public class Person {
       if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
          sc.statusEffect[i] <= StatusConditionEffect.turnDamageMagic) {
         //Debug.LogWarning("Activating "+ sc.statusEffect[i]);
-        int damage = ((int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i])-4)) /2;
+        int damage = (int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i])-4)/3;
         damage = Mathf.Max(1, damage);
         BattleController.instance.DamagePartyHp(damage);
         GetActor2D().ShowDamageParticle(((int)sc.statusEffect[i])-4, damage, 1f);

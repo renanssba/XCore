@@ -127,7 +127,7 @@ public class ActionsPanel : MonoBehaviour {
     UIController.instance.HideHelpMessagePanel();
   }
 
-  public IEnumerator WaitAndShowBaseActionsPanel(ScreenTransitions panel) {
+  public IEnumerator WaitAndShowActionsPanel(ScreenTransitions panel) {
     yield return new WaitForSeconds(0.3f);
     panel.ShowPanel();
   }
