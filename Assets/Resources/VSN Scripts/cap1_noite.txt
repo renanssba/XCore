@@ -6,8 +6,13 @@ if #day == 3
 endif
 
 say "" "Cai a noite e Ricardo fica em casa."
+
+/// DEBUG while item interaction mechanic is not complete
+goto after_item_interaction
+
 bg "house afternoon"
 fade_in 0.5
+
 
 waypoint interact_with_item
 say "Fertiliel" "(Eu posso escolher algum item para o Ricardo utilizar durante esse período! O que ele deve fazer?)"

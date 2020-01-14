@@ -11,8 +11,8 @@ public class ScreenTransitions : MonoBehaviour {
 
   public ScreenContext context;
 
-  //public static float fadeTime = 0.3f;
-  public static float fadeTime = 1f;
+  public static float fadeTime = 0.3f;
+  //public static float fadeTime = 1f;
 
 
   public void ShowPanel() {
@@ -22,11 +22,11 @@ public class ScreenTransitions : MonoBehaviour {
     DOTween.Kill(canvasGroup);
     canvasGroup.alpha = 0f;
     gameObject.SetActive(true);
-    //canvasGroup.interactable = false;
+    canvasGroup.interactable = false;
     canvasGroup.DOFade(1f, fadeTime).OnComplete(() => {
-      //canvasGroup.interactable = true;
+      canvasGroup.interactable = true;
     });
-    canvasGroup.interactable = true;
+    //canvasGroup.interactable = true;
   }
 
   public void HidePanel() {

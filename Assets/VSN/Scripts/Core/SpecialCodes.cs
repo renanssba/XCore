@@ -163,6 +163,13 @@ public class SpecialCodes {
         } else {
           return -1;
         }
+      case "#currentPlayerStatusConditionsCount":
+        int currentPlayerId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+        if(BattleController.instance.partyMembers.Length >= currentPlayerId) {
+          Person currentPlayer = BattleController.instance.partyMembers[currentPlayerId];
+          return currentPlayer.statusConditions.Count;
+        }
+        break;
       default:
         return 0f;
     }

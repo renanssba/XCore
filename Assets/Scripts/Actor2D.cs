@@ -136,11 +136,24 @@ public class Actor2D : MonoBehaviour {
     ShowParticleAnimation(particleString, Color.green);
   }
 
+  public void ShowStatusConditionParticle(StatusCondition statusCondition) {
+    ShowParticleAnimationWithSprite("<size=50%>"+statusCondition.GetPrintableName()+"</size>", Color.gray, statusCondition.sprite);
+  }
+
+  public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {
+    Vector3 v = BattleController.instance.damageParticlePrefab.transform.localPosition;
+    GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, BattleController.instance.transform);
+    newParticle.GetComponent<TextMeshPro>().color = color;
+    newParticle.GetComponent<TextMeshPro>().text = text;
+    newParticle.GetComponentInChildren<SpriteRenderer>().sprite = particleSprite;
+  }
+
   public void ShowParticleAnimation(string text, Color color) {
     Vector3 v = BattleController.instance.damageParticlePrefab.transform.localPosition;
     GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, BattleController.instance.transform);
     newParticle.GetComponent<TextMeshPro>().color = color;
     newParticle.GetComponent<TextMeshPro>().text = text;
+    newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
   }
 
   public void ClickedTargetSelectButton() {

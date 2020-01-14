@@ -186,6 +186,8 @@ public class Person {
     int i = FindStatusCondition(newCondition);
     if(i == -1 || statusConditions[i].stackable) {
       statusConditions.Add(newCondition);
+      Actor2D actor = TheaterController.instance.GetActorByPerson(this);
+      actor.ShowStatusConditionParticle(newCondition);
     } else {
       statusConditions[i].duration = Mathf.Max(statusConditions[i].duration,
                                                newCondition.duration);
@@ -218,9 +220,6 @@ public class Person {
 
   public void EndTurn() {
     for(int i = statusConditions.Count-1; i>=0; i--) {
-      /// take "poison" damages
-      TakePoisonDamage(i);
-
       /// pass status conditions turn
       if(statusConditions[i].duration > 0) {
         statusConditions[i].duration--;
@@ -232,16 +231,39 @@ public class Person {
     UIController.instance.UpdateDateUI();
   }
 
-  public void TakePoisonDamage(int statusCondPos) {
+  public void ActivateStatusConditionEffect(int statusCondPos) {
     StatusCondition sc = statusConditions[statusCondPos];
+    int statusEffectStacks = 0;
+    bool damageDealtBefore;
+
     for(int i=0; i<sc.statusEffect.Length; i++) {
       if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
          sc.statusEffect[i] <= StatusConditionEffect.turnDamageMagic) {
+        damageDealtBefore = false;
+        for(int j=0; j < statusCondPos; j++) {
+          if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {
+            damageDealtBefore = true;
+          }
+        }
+        if(damageDealtBefore) {
+          continue;
+        }
+
+        statusEffectStacks = 0;
+        for(int j = 0; j < statusConditions.Count; j++) {
+          if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {
+            statusEffectStacks++;
+          }
+        }
+
         //Debug.LogWarning("Activating "+ sc.statusEffect[i]);
         int damage = (int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i])-4)/3;
         damage = Mathf.Max(1, damage);
+        damage *= statusEffectStacks;
         BattleController.instance.DamagePartyHp(damage);
         GetActor2D().ShowDamageParticle(((int)sc.statusEffect[i])-4, damage, 1f);
+        VsnController.instance.WaitForCustomInput();
+        BattleController.instance.ShowActionDescription("receive_damage_" + statusConditions[statusCondPos].name, name);
       }
     }
   }

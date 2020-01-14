@@ -38,6 +38,7 @@ public class RelationshipCard : MonoBehaviour {
 
   public void RaiseHeartsAnimation(int heartsToAdd) {
     int initValue = relationship.hearts;
+    UpdateUI();
     screenTransitions.ShowPanel();
     StartCoroutine(ShowRaiseHeartsAnimation(initValue, heartsToAdd));
   }

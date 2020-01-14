@@ -12,11 +12,22 @@ public class JumpingParticle : MonoBehaviour {
 
 	public void Start() {
     transform.DOJump(transform.position, jumpForce, 1, duration).OnComplete(()=> {
-      TextMeshPro t = GetComponent<TextMeshPro>();
-      t.DOFade(0f, fadeDuration).OnComplete(() => {
-        Destroy(gameObject);
-        //gameObject.SetActive(false);
-      });
+      TextMeshPro[] texts = GetComponentsInChildren<TextMeshPro>();
+      foreach(TextMeshPro t in texts) {
+        t.DOFade(0f, fadeDuration);
+      }
+
+      SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
+      foreach(SpriteRenderer sr in renderers) {
+        sr.DOFade(0f, fadeDuration);
+      }
+
+      StartCoroutine(WaitThenBeDestroyed(fadeDuration));
     });
+  }
+
+  public IEnumerator WaitThenBeDestroyed(float time) {
+    yield return new WaitForSeconds(time);
+    Destroy(gameObject);
   }
 }

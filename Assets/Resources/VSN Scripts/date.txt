@@ -36,8 +36,16 @@ for currentDateEvent #dateLength
 
   waypoint start_new_turn  
   
-  // end turn (to pass time on status conditions and take poison damage)
+  // receive effects from conditions (like take poison damage)
+  for currentPlayerTurn #partyLength
+    for currentStatusCondition #currentPlayerStatusConditionsCount
+      activate_status_condition_effect currentPlayerTurn currentStatusCondition
+    endfor
+  endfor
+  // end turn (to pass time on status conditions)
   end_turn
+  
+  
   if #currentHp <= 0
     goto fail_date
   endif

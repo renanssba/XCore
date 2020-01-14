@@ -116,6 +116,19 @@ public class TheaterController : MonoBehaviour {
     return null;
   }
 
+  public Actor2D GetActorByPerson(Person p) {
+    if(mainActor.person == p) {
+      return mainActor;
+    }
+    if(supportActor.person == p) {
+      return supportActor;
+    }
+    if(angelActor.person == p) {
+      return angelActor;
+    }
+    return null;
+  }
+
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
     SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();

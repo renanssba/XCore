@@ -101,6 +101,15 @@ public class StatusCondition {
     return desc;
   }
 
+  public bool ContainsStatusEffect(StatusConditionEffect effect) {
+    for(int i = 0; i < statusEffect.Length; i++) {
+      if(statusEffect[i] == effect) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public int AttributeBonus(int attributeId) {
     int sum = 0;
     for(int i=0; i < statusEffect.Length; i++) {

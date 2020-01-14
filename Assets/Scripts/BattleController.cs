@@ -221,9 +221,6 @@ public class BattleController : MonoBehaviour {
     // damage event HP
     int attributeId = (int)usedSkill.attribute;
     float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
-    //int actionPowerLevel = (int)(partyMembers[partyMemberId].AttributeValue((int)usedSkill.attribute) * usedSkill.power);
-    //float damageMultiplier = partyMembers[partyMemberId].DamageMultiplier();
-    //int effectiveAttackDamage = (int)(actionPowerLevel * effectivity * damageMultiplier);
     int effectiveAttackDamage = CalculateCharacterDamage(partyMembers[partyMemberId], usedSkill, GetCurrentDateEvent());
     int initialHp = hp;
 
@@ -326,7 +323,7 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
 
     bool fleeSuccess = Random.Range(0, 100) < 60;
-    fleeSuccess = true; // DEBUG TO TEST DAMAGE
+    //fleeSuccess = true; // DEBUG TO TEST DAMAGE
     if(fleeSuccess) {
       yield return new WaitForSeconds(0.5f);
       int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
@@ -373,8 +370,6 @@ public class BattleController : MonoBehaviour {
     // damage party HP
     DateEvent currentEvent = GetCurrentDateEvent();
     int attributeId = (int)currentEvent.attackAttribute;
-    //int baseDamage = currentEvent.attackDamage;
-    //int effectiveAttackDamage = (int)(baseDamage * partyMembers[targetId].defenses[attributeId]);
     int effectiveAttackDamage = CalculateEnemyDamage(currentEvent, targetId);
     int initialHp = hp;
     bool causeDamage = (currentEvent.attackPower != 0);
@@ -386,15 +381,20 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(time);
 
     TheaterController.instance.ShineCharacter(targetId);
+    
+    // cause damage
     if(causeDamage) {
       TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
+      yield return new WaitForSeconds(1f);
+      DamagePartyHp(effectiveAttackDamage);
+      yield return new WaitForSeconds(1f);
     }
 
     // chance to receive status condition
     int effectiveStatusConditionChance = currentEvent.giveStatusConditionChance;
     if(selectedActionType[targetId] == TurnActionType.defend) {
       if(effectiveStatusConditionChance == 100) {
-        effectiveStatusConditionChance -= 30;
+        effectiveStatusConditionChance -= 20;
       } else {
         effectiveStatusConditionChance /= 2;
       }
@@ -403,16 +403,18 @@ public class BattleController : MonoBehaviour {
       foreach(string statusConditionName in currentEvent.givesConditionNames) {
         StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
         partyMembers[targetId].ReceiveStatusCondition(statusCondition);
+
+        VsnArgument[] args = new VsnArgument[3];
+        args[0] = new VsnString("receive_status_condition");
+        args[1] = new VsnString(partyMembers[targetId].name);
+        args[2] = new VsnString(statusCondition.GetPrintableName());
+
+        StartCoroutine(WaitThenShowActionDescription(1f, args));
       }
+    } else {
+      yield return new WaitForSeconds(0.2f);
+      VsnController.instance.state = ExecutionState.PLAYING;
     }
-
-    if(causeDamage) {
-      yield return new WaitForSeconds(1f);
-      DamagePartyHp(effectiveAttackDamage);
-    }
-
-    yield return new WaitForSeconds(1.2f);
-    VsnController.instance.state = ExecutionState.PLAYING;
   }
 
   public void ShowChallengeResult(bool success) {
@@ -430,6 +432,7 @@ public class BattleController : MonoBehaviour {
       Lean.Localization.LeanLocalization.GetTranslationText("date/success_message") :
       Lean.Localization.LeanLocalization.GetTranslationText("date/failure_message");
     newParticle.GetComponent<TextMeshPro>().color = success ? greenColor : redColor;
+    newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
   }
 
 
@@ -495,6 +498,7 @@ public class BattleController : MonoBehaviour {
 
   public int GetNewEnemy(List<int> selectedEvents) {
     //return 7;
+    //return 4;
     return Random.Range(0, 10);
 
     int selectedEnemyId;
@@ -555,6 +559,20 @@ public class BattleController : MonoBehaviour {
     currentUsedEvents.Clear();
 
     RecoverEnemiesHp();
+  }
+
+  public void ShowActionDescription(string waypointToLoad, string personName) {
+    VsnArgument[] args = new VsnArgument[2];
+    args[0] = new VsnString(waypointToLoad);
+    args[1] = new VsnString(personName);
+    Debug.LogWarning("WaitThenShowActionDescription. waypoint: " + waypointToLoad + ", person: " + personName);
+
+    StartCoroutine(WaitThenShowActionDescription(1f, args));
+  }
+
+  public IEnumerator WaitThenShowActionDescription(float waitTime, VsnArgument[] args) {
+    yield return new WaitForSeconds(waitTime);
+    Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
   }
 
 

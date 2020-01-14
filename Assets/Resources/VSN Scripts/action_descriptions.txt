@@ -23,7 +23,7 @@ say "" "\active atira uma flecha mágica no alvo."
 end_script
 
 waypoint flee
-say "" "\boy e \girl tentam fugir da situação..."
+say "" "\couple tentam fugir da situação..."
 end_script
 
 waypoint flee_fail
@@ -32,6 +32,25 @@ end_script
 
 waypoint defend
 say "" "\active se prepara para o ataque do oponente."
+end_script
+
+
+
+waypoint receive_status_condition
+say "" "\vsn[arg2] fica <color=yellow>\vsn[arg3]</color>."
+end_script
+
+
+waypoint receive_damage_injured
+say "" "O machucado de \vsn[arg2] dói."
+end_script
+
+waypoint receive_damage_sad
+say "" "A tristeza de \vsn[arg2] machuca seu coração."
+end_script
+
+waypoint receive_damage_unclothed
+say "" "\vsn[arg2] sente vergonha por não estar totalmente vestido(a)."
 end_script
 
 

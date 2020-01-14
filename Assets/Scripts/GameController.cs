@@ -111,8 +111,8 @@ public class GameController : MonoBehaviour {
 
     coupleEntry.Initialize(currentRelationship);
     girlInteractionPanel.ShowPanel();
-    girlInteractionButtonsPanel.gameObject.SetActive(true);
-    girlInteractionButtonsPanel.canvasGroup.alpha = 1f;
+    girlInteractionButtonsPanel.canvasGroup.alpha = 0f;
+    girlInteractionButtonsPanel.ShowPanel();
     dateSelectPanel.gameObject.SetActive(false);
   }
 
@@ -160,7 +160,7 @@ public class GameController : MonoBehaviour {
     BattleController.instance.StartBattle(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
 
     SfxManager.StaticPlayBigConfirmSfx();
-    GameController.instance.HideGirlInteractionScreen();
+    HideGirlInteractionScreen();
     Command.EndScriptCommand.StaticExecute(new VsnArgument[0]);
     VsnController.instance.GotCustomInput();
     VsnController.instance.StartVSN("date");
