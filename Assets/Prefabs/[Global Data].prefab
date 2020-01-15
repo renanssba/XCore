@@ -2666,6 +2666,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1315786714199548
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4172517161507024}
+  - component: {fileID: 114655558164328654}
+  m_Layer: 0
+  m_Name: blindness
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1316728800618840
 GameObject:
   m_ObjectHideFlags: 1
@@ -4142,6 +4158,22 @@ GameObject:
   - component: {fileID: 114684762951691210}
   m_Layer: 0
   m_Name: say_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1465106918240336
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4120057346707816}
+  - component: {fileID: 114221315807354244}
+  m_Layer: 0
+  m_Name: blindness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9981,6 +10013,19 @@ Transform:
   m_Father: {fileID: 4739744252357014}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4120057346707816
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465106918240336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896331924423158}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4122016290133096
 Transform:
   m_ObjectHideFlags: 1
@@ -10031,6 +10076,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4322374131542404}
+  - {fileID: 4172517161507024}
   m_Father: {fileID: 4020664919214342}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10309,6 +10355,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4184995686407568}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4172517161507024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315786714199548}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4126275706725958}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4173815192400310
 Transform:
@@ -16493,6 +16552,7 @@ Transform:
   - {fileID: 4409138639981294}
   - {fileID: 4368873004003814}
   - {fileID: 4447703962017438}
+  - {fileID: 4120057346707816}
   m_Father: {fileID: 4020664919214342}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19530,6 +19590,24 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: 
+    Object: {fileID: 0}
+--- !u!114 &114221315807354244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465106918240336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Cego
+    Object: {fileID: 0}
+  - Language: English
+    Text: Blind
     Object: {fileID: 0}
 --- !u!114 &114226428315941884
 MonoBehaviour:
@@ -23943,6 +24021,24 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: My place in the universe is here with you.
+    Object: {fileID: 0}
+--- !u!114 &114655558164328654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315786714199548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Diminui a chance de acerto de todo ataque realizado
+    Object: {fileID: 0}
+  - Language: English
+    Text: Lowers executed attack's accuracy
     Object: {fileID: 0}
 --- !u!114 &114656322855394408
 MonoBehaviour:

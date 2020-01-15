@@ -16,6 +16,7 @@ public enum StatusConditionEffect {
   turnDamageCharisma,
   turnDamageMagic,
   damageMultiplier,
+  missAttacks,
   count
 }
 
@@ -94,9 +95,15 @@ public class StatusCondition {
       case StatusConditionEffect.turnDamageMagic:
         desc += "Receive " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/magic") + "-based damage every turn.";
         break;
-      case StatusConditionEffect.damageMultiplier:
-        desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
+      default:
+        desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/"+name);
         break;
+      //case StatusConditionEffect.damageMultiplier:
+      //  desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
+      //  break;
+      //case StatusConditionEffect.missAttacks:
+      //  desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
+      //  break;
     }
     return desc;
   }

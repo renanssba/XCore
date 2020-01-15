@@ -120,11 +120,6 @@ public class ItemSelectorScreen : MonoBehaviour {
 
 
   GameObject CreateItem(ItemListing listing){
-    //if(interactionType == ItemInteractionType.store_buy &&
-    //   GlobalData.instance.CurrentBoy().inventory.HasItem(listing.id)){
-    //  return null;
-    //}
-
     GameObject obj = Instantiate(itemPrefab, itemsHolder.transform) as GameObject;
     obj.GetComponent<ItemUI>().Initialize(listing, interactionType);
     return obj;

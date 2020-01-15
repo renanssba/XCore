@@ -414,11 +414,12 @@ public class BattleController : MonoBehaviour {
     // chance to receive status condition
     int effectiveStatusConditionChance = currentEvent.giveStatusConditionChance;
     if(selectedActionType[targetId] == TurnActionType.defend) {
-      if(effectiveStatusConditionChance == 100) {
-        effectiveStatusConditionChance -= 20;
-      } else {
-        effectiveStatusConditionChance /= 2;
-      }
+      effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance/2, 30);
+      //if(effectiveStatusConditionChance == 100) {
+      //  effectiveStatusConditionChance -= 20;
+      //} else {
+      //  effectiveStatusConditionChance /= 2;
+      //}
     }
     if(Random.Range(0, 100) < effectiveStatusConditionChance) {
       foreach(string statusConditionName in currentEvent.givesConditionNames) {
@@ -520,7 +521,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    return 7;
+    return 5;
     return Random.Range(0, 10);
 
     int selectedEnemyId;
