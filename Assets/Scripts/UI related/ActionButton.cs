@@ -101,7 +101,7 @@ public class ActionButton : MonoBehaviour {
         break;
       case TurnActionType.useItem:
         Item it = Item.GetItemById(itemListing.id);
-        s = it.GetPrintableDescription();
+        s = it.GetBattleDescription(true);
         break;
     }
     UIController.instance.ShowHelpMessagePanel(s);

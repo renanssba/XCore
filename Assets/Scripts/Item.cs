@@ -53,6 +53,64 @@ public class Item {
     return Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + descriptionKey);
   }
 
+  public string GetBattleDescription(bool useBattleMarker = false) {
+    string healDesc = "";
+    string singleAllyHealsDesc = "";
+    string givesStatusDesc = "";
+    string battleMarkerStart = "";
+    string battleMarkerEnd = "";
+    if(useBattleMarker) {
+      battleMarkerStart = "<color=yellow>";
+      battleMarkerEnd = "</color>";
+    }
+
+    if(healHp > 0) {
+      healDesc += "Restaura "+battleMarkerStart + healHp + " HP"+ battleMarkerEnd+" da equipe. ";
+    }
+
+    if(healSp > 0) {
+      singleAllyHealsDesc += battleMarkerStart + healSp + " SP" + battleMarkerEnd;
+    }
+
+    if(healsConditionNames.Length > 0) {
+      if(singleAllyHealsDesc != "") {
+        singleAllyHealsDesc += ", ";
+      }
+      for(int i = 0; i < healsConditionNames.Length; i++) {
+        singleAllyHealsDesc += battleMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/"+healsConditionNames[i])+ battleMarkerEnd;
+        if(i == healsConditionNames.Length - 1) {
+          continue;
+        }else if(i == healsConditionNames.Length-2) {
+          singleAllyHealsDesc += " e ";
+        } else {
+          singleAllyHealsDesc += ", ";
+        }
+      }
+    }
+
+    if(givesConditionNames.Length > 0) {
+      for(int i = 0; i < givesConditionNames.Length; i++) {
+        givesStatusDesc += battleMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/" + givesConditionNames[i]) + battleMarkerEnd;
+        if(i == givesConditionNames.Length - 1) {
+          continue;
+        } else if(i == givesConditionNames.Length - 2) {
+          givesStatusDesc += " e ";
+        } else {
+          givesStatusDesc += ", ";
+        }
+      }
+    }
+
+    if(singleAllyHealsDesc != "") {
+      singleAllyHealsDesc = "Cura " + singleAllyHealsDesc + " de um aliado. ";
+    }
+    if(givesStatusDesc != "") {
+      givesStatusDesc = "Causa " + givesStatusDesc + " em um aliado.";
+    }
+
+    return (healDesc + singleAllyHealsDesc + givesStatusDesc).TrimEnd();
+  }
+
   public static string GetPrintableNameById(int id) {
     if(id == -1) {
       return "";

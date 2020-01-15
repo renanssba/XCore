@@ -22,7 +22,7 @@ namespace Command {
 
       Inventory inventory = GlobalData.instance.CurrentBoy().inventory;
 
-      if (amount >= 0) {
+      if(amount >= 0) {
         inventory.AddItem(itemToAdd.id, amount);
       } else {
         inventory.ConsumeItem(itemToAdd.id, -amount);

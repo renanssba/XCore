@@ -225,7 +225,7 @@ MonoBehaviour:
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -292,22 +292,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e5d5028837cd042a0fb2bc37de68f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    id: 0
-    name: Item de Teste
-    description: Faz alguma coisa
-    attribute_bonus: 000000000000000000000000
-    type: 0
-    price: 100
-    sprite: {fileID: 0}
   nameText: {fileID: 114549311195548564}
   descriptionText: {fileID: 114001393922305664}
   typeImage: {fileID: 114287632711008098}
   costText: {fileID: 114960370710152290}
   quantityText: {fileID: 114372054413269134}
   button: {fileID: 114803444074459188}
+  itemListing:
+    id: 0
+    amount: 0
+    ownerId: -1
   interactionType: 0
-  amount: 0
 --- !u!114 &114050716484626480
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -74,7 +74,7 @@ goto depois_investigar
 
 waypoint ana_checar
 say "(Vou devagarzinho até a porta do quarto observar Ana na sala. Ela está assistindo tv.)"
-say "(Está passando um programa com humanos altos vestindo uniformes de duas cores diferentes e disputando uma bola.)"
+say "(Está passando um jogo de basquete muito disputado.)"
 say "(A garota está muito animada, torcendo para um dos times.)"
 goto depois_investigar
 
@@ -103,7 +103,7 @@ say "(Na galeria tem várias fotos do Ricardo. Na biblioteca, na sala de aula, e
 goto depois_investigar
 
 waypoint beatrice_roupas
-say "(Abrindo o guarda-roupas encontro alguns vestidos delicados.)"
+say "(Abrindo o guarda-roupas encontro alguns vestidos escuros e bem adornados.)"
 say "(Este tipo de roupas parece ser o tipo que uma garota romântica usaria.)"
 if #char[2]item_count[dark_dress] >= 1
   say_auto "(Eu deveria pegar um desses?)"

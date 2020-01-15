@@ -160,10 +160,13 @@ public class GlobalData : MonoBehaviour {
     people[3].inventory.AddItem("flower_dress", 2);
 
 
+    VsnSaveSystem.SetVariable("money", 500);
+
+
     /// DEBUG: TESTING SKILLS IN BATTLE
-    relationships[0].hearts = 1;
-    relationships[1].hearts = 1;
-    relationships[2].hearts = 1;
+    //relationships[0].hearts = 1;
+    //relationships[1].hearts = 1;
+    //relationships[2].hearts = 1;
   }
 
 

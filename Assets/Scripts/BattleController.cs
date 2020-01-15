@@ -264,6 +264,14 @@ public class BattleController : MonoBehaviour {
       case SkillEffect.giveStatusCondition:
         partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
         TheaterController.instance.GetActorByIdInParty(targetId).Shine();
+        StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[0]);
+        VsnArgument[] args = new VsnArgument[3];
+        args[0] = new VsnString("receive_status_condition");
+        args[1] = new VsnString(partyMembers[targetId].name);
+        args[2] = new VsnString(statusCondition.GetPrintableName());
+
+        StartCoroutine(WaitThenShowActionDescription(1f, args));
+        yield break;
         break;
       case SkillEffect.healStatusCondition:
         partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
@@ -289,20 +297,7 @@ public class BattleController : MonoBehaviour {
     ivt.ConsumeItem(usedItem.id, 1);
 
 
-    // heal HP and SP
-    if(usedItem.healHp > 0) {
-      HealPartyHp(usedItem.healHp);
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedItem.healHp);
-    }
-    if(usedItem.healSp > 0) {
-      partyMembers[targetId].HealSp(usedItem.healSp);
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedItem.healSp);
-    }
-
-    // give status condition
-    if(usedItem.GivesStatusCondition()) {
-      partyMembers[targetId].ReceiveStatusConditionByItem(usedItem);
-    }
+    TheaterController.instance.GetActorByIdInParty(targetId).Shine();
 
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
@@ -311,10 +306,36 @@ public class BattleController : MonoBehaviour {
       }
     }
 
-    TheaterController.instance.GetActorByIdInParty(targetId).Shine();
+    // heal HP and SP
+    if(usedItem.healHp > 0) {
+      HealPartyHp(usedItem.healHp);
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedItem.healHp);
+      yield return new WaitForSeconds(1f);
+    }
+    if(usedItem.healSp > 0) {
+      partyMembers[targetId].HealSp(usedItem.healSp);
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedItem.healSp);
+      yield return new WaitForSeconds(1f);
+    }
 
+    // give status condition
+    if(usedItem.GivesStatusCondition()) {
+      partyMembers[targetId].ReceiveStatusConditionByItem(usedItem);
+      bool receivedNewStatus = true;
 
-    yield return new WaitForSeconds(1.5f);
+      if(receivedNewStatus) {
+        StatusCondition statusCondition = GetStatusConditionByName(usedItem.givesConditionNames[0]);
+        VsnArgument[] args = new VsnArgument[3];
+        args[0] = new VsnString("receive_status_condition");
+        args[1] = new VsnString(partyMembers[targetId].name);
+        args[2] = new VsnString(statusCondition.GetPrintableName());
+
+        StartCoroutine(WaitThenShowActionDescription(1f, args));
+        yield break;
+      }
+    }
+
+    yield return new WaitForSeconds(0.5f);
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -402,19 +423,21 @@ public class BattleController : MonoBehaviour {
     if(Random.Range(0, 100) < effectiveStatusConditionChance) {
       foreach(string statusConditionName in currentEvent.givesConditionNames) {
         StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
-        partyMembers[targetId].ReceiveStatusCondition(statusCondition);
+        bool receivedNewStatus = partyMembers[targetId].ReceiveStatusCondition(statusCondition);
 
-        VsnArgument[] args = new VsnArgument[3];
-        args[0] = new VsnString("receive_status_condition");
-        args[1] = new VsnString(partyMembers[targetId].name);
-        args[2] = new VsnString(statusCondition.GetPrintableName());
+        if(receivedNewStatus) {
+          VsnArgument[] args = new VsnArgument[3];
+          args[0] = new VsnString("receive_status_condition");
+          args[1] = new VsnString(partyMembers[targetId].name);
+          args[2] = new VsnString(statusCondition.GetPrintableName());
 
-        StartCoroutine(WaitThenShowActionDescription(1f, args));
+          StartCoroutine(WaitThenShowActionDescription(1f, args));
+          yield break;
+        }
       }
-    } else {
-      yield return new WaitForSeconds(0.2f);
-      VsnController.instance.state = ExecutionState.PLAYING;
     }
+    yield return new WaitForSeconds(0.2f);
+    VsnController.instance.state = ExecutionState.PLAYING;
   }
 
   public void ShowChallengeResult(bool success) {
@@ -497,8 +520,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    //return 7;
-    //return 4;
+    return 7;
     return Random.Range(0, 10);
 
     int selectedEnemyId;

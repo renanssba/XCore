@@ -182,19 +182,23 @@ public class Person {
     }
   }
 
-  public void ReceiveStatusCondition(StatusCondition newCondition) {
+  public bool ReceiveStatusCondition(StatusCondition newCondition) {
     int i = FindStatusCondition(newCondition);
+    bool receivedNewStatus = false;
     if(i == -1 || statusConditions[i].stackable) {
       statusConditions.Add(newCondition);
       Actor2D actor = TheaterController.instance.GetActorByPerson(this);
       actor.ShowStatusConditionParticle(newCondition);
-    } else {
+      receivedNewStatus = true;
+    } else if(statusConditions[i].duration < newCondition.duration) {
       statusConditions[i].duration = Mathf.Max(statusConditions[i].duration,
                                                newCondition.duration);
       statusConditions[i].maxDurationShowable = Mathf.Max(statusConditions[i].maxDurationShowable,
                                                           newCondition.maxDurationShowable);
+      receivedNewStatus = true;
     }
     UIController.instance.UpdateDateUI();
+    return receivedNewStatus;
   }
 
 

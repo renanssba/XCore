@@ -249,6 +249,7 @@ public class UIController : MonoBehaviour {
   }
 
   public void ShowHelpMessagePanel(string helpMessage) {
+    Debug.LogWarning("Show Help Message Panel!");
     helpMessageText.text = helpMessage;
     helpMessagePanel.ShowPanel();
   }

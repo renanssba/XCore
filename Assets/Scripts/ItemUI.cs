@@ -44,7 +44,7 @@ public class ItemUI : MonoBehaviour {
     }
 
     nameText.text = item.GetPrintableName() + name_suffix;
-    descriptionText.text = item.GetPrintableDescription() + description_suffix;
+    descriptionText.text = item.GetPrintableDescription() +" "+ item.GetBattleDescription() + description_suffix;
     typeImage.sprite = item.sprite;
 
     if(interactionType == ItemInteractionType.store_buy) {
