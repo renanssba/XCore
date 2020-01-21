@@ -98,12 +98,6 @@ public class StatusCondition {
       default:
         desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/"+name);
         break;
-      //case StatusConditionEffect.damageMultiplier:
-      //  desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
-      //  break;
-      //case StatusConditionEffect.missAttacks:
-      //  desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/hunger");
-      //  break;
     }
     return desc;
   }

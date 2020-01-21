@@ -56,6 +56,14 @@ public class Actor2D : MonoBehaviour {
     transform.DOMoveX(-0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
+  public void UseItemAnimation(Actor2D destiny, Item item) {
+    ShowThrowItemAnimation(item.sprite, destiny);
+  }
+
+  //public void ReceiveItemAnimation(Item item) {
+
+  //}
+
   public void Shine() {
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
@@ -141,19 +149,26 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {
-    Vector3 v = BattleController.instance.damageParticlePrefab.transform.localPosition;
-    GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, BattleController.instance.transform);
+    Vector3 particlePrefabPos = BattleController.instance.damageParticlePrefab.transform.localPosition;
+    GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
     newParticle.GetComponent<TextMeshPro>().color = color;
     newParticle.GetComponent<TextMeshPro>().text = text;
     newParticle.GetComponentInChildren<SpriteRenderer>().sprite = particleSprite;
   }
 
   public void ShowParticleAnimation(string text, Color color) {
-    Vector3 v = BattleController.instance.damageParticlePrefab.transform.localPosition;
-    GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, BattleController.instance.transform);
+    Vector3 particlePrefabPos = BattleController.instance.damageParticlePrefab.transform.localPosition;
+    GameObject newParticle = Instantiate(BattleController.instance.damageParticlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
     newParticle.GetComponent<TextMeshPro>().color = color;
     newParticle.GetComponent<TextMeshPro>().text = text;
     newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
+  }
+
+  public void ShowThrowItemAnimation(Sprite itemSprite, Actor2D targetPerson) {
+    Vector3 particlePrefabPos = BattleController.instance.itemParticlePrefab.transform.localPosition;
+    GameObject newParticle = Instantiate(BattleController.instance.itemParticlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
+    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.transform.position.x, particlePrefabPos.y, particlePrefabPos.z);
+    newParticle.GetComponent<SpriteRenderer>().sprite = itemSprite;
   }
 
   public void ClickedTargetSelectButton() {

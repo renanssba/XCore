@@ -10,8 +10,13 @@ public class JumpingParticle : MonoBehaviour {
   public float duration;
   public float fadeDuration;
 
+  public Vector3 finalPosition;
+
 	public void Start() {
-    transform.DOJump(transform.position, jumpForce, 1, duration).OnComplete(()=> {
+    if(finalPosition == Vector3.zero) {
+      finalPosition = transform.position;
+    }
+    transform.DOJump(finalPosition, jumpForce, 1, duration).OnComplete(()=> {
       TextMeshPro[] texts = GetComponentsInChildren<TextMeshPro>();
       foreach(TextMeshPro t in texts) {
         t.DOFade(0f, fadeDuration);

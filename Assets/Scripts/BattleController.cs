@@ -33,6 +33,7 @@ public class BattleController : MonoBehaviour {
   public int currentDateId;
 
   public GameObject damageParticlePrefab;
+  public GameObject itemParticlePrefab;
   public TextMeshProUGUI difficultyText;
   public Slider enemyHpSlider;
   const float attackAnimationTime = 0.15f;
@@ -285,19 +286,23 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteUseItem(int partyMemberId, int targetId, Item usedItem) {
-    TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+    //TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+    Actor2D userActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("ui_success");
 
-    yield return new WaitForSeconds(attackAnimationTime);
+    userActor.UseItemAnimation(targetActor, usedItem);
+
+    yield return new WaitForSeconds(1.5f);
 
     // spend item
     Inventory ivt = GlobalData.instance.people[0].inventory;
     ivt.ConsumeItem(usedItem.id, 1);
 
 
-    TheaterController.instance.GetActorByIdInParty(targetId).Shine();
+    targetActor.Shine();
 
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
