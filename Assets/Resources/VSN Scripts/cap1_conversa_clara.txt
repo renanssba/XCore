@@ -22,9 +22,77 @@ if clara_heart >= 1
   
   
   waypoint conversation
+  if clara_heart == 1
+    say "" "Após estudarem um pouco, os dois começam a conversar."
+    say "Ricardo" "Desde aquele dia eu sempre te achei tão gentil, Clara. Agora que te conheci melhor, fico feliz que você seja como eu imaginava."
+    say "Clara" "Como assim? De que dia você tá falando?"
+    fade_music 0 1.5
+    wait 2
+    play_music "sad1_intro" "sad1_loop"
+    say "Ricardo" "Foi há muitos anos atrás, no quinto ano. Não sei se você se lembra, mas nós tivemos aulas extras, e dava pra escolher entre culinária e trabalhos manuais."
+    say "Clara" "Ah, eu lembro sim. Fiz as de culinária. Foram muito divertidas, não é? O que você cursou?"
+    say "Ricardo" "Eu fiz trabalhos manuais. Mas não era o que eu queria na época..."
+    say "Clara" "Não era? Por quê?"
+    say "Ricardo" "Eu... Eu sempre gostei de culinária. Minha mãe era uma grande cozinheira, e desde pequenininho eu sempre amei a comida dela."
+    say "Sempre que eu ficava triste, ela cozinhava pra mim cookies de chocolate e isso sempre levantava meu astral."
+    say "Clara" "Que legal! E ela te ensinou a receita?"
+    say "Ricardo" "Eu... aprendi sozinho. Lembro que a primera aula de culinária tinha \qtemática livre\q e eu tentei reproduzir os cookies que ela fazia pra mim."
+    say "Clara" "Entendi. E eles ficaram bons?"
+    say "Ricardo" "Eu não sei. Eu tentei copiar os passos e ingredientes o melhor que pude. No final eles ficaram com uma aparência e um cheiro muito bons, mas eu nunca consegui provar."
+    say "Clara" "Ué, por quê?"
+    wait 1
+    say "!!!!"
+    say "Não me diga que... "
+    say "Ricardo" "A professora veio avaliar os pratos de todos e elogiou muito o cheiro dos meus cookies."
+    say "Mas uns garotos de outra turma ficaram com inveja e derrubaram o prato no chão enquanto eles ainda esfriavam."
+    say "Clara" "Você... Você era aquele garoto..."
+    say "Ricardo" "...Eles ainda ficaram me zoando, e dizendo que \qfazer biscoitinho\q era coisa de \qmariquinha\q, que eu não era homem por me importar com aquilo."
+    say "A minha amiga Ana ficou furiosa e saiu correndo atrás dos garotos pra bater neles."
+    say "Clara" "Eu sinto muito..."
+    say "Ricardo" "Eu fiquei muito triste e comecei a chorar. Eu me senti tão bobo naquela hora por me dedicar a isso."
+    say "..."
+    say "Eu me senti tão sozinho e estúpido."
+    say "Só uma pessoa me consolou."
+    say "" "*Uma lágrima começa a escorrer pelo rosto da garota.*"
+    say "Clara" "Eu... Eu sinto muito... Pelos seus cookies..."
+    say "Quando eu pude perceber, já estava pegando o que restou deles do chão e devolvendo ao pratinho..."
+    say "E, eu queria te devolver..."
+    say "Ricardo" "Isso foi muito gentil de sua parte. E você nem me conhecia..."
+    say "Clara" "Eu vi o quanto você se dedicou ao fazê-los. Parecia estar colocando... tanto carinho naquela receita..."
+    say "Eu não queria que aqueles meninos desprezassem isso dessa forma."
+    say "Eu sinto muito pelo que eles fizeram..."
+    say "Ricardo" "Tá tudo bem. Você me apoiou naquela hora. Fez eu me sentir menos estúpido por um momento."
+    say "Mas depois daquele incidente eu saí da aula de culinária, e me mudei pra trabalhos manuais."
+    say "Eu não aguentaria sofrer a mesma tristeza toda aula. Mesmo assim o bullying continuou."
+    say "Clara" "Deve ser por isso que eu nunca mais te vi por lá."
+    say "Ricardo" "Eu também nunca mais tive coragem de fazer a receita da mamãe. Nunca saberei se ela era tão boa mesmo quanto eu me lembrava."
+    say "" "*Ricardo abaixa o rosto, visivelmente triste*"
+    say "" "*Lágrimas começam a escorrer no rosto de Clara, mas ela continua sorrindo*"
+    say "Clara" "Eles... Estavam ótimos..."
+    say "Ricardo" "O quê? Do que você tá falando?"
+    say "Clara" "Depois que você saiu... Eu não quis desperdiçar algo feito com tanto afinco e que era especial pra você."
+    say "Ricardo" "Você... Você comeu os cookies que caíram no chão?"
+    say "Clara" "Sim, eu comi. A culinária é realmente uma arte. A maciez, o sabor, tudo... *snif* Mesmo amassados, eles tavam incríveis. Eu pude sentir o quanto de... *snif* amor você pôs naqueles cookies."
+    say "Ricardo" "S-sério?"
+    say "Clara" "Sim... Eu quis te dizer no dia seguinte... o quanto eu gostei deles. Mas você não apareceu mais nas aulas."
+    say "Ricardo" "..."
+    say "Obrigado, isso significa muito pra mim."
+    say "Clara" "Eu vi o quanto você gosta de cozinhar. Por favor, não desista. Você deveria fazer essa receita mais vezes."
+    say "Ricardo" "Não tenho certeza se eu lembro a receita depois de todos esses anos, mas..."
+    say "Eu vou fazer mais uma vez pra você! E vou me certificar que eles não caiam no chão dessa vez."
+    say "Clara" "Hahaha, obrigada!"
+    
+    add_heart 3
+    
+    say "Ricardo" "(Onde quer que ela esteja agora, eu tenho certeza que a minha mãe ficará orgulhosa.)"
+  else
+    say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
+    say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+  endif
   
-  say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
-  say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+  add_var clara_heart 1
+  goto end
+
 endif
 
 
@@ -81,7 +149,7 @@ endif
 
 
 waypoint end
-say "Eles marcam de continuar o trabalho no dia seguinte."
+say "" "Eles marcam de continuar o trabalho no dia seguinte."
 goto_script "pass_time"
 end_script
 

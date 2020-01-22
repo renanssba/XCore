@@ -98,7 +98,7 @@ public class PartialLoopPlayer : MonoBehaviour {
       return playedTime; 
     } 
     return 0; 
-  } 
+  }
 
   public void FadeMusic(float fadeValue, float fadeTime){
     Debug.LogWarning("Fading music volume to " + fadeValue + " in " + fadeTime + " seconds.");
