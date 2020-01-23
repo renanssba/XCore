@@ -54,11 +54,11 @@ public class ActionButton : MonoBehaviour {
   }
 
   public void UpdateUIAsSkill() {
-    string sexModifier = (person.isMale ? "_boy" : "_girl");
     nameText.text = skill.GetPrintableName();
     if(skill.type == SkillType.attack) {
       if(skill.id != 9) {
-        nameText.text = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action" +sexModifier+ "_name]");
+        ActionSkin actionSkin = GetActionSkin();
+        nameText.text = actionSkin.buttonName;
       }
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];
@@ -75,6 +75,12 @@ public class ActionButton : MonoBehaviour {
       spCostText.gameObject.SetActive(false);
       shade.gameObject.SetActive(false);
     }
+  }
+
+  public ActionSkin GetActionSkin() {
+    string sexModifier = (person.isMale ? "_boy" : "_girl");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action" + sexModifier + "_name]");
+    return BattleController.instance.GetActionSkinByName(actionSkinName);
   }
 
   public void UpdateUIAsItem() {

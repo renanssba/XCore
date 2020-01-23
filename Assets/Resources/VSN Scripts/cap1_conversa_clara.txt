@@ -23,16 +23,18 @@ if clara_heart >= 1
   
   waypoint conversation
   if clara_heart == 1
-    say "" "Após estudarem um pouco, os dois começam a conversar."
-    say "Ricardo" "Desde aquele dia eu sempre te achei tão gentil, Clara. Agora que te conheci melhor, fico feliz que você seja como eu imaginava."
-    say "Clara" "Como assim? De que dia você tá falando?"
+    say "" "Após estudarem um pouco, Ricardo faz uma omelete para Clara."
+    say "Clara" "Huuum!! Você cozinha muito bem, Ricardo!"
+    say "Eu tentei aprender a cozinhar uma vez, mas eu sou desastrada demais pra isso. Lembra que a gente teve aula de culinária no colégio?"
+    say "Ricardo" "Ah, mas isso foi muito tempo atrás. No quinto ano, eu acho?"
+    say "Clara" "Sim, sim. Foi nessas aulas que você você aprendeu a cozinhar?"
+    say "Ricardo" "Não, eu nem cursei. Na época eu acabei fazendo \qtrabalhos manuais\q como matéria extra-curricular... Mesmo tendo me inscrito nas aulas de culinária."
+    say "Clara" "Ué, você não gostou da aula? O que aconteceu?"
+    
     fade_music 0 1.5
     wait 2
     play_music "sad1_intro" "sad1_loop"
-    say "Ricardo" "Foi há muitos anos atrás, no quinto ano. Não sei se você se lembra, mas nós tivemos aulas extras, e dava pra escolher entre culinária e trabalhos manuais."
-    say "Clara" "Ah, eu lembro sim. Fiz as de culinária. Foram muito divertidas, não é? O que você cursou?"
-    say "Ricardo" "Eu fiz trabalhos manuais. Mas não era o que eu queria na época..."
-    say "Clara" "Não era? Por quê?"
+    
     say "Ricardo" "Eu... Eu sempre gostei de culinária. Minha mãe era uma grande cozinheira, e desde pequenininho eu sempre amei a comida dela."
     say "Sempre que eu ficava triste, ela cozinhava pra mim cookies de chocolate e isso sempre levantava meu astral."
     say "Clara" "Que legal! E ela te ensinou a receita?"
@@ -74,7 +76,7 @@ if clara_heart >= 1
     say "Ricardo" "Você... Você comeu os cookies que caíram no chão?"
     say "Clara" "Sim, eu comi. A culinária é realmente uma arte. A maciez, o sabor, tudo... *snif* Mesmo amassados, eles tavam incríveis. Eu pude sentir o quanto de... *snif* amor você pôs naqueles cookies."
     say "Ricardo" "S-sério?"
-    say "Clara" "Sim... Eu quis te dizer no dia seguinte... o quanto eu gostei deles. Mas você não apareceu mais nas aulas."
+    say "Clara" "Sim... Eu quis muito te dizer no dia seguinte... o quanto eu gostei deles. Mas você nunca mais apareceu nas aulas."
     say "Ricardo" "..."
     say "Obrigado, isso significa muito pra mim."
     say "Clara" "Eu vi o quanto você gosta de cozinhar. Por favor, não desista. Você deveria fazer essa receita mais vezes."

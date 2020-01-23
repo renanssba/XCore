@@ -35,6 +35,7 @@ public class DateEvent {
   public int stage;
   public string location;
   public string spriteName;
+  public string appearSfxName;
   //public DateEventInteractionType interactionType;
 
   public int maxHp;
@@ -43,6 +44,7 @@ public class DateEvent {
   public int[] attributes;
   public Attributes attackAttribute;
   public int attackPower;
+  public string attackSfxName;
   public string[] givesConditionNames;
   public int giveStatusConditionChance;
 

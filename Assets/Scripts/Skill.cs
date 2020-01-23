@@ -27,6 +27,17 @@ public enum SkillType {
   passive
 }
 
+
+[System.Serializable]
+public class ActionSkin{
+  public string name;
+  public string id;
+  public string buttonName;
+  public string sfxName;
+}
+
+
+
 [System.Serializable]
 public class Skill {
   public string name;

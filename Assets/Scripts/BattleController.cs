@@ -14,6 +14,8 @@ public class BattleController : MonoBehaviour {
 
   public List<Skill> allSkills;
   public TextAsset skillsFile;
+  public List<ActionSkin> allActionSkins;
+  public TextAsset actionSkinsFile;
 
   public List<StatusCondition> allStatusConditions;
   public TextAsset statusConditionsFile;
@@ -48,6 +50,7 @@ public class BattleController : MonoBehaviour {
     selectedTargetPartyId = new int[0];
     LoadAllEnemies();
     LoadAllSkills();
+    LoadAllActionSkins();
     LoadAllStatusConditions();
     dateLength = 3;
   }
@@ -233,7 +236,13 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
     DateEvent currentEvent = GetCurrentDateEvent();
-    VsnAudioManager.instance.PlaySfx("hit_default");
+
+    if(usedSkill.id != 9) {
+      ActionSkin skin = GetActionSkin(partyMembers[partyMemberId], usedSkill);
+      VsnAudioManager.instance.PlaySfx(skin.sfxName);
+    } else {
+      VsnAudioManager.instance.PlaySfx("action_flatter");
+    }
 
     yield return new WaitForSeconds(attackAnimationTime);
 
@@ -246,6 +255,12 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(1.2f);
     VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+  public ActionSkin GetActionSkin(Person user, Skill usedSkill) {
+    string sexModifier = (user.isMale ? "_boy" : "_girl");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn[" + usedSkill.attribute.ToString() + "_action" + sexModifier + "_name]");
+    return GetActionSkinByName(actionSkinName);
   }
 
 
@@ -402,7 +417,7 @@ public class BattleController : MonoBehaviour {
 
     TheaterController.instance.EnemyAttackAnimation();
 
-    VsnAudioManager.instance.PlaySfx("hit_default");
+    VsnAudioManager.instance.PlaySfx(currentEvent.attackSfxName);
 
     yield return new WaitForSeconds(time);
 
@@ -624,6 +639,8 @@ public class BattleController : MonoBehaviour {
         maxHp = int.Parse(dic["max hp"]),
         attributeEffectivity = new float[] { guts, intelligence, charisma, magic },
         spriteName = dic["sprite name"],
+        attackSfxName = dic["attack sfx"],
+        appearSfxName = dic["appear sfx"],
         stage = int.Parse(dic["stage"]),
         location = dic["location"],
         attackAttribute = Utils.GetAttributeByString(dic["attack attribute"]),
@@ -746,6 +763,32 @@ public class BattleController : MonoBehaviour {
       if(skill.name == name) {
         return skill;
       }
+    }
+    return null;
+  }
+
+
+  public void LoadAllActionSkins() {
+    SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(actionSkinsFile, 1);
+
+    allActionSkins = new List<ActionSkin>();
+    foreach(Dictionary<string, string> entry in data.data) {
+      ActionSkin newSkin = new ActionSkin() {
+        id = entry["id"],
+        name = entry["name"],
+        buttonName = entry["button name"],
+        sfxName = entry["sfx"]
+      };
+
+      allActionSkins.Add(newSkin);
+    }
+  }
+
+  public ActionSkin GetActionSkinByName(string name) {
+    foreach(ActionSkin currentActionSkin in allActionSkins) {
+      if(currentActionSkin.name == name) {
+        return currentActionSkin;
+      }      
     }
     return null;
   }

@@ -164,7 +164,7 @@ public class TheaterController : MonoBehaviour {
 
     currentChallenge.hp = currentChallenge.maxHp;
 
-    VsnAudioManager.instance.PlaySfx("challenge_default");
+    VsnAudioManager.instance.PlaySfx(currentChallenge.appearSfxName);
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
