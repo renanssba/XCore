@@ -37,6 +37,7 @@ public class Person {
   public string mostHatedMatter;
 
   public Inventory inventory;
+  public Inventory giftsReceived;
 
   public List<StatusCondition> statusConditions;
 
@@ -46,8 +47,10 @@ public class Person {
 
   public Person() {
     inventory = new Inventory();
+    giftsReceived = new Inventory();
     statusConditions = new List<StatusCondition>();
     inventory.owner = this;
+    giftsReceived.owner = this;
     maxSp = 3;
     sp = 3;
   }

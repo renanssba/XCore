@@ -248,10 +248,13 @@ public class UIController : MonoBehaviour {
     turnIndicators[currentPartyMember].SetActive(true);
   }
 
-  public void ShowHelpMessagePanel(string helpMessage) {
+  public void ShowHelpMessagePanel() {
     Debug.LogWarning("Show Help Message Panel!");
-    helpMessageText.text = helpMessage;
     helpMessagePanel.ShowPanel();
+  }
+
+  public void SetHelpMessageText(string helpMessage) {
+    helpMessageText.text = helpMessage;
   }
 
   public void HideHelpMessagePanel() {

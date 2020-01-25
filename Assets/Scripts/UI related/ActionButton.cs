@@ -100,6 +100,10 @@ public class ActionButton : MonoBehaviour {
 
 
   public void SetHelpText() {
+    if(transform.parent.GetComponent<CanvasGroup>().interactable == false) {
+      return;
+    }
+
     string s = "";
     switch(actionType) {
       case TurnActionType.useSkill:
@@ -110,12 +114,16 @@ public class ActionButton : MonoBehaviour {
         s = it.GetBattleDescription(true);
         break;
     }
-    UIController.instance.ShowHelpMessagePanel(s);
+    UIController.instance.SetHelpMessageText(s);
   }
 
   public void SetBackHelpText() {
+    if(transform.parent.GetComponent<CanvasGroup>().interactable == false) {
+      return;
+    }
+
     string s = Lean.Localization.LeanLocalization.GetTranslationText("choices/cancel");
-    UIController.instance.ShowHelpMessagePanel(s);
+    UIController.instance.SetHelpMessageText(s);
   }
 
 

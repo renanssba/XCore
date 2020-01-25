@@ -34,7 +34,7 @@ for currentDateEvent #dateLength
   // endif
 
 
-  waypoint start_new_turn  
+  waypoint start_new_turn
   
   // receive effects from conditions (like take poison damage)
   for currentPlayerTurn #partyLength
@@ -61,6 +61,7 @@ for currentDateEvent #dateLength
 
   // execute player actions
   for currentPlayerTurn #partyLength
+    check_action_skip currentPlayerTurn
     character_action_description currentPlayerTurn
     character_action currentPlayerTurn
     wait 0.5

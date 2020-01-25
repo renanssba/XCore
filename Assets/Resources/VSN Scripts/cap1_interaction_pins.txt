@@ -28,7 +28,7 @@ goto end
 
 waypoint tarde
 reset_pins_board "city map"
-if lanchou_com_ana_hoje == 0
+if passou_tempo_com_ana_hoje == 0
   set_interaction_pin 0 true "cap1_conversa_ana" "Clube Esportivo"
 endif
 

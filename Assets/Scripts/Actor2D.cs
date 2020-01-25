@@ -116,7 +116,7 @@ public class Actor2D : MonoBehaviour {
 
   public void ShowDamageParticle(int attribute, int damage, float effectivity) {
     string particleString = damage.ToString();
-    Color particleColor = ResourcesManager.instance.attributeColor[attribute];
+    Color particleColor = ResourcesManager.instance.attributeColor[0];
 
     if(effectivity > 1f) {
       particleString += "\n<size=12>SUPER!</size>";
@@ -136,12 +136,12 @@ public class Actor2D : MonoBehaviour {
 
   public void ShowHealHpParticle(int value) {
     string particleString = "+" + value + " HP";
-    ShowParticleAnimation(particleString, Color.green);
+    ShowParticleAnimation(particleString, ResourcesManager.instance.attributeColor[3]);
   }
 
   public void ShowHealSpParticle(int value) {
     string particleString = "+" + value + " SP";
-    ShowParticleAnimation(particleString, Color.green);
+    ShowParticleAnimation(particleString, ResourcesManager.instance.attributeColor[3]);
   }
 
   public void ShowStatusConditionParticle(StatusCondition statusCondition) {

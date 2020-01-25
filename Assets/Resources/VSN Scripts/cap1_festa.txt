@@ -12,10 +12,9 @@ say "Ricardo" "(Uau. Quanta... gente que eu não conheço.)"
 say "" "Ele passeia por alguns cômodos e corredores da casa, sentindo-se deslocado, e não encontra ninguém conhecido."
 say "Ricardo" "(Hum, onde será que tá a Clara?)"
 say "" "Ele chega na sala. É um salão grande e barulhento: tem música tocando, muitas pessoas conversando e algumas dando uns amassos pelos cantos."
-say "" "Ricardo avista Clara. Ela está falando animadamente com dois caras populares do colégio e rindo bastante."
-say "Ana está do outro lado da sala, conversando com outro rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
+say "" "Ricardo avista Clara. Ela está cercada por um grande grupo de pessoas, conversando animadamente."
+say "Ana está do outro lado da sala, conversando com um rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
 
-// if cajskajdhakf == 0 /// DEBUG
 if conhece_beatrice == 1
   say "Ele percebe que Beatrice também está na sala, sozinha e cabisbaixa num canto, quase como se estivesse se escondendo."
   say_auto "Ricardo" "(O que eu deveria fazer?)"
@@ -102,7 +101,7 @@ say "" "Ele percebe que ela está respirando com dificuldade e com uma mão fech
 say "Ricardo" "Beatrice, tá tudo bem com você?"
 say "" "A garota parece estar passando mal. Ela se encosta na parede e escorrega até o chão, caindo sentada."
 say "Beatrice" "Não estou conseguindo... respirar..."
-say "" "Ricardo segura a mão da garota e a ajuda sair da sala lotada e barulhenta."
+say "" "Ricardo segura a mão da garota e a ajuda a sair da sala lotada e barulhenta."
 say "Ricardo" "Por favor, abram espaço!"
 say "" "Os dois se sentam na escadinha que dá acesso à casa e Ricardo tenta acalmar Beatrice."
 say "Ricardo" "Calma, eu tô aqui com você. Respira..."
@@ -130,7 +129,36 @@ goto end
 
 
 waypoint ir_clara
-say "" "Esta cena da festa (com a Clara) ainda não está implementada... Por favor teste as cenas com as demais garotas."
+say "" "Ricardo tira um pequeno embrulho do bolso e vai em direção ao grupo de Clara."
+say "A garota está com a atenção focada nas outras pessoas e não percebe sua aproximação."
+say "Ele tenta se colocar dentro do círculo de pessoas discretamente, mas ninguém percebe sua presença lá."
+say "Ricardo" "(Droga...)"
+say "" "Ele tenta acenar para a garota por cima do grupo e fala seu nome baixinho."
+say "Ricardo" "Cla-Clara..."
+say "" "...Mesmo assim ela não percebe a presença dele. Um dos garotos do lado dela, no entanto, percebe."
+say "Rapaz" "Ei Clara, parece que o Biscoitinho aqui quer falar com você."
+say "" "Clara se vira para Ricardo. Um outro rapaz continua:"
+say "Rapaz 2" "E por quê ele veio? Por acaso alguém convidou ele pra festa?"
+say "" "Ricardo abaixo o rosto."
+say "Clara" "Eu convidei! Oi Ricardo, vem cá."
+say "Rapaz" "Você tá andando com esse otário agora, Clarinha?"
+say "Clara" "A gente tá fazendo o trabalho de história juntos."
+say "" "Ricardo fala baixinho, cabisbaixo."
+say "Ricardo" "Desculpa, eu só vim... te desejar um feliz aniversário."
+say "" "Após ouvir algumas risadas baixinhas, o garoto se vira para longe do grupo."
+say "Clara" "Espera, Ricardo!"
+say "" "Ricardo cobre o rosto e sai andando apressado para longe no meio da multidão de pessoas."
+say "Desnorteado, ele acaba se perdendo pelos corredores da grande casa."
+say "Ele entra em um dos banheiros que encontra pelo caminho e começa a chorar segurando o embrulho."
+say "Ricardo" "Estúpido! Estúpido! Estúpido! A Clara nunca vai notar que eu existo."
+say ""
+say ""
+
+
+
+/// TODO: FINISH SCENE
+
+
 
 add_heart 2
 goto end

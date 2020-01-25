@@ -3,6 +3,11 @@ say "" "Ricardo vai para casa e espera a chegada de Clara para estudarem."
 fade_in 1
 
 
+if daytime != 2
+  set_var passou_tempo_com_clara_hoje 1
+endif
+
+
 if #day == 3
   say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
@@ -151,7 +156,7 @@ endif
 
 
 waypoint end
-say "" "Eles marcam de continuar o trabalho no dia seguinte."
+say "" "Clara diz que chegou seu horário de ir embora e eles marcam de continuar o trabalho no dia seguinte."
 goto_script "pass_time"
 end_script
 

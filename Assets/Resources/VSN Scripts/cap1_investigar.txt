@@ -16,6 +16,7 @@ say "(Vou aproveitar enquanto ela não volta para dar uma investigada em suas co
 
 
 waypoint escolher_garota_investigar
+say_auto "Fertiliel" "(O que eu deveria investigar?)"
 if #currentGirlId == 1
   goto investigar_ana
 endif
@@ -28,7 +29,6 @@ endif
 
 
 waypoint investigar_ana
-say_auto "Fertiliel" "(O que eu deveria investigar?)"
 choices "Mesa" ana_mesa "Cama" ana_cama "Guarda-roupas" ana_roupas "Armário" ana_armario "Checar Ana" ana_checar "Ir Embora" exit
 
 waypoint ana_armario
@@ -82,7 +82,6 @@ goto depois_investigar
 
 
 waypoint investigar_beatrice
-say_auto "Fertiliel" "(O que eu deveria investigar?)"
 choices "Mesa" beatrice_mesa "Cama" beatrice_cama "Guarda-roupas" beatrice_roupas "Armário" beatrice_armario "Checar Beatrice" beatrice_checar "Ir Embora" exit
 
 waypoint beatrice_mesa
@@ -147,8 +146,62 @@ goto depois_investigar
 
 
 waypoint investigar_clara
+choices "Mesa" clara_mesa "Cama" clara_cama "Guarda-roupas" clara_roupas "Armário" clara_armario "Checar Clara" clara_checar "Ir Embora" exit
 
-say "" "Esta cena de investigação (investigando a Clara) ainda não está implementada... Por favor teste investigar as outras garotas."
+waypoint clara_armario
+say "(Dentro do armário há um antigo par de sapatilhas de balé e alguns materiais do colégio.)"
+say "(Uma das gavetas possui uma fechadura delicada. Devo tentar abrí-la?)"
+choices "Sim" null "Não" depois_investigar
+if #char[0]item_count[delicate_key]from[3] >= 1
+  say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
+  say "(Dentro da gaveta há alguns doces e balas variados.)"
+  if #char[3]item_count[chocolate_cake] >= 1
+    say "(Também há um bolo de chocolate que parece bem gostoso. Eu deveria pegá-lo?)"
+    choices "Sim" null "Não" depois_investigar
+    take_item 3 "chocolate_cake" 1
+  endif
+else
+  say "(Ela está trancada. Onde será que está a chave?)"
+endif
+goto depois_investigar
+
+waypoint clara_mesa
+say "(Em cima da mesa eu encontro um pequeno livro escrito\qAgenda\q. Devo abrí-lo para ler?)"
+choices "Sim" null "Não" depois_investigar
+say "(Na agenda está a programação semanal para atividades da Clara. Há várias atividades fora o colégio, como aulas de piano, inglês, até de etiqueta.)"
+say "(Os dias estão totalmente preenchidos, desde a hora de acordar até a de dormir.)"
+goto depois_investigar
+
+waypoint clara_roupas
+say "(Abrindo o guarda-roupas encontro muitas roupas delicadas e bonitas.)"
+say "(Em particular há muitos vestidos floridos.)"
+if #char[3]item_count[flower_dress] >= 1
+  say_auto "(Eu deveria pegar um desses?)"
+  choices "Sim" null "Não" depois_investigar
+  take_item 3 "flower_dress" 1
+endif
+goto depois_investigar
+
+waypoint clara_cama
+say "(A cama está muito bem arrumada, com uma bonita colcha de cama e lençóis bem dobrados.)"
+if #char[3]item_count[delicate_key] >= 1
+  say "(Eu encontro uma chave debaixo de um dos travesseiros. Eu deveria pegá-la?)"
+  choices "Sim" null "Não" depois_investigar
+  take_item 3 "delicate_key" 1
+endif
+goto depois_investigar
+
+waypoint clara_checar
+say "(Vou devagarzinho até a porta do quarto observar Clara na sala. Ela está conversando com uma mulher mais velha, que deve ser sua mãe.)"
+if passou_tempo_com_clara_hoje == 1
+  say "(A mulher está reclamando sobre como a Clara demorou para voltar da casa de Ricardo hoje.)"
+else
+  say "(A mulher está reclamando sobre como a Clara se atrasou para uma das atividades da agenda de hoje.)"  
+endif
+say "(A garota está cabisbaixa, concordando silenciosamente com o sermão da mãe.)"
+goto depois_investigar
+
+
 
 
 

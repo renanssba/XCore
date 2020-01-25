@@ -12,16 +12,16 @@ if daytime == 1
 endif
 
 
+if daytime == 0
+  set_var passou_tempo_com_ana_hoje 1
+endif
+
 
 waypoint action_choice
 girl_interaction
 
 
 waypoint conversation
-
-if daytime == 0
-  set_var lanchou_com_ana_hoje 1
-endif
 
 if ana_heart == 0
   say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."

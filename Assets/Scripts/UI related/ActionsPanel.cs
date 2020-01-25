@@ -79,7 +79,7 @@ public class ActionsPanel : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.HidePanel();
     skillsPanel.ShowPanel();
-    UIController.instance.ShowHelpMessagePanel("");
+    UIController.instance.ShowHelpMessagePanel();
   }
 
   public void ClickItemsPanel() {
@@ -91,7 +91,7 @@ public class ActionsPanel : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.HidePanel();
     itemsPanel.ShowPanel();
-    UIController.instance.ShowHelpMessagePanel("");
+    UIController.instance.ShowHelpMessagePanel();
   }
 
   //public void ClickDefendButton() {

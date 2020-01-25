@@ -149,7 +149,7 @@ public class GlobalData : MonoBehaviour {
     people[1].inventory.AddItemWithOwnership("old_teddy_bear", 1, 1);
     people[1].inventory.AddItemWithOwnership("delicate_key", 1, 1);
     people[1].inventory.AddItem("sports_clothes", 1);
-    //people[1].inventory.AddItemWithOwnership("sports_clothes", 2, 1);
+    //people[1].inventory.AddItemWithOwnership("sports_clothes", 1, 1);
 
     /// BEATRICE
     people[2].inventory.AddItemWithOwnership("delicate_key", 1, 2);
@@ -158,8 +158,9 @@ public class GlobalData : MonoBehaviour {
     people[2].inventory.AddItem("dark_dress", 1);
 
     /// CLARA
-    //people[3].inventory.AddItemWithOwnership("delicate_key", 1, 1);
-    people[3].inventory.AddItem("flower_dress", 2);
+    people[3].inventory.AddItemWithOwnership("flower_dress", 2, 3);
+    people[3].inventory.AddItemWithOwnership("delicate_key", 1, 3);
+    people[3].inventory.AddItemWithOwnership("chocolate_cake", 1, 3);
 
 
     VsnSaveSystem.SetVariable("money", 500);

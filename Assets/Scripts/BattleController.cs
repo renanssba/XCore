@@ -152,9 +152,11 @@ public class BattleController : MonoBehaviour {
   public void WaitToSelectAllyTarget(TurnActionType actionType) {
     UIController.instance.actionsPanel.EndActionSelect();
     if(actionType == TurnActionType.useItem) {
-      UIController.instance.ShowHelpMessagePanel("Escolha um aliado para usar o item:");
+      UIController.instance.SetHelpMessageText("Escolha um aliado para usar o item:");
+      UIController.instance.ShowHelpMessagePanel();
     } else if(actionType == TurnActionType.useSkill) {
-      UIController.instance.ShowHelpMessagePanel("Escolha um aliado para usar a habilidade:");
+      UIController.instance.SetHelpMessageText("Escolha um aliado para usar a habilidade:");
+      UIController.instance.ShowHelpMessagePanel();
     }    
     UIController.instance.selectTargetPanel.SetActive(true);
   }
@@ -541,7 +543,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    return 5;
+    //return 5;
     return Random.Range(0, 10);
 
     int selectedEnemyId;
