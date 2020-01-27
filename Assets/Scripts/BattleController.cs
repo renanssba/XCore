@@ -243,7 +243,7 @@ public class BattleController : MonoBehaviour {
       ActionSkin skin = GetActionSkin(partyMembers[partyMemberId], usedSkill);
       VsnAudioManager.instance.PlaySfx(skin.sfxName);
     } else {
-      VsnAudioManager.instance.PlaySfx("action_flatter");
+      VsnAudioManager.instance.PlaySfx("action_magic_arrow");
     }
 
     yield return new WaitForSeconds(attackAnimationTime);
@@ -270,7 +270,7 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
 
     DateEvent currentEvent = GetCurrentDateEvent();
-    VsnAudioManager.instance.PlaySfx("ui_success");
+    VsnAudioManager.instance.PlaySfx("heal_default");
 
     yield return new WaitForSeconds(attackAnimationTime);
 
@@ -308,7 +308,7 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
     DateEvent currentEvent = GetCurrentDateEvent();
-    VsnAudioManager.instance.PlaySfx("ui_success");
+    VsnAudioManager.instance.PlaySfx("item_use");
 
     userActor.UseItemAnimation(targetActor, usedItem);
 

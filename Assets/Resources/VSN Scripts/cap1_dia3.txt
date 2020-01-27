@@ -4,17 +4,17 @@ goto_script "enter_observation" "school morning"
 say "" "No dia seguinte, Ricardo vai para o colégio."
 fade_in 1
 
-say "Ana" "Ei Ricardo! Você ficou sabendo da festa na casa da Clara que vai ter hoje de noite?"
+say "Ana" "Ei Ricardo! Você ficou sabendo do aniversário da Clara na casa dela? Vai ser hoje à noite."
 if clara_convidou_festa == 1
   say "Ricardo" "Fiquei sim, ela me convidou ontem depois do estudo."
   say "Ana" "Ah.. Ela convidou, foi?"
-  say "Ricardo" "Foi, eu tô tão feliz! E parece que vai ser bem legal, ela contratou banda e vai ter sorvete liberado!"
+  say "Ricardo" "Foi, eu tô tão feliz! E parece que vai ser bem legal, os pais dela contrataram banda e vai ter sorvete liberado!"
   say "Ana" "É, vai sim."
   say "Ricardo" "Você vem também, não é?"
   say "Ana" "Claro."
 else
   say "Ricardo" "Não, não fui convidado."
-  say "Ana" "Vai ser muito legal! Ela contratou banda e vai ter sorvete liberado, além de uma porrada de comida também! Vamos?"
+  say "Ana" "Vai ser muito legal! Os pais dela contrataram banda e vai ter sorvete liberado, além de uma porrada de comida também! Vamos?"
   say "Ricardo" "Não sei... Eu não acho uma boa ir sem ter sido convidado..."
   say "Ana" "Eu também não, mas vamo! Comida de graça!"
   wait 1

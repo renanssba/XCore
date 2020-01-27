@@ -129,38 +129,87 @@ goto end
 
 
 waypoint ir_clara
-say "" "Ricardo tira um pequeno embrulho do bolso e vai em direção ao grupo de Clara."
+say "" "Ricardo tira um pequeno presente do bolso e vai em direção ao grupo de Clara."
 say "A garota está com a atenção focada nas outras pessoas e não percebe sua aproximação."
 say "Ele tenta se colocar dentro do círculo de pessoas discretamente, mas ninguém percebe sua presença lá."
 say "Ricardo" "(Droga...)"
-say "" "Ele tenta acenar para a garota por cima do grupo e fala seu nome baixinho."
+say "" "Ele tenta acenar para a garota por cima do grupo e chamar seu nome baixinho."
 say "Ricardo" "Cla-Clara..."
 say "" "...Mesmo assim ela não percebe a presença dele. Um dos garotos do lado dela, no entanto, percebe."
 say "Rapaz" "Ei Clara, parece que o Biscoitinho aqui quer falar com você."
 say "" "Clara se vira para Ricardo. Um outro rapaz continua:"
-say "Rapaz 2" "E por quê ele veio? Por acaso alguém convidou ele pra festa?"
-say "" "Ricardo abaixo o rosto."
+say "Rapaz 2" "E por que ele veio? Por acaso alguém convidou ele pra festa?"
+say "" "Ricardo abaixa o rosto."
 say "Clara" "Eu convidei! Oi Ricardo, vem cá."
+say "" "Um rapaz põe a mão no ombro dela e fala:"
 say "Rapaz" "Você tá andando com esse otário agora, Clarinha?"
-say "Clara" "A gente tá fazendo o trabalho de história juntos."
+say "Clara" "Para, não fala dele assim! Ele é legal!"
 say "" "Ricardo fala baixinho, cabisbaixo."
 say "Ricardo" "Desculpa, eu só vim... te desejar um feliz aniversário."
-say "" "Após ouvir algumas risadas baixinhas, o garoto se vira para longe do grupo."
+say "Rapaz" "Volta pra cozinha, cara! Vai brincar de fazer bolinho."
+say "" "Após ouvir algumas risadas vindas do grupo, o garoto se vira para longe."
 say "Clara" "Espera, Ricardo!"
 say "" "Ricardo cobre o rosto e sai andando apressado para longe no meio da multidão de pessoas."
 say "Desnorteado, ele acaba se perdendo pelos corredores da grande casa."
-say "Ele entra em um dos banheiros que encontra pelo caminho e começa a chorar segurando o embrulho."
-say "Ricardo" "Estúpido! Estúpido! Estúpido! A Clara nunca vai notar que eu existo."
-say ""
-say ""
-
-
-
-/// TODO: FINISH SCENE
-
-
+fade_music 0 1.5
+wait 2.5
+play_music "sad1_intro" "sad1_loop"
+say "Após perambular por alguns minutos, ele entra em um banheiro que encontra pelo caminho. Em seguida, se senta no chão, chorando."
+say "Ricardo" "Estúpido! Estúpido! Como eu fui idiota de achar que eu teria alguma chance com a Clara..."
+say "Ela é tão bonita e tão popular... Ela nunca ficaria com alguém como eu..."
+say "" "Ricardo escuta um barulho de batidas de leve na porta. Ele fica em silêncio."
+say "" "Em seguida, escuta o barulho da porta abrindo. Clara aparece de pé do lado de fora do banheiro."
+say "Clara" "Ricardo, tá tudo bem? Eu fiquei preocupada quando você saiu."
+say "Ricardo" "Clara?!"
+say "Clara" "Você... tá chorando?"
+say "" "O garoto se vira para o lado, escondendo o rosto."
+say "Ricardo" "Eu... tô bem, não esquenta."
+say "Clara" "Olha... Me desculpa. Eu devia ter te defendido mais cedo."
+say "O pessoal é muito injusto às vezes, eles pegam muito pesado com você toda hora."
+say "Ricardo" "Tudo bem, eu tô acostumado..."
+say "" "Clara se abaixa e toca delicadamente o rosto de Ricardo com uma mão, puxando-o para se virar para ela."
+say "Clara" "Mas... Eu fiquei muito feliz que você veio."
+say "Ricardo" "Va-valeu."
+say "" "Clara percebe o pequeno embrulho de presente no chão, ao lado do garoto."
+say "Clara" "Você trouxe um presente pra mim?"
+say "" "A garota, curiosa, pega o objeto."
+say "Ricardo" "Na-não é nada, esquece. É um presente idiota, você não vai querer isso."
+say "Clara" "Como você sabe? Tá tão lindo o embrulho, deve ser algo legal."
+say "Ricardo" "É sério, por favor não abre..."
+say "" "Clara abre o presente e encontra um gatinho artesanal, feito de meia."
+say "Ricardo" "Eu não tinha muito dinheiro pra te comprar algo, então resolvi fazer isso pra você."
+say "Clara" "Que fofinho, eu adorei! Muito obrigada!"
+say "Ricardo" "É um presente bobo. Eu aprendi a fazê-lo na aula de trabalhos manuais."
+say "Clara" "Não, eu gostei muito! Ele é especial pra mim porque foi você quem fez."
+say "" "Ricardo dá um sorriso. Clara o surpreende com um abraço."
+say "Clara" "Você é muito gentil e atencioso, Ricardo. Eu gosto muito disso em você."
+say "" "O abraço caloroso de Clara acelera o coração de Ricardo."
+say "Após pensar em seus sentimentos por alguns segundos, ele fala:"
+say "Ricardo" "E-eu queria te dizer uma coisa."
+say "Clara" "Pode falar."
+wait 1
+say "Ricardo" "Pode ser inútil te falar isso agora, e talvez isso estrague as coisas entre a gente..."
+say "Clara" "O... o que é?"
+say "Ricardo" "Eu sei que você é tão popular e eu sou o cara mais zoado no colégio... mas mesmo assim."
+//say "E é claro que nunca teria olhos pra alguém como eu..."
+wait 1
+say "Ricardo" "A gente tá passando um tempo junto pra fazer o trabalho... e eu sei que isso vai acabar em breve."
+say "Desde aquele dia na aula de culinária... Todas as vezes que eu te vejo, eu só penso em quanto você é incrível."
+say "Então eu só queria te dizer... Antes que seja tarde demais..."
+say "Que eu te amo."
+say "" "A garota fica em silêncio por alguns segundos. As lágrimas não param de escorrer pelo rosto de Ricardo."
+wait 1
+say "Clara" "É tarde demais."
+say "Ricardo" "O quê?"
+say "Clara" "É tarde demais pra se preocupar com tudo isso agora."
+say "Porque eu já gosto muito de você."
 
 add_heart 2
+
+say "Clara" "Eu não me importo se você é popular ou não. Você é muito mais gentil e atencioso que os outros garotos do colégio."
+say "Portanto, fica comigo."
+say "" "Ricardo e Clara se abraçam novamente."
+
 goto end
 
 

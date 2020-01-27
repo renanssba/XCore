@@ -11,7 +11,8 @@ endif
 if #day == 3
   say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
-  say "Clara" "Oi! Eu fiquei organizando umas coisas pra festa de mais tarde e nem me lembrei de te avisar... Desculpa!"
+  say "Clara" "Oi Ricardo, desculpa! :( Hoje o meu dia foi muito corrido organizando o aniversário e acabei me esquecendo de te avisar..."
+  say "Podemos continuar o trabalho amanhã? Espero que venha para a festa :)"
   goto_script "pass_time"
   end_script
 endif
@@ -32,7 +33,7 @@ if clara_heart >= 1
     say "Clara" "Huuum!! Você cozinha muito bem, Ricardo!"
     say "Eu tentei aprender a cozinhar uma vez, mas eu sou desastrada demais pra isso. Lembra que a gente teve aula de culinária no colégio?"
     say "Ricardo" "Ah, mas isso foi muito tempo atrás. No quinto ano, eu acho?"
-    say "Clara" "Sim, sim. Foi nessas aulas que você você aprendeu a cozinhar?"
+    say "Clara" "Sim, sim. Foi nessas aulas que você aprendeu a cozinhar?"
     say "Ricardo" "Não, eu nem cursei. Na época eu acabei fazendo \qtrabalhos manuais\q como matéria extra-curricular... Mesmo tendo me inscrito nas aulas de culinária."
     say "Clara" "Ué, você não gostou da aula? O que aconteceu?"
     
@@ -111,25 +112,28 @@ if clara_heart == 0
   say "" "A campainha toca e Ricardo tem um leve infarto."
   say "Ele anda até a entrada da casa. Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
   say "Ricardo" "C-Clara! Q-que bom que você veio!"
-  say "Clara" "E aí?"
-  say "" "Ricardo fica em silêncio, pois não sabe como reagir."
-  say "Um silêncio constrangedor se segue."
-  say "Clara" "Vou entrando, viu?"
-  say "" "A garota entra na casa, dá uma olhada ao redor e senta-se à mesa da sala. Ricardo a segue em silêncio e se senta à mesa. Eles pegam os livros e cadernos."
+  say "Clara" "Oi Ricardo, obrigada por me receber."
+  say "" "Ricardo consente em silêncio, pois não sabe como reagir."
+  say "Um pequeno silêncio se segue. A garota sorri e pergunta:"
+  say "Clara" "Vamos entrar?"
+  say "Ricardo" "C-Claro!"
+  say "" "A garota sorridente entra, dá uma olhada ao redor e senta-se à mesa da sala. Ricardo a segue em silêncio e se senta de frente para ela."
+  say "Os dois pegam os livros e cadernos."
   say "" "Ricardo não tira os olhos do livro. Um silêncio constrangedor se segue."
   wait 2
-  say "Clara" "Bonitinha essa sua casa."
+  say "Clara" "Sua casa é tão linda! Eu amei a decoração."
   say "Ricardo" "V-valeu!"
   wait 2
   say "" "O garoto permanece olhando para o livro fixamente, suando muito."
-  say "Ricardo" "(Eu deveria me declarar pra ela agora! Pode ser minha única chance.)"
-  say "Ricardo" "C-Clara! É-é que, na verdade..."
-  say "Ricardo" "Eu..."
+  say "Ricardo" "(Será que eu deveria mesmo me declarar pra ela? Quem sabe se ela vai vir na minha casa outra vez?)"
+  say "Clara" "E então, você sabe como podemos começar? História é meio que a minha pior matéria, haha..."
+  say "Ricardo" "Bem, eu..."
   say "" "Um ronco estomacal é ouvido bem alto pela sala."
   wait 1
   say "Ricardo" "(Quê?)"
-  say "Clara" "Er.. Desculpa, você tem algo pra comer?"
-  say "" "Ricardo engole em seco mais uma vez. Não foi dessa vez."
+  say "V-você tá bem? Acho que está com fome."
+  say "Clara" "Er.. desculpa. Tá tudo bem, deixa pra lá. Eu só não me alimentei bem hoje."
+  say "" "Ricardo engole em seco mais uma vez."
   say "Ricardo" "E-eu sei fazer omelete... Você gosta de omelete?"
   say "Clara" "Ah, eu adoro! Café da manhã é a melhor refeição! Mesmo durante a tarde."
   say "" "Ricardo sorriu e se dirigiu até a cozinha para preparar a refeição."
@@ -148,9 +152,10 @@ endif
 add_var clara_heart 1
 
 if #day == 2
-  say "" "Antes de ir embora, Clara convida Ricardo para uma festa que ocorrerá na sua casa amanhã de noite."
-  say "Clara" "Você pode vir?"
-  say "Ricardo" "Claro, adoraria."
+  say "" "Antes de ir embora, Clara convida Ricardo para sua festa de aniversário que ocorrerá em sua casa amanhã de noite."
+  say "Clara" "Eu adoraria que você viesse amanhã, é o meu aniversário."
+  say "Ricardo" "Claro, mal posso esperar."
+  say "Clara" "Que legal! Espero que se divirta."
   set_var clara_convidou_festa 1
 endif
 
