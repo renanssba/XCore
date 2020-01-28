@@ -1,5 +1,5 @@
-﻿goto_script "battle_test"
-end_script
+﻿//goto_script "battle_test"
+//end_script
 
 fade_out 0
 play_music null null
@@ -7,6 +7,8 @@ play_music null null
 wait 1
 bg "heaven"
 fade_in 1
+
+skip_button true end
 
 goto_script "fertiliel_enter" 0.25
 
@@ -124,10 +126,14 @@ say "Graciel" "É isso aí, vamos dar o nosso melhor!"
 
 fade_music 0 1
 fade_out 1
+
+waypoint end
+skip_button false
+fade_music 0 0
+fade_out 0
 char_reset_all
 bg null
 wait 1
 
 
-waypoint end
 goto_script "cap1_intro"

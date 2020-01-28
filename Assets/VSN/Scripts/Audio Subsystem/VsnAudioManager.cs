@@ -174,7 +174,6 @@ public class VsnAudioManager : MonoBehaviour {
   public void PlaySfx(string clipName, float panValue){
     AudioClip audioClip = GetAudioClip(clipName);
     if(audioClip == null){
-      Debug.LogError("Error loading " + clipName + " sfx. Please check its path");
       return;
     }
     PlaySfx(audioClip, panValue);

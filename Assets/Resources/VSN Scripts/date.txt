@@ -1,20 +1,26 @@
 fade_out 0.7
 bg null
-say "char_name/none" "date/say_0"
 
-play_music "battle1_intro" "battle1_loop"
-
+wait 0.5
 set_var currentDateEvent 0
 theater_animation "setup_date"
+
+// move_camera -0.91 1.52 -2.52 0
+
+move_camera 0 1.2 -6.4 0
+
 set_screen "date"
 enable_input true
 set_current_character_turn -1
 
 fade_in 0.7
 
+wait 0.5
 
 theater_animation "party_enters"
-wait 0.7
+wait 1.5
+
+say "" "\couple estavam andando tranquilamente em direção ao local do piquenique, quando de repente..."
 
 /// DATE TUTORIAL (?)
 // if tutorial_date == 0
@@ -22,12 +28,28 @@ wait 0.7
 // endif
 
 
+
+
 for currentDateEvent #dateLength
   waypoint new_enemy_appears
+  move_camera 0 1.2 -6.4 0.5
+  play_music "battle1_intro" "battle1_loop"
+  wait 0.8
+  
   theater_animation "enemy_enters"
-  wait 0.7
+  wait 1.2
+  
   goto_script "\currentEventName" event_statement
-
+  if currentDateEvent == 0
+    say "Ricardo" "E agora, o que faremos?"
+    say "Ana" "Eu vou te proteger!"
+  else
+    say "Ana" "Fica comigo!"
+    say "Ricardo" "Vamos lutar juntos."
+  endif
+  
+  show_date_ui true
+  wait 0.5
 
   // if tutorial_date2 == 0
     // goto_script "tutorial_date2"
@@ -76,7 +98,28 @@ for currentDateEvent #dateLength
     update_ui
     play_sfx "ui_success"
     wait 2
-    continue
+    //continue
+    show_date_ui false
+    wait 0.5
+    fade_music 0 1
+    move_camera -0.91 1.52 -2.52 1.5
+    wait 2
+    play_music "observacao2_intro" "observacao2_loop"
+    wait 0.5
+    if currentDateEvent == 1
+      say "" "Após os ânimos se acalmarem, o casal continua conversando."
+      say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
+      say "\girl" "É mesmo? O que é?"
+      say "" "Antes que \boy pudesse continuar..."
+      continue
+    endif
+    if currentDateEvent == 0
+      say "" "O casal continua indo em direção ao seu objetivo."
+      say "\boy" "Isso foi estranho, né?"
+      say "\girl" "Sim, mas ainda bem que deu tudo certo."
+      say "" "Subitamente, um novo desafio aparece..."
+      continue
+    endif
   endif
 
 
@@ -105,13 +148,15 @@ goto end
 
 
 waypoint fail_date
-//say "SUA EQUIPE FOI DERROTADA!"
 challenge_result false
 update_ui
 play_sfx "ui_fail"
 wait 2
 enable_input false
-say "char_name/none" "date/say_6"
+say "" "\couple decidem que o encontro não está dando certo."
+say "\boy" "Podemos continuar esse encontro outro dia..."
+say "\girl" "Sim, com certeza será melhor..."
+say "" "date/say_6"
 // show_date_ui false
 goto end
 

@@ -202,7 +202,7 @@ public class UIController : MonoBehaviour {
         bgImage.SetActive(false);
         peopleInfoPanel.HidePanel();
         peopleButtonPanel.HidePanel();
-        datingPeoplePanel.ShowPanel();
+        datingPeoplePanel.HidePanel();
         mapMenuButtonsPanel.HidePanel();
         interactionPinsBoard.HidePanel();
         fertilielInMenu.SetActive(false);
@@ -246,6 +246,14 @@ public class UIController : MonoBehaviour {
     }
     partyPeopleCards[currentPartyMember].ShowShade(false);
     turnIndicators[currentPartyMember].SetActive(true);
+  }
+
+  public void ShowDateUI(bool value) {
+    if(value == true) {
+      datingPeoplePanel.OpenMenuScreen();
+    } else {
+      datingPeoplePanel.CloseMenuScreen();
+    }    
   }
 
   public void ShowHelpMessagePanel() {

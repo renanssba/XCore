@@ -16,10 +16,11 @@ public class TheaterController : MonoBehaviour {
 
   public static TheaterController instance;
 
+  public Camera mainCamera;
+
   public Vector3 mainPosition;
   public Vector3 supportPosition;
   public Vector3 angelPosition;
-  public Vector3 encounterPosition;
   public Vector3 challengePosition;
 
   public Actor2D mainActor;
@@ -152,9 +153,11 @@ public class TheaterController : MonoBehaviour {
 
   public void PartyEntersScene() {
     // TODO: implement
-    mainActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
-    supportActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
-    angelActor.transform.DOLocalMoveX(3f, 0.5f).SetRelative(true);
+    float enterAnimationDuration = 1f;
+
+    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
   }
 
   public void EnemyEntersScene() {
@@ -164,10 +167,11 @@ public class TheaterController : MonoBehaviour {
 
     currentChallenge.hp = currentChallenge.maxHp;
 
-    VsnAudioManager.instance.PlaySfx(currentChallenge.appearSfxName);
+    
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
+      VsnAudioManager.instance.PlaySfx(currentChallenge.appearSfxName);
       InitializeChallengeLevelAndHp();
     });
   }
@@ -206,5 +210,9 @@ public class TheaterController : MonoBehaviour {
         bgObjects[2].SetActive(true);
         break;
     }
+  }
+
+  public void MoveCamera(Vector3 newPosition, float time) {
+    mainCamera.transform.DOMove(newPosition, time);
   }
 }

@@ -3,7 +3,8 @@
 // pass_time
 //goto dia_4
 fade_music 0 0
-choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
+skip_button true end
+//choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 3" dia_3 "Dia 4" dia_4
 //goto aula
 
 
@@ -136,6 +137,7 @@ say "" "Ana saiu correndo pela porta antes que Ricardo conseguisse responder."
 wait 1
 
 waypoint end
+skip_button false
 fade_out 1
 bg null
 goto_script "show_people_screen"

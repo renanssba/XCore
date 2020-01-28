@@ -1,3 +1,7 @@
+if argsCount > 0
+  goto *arg1
+endif
+
 goto_script "enter_observation" "school morning"
 if daytime == 0
   say "" "Chegando no telhado..."
@@ -92,3 +96,10 @@ say "Ricardo" "Que bom que você gostou!"
 
 add_heart 1
 goto end
+
+
+waypoint date_intro_1
+say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
+say "Ana" "Oba, vamos sim! Que tal fazermos um piquenique?"
+say "Ricardo" "Ótimo, eu levo os sanduíches."
+goto_script "date"

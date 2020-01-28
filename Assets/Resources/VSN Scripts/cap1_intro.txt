@@ -1,6 +1,9 @@
 ﻿fade_out 0
 wait 1
 dialog_style "faded_screen_message"
+
+skip_button true end
+
 say "" "No dia seguinte, no escritório da Supervisora Hardiel..."
 
 dialog_style "normal"
@@ -65,15 +68,22 @@ say "Fertiliel" "Não, espera, eu..."
 say "Hardiel" "Está dispensada, Fertiliel."
 say "Fertiliel" "..."
 
-
 fade_out 1
-char_reset_all
-bg null
 wait 1
+
 say "Fertiliel" "(Tudo bem, eu me viro...)"
 say "(Eu consigo fazer isso... Eu consigo fazer isso...)"
 
 fade_music 0 1
+
+waypoint end
+skip_button false
+dialog_style "normal"
+fade_music 0 0
+fade_out 0
+char_reset_all
+bg null
+
 wait 1
 
 goto_script "cap1_manha"

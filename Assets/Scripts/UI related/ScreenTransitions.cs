@@ -45,13 +45,15 @@ public class ScreenTransitions : MonoBehaviour {
       return;
     }
     DOTween.Kill(canvasGroup);
-    myRect.DOAnchorPos(new Vector2(0f, -200f), 0f).OnComplete( ()=>{
-      canvasGroup.alpha = 0f;
-      FadeInShade(fadeTime);
-      canvasGroup.DOFade(1f, fadeTime);
-      myRect.DOAnchorPos(new Vector2(0f, 0), fadeTime);
-      gameObject.SetActive(true);
-    } );
+    canvasGroup.alpha = 0f;
+    gameObject.SetActive(true);
+    canvasGroup.interactable = false;
+    myRect.anchoredPosition = new Vector2(0f, -200f);
+    FadeInShade(fadeTime);
+    myRect.DOAnchorPos(new Vector2(0f, 0), fadeTime);
+    canvasGroup.DOFade(1f, fadeTime).OnComplete(() => {
+      canvasGroup.interactable = true;
+    });
   }
 
   public void CloseMenuScreen(){
@@ -69,11 +71,17 @@ public class ScreenTransitions : MonoBehaviour {
 
 
   public void FadeInShade(float fadeTime) {
+    if(shadeCanvasGroup == null) {
+      return;
+    }
     shadeCanvasGroup.gameObject.SetActive(true);
     shadeCanvasGroup.DOFade(1f, fadeTime);
   }
 
   public void FadeOutShade(float fadeTime) {
+    if(shadeCanvasGroup == null) {
+      return;
+    }
     shadeCanvasGroup.DOFade(0f, fadeTime).OnComplete(() => {
       shadeCanvasGroup.gameObject.SetActive(false);
     });
