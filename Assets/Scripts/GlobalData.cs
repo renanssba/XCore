@@ -126,7 +126,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
 
-    ResourcesManager.instance.GenerateCharacterSprites(new string[]{"ana", "beatrice", "clara", "ricardo"});
+    ResourcesManager.instance.GenerateCharacterSprites(new string[] {"ricardo", "ana", "beatrice", "clara", "fertiliel"});
 
 
     relationships = new Relationship[3];
@@ -135,7 +135,6 @@ public class GlobalData : MonoBehaviour {
         people = new Person[] {people[0], people[i+1]}
       };
     }
-    //relationships[0].hearts = 1;
 
 
     /// INITIAL INVENTORIES
@@ -302,8 +301,14 @@ public class GlobalData : MonoBehaviour {
     if(name == "Fertiliel") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[0];
     }
-    if(name == "Carta") {
+    if(name == "Graciel") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[1];
+    }
+    //if(name == "Hardiel") {
+    //  return ResourcesManager.instance.fixedCharactersFaceSprites[2];
+    //}
+    if(name == "Carta") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[3];
     }
     foreach(Person p in people) {
       if(p.name == name) {

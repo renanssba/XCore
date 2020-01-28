@@ -105,8 +105,14 @@ public class GameController : MonoBehaviour {
     if(currentRelationship == null){
       Debug.LogError("Error getting current relationship");
     }
-    UIController.instance.boyInteractionImage.sprite = Resources.Load<Sprite>("Characters/" + GlobalData.instance.observedPeople[0].name);
-    UIController.instance.girlInteractionImage.sprite = Resources.Load<Sprite>("Characters/" + GlobalData.instance.observedPeople[1].name);
+
+    if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
+      UIController.instance.boyInteractionImage.sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[0].id, "uniform");
+      UIController.instance.girlInteractionImage.sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[1].id, "uniform");
+    } else {
+      UIController.instance.boyInteractionImage.sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[0].id, "casual");
+      UIController.instance.girlInteractionImage.sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[1].id, "casual");
+    }    
     UIController.instance.relationshipCard.Initialize(currentRelationship);
 
     coupleEntry.Initialize(currentRelationship);

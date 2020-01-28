@@ -4,22 +4,23 @@ waypoint event_statement
 say "" "Ao tentarem subir para o segundo andar, \boy dá um passo em falso e fica com o pé preso na escada rolante! Ele entra em pânico."
 end_script
 
-et_var guts_action_boy_name "strike"
+set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
-set_var intelligence_action_boy_name "think"
-set_var intelligence_action_girl_name "think"
-set_var charisma_action_boy_name "flatter"
-set_var charisma_action_girl_name "flatter"
+set_var intelligence_action_boy_name "improvise"
+set_var intelligence_action_girl_name "improvise"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
 end_script
 
 
 
 waypoint guts_action_boy
-say "" "\boy tenta se libertar puxando com força!"
+say "" "\boy chuta a escada rolante para se libertar!"
 say "A armadilha da escada-rolante se afrouxa!"
 end_script
+
 waypoint guts_action_girl
-say "" "\girl puxa o braço de \boy com toda a força que pode!"
+say "" "\girl chuta o motor da escada rolante!"
 say "A armadilha da escada-rolante se afrouxa!"
 end_script
 
@@ -27,51 +28,35 @@ waypoint intelligence_action_boy
 say "" "\boy joga água no vão da escada rolante!"
 say "" "O motor da escada começa a pifar!"
 end_script
+
 waypoint intelligence_action_girl
 say "" "\girl joga água no vão da escada rolante!"
 say "" "O motor da escada começa a pifar!"
 end_script
 
 waypoint charisma_action_boy
-say "" "\boy  puxa assunto com \girl para passar o tempo!"
+say "" "\boy puxa assunto com \girl para se acalmar e passar o tempo!"
 say "A armadilha da escada-rolante se afrouxa!"
 end_script
+
 waypoint charisma_action_girl
 say "" "\girl passa a mão na cabeça de \boy e diz que tudo ficará bem!"
 say "A armadilha da escada-rolante se afrouxa!"
 end_script
 
-waypoint guts_success
-say "" "\girl segura o braço de \boy com toda a força que pode. Ela puxa, e o pé do menino se desgruda."
-say "Ele parece aliviado."
+
+
+waypoint attack_boy
+say "" "A escada machuca o pé do \boy!"
+say "" "\boy fica receoso!"
 end_script
 
-waypoint intelligence_success
-say "" "\girl habilmente faz a escada rolante entrar em ressonância com batidas na frequência perfeita."
-say "A escada começa a tremer, o suficiente para \boy conseguir desprender o pé."
-say "\boy fica impressionado e aliviado."
-end_script
-
-waypoint charisma_success
-say "" "\girl, conciliadora, passa a mão na cabeça de \boy e diz que tudo ficará bem."
-say "Ele relaxa e consegue desprender o pé. \boy fica aliviado."
+waypoint attack_girl
+say "" "A escada rolante ruge de forma ameaçadora na direção de \girl!"
+say "" "\girl fica receosa!"
 end_script
 
 
-
-waypoint guts_fail
-say "" "\girl segura o braço de \boy com toda a força que pode. Ela puxa, porém acaba de desequilibrando e caindo."
-say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
+waypoint defeated
+say "" "A escada rolante explode, libertando \boy!"
 end_script
-
-waypoint intelligence_fail
-say "" "\girl olha ao redor, pensa muito, mas não consegue formular um plano."
-say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
-end_script
-
-waypoint charisma_fail
-say "" "\girl, conciliadora, passa a mão na cabeça de \boy e diz que tudo ficará bem. Isso não é o suficiente para acalmar o rapaz, que começa a gritar de desespero."
-say "Felizmente, a escada rolante desliga sozinha, impedindo que uma tragédia aconteça. O clima de encontro fica bem ruim."
-end_script
-
-

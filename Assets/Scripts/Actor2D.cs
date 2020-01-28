@@ -24,7 +24,11 @@ public class Actor2D : MonoBehaviour {
   public void SetCharacterGraphics(Person p) {
     person = p;
     if(!string.IsNullOrEmpty(person.name)) {
-      renderer.sprite = LoadSprite("Characters/" + person.name);
+      if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
+        renderer.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "uniform");
+      } else {
+        renderer.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+      }
     } else {
       gameObject.SetActive(false);
     }

@@ -6,12 +6,10 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class CharacterSpriteCollection {
+  public string name;
   public Sprite body;
   public Sprite schoolClothes;
   public Sprite casual;
-  
-  public RenderTexture renderCasual;
-  public RenderTexture renderUniform;
 }
 
 
@@ -43,6 +41,22 @@ public class ResourcesManager : MonoBehaviour {
     return faceSprites[index];
   }
 
+  public Sprite GetCharacterSprite(int id, string situation) {
+    if(id >= characterSpritesCollections.Count) {
+      return null;
+    }
+    CharacterSpriteCollection col = characterSpritesCollections[id];
+    switch(situation) {
+      case "nude":
+        return col.body;
+      case "uniform":
+        return col.schoolClothes;
+      case "casual":
+      default:
+        return col.casual;
+    }
+  }
+
   public void GenerateCharacterSprites(string[] characterNames) {
     foreach(string charName in characterNames) {
       NewSpriteCollection(charName);
@@ -50,41 +64,62 @@ public class ResourcesManager : MonoBehaviour {
   }
 
   public void NewSpriteCollection(string charName) {
-    string asd = "Characters/";
+    string characterSpritesPath = "Characters/";
+    Color[] bodyPixels, casualPixels, uniformPixels, auxColorArray;
+    Sprite newSprite;
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
-    spriteCollection.body = Resources.Load<Sprite>(asd + charName + "-base");
-    //spriteCollection.schoolClothes = Resources.Load<Sprite>(asd + charName + "-uniform");
-    //spriteCollection.casual = Resources.Load<Sprite>(asd + charName + "-casual");
+    spriteCollection.name = charName;
+    spriteCollection.body = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
 
-    Texture2D body = Resources.Load<Texture2D>(asd + charName + "-base"); ;
-    Texture2D casual = Resources.Load<Texture2D>(asd + charName + "-casual");
-    Texture2D uniform = Resources.Load<Texture2D>(asd + charName + "-uniform");
+    Texture2D bodyTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-base");
+    bodyPixels = bodyTex.GetPixels();
+    Texture2D casualTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-casual");
 
-    spriteCollection.renderCasual = new RenderTexture((int)spriteCollection.body.rect.width, (int)spriteCollection.body.rect.height, 24);
-    spriteCollection.renderUniform = new RenderTexture((int)spriteCollection.body.rect.width, (int)spriteCollection.body.rect.height, 24);
+    // If there's no casual texture, use the base for everything
+    if(casualTex == null) {
+      spriteCollection.schoolClothes = spriteCollection.body;
+      spriteCollection.casual = spriteCollection.body;
+      return;
+    }
+    casualPixels = casualTex.GetPixels();
+    Texture2D uniformTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-uniform");
+    uniformPixels = uniformTex.GetPixels();
 
-    RenderTexture.active = spriteCollection.renderCasual;
-    GL.Clear(true, true, Color.black);
-    Graphics.Blit(body, spriteCollection.renderCasual);
-    Graphics.Blit(casual, spriteCollection.renderCasual);
 
-    Texture2D myTexture2D = new Texture2D(RenderTexture.active.width, RenderTexture.active.height);
-    myTexture2D.ReadPixels(new Rect(0, 0, RenderTexture.active.width, RenderTexture.active.height), 0, 0);
-    myTexture2D.Apply();
+    Debug.LogWarning("body texture format: " + bodyTex.format);
+    Debug.LogWarning("casual texture format: " + casualTex.format);
+    Debug.LogWarning("uniform texture format: " + uniformTex.format);
 
-    Sprite newSprite = Sprite.Create(myTexture2D, new Rect(0, 0, myTexture2D.width, myTexture2D.height), new Vector2(0.5f, 0.5f));
+    auxColorArray = ImageAddition(bodyPixels, uniformPixels);
+    Texture2D auxTexture = new Texture2D(casualTex.width, casualTex.height);
+    auxTexture.SetPixels(auxColorArray);
+    auxTexture.Apply();
+    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f));
     spriteCollection.schoolClothes = newSprite;
 
 
-    RenderTexture.active = spriteCollection.renderCasual;
-    GL.Clear(true, true, Color.black);
-    Graphics.Blit(body, spriteCollection.renderUniform);
-    Graphics.Blit(uniform, spriteCollection.renderUniform);
-
-    //spriteCollection.texCasual = Resources.Load<Texture2D>(asd + charName + "-casual");
-    //spriteCollection.renderCasual = newtex;
-    //spriteCollection.casual = Resources.Load<Sprite>(asd + charName + "-casual");
+    auxColorArray = ImageAddition(bodyPixels, casualPixels);
+    auxTexture = new Texture2D(casualTex.width, casualTex.height);
+    auxTexture.SetPixels(auxColorArray);
+    auxTexture.Apply();
+    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f));
+    spriteCollection.casual = newSprite;
+    
 
     characterSpritesCollections.Add(spriteCollection);
+  }
+
+  public Color[] ImageAddition(Color[] a, Color[] b) {
+    Color[] c = new Color[a.Length];
+    for(int i=0; i<a.Length; i++) {
+      if(b[i].a > 0f) {
+      //if(Random.Range(0, 100) < 50) {
+        c[i] = b[i];
+      } else {
+        c[i] = a[i];
+      }
+      //c[i] = a[i];
+    }
+    return c;
   }
 }

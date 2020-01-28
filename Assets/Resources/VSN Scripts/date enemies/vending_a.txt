@@ -7,8 +7,8 @@ set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
 set_var intelligence_action_boy_name "hack"
 set_var intelligence_action_girl_name "hack"
-set_var charisma_action_boy_name "perform"
-set_var charisma_action_girl_name "perform"
+set_var charisma_action_boy_name "flatter"
+set_var charisma_action_girl_name "flatter"
 end_script
 
 
@@ -27,7 +27,8 @@ end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active surrupia um salgadinho da máquina!"
+say "" "\active elogia a vasta seleção de produtos da máquina!"
+say "A máquina se sente lisonjeada."
 end_script
 
 
@@ -41,5 +42,5 @@ say "" "A máquina cospe lixo por todos os lados, acertando \girl!"
 end_script
 
 waypoint defeated
-say "" "A máquina de salgadinhos explodiu!"
+say "" "A máquina de salgadinhos explode!"
 end_script

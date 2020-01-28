@@ -50,7 +50,7 @@ public class ActionButton : MonoBehaviour {
       case TurnActionType.useItem:
         UpdateUIAsItem();
         break;
-    }    
+    }
   }
 
   public void UpdateUIAsSkill() {
