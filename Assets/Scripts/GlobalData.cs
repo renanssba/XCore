@@ -92,7 +92,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] { 5, 3, 3, 0, 8 },
+      attributes = new int[] { 6, 3, 2, 0, 8 },
       skillIds = new int[] { 0, 1, 2, 11 }
     };
     people.Add(p);

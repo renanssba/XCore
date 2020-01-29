@@ -64,12 +64,22 @@ public class Actor2D : MonoBehaviour {
     ShowThrowItemAnimation(item.sprite, destiny);
   }
 
-  //public void ReceiveItemAnimation(Item item) {
-
-  //}
+  public void DefendActionAnimation() {
+    GameObject particlePrefab = BattleController.instance.defenseActionParticlePrefab;
+    Vector3 particlePrefabPos = particlePrefab.transform.localPosition;
+    VsnAudioManager.instance.PlaySfx("buff_default");
+    GameObject newParticle = Instantiate(particlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
+  }
 
   public void Shine() {
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
+  }
+
+  public void ShowDefendHitParticle() {
+    GameObject particlePrefab = BattleController.instance.defendHitParticlePrefab;
+    Vector3 particlePrefabPos = particlePrefab.transform.localPosition;
+    //TODO: add "reduce damage" SFX
+    GameObject newParticle = Instantiate(particlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
