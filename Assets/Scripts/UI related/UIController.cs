@@ -43,6 +43,7 @@ public class UIController : MonoBehaviour {
 
   public ActionsPanel actionsPanel;
   public GameObject selectTargetPanel;
+  public GameObject[] selectTargets;
 
   public ScreenTransitions helpMessagePanel;
   public TextMeshProUGUI helpMessageText;

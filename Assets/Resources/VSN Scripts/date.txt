@@ -97,7 +97,6 @@ for currentDateEvent #dateLength
     update_ui
     play_sfx "ui_success"
     wait 2
-    //continue
     show_date_ui false
     wait 0.5
     fade_music 0 1
@@ -105,17 +104,20 @@ for currentDateEvent #dateLength
     wait 2
     play_music "observacao2_intro" "observacao2_loop"
     wait 0.5
-    if currentDateEvent == 1
-      say "" "Após os ânimos se acalmarem, o casal continua conversando."
-      say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
-      say "\girl" "É mesmo? O que é?"
-      say "" "Antes que \boy pudesse continuar..."
+    if currentDateEvent == #dateLength
+      continue
     endif
     if currentDateEvent == 0
       say "" "O casal continua indo em direção ao seu objetivo."
       say "\boy" "Isso foi estranho, né?"
       say "\girl" "Sim, mas ainda bem que deu tudo certo."
       say "" "Subitamente, um novo desafio aparece..."
+    endif
+    if currentDateEvent == 1
+      say "" "Após os ânimos se acalmarem, o casal continua conversando."
+      say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
+      say "\girl" "É mesmo? O que é?"
+      say "" "Antes que \boy pudesse continuar..."
     endif
     if currentDateEvent > 1
       say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."

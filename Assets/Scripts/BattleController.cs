@@ -127,7 +127,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void FinishSelectingCharacterAction() {
-    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentPlayerTurn = CurrentPartyMemberId();
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
@@ -157,11 +157,13 @@ public class BattleController : MonoBehaviour {
     } else if(actionType == TurnActionType.useSkill) {
       UIController.instance.SetHelpMessageText("Escolha um aliado para usar a habilidade:");
       UIController.instance.ShowHelpMessagePanel();
-    }    
+    }
+    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPartyMemberId()]);
     UIController.instance.selectTargetPanel.SetActive(true);
   }
 
   public void WaitToSelectEnemyTarget() {
+    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPartyMemberId()]);
     UIController.instance.selectTargetPanel.SetActive(true);
   }
 
@@ -308,7 +310,7 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
     DateEvent currentEvent = GetCurrentDateEvent();
-    VsnAudioManager.instance.PlaySfx("item_use");
+    VsnAudioManager.instance.PlaySfx("challenge_default");
 
     userActor.UseItemAnimation(targetActor, usedItem);
 
@@ -318,7 +320,7 @@ public class BattleController : MonoBehaviour {
     Inventory ivt = GlobalData.instance.people[0].inventory;
     ivt.ConsumeItem(usedItem.id, 1);
 
-
+    VsnAudioManager.instance.PlaySfx("item_use");
     targetActor.Shine();
 
     // heal status condition
@@ -543,7 +545,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    //return 5;
+    //return 10;
     return Random.Range(0, 11);
 
     int selectedEnemyId;
@@ -561,8 +563,12 @@ public class BattleController : MonoBehaviour {
     return selectedEnemyId;
   }
 
+  public int CurrentPartyMemberId() {
+    return VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+  }
+
   public Person GetCurrentPlayer() {
-    int currentPlayer = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentPlayer = CurrentPartyMemberId();
     if(currentPlayer < partyMembers.Length) {
       return partyMembers[currentPlayer];
     }
@@ -570,7 +576,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public Person GetCurrentTarget() {
-    int currentPlayer = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentPlayer = CurrentPartyMemberId();
     if(currentPlayer < partyMembers.Length) {
       int target = selectedTargetPartyId[currentPlayer];
       if(target < partyMembers.Length) {

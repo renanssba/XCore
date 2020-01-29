@@ -15,6 +15,10 @@ public class GameController : MonoBehaviour {
 
   public ScreenTransitions girlInteractionPanel;
   public ScreenTransitions girlInteractionButtonsPanel;
+
+  public GameObject[] girlInteractionButtons;
+  public GameObject[] dateSelectButtons;
+
   public ScreenTransitions dateSelectPanel;
   public CoupleEntry coupleEntry;
 
@@ -120,16 +124,19 @@ public class GameController : MonoBehaviour {
     girlInteractionPanel.ShowPanel();
     girlInteractionButtonsPanel.canvasGroup.alpha = 0f;
     girlInteractionButtonsPanel.ShowPanel();
+    Utils.SelectUiElement(girlInteractionButtons[0]);
     dateSelectPanel.gameObject.SetActive(false);
   }
 
   public void ShowDateSelectionPanel() {
     girlInteractionButtonsPanel.HidePanel();
     dateSelectPanel.ShowPanel();
+    Utils.SelectUiElement(dateSelectButtons[0]);
   }
 
   public void ExitDateSelectionPanel() {
     girlInteractionButtonsPanel.ShowPanel();
+    Utils.SelectUiElement(girlInteractionButtons[0]);
     dateSelectPanel.HidePanel();
   }
 
