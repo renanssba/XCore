@@ -14,6 +14,7 @@ namespace Command {
       } else {
         VsnEffectManager.instance.FadeOut(0.5f);
       }
+      DialogStyleCommand.StaticExecute("faded_screen_message");
     }
 
     public override void AddSupportedSignatures() {

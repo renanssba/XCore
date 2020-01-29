@@ -14,6 +14,7 @@ namespace Command {
       } else {
         VsnEffectManager.instance.FadeIn(0.5f);
       }
+      DialogStyleCommand.StaticExecute("normal");
     }
 
     public override void AddSupportedSignatures() {

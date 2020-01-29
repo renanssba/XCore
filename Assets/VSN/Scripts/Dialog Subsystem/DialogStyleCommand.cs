@@ -9,16 +9,18 @@ namespace Command {
   public class DialogStyleCommand : VsnCommand {
 
     public override void Execute() {
-      RectTransform rect = VsnUIManager.instance.vsnMessagePanel.GetComponent<RectTransform>();
+      StaticExecute(args[0].GetStringValue());
+    }
 
+    public static void StaticExecute(string styleName) {
       VsnUIManager.instance.SetTextBaseColor(Color.white);
       VsnUIManager.instance.SetDialogBoxInvisible(false);
 
-      switch(args[0].GetStringValue()) {
+      switch(styleName) {
         case "up":
         case "down":
         case "center":
-          VsnUIManager.instance.SetDialogBoxPosition(args[0].GetStringValue());
+          VsnUIManager.instance.SetDialogBoxPosition(styleName);
           break;
         case "normal":
           VsnUIManager.instance.SetDialogBoxPosition("down");

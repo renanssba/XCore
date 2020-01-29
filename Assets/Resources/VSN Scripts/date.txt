@@ -5,8 +5,7 @@ wait 0.5
 set_var currentDateEvent 0
 theater_animation "setup_date"
 
-move_camera -0.91 1.52 -2.52 0
-//move_camera 0 1.2 -6.4 0
+move_camera "close_shot" 0
 
 set_screen "date"
 enable_input true
@@ -27,11 +26,13 @@ say "" "\couple estavam andando tranquilamente em direção ao local do piqueniq
 // endif
 
 
+set_var last_enemy #dateLength
+add_var last_enemy -1
 
 
 for currentDateEvent #dateLength
   waypoint new_enemy_appears
-  move_camera 0 1.2 -6.4 0.5
+  move_camera "battle_view" 0.5
   play_music "battle1_intro" "battle1_loop"
   wait 0.8
   
@@ -100,11 +101,11 @@ for currentDateEvent #dateLength
     show_date_ui false
     wait 0.5
     fade_music 0 1
-    move_camera -0.91 1.52 -2.52 1.5
+    move_camera "close_shot" 1.5
     wait 2
     play_music "observacao2_intro" "observacao2_loop"
     wait 0.5
-    if currentDateEvent == #dateLength
+    if currentDateEvent == last_enemy
       continue
     endif
     if currentDateEvent == 0
