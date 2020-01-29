@@ -5,9 +5,8 @@ wait 0.5
 set_var currentDateEvent 0
 theater_animation "setup_date"
 
-// move_camera -0.91 1.52 -2.52 0
-
-move_camera 0 1.2 -6.4 0
+move_camera -0.91 1.52 -2.52 0
+//move_camera 0 1.2 -6.4 0
 
 set_screen "date"
 enable_input true
@@ -111,15 +110,17 @@ for currentDateEvent #dateLength
       say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
       say "\girl" "É mesmo? O que é?"
       say "" "Antes que \boy pudesse continuar..."
-      continue
     endif
     if currentDateEvent == 0
       say "" "O casal continua indo em direção ao seu objetivo."
       say "\boy" "Isso foi estranho, né?"
       say "\girl" "Sim, mas ainda bem que deu tudo certo."
       say "" "Subitamente, um novo desafio aparece..."
-      continue
     endif
+    if currentDateEvent > 1
+      say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."
+    endif
+    continue
   endif
 
 

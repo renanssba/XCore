@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour {
   public TextMeshProUGUI titleText;
 
   public ScreenTransitions uiControllerPanel;
-  public PersonCard[] personCards;
+  public RelationshipCard[] relationshipCards;
   public TextMeshProUGUI dayText;
 
   public RelationshipCard relationshipCard;
@@ -69,12 +69,12 @@ public class UIController : MonoBehaviour {
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
-    for(int i = 0; i < personCards.Length; i++) {
-      if(i < GlobalData.instance.people.Count) {
-        personCards[i].gameObject.SetActive(true);
-        personCards[i].Initialize(GlobalData.instance.people[i]);
+    for(int i = 0; i < relationshipCards.Length; i++) {
+      if(i < GlobalData.instance.relationships.Length) {
+        relationshipCards[i].gameObject.SetActive(true);
+        relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
       } else {
-        personCards[i].gameObject.SetActive(false);
+        relationshipCards[i].gameObject.SetActive(false);
       }
     }
 
@@ -145,23 +145,12 @@ public class UIController : MonoBehaviour {
     }
   }
 
-  public void ShowOnlyObservedPerson() {
-    foreach(PersonCard p in personCards) {
-      if(p.person == GlobalData.instance.ObservedPerson() ||
-        p.person == GlobalData.instance.EncounterPerson()) {
-        p.gameObject.SetActive(true);
-      } else {
-        p.gameObject.SetActive(false);
-      }
-    }
-  }
-
 
   public void SetScreenLayout(string state) {
     TheaterController theater = TheaterController.instance;
     Button firstButton = null;
-    foreach(PersonCard p in personCards) {
-      p.gameObject.SetActive(p.person.state == PersonState.available);
+    foreach(RelationshipCard p in relationshipCards) {
+      p.gameObject.SetActive(true);
     }
 
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
@@ -271,7 +260,7 @@ public class UIController : MonoBehaviour {
 
 
   public void HidePeople() {
-    foreach(PersonCard p in personCards) {
+    foreach(RelationshipCard p in relationshipCards) {
       p.gameObject.SetActive(false);
     }
   }

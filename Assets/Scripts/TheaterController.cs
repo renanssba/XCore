@@ -68,11 +68,6 @@ public class TheaterController : MonoBehaviour {
     //}
   }
 
-  public void PositionActorsCloseup() {
-    mainActor.transform.localPosition = mainPosition;
-    supportActor.transform.localPosition = new Vector3(mainPosition.x, supportPosition.y, supportPosition.z);
-  }
-
   public void CharacterAttackAnimation(int actorId, int animId) {
     switch(actorId) {
       case 0:
@@ -152,12 +147,11 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void PartyEntersScene() {
-    // TODO: implement
-    float enterAnimationDuration = 1f;
+    float enterAnimationDuration = 1.5f;
 
-    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
-    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
-    angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+    angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
   }
 
   public void EnemyEntersScene() {

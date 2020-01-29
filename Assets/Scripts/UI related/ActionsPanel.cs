@@ -8,29 +8,28 @@ public class ActionsPanel : MonoBehaviour {
 
   public ScreenTransitions baseActionsPanel;
   public ScreenTransitions skillsPanel;
-  public ScreenTransitions itemsPanel;
 
   public GameObject[] baseActionButtons;
   public ActionButton[] skillButtons;
-  public ActionButton[] itemButtons;
+  public int currentPartyMember;
 
   public GameObject[] baseActionButtonShades;
 
-  public Person currentCharacter;
 
-
-  public void Initialize(int currentPartyMember) {
-    currentCharacter = BattleController.instance.partyMembers[currentPartyMember];
-    SetupBaseActionButtons(currentPartyMember);
-    SetupCharacterActions(currentPartyMember);
-    SetupItemButtons();
+  public void Initialize(int partyMemberId) {
+    currentPartyMember = partyMemberId;
+    SetupBaseActionButtons(partyMemberId);
 
     skillsPanel.gameObject.SetActive(false);
-    itemsPanel.gameObject.SetActive(false);
-    baseActionsPanel.gameObject.SetActive(false);
-    baseActionsPanel.ShowPanel();
+    //itemsPanel.gameObject.SetActive(false);
+    baseActionsPanel.gameObject.SetActive(true);
+    Utils.SelectUiElement(baseActionButtons[0]);
 
-    PositionPanels(currentPartyMember);
+    PositionPanels(partyMemberId);
+  }
+
+  public Person CurrentCharacter() {
+    return BattleController.instance.partyMembers[currentPartyMember];
   }
 
 
@@ -48,9 +47,9 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupCharacterActions(int currentPartyMember) {
     for(int i = 0; i < skillButtons.Length; i++) {
-      if(i < currentCharacter.skillIds.Length) {
-        skillButtons[i].InitializeAsSkill(currentCharacter,
-                                          BattleController.instance.GetSkillById(currentCharacter.skillIds[i]));
+      if(i < CurrentCharacter().skillIds.Length) {
+        skillButtons[i].InitializeAsSkill(CurrentCharacter(),
+                                          BattleController.instance.GetSkillById(CurrentCharacter().skillIds[i]));
         skillButtons[i].gameObject.SetActive(true);
       } else {
         skillButtons[i].gameObject.SetActive(false);
@@ -60,12 +59,12 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupItemButtons() {
     List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
-    for(int i = 0; i < itemButtons.Length; i++) {
+    for(int i = 0; i < skillButtons.Length; i++) {
       if(i < battleItems.Count) {
-        itemButtons[i].InitializeAsItem(battleItems[i]);
-        itemButtons[i].gameObject.SetActive(true);
+        skillButtons[i].InitializeAsItem(battleItems[i]);
+        skillButtons[i].gameObject.SetActive(true);
       } else {
-        itemButtons[i].gameObject.SetActive(false);
+        skillButtons[i].gameObject.SetActive(false);
       }
     }
   }
@@ -77,8 +76,10 @@ public class ActionsPanel : MonoBehaviour {
 
   public void ClickSkillsPanel() {
     SfxManager.StaticPlayConfirmSfx();
-    baseActionsPanel.HidePanel();
-    skillsPanel.ShowPanel();
+    baseActionsPanel.gameObject.SetActive(false);
+    SetupCharacterActions(currentPartyMember);
+    skillsPanel.gameObject.SetActive(true);
+    Utils.SelectUiElement(skillButtons[0].gameObject);
     UIController.instance.ShowHelpMessagePanel();
   }
 
@@ -89,8 +90,10 @@ public class ActionsPanel : MonoBehaviour {
     }
 
     SfxManager.StaticPlayConfirmSfx();
-    baseActionsPanel.HidePanel();
-    itemsPanel.ShowPanel();
+    baseActionsPanel.gameObject.SetActive(false);
+    SetupItemButtons();
+    skillsPanel.gameObject.SetActive(true);
+    Utils.SelectUiElement(skillButtons[0].gameObject);
     UIController.instance.ShowHelpMessagePanel();
   }
 
@@ -120,9 +123,9 @@ public class ActionsPanel : MonoBehaviour {
 
   public void ClickBackToBaseActionsPanel() {
     SfxManager.StaticPlayCancelSfx();
-    skillsPanel.HidePanel();
-    itemsPanel.HidePanel();
-    baseActionsPanel.ShowPanel();
+    skillsPanel.gameObject.SetActive(false);
+    baseActionsPanel.gameObject.SetActive(true);
+    Utils.SelectUiElement(baseActionButtons[0]);
     UIController.instance.selectTargetPanel.SetActive(false);
     UIController.instance.HideHelpMessagePanel();
   }
@@ -133,8 +136,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void EndActionSelect() {
-    baseActionsPanel.HidePanel();
-    itemsPanel.HidePanel();
-    skillsPanel.HidePanel();
+    baseActionsPanel.gameObject.SetActive(false);
+    skillsPanel.gameObject.SetActive(false);
   }
 }
