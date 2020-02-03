@@ -5,10 +5,10 @@ say "" "O casal é abordado por dois vendedores de cartão de crédito! Os juros
 
 set_var guts_action_boy_name "shout"
 set_var guts_action_girl_name "shout"
-set_var intelligence_action_boy_name "argue"
-set_var intelligence_action_girl_name "argue"
-set_var charisma_action_boy_name "bluff"
-set_var charisma_action_girl_name "bluff"
+set_var intelligence_action_boy_name "bluff"
+set_var intelligence_action_girl_name "bluff"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
 end_script
 
 
@@ -21,14 +21,14 @@ end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active tenta analisar as taxas de juros e a atual conjuntura econômica!"
-say "" "Os vendedores coçam a cabeça!"
+say "" "\active afirma que já possui o cartão e adora!"
+say "" "Os vendedores ficam surpresos!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active afirma que já possui o cartão e adora!"
-say "" "Os vendedores ficam surpresos!"
+say "" "\active puxa assunto com os vendedores sobre todas as coisas que irá comprar com o cartão novo!"
+say "" "Os vendedores ficam com pena!"
 end_script
 
 

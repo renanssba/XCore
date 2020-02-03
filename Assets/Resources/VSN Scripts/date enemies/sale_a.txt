@@ -1,14 +1,14 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Uma liquidação-relâmpago! Centenas de consumidores cercam o casal, sedentos por produtos!"
+say "" "Uma liquidação-relâmpago! Centenas de consumidores invadem o corredor do shopping, sedentos por produtos!"
 
 set_var guts_action_boy_name "dare"
 set_var guts_action_girl_name "dare"
-set_var intelligence_action_boy_name "argue"
-set_var intelligence_action_girl_name "argue"
-set_var charisma_action_boy_name "bluff"
-set_var charisma_action_girl_name "bluff"
+set_var intelligence_action_boy_name "bluff"
+set_var intelligence_action_girl_name "bluff"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
 end_script
 
 
@@ -21,14 +21,14 @@ end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active argumenta com os consumidores!"
-say "" "A multidão fica confusa!"
+say "" "\active grita '75% de desconto!', apontando para o lado oposto!"
+say "" "Pessoas correm para o outro corredor!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active grita '75% de desconto!', apontando para o lado oposto!"
-say "" "Pessoas correm para o outro corredor!"
+say "" "\active implora para que pessoas sejam consumidores conscientes!"
+say "" "A multidão se sente culpada!"
 end_script
 
 
