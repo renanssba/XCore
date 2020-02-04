@@ -7,8 +7,8 @@ set_var guts_action_boy_name "shout"
 set_var guts_action_girl_name "shout"
 set_var intelligence_action_boy_name "hack"
 set_var intelligence_action_girl_name "argue"
-set_var charisma_action_boy_name "bluff"
-set_var charisma_action_girl_name "bluff"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
 end_script
 
 
@@ -33,11 +33,11 @@ end_script
 
 waypoint charisma_action_boy
 say "" "\boy ajuda \girl a elaborar uma desculpa!"
-say "" "A voz do outro lado da linha reclama!"
+say "" "A voz do outro lado da linha parece satisfeita!"
 end_script
 waypoint charisma_action_girl
-say "" "\active aplica uma desculpa qualquer!"
-say "" "A voz do outro lado da linha reclama!"
+say "" "\active sorri e concorda com tudo que a pessoa diz!"
+say "" "A voz do outro lado da linha parece satisfeita!"
 end_script
 
 
