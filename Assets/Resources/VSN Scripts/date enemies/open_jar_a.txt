@@ -1,36 +1,47 @@
 goto *arg1
 
 waypoint event_statement
-say "" "\girl compra um pote de algum doce e parece ter dificuldade pra abrir. \boy vai ajudá-la."
+say "" "\girl e \boy tentam abrir o pote de doces!"
+end_script
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "improvise"
+set_var intelligence_action_girl_name "improvise"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
 end_script
 
 
-
-waypoint guts_success
-say "" "Usando um pouco de força, \boy abre o pote facilmente. O doce é muito gostoso."
+waypoint guts_action_boy
+waypoint guts_action_girl
+say "" "\active usa de toda sua força pra tentar abrir o pote na pancada!"
+say "" "O pote ainda permanece fechado!"
 end_script
 
-waypoint intelligence_success
-say "" "Ao ler a letrinha miúda, \boy consegue seguir as instruções, abrindo o pote na linha pontilhada. O doce é ótimo."
-end_script
-
-waypoint charisma_success
-say "" "\boy volta e fala com o vendedor, convencendo-o de que o pote está com algum defeito."
-say "O vendedor se desculpa e devolve o dinheiro, além de um monte de outros doces!"
-end_script
-
-
-
-waypoint guts_fail
-say "" "\boy tenta abrir o pote e falha miseravelmente. Com raiva, ele usa força demais e acaba arrebentando o pote."
-end_script
-
-waypoint intelligence_fail
-say "" "\boy tenta entender como abrir o pote, porém as palavras complicadas e instruções confusas da embalagem tornam praticamente impossível abrir o negócio."
-end_script
-
-waypoint charisma_fail
-say "" "\boy volta e fala com o vendedor, o convencendo de que o pote está com algum defeito. O vendedor se enfurece e manda \boy ir catar coquinho."
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+say "" "\active molha um pedaço de sua roupa e enrola nas mãos para tentar abrir o pote!"
+say "" "O pote ainda permanece fechado!"
 end_script
 
 
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+say "" "\active diz que está com muita fome e implora para o vendedor deixá-los provarem os doces!"
+say "" "O vendedor fica com pena e afrouxa o pote só um pouquinho."
+end_script
+
+waypoint attack_boy
+say "" "Os doces parecem muito apetitosos!"
+say "" "O estômago de \boy reclama baixinho..."
+end_script
+
+waypoint attack_girl
+say "" "Os doces parecem muito apetitosos!"
+say "" "O estômago de \girl reclama baixinho..."
+end_script
+
+waypoint defeated
+say "" "O pote abriu!"
+end_script
