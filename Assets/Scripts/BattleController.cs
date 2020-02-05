@@ -528,11 +528,11 @@ public class BattleController : MonoBehaviour {
         currentDateLocation = DateLocation.park;
         break;
       case 2:
-        dateLength = 5;
+        dateLength = 4;
         currentDateLocation = DateLocation.shopping;
         break;
       case 3:
-        dateLength = 7;
+        dateLength = 5;
         currentDateLocation = DateLocation.park;
         break;
       default:
@@ -562,13 +562,13 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    //return 10;
-    return Random.Range(0, 12);
+    //return 11;
+    //return Random.Range(0, 12);
 
     int selectedEnemyId;
     do {
       //selectedId = Random.Range(0, allDateEvents.Count);
-      selectedEnemyId = Random.Range(0, 9);
+      selectedEnemyId = Random.Range(0, 12);
 
       Debug.LogWarning("selected location: " + allDateEvents[selectedEnemyId].location);
       Debug.LogWarning("date location: " + currentDateLocation.ToString());

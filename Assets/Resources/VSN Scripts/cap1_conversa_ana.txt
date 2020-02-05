@@ -99,12 +99,39 @@ goto end
 
 
 waypoint date_intro_1
-waypoint date_intro_2
 waypoint date_intro_3
 say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
 say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
 say "Ricardo" "Certo, vai ser divertido."
+set_var date_objective "ideal para jogar frisbee"
 goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "Ana" "Sabia que estreou o filme do Hopping James? Eu tô tão animada pra ver!"
+say "Ricardo" "Sério? Que legal! Quer ir comigo assistir?"
+say "Ana" "Quero! Vamo no cinema do shopping? É onde tem as melhores poltronas e o pessoal não reclama se você gritar nas cenas de ação."
+say "Ricardo" "Ótimo! Vou comprar um baldão de pipoca pra gente."
+set_var date_objective "do cinema"
+goto_script "date"
+end_script
+
+
 
 waypoint date_end_1
+say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
+say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
+end_script
+
+waypoint date_end_2
+say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
+say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
+end_script
+
+waypoint date_end_3
+say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
+say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
 end_script
