@@ -563,7 +563,7 @@ public class BattleController : MonoBehaviour {
 
   public int GetNewEnemy(List<int> selectedEvents) {
     //return 10;
-    return Random.Range(0, 11);
+    return Random.Range(0, 12);
 
     int selectedEnemyId;
     do {

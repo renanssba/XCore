@@ -173,8 +173,8 @@ public class UIController : MonoBehaviour {
         titleText.gameObject.SetActive(true);
         SetTitleText();
         bgImage.SetActive(true);
-        peopleInfoPanel.HidePanel();
-        peopleButtonPanel.ShowPanel();
+        peopleInfoPanel.ShowPanel();
+        peopleButtonPanel.HidePanel();
         datingPeoplePanel.HidePanel();
         mapMenuButtonsPanel.ShowPanel();
         interactionPinsBoard.ShowPanel();
