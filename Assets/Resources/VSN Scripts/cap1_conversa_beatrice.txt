@@ -117,3 +117,33 @@ say "Ricardo" "Que bom que você gostou!"
 
 add_heart 2
 goto end
+
+
+waypoint date_intro_1
+waypoint date_intro_3
+say "Ricardo" "Ei, o dia está lindo lá fora. Que tal irmos dar um passeio no parque?"
+say "Beatrice" "Tudo bem, estou disposta hoje. Há um carvalho que faz uma sombra muito agradável, ótimo lugar para ler."
+say "Ricardo" "Certo, vou levar um livro novo que eu comprei esses dias."
+set_var date_objective "do carvalho"
+goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "" "Ricardo se lembra que um filme de terror muito aguardado está nos cinemas atualmente, e que a garota poderia gostar de assistir."
+say "Ricardo" "Ei Beatrice, você viu que aquele filme O Furgão Assassino está nos cinemas? Você tem vontade de assistir?"
+say "Beatrice" "Sim, parece interessante. Mas eu... não frequento cinema há muito tempo. Me sinto deslocada e sozinha. E tem muita gente..."
+say "Ricardo" "Que tal se eu for com você? Você se sentiria melhor?"
+say "Beatrice" "Creio que sim... Por favor, me faça companhia."
+set_var date_objective "do cinema"
+goto_script "date"
+end_script
+
+
+
+waypoint date_end_1
+waypoint date_end_2
+waypoint date_end_3
+say "Beatrice" "É aqui, chegamos. Aprecie a beleza desse carvalho!"
+say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
+say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
+end_script

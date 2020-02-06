@@ -18,7 +18,7 @@ wait 0.5
 theater_animation "party_enters"
 wait 1.5
 
-say "" "\couple estavam andando tranquilamente em direção ao local do piquenique, quando de repente..."
+say "" "\couple estavam andando tranquilamente em direção ao local \vsn[date_objective], quando de repente..."
 
 /// DATE TUTORIAL (?)
 // if tutorial_date == 0
@@ -144,6 +144,8 @@ endfor
 
 waypoint win_date
 enable_input false
+say "" "O casal finalmente consegue chegar ao local desejado."
+goto_script "date_end"
 say "char_name/none" "date/say_4"
 // show_date_ui false
 

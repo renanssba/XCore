@@ -183,3 +183,32 @@ say "Ricardo" "Que bom que você gostou!"
 
 add_heart 3
 goto end
+
+
+waypoint date_intro_1
+waypoint date_intro_3
+say "Ricardo" "Oi Clara, gostaria de me acompanhar a um passeio no parque?"
+say "Clara" "Claro, tem um muito bonito aqui perto. Que tal fazermos um piquenique?"
+say "Ricardo" "Ótimo, vou preparar uns sanduíches."
+set_var date_objective "do piquenique"
+goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "" "Ricardo percebe que Clara está olhando um panfleto com uma expressão triste. Ele pergunta do que se trata."
+say "Clara" "Ah, isso? É uma lojinha nova de tortas que abriu no shopping. Eu queria muito conhecer, mas os meus pais não me deixam comer doce."
+say "Ricardo" "Não deixam? Que crueldade, eu sei que você adora. Vem comigo, eles não precisam saber!"
+say "Clara" "Tá bom, só dessa vez! Eu não vou contar pra eles."
+set_var date_objective "da loja de tortas"
+goto_script "date"
+end_script
+
+
+
+waypoint date_end_1
+waypoint date_end_2
+waypoint date_end_3
+say "Ricardo" "Aqui, Clara. Esse é um bom local pra estender a toalha."
+say "Clara" "Eba!!! Piquenique! Piquenique!"
+say "" "Ricardo abre a cestinha que trouxe e tira sanduíches, frutas e outras guloseimas. Os dois curtem um delicioso piquenique."
+end_script

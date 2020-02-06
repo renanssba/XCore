@@ -9,6 +9,7 @@ public class VsnSaveSystem {
 
   static readonly string varFloatPrefix = "VARNUMBER";
   static readonly string varStringPrefix = "VARSTRING";
+  static readonly string varBoolPrefix = "VARBOOL";
 
   private static int saveSlot;
   private static IVsnSaveHandler saveHandler;
@@ -51,6 +52,10 @@ public class VsnSaveSystem {
     return varFloatPrefix + "_" + key;
   }
 
+  static string GetVariableBoolPrefix(string key) {
+    return varBoolPrefix + "_" + key;
+  }
+
   static string GetVariableStringPrefix(string key) {
     return varStringPrefix + "_" + key;
   }
@@ -77,7 +82,7 @@ public class VsnSaveSystem {
 
   public static void SetVariable(string key, bool value) {
     Debug.Log("Variable " + key + " saved with bool value " + value);
-    string savedKey = GetVariableFloatPrefix(key);
+    string savedKey = GetVariableBoolPrefix(key);
 
     if (savedDataDictionary.ContainsKey(savedKey)) {
       savedDataDictionary[savedKey] = value.ToString();
@@ -127,6 +132,19 @@ public class VsnSaveSystem {
       if(float.TryParse(savedDataDictionary[savedKey], out currentValue)) {	
         return currentValue;
       }
+    }
+
+    return defaultValue;
+  }
+
+  public static bool GetBoolVariable(string key, bool defaultValue = false) {
+    string savedKey = GetVariableBoolPrefix(key);
+
+    if(savedDataDictionary.ContainsKey(savedKey)) {
+      if(savedDataDictionary[savedKey] == "True") {
+        return true;
+      }
+      return false;
     }
 
     return defaultValue;

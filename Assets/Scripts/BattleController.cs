@@ -36,6 +36,8 @@ public class BattleController : MonoBehaviour {
 
   public GameObject damageParticlePrefab;
   public GameObject itemParticlePrefab;
+  public GameObject defenseActionParticlePrefab;
+  public GameObject defendHitParticlePrefab;
   public TextMeshProUGUI difficultyText;
   public Slider enemyHpSlider;
   const float attackAnimationTime = 0.15f;
@@ -179,7 +181,7 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(ExecuteUseItem(partyMemberId, selectedTargetPartyId[partyMemberId], selectedItems[partyMemberId]));
         break;
       case TurnActionType.defend:
-        VsnController.instance.state = ExecutionState.PLAYING;
+        StartCoroutine(ExecuteDefend(partyMemberId));
         break;
       case TurnActionType.flee:
         StartCoroutine(ExecuteTryToFlee());
@@ -364,6 +366,17 @@ public class BattleController : MonoBehaviour {
   }
 
 
+  public IEnumerator ExecuteDefend(int partyMemberId) {
+
+    Actor2D currentActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+
+    currentActor.DefendActionAnimation();
+
+    yield return new WaitForSeconds(1f);
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
   public IEnumerator ExecuteTryToFlee() {
     VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
 
@@ -417,6 +430,7 @@ public class BattleController : MonoBehaviour {
     int attributeId = (int)currentEvent.attackAttribute;
     int effectiveAttackDamage = CalculateEnemyDamage(currentEvent, targetId);
     int initialHp = hp;
+    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     bool causeDamage = (currentEvent.attackPower != 0);
 
     TheaterController.instance.EnemyAttackAnimation();
@@ -429,7 +443,10 @@ public class BattleController : MonoBehaviour {
     
     // cause damage
     if(causeDamage) {
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
+      if(selectedActionType[targetId] == TurnActionType.defend) {
+        targetActor.ShowDefendHitParticle();
+      }
+      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
       yield return new WaitForSeconds(1f);
       DamagePartyHp(effectiveAttackDamage);
       yield return new WaitForSeconds(1f);
@@ -511,11 +528,11 @@ public class BattleController : MonoBehaviour {
         currentDateLocation = DateLocation.park;
         break;
       case 2:
-        dateLength = 5;
+        dateLength = 4;
         currentDateLocation = DateLocation.shopping;
         break;
       case 3:
-        dateLength = 7;
+        dateLength = 5;
         currentDateLocation = DateLocation.park;
         break;
       default:
@@ -545,13 +562,13 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    //return 10;
-    return Random.Range(0, 11);
+    //return 11;
+    //return Random.Range(0, 12);
 
     int selectedEnemyId;
     do {
       //selectedId = Random.Range(0, allDateEvents.Count);
-      selectedEnemyId = Random.Range(0, 9);
+      selectedEnemyId = Random.Range(0, 12);
 
       Debug.LogWarning("selected location: " + allDateEvents[selectedEnemyId].location);
       Debug.LogWarning("date location: " + currentDateLocation.ToString());

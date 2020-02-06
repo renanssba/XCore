@@ -22,5 +22,9 @@ public class VsnReference : VsnArgument{
   public override string GetReference(){
     return variableReferenceValue;
   }
+
+  public override bool GetBooleanValue() {
+    return VsnSaveSystem.GetBoolVariable(variableReferenceValue);
+  }
 }
 
