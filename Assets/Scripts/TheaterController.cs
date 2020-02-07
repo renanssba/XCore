@@ -45,12 +45,13 @@ public class TheaterController : MonoBehaviour {
 
     if(prefabToSpawn == null) {
       Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName+". Using default prefab");
-      prefabToSpawn = BattleController.instance.defaultEnemyPrefab;
+      spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, challengePosition, Quaternion.identity, transform);
+      enemyActor = spawnedEnemy.GetComponent<Actor2D>();
+      enemyActor.SetEnemyGraphics(dateEvent);
+    } else {
+      spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
+      enemyActor = spawnedEnemy.GetComponent<Actor2D>();
     }
-    spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
-
-    enemyActor = spawnedEnemy.GetComponent<Actor2D>();
-    enemyActor.SetEnemyGraphics(dateEvent);
   }
 
   public void DestroyEnemyActor() {
