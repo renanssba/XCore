@@ -7,6 +7,7 @@ public class VsnConsoleSimulator : MonoBehaviour {
 
   int totalCharacters;
   public bool autopass = false;
+  public bool dontHideMessageScreen = false;
 
   Coroutine showLettersCoroutine = null;
 
@@ -15,9 +16,15 @@ public class VsnConsoleSimulator : MonoBehaviour {
   }
 
 
-  public void SetAutoPassText(bool value){
-    autopass = value;
+  public void SetAutoPassText(){
+    autopass = true;
   }
+
+  public void SetBattleText() {
+    autopass = true;
+    dontHideMessageScreen = true;
+  }
+
   public void StartShowingCharacters(){
     showLettersCoroutine = StartCoroutine(RevealCharacters());
   }

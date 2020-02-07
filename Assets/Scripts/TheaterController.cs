@@ -30,42 +30,31 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject[] bgObjects;
 
-  public float intensity;
-
 
   public void Awake() {
     instance = this;
   }
 
-  public void SetEvent(TheaterEvent currentEvent) {
-    Debug.LogWarning("SET THEATER EVENT: " + currentEvent);
 
-    //mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
-    //supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
+  public void SpawnEnemyActor() {
+    DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
+    BattleController.instance.difficultyText.text = "<size=68>NV </size>" + dateEvent.level;
 
-    //mainActor.transform.localPosition = mainPosition;
-    //supportActor.gameObject.SetActive(true);
-    //supportActor.transform.localPosition = supportPosition;
+    GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + dateEvent.scriptName);
+    GameObject spawnedEnemy;
 
-    //if(currentEvent == TheaterEvent.date) {
-    //  enemyActor.ShowWeaknessCard(false);
+    if(prefabToSpawn == null) {
+      Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName+". Using default prefab");
+      prefabToSpawn = BattleController.instance.defaultEnemyPrefab;
+    }
+    spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
 
-    //  EnemyLeavesScene();
-    //} else {
-    //  SetupEnemySprites();
-    //}
+    enemyActor = spawnedEnemy.GetComponent<Actor2D>();
+    enemyActor.SetEnemyGraphics(dateEvent);
   }
 
-  public void SetupEnemySprites() {
-    DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
-    BattleController.instance.difficultyText.text = "<size=68>NV </size>" + BattleController.instance.GetCurrentDateEvent().level;
-
-    enemyActor.SetEnemyGraphics(dateEvent);
-    //if(!string.IsNullOrEmpty(dateEvent.spriteName)) {
-    //  EnemyEntersScene();
-    //} else {
-    //  InitializeChallengeLevelAndHp();
-    //}
+  public void DestroyEnemyActor() {
+    Destroy(enemyActor.gameObject);
   }
 
   public void CharacterAttackAnimation(int actorId, int animId) {
@@ -89,13 +78,13 @@ public class TheaterController : MonoBehaviour {
   public void ShineCharacter(int actorId) {
     switch(actorId) {
       case 0:
-        mainActor.Shine();
+        mainActor.ShineRed();
         break;
       case 1:
-        supportActor.Shine();
+        supportActor.ShineRed();
         break;
       case 2:
-        angelActor.Shine();
+        angelActor.ShineRed();
         break;
     }
   }
@@ -142,8 +131,8 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localPosition = supportPosition - distance;
     angelActor.transform.localPosition = angelPosition - distance;
 
-    enemyActor.transform.localPosition = challengePosition + distance;
-    enemyActor.ShowWeaknessCard(false);
+    //enemyActor.transform.localPosition = challengePosition + distance;
+    //enemyActor.ShowWeaknessCard(false);
   }
 
   public void PartyEntersScene() {
@@ -157,18 +146,32 @@ public class TheaterController : MonoBehaviour {
   public void EnemyEntersScene() {
     DateEvent currentChallenge = BattleController.instance.GetCurrentDateEvent();
 
-    SetupEnemySprites();
+    SpawnEnemyActor();
 
     currentChallenge.hp = currentChallenge.maxHp;
-
     
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
       VsnAudioManager.instance.PlaySfx(currentChallenge.appearSfxName);
       InitializeChallengeLevelAndHp();
+      PartyEntersBattleMode();
     });
   }
+
+
+  public void PartyEntersBattleMode() {
+    mainActor.SetBattleMode(true);
+    supportActor.SetBattleMode(true);
+    angelActor.SetBattleMode(true);
+  }
+
+  public void PartyLeavesBattleMode() {
+    mainActor.SetBattleMode(false);
+    supportActor.SetBattleMode(false);
+    angelActor.SetBattleMode(false);
+  }
+
 
   public void InitializeChallengeLevelAndHp() {
     BattleController.instance.enemyHpSlider.maxValue = BattleController.instance.GetCurrentDateEvent().maxHp;
@@ -182,7 +185,9 @@ public class TheaterController : MonoBehaviour {
     enemyActor.ShowWeaknessCard(false);
 
     enemyActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
-      enemyActor.gameObject.SetActive(false);
+      //enemyActor.gameObject.SetActive(false);
+      PartyLeavesBattleMode();
+      DestroyEnemyActor();
     });
   }
 

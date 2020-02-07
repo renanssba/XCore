@@ -14,6 +14,7 @@ public class Actor2D : MonoBehaviour {
 
   public DateEvent dateChallenge;
   public Person person;
+  public Animator animator;
 
   public Button targetSelectButton;
 
@@ -37,7 +38,7 @@ public class Actor2D : MonoBehaviour {
   public void SetEnemyGraphics(DateEvent currentEvent) {
     dateChallenge = currentEvent;
     if(!string.IsNullOrEmpty(currentEvent.spriteName)) {
-      renderer.sprite = LoadSprite("Challenges/" + currentEvent.spriteName);
+      renderer.sprite = LoadSprite("Enemies/" + currentEvent.spriteName);
     } else {
       gameObject.SetActive(false);
     }
@@ -49,6 +50,10 @@ public class Actor2D : MonoBehaviour {
       Debug.LogError("Error loading " + spriteName + " sprite. Please check its path");
     }
     return sprite;
+  }
+
+  public void SetBattleMode(bool value) {
+    animator.SetBool("Battle", value);
   }
 
 
@@ -71,7 +76,13 @@ public class Actor2D : MonoBehaviour {
     GameObject newParticle = Instantiate(particlePrefab, new Vector3(transform.position.x, particlePrefabPos.y, particlePrefabPos.z), Quaternion.identity, BattleController.instance.transform);
   }
 
-  public void Shine() {
+  public void ShineRed() {
+    renderer.material.SetColor("_FlashColor", Color.red);
+    FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
+  }
+
+  public void ShineGreen() {
+    renderer.material.SetColor("_FlashColor", Color.green);
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 

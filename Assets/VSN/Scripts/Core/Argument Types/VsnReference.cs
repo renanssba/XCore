@@ -27,4 +27,3 @@ public class VsnReference : VsnArgument{
     return VsnSaveSystem.GetBoolVariable(variableReferenceValue);
   }
 }
-

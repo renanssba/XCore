@@ -84,7 +84,11 @@ public class VsnUIManager : MonoBehaviour {
   }
 
   public void SetTextAuto() {
-    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetAutoPassText(true);
+    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetAutoPassText();
+  }
+
+  public void SetTextBattle() {
+    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetBattleText();
   }
 
   public void ShowClickMessageIcon(bool value){
@@ -114,6 +118,15 @@ public class VsnUIManager : MonoBehaviour {
       VsnAudioManager.instance.PlaySfx("ui_dialogue_advance");
       VsnController.instance.state = ExecutionState.PLAYING;
       ShowClickMessageIcon(false);
+      if(vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen == false) {
+        ShowDialogPanel(false);
+      }      
+    }
+  }
+
+  public void PassBattleDialog() {
+    if(vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen) {
+      vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen = false;
       ShowDialogPanel(false);
     }
   }

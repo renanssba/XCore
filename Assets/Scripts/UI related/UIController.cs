@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour {
 
   public GameObject fertilielInMenu;
 
-  public GameObject[] turnIndicators;
+  //public GameObject[] turnIndicators;
 
   public GameObject statusConditionIconPrefab;
 
@@ -220,7 +220,7 @@ public class UIController : MonoBehaviour {
     if(currentPartyMember == -1) {
       for(int i = 0; i < 3; i++) {
         partyPeopleCards[i].ShowShade(false);
-        turnIndicators[i].SetActive(false);
+        //turnIndicators[i].SetActive(false);
       }
       return;
     }
@@ -232,10 +232,10 @@ public class UIController : MonoBehaviour {
     // turn characters UI
     for(int i = 0; i < 3; i++) {
       partyPeopleCards[i].ShowShade(true);
-      turnIndicators[i].SetActive(false);
+      //turnIndicators[i].SetActive(false);
     }
     partyPeopleCards[currentPartyMember].ShowShade(false);
-    turnIndicators[currentPartyMember].SetActive(true);
+    //turnIndicators[currentPartyMember].SetActive(true);
   }
 
   public void ShowDateUI(bool value) {

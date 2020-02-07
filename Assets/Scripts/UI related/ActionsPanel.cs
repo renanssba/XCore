@@ -14,7 +14,12 @@ public class ActionsPanel : MonoBehaviour {
   public int currentPartyMember;
 
   public GameObject[] baseActionButtonShades;
+  public GameObject turnIndicator;
 
+
+  public void Awake() {
+    instance = this;
+  }
 
   public void Initialize(int partyMemberId) {
     currentPartyMember = partyMemberId;
@@ -23,6 +28,7 @@ public class ActionsPanel : MonoBehaviour {
     skillsPanel.gameObject.SetActive(false);
     //itemsPanel.gameObject.SetActive(false);
     baseActionsPanel.gameObject.SetActive(true);
+    turnIndicator.SetActive(true);
     Utils.SelectUiElement(baseActionButtons[0]);
 
     PositionPanels(partyMemberId);

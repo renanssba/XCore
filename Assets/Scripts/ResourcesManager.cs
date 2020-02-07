@@ -94,7 +94,7 @@ public class ResourcesManager : MonoBehaviour {
     Texture2D auxTexture = new Texture2D(casualTex.width, casualTex.height);
     auxTexture.SetPixels(auxColorArray);
     auxTexture.Apply();
-    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f));
+    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f), 1000);
     spriteCollection.schoolClothes = newSprite;
 
 

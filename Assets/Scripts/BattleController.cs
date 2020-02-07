@@ -34,6 +34,8 @@ public class BattleController : MonoBehaviour {
   public DateLocation currentDateLocation;
   public int currentDateId;
 
+  public GameObject defaultEnemyPrefab;
+
   public GameObject damageParticlePrefab;
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
@@ -149,6 +151,7 @@ public class BattleController : MonoBehaviour {
     UIController.instance.actionsPanel.EndActionSelect();
     VsnController.instance.GotCustomInput();
     UIController.instance.HideHelpMessagePanel();
+    ActionsPanel.instance.turnIndicator.SetActive(false);
   }
 
   public void WaitToSelectAllyTarget(TurnActionType actionType) {
@@ -252,10 +255,12 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(attackAnimationTime);
 
-    TheaterController.instance.enemyActor.Shine();
+    TheaterController.instance.enemyActor.ShineRed();
     TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
 
     yield return new WaitForSeconds(1f);
+
+    VsnUIManager.instance.PassBattleDialog();
     enemyHpSlider.maxValue = currentEvent.maxHp;
     enemyHpSlider.DOValue(currentEvent.hp, 1f);
 
@@ -277,15 +282,16 @@ public class BattleController : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("heal_default");
 
     yield return new WaitForSeconds(attackAnimationTime);
+    VsnUIManager.instance.PassBattleDialog();
 
     switch(usedSkill.skillEffect) {
       case SkillEffect.sensor:
-        TheaterController.instance.enemyActor.Shine();
+        TheaterController.instance.enemyActor.ShineRed();
         TheaterController.instance.enemyActor.ShowWeaknessCard(true);
         break;
       case SkillEffect.giveStatusCondition:
         partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
-        TheaterController.instance.GetActorByIdInParty(targetId).Shine();
+        TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
         StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[0]);
         VsnArgument[] args = new VsnArgument[3];
         args[0] = new VsnString("receive_status_condition");
@@ -297,7 +303,7 @@ public class BattleController : MonoBehaviour {
         break;
       case SkillEffect.healStatusCondition:
         partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
-        TheaterController.instance.GetActorByIdInParty(targetId).Shine();
+        TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
         break;
     }
     
@@ -323,7 +329,7 @@ public class BattleController : MonoBehaviour {
     ivt.ConsumeItem(usedItem.id, 1);
 
     VsnAudioManager.instance.PlaySfx("item_use");
-    targetActor.Shine();
+    targetActor.ShineGreen();
 
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
@@ -448,6 +454,8 @@ public class BattleController : MonoBehaviour {
       }
       targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
       yield return new WaitForSeconds(1f);
+
+      VsnUIManager.instance.PassBattleDialog();
       DamagePartyHp(effectiveAttackDamage);
       yield return new WaitForSeconds(1f);
     }
@@ -562,7 +570,9 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
+    //return 7;
     //return 11;
+    return Random.Range(7, 9);
     //return Random.Range(0, 12);
 
     int selectedEnemyId;
