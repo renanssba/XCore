@@ -32,7 +32,7 @@ public class StatusCondition {
 
   public StatusConditionEffect[] statusEffect;
   public float[] statusEffectPower;
-  public bool stackable = false;
+  public int stackable = 1;
 
   public StatusCondition() {
     duration = -1;

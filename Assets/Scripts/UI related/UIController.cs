@@ -14,19 +14,14 @@ public class UIController : MonoBehaviour {
   public RelationshipCard[] relationshipCards;
   public TextMeshProUGUI dayText;
 
-  public RelationshipCard relationshipCard;
+  public RelationshipCard relationshipUpAnimationCard;
 
   public CoupleEntry[] coupleEntries;
 
   public TextMeshProUGUI moneyText;
 
-  public GameObject bgImage;
-
   public Button[] menuButtons;
 
-  public ScreenTransitions peopleButtonPanel;
-  public ScreenTransitions peopleInfoPanel;
-  public ScreenTransitions mapMenuButtonsPanel;
   public ScreenTransitions datingPeoplePanel;
   public Slider partyHpSlider;
   public TextMeshProUGUI partyHpText;
@@ -51,12 +46,8 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
-  public Image girlInteractionImage;
-  public Image boyInteractionImage;
 
-  public GameObject fertilielInMenu;
-
-  //public GameObject[] turnIndicators;
+  public GirlInteractionScreen girlInteractionScreen;
 
   public GameObject statusConditionIconPrefab;
 
@@ -158,44 +149,26 @@ public class UIController : MonoBehaviour {
 
     switch(state) {
       case "hide_all":
-        uiControllerPanel.HidePanel();
-        titleText.gameObject.SetActive(false);
-        bgImage.SetActive(true);
-        peopleInfoPanel.HidePanel();
-        peopleButtonPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
-        mapMenuButtonsPanel.HidePanel();
         interactionPinsBoard.HidePanel();
-        fertilielInMenu.SetActive(false);
+        uiControllerPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         break;
       case "interact_with_board":
-        uiControllerPanel.ShowPanel();
-        titleText.gameObject.SetActive(true);
         SetTitleText();
-        bgImage.SetActive(true);
-        peopleInfoPanel.ShowPanel();
-        peopleButtonPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
-        mapMenuButtonsPanel.ShowPanel();
         interactionPinsBoard.ShowPanel();
-        fertilielInMenu.SetActive(true);
+        uiControllerPanel.ShowPanel();
+        datingPeoplePanel.HidePanel();
+        break;
+      case "girl_interaction_screen":
+        interactionPinsBoard.HidePanel();
+        uiControllerPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         break;
       case "date":
       case "date_challenge":
-        uiControllerPanel.HidePanel();
-        titleText.gameObject.SetActive(false);
-        //if(state == "date") {
-        //  theater.SetEvent(TheaterEvent.date);
-        //} else {
-        //  theater.SetEvent(TheaterEvent.dateChallenge);
-        //}
-        bgImage.SetActive(false);
-        peopleInfoPanel.HidePanel();
-        peopleButtonPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
-        mapMenuButtonsPanel.HidePanel();
         interactionPinsBoard.HidePanel();
-        fertilielInMenu.SetActive(false);
+        uiControllerPanel.HidePanel();
+        datingPeoplePanel.HidePanel();
         break;
     }
     SetupContext(state, firstButton);

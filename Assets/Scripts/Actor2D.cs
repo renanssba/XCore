@@ -7,7 +7,9 @@ using TMPro;
 
 public class Actor2D : MonoBehaviour {
 
-  public new SpriteRenderer renderer;
+  public new SpriteRenderer[] renderers;
+  public SpriteRenderer[] buffAuraRenderers;
+  public ParticleSystem particleSystem;
 
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
@@ -24,21 +26,66 @@ public class Actor2D : MonoBehaviour {
 
   public void SetCharacterGraphics(Person p) {
     person = p;
+    UpdateCharacterGraphics();
+  }
+
+  public void UpdateCharacterGraphics() {
     if(!string.IsNullOrEmpty(person.name)) {
-      if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
-        renderer.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "uniform");
+      if(person.CurrentStatusConditionStacks("sad") == 0) {
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "base");
       } else {
-        renderer.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "sad");
+      }      
+      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "underwear");
+      switch(person.CurrentStatusConditionStacks("unclothed")) {
+        case 0:
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+          break;
+        case 1:
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "unclothed");
+          break;
+        case 2:
+          renderers[2].sprite = null;
+          break;
       }
+      SetAuraVisibility();
     } else {
       gameObject.SetActive(false);
     }
   }
 
+  public void SetAuraVisibility() {
+    Debug.LogWarning("SETTING AURA VISIBILITY");
+    if(person.CurrentStatusConditionStacks("encouraged") > 0) {
+      ShowAura( ResourcesManager.instance.attributeColor[(int)Attributes.guts] );
+    } else if(person.CurrentStatusConditionStacks("focused") > 0) {
+      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.intelligence]);
+    } else if(person.CurrentStatusConditionStacks("inspired") > 0) {
+      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.charisma]);
+    } else if(person.CurrentStatusConditionStacks("blessed") > 0) {
+      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.magic]);
+    } else {
+      Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
+      buffAuraRenderers[0].gameObject.SetActive(false);
+    }
+  }
+
+  public void ShowAura(Color c) {
+    c = 2f * c;
+    Debug.LogWarning("showing aura: " + c);
+
+    ParticleSystem.MainModule settings = particleSystem.main;
+    settings.startColor = new ParticleSystem.MinMaxGradient(c);
+
+    buffAuraRenderers[0].color = c;
+    buffAuraRenderers[1].color = c;
+    buffAuraRenderers[0].gameObject.SetActive(true);
+  }
+
   public void SetEnemyGraphics(DateEvent currentEvent) {
     dateChallenge = currentEvent;
     if(!string.IsNullOrEmpty(currentEvent.spriteName)) {
-      renderer.sprite = LoadSprite("Enemies/" + currentEvent.spriteName);
+      renderers[0].sprite = LoadSprite("Enemies/" + currentEvent.spriteName);
     } else {
       gameObject.SetActive(false);
     }
@@ -77,12 +124,16 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShineRed() {
-    renderer.material.SetColor("_FlashColor", Color.red);
+    foreach(SpriteRenderer r in renderers) {
+      r.material.SetColor("_FlashColor", Color.red);
+    }    
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 
   public void ShineGreen() {
-    renderer.material.SetColor("_FlashColor", Color.green);
+    foreach(SpriteRenderer r in renderers) {
+      r.material.SetColor("_FlashColor", Color.green);
+    }
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 
@@ -94,11 +145,13 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
-    DOTween.Kill(renderer.material);
-    renderer.material.SetFloat("_FlashAmount", minFlash);
-    renderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(()=> {
-      renderer.material.SetFloat("_FlashAmount", 0f);
-    });
+    foreach(SpriteRenderer r in renderers) {
+      DOTween.Kill(r.material);
+      r.material.SetFloat("_FlashAmount", minFlash);
+      r.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
+        r.material.SetFloat("_FlashAmount", 0f);
+      });
+    }
   }
 
 

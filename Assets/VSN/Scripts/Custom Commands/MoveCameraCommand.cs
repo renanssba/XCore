@@ -21,7 +21,7 @@ namespace Command {
 
       switch(args[0].GetStringValue()) {
         case "close_shot":
-          cameraPos = new Vector3(-0.91f, 1.52f, -2.52f);
+          cameraPos = new Vector3(-0.91f, 1.52f, -2.8f);
           break;
         case "battle_view":
         default:

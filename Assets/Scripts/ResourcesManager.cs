@@ -7,9 +7,12 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CharacterSpriteCollection {
   public string name;
-  public Sprite body;
+  public Sprite baseBody;
+  public Sprite sadBody;
+  public Sprite underwear;
   public Sprite schoolClothes;
-  public Sprite casual;
+  public Sprite casualClothes;
+  public Sprite incompleteCasualClothes;
 }
 
 
@@ -47,13 +50,19 @@ public class ResourcesManager : MonoBehaviour {
     }
     CharacterSpriteCollection col = characterSpritesCollections[id];
     switch(situation) {
-      case "nude":
-        return col.body;
-      case "uniform":
+      case "base":
+        return col.baseBody;
+      case "sad":
+        return col.sadBody;
+      case "underwear":
+        return col.underwear;
+      case "school":
         return col.schoolClothes;
+      case "unclothed":
+        return col.incompleteCasualClothes;
       case "casual":
       default:
-        return col.casual;
+        return col.casualClothes;
     }
   }
 
@@ -69,7 +78,23 @@ public class ResourcesManager : MonoBehaviour {
     Sprite newSprite;
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
     spriteCollection.name = charName;
-    spriteCollection.body = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
+    spriteCollection.baseBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
+    spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-shy");
+
+    spriteCollection.underwear = Resources.Load<Sprite>(characterSpritesPath + charName + "-underwear");
+
+    spriteCollection.schoolClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-uniform");
+    spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
+
+    //Sprite aux = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
+    //if(aux != null) {
+    //  spriteCollection.incompleteCasualClothes = aux;
+    //}
+    spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
+
+    characterSpritesCollections.Add(spriteCollection);
+    return;
+
 
     Texture2D bodyTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-base");
     bodyPixels = bodyTex.GetPixels();
@@ -77,8 +102,8 @@ public class ResourcesManager : MonoBehaviour {
 
     // If there's no casual texture, use the base for everything
     if(casualTex == null) {
-      spriteCollection.schoolClothes = spriteCollection.body;
-      spriteCollection.casual = spriteCollection.body;
+      spriteCollection.schoolClothes = spriteCollection.baseBody;
+      spriteCollection.casualClothes = spriteCollection.baseBody;
       return;
     }
     casualPixels = casualTex.GetPixels();
@@ -103,7 +128,7 @@ public class ResourcesManager : MonoBehaviour {
     auxTexture.SetPixels(auxColorArray);
     auxTexture.Apply();
     newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f));
-    spriteCollection.casual = newSprite;
+    spriteCollection.casualClothes = newSprite;
     
 
     characterSpritesCollections.Add(spriteCollection);

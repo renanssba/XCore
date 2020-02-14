@@ -166,8 +166,8 @@ public class Person {
       newCondition = newCondition.GenerateClone();
       newCondition.duration = usedSkill.duration + 1;
       newCondition.maxDurationShowable = usedSkill.duration;
-      newCondition.name = usedSkill.GetPrintableName();
-      newCondition.sprite = usedSkill.sprite;
+      //newCondition.name = usedSkill.GetPrintableName();
+      //newCondition.sprite = usedSkill.sprite;
       ReceiveStatusCondition(newCondition);
     }
   }
@@ -179,8 +179,8 @@ public class Person {
       newCondition = newCondition.GenerateClone();
       newCondition.duration = usedItem.duration + 1;
       newCondition.maxDurationShowable = usedItem.duration;
-      newCondition.name = usedItem.GetPrintableName();
-      newCondition.sprite = usedItem.sprite;
+      //newCondition.name = usedItem.GetPrintableName();
+      //newCondition.sprite = usedItem.sprite;
       ReceiveStatusCondition(newCondition);
     }
   }
@@ -188,9 +188,10 @@ public class Person {
   public bool ReceiveStatusCondition(StatusCondition newCondition) {
     int i = FindStatusCondition(newCondition);
     bool receivedNewStatus = false;
-    if(i == -1 || statusConditions[i].stackable) {
+    Actor2D actor = TheaterController.instance.GetActorByPerson(this);
+
+    if(CurrentStatusConditionStacks(newCondition.name) < newCondition.stackable) {
       statusConditions.Add(newCondition);
-      Actor2D actor = TheaterController.instance.GetActorByPerson(this);
       actor.ShowStatusConditionParticle(newCondition);
       receivedNewStatus = true;
     } else if(statusConditions[i].duration < newCondition.duration) {
@@ -201,7 +202,18 @@ public class Person {
       receivedNewStatus = true;
     }
     UIController.instance.UpdateDateUI();
+    actor.UpdateCharacterGraphics();
     return receivedNewStatus;
+  }
+
+  public int CurrentStatusConditionStacks(string name) {
+    int count = 0;
+    foreach(StatusCondition sc in statusConditions) {
+      if(sc.name == name) {
+        count++;
+      }
+    }
+    return count;
   }
 
 
@@ -212,12 +224,15 @@ public class Person {
   }
 
   public void RemoveStatusCondition(string name) {
+    Actor2D actor = TheaterController.instance.GetActorByPerson(this);
+
     for(int i = statusConditions.Count-1; i >= 0; i--) {
       if(statusConditions[i].name == name) {
         statusConditions.RemoveAt(i);
       }
     }
     UIController.instance.UpdateDateUI();
+    actor.UpdateCharacterGraphics();
   }
 
   public void RemoveAllStatusConditions() {

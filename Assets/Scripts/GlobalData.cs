@@ -289,7 +289,7 @@ public class GlobalData : MonoBehaviour {
 
 
   public void AddHeartsWithGirlId(int girlId, int hearts) {
-    UIController.instance.relationshipCard.RaiseHeartsAnimation(hearts);
+    UIController.instance.relationshipUpAnimationCard.RaiseHeartsAnimation(hearts);
     relationships[girlId-1].hearts += hearts;
   }
 

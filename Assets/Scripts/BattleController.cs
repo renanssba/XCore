@@ -570,9 +570,12 @@ public class BattleController : MonoBehaviour {
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {
-    //return 6;
+    return 2;
+    return 4;
+    return 6;
+    return 7;
     //return 11;
-    //return Random.Range(7, 9);
+    return Random.Range(5, 9);
     //return Random.Range(0, 12);
 
     int selectedEnemyId;
@@ -839,7 +842,7 @@ public class BattleController : MonoBehaviour {
       newStatusCondition.id = int.Parse(entry["id"]);
       newStatusCondition.name = entry["name"];
       //newStatusCondition.description = entry["description"];
-      newStatusCondition.stackable = (entry["stackable"] == "TRUE" ? true : false);
+      newStatusCondition.stackable = int.Parse(entry["stackable"]);//  (entry["stackable"] == "TRUE" ? true : false);
 
       newStatusCondition.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
 

@@ -14,6 +14,7 @@ public class ArmyAnimatorController : MonoBehaviour {
   }
 
   public IEnumerator StartAnimators(Animator anim, float waitTime) {
+    anim.enabled = false;
     yield return new WaitForSeconds(waitTime);
     anim.enabled = true;
   }
