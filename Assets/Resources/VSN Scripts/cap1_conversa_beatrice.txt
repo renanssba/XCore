@@ -9,6 +9,8 @@ if #day == 1
   say "" "Ricardo senta-se em uma cadeira ao fundo da biblioteca e fica bem atento, observando se alguém vem falar com ele."
   say "Ricardo" "(A cartinha estava assinada com um 'B'... Eu não lembro de ninguém em particular cujo nome comece com essa letra. Quem será?)"
   say "" "Ricardo fica vários minutos observando ao seu redor, mas ninguém vem falar com ele."
+  say "Certo momento, ele percebe que há alguém escondido atrás de uma coluna, observando-o."
+  say "Ele tenta acenar para a pessoa, mas ela se afasta e corre para longe rapidamente."
   say "O tempo do intervalo acaba e ele não obtém sua resposta sobre o autor da cartinha."
   say "Ricardo" "(Droga, eu perdi meu tempo aqui. Eu furei de lanchar com a Ana e a pessoa nem apareceu... Que vacilo...)"
   say "" "Ricardo volta para a sala de aula para continuar as próximas lições."
@@ -63,7 +65,7 @@ if #day == 2
   say "Ricardo" "Sério? Obrigado, é muito gentil da sua parte!"
   say "Beatrice" "De nada. Espero que aprecie..."
 
-  add_heart 2
+  add_exp 50
 
   say "Beatrice" "Por favor, me conte o que achou quando terminar sua leitura."
   say "Ricardo" "Claro, com prazer!"
@@ -90,6 +92,7 @@ if beatrice_heart >= 1
   
   say "" "Os dois conversam sobre os livros que eles leram recentemente."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+  add_exp 20
 endif
 
 add_var beatrice_heart 1
@@ -115,7 +118,7 @@ play_sfx "relationship_up"
 say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
-add_heart 2
+add_exp 50
 goto end
 
 
@@ -141,9 +144,18 @@ end_script
 
 
 waypoint date_end_1
-waypoint date_end_2
 waypoint date_end_3
 say "Beatrice" "É aqui, chegamos. Aprecie a beleza desse carvalho!"
 say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
 say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
+end_script
+
+
+waypoint date_end_2
+say "" "Depois de todos os percalços, o casal finalmente consegue chegar ao cinema."
+say "Beatrice" "Agradeço por me acompanhar. Toda essa multidão de gente me deixa nervosa."
+say "Ricardo" "Tudo bem. Eu espero que o filme valha a pena."
+say "Beatrice" "Estou muito entusiasmada. O diretor sempre exagera nos esguichos de sangue, é hilário."
+fade_out 0.5
+say "" "Os dois assistem o filme e se divertem bastante."
 end_script

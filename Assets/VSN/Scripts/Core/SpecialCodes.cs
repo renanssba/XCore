@@ -159,7 +159,7 @@ public class SpecialCodes {
       case "#currentRelationshipProgress":
         Relationship rel = GlobalData.instance.GetCurrentRelationship();
         if(rel != null) {
-          return GlobalData.instance.GetCurrentRelationship().hearts;
+          return GlobalData.instance.GetCurrentRelationship().level;
         } else {
           return -1;
         }

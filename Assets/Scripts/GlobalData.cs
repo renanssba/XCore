@@ -267,7 +267,7 @@ public class GlobalData : MonoBehaviour {
     List<Relationship> availableCouples = new List<Relationship>();
 
     foreach(Relationship r in relationships) {
-      if(r.hearts >= 2) {
+      if(r.level >= 2) {
         availableCouples.Add(r);
       }
     }
@@ -288,9 +288,9 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void AddHeartsWithGirlId(int girlId, int hearts) {
-    UIController.instance.relationshipUpAnimationCard.RaiseHeartsAnimation(hearts);
-    relationships[girlId-1].hearts += hearts;
+  public void AddExpForRelationship(Relationship rel, int expToAdd) {
+    UIController.instance.relationshipUpAnimationCard.Initialize(rel);
+    UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
   }
 
   public void AddBondSkill(int relationshipId, int skillId) {

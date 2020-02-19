@@ -66,7 +66,7 @@ public class PersonCard : MonoBehaviour {
         heartsPanel.SetActive(true);
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, 184f);
         for(int i = 0; i < heartIcons.Length; i++) {
-          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id - 1].hearts ? Color.white : new Color(0f, 0f, 0f, 0.5f));
+          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id - 1].level ? Color.white : new Color(0f, 0f, 0f, 0.5f));
         }
       }
     }

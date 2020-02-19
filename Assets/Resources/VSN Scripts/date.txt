@@ -149,7 +149,17 @@ goto_script "date_end"
 say "char_name/none" "date/say_4"
 // show_date_ui false
 
-add_heart #currentGirlId #currentDateId
+if #currentDateId == 1
+  add_exp 180
+endif
+if #currentDateId == 2
+  add_exp 400
+endif
+if #currentDateId == 3
+  add_exp 2000
+endif
+open_heart_lock #currentDateId
+
 goto end
 
 

@@ -70,7 +70,7 @@ public class BattleController : MonoBehaviour {
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedTargetPartyId = new int[partyMembers.Length];
 
-    maxHp = GlobalData.instance.GetCurrentRelationship().hearts * 8 + 26;
+    maxHp = GlobalData.instance.GetCurrentRelationship().level * 8 + 26;
 
     FullHealParty();
     UIController.instance.ShowPartyPeopleCards();
@@ -288,26 +288,29 @@ public class BattleController : MonoBehaviour {
       case SkillEffect.sensor:
         TheaterController.instance.enemyActor.ShineRed();
         TheaterController.instance.enemyActor.ShowWeaknessCard(true);
+        yield return new WaitForSeconds(1f);
         break;
-      case SkillEffect.giveStatusCondition:
-        partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
+      case SkillEffect.buffDebuff:
         TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
-        StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[0]);
-        VsnArgument[] args = new VsnArgument[3];
-        args[0] = new VsnString("receive_status_condition");
-        args[1] = new VsnString(partyMembers[targetId].name);
-        args[2] = new VsnString(statusCondition.GetPrintableName());
 
-        StartCoroutine(WaitThenShowActionDescription(1f, args));
-        yield break;
-        break;
-      case SkillEffect.healStatusCondition:
-        partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
-        TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
+        if(usedSkill.healsConditionNames.Length > 0) {
+          partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
+        }
+
+        foreach(string givenCondition in usedSkill.givesConditionNames) {
+          partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
+          StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
+          VsnArgument[] args = new VsnArgument[3];
+          args[0] = new VsnString("receive_status_condition");
+          args[1] = new VsnString(partyMembers[targetId].name);
+          args[2] = new VsnString(statusCondition.GetPrintableName());
+
+          StartCoroutine(WaitThenShowActionDescription(1f, args));
+        }
         break;
     }
     
-    yield return new WaitForSeconds(1.5f);
+    yield return new WaitForSeconds(0.5f);
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 

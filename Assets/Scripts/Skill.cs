@@ -13,8 +13,7 @@ public enum ActionRange {
 
 public enum SkillEffect {
   sensor,
-  giveStatusCondition,
-  healStatusCondition,
+  buffDebuff,
   flee,
   gluttony,
   bondSkill,

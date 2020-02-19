@@ -58,10 +58,10 @@ public class GameController : MonoBehaviour {
 
 
   public void Update() {
-    if(Input.GetKeyDown(KeyCode.F4)){
+    if(Input.GetKeyDown(KeyCode.F4) && Application.isEditor){
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
-    if (Input.GetKeyDown(KeyCode.F5)) {
+    if(Input.GetKeyDown(KeyCode.F5) && Application.isEditor) {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
   }

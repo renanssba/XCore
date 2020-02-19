@@ -30,6 +30,7 @@ waypoint conversation
 if ana_heart == 0
   say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+  add_exp 20
 endif
 
 if ana_heart == 1
@@ -56,12 +57,13 @@ if ana_heart == 1
   say "Ana" "..."
   say "Ana" "Valeu. Você é um bobo, mesmo!"
 
-  add_heart 1
+  add_exp 50
 endif
 
 if ana_heart >= 2
   say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
   say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+  add_exp 20
 endif
 
 add_var ana_heart 1
@@ -94,7 +96,7 @@ play_sfx "relationship_up"
 say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
-add_heart 1
+add_exp 50
 goto end
 
 
@@ -125,9 +127,12 @@ say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansa
 end_script
 
 waypoint date_end_2
-say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
-say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
-say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
+say "" "Depois de todos os percalços, o casal finalmente consegue chegar ao cinema."
+say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
+say "Ricardo" "Você tá mesmo empolgada, hein?"
+say "Ana" "Claro! Esse cara é o meu ídolo! Ele levou o time dele até a final praticamente sozinho!"
+fade_out 0.5
+say "" "Os dois assistem o filme e se divertem bastante."
 end_script
 
 waypoint date_end_3

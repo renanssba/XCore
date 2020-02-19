@@ -62,7 +62,7 @@ public class UIController : MonoBehaviour {
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
     for(int i = 0; i < relationshipCards.Length; i++) {
-      if(i < GlobalData.instance.relationships.Length) {
+      if(i < GlobalData.instance.relationships.Length && GlobalData.instance.relationships[i].level>0) {
         relationshipCards[i].gameObject.SetActive(true);
         relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
       } else {

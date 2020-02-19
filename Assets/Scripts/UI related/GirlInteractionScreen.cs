@@ -74,6 +74,12 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickGiveGiftButton() {
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+    if(currentRelationship.heartLocksOpened < 1) {
+      ShowForbiddenMessage("give_gift");
+      return;
+    }
+
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
     Command.GotoCommand.StaticExecute("give_gift");
@@ -82,17 +88,24 @@ public class GirlInteractionScreen : MonoBehaviour {
 
 
   public void ClickedDateButton(int dateId) {
-
-    /// IF CANNOT GO TO DATE RIGHT NOW
-    //if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
-    //  SfxManager.StaticPlayForbbidenSfx();
-    //  return;
-    //}
-
     Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+    if(currentRelationship.level < 2 && dateId == 1) {
+      ShowForbiddenMessage("date_1");
+      return;
+    }
+    else if(currentRelationship.level < 4 && dateId == 2) {
+      ShowForbiddenMessage("date_2");
+      return;
+    }
+    else if(currentRelationship.level < 7 && dateId == 3) {
+      ShowForbiddenMessage("date_3");
+      return;
+    }
 
-    Debug.LogWarning("Clicked date button to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
 
+    Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
+
+    VsnSaveSystem.SetVariable("dateId", dateId);
     BattleController.instance.StartBattle(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
 
     SfxManager.StaticPlayBigConfirmSfx();
@@ -113,5 +126,12 @@ public class GirlInteractionScreen : MonoBehaviour {
         VsnController.instance.StartVSN("cap1_conversa_clara", args);
         break;
     }
+  }
+
+  public void ShowForbiddenMessage(string waypointToLoad) {
+    HideGirlInteractionScreen();
+    Command.GotoCommand.StaticExecute("action_choice");
+    Command.GotoScriptCommand.StaticExecute("forbidden_interaction", new VsnArgument[] { new VsnString(waypointToLoad) });
+    VsnController.instance.GotCustomInput();
   }
 }

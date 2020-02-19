@@ -29,7 +29,7 @@ public class CoupleEntry : MonoBehaviour {
     }
     // heart icons
     for(int i = 0; i < heartIcons.Length; i++) {
-      heartIcons[i].color = (i < relationship.hearts ? Color.white : new Color(0f, 0f, 0f, 0.5f));
+      heartIcons[i].color = (i < relationship.level ? Color.white : new Color(0f, 0f, 0f, 0.5f));
     }
 
     for(int i=0; i<3; i++) {

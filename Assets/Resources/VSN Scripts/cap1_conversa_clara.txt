@@ -90,12 +90,13 @@ if clara_heart >= 1
     say "Eu vou fazer mais uma vez pra você! E vou me certificar que eles não caiam no chão dessa vez."
     say "Clara" "Hahaha, obrigada!"
     
-    add_heart 3
+    add_exp 50
     
     say "Ricardo" "(Onde quer que ela esteja agora, eu tenho certeza que a minha mãe ficará orgulhosa.)"
   else
     say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
     say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+    add_exp 20
   endif
   
   add_var clara_heart 1
@@ -145,7 +146,7 @@ if clara_heart == 0
   say "Clara" "Claro, isso aqui tá bom demais. Você já pensou em ser cozinheiro?"
   say "" "Ricardo fica muito feliz e consegue se acalmar. Após terminarem de comer, eles conversam muito sobre omeletes e tipos de café da manhã."
 
-  add_heart 3
+  add_exp 20
 endif
 
 
@@ -181,7 +182,7 @@ play_sfx "relationship_up"
 say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
-add_heart 3
+add_exp 50
 goto end
 
 
@@ -206,9 +207,17 @@ end_script
 
 
 waypoint date_end_1
-waypoint date_end_2
 waypoint date_end_3
 say "Ricardo" "Aqui, Clara. Esse é um bom local pra estender a toalha."
 say "Clara" "Eba!!! Piquenique! Piquenique!"
 say "" "Ricardo abre a cestinha que trouxe e tira sanduíches, frutas e outras guloseimas. Os dois curtem um delicioso piquenique."
+end_script
+
+waypoint date_end_2
+say "" "Depois de todos os percalços, o casal finalmente chega à loja de tortas."
+say "Clara" "Oba! Você consegue sentir esse cheirinho? Já tô com água na boca!"
+say "Ricardo" "A comida daqui deve ser incrível... Eu quero cozinhar tão bem assim algum dia!"
+say "Clara" "Com certeza você vai conseguir!"
+fade_out 0.5
+say "" "Os dois se sentam e provam diversas tortas deliciosas."
 end_script

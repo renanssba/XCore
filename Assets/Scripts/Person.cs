@@ -303,12 +303,36 @@ public class Person {
 [System.Serializable]
 public class Relationship {
   public Person[] people;
-  public int hearts = 0;
+  public int level = 0;
+  public int exp = 0;
+  public int heartLocksOpened = 0;
   public List<int> bondSkills;
 
+  public static readonly int[] levelUpCosts = {20, 40, 100, 180, 300, 480, 750, 1150, 1700, 2500};
+
   public Relationship() {
-    hearts = 0;
+    level = 0;
     bondSkills = new List<int>();
+  }
+
+  public static int LevelStartingExp(int level) {
+    int count = 0;
+
+    for(int i=0; i<level;  i++) {
+      count += levelUpCosts[i];
+    }
+    return count;
+  }
+
+  public static int LevelUpNeededExp(int level) {
+    if(level >= 10) {
+      return -1;
+    }
+    return levelUpCosts[level];
+  }
+
+  public void OpenHeartLock(int lockId) {
+    heartLocksOpened = Mathf.Max(heartLocksOpened, lockId);
   }
 
 
@@ -318,5 +342,16 @@ public class Relationship {
 
   public Person GetGirl() {
     return people[1];
+  }
+
+  public bool GetExp(int value) {
+    bool didLevelUp = false;
+
+    exp += value;
+    while(level < 10 && exp - LevelStartingExp(level) >= LevelUpNeededExp(level)) {
+      level++;
+      didLevelUp = true;
+    }
+    return didLevelUp;
   }
 }
