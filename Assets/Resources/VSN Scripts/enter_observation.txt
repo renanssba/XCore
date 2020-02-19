@@ -3,4 +3,8 @@ fade_out 1
 wait 0.5
 play_music "observacao2_intro" "observacao2_loop"
 wait 0.5
-bg arg1
+bg null
+bg3d arg1
+theater_animation "setup_girl_interaction"
+set_screen "girl_interaction_screen"
+move_camera "girl_interaction" 0

@@ -16,6 +16,8 @@ public class RelationshipCard : MonoBehaviour {
   public TextMeshProUGUI coupleNameText;
   public ScreenTransitions screenTransitions;
 
+  public TextMeshProUGUI proximityLevelText;
+
   public Relationship relationship;
 
 
@@ -31,10 +33,11 @@ public class RelationshipCard : MonoBehaviour {
     int startingPoint = Relationship.LevelStartingExp(relationship.level);
     int neededExp = Relationship.LevelUpNeededExp(relationship.level);
     int currentLevelExp = relationship.exp - startingPoint;
-    //int sliderSize
 
     expSlider.maxValue = neededExp;
     expSlider.value = currentLevelExp;
+
+    proximityLevelText.text = Utils.RelationshipNameByHeartLocksOpened(relationship.heartLocksOpened);
 
     expText.text = currentLevelExp.ToString()+" /"+neededExp;
 

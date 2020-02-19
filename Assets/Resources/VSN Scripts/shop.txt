@@ -1,14 +1,27 @@
-﻿goto_script "tutorial_shop"
+﻿fade_out 0.7
+bg "heaven"
+fade_in 0.7
+//goto_script "tutorial_shop"
 
-/// graciel appears and talks to fertiliel before you can shop
-//
+character char_right "graciel"
+char_move_x char_right 1.5
+char_move_x char_right 0.5 0.7
+anim_alpha char_right 0 0
+anim_alpha char_right 1 0.7
+wait 0.7
+
 /// DEBUG: GET MUCH MONEY
 // add_var money 1000
 // update_ui
 
+say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
+goto store_choices
+
+
 waypoint store_loop
-say_auto "char_name/none" "shop/say_0"
-choices "shop/choices_0_0" buy "shop/choices_0_1" sell "choices/cancel" end
+say_auto "Graciel" "Quer fazer mais algum negócio?"
+waypoint store_choices
+choices "shop/choices_0_0" buy "shop/choices_0_1" sell "Sair" end
 
 
 waypoint buy
@@ -17,12 +30,12 @@ show_shop true "buy"
 if item_id != -1
   if item_price <= money
     say_auto "shop/say_1"
-    choices "choices/yes" comprar_sim "choices/no" voltar
+    choices "choices/yes" comprar_sim "choices/no" store_loop
   else
     say "shop/say_2"
   endif
 else
-  goto end
+  goto store_loop
 endif
 goto store_loop
 
@@ -36,9 +49,9 @@ endif
 show_shop true "sell"
 if item_id != -1
   say_auto "shop/say_4"
-  choices "choices/yes" vender_sim "choices/no" voltar
+  choices "choices/yes" vender_sim "choices/no" store_loop
 else
-  goto end
+  goto store_loop
 endif
 goto store_loop
 
@@ -58,13 +71,15 @@ add_var money item_price
 update_ui
 play_sfx "ui_money"
 add_item item_id -1 false
-say "shop/say_6"
+say "Graciel" "Muito obrigada! Isso vai ficar lindo na minha coleção."
 goto store_loop
 
-
-
-waypoint voltar
-goto store_loop
-
+// waypoint
 
 waypoint end
+say "Graciel" "Obrigada e volte sempre! Boa sorte juntando os humanos!"
+
+fade_out 0.7
+char_reset_all
+bg null
+fade_in 0.7

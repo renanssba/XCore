@@ -83,6 +83,9 @@ endif
 if beatrice_heart >= 1
   say "" "Chegando na biblioteca, Ricardo encontra Beatrice lendo."
   fade_in 1
+
+  theater_animation "main_actor_enters"
+  wait 1.8
   
   waypoint action_choice
   girl_interaction

@@ -6,18 +6,17 @@ using DG.Tweening;
 
 public class GirlInteractionScreen : MonoBehaviour {
 
-
   public ScreenTransitions girlInteractionPanel;
   public ScreenTransitions girlInteractionButtonsPanel;
 
-  public CoupleEntry coupleEntry;
+  public RelationshipCard relationshipCard;
 
   public ScreenTransitions dateSelectPanel;
   public GameObject[] girlInteractionButtons;
   public GameObject[] dateSelectButtons;
 
-  public Image[] girlInteractionImage;
-  public Image[] boyInteractionImage;
+  //public Image[] girlInteractionImage;
+  //public Image[] boyInteractionImage;
 
 
 
@@ -27,20 +26,10 @@ public class GirlInteractionScreen : MonoBehaviour {
       Debug.LogError("Error getting current relationship");
     }
 
-    UIController.instance.SetScreenLayout("girl_interaction_screen");
-
-    boyInteractionImage[0].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[0].id, "base");
-    girlInteractionImage[0].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[1].id, "base");
-    if(VsnSaveSystem.GetIntVariable("daytime") == 0) {
-      boyInteractionImage[1].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[0].id, "school");
-      girlInteractionImage[1].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[1].id, "school");
-    } else {
-      boyInteractionImage[1].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[0].id, "casual");
-      girlInteractionImage[1].sprite = ResourcesManager.instance.GetCharacterSprite(GlobalData.instance.observedPeople[1].id, "casual");
-    }
+    //UIController.instance.SetScreenLayout("girl_interaction_screen");
     UIController.instance.relationshipUpAnimationCard.Initialize(currentRelationship);
 
-    coupleEntry.Initialize(currentRelationship);
+    relationshipCard.Initialize(currentRelationship);
     girlInteractionPanel.ShowPanel();
     girlInteractionButtonsPanel.canvasGroup.alpha = 0f;
     girlInteractionButtonsPanel.ShowPanel();

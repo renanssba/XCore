@@ -8,7 +8,7 @@ if daytime != 2
 endif
 
 
-if #day == 3
+if #day == 5
   say "" "Ricardo passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
   say "Clara" "Oi Ricardo, desculpa! :( Hoje o meu dia foi muito corrido organizando o aniversário e acabei me esquecendo de te avisar..."
@@ -22,6 +22,9 @@ endif
 
 if clara_heart >= 1
   say "Clara chega e se senta à mesa com Ricardo."
+  
+  theater_animation "main_actor_enters"
+  wait 1.8
   
   waypoint action_choice
   girl_interaction

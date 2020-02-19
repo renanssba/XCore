@@ -11,8 +11,10 @@ public class UIController : MonoBehaviour {
   public TextMeshProUGUI titleText;
 
   public ScreenTransitions uiControllerPanel;
-  public RelationshipCard[] relationshipCards;
   public TextMeshProUGUI dayText;
+
+  public RectTransform relationshipCardsPanel;
+  public RelationshipCard[] relationshipCards;
 
   public RelationshipCard relationshipUpAnimationCard;
 
@@ -61,14 +63,17 @@ public class UIController : MonoBehaviour {
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
+    int relationshipCardsVisible = 0;
     for(int i = 0; i < relationshipCards.Length; i++) {
       if(i < GlobalData.instance.relationships.Length && GlobalData.instance.relationships[i].level>0) {
         relationshipCards[i].gameObject.SetActive(true);
         relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
+        relationshipCardsVisible++;
       } else {
         relationshipCards[i].gameObject.SetActive(false);
       }
     }
+    relationshipCardsPanel.sizeDelta = new Vector2(relationshipCardsPanel.sizeDelta.x, 18f+126f*relationshipCardsVisible);
 
 
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day;

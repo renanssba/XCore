@@ -138,11 +138,11 @@ public class GlobalData : MonoBehaviour {
 
 
     /// INITIAL INVENTORIES
-    /// RICARDO
-    people[0].inventory.AddItem("sports_clothes", 5);
+    /// PLAYER
+    //people[0].inventory.AddItem("sports_clothes", 5);
     people[0].inventory.AddItem("chocolate_cake", 5);
-    people[0].inventory.AddItem("strawberry_cake", 5);
-    people[0].inventory.AddItem("pepper_cake", 5);
+    //people[0].inventory.AddItem("strawberry_cake", 5);
+    //people[0].inventory.AddItem("pepper_cake", 5);
 
     /// ANA
     people[1].inventory.AddItemWithOwnership("old_teddy_bear", 1, 1);

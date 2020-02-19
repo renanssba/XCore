@@ -8,8 +8,6 @@ namespace Command {
   public class SetScreenCommand : VsnCommand {
 
     public override void Execute() {
-
-      VsnSaveSystem.SetVariable("people_ui_state", args[0].GetStringValue());
       UIController.instance.SetScreenLayout(args[0].GetStringValue());
     }
 

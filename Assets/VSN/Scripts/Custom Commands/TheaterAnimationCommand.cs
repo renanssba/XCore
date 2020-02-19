@@ -21,6 +21,12 @@ namespace Command {
         case "enemy_leaves":
           TheaterController.instance.EnemyLeavesScene();
           break;
+        case "setup_girl_interaction":
+          TheaterController.instance.SetupGirlInteraction();
+          break;
+        case "main_actor_enters":
+          TheaterController.instance.MainActorEntersScene();
+          break;
       }      
     }
 

@@ -15,13 +15,11 @@ if #day == 2
   goto_script "cap1_dia2"
   end_script
 endif
-if #day == 3
-  goto_script "cap1_dia3"
-  end_script
-endif
-if #day >= 4
-  play_music "intermission_intro" "intermission_loop"
-  fade_in 1
+if #day == 5
+  goto_script "cap1_dia5"
   end_script
 endif
 
+play_music "intermission_intro" "intermission_loop"
+fade_in 1
+end_script

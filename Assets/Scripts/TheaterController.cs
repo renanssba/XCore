@@ -28,7 +28,10 @@ public class TheaterController : MonoBehaviour {
   public Actor2D angelActor;
   public Actor2D enemyActor;
 
-  public GameObject[] bgObjects;
+  //public GameObject[] bgObjects;
+  public SpriteRenderer bgRenderer;
+
+  public const float enterAnimationDuration = 1.5f;
 
 
   public void Awake() {
@@ -123,8 +126,37 @@ public class TheaterController : MonoBehaviour {
     spriteRenderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
   }
 
+  public void SetupGirlInteraction() {
+    Vector3 distance = new Vector3(3f, 0f, 0f);
+
+    ClearBattle();
+
+    mainActor.transform.localPosition = supportPosition -distance;
+    supportActor.transform.localPosition = mainPosition;
+    angelActor.transform.localPosition = angelPosition - distance;
+
+    if(GlobalData.instance.CurrentBoy() != null) {
+      mainActor.SetCharacterGraphics(GlobalData.instance.CurrentBoy());
+      mainActor.SetClothing("uniform");
+      mainActor.FaceRight();
+    }
+    if(GlobalData.instance.CurrentGirl() != null) {
+      supportActor.SetCharacterGraphics(GlobalData.instance.CurrentGirl());
+      supportActor.SetClothing("uniform");
+      supportActor.FaceLeft();
+      supportActor.gameObject.SetActive(true);
+    } else {
+      supportActor.gameObject.SetActive(false);
+    }
+
+    angelActor.FaceRight();
+  }
+
   public void SetupDate() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
+
+    ClearBattle();
+
     mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
     supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
 
@@ -132,6 +164,15 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localPosition = supportPosition - distance;
     angelActor.transform.localPosition = angelPosition - distance;
 
+    mainActor.gameObject.SetActive(true);
+    supportActor.gameObject.SetActive(true);
+
+    mainActor.FaceRight();
+    supportActor.FaceRight();
+    angelActor.FaceRight();
+  }
+
+  public void ClearBattle() {
     mainActor.SetBattleMode(false);
     supportActor.SetBattleMode(false);
     angelActor.SetBattleMode(false);
@@ -142,11 +183,15 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void PartyEntersScene() {
-    float enterAnimationDuration = 1.5f;
-
     mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
     supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
     angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+  }
+
+  public void MainActorEntersScene() {
+    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    //supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+    //angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
   }
 
   public void EnemyEntersScene() {
@@ -199,22 +244,7 @@ public class TheaterController : MonoBehaviour {
 
 
   public void SetLocation(string place) {
-
-    foreach(GameObject c in bgObjects) {
-      c.SetActive(false);
-    }
-
-    switch(place) {
-      case "park":
-        bgObjects[0].SetActive(true);
-        break;
-      case "shopping":
-        bgObjects[1].SetActive(true);
-        break;
-      case "street":
-        bgObjects[2].SetActive(true);
-        break;
-    }
+    bgRenderer.sprite = Resources.Load<Sprite>("Bg/"+place);
   }
 
   public void MoveCamera(Vector3 newPosition, float time) {

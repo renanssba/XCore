@@ -1,5 +1,5 @@
 ﻿/// CONDIÇÕES DE FIM DE JOGO
-if #currentRelationshipProgress >= 6
+if #currentRelationshipHeartLocksOpened >= 3
   set_var game_has_ended 1
   set_screen "hide_all"
   goto_script "fertiliel_enter"

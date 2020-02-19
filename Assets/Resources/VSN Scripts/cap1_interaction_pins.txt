@@ -47,7 +47,7 @@ goto end
 waypoint noite
 reset_pins_board "city map night"
 
-if #day == 3
+if #day == 5
   set_interaction_pin 0 false
   set_interaction_pin 1 false
   set_interaction_pin 2 true "cap1_festa" "Festa"
@@ -58,8 +58,8 @@ else
   endif
   set_interaction_pin 2 true "cap1_investigar" "Investigar"
 endif
-
 goto end
+
 
 waypoint end
 

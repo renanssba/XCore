@@ -228,6 +228,18 @@ public class Utils {
     }
   }
 
+  public static string RelationshipNameByHeartLocksOpened(int heartlocksOpened) {
+    switch(heartlocksOpened) {
+      case 0:
+      default:
+        return "Conhecidos";
+      case 1:
+        return "Amigos";
+      case 2:
+        return "Amigos Próximos";
+    }
+  }
+
   public static string GetRandomFamilyMember() {
     int selected = Random.Range(0, 4);
     switch (selected) {

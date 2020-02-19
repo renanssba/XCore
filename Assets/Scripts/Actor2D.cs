@@ -54,6 +54,30 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
+  public void SetClothing(string clothingType) {
+    switch(clothingType) {
+      case "uniform":
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "school");
+        break;
+      case "casual":
+      default:
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+        break;
+    }
+  }
+
+  public void FaceLeft() {
+    Vector3 scale = transform.localScale;
+    scale.x = -Mathf.Abs(scale.x);
+    transform.localScale = scale;
+  }
+
+  public void FaceRight() {
+    Vector3 scale = transform.localScale;
+    scale.x = Mathf.Abs(scale.x);
+    transform.localScale = scale;
+  }
+
   public void SetAuraVisibility() {
     Debug.LogWarning("SETTING AURA VISIBILITY");
     if(person.CurrentStatusConditionStacks("encouraged") > 0) {

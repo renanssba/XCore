@@ -113,6 +113,8 @@ public class SpecialCodes {
       return result;
     }
 
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+
     switch(keycode){
       case "#random100":
         return Random.Range(0, 100);
@@ -156,10 +158,15 @@ public class SpecialCodes {
         } else {
           return -1;
         }
-      case "#currentRelationshipProgress":
-        Relationship rel = GlobalData.instance.GetCurrentRelationship();
-        if(rel != null) {
-          return GlobalData.instance.GetCurrentRelationship().level;
+      case "#currentRelationshipLevel":
+        if(currentRelationship != null) {
+          return currentRelationship.level;
+        } else {
+          return -1;
+        }
+      case "#currentRelationshipHeartLocksOpened":
+        if(currentRelationship != null) {
+          return currentRelationship.heartLocksOpened;
         } else {
           return -1;
         }
