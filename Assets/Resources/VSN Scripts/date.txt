@@ -150,7 +150,7 @@ say "char_name/none" "date/say_4"
 // show_date_ui false
 
 if #currentDateId == 1
-  add_exp 180
+  add_exp 120
 endif
 if #currentDateId == 2
   add_exp 400
@@ -159,7 +159,6 @@ if #currentDateId == 3
   add_exp 2000
 endif
 open_heart_lock #currentDateId
-
 goto end
 
 

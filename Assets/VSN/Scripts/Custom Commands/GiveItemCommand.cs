@@ -24,7 +24,7 @@ namespace Command {
 
       Inventory inventory = GlobalData.instance.CurrentBoy().inventory;
 
-      personWhoReceives.inventory.AddItemWithOwnership(il.id, amount, il.ownerId);
+      personWhoReceives.giftsReceived.AddItemWithOwnership(il.id, amount, il.ownerId);
 
       inventory.ConsumeItem(itemToLose.id, amount);
 

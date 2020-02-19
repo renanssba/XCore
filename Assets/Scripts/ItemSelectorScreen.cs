@@ -94,6 +94,10 @@ public class ItemSelectorScreen : MonoBehaviour {
     GameObject current;
 
     for(int i = 0; i < currentItems.itemListings.Count; i++) {
+      if((interactionType == ItemInteractionType.store_sell || interactionType == ItemInteractionType.give_gift) &&
+        Item.GetItemById(currentItems.itemListings[i].id).price <= 0) {
+        continue;
+      }
       current = CreateItem(currentItems.itemListings[i]);
       if(current != null) {
         createdObjects.Add(current.GetComponent<Button>());

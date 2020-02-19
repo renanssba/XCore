@@ -132,8 +132,13 @@ public class TheaterController : MonoBehaviour {
     supportActor.transform.localPosition = supportPosition - distance;
     angelActor.transform.localPosition = angelPosition - distance;
 
-    //enemyActor.transform.localPosition = challengePosition + distance;
-    //enemyActor.ShowWeaknessCard(false);
+    mainActor.SetBattleMode(false);
+    supportActor.SetBattleMode(false);
+    angelActor.SetBattleMode(false);
+
+    if(enemyActor != null) {
+      DestroyEnemyActor();
+    }
   }
 
   public void PartyEntersScene() {

@@ -14,7 +14,6 @@ namespace Command {
       //}
       //GlobalData.instance.AddExpForRelationship(relation, (int)args[0].GetNumberValue());
       relation.OpenHeartLock(BattleController.instance.currentDateId);
-      VsnController.instance.WaitForCustomInput();
     }
 
 
