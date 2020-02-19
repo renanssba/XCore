@@ -26,6 +26,7 @@ public class ResourcesManager : MonoBehaviour {
   public GameObject[] baseActorPrefab;
   public Sprite unknownSprite;
   public Color[] attributeColor;
+  public Sprite[] buttonSprites;
   public List<CharacterSpriteCollection> characterSpritesCollections;
 
 

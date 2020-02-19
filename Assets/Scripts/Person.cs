@@ -354,4 +354,11 @@ public class Relationship {
     }
     return didLevelUp;
   }
+
+  public string GetRelationshipLevelDescription() {
+    if(GetGirl().name == "Ana" && heartLocksOpened == 0) {
+      return "Amigos";
+    }
+    return Utils.RelationshipNameByHeartLocksOpened(heartLocksOpened);
+  }
 }

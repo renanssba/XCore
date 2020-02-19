@@ -12,11 +12,8 @@ public class GirlInteractionScreen : MonoBehaviour {
   public RelationshipCard relationshipCard;
 
   public ScreenTransitions dateSelectPanel;
-  public GameObject[] girlInteractionButtons;
-  public GameObject[] dateSelectButtons;
-
-  //public Image[] girlInteractionImage;
-  //public Image[] boyInteractionImage;
+  public Button[] girlInteractionButtons;
+  public Button[] dateSelectButtons;
 
 
 
@@ -30,11 +27,38 @@ public class GirlInteractionScreen : MonoBehaviour {
     UIController.instance.relationshipUpAnimationCard.Initialize(currentRelationship);
 
     relationshipCard.Initialize(currentRelationship);
+    SetButtonsGraphics();
     girlInteractionPanel.ShowPanel();
     girlInteractionButtonsPanel.canvasGroup.alpha = 0f;
     girlInteractionButtonsPanel.ShowPanel();
-    Utils.SelectUiElement(girlInteractionButtons[0]);
+    Utils.SelectUiElement(girlInteractionButtons[0].gameObject);
     dateSelectPanel.gameObject.SetActive(false);
+  }
+
+  public void SetButtonsGraphics() {
+    if(relationshipCard.relationship.heartLocksOpened == 0) {
+      Utils.SetButtonDisabledGraphics(girlInteractionButtons[0]);
+    } else {
+      Utils.SetButtonEnabledGraphics(girlInteractionButtons[0]);
+    }
+
+    if(relationshipCard.relationship.level < 2) {
+      Utils.SetButtonDisabledGraphics(girlInteractionButtons[2]);
+    } else {
+      Utils.SetButtonEnabledGraphics(girlInteractionButtons[2]);
+    }
+
+    if(relationshipCard.relationship.level < 4) {
+      Utils.SetButtonDisabledGraphics(dateSelectButtons[1]);
+    } else {
+      Utils.SetButtonDisabledGraphics(dateSelectButtons[1]);
+    }
+
+    if(relationshipCard.relationship.level < 7) {
+      Utils.SetButtonDisabledGraphics(dateSelectButtons[2]);
+    } else {
+      Utils.SetButtonDisabledGraphics(dateSelectButtons[2]);
+    }
   }
 
   public void HideGirlInteractionScreen() {
@@ -44,14 +68,19 @@ public class GirlInteractionScreen : MonoBehaviour {
 
 
   public void ShowDateSelectionPanel() {
+    if(relationshipCard.relationship.level < 2) {
+      ShowForbiddenMessage("date_1");
+      return;
+    }
+
     girlInteractionButtonsPanel.HidePanel();
     dateSelectPanel.ShowPanel();
-    Utils.SelectUiElement(dateSelectButtons[0]);
+    Utils.SelectUiElement(dateSelectButtons[0].gameObject);
   }
 
   public void ExitDateSelectionPanel() {
     girlInteractionButtonsPanel.ShowPanel();
-    Utils.SelectUiElement(girlInteractionButtons[0]);
+    Utils.SelectUiElement(girlInteractionButtons[0].gameObject);
     dateSelectPanel.HidePanel();
   }
 
@@ -63,8 +92,7 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickGiveGiftButton() {
-    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
-    if(currentRelationship.heartLocksOpened < 1) {
+    if(relationshipCard.relationship.heartLocksOpened < 1) {
       ShowForbiddenMessage("give_gift");
       return;
     }
@@ -77,7 +105,7 @@ public class GirlInteractionScreen : MonoBehaviour {
 
 
   public void ClickedDateButton(int dateId) {
-    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+    Relationship currentRelationship = relationshipCard.relationship;
     if(currentRelationship.level < 2 && dateId == 1) {
       ShowForbiddenMessage("date_1");
       return;

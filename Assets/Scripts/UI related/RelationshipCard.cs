@@ -37,7 +37,7 @@ public class RelationshipCard : MonoBehaviour {
     expSlider.maxValue = neededExp;
     expSlider.value = currentLevelExp;
 
-    proximityLevelText.text = Utils.RelationshipNameByHeartLocksOpened(relationship.heartLocksOpened);
+    proximityLevelText.text = relationship.GetRelationshipLevelDescription();
 
     expText.text = currentLevelExp.ToString()+" /"+neededExp;
 

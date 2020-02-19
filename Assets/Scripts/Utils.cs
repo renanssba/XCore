@@ -138,6 +138,25 @@ public class Utils {
     EventSystem.current.SetSelectedGameObject(null);
   }
 
+  public static void SetButtonDisabledGraphics(Button but) {
+    SpriteState st = new SpriteState();
+    st.disabledSprite     = ResourcesManager.instance.buttonSprites[3];
+    st.highlightedSprite  = ResourcesManager.instance.buttonSprites[4];
+    st.pressedSprite      = ResourcesManager.instance.buttonSprites[5];
+    but.spriteState = st;
+    but.GetComponent<Image>().sprite = ResourcesManager.instance.buttonSprites[3];
+    Debug.LogWarning("Setting ");
+  }
+
+  public static void SetButtonEnabledGraphics(Button but) {
+    SpriteState st = new SpriteState();
+    st.disabledSprite     = ResourcesManager.instance.buttonSprites[0];
+    st.highlightedSprite  = ResourcesManager.instance.buttonSprites[1];
+    st.pressedSprite      = ResourcesManager.instance.buttonSprites[2];
+    but.spriteState = st;
+    but.GetComponent<Image>().sprite = ResourcesManager.instance.buttonSprites[0];
+  }
+
 
 
   public static string GroupNameString(List<Person> peopleGroup) {
@@ -234,9 +253,9 @@ public class Utils {
       default:
         return "Conhecidos";
       case 1:
-        return "Amigos";
-      case 2:
         return "Amigos Próximos";
+      case 2:
+        return "Apaixonados";
     }
   }
 
