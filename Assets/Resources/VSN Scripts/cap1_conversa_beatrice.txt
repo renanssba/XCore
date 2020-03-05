@@ -116,21 +116,22 @@ endif
 
 say "Ricardo" "Ei Beatrice, eu tenho uma coisinha para te dar."
 give_item 2 item_id 1
-play_sfx "relationship_up"
-//say "" "Ricardo entrega \vsn[item_name] para Beatrice."
-say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-say "Ricardo" "Que bom que você gostou!"
-
-add_exp 50
+if item_owner == 2
+  say "Beatrice" "Eu acredito que isso já me pertença. "
+  say "Ricardo" "De-desculpa... Eu não sei como isso veio parar aqui na minha mochila..."
+  say "Beatrice" "Não invada mais a minha privacidade se quiser continuar conversando comigo."
+else
+  say "Beatrice" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+  say "Ricardo" "Que bom que você gostou!"
+  add_exp 50
+endif
 goto end
 
 
 waypoint date_intro_1
-waypoint date_intro_3
-say "Ricardo" "Ei, o dia está lindo lá fora. Que tal irmos dar um passeio no parque?"
-say "Beatrice" "Tudo bem, estou disposta hoje. Há um carvalho que faz uma sombra muito agradável, ótimo lugar para ler."
-say "Ricardo" "Certo, vou levar um livro novo que eu comprei esses dias."
-set_var date_objective "do carvalho"
+say "Beatrice" "Ricardo, você por acaso me acompanharia até o parque? Eu preciso respirar um pouco de ar fresco de vez em quando."
+say "Ricardo" "Claro, vamos lá."
+set_var date_objective "de destino"
 goto_script "date"
 end_script
 
@@ -144,15 +145,21 @@ set_var date_objective "do cinema"
 goto_script "date"
 end_script
 
+waypoint date_intro_3
+say "Ricardo" "Ei, o dia está lindo lá fora. Que tal irmos dar um passeio no parque?"
+say "Beatrice" "Tudo bem, estou disposta hoje. Há um carvalho que faz uma sombra muito agradável, ótimo lugar para ler."
+say "Ricardo" "Certo, vou levar um livro novo que eu comprei esses dias."
+set_var date_objective "do carvalho"
+goto_script "date"
+end_script
+
 
 
 waypoint date_end_1
-waypoint date_end_3
-say "Beatrice" "É aqui, chegamos. Aprecie a beleza desse carvalho!"
-say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
-say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
+say "" "Depois de caminharem um pouco, os dois ficaram satisfeitos com o passeio."
+say "Beatrice" "Agradeço a sua companhia."
+say "Ricardo" "De nada, devíamos dar uma volta mais vezes!"
 end_script
-
 
 waypoint date_end_2
 say "" "Depois de todos os percalços, o casal finalmente consegue chegar ao cinema."
@@ -161,4 +168,10 @@ say "Ricardo" "Tudo bem. Eu espero que o filme valha a pena."
 say "Beatrice" "Estou muito entusiasmada. O diretor sempre exagera nos esguichos de sangue, é hilário."
 fade_out 0.5
 say "" "Os dois assistem o filme e se divertem bastante."
+end_script
+
+waypoint date_end_3
+say "Beatrice" "É aqui, chegamos. Aprecie a beleza desse carvalho!"
+say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
+say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
 end_script

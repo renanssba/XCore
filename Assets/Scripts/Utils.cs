@@ -346,7 +346,7 @@ public class Utils {
       case "charisma":
         return Attributes.charisma;
       case "magic":
-        return Attributes.magic;
+        return Attributes.resistance;
     }
     return Attributes.guts;
   }

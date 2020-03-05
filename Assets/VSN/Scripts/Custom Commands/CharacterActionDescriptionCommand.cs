@@ -16,7 +16,7 @@ namespace Command {
         case TurnActionType.useSkill:
           Skill usedSkill = BattleController.instance.selectedSkills[partyMemberId];
           if(usedSkill.type == SkillType.attack) {
-            if(usedSkill.attribute != Attributes.magic) {
+            if(usedSkill.attribute != Attributes.resistance) {
               scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentDateEventName();
               newArgs[0] = new VsnString(usedSkill.attribute.ToString() + "_action"+(BattleController.instance.partyMembers[partyMemberId].isMale ? "_boy":"_girl") );
             } else {

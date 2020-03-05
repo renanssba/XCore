@@ -103,7 +103,7 @@ goto depois_investigar
 
 waypoint beatrice_roupas
 say "(Abrindo o guarda-roupas encontro alguns vestidos escuros e bem adornados.)"
-say "(Este tipo de roupas parece ser o tipo que uma garota romântica usaria.)"
+say "(Este tipo de roupas segue uma temática gótica.)"
 if #char[2]item_count[dark_dress] >= 1
   say_auto "(Eu deveria pegar um desses?)"
   choices "Sim" null "Não" not_take_clothing
@@ -154,7 +154,7 @@ say "(Uma das gavetas possui uma fechadura delicada. Devo tentar abrí-la?)"
 choices "Sim" null "Não" depois_investigar
 if #char[0]item_count[delicate_key]from[3] >= 1
   say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
-  say "(Dentro da gaveta há alguns doces e balas variados.)"
+  say "(Dentro da gaveta há alguns papéis e embalagens de doces variados.)"
   if #char[3]item_count[chocolate_cake] >= 1
     say "(Também há um bolo de chocolate que parece bem gostoso. Eu deveria pegá-lo?)"
     choices "Sim" null "Não" depois_investigar

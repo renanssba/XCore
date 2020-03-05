@@ -51,7 +51,8 @@ public class GameController : MonoBehaviour {
       }
       //VsnController.instance.StartVSN("cap0_intro");
       //VsnController.instance.StartVSN("cap1_manha");
-      VsnController.instance.StartVSN("cap1_manha");
+      VsnController.instance.StartVSN("cap0_intro");
+      //VsnController.instance.StartVSN("cap1_manha");
       //VsnController.instance.StartVSN("tutorial_intro");
     }
   }

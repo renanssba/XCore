@@ -1,4 +1,4 @@
-if #day == 3
+if #day == 5
   say "" "A noite cai e chega a hora da festa na casa da Clara."
   play_music "intermission_intro" "intermission_loop"
   fade_in 1
@@ -55,7 +55,10 @@ fade_out 0.5
 bg null
 play_music "intermission_intro" "intermission_loop"
 fade_in 1
-say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
+
+if #day == 1
+  say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
+endif
 
 
 waypoint end

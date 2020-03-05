@@ -94,21 +94,22 @@ endif
 
 say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
 give_item 1 item_id 1
-play_sfx "relationship_up"
-//say "" "Ricardo entrega \vsn[item_name] para Ana."
-say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-say "Ricardo" "Que bom que você gostou!"
-
-add_exp 50
+if item_owner == 1
+  say "Ana" "Pera, o que você tá fazendo com isso? Como você conseguiu isso, Ricardo?"
+  say "Ricardo" "E-eu... não sei?!"
+  say "Ana" "Me devolve isso agora!"
+else
+  say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+  say "Ricardo" "Que bom que você gostou!"
+  add_exp 50
+endif
 goto end
 
 
 waypoint date_intro_1
-waypoint date_intro_3
-say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
-say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
-say "Ricardo" "Certo, vai ser divertido."
-set_var date_objective "ideal para jogar frisbee"
+say "Ana" "Ei, você vem comigo ao parque? Estou a fim de respirar um ar fresco."
+say "Ricardo" "Claro, vamos lá."
+set_var date_objective "de destino"
 goto_script "date"
 end_script
 
@@ -121,12 +122,20 @@ set_var date_objective "do cinema"
 goto_script "date"
 end_script
 
+waypoint date_intro_3
+say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
+say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
+say "Ricardo" "Certo, vai ser divertido."
+set_var date_objective "ideal para jogar frisbee"
+goto_script "date"
+end_script
+
 
 
 waypoint date_end_1
-say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
-say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
-say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
+say "" "Depois de caminharem um pouco, os dois ficaram satisfeitos com o passeio."
+say "Ana" "Obrigada por ter vindo comigo, Ricardo. A gente devia passear mais vezes."
+say "Ricardo" "Claro!"
 end_script
 
 waypoint date_end_2

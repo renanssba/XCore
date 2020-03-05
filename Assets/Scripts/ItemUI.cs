@@ -73,6 +73,7 @@ public class ItemUI : MonoBehaviour {
     Item item = Item.GetItemById(itemListing.id);
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
+    VsnSaveSystem.SetVariable("item_owner", itemListing.ownerId);
     VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(item.id));
     VsnSaveSystem.SetVariable("item_key", Item.GetKeyById(item.id));
     switch (interactionType) {

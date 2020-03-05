@@ -15,6 +15,15 @@ public class CharacterSpriteCollection {
   public Sprite incompleteCasualClothes;
 }
 
+public enum CharacterSpritePart {
+  body,
+  sad,
+  underwear,
+  school,
+  unclothed,
+  casual
+}
+
 
 public class ResourcesManager : MonoBehaviour {
   public Sprite[] faceSprites;
@@ -45,23 +54,23 @@ public class ResourcesManager : MonoBehaviour {
     return faceSprites[index];
   }
 
-  public Sprite GetCharacterSprite(int id, string situation) {
+  public Sprite GetCharacterSprite(int id, CharacterSpritePart spritePart) {
     if(id >= characterSpritesCollections.Count) {
       return null;
     }
     CharacterSpriteCollection col = characterSpritesCollections[id];
-    switch(situation) {
-      case "base":
+    switch(spritePart) {
+      case CharacterSpritePart.body:
         return col.baseBody;
-      case "sad":
+      case CharacterSpritePart.sad:
         return col.sadBody;
-      case "underwear":
+      case CharacterSpritePart.underwear:
         return col.underwear;
-      case "school":
+      case CharacterSpritePart.school:
         return col.schoolClothes;
-      case "unclothed":
+      case CharacterSpritePart.unclothed:
         return col.incompleteCasualClothes;
-      case "casual":
+      case CharacterSpritePart.casual:
       default:
         return col.casualClothes;
     }

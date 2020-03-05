@@ -83,7 +83,7 @@ public class GlobalData : MonoBehaviour {
       isMale = true,
       id = 0,
       faceId = 0,
-      attributes = new int[] { 5, 5, 5, 0, 4 },
+      attributes = new int[] { 5, 5, 5, 4 },
       skillIds = new int[] { 0, 1, 2, 10 }
     };
     people.Add(p);
@@ -92,7 +92,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] { 6, 3, 2, 0, 8 },
+      attributes = new int[] { 6, 3, 2, 8 },
       skillIds = new int[] { 0, 1, 2, 11 }
     };
     people.Add(p);
@@ -101,7 +101,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] { 4, 9, 4, 0, 1 },
+      attributes = new int[] { 4, 9, 4, 1 },
       skillIds = new int[] { 0, 1, 2, 12 }
     };
     people.Add(p);
@@ -110,7 +110,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 3,
       faceId = 7,
-      attributes = new int[] { 4, 4, 7, 0, 4 },
+      attributes = new int[] { 4, 4, 7, 4 },
       skillIds = new int[] { 0, 1, 2, 13 }
     };
     people.Add(p);
@@ -121,7 +121,7 @@ public class GlobalData : MonoBehaviour {
       isHuman = false,
       id = 10,
       faceId = 11,
-      attributes = new int[] { 2, 2, 2, 2, 2 },
+      attributes = new int[] { 2, 2, 2, 2 },
       skillIds = new int[] { 9 }
     };
     people.Add(p);
@@ -159,7 +159,7 @@ public class GlobalData : MonoBehaviour {
     /// CLARA
     people[3].inventory.AddItemWithOwnership("flower_dress", 2, 3);
     people[3].inventory.AddItemWithOwnership("delicate_key", 1, 3);
-    people[3].inventory.AddItemWithOwnership("chocolate_cake", 1, 3);
+    people[3].inventory.AddItem("chocolate_cake", 1);
 
 
     VsnSaveSystem.SetVariable("money", 500);

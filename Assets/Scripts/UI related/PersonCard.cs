@@ -6,9 +6,8 @@ using TMPro;
 using DG.Tweening;
 
 public enum PersonCardLayout {
-  single,
-  couple,
-  date
+  statusScreen,
+  dateUI
 }
 
 
@@ -18,19 +17,18 @@ public class PersonCard : MonoBehaviour {
   public Image bgImage;
   public TextMeshProUGUI nameText;
   public Image faceImage;
-  public TextMeshProUGUI[] attributeTexts;
-  public Image skillIcon;
-  public TextMeshProUGUI skillText;
+  public Image[] bodyImages;
+  public TextMeshProUGUI[] attributeNamesTexts;
+  public TextMeshProUGUI attributeValuesText;
   public GameObject shade;
 
   public TextMeshProUGUI spText;
 
-  public GameObject heartsPanel;
-  public Image[] heartIcons;
-
   public Transform statusConditionsContent;
 
-  public PersonCardLayout coupleEntryLayout = PersonCardLayout.single;
+  public SkillButton[] skillButtons;
+
+  public PersonCardLayout coupleEntryLayout = PersonCardLayout.statusScreen;
 
 
   public void Initialize(Person p){
@@ -48,46 +46,39 @@ public class PersonCard : MonoBehaviour {
     /// BG AND FACE / NAME
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
     nameText.text = person.name;
-    faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
 
-    if(coupleEntryLayout == PersonCardLayout.date) {
-      spText.text = "SP: "+person.sp + "<size=16>/" + person.maxSp+ "</size>";
+    if(coupleEntryLayout == PersonCardLayout.dateUI) {
+      faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
+      spText.text = "<sprite=\"Attributes\" index=3 tint>SP: " + person.sp + "<size=16>/" + person.maxSp+ "</size>";
 
-      UpdateStatusConditions();
       return;
     }
 
-    RectTransform rect = GetComponent<RectTransform>();
-    if(heartsPanel != null) {
-      if(person.id == 0 || coupleEntryLayout != PersonCardLayout.single) {
-        heartsPanel.SetActive(false);
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 144f);
-      } else {
-        heartsPanel.SetActive(true);
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, 184f);
-        for(int i = 0; i < heartIcons.Length; i++) {
-          heartIcons[i].color = (i < GlobalData.instance.relationships[person.id - 1].level ? Color.white : new Color(0f, 0f, 0f, 0.5f));
-        }
-      }
-    }
+    bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
+    bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
 
+    /// STATUS CONDITIONS
+    UpdateStatusConditions();
 
     /// ATTRIBUTES
+    string attrString = "";
     for(int i=0; i<4; i++){
-      attributeTexts[i].text = person.AttributeValue(i).ToString();
+      attrString += person.AttributeValue(i).ToString()+"\n";
+      attributeNamesTexts[i].gameObject.SetActive(false);
+      attributeNamesTexts[i].gameObject.SetActive(true);
     }
-    //Debug.Log("Person: " + person.name);
+    attrString += person.maxSp;
+    attributeValuesText.text = attrString;
 
 
-    /// SKILL
-    //if(skillText != null) {
-    //  if(person.skillIds != -1) {
-    //    skillText.text =  CardsDatabase.instance.GetCardById(person.skillIds).name;
-    //  } else {
-    //    skillText.text = "---";
-    //  }
-    //}
-    //skillIcon.sprite = CardsDatabase.instance.GetCardById(person.skillIds).sprite;
+    /// SKILLS
+    for(int i=0; i<skillButtons.Length; i++) {
+      if(i < person.skillIds.Length) {
+        skillButtons[i].Initialize(person, BattleController.instance.GetSkillById(person.skillIds[i]));
+      } else {
+        skillButtons[i].Initialize(person, null);
+      }      
+    }
   }
 
   public void UpdateStatusConditions() {

@@ -32,17 +32,17 @@ public class Actor2D : MonoBehaviour {
   public void UpdateCharacterGraphics() {
     if(!string.IsNullOrEmpty(person.name)) {
       if(person.CurrentStatusConditionStacks("sad") == 0) {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "base");
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
       } else {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "sad");
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.sad);
       }      
-      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "underwear");
+      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.underwear);
       switch(person.CurrentStatusConditionStacks("unclothed")) {
         case 0:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.casual);
           break;
         case 1:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "unclothed");
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.unclothed);
           break;
         case 2:
           renderers[2].sprite = null;
@@ -57,11 +57,11 @@ public class Actor2D : MonoBehaviour {
   public void SetClothing(string clothingType) {
     switch(clothingType) {
       case "uniform":
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "school");
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
         break;
       case "casual":
       default:
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, "casual");
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.casual);
         break;
     }
   }
@@ -87,7 +87,7 @@ public class Actor2D : MonoBehaviour {
     } else if(person.CurrentStatusConditionStacks("inspired") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.charisma]);
     } else if(person.CurrentStatusConditionStacks("blessed") > 0) {
-      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.magic]);
+      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.resistance]);
     } else {
       Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
       buffAuraRenderers[0].gameObject.SetActive(false);

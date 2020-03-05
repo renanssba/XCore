@@ -7,7 +7,7 @@ public enum Attributes{
   guts = 0,
   intelligence = 1,
   charisma = 2,
-  magic = 3
+  resistance = 3
 }
 
 public enum PersonState {

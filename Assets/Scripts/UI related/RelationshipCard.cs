@@ -71,6 +71,7 @@ public class RelationshipCard : MonoBehaviour {
       bool didLevelUp = relationship.GetExp(currentExp-relationship.exp);
       UpdateUI();
       if(didLevelUp) {
+        VsnAudioManager.instance.PlaySfx("level_up");
         HeartPulseAnimation();
         yield return new WaitForSeconds(1.2f);
       } else {
@@ -94,7 +95,14 @@ public class RelationshipCard : MonoBehaviour {
   }
 
   public void HeartPulseAnimation() {
-    VsnAudioManager.instance.PlaySfx("relationship_up");
+    VsnAudioManager.instance.PlaySfx("level_up");
     heartIcon.transform.DOScale(1.4f, 0.4f).SetRelative().SetLoops(2, LoopType.Yoyo);
+  }
+
+
+  public void ClickRelationshipCard() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    UIController.instance.coupleStatusScreen.Initialize(relationship);
+    UIController.instance.coupleStatusScreen.panel.ShowPanel();
   }
 }

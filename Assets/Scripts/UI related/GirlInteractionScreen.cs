@@ -92,10 +92,10 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickGiveGiftButton() {
-    if(relationshipCard.relationship.heartLocksOpened < 1) {
-      ShowForbiddenMessage("give_gift");
-      return;
-    }
+    //if(relationshipCard.relationship.heartLocksOpened < 1) {
+    //  ShowForbiddenMessage("give_gift");
+    //  return;
+    //}
 
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();

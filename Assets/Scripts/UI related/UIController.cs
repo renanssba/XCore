@@ -48,6 +48,8 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
+  public CoupleStatusScreen coupleStatusScreen;
+
 
   public GirlInteractionScreen girlInteractionScreen;
 
@@ -65,7 +67,7 @@ public class UIController : MonoBehaviour {
     GlobalData gb = GlobalData.instance;
     int relationshipCardsVisible = 0;
     for(int i = 0; i < relationshipCards.Length; i++) {
-      if(i < GlobalData.instance.relationships.Length && GlobalData.instance.relationships[i].level>0) {
+      if(i < GlobalData.instance.relationships.Length && GlobalData.instance.relationships[i].exp>0) {
         relationshipCards[i].gameObject.SetActive(true);
         relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
         relationshipCardsVisible++;
