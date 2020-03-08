@@ -1,3 +1,4 @@
+add_exp 100
 if argsCount > 0
   goto *arg1
 endif
@@ -24,52 +25,30 @@ endif
 theater_animation "main_actor_enters"
 wait 1.8
 
+
 waypoint action_choice
 girl_interaction
 
 
 waypoint conversation
 
-if ana_heart == 0
-  say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
-  say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
-  add_exp 20
+set_var aux #random100
+if #currentRelationshipHeartLocksOpened == 0
+  if aux < 50
+    
+  else
+    
+  endif
 endif
-
-if ana_heart == 1
-  say "Ana" "Valeu por ter vindo..."
-  say "Ricardo" "Ah, eu não tinha nada melhor pra fazer, haha."
-  say "Ana" "..."
-  say "Ricardo" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
-  say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
-  say "Ricardo" "Por quê?"
-  say "Ana" "Você sabe... Toda essa coisa da Clara."
-  say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
-  say "Ricardo" "É, sim. Eu espero que sim. É a minha grande chance."
-  say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
-  say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
-  say "Ricardo" "Eu vou sempre ter tempo pra você, sua boba!"
-  say "Ana" "..."
-  say "Ricardo" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
-  say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
-  say "Ricardo" "Ei, aquilo doeu!"
-  say "Ana" "Pô, o Tobi era um pug tão pequeninho..."
-  say "Ricardo" "De qualquer forma. Eu não parei de falar contigo, parei?"
-  say "Ana" "Só por uns dois dias."
-  say "Ricardo" "Pois é. Eu não parei naquele dia e não vou parar agora."
-  say "Ana" "..."
-  say "Ana" "Valeu. Você é um bobo, mesmo!"
-
-  add_exp 50
+if #currentRelationshipHeartLocksOpened == 1
+  
 endif
-
-if ana_heart >= 2
-  say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
-  say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
-  add_exp 20
+if #currentRelationshipHeartLocksOpened == 2
+  
 endif
-
-add_var ana_heart 1
+say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
+say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+add_exp 20
 goto end
 
 
@@ -84,6 +63,32 @@ goto_script "pass_time"
 end_script
 
 
+waypoint dialog_after_date_2
+say "Ana" "Valeu por ter vindo ao cinema comigo..."
+say "Ricardo" "Ah, eu não tinha nada melhor pra fazer, haha."
+say "Ana" "..."
+say "Ricardo" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
+say "Ricardo" "Por quê?"
+say "Ana" "Você sabe... Toda essa coisa da Clara."
+say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
+say "Ricardo" "É, sim. Eu espero que sim. É a minha grande chance."
+say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
+say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
+say "Ricardo" "Eu vou sempre ter tempo pra você, sua boba!"
+say "Ana" "..."
+say "Ricardo" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
+say "Ricardo" "Ei, aquilo doeu!"
+say "Ana" "Pô, o Tobi era um pug tão pequeninho..."
+say "Ricardo" "De qualquer forma. Eu não parei de falar contigo, parei?"
+say "Ana" "Só por uns dois dias."
+say "Ricardo" "Pois é. Eu não parei naquele dia e não vou parar agora."
+say "Ana" "..."
+say "Ana" "Valeu. Você é um bobo, mesmo!"
+goto end
+
+
 
 waypoint give_gift
 say "" "Escolha qual item dar para Ana:"
@@ -94,22 +99,21 @@ endif
 
 say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
 give_item 1 item_id 1
-if item_owner == 1
-  say "Ana" "Pera, o que você tá fazendo com isso? Como você conseguiu isso, Ricardo?"
-  say "Ricardo" "E-eu... não sei?!"
-  say "Ana" "Me devolve isso agora!"
-else
-  say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-  say "Ricardo" "Que bom que você gostou!"
-  add_exp 50
-endif
+play_sfx "relationship_up"
+//say "" "Ricardo entrega \vsn[item_name] para Ana."
+say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+say "Ricardo" "Que bom que você gostou!"
+
+add_exp 50
 goto end
 
 
 waypoint date_intro_1
-say "Ana" "Ei, você vem comigo ao parque? Estou a fim de respirar um ar fresco."
-say "Ricardo" "Claro, vamos lá."
-set_var date_objective "de destino"
+waypoint date_intro_3
+say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
+say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
+say "Ricardo" "Certo, vai ser divertido."
+set_var date_objective "ideal para jogar frisbee"
 goto_script "date"
 end_script
 
@@ -122,20 +126,12 @@ set_var date_objective "do cinema"
 goto_script "date"
 end_script
 
-waypoint date_intro_3
-say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
-say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
-say "Ricardo" "Certo, vai ser divertido."
-set_var date_objective "ideal para jogar frisbee"
-goto_script "date"
-end_script
-
 
 
 waypoint date_end_1
-say "" "Depois de caminharem um pouco, os dois ficaram satisfeitos com o passeio."
-say "Ana" "Obrigada por ter vindo comigo, Ricardo. A gente devia passear mais vezes."
-say "Ricardo" "Claro!"
+say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
+say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
 end_script
 
 waypoint date_end_2
@@ -144,7 +140,9 @@ say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
 say "Ricardo" "Você tá mesmo empolgada, hein?"
 say "Ana" "Claro! Esse cara é o meu ídolo! Ele levou o time dele até a final praticamente sozinho!"
 fade_out 0.5
-say "" "Os dois assistem o filme e se divertem bastante."
+say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
+fade_in 0.5
+goto dialog_after_date_2
 end_script
 
 waypoint date_end_3

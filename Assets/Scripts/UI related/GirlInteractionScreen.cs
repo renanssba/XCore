@@ -123,7 +123,7 @@ public class GirlInteractionScreen : MonoBehaviour {
     Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
 
     VsnSaveSystem.SetVariable("dateId", dateId);
-    BattleController.instance.StartBattle(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
+    BattleController.instance.SetupBattleStart(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
 
     SfxManager.StaticPlayBigConfirmSfx();
     HideGirlInteractionScreen();

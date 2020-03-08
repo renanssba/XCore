@@ -1,15 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CoupleStatusScreen : MonoBehaviour {
+
+  public static CoupleStatusScreen instance;
 
   public ScreenTransitions panel;
   public Relationship relationship;
   public RelationshipCard relationshipCard;
   public PersonCard[] personCards;
 
-	public void Initialize(Relationship newRelationship) {
+  public TextMeshProUGUI coupleHpText;
+
+  public void Awake() {
+    instance = this;
+  }
+
+  public void Initialize(Relationship newRelationship) {
+    instance = this;
     relationship = newRelationship;
     relationshipCard.Initialize(relationship);
     personCards[0].Initialize(relationship.GetBoy());
@@ -20,10 +30,11 @@ public class CoupleStatusScreen : MonoBehaviour {
     relationshipCard.UpdateUI();
     personCards[0].UpdateUI();
     personCards[1].UpdateUI();
+    coupleHpText.text = "HP: "+relationship.GetMaxHp().ToString();
   }
 
   public void ClickRightCoupleButton() {
-    int initialRelationship = GetCurrentRelationshipId();
+    int initialRelationship = relationship.id;
     int relationshipId = initialRelationship;
 
     SfxManager.StaticPlaySelectSfx();
@@ -37,7 +48,7 @@ public class CoupleStatusScreen : MonoBehaviour {
   }
 
   public void ClickLeftCoupleButton() {
-    int initialRelationship = GetCurrentRelationshipId();
+    int initialRelationship = relationship.id;
     int relationshipId = initialRelationship;
 
     SfxManager.StaticPlaySelectSfx();
@@ -48,15 +59,6 @@ public class CoupleStatusScreen : MonoBehaviour {
       }
     } while(GlobalData.instance.relationships[relationshipId].exp <= 0 && relationshipId != initialRelationship);
     Initialize(GlobalData.instance.relationships[relationshipId]);
-  }
-
-  public int GetCurrentRelationshipId() {
-    for(int i = 0; i < GlobalData.instance.relationships.Length; i++) {
-      if(GlobalData.instance.relationships[i] == relationship) {
-        return i;
-      }
-    }
-    return -1;
   }
 
   public void ClickExitButton() {

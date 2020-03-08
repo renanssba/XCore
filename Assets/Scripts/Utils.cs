@@ -346,9 +346,21 @@ public class Utils {
       case "charisma":
         return Attributes.charisma;
       case "magic":
-        return Attributes.resistance;
+        return Attributes.endurance;
     }
     return Attributes.guts;
   }
+
+  public static Color ChangeColorAlpha(Color c, float alpha) {
+    c.a = alpha;
+    return c;
+  }
 }
 
+public static class MyExtensions {
+  public static void SetAlpha(this Image img, float alpha) {
+    Color c = img.color;
+    c.a = alpha;
+    img.color = c;
+  }
+}

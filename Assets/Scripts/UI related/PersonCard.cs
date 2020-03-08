@@ -38,6 +38,7 @@ public class PersonCard : MonoBehaviour {
 
   public void UpdateUI() {
     //Debug.Log("updating "+person.name);
+    int relationShipId = CoupleStatusScreen.instance.relationship.id;
 
     if(person == null || gameObject.activeSelf == false) {
       return;
@@ -63,18 +64,18 @@ public class PersonCard : MonoBehaviour {
     /// ATTRIBUTES
     string attrString = "";
     for(int i=0; i<4; i++){
-      attrString += person.AttributeValue(i).ToString()+"\n";
       attributeNamesTexts[i].gameObject.SetActive(false);
       attributeNamesTexts[i].gameObject.SetActive(true);
+      attrString += person.AttributeValue(i).ToString() + "\n";
     }
-    attrString += person.maxSp;
+    attrString += person.sp+"/"+person.maxSp;
     attributeValuesText.text = attrString;
 
 
     /// SKILLS
     for(int i=0; i<skillButtons.Length; i++) {
-      if(i < person.skillIds.Length) {
-        skillButtons[i].Initialize(person, BattleController.instance.GetSkillById(person.skillIds[i]));
+      if(i < person.GetAllSkills(relationShipId).Length) {
+        skillButtons[i].Initialize(person, person.GetAllSkills(relationShipId)[i]);
       } else {
         skillButtons[i].Initialize(person, null);
       }      
@@ -100,5 +101,11 @@ public class PersonCard : MonoBehaviour {
 
   public void ShowShade(bool active) {
     shade.SetActive(active);
+  }
+
+  public void ClickDateUiPersonCard() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    UIController.instance.coupleStatusScreen.Initialize(GlobalData.instance.GetCurrentRelationship());
+    UIController.instance.coupleStatusScreen.panel.ShowPanel();
   }
 }

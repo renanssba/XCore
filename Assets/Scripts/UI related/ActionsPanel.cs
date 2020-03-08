@@ -40,6 +40,12 @@ public class ActionsPanel : MonoBehaviour {
 
 
   public void SetupBaseActionButtons(int currentPartyMember) {
+    if(BattleController.instance.partyMembers[currentPartyMember].id == 10) {
+      baseActionButtons[1].SetActive(true);
+    } else {
+      baseActionButtons[1].SetActive(false);
+    }
+
     if(currentPartyMember == 0) {
       baseActionButtons[3].SetActive(true);
       baseActionButtons[4].SetActive(false);
@@ -52,10 +58,11 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void SetupCharacterActions(int currentPartyMember) {
+    int relationshipId = GlobalData.instance.GetCurrentRelationship().id;
+
     for(int i = 0; i < skillButtons.Length; i++) {
-      if(i < CurrentCharacter().skillIds.Length) {
-        skillButtons[i].InitializeAsSkill(CurrentCharacter(),
-                                          BattleController.instance.GetSkillById(CurrentCharacter().skillIds[i]));
+      if(i < CurrentCharacter().GetActiveSkills(relationshipId).Length) {
+        skillButtons[i].InitializeAsSkill(CurrentCharacter(), CurrentCharacter().GetActiveSkills(relationshipId)[i] );
         skillButtons[i].gameObject.SetActive(true);
       } else {
         skillButtons[i].gameObject.SetActive(false);

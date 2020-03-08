@@ -20,17 +20,14 @@ public class SkillButton : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    Color c = bg.color;
 
     if(skill != null) {
-      c.a = 1f;
-      bg.color = c;
+      bg.SetAlpha(1f);
       skillName.text = skill.GetPrintableName();
       skillIcon.sprite = skill.sprite;
       skillIcon.gameObject.SetActive(true);
     } else {
-      c.a = 0.4f;
-      bg.color = c;
+      bg.SetAlpha(0.4f);
       skillName.text = "";
       skillIcon.gameObject.SetActive(false);
     }

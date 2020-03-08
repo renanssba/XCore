@@ -23,7 +23,7 @@ namespace Command {
           break;
         case "resistance":
         case "magic":
-          p.attributes[(int)Attributes.resistance] += improve_value;
+          p.attributes[(int)Attributes.endurance] += improve_value;
           break;
       }
 

@@ -170,6 +170,8 @@ public class TheaterController : MonoBehaviour {
     mainActor.FaceRight();
     supportActor.FaceRight();
     angelActor.FaceRight();
+
+    BattleController.instance.SetupDateLocation();
   }
 
   public void ClearBattle() {

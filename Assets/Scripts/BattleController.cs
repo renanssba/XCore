@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -47,6 +48,9 @@ public class BattleController : MonoBehaviour {
   public Color greenColor;
   public Color redColor;
 
+  public float damageShineTime;
+  public float damageShineAlpha;
+
 
   public void Awake() {
     instance = this;
@@ -59,7 +63,7 @@ public class BattleController : MonoBehaviour {
     dateLength = 3;
   }
 
-  public void StartBattle(Person boy, Person girl, int dateId) {
+  public void SetupBattleStart(Person boy, Person girl, int dateId) {
     GlobalData.instance.observedPeople = new Person[] {boy, girl};
 
     currentDateId = dateId;
@@ -70,7 +74,7 @@ public class BattleController : MonoBehaviour {
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedTargetPartyId = new int[partyMembers.Length];
 
-    maxHp = GlobalData.instance.GetCurrentRelationship().level * 8 + 26;
+    maxHp = GlobalData.instance.GetCurrentRelationship().GetMaxHp();
 
     FullHealParty();
     UIController.instance.ShowPartyPeopleCards();
@@ -78,7 +82,6 @@ public class BattleController : MonoBehaviour {
 
     SetDateLengthAndLocation();
     GenerateDateEnemies();
-    SetupDateLocation();
   }
 
 
@@ -419,7 +422,7 @@ public class BattleController : MonoBehaviour {
     float damage;
     Person defender = partyMembers[targetId];
 
-    damage = (3f * attacker.attributes[((int)attacker.attackAttribute)] / Mathf.Max(2f * defender.AttributeValue(4) + defender.AttributeValue((int)attacker.attackAttribute), 1) );
+    damage = (3f * attacker.attributes[((int)attacker.attackAttribute)] / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)attacker.attackAttribute), 1) );
 
     Debug.LogWarning("Enemy Hits! Damage:");
     Debug.Log("Defensive ratio (ATK/DEF):" + damage);
@@ -446,10 +449,10 @@ public class BattleController : MonoBehaviour {
 
     VsnAudioManager.instance.PlaySfx(currentEvent.attackSfxName);
 
-    yield return new WaitForSeconds(time);
+    yield return new WaitForSeconds(time + 0.4f);
 
     TheaterController.instance.ShineCharacter(targetId);
-    
+
     // cause damage
     if(causeDamage) {
       if(selectedActionType[targetId] == TurnActionType.defend) {

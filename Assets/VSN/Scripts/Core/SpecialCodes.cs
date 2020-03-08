@@ -41,7 +41,7 @@ public class SpecialCodes {
         currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.charisma).ToString());
-        currentString = currentString.Replace("\\magic", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.resistance).ToString());
+        currentString = currentString.Replace("\\magic", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.endurance).ToString());
       }
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);

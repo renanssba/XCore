@@ -83,8 +83,7 @@ public class GlobalData : MonoBehaviour {
       isMale = true,
       id = 0,
       faceId = 0,
-      attributes = new int[] { 5, 5, 5, 4 },
-      skillIds = new int[] { 0, 1, 2, 10 }
+      attributes = new int[] { 5, 5, 5, 4 }
     };
     people.Add(p);
     p = new Person() {
@@ -92,8 +91,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] { 6, 3, 2, 8 },
-      skillIds = new int[] { 0, 1, 2, 11 }
+      attributes = new int[] { 6, 3, 2, 8 }
     };
     people.Add(p);
     p = new Person() {
@@ -101,8 +99,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] { 4, 9, 4, 1 },
-      skillIds = new int[] { 0, 1, 2, 12 }
+      attributes = new int[] { 4, 9, 4, 1 }
     };
     people.Add(p);
     p = new Person() {
@@ -110,8 +107,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 3,
       faceId = 7,
-      attributes = new int[] { 4, 4, 7, 4 },
-      skillIds = new int[] { 0, 1, 2, 13 }
+      attributes = new int[] { 4, 4, 7, 4 }
     };
     people.Add(p);
 
@@ -121,8 +117,7 @@ public class GlobalData : MonoBehaviour {
       isHuman = false,
       id = 10,
       faceId = 11,
-      attributes = new int[] { 2, 2, 2, 2 },
-      skillIds = new int[] { 9 }
+      attributes = new int[] { 2, 2, 2, 2 }
     };
     people.Add(p);
 
@@ -132,9 +127,15 @@ public class GlobalData : MonoBehaviour {
     relationships = new Relationship[3];
     for(int i = 0; i < girlsToGenerate; i++) {
       relationships[i] = new Relationship {
+        id = i,
         people = new Person[] {people[0], people[i+1]}
       };
     }
+
+    /// RELATIONSHIP SKILLTREES
+    relationships[0].skillIds = new int[] { 0, 10, 0, 11, 4, 14, 0, 0, 3, 14, 1, 15, 1 };
+    relationships[1].skillIds = new int[] { 0, 10, 0, 12, 4, 14, 0, 0, 4, 17, 1, 15, 1 };
+    relationships[2].skillIds = new int[] { 0, 10, 0, 13, 4, 14, 0, 0, 5, 20, 1, 15, 1 };
 
 
     /// INITIAL INVENTORIES
@@ -291,10 +292,6 @@ public class GlobalData : MonoBehaviour {
   public void AddExpForRelationship(Relationship rel, int expToAdd) {
     UIController.instance.relationshipUpAnimationCard.Initialize(rel);
     UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
-  }
-
-  public void AddBondSkill(int relationshipId, int skillId) {
-    relationships[relationshipId].bondSkills.Add(skillId);
   }
 
   public Sprite GetFaceByName(string name) {

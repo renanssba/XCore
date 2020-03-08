@@ -32,14 +32,14 @@ public class CoupleEntry : MonoBehaviour {
       heartIcons[i].color = (i < relationship.level ? Color.white : new Color(0f, 0f, 0f, 0.5f));
     }
 
-    for(int i=0; i<3; i++) {
-      skillIcons[i].gameObject.SetActive(i<relationship.bondSkills.Count);
-      if(i < relationship.bondSkills.Count) {
-        // print bond skill name
-        //skillNameTexts[i].text = "skill name";
-      } else {
-        skillNameTexts[i].text = "---";
-      }
-    }
+    //for(int i=0; i<3; i++) {
+    //  skillIcons[i].gameObject.SetActive(i<relationship.skillIds.Count);
+    //  if(i < relationship.skillIds.Count) {
+    //    // print bond skill name
+    //    //skillNameTexts[i].text = "skill name";
+    //  } else {
+    //    skillNameTexts[i].text = "---";
+    //  }
+    //}
   }
 }

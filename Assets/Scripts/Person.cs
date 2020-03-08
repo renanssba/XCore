@@ -7,7 +7,7 @@ public enum Attributes{
   guts = 0,
   intelligence = 1,
   charisma = 2,
-  resistance = 3
+  endurance = 3
 }
 
 public enum PersonState {
@@ -30,8 +30,6 @@ public class Person {
 
   public int maxSp;
   public int sp;
-
-  public int[] skillIds;
 
   public string favoriteMatter;
   public string mostHatedMatter;
@@ -124,29 +122,29 @@ public class Person {
     UIController.instance.UpdateDateUI();
   }
 
-  //public void EquipItemInSlot(int slotId, Item item){
-  //  VsnAudioManager.instance.PlaySfx("inventory_equip");
-  //  equipment = item;
-  //  GlobalData.instance.CurrentBoy().inventory.ConsumeItem(equipment.id, 1);
-  //  UIController.instance.UpdateUI();
-  //}
+  public Skill[] GetActiveSkills(int relationshipId) {
+    List<Skill> skills = new List<Skill>();
+    Relationship relationship = GlobalData.instance.relationships[relationshipId];
 
-  //public void UnequipItemInSlot(int slotId) {
-  //  if (equipment != null) {
-  //    VsnAudioManager.instance.PlaySfx("inventory_equip");
-  //    Debug.LogWarning("Unequiping item: " + equipment.id +", " + equipment.nameKey);
-  //    GlobalData.instance.CurrentBoy().inventory.AddItem(equipment.id, 1);
-  //    equipment = null;
-  //    UIController.instance.UpdateUI();
-  //  }
-  //}
+    if(id == 10) {
+      skills.Add(BattleController.instance.GetSkillById(9));
+      return skills.ToArray();
+    } else {
+      skills.Add(BattleController.instance.GetSkillById(0));
+      skills.Add(BattleController.instance.GetSkillById(1));
+      skills.Add(BattleController.instance.GetSkillById(2));
+    }
+    skills.AddRange(relationship.GetActiveSkillsByCharacter(isMale));
 
-  //public int EquipsCount(){
-  //  if (equipment != null) {
-  //    return 1;
-  //  }
-  //  return 0;
-  //}
+    return skills.ToArray();
+  }
+
+  public Skill[] GetAllSkills(int relationshipId) {
+    Relationship relationship = GlobalData.instance.relationships[relationshipId];
+
+    return relationship.GetAllSkillsByCharacter(isMale);
+  }
+
 
   public int FindStatusCondition(StatusCondition cond) {
     for(int i=0; i< statusConditions.Count; i++) {
@@ -302,17 +300,30 @@ public class Person {
 
 [System.Serializable]
 public class Relationship {
+  public int id;
   public Person[] people;
   public int level = 0;
   public int exp = 0;
   public int heartLocksOpened = 0;
-  public List<int> bondSkills;
+
+  public int bondPoints = 0;
+  public int[] skillIds;
+  public bool[] unlockedSkill;
 
   public static readonly int[] levelUpCosts = {20, 40, 100, 180, 300, 480, 750, 1150, 1700, 2500};
+  public static readonly int[] skillRequisites = {-1, 0, 0, 0, 1, 1, 2, 2, 3, 3, -1, -1, -1};
+  public const int skillTreeSize = 13;
+
 
   public Relationship() {
     level = 0;
-    bondSkills = new List<int>();
+    skillIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    unlockedSkill = new bool[skillTreeSize];
+    for(int i=0; i< unlockedSkill.Length; i++) {
+      unlockedSkill[i] = false;
+    }
+    unlockedSkill[10] = true;
+    unlockedSkill[12] = true;
   }
 
   public static int LevelStartingExp(int level) {
@@ -344,12 +355,17 @@ public class Relationship {
     return people[1];
   }
 
+  public int GetMaxHp() {
+    return level * 8 + 26;
+  }
+
   public bool GetExp(int value) {
     bool didLevelUp = false;
 
     exp += value;
     while(level < 10 && exp - LevelStartingExp(level) >= LevelUpNeededExp(level)) {
       level++;
+      bondPoints++;
       didLevelUp = true;
     }
     return didLevelUp;
@@ -360,5 +376,45 @@ public class Relationship {
       return "Amigos";
     }
     return Utils.RelationshipNameByHeartLocksOpened(heartLocksOpened);
+  }
+
+  public Skill[] GetActiveSkillsByCharacter(bool isBoy) {
+    List<Skill> skills = new List<Skill>();
+    if(isBoy) {
+      AddSkillToList(skills, 1, true);
+      AddSkillToList(skills, 4, true);
+      AddSkillToList(skills, 5, true);
+    } else {
+      AddSkillToList(skills, 3, true);
+      AddSkillToList(skills, 8, true);
+      AddSkillToList(skills, 9, true);
+    }
+    return skills.ToArray();
+  }
+
+  public void AddSkillToList(List<Skill> list, int id, bool shouldBeActive) {
+    Skill sk = BattleController.instance.GetSkillById(skillIds[id]);
+
+    if(unlockedSkill[id]) {
+      if(!shouldBeActive || sk.type == SkillType.active) {
+        list.Add(sk);
+      }
+    }
+  }
+
+  public Skill[] GetAllSkillsByCharacter(bool isBoy) {
+    List<Skill> skills = new List<Skill>();
+    if(isBoy) {
+      AddSkillToList(skills, 10, false);
+      AddSkillToList(skills, 1, false);
+      AddSkillToList(skills, 4, false);
+      AddSkillToList(skills, 5, false);
+    } else {
+      AddSkillToList(skills, 12, false);
+      AddSkillToList(skills, 3, false);
+      AddSkillToList(skills, 8, false);
+      AddSkillToList(skills, 9, false);
+    }
+    return skills.ToArray();
   }
 }
