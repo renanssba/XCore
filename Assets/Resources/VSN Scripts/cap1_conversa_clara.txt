@@ -78,16 +78,142 @@ waypoint conversation
 
 set_var aux #random100
 if #currentRelationshipHeartLocksOpened == 0
-  
+  if aux < 33
+    say "" "Ricardo e Clara bocejam. O trabalho de história está entediante."
+    say "Ricardo" "E aí Clara, o que você gosta de fazer para se divertir?"
+    say "" "Clara para e pensa um pouco."
+    say "Clara" "E-eu não tenho muito tempo livre, na verdade..."
+    say "Puxa, que trabalho difícil! estou cansada. Tem algo pra comer?"
+    say "" "Ricardo sorri."
+    goto end_dialog
+  endif
+  if aux < 66
+    say "Clara" "Ei Ricardo, você gosta daquele programa, o Reis do Fogão? Eu assisti o episódio de ontem e gostei muito."
+    say "Ricardo" "Sim, eu adoro! Você viu a reviravolta no final? Eu nunca imaginei que molho shoyu pudesse ser usado daquela forma."
+    say "Clara" "Ah, nem vi... Eu me lembrei que tive que terminar coisa X e acabei perdendo o final. Como foi?"
+    say "Ricardo" "Foi incrível, os particiantes tiveram que cozinhar de olhos vendados e..."
+    say "" "Clara escuta a história com entusiasmo e os dois riem muito."
+    goto end_dialog    
+  if aux < 100
+    say "Clara" "Ricardo, trouxe uns livros lá de casa pra gente usar de referência pro trabalho de história."
+    say "Ricardo" "Eita, esses livros são bem antigos. Eles... são originais da época da guerra?"
+    say "Clara" "Sim. Meu pai é diplomata, ele ficou com alguns livros do meu avô."
+    say "Ricardo" "Que sorte, seu pai deve ser alguém muito importante!"
+    say "Clara" "É, minha família é bem... requisitada... Mas vamos lá, por onde a gente começa a pesquisa?"
+    say "" "Os dois começam a folhear os livros e planejar quais vão usar de referência pro trabalho."
+    goto end_dialog
+  endif
 endif
+
 if #currentRelationshipHeartLocksOpened == 1
-  
+  if aux < 33
+    say "" "Ricardo nota que Clara está desatenta."
+    say "Ricardo" "Está tudo bem com você? Você parece cansada."
+    say "Clara" "Eu tô bem. Só com um pouco de sono, fiquei acordada até tarde terminando minhas lições de etiqueta."
+    say "Clara" "Meus pais são convidados pra muitos jantares formais e eu não posso fazer feio."
+    say "Ricardo" "Parece cansativo."
+    say "Clara" "É a minha rotina, já estou acostumada."
+    say "Ricardo" "Pegue leve de vez em quando! Descansar é bom também."
+    say "" "Clara agradece e pede para voltarem ao trabalho."
+    goto end_dialog
+  endif
+  if aux < 66
+    say "" "Ricardo e Clara estão aprofundados no assunto do trabalho."
+    say "Ricardo" "Você acha que seria interessante adicionarmos algo sobre a princesa?"
+    say "Clara" "Com certeza! Ela foi fundamental para a negociação de paz no final."
+    say "Ricardo" "Ok, então a gente adiciona esse parágrafo na conclusão..."
+    say "Clara" "Se a gente continuar nesse ritmo, esse trabalho ficará pronto em minutos!"
+    say "" "Alguns minutos se passam..."
+    say "Ricardo" "...então o jurado disse: \q Esse foi o pior frango assado que eu já comi! \q "
+    say "Clara" "Hahahaha!  E ele nem notou que era peixe frito?"
+    say "Ricardo" "Não!"
+    say "" "Os dois riem e continuam a procrastinar."
+    
+    goto end_dialog    
+  if aux < 100
+    say "Clara" "Ok, trouxe um monte de material de pesquisa. Esse trabalho vai ficar perfeito!"
+    say "Ricardo" "Vamos lá, trouxe uns doces pra deixar a gente energizado!"
+    say "Clara" "Agora sim, somos imbatíveis."
+    say "" "O celular de Clara toca."
+    say "Clara" "Alô?"
+    say "" "Clara balança a cabeça concordando calada. Sua expressão fica cada vez mais morta."
+    say "Clara" "Sim, sim...Claro, mamãe, estou indo."
+    say "" "Clara desliga o telefone, cabisbaixa. Ricardo parece preocupado."
+    say "Ricardo" "Aconteceu alguma coisa? Você precisa de ajuda?"
+    say "Clara" "São coisas de família, nada demais. Desculpa Ricardo, tenho que ir agora."
+    say "" "Clara vai embora com pressa. Ricardo fica triste."
+    goto end_dialog
+  endif
 endif
+
 if #currentRelationshipHeartLocksOpened == 2
-  
+  if aux < 33
+    say "Ricardo" "Olha só o que eu trouxe!"
+    say "" "Ricardo estende uma revista para Clara. A garota olha de forma entusiasmada."
+    say "Clara" "A 50 Cafés da Manhã Para Comer Antes de Morrer! Você conseguiu a edição deste mês!"
+    say "Ricardo" "Escolhe um que eu preparo pra você!"
+    say "Clara" "Sério? Eu vou cobrar!"
+    say "" "Os dois folheiam a revista admirando vários pratos deliciosos."
+    say "" "O celular de Clara toca. A menina atende."
+    say "Clara" "Oi, mãe. Aham. Não, mãe, hoje não dá. Mas é o que eu quero, mãe. Falo com a senhora mais tarde."
+    say "" "Clara desliga o telefone, pensativa."
+    say "Ricardo" "...Tá tudo bem?"
+    say "Clara" "Eu e minha mãe... não estamos nos melhores termos ultimamente. Mas acho que é temporário."
+    say "Ricardo" "..."
+    say "Clara" "Eu sei que minha mãe sempre deseja o melhor pra mim, mas acho que eu posso ter uma opinião também."
+    say "Clara" "...Então, qual desses cafés da manhã você acha que é o mais gostoso do mês?"
+    say "" "Ricardo dá um sorriso, compreendendo. Os dois seguem conversando sobre cafés da manhã."    
+    goto end_dialog
+  endif
+  if aux < 66
+    say "Clara" "Pronto, acho que terminando esse capítulo o trabalho fica pronto!"
+    say "Ricardo" "É... Verdade, né..."
+    say "" "Ricardo parece um pouco relutante."
+    say "Ricardo" "Mas... E se a gente adicionasse umas fotos?"
+    say "Clara" "Fotos?"
+    say "" ""
+    say "Ricardo" "É, e podemos melhorar também a formatação, e revisar mais a ortografia."
+    say "Clara" "Formatação? Eu acho que ela tá boa o bastante..."
+    say "" "Ricardo concorda com um leve movimento da cabeça. Clara percebe que há algo de errado."
+    say "Clara" "...Mas sempre podemos melhorar, não é verdade? Sempre dá pra fazer um trabalho melhor."
+    say "" "O rosto do garoto se ilumina."
+    say "Clara" "Vamos aproveitar e adicionar uma bibliografia, sumário e revisar mais uma vez."
+    say "Ricardo" "Isso! Eu vou preparar mais lanches pra gente."
+    say "" "Os dois continuam conversando animadamente."
+    goto end_dialog
+  endif
+  if aux < 100
+    say "" "Clara chega, visivelmente angustiada. Ela está tapando o rosto com as mãos."
+    say "Ricardo" "Er... Clara? Tá tudo bem?"
+    say "Clara" "Rápido, me ajuda a encontrar alguma coisa pra cobrir meu rosto antes que alguém veja. Um saco de papel, uma mochila, qualquer coisa."
+    say "Ricardo" "Pera, se acalma. Me fala o que tá acontecendo."
+    say "Clara" "Tá bom. Eu vou te mostrar, mas me promete que você não vai rir de mim."
+    say "" "Clara tira as mãos da frente do rosto e o aproxima bastante de Ricardo. O garoto olha para ela, confuso."
+    say "Ricardo" "Eu... não vejo nada."
+    say "Clara" "Tem uma espinha ENORME no meu rosto."
+    say "" "De fato, há uma espinha no rosto da garota."
+    say "Ricardo" "Mas tá tudo bem, todo mundo tem espinha."
+    say "Clara" "Mas... aí eu fico feia."
+    say "Ricardo" "Mas Clara..."
+    say "Er... O ser humano é que nem bolo decorado."
+    say "Clara" "Hã... Quê?"
+    say "Ricardo" "Muitas vezes, confeiteiros escondem um bolo ruim colocando bastante cobertura pra corrigir as falhas."
+    say "Independente da aparência, o mais importante do bolo é o recheio! Tanto faz ter cobertura, é só enfeite."
+    say "Clara" "Pera, eu também gosto da cobertura."
+    say "Ricardo" "Você gosta de tudo, Clara."
+    say "Clara" "Fato."
+    say "Ricardo" "Mas o meu ponto é..."
+    say "Você é legal com ou sem cobertura, não se preocupe!"
+    say "" "Clara para e pensa um pouquinho. Ela abre um sorriso e responde:"
+    say "Clara" "Tem razão, muito obrigada. Mas todo esse papo me deixou com muita fome. Vamos comer bolo?"
+    say "" "Ricardo consente."
+    goto end_dialog
+  endif
 endif
-say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
-say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
+
+waypoint end_dialog
+// say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
+// say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
 add_exp 20
 goto end
 
