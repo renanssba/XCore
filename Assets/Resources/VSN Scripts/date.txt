@@ -41,11 +41,11 @@ for currentDateEvent #dateLength
   
   goto_script "\currentEventName" event_statement
   if currentDateEvent == 0
-    say "Ricardo" "E agora, o que faremos?"
-    say "Ana" "Eu vou te proteger!"
+    say "\boy" "E agora, o que faremos?"
+    say "\girl" "Eu vou te proteger!"
   else
-    say "Ana" "Fica comigo!"
-    say "Ricardo" "Vamos lutar juntos."
+    say "\girl" "Fica comigo!"
+    say "\boy" "Vamos lutar juntos."
   endif
   
   show_date_ui true
@@ -178,4 +178,5 @@ goto end
 
 
 waypoint end
+full_heal_party
 goto_script "pass_time"

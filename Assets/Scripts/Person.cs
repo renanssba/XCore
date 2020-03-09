@@ -314,6 +314,8 @@ public class Relationship {
   public static readonly int[] skillRequisites = {-1, 0, 0, 0, 1, 1, 2, 2, 3, 3, -1, -1, -1};
   public const int skillTreeSize = 13;
 
+  public List<string> talkedDialogs;
+
 
   public Relationship() {
     level = 0;
@@ -324,6 +326,7 @@ public class Relationship {
     }
     unlockedSkill[10] = true;
     unlockedSkill[12] = true;
+    talkedDialogs = new List<string>();
   }
 
   public static int LevelStartingExp(int level) {

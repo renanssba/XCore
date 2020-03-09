@@ -12,7 +12,7 @@ namespace Command {
         UIController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue(), args[2].GetStringValue(), args[3].GetStringValue());
       } else {
         UIController.instance.SetInteractionPin((int)args[0].GetNumberValue(), args[1].GetBooleanValue());
-      }      
+      }
     }
 
     public override void AddSupportedSignatures() {

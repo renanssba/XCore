@@ -37,9 +37,6 @@ public class PersonCard : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    //Debug.Log("updating "+person.name);
-    int relationShipId = CoupleStatusScreen.instance.relationship.id;
-
     if(person == null || gameObject.activeSelf == false) {
       return;
     }
@@ -73,6 +70,7 @@ public class PersonCard : MonoBehaviour {
 
 
     /// SKILLS
+    int relationShipId = CoupleStatusScreen.instance.relationship.id;
     for(int i=0; i<skillButtons.Length; i++) {
       if(i < person.GetAllSkills(relationShipId).Length) {
         skillButtons[i].Initialize(person, person.GetAllSkills(relationShipId)[i]);

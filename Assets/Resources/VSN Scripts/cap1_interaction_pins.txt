@@ -2,7 +2,7 @@ if daytime == 0
   goto manha
 endif
 if daytime == 1
-  goto tarde
+  goto manha
 endif
 if daytime == 2
   goto noite
@@ -11,7 +11,12 @@ endif
 
 
 waypoint manha
-reset_pins_board "school map"
+if daytime == 0
+  reset_pins_board "school map"
+endif
+if daytime == 1
+  reset_pins_board "city map"
+endif
 set_interaction_pin 0 true "cap1_conversa_ana" "Telhado"
 
 if #day == 1
@@ -21,7 +26,7 @@ if conhece_beatrice == 1
   set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 
-set_interaction_pin 2 false
+set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
 goto end
 
 

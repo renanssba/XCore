@@ -1,3 +1,7 @@
+if argsCount > 0
+  goto *arg1
+endif
+
 goto_script "enter_observation" "school morning"
 
 if #day == 1

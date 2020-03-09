@@ -30,7 +30,7 @@ public class CoupleStatusScreen : MonoBehaviour {
     relationshipCard.UpdateUI();
     personCards[0].UpdateUI();
     personCards[1].UpdateUI();
-    coupleHpText.text = "HP: "+relationship.GetMaxHp().ToString();
+    coupleHpText.text = relationship.GetMaxHp().ToString();
   }
 
   public void ClickRightCoupleButton() {
