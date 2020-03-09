@@ -23,8 +23,21 @@ public class Actor2D : MonoBehaviour {
 
   const float attackAnimTime = 0.18f;
 
+    public MaterialPropertyBlock prop;
 
-  public void SetCharacterGraphics(Person p) {
+    [ContextMenu("Print Material Property Block")]
+    public void PrintMaterialPropertyBlock()
+    {
+        print("Flash Color:" + prop.GetColor("_FlashColor"));
+        print("Flash Amount:" + prop.GetColor("_FlashAmount"));
+    }
+    void Awake()
+    {
+        prop = new MaterialPropertyBlock();
+    }
+
+
+    public void SetCharacterGraphics(Person p) {
     person = p;
     UpdateCharacterGraphics();
   }
@@ -149,17 +162,19 @@ public class Actor2D : MonoBehaviour {
 
   public void ShineRed() {
     foreach(SpriteRenderer r in renderers) {
-      //MaterialPropertyBlock prop = new MaterialPropertyBlock();
-      //prop.SetColor("_FlashColor", Color.red);
-      //r.SetPropertyBlock(prop);
-      r.material.SetColor("_FlashColor", Color.red);
+      r.GetPropertyBlock(prop);
+      prop.SetColor("_FlashColor", Color.red);
+      r.SetPropertyBlock(prop);
+      //r.material.SetColor("_FlashColor", Color.red);
     }    
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 
   public void ShineGreen() {
     foreach(SpriteRenderer r in renderers) {
-      r.material.SetColor("_FlashColor", Color.green);
+            r.GetPropertyBlock(prop);
+            prop.SetColor("_FlashColor", Color.green);
+            r.SetPropertyBlock(prop);
     }
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
@@ -175,27 +190,26 @@ public class Actor2D : MonoBehaviour {
     foreach(SpriteRenderer r in renderers) {
       DOTween.Kill(r.material);
 
-      //MaterialPropertyBlock prop = new MaterialPropertyBlock();
-      //r.GetPropertyBlock(prop);
-      //prop.SetFloat("_FlashAmount", 0.5f);
-      //r.SetPropertyBlock(prop);
+      r.GetPropertyBlock(prop);
+      prop.SetFloat("_FlashAmount", minFlash);
+      r.SetPropertyBlock(prop);
 
-      r.material.SetFloat("_FlashAmount", minFlash);
-      //float currentFlashPower = minFlash;
+      //r.material.SetFloat("_FlashAmount", minFlash);
+      float currentFlashPower = minFlash;
 
-      //DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
-      //  prop = new MaterialPropertyBlock();
-      //  prop.SetFloat("_FlashAmount", currentFlashPower);
-      //  r.SetPropertyBlock(prop);
-      //}).OnComplete(()=> {
-      //  prop = new MaterialPropertyBlock();
-      //  prop.SetFloat("_FlashAmount", minFlash);
-      //  r.SetPropertyBlock(prop);
-      //});
-
-      r.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
-        r.material.SetFloat("_FlashAmount", 0f);
+      DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
+        r.GetPropertyBlock(prop);
+        prop.SetFloat("_FlashAmount", currentFlashPower);
+        r.SetPropertyBlock(prop);
+      }).OnComplete(()=> {
+        r.GetPropertyBlock(prop);
+        prop.SetFloat("_FlashAmount", 0.0f);
+        r.SetPropertyBlock(prop);
       });
+
+      //r.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
+      //  r.material.SetFloat("_FlashAmount", 0f);
+      //});
     }
   }
 
