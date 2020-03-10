@@ -94,6 +94,151 @@ girl_interaction
 
 
 waypoint conversation
+//Ricardo diz que não via muito a Beatrice antes e pergunta porque. Ela explica que era ensinada em casa e só entrou no colégio esse ano.
+waypoint dialog_acquaintances_1
+
+say "Ricardo" "Beatrice, eu não me lembro de ver você no colégio antes. Você veio de outra escola?"
+say "Beatrice" "Fui transferida... de minha residência."
+say "Ricardo" "Ah... Hein?"
+say "Beatrice" "Eu era instruída em casa. Mas este ano, passei a frequentar o seu colégio. O doutor disse que seria bom para mim."
+say "" "Ricardo acha estranho, porém decide não insistir mais no assunto."
+// say "Ricardo" "Saquei. E o que você acha da escola?"
+// say "Beatrice" "Os instrutores são decentes. As instalações são agradáveis também. É uma instituição muito ampla."
+// say "Ricardo" "Já fez muitas amizades?"
+// say "Beatrice" "...Há muitos livros na biblioteca. Eu tenho preferência por ambientes mais sossegados, se é que me entende."
+// say "Ricardo" "Entendo. Bem, se precisar de ajuda, pode contar comigo!"
+// say "Beatrice" "Contarei."
+//say "Beatrice" "Pessoas...são muito incômodas."
+//say "Ricardo" "..."
+//say "Beatrice" "Pessoas...são muito incômodas."
+goto end_dialog
+
+
+waypoint dialog_acquaintances_2
+say "" "Ricardo e Beatrice discutem sobre os rascunhos do livro que a menina deu para ele."
+say "Beatrice" "Então, quais são suas considerações sobre o final da série Poço da Perdição?"
+say "Ricardo" "Eu comecei a ler ontem, mas até agora, é surpreendente!"
+say "Ricardo" "O estilo de escrita do autor parece um pouco diferente do que eu me lembrava. Acho que é porque é um rascunho, né?"
+say "Beatrice" "...Interessante. De fato, uma obra muda bastante durante os diversos processos de revisão e reescrita."
+say "Ricardo" "Não é ruim. Eu tô muito ansioso, quero ler mais e saber como vai terminar."
+say "Beatrice" "É mesmo?"
+say "" "Beatrice parece satisfeita."
+goto end_dialog
+
+waypoint dialog_acquaintances_3
+say "" "Beatrice olha para as mãos de Ricardo, intrigada."  
+say "Beatrice" "O que é esse pó branco?"
+say "Ricardo" "Isso? Ah, é açúcar de confeiteiro. São das rosquinhas que eu preparei hoje de manhã."
+say "" "Ricardo tira uma rosquinha de um recipiente na mochila e dá para a garota."
+say "Beatrice" "Você transmutou este alimento a partir de outros ingredientes? Como um alquimista?"
+say "Ricardo" "É...Acho que sim?"
+say "Beatrice" "*mastiga, *mastiga* Isto ...não é ruim. Na verdade, é delicioso. *mastiga, mastiga*"
+say "Beatrice" "Deveras impressionante! Eu lhe nomeio Alquimista Ricardo, O Lorde dos Confeitos!"
+say "" "Ricardo ri. Os dois continuam comendo rosquinhas."
+//say "" "Beatrice vai para o hospital por comer muito açúcar."
+goto end_dialog
+
+waypoint dialog_friends_1
+say "" "Ricardo comenta sobre suas noites de leitura."
+say "Ricardo" "Ontem à noite eu deitei e passei a madrugada lendo. Tô exausto, Beatrice! Porque você me emprestou um livro tão bom?"
+say "Beatrice" "Dormir é superestimado. Não acredite nos engodos que a sociedade te conta."
+say "Beatrice" "Ao adormecer, você desperdiça as horas mais tranquilas e preciosas do dia."
+say "Ricardo" "Eu preciso das minhas oito horas de sono!"
+say "Beatrice" "Pura invenção. Eu não repouso há 3 dias e estou perfeitamente bem."
+say "Beatrice" "Os ocasionais desmaios são um preço pequeno a se pagar."
+say "Ricardo" "O quê?"
+say "Beatrice" "...e o gosto de sangue na boca fica deveras agradável depois que você se acostuma."
+say "Ricardo" "Por tudo que é mais sagrado, vá no médico."
+say "" "Ricardo arrasta Beatrice para um hospital."
+goto end_dialog
+
+
+waypoint dialog_friends_2
+say "Ricardo" "Já passei da metade do Poço da Perdição!"
+say "Beatrice" "Então, qual sua personagem favorita até agora?"
+say "Ricardo" "No quarto capítulo, aparece uma feiticeira adolescente que é muito legal!"
+say "Ricardo" "Quando ela executou aquele plano elaborado para destruir o covil de lobisomens eu quase gritei."
+say "Ricardo" "Facilmente a melhor do livro até agora, adoro personagens inteligentes assim."
+say "Beatrice" "..."
+say "" "Beatrice fica vermelha."
+say "Ricardo" "Você tá bem?"
+say "Beatrice" "...Sim."
+say "Beatrice" "Eu... também aprecio bastante esta personagem."
+goto end_dialog
+
+waypoint dialog_friends_3
+say "Beatrice" "O que você faria se tivesse poderes mágicos, Ricardo?"
+say "Ricardo" "Não sei...Acabaria com a fome no mundo, eu acho. Ainda há muitas famílias que não conseguiram se recuperar depois da guerra. Um pouco de ajuda não faria mal."
+say "Beatrice" "Um esforço muito nobre de sua parte."
+say "Beatrice" " Já eu, seria uma metamorfa. Mudar de forma é uma habilidade deveras vantajosa."
+say "Ricardo" "Parece legal! E no que você se transformaria?"
+say "Beatrice" "Numa pessoa completamente diferente. Alguém de quem as pessoas gostassem."
+say "Beatrice" "A Clara, por exemplo. Ela é a garota mais popular do colégio. Sempre há um exército de pessoas ao redor dela."
+say "" "Ricardo engole em seco."
+say "Beatrice" "Ela estuda em sua classe, correto? Eu provavelmente me transformaria nela."
+say "Beatrice" "...e depois que eu enjoasse de toda a atenção, eu me transformaria num dragão e reduziria a escola a cinzas."
+say "" "Ricardo fica assustado."
+goto end_dialog
+
+waypoint dialog_lovers_1
+say "" "Ricardo retira um livro da mochila e estende para Beatrice."
+say "Ricardo" "Aqui está. Poço da Perdição devidamente finalizado!"
+say "Beatrice" "Terminou de analisar todo o conteúdo?"
+say "Ricardo" "Sim, foi uma leitura muito boa."
+say "" "Ricardo pausa por um segundo."
+say "Ricardo" "...A autora é muito talentosa."
+say "Beatrice" "..."
+say "Beatrice" "...Mas o escritor da série é um homem."
+say "" "Ricardo observa Beatrice com um olhar compreensivo."
+say "Ricardo" "Você tem um estilo muito próprio de escrever, sabia?"
+say "Beatrice" "..."
+say "Beatrice" "...Então você notou."
+say "Ricardo" "Já faz algum tempo. Porque você mentiu?"
+say "Beatrice" "Eu...não sou uma pessoa muito interessante."
+say "Beatrice" "Eu considerei minhas opções. Creio que se eu houvesse sido verdadeira, você jamais teria correspondido minha carta."
+say "Ricardo" "Bobeira. Você é uma das pessoas mais interessantes que eu conheço."
+say "Ricardo" "E você escreve muito bem. Eu lhe nomeio Alquimista Beatrice, A Madame das Palavras!"
+say "" "Beatrice ri."
+say "Beatrice" "...Obrigada."
+goto end_dialog
+
+waypoint dialog_lovers_2
+
+say "Ricardo" "Eu estava pensando sobre o que você disse outro dia."
+say "Beatrice" "Meus pensamentos sobre dormir ser um desperdício de tempo?"
+say "Ricardo" "Não, aquela coisa de...virar um dragão e queimar a escola. Você estava falando sério?"
+say "Beatrice" "É evidente que não. Se transformar em um dragão é algo excessivamente complicado até mesmo pra mim."
+say "Ricardo" "Mas...Você odeia o colégio tanto assim? Há pessoas boas lá."
+say "Beatrice" "Não, não há. Só você. O restante pode ir pro inferno, se depender da minha opinião."
+say "" "Ricardo fica visivelmente alarmado, mas se controla."
+say "Ricardo" "Você está enganada. Se você der uma chance para as pessoas, elas podem te surpreender."
+say "Ricardo" "Por exemplo, eu te dei uma chance, não foi? Se eu não tivesse respondido sua carta, nós nunca teríamos nos conhecido."
+say "" "Beatrice fica pensativa."
+say "Beatrice" "..."
+say "Beatrice" "Acredito que...você está certo."
+say "Ricardo" "Tem um clube de leitura no colégio. Podemos combinar de ir...juntos."
+say "Beatrice" "Eu apreciaria bastante."
+goto end_dialog
+
+waypoint dialog_lovers_3
+
+say "Beatrice" "Olá, *tosse, tosse* Ricardo!"
+say "Ricardo" "Está ficando doente de novo?"
+say "Beatrice" "Não, *tosse, tosse*, estou *tosse* ... perfeitamente bem."
+say "Ricardo" "Se você está doente, é melhor ir pra casa descansar."
+say "Beatrice" "Não posso *tosse* ir para casa!"
+say "" "Beatrice pigarreia, tentando controlar a crise de tosse."
+say "Beatrice" "Se meus pais souberem que estou debilitada, eles podem me retirar do colégio!"
+say "Ricardo" "..."
+say "Beatrice" "...Eu sempre tive uma saúde muito frágil."
+say "Beatrice" "Desde que me recordo, passo os dias trancada em casa lendo. Este é meu primeiro ano vivendo como um ser humano normal."
+say "Beatrice" "Eu não posso mais voltar a como era anteriormente. Não posso."
+say "Ricardo" "Pensei que você não gostasse da escola."
+say "Beatrice" "Não aprecio. Mas se eu sair do colégio...talvez nunca mais nos vejamos novamente."
+say "Ricardo" "Eu posso te visitar em casa, não posso?"
+say "Beatrice" "...Talvez."
+
+goto end_dialog
 
 set_var aux #random100
 if #currentRelationshipHeartLocksOpened == 0
@@ -105,8 +250,14 @@ endif
 if #currentRelationshipHeartLocksOpened == 2
   
 endif
+
+waypoint dialog_fallback
 say "" "Os dois conversam sobre os livros que eles leram recentemente."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+goto end_dialog
+
+
+waypoint end_dialog
 add_exp 20
 goto end
 
