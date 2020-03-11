@@ -28,7 +28,7 @@ namespace Command {
           break;
         case "battle_view":
         default:
-          cameraPos = new Vector3(0f, 1.2f, -6.4f);
+          cameraPos = new Vector3(0f, 1.45f, -6.4f);
           break;
       }
 

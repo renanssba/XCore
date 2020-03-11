@@ -119,13 +119,6 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
-    SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
-    DOTween.Kill(spriteRenderer.material);
-    spriteRenderer.material.SetFloat("_FlashAmount", minFlash);
-    spriteRenderer.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo);
-  }
-
   public void SetupGirlInteraction() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
 

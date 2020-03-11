@@ -30,23 +30,168 @@ girl_interaction
 
 
 waypoint conversation
+select_dialog
 
-set_var aux #random100
-if #currentRelationshipHeartLocksOpened == 0
-  if aux < 50
-    
-  else
-    
-  endif
-endif
-if #currentRelationshipHeartLocksOpened == 1
-  
-endif
-if #currentRelationshipHeartLocksOpened == 2
-  
-endif
+waypoint dialog_acquaintances_1
+say "Ricardo" "Como andam os treinos, Ana?"
+say "Ana" "Estão ótimos, tô progredindo bastante."
+say "" "Ricardo percebe que o braço de Ana está com um grande hematoma."
+say "Ricardo" "Tá tudo bem, Ana? Seu braço parece machucado."
+say "Ana" "Tá sim. É um machucado pequeno, acontece o tempo todo por lá."
+say "Ricardo" "Tudo bem. Só tenta tomar mais cuidado, tá?"
+say "Ana" "Não se preocupa, é preciso muito mais que isso pra me parar."
+say "" "A garota sorri, confiante."
+goto end_dialog
+
+waypoint dialog_acquaintances_2
+say "Ana" "Ricardo, eu tava assistindo ao jogo dos Monsters ontem e eu decidi em qual posição eu quero jogar."
+say "Ricardo" "Que legal, qual vai ser sua posição?"
+say "Ana" "Eu vou ser pivô, igual ao Hopping James!"
+say "É a posição mais legal do time, que fica perto da cesta e faz a maior quantidade de pontos!"
+say "Ricardo" "Uou, parece bem incrível."
+say "Ana" "E eu vou ser a maior pivô de todos os tempos!"
+say "Ricardo" "Não a maior em altura, com certeza..."
+say "Ana" "Vem cá, eu vou te dar um cascudo!"
+say "Ricardo" "Hahaha."
+goto end_dialog
+
+waypoint dialog_acquaintances_3
+say "Ana" "Ei Ricardo, eu preparei uma rotina de treinos pra você!"
+say "Ricardo" "Como assim?"
+say "Ana" "Você tá muito parado, precisa aumentar sua resistência física!"
+say "É bem simples: vamos começar com 100 abdominais, 100 apoios de frente, 100 agachamentos e correr 10km..."
+say "Ricardo" "Pera, quê?"
+say "" "Os olhos do garoto exibem um profundo medo por sua vida."
+say "Ana" "Isso todos os dias! E depois pode treinar basquete comigo, se quiser."
+say "Ricardo" "Eu não vou ter resistência alguma se eu estiver morto, Ana!"
+say "" "A garota continua tentando convencê-lo, sem sucesso."
+goto end_dialog
+
+
+
+waypoint dialog_friends_1
+say "Ricardo" "Oi Ana! Como foram os testes pra ser pivô na nossa seleção de basquete?"
+say "Ana" "Foi péssimo... Eu consegui acertar muitas cestas a distância, mas a marcação e disputa de bola foram muito difíceis..."
+say "Todo mundo era muito alto, eu não tinha como brigar pela bola..."
+say "" "A garota parece bem decepcionada."
+say "Ricardo" "Que droga! Mas eles não te deixaram entrar no time?"
+say "Ana" "Não! Só ficaram me zoando e disseram que uma \qbaixinha\q como eu jamais poderia ser pivô."
+say "Ricardo" "Poxa, que droga."
+say "Ana" "Mas quero é ver quem vai me chamar de baixinha com a boca inchada!"
+say "Ricardo" "Hum... Por que você não tenta de novo?"
+say "Ana" "Eu já tentei três vezes, Ricardo... Eles nunca me deixam."
+say "Ricardo" "Então por que você... não tenta pra outra posição? Você disse que lança bem, não é? Poderia tentar ser armadora."
+say "Ana" "É, pensando bem... É uma ótima ideia! Vou tentar isso no próximo teste! Não vou desistir!"
+say "" "Ana agradece e Ricardo fica feliz por poder ajudá-la."
+goto end_dialog
+
+waypoint dialog_friends_2
+// say "Ricardo" "Parece que o seu super treino tá fazendo efeito, hein Ana! Olha só esses músculos!"
+// say "" "Ricardo toca amigavelmente no braço de Ana, mas a garota se afasta em reflexo."
+say "Ricardo" "...Aí eu tava lendo esse livro e percebi que a história dos Monsters é mesmo bem interessante."
+say "" "Ana, encostada em uma parede, balança a cabeça lentamente em confirmação."
+say "Ricardo" "Eu não acredito como eles conseguiram virar o jogo e ganhar o último torneio no último minuto!"
+say "" "Ricardo percebe que Ana está com os olhos fechados. E roncando."
+say "Ricardo" "Ana?"
+say "Ana" "Hã, oi? Falou comigo?"
+say "Ricardo" "Você tá dormindo em pé?"
+say "Ana" "Desculpa, os treinos pra entrar no clube de basquete têm consumido todas as minhas energias..."
+say "Ricardo" "Você tem que cuidar melhor de si! Tenho te visto sempre muito cansada ultimamente, então eu preparei isso aqui pra você."
+say "" "Ele entrega um pequeno papel escrito a mão para a garota."
+say "Ana" "Hum, uma dieta alimentar?"
+say "Ricardo" "É, você precisa se alimentar bem se quiser ter energia pra ser a melhor jogadora de basquete do mundo!"
+say "Ana" "Obrigada! Com certeza vai me ajudar!"
+goto end_dialog
+
+waypoint dialog_friends_3
+say "Ana" "Hoje eu trouxe um bolo que eu fiz pra você, Ricardo! Espero que goste!"
+say "Ricardo" "Certo, deixa eu provar aqui."
+say "" "Ricardo prova um pedaço do bolo dando uma grande mordida."
+say "Ana" "E aí, o que achou?"
+say "" "O garoto inicialmente fica vermelho, depois começa a suar, ficar verde e com os cabelos em pé. Ana parece preocupada."
+say "Ana" "Você... gostou?"
+say "" "Tremendo e com os olhos esbugalhados, Ricardo engole o pedaço de bolo."
+say "Ricardo" "T-tá... er... \qinteressante\q."
+say "Ana" "Você odiou, não é?"
+say "Ricardo" "Na-não... Eu g-gostei."
+say "" "Ana faz uma cara de choro."
+say "Ana" "Me desculpa, eu sei que tá horrível. Eu passei a noite toda ontem tentando, mas essa foi a que ficou melhorzinha."
+say "Eu só queria te agradecer por ser um amigo tão legal..."
+say "" "Ricardo abre um sorriso."
+say "Ricardo" "O que importa é a intenção. Obrigado por ter se esforçado por mim, Ana."
+say "" "A garota sorri. Em seguida o estômago de Ricardo faz barulhos estranhos e ele corre para o banheiro."
+goto end_dialog
+
+
+
+waypoint dialog_lovers_1
+say "Ricardo" "Ei Ana, você sabe alguma loja onde eu posso comprar uns shorts esportivos?"
+say "Ana" "Roupas esportivas? Ué, você vai pra alguma festa a fantasia?"
+say "Ricardo" "Não, pô! Eu vou começar a treinar. Tô considerando começar aquele treinamento que você fez pra mim..."
+say "Ana" "Sério? Que legal!"
+say "Ricardo" "É..."
+say "Ana" "Eu vou contigo! E te ajudar a comprar as roupas também. Se quiser eu te empresto umas camisetas minhas de basquete."
+say "Ricardo" "Haha, obrigado. Mas eu passo, quero ter minhas próprias."
+say "" "Ana comemora animadamente e abraça Ricardo."
+say "Ana" "Você vai ficar forte e "
+say "Ricardo" "Você sempre me protege... Eu tô cansado de depender sempre de você."
+say "Eu também quero ser forte e poder te proteger, quando for necessário!"
+say "Ana" "Isso é muito legal! Eu sei que você vai conseguir, Ricardo."
+say "Aí nós vamos proteger os fracos, batendo em todo mundo que faz bullying no colégio!"
+say "Ricardo" "Não foi bem isso que eu quis dizer com \qte proteger\q..."
+goto end_dialog
+
+waypoint dialog_lovers_2
+// Ana tenta novamente entrar no clube e entra como armadora.
+say "Ana" "Ricardo, Ricardo! Eu preciso muito falar com você!"
+say "" "A garota está com um sorriso radiante."
+say "Ricardo" "Oi, o que aconteceu de tão bom?"
+say "Ana" "Eu passei no teste pra seleção de basquete do colégio!"
+say "Ricardo" "Caramba, que incrível, Ana! Finalmente eles perceberam o seu talento."
+say "Ana" "O único porém é que eu não vou ser pivô, entrei como armadora. Mas pelo menos eu tô dentro, e foi graças à sua sugestão."
+say "Ricardo" "Que ótimo! Fico feliz em ajudar."
+say "" "A garota fica com olhar distante por um momento."
+say "Ana" "Mas é uma pena... Acho que eu nunca vou ser a maior pivô de todos os tempos, afinal..."
+say "Ricardo" "Não, não desiste! A Ana que eu conheço nunca desiste!"
+say "Ana" "Eles têm uma pivô tão alta, e vivem dizendo que alguém da minha altura não serviria."
+say "Ricardo" "Mas não importa! Mostrar pra eles que estão errados."
+say "Seja a melhor armadora que a nossa seleção já teve! E aí eles devem te deixar escolher jogar em outra posição."
+say "Ana" "Você acha, Ricardo?"
+say "Ricardo" "Claro! É assim que você me ensinou a resolver as coisas, nunca desistindo e dando o seu melhor!"
+say "" "A garota cerra o punho e abre um grande sorriso. Seus olhos demonstram grande determinação."
+say "Ana" "Você tá certo! Eles só não perceberam ainda o que tão perdendo. Eu vou treinar muito mais e vou mostrar pra todos que sou a melhor!"
+say "Ricardo" "Essa é a Ana que eu conheço!"
+goto end_dialog
+
+waypoint dialog_lovers_3
+say "Ana" "Sabe, Ricardo, eu vi uma moça passeando com seu cãozinho no caminho para o colégio hoje."
+say "Ricardo" "Era um cãozinho fofo?"
+say "Ana" "Muito fofo. Me lembrou muito o Tobi..."
+say "" "A garota abaixa o rosto, triste."
+say "Ricardo" "Você sente muita falta dele, não é?"
+say "Ana" "Demais. Você sabe que dia é hoje?"
+say "Ricardo" "Claro. Hoje faz quatro anos desde que ele se foi..."
+say "" "Ana mexe a cabeça em confirmação."
+say "Ricardo" "Eu sinto muito... Queria poder fazer algo a mais por você."
+say "Ana" "Você sempre faz."
+say "Quando ele se foi, eu costumava chorar muito de noite e não conseguia dormir."
+say "Foi aí que você me deu o ursinho de pelúcia, e eu passei a dormir sempre abraçada com ele."
+say "Ricardo" "É, você adorava aquele ursinho."
+say "Ana" "Ainda gosto. Obrigada por estar aqui pra mim sempre que eu preciso."
+say "Ricardo" "E vou sempre estar."
+say "" "A garota esboça um leve sorriso."
+say "Ricardo" "Vamos levar flores ao túmulo do Tobi? Eu posso ir contigo mais tarde."
+say "Ana" "Vamos. Tenho certeza que ele vai gostar."
+goto end_dialog
+
+
+waypoint dialog_fallback
 say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+goto end_dialog
+
+
+waypoint end_dialog
 add_exp 20
 goto end
 
@@ -79,7 +224,7 @@ say "Ana" "..."
 say "Ricardo" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
 say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
 say "Ricardo" "Ei, aquilo doeu!"
-say "Ana" "Pô, o Tobi era um pug tão pequeninho..."
+say "Ana" "Pô, o Tobi era um pug tão pequenininho..."
 say "Ricardo" "De qualquer forma. Eu não parei de falar contigo, parei?"
 say "Ana" "Só por uns dois dias."
 say "Ricardo" "Pois é. Eu não parei naquele dia e não vou parar agora."

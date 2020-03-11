@@ -7,9 +7,9 @@ using TMPro;
 
 public class Actor2D : MonoBehaviour {
 
-  public new SpriteRenderer[] renderers;
+  public SpriteRenderer[] renderers;
   public SpriteRenderer[] buffAuraRenderers;
-  public ParticleSystem particleSystem;
+  public new ParticleSystem particleSystem;
 
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
@@ -23,21 +23,19 @@ public class Actor2D : MonoBehaviour {
 
   const float attackAnimTime = 0.18f;
 
-    public MaterialPropertyBlock prop;
+  public MaterialPropertyBlock materialProperties;
 
-    [ContextMenu("Print Material Property Block")]
-    public void PrintMaterialPropertyBlock()
-    {
-        print("Flash Color:" + prop.GetColor("_FlashColor"));
-        print("Flash Amount:" + prop.GetColor("_FlashAmount"));
-    }
-    void Awake()
-    {
-        prop = new MaterialPropertyBlock();
-    }
+  [ContextMenu("Print Material Property Block")]
+  public void PrintMaterialPropertyBlock(){
+      print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
+      print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
+  }
+  void Awake() {
+      materialProperties = new MaterialPropertyBlock();
+  }
 
 
-    public void SetCharacterGraphics(Person p) {
+  public void SetCharacterGraphics(Person p) {
     person = p;
     UpdateCharacterGraphics();
   }
@@ -162,19 +160,18 @@ public class Actor2D : MonoBehaviour {
 
   public void ShineRed() {
     foreach(SpriteRenderer r in renderers) {
-      r.GetPropertyBlock(prop);
-      prop.SetColor("_FlashColor", Color.red);
-      r.SetPropertyBlock(prop);
-      //r.material.SetColor("_FlashColor", Color.red);
+      r.GetPropertyBlock(materialProperties);
+      materialProperties.SetColor("_FlashColor", Color.red);
+      r.SetPropertyBlock(materialProperties);
     }    
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 
   public void ShineGreen() {
     foreach(SpriteRenderer r in renderers) {
-            r.GetPropertyBlock(prop);
-            prop.SetColor("_FlashColor", Color.green);
-            r.SetPropertyBlock(prop);
+      r.GetPropertyBlock(materialProperties);
+      materialProperties.SetColor("_FlashColor", Color.green);
+      r.SetPropertyBlock(materialProperties);
     }
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
@@ -190,21 +187,21 @@ public class Actor2D : MonoBehaviour {
     foreach(SpriteRenderer r in renderers) {
       DOTween.Kill(r.material);
 
-      r.GetPropertyBlock(prop);
-      prop.SetFloat("_FlashAmount", minFlash);
-      r.SetPropertyBlock(prop);
+      r.GetPropertyBlock(materialProperties);
+      materialProperties.SetFloat("_FlashAmount", minFlash);
+      r.SetPropertyBlock(materialProperties);
 
       //r.material.SetFloat("_FlashAmount", minFlash);
       float currentFlashPower = minFlash;
 
       DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
-        r.GetPropertyBlock(prop);
-        prop.SetFloat("_FlashAmount", currentFlashPower);
-        r.SetPropertyBlock(prop);
+        r.GetPropertyBlock(materialProperties);
+        materialProperties.SetFloat("_FlashAmount", currentFlashPower);
+        r.SetPropertyBlock(materialProperties);
       }).OnComplete(()=> {
-        r.GetPropertyBlock(prop);
-        prop.SetFloat("_FlashAmount", 0.0f);
-        r.SetPropertyBlock(prop);
+        r.GetPropertyBlock(materialProperties);
+        materialProperties.SetFloat("_FlashAmount", 0f);
+        r.SetPropertyBlock(materialProperties);
       });
 
       //r.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
@@ -273,12 +270,12 @@ public class Actor2D : MonoBehaviour {
 
   public void ShowHealHpParticle(int value) {
     string particleString = "+" + value + " HP";
-    ShowParticleAnimation(particleString, ResourcesManager.instance.attributeColor[3]);
+    ShowParticleAnimation(particleString, Color.green);
   }
 
   public void ShowHealSpParticle(int value) {
     string particleString = "+" + value + " SP";
-    ShowParticleAnimation(particleString, ResourcesManager.instance.attributeColor[3]);
+    ShowParticleAnimation(particleString, Color.cyan);
   }
 
   public void ShowStatusConditionParticle(StatusCondition statusCondition) {

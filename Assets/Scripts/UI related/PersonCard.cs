@@ -45,6 +45,11 @@ public class PersonCard : MonoBehaviour {
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
     nameText.text = person.name;
 
+
+    /// STATUS CONDITIONS
+    UpdateStatusConditions();
+
+
     if(coupleEntryLayout == PersonCardLayout.dateUI) {
       faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
       spText.text = "<sprite=\"Attributes\" index=3 tint>SP: " + person.sp + "<size=16>/" + person.maxSp+ "</size>";
@@ -55,8 +60,6 @@ public class PersonCard : MonoBehaviour {
     bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
     bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
 
-    /// STATUS CONDITIONS
-    UpdateStatusConditions();
 
     /// ATTRIBUTES
     string attrString = "";

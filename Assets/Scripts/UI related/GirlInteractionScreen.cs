@@ -36,28 +36,30 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void SetButtonsGraphics() {
-    if(relationshipCard.relationship.heartLocksOpened == 0) {
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+
+    if(currentRelationship.heartLocksOpened == 0) {
       Utils.SetButtonDisabledGraphics(girlInteractionButtons[0]);
     } else {
       Utils.SetButtonEnabledGraphics(girlInteractionButtons[0]);
     }
 
-    if(relationshipCard.relationship.level < 2) {
+    if(currentRelationship.level < 2) {
       Utils.SetButtonDisabledGraphics(girlInteractionButtons[2]);
     } else {
       Utils.SetButtonEnabledGraphics(girlInteractionButtons[2]);
     }
 
-    if(relationshipCard.relationship.level < 4) {
+    if(currentRelationship.level < 4) {
       Utils.SetButtonDisabledGraphics(dateSelectButtons[1]);
     } else {
-      Utils.SetButtonDisabledGraphics(dateSelectButtons[1]);
+      Utils.SetButtonEnabledGraphics(dateSelectButtons[1]);
     }
 
-    if(relationshipCard.relationship.level < 7) {
+    if(currentRelationship.level < 7) {
       Utils.SetButtonDisabledGraphics(dateSelectButtons[2]);
     } else {
-      Utils.SetButtonDisabledGraphics(dateSelectButtons[2]);
+      Utils.SetButtonEnabledGraphics(dateSelectButtons[2]);
     }
   }
 
@@ -68,7 +70,9 @@ public class GirlInteractionScreen : MonoBehaviour {
 
 
   public void ShowDateSelectionPanel() {
-    if(relationshipCard.relationship.level < 2) {
+    Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
+
+    if(currentRelationship.level < 2) {
       ShowForbiddenMessage("date_1");
       return;
     }

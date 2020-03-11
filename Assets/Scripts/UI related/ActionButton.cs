@@ -9,7 +9,8 @@ public enum TurnActionType {
   useSkill,
   useItem,
   flee,
-  defend
+  defend,
+  idle
 }
 
 

@@ -27,6 +27,11 @@ if conhece_beatrice == 1
 endif
 
 set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
+if #day == 1
+  if daytime == 0
+    set_interaction_pin 2 false
+  endif
+endif
 goto end
 
 
