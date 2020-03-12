@@ -9,11 +9,14 @@ namespace Command {
 
     public override void Execute() {
       Relationship relation = GlobalData.instance.GetCurrentRelationship();
-      //if(args.Length > 1) {
-      //  relation = GlobalData.instance.relationships[(int)args[1].GetNumberValue()];
-      //}
-      //GlobalData.instance.AddExpForRelationship(relation, (int)args[0].GetNumberValue());
-      relation.OpenHeartLock(BattleController.instance.currentDateId);
+
+      relation.OpenHeartLock((int)args[0].GetNumberValue());
+
+      SfxManager.StaticPlayBigConfirmSfx();
+      VsnArgument[] sayArgs = new VsnArgument[2];
+      sayArgs[0] = new VsnString("char_name/none");
+      sayArgs[1] = new VsnString("add_heart/say_1");
+      Command.SayCommand.StaticExecute(sayArgs);
     }
 
 

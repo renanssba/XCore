@@ -80,9 +80,8 @@ public class GameController : MonoBehaviour {
                                                          GlobalData.instance.people[3]};
       VsnController.instance.StartVSNContent("add_exp 100", "custom");
     }
-    if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
-      Relationship rel = GlobalData.instance.GetCurrentRelationship();
-      VsnController.instance.StartVSNContent("open_heart_lock "+(rel.heartLocksOpened+1), "custom");
+    if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+      VsnController.instance.StartVSN("debug_menu");
     }
   }
 

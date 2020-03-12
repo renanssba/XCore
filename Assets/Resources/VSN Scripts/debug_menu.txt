@@ -1,0 +1,59 @@
+﻿say_auto "DEBUG MENU"
+choices "Ana" ana "Beatrice" beatrice "Clara" clara "Cancelar" end
+
+
+waypoint ana
+set_current_couple 1
+set_var girl_script_name "cap1_conversa_ana"
+goto girl_menu
+
+waypoint beatrice
+set_current_couple 2
+set_var girl_script_name "cap1_conversa_beatrice"
+set_var conhece_beatrice 1
+goto girl_menu
+
+waypoint clara
+set_current_couple 3
+set_var girl_script_name "cap1_conversa_clara"
+goto girl_menu
+
+
+waypoint girl_menu
+choices "Adicionar Exp" add_exp "Aumentar Nível de Proximidade" open_lock "Iniciar Date" date "Cancelar" end
+
+
+waypoint add_exp
+add_exp 100
+goto girl_menu
+
+waypoint open_lock
+choices "Amigos Próximos" lock_1 "Apaixonados" lock_2 "Cancelar" end
+
+waypoint lock_1
+open_heart_lock 1
+goto girl_menu
+
+waypoint lock_2
+open_heart_lock 2
+goto girl_menu
+
+
+waypoint date
+choices "Date 1 (Parque)" date_1 "Date 2 (Shopping)" date_2 "Date 3 (Parque)" date_3 "Cancelar" end
+
+waypoint date_1
+goto_script girl_script_name "date_intro_1"
+goto end
+
+waypoint date_2
+goto_script girl_script_name "date_intro_2"
+goto end
+
+waypoint date_3
+goto_script girl_script_name "date_intro_3"
+goto end
+
+
+waypoint end
+end_script

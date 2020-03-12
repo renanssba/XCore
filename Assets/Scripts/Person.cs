@@ -346,7 +346,10 @@ public class Relationship {
   }
 
   public void OpenHeartLock(int lockId) {
-    heartLocksOpened = Mathf.Max(heartLocksOpened, lockId);
+    if(lockId > heartLocksOpened) {
+      heartLocksOpened = lockId;
+    }
+    UIController.instance.UpdateUI();
   }
 
 

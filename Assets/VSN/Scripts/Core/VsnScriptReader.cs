@@ -64,6 +64,8 @@ public class VsnScriptReader {
           Debug.Log("Setting variable arg" + (i + 1) + " to value: " + args[i].GetReference());
         }
       }
+    } else {
+      VsnSaveSystem.SetVariable("argsCount", 0);
     }
   }
 

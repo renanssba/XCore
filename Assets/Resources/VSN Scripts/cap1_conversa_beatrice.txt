@@ -23,8 +23,6 @@ if #day == 1
 endif
 
 
-
-
 if #day == 2
   say "" "Ricardo vai para entrada do colégio, onde marcou de se encontrar com Beatrice."
   fade_in 1
@@ -94,6 +92,8 @@ girl_interaction
 
 
 waypoint conversation
+select_dialog
+
 //Ricardo diz que não via muito a Beatrice antes e pergunta porque. Ela explica que era ensinada em casa e só entrou no colégio esse ano.
 waypoint dialog_acquaintances_1
 
@@ -131,7 +131,7 @@ say "Beatrice" "O que é esse pó branco?"
 say "Ricardo" "Isso? Ah, é açúcar de confeiteiro. São das rosquinhas que eu preparei hoje de manhã."
 say "" "Ricardo tira uma rosquinha de um recipiente na mochila e dá para a garota."
 say "Beatrice" "Você transmutou este alimento a partir de outros ingredientes? Como um alquimista?"
-say "Ricardo" "É...Acho que sim?"
+say "Ricardo" "É...Acho que sim?!"
 say "Beatrice" "*mastiga, *mastiga* Isto ...não é ruim. Na verdade, é delicioso. *mastiga, mastiga*"
 say "Beatrice" "Deveras impressionante! Eu lhe nomeio Alquimista Ricardo, O Lorde dos Confeitos!"
 say "" "Ricardo ri. Os dois continuam comendo rosquinhas."
@@ -170,7 +170,7 @@ waypoint dialog_friends_3
 say "Beatrice" "O que você faria se tivesse poderes mágicos, Ricardo?"
 say "Ricardo" "Não sei...Acabaria com a fome no mundo, eu acho. Ainda há muitas famílias que não conseguiram se recuperar depois da guerra. Um pouco de ajuda não faria mal."
 say "Beatrice" "Um esforço muito nobre de sua parte."
-say "Beatrice" " Já eu, seria uma metamorfa. Mudar de forma é uma habilidade deveras vantajosa."
+say "Beatrice" "Já eu, seria uma metamorfa. Mudar de forma é uma habilidade deveras vantajosa."
 say "Ricardo" "Parece legal! E no que você se transformaria?"
 say "Beatrice" "Numa pessoa completamente diferente. Alguém de quem as pessoas gostassem."
 say "Beatrice" "A Clara, por exemplo. Ela é a garota mais popular do colégio. Sempre há um exército de pessoas ao redor dela."
@@ -215,7 +215,7 @@ say "Ricardo" "Você está enganada. Se você der uma chance para as pessoas, el
 say "Ricardo" "Por exemplo, eu te dei uma chance, não foi? Se eu não tivesse respondido sua carta, nós nunca teríamos nos conhecido."
 say "" "Beatrice fica pensativa."
 say "Beatrice" "..."
-say "Beatrice" "Acredito que...você está certo."
+say "Beatrice" "Acredito que...você possa estar certo."
 say "Ricardo" "Tem um clube de leitura no colégio. Podemos combinar de ir...juntos."
 say "Beatrice" "Eu apreciaria bastante."
 goto end_dialog
@@ -228,11 +228,11 @@ say "Beatrice" "Não, *tosse, tosse*, estou *tosse* ... perfeitamente bem."
 say "Ricardo" "Se você está doente, é melhor ir pra casa descansar."
 say "Beatrice" "Não posso *tosse* ir para casa!"
 say "" "Beatrice pigarreia, tentando controlar a crise de tosse."
-say "Beatrice" "Se meus pais souberem que estou debilitada, eles podem me retirar do colégio!"
+say "Beatrice" "Se meus pais souberem que estou debilitada, eles podem me retirar do colégio."
 say "Ricardo" "..."
 say "Beatrice" "...Eu sempre tive uma saúde muito frágil."
-say "Beatrice" "Desde que me recordo, passo os dias trancada em casa lendo. Este é meu primeiro ano vivendo como um ser humano normal."
-say "Beatrice" "Eu não posso mais voltar a como era anteriormente. Não posso."
+say "Beatrice" "Desde que me recordo, passo os dias trancada em casa lendo. Este é meu primeiro ano convivendo com outros seres humanos."
+say "Beatrice" "Eu não posso mais voltar a como era anteriormente. Não posso, não posso!"
 say "Ricardo" "Pensei que você não gostasse da escola."
 say "Beatrice" "Não aprecio. Mas se eu sair do colégio...talvez nunca mais nos vejamos novamente."
 say "Ricardo" "Eu posso te visitar em casa, não posso?"
