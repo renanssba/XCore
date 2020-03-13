@@ -5,28 +5,32 @@ say "" "No dia seguinte, Ricardo vai para o colégio."
 say "A manhã se passa sem nenhuma grande ocorrência, mas durante a hora do intervalo..."
 fade_in 1
 
-say "Ricardo" "Ei, o que é isso? Mais uma cartinha na minha mesa?"
-say "" "O garoto pega o envelope e lê a carta. O seguinte conteúdo está escrito numa letra bonita e caprichada:"
+say "Ricardo" "Ei, o que é isso? Mais uma carta na minha mesa?"
+say "" "O garoto pega o envelope e lê a carta. O conteúdo está escrito com recortes de revistas, como anteriormente:"
 
 if foi_na_biblioteca == 1
-  say "Carta" "Olá... Desculpe-me por não ter comparecido à biblioteca ontem. Eu aprecio que você tenha sido tão gentil e atendido ao chamado de uma garota desconhecida..."
-  say "Mas eu.. me acovardei. Sinto muito, muitíssimo mesmo. Obrigada por ter comparecido. Eu sinto que estamos mais próximos só por ter acolhido o meu pedido. Agradeço de coração."
-  
+  say "Carta" "mEus CumPRImeNtOs. DesCUlpe-ME  pElO  trAnSTorNO de ONTEM."
+  say "AcoVARDEI-me E fuGi aNtEs de cuMPrIr mEU objETiVO."
+  say "AgrAdeÇO pOr sEu EsFOrço em cOMpARecer."
   add_exp 20 1
   
-  say "Carta" "Ah, e eu nem assinei da última vez. Pelo menos o meu nome eu preciso te dizer... \n-Com carinho, Beatrice."
-  say "Ps: Caso se interesse em me responder, por favor deixe uma carta no meu armário. É o segundo no corredor, com um adesivo de borboleta."
+  say "Carta" "Me cHAmo bEAtrIce. pRazEr em coNHEcê-lO, RICARDO."
+  say "aGOrA eStaMoS aPrEsENtAdOs. pOdEMOS tENtAR nOvaMENTE?"
+  say "O resto da carta é escrito à caneta, em uma caligrafia apertada."
+  say "Ps: Minhas revistas velhas acabaram. Caso possua interesse em me responder, deixe uma carta em meu armário. É a quarta porta no corredor."
 
 else
-  say "Carta" "Olá... Desculpe-me por ter-te escrito aquela carta ontem. Sou apenas uma garota desconhecida e seria tolice minha achar que você atenderia ao meu chamado inusitado..."
-  say "Perdoe minha falta de cordialidade e permita-me apresentar primeiro. Meu nome é Beatrice."
-  say "Eu... ainda tenho interesse em conversar, se você quiser. Caso não tenha, eu compreendo. Desculpe-me se fui um estorvo."
-  say "Ps: Caso se interesse em me responder, por favor deixe uma carta no meu armário. É o segundo no corredor, com um adesivo de borboleta."
+  say "Carta" "mInha carTA de onTem foi UM erRO."
+  say "cOmPreEnDo suA reLutAnCiA eM mE cOrrEsPoNdEr. uMa reaÇao coMum, jÁ qUE sOMOs deSCOnHecidOs."
+  say "Carta" "Me cHAmo bEAtrIce. pRazEr em coNHEcê-lO, RICARDO."
+  say "aGOrA eStaMoS aPrEsENtAdOs. pOdEMOS tENtAR nOvaMENTE?"
+  say "O resto da carta é escrito à caneta, em uma caligrafia apertada."
+  say "Ps: Minhas revistas velhas acabaram. Caso possua interesse em me responder, deixe uma carta em meu armário. É a quarta porta no corredor."
 endif
 
 change_person_name 2 "Beatrice"
 
-say "Ricardo" "(Eu acho que deveria respondê-la. Mas o quê?)"
+say "Ricardo" "(Que menina estranha. Eu acho que deveria respondê-la. Mas o quê?)"
 say_auto "Fertiliel" "(O que o humano deveria responder?)"
 choices "Conhecer Beatrice depois da aula" convidar_beatrice "Apenas agradecer" apenas_agradecer_beatrice
 
@@ -38,11 +42,11 @@ goto apos_responder_beatrice
 
 waypoint apenas_agradecer_beatrice
 set_var convidou_beatrice 0
-say "Ricardo" "(Vou apenas agradecer as cartinhas, mas não quero me envolver mais.)"
+say "Ricardo" "(Ela é esquisita, não quero me envolver mais.)"
 
 waypoint apos_responder_beatrice
 say "" "Ricardo guarda sua resposta em um envelope e vai até o armário deixar a cartinha."
-say "Ricardo" "(Espero que ela receba...)"
+say "Ricardo" "(Sinto que estou sendo observado...)"
 
 wait 1
 say "" "Ana aparece e chama Ricardo para lanchar com ela novamente."

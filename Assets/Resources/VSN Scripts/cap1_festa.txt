@@ -16,7 +16,7 @@ say "" "Ricardo avista Clara. Ela está cercada por um grande grupo de pessoas, 
 say "Ana está do outro lado da sala, conversando com um rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
 
 if conhece_beatrice == 1
-  say "Ele percebe que Beatrice também está na sala, sozinha e cabisbaixa num canto, quase como se estivesse se escondendo."
+  say "Ele percebe que Beatrice também está na sala, sozinha num canto, quase como se estivesse se escondendo."
   say_auto "Ricardo" "(O que eu deveria fazer?)"
   choices "Ir atrás de Ana" ir_ana "Ir atrás de Beatrice" ir_beatrice "Ir atrás de Clara" ir_clara
 else
@@ -91,14 +91,14 @@ goto end
 
 
 waypoint ir_beatrice
-say "" "Ricardo chega mais perto de Beatrice, que está cabisbaixa."
+say "" "Ricardo chega mais perto de Beatrice, que está isolada."
 say "Ricardo" "Oi, que bom que veio! Eu não sabia se você viria."
 say "" "A garota não responde."
 say "Ricardo" "Hum.. Beatrice?"
 say "" "Beatrice levanta o rosto com uma certa dificuldade."
 say "Beatrice" "Ricardo..."
 say "" "Ele percebe que ela está respirando com dificuldade e com uma mão fechada sobre a outra, ambas apoiadas sobre o peito."
-say "Ricardo" "Beatrice, tá tudo bem com você?"
+say "Ricardo" "Beatrice, o que está acontecendo?"
 say "" "A garota parece estar passando mal. Ela se encosta na parede e escorrega até o chão, caindo sentada."
 say "Beatrice" "Não estou conseguindo... respirar..."
 say "" "Ricardo segura a mão da garota e a ajuda a sair da sala lotada e barulhenta."
@@ -113,13 +113,13 @@ say "Ricardo" "Calma, eu tô aqui com você. Vai ficar tudo bem."
 say "" "Ricardo continua tranquilizando a garota."
 say "A crise de ansiedade perdura por mais alguns angustiantes minutos que parecem não ter fim."
 say "Felizmente, Beatrice consegue retomar o controle de si e superar sua crise."
-say "Beatrice" "Muito obrigada, Ricardo. Desculpe-me, eu peço perdão por arruinar a sua noite."
+say "Beatrice" "...Desculpe-me por ter feito você testemunhar algo assim."
 say "Ricardo" "Relaxa, não precisa se desculpar."
 say "Beatrice" "Eu... não me sinto muito bem em lugares muito lotados."
 say "Ricardo" "Eu imagino. Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal..."
-say "Beatrice" "Tudo bem. Passar tempo junto a ti tem feito a minha ansiedade social diminuir, pouco a pouco."
-say "Quando estamos juntos eu me sinto mais segura. Mas creio que vir a um local tão lotado ainda seja demais para mim."
-say "Ricardo" "Que bom que se sente bem quando estamos juntos. Eu também gosto muito."
+say "Beatrice" "Tudo bem. Não haveria como você saber."
+say "Eu tenho tentado superar, porém creio que vir a um local tão lotado ainda seja demais para mim."
+say "...Mas quando estamos juntos eu...me sinto mais segura."
 
 add_exp 100
 goto end
