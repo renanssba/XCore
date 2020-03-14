@@ -272,9 +272,27 @@ goto end
 
 
 waypoint end
-say "" "Os dois se despedem e voltam para suas aulas."
+if daytime == 0
+  say "" "Ricardo e Beatrice voltam para a sala de aula para continuar as próximas lições."
+endif
+if daytime == 1
+  say "" "Ricardo e Beatrice voltam para suas casas."
+endif
 goto_script "pass_time"
 end_script
+
+waypoint dialog_after_date_2
+say "Beatrice" "Isso foi...inusitado."
+say "Ricardo" "É, eu não achei que fosse esse tipo de filme. A crítica vai ter um dia cheio."
+say "Beatrice" "Eu aguardava um banho de sangue indiscriminado e não um ensaio conceitual sobre cinematografia."
+say "Ricardo" "Talvez o diretor esteja querendo fazer algo diferente. Acho que todo mundo precisa experimentar algo novo de vez em quando."
+say "Beatrice" "Não creio. Modificar hábitos é deveras estressante. Porque ele faria isso?"
+say "Ricardo" "É bem divertido! Todo final de semana eu pesquiso alguma receita nova e tento preparar em casa."
+say "Às vezes eu mudo os ingredientes e tento criar minha própria versão!"
+say "Beatrice" "É mesmo? Obteve algum sucesso?"
+say "Ricardo" "Ainda não. Mas um dia criarei uma receita só minha."
+say "Beatrice" "Admiro sua perseverança."
+goto end
 
 
 
@@ -339,7 +357,9 @@ say "Beatrice" "Agradeço por me acompanhar."
 say "Ricardo" "Tudo bem. Eu espero que o filme valha a pena."
 say "Beatrice" "O diretor sempre exagera nos esguichos de sangue, é hilário."
 fade_out 0.5
-say "" "Os dois assistem o filme e se divertem bastante."
+say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
+fade_in 0.5
+goto dialog_after_date_2
 end_script
 
 waypoint date_end_3
@@ -347,3 +367,8 @@ say "Beatrice" "É aqui, chegamos. Não é uma árvore deveras formosa?"
 say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
 say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
 end_script
+
+
+
+
+goto end
