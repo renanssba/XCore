@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public enum PersonCardLayout {
   statusScreen,
@@ -26,6 +27,9 @@ public class PersonCard : MonoBehaviour {
 
   public Transform statusConditionsContent;
 
+  public ScreenTransitions skillDescriptionPanel;
+  public TextMeshProUGUI skillNameText;
+  public TextMeshProUGUI skillDescriptionText;
   public SkillButton[] skillButtons;
 
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.statusScreen;
@@ -73,14 +77,48 @@ public class PersonCard : MonoBehaviour {
 
 
     /// SKILLS
-    int relationShipId = CoupleStatusScreen.instance.relationship.id;
+    int relationshipId = CoupleStatusScreen.instance.relationship.id;
+    Skill[] allSkills = person.GetAllCharacterSpecificSkills(relationshipId);
     for(int i=0; i<skillButtons.Length; i++) {
-      if(i < person.GetAllSkills(relationShipId).Length) {
-        skillButtons[i].Initialize(person, person.GetAllSkills(relationShipId)[i]);
+      if(i < allSkills.Length) {
+        skillButtons[i].Initialize(this, allSkills[i]);
       } else {
-        skillButtons[i].Initialize(person, null);
+        skillButtons[i].Initialize(this, null);
       }      
     }
+
+    /// SKILL DESCRIPTION
+    GameObject selected = EventSystem.current.currentSelectedGameObject;
+    if(selected != null && selected.GetComponent<SkillButton>() != null) {
+      SetSkillDescription(selected.GetComponent<SkillButton>().skill);
+    } else {
+      SetSkillDescription(null);
+    }
+  }
+
+  public void SetSkillDescription(Skill skill) {
+    if(skill != null) {
+      skillNameText.text = skill.GetPrintableName();
+      skillDescriptionText.text = StatusScreenSkillDescription(skill);
+      skillDescriptionPanel.ShowPanel();
+    } else {
+      skillNameText.text = "";
+      skillDescriptionText.text = "";
+      skillDescriptionPanel.HidePanel();
+    }
+  }
+
+  public string StatusScreenSkillDescription(Skill skill) {
+    string text = "";
+
+    if(skill.type == SkillType.active || skill.type == SkillType.attack) {
+      text += "[Ativa] ";
+    } else {
+      text += "[Passiva] ";
+    }
+    text = text + skill.GetPrintableDescription();
+
+    return text;
   }
 
   public void UpdateStatusConditions() {

@@ -10,6 +10,9 @@ public class SkilltreeScreen : MonoBehaviour {
 
   public ScreenTransitions screenTransitions;
   public Relationship relationship;
+
+  public Image[] characterImages;
+
   public SkilltreeIcon[] skilltreeIcons;
   public Image[] skillRequirementPaths;
 
@@ -24,6 +27,7 @@ public class SkilltreeScreen : MonoBehaviour {
 
   public Color lockedPathColor;
   public Color unlockableSkillColor;
+  public Color unlockableIconColor;
 
 
   public void Awake() {
@@ -34,6 +38,7 @@ public class SkilltreeScreen : MonoBehaviour {
     instance = this;
     lockedPathColor = new Color(0.92f, 0.5f, 0.52f);
     unlockableSkillColor = new Color(0.6f, 0.42f, 0.42f);
+    unlockableIconColor = new Color(0f, 0f, 0f, 0.3f);
     relationship = CoupleStatusScreen.instance.relationship;
     UpdateUI();
   }
@@ -45,34 +50,41 @@ public class SkilltreeScreen : MonoBehaviour {
 
     bondPointsText.text = relationship.bondPoints.ToString();
 
+    /// character sprites
+    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.body);
+    characterImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.school);
+    characterImages[2].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetGirl().id, CharacterSpritePart.body);
+    characterImages[3].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetGirl().id, CharacterSpritePart.school);
+
+
     /// show requisite paths
-    if(relationship.unlockedSkill[0]) {
+    if(relationship.skilltree.skills[8].isUnlocked) {
       skillRequirementPaths[0].color = Color.white;
+      skillRequirementPaths[3].color = Color.white;
+      skillRequirementPaths[6].color = Color.white;
+    } else {
+      skillRequirementPaths[0].color = lockedPathColor;
+      skillRequirementPaths[3].color = lockedPathColor;
+      skillRequirementPaths[6].color = lockedPathColor;
+    }
+
+    if(relationship.skilltree.skills[0].isUnlocked) {
       skillRequirementPaths[1].color = Color.white;
       skillRequirementPaths[2].color = Color.white;
     } else {
-      skillRequirementPaths[0].color = lockedPathColor;
       skillRequirementPaths[1].color = lockedPathColor;
       skillRequirementPaths[2].color = lockedPathColor;
     }
 
-    if(relationship.unlockedSkill[1]) {
-      skillRequirementPaths[3].color = Color.white;
+    if(relationship.skilltree.skills[9].isUnlocked) {
       skillRequirementPaths[4].color = Color.white;
-    } else {
-      skillRequirementPaths[3].color = lockedPathColor;
-      skillRequirementPaths[4].color = lockedPathColor;
-    }
-
-    if(relationship.unlockedSkill[2]) {
       skillRequirementPaths[5].color = Color.white;
-      skillRequirementPaths[6].color = Color.white;
     } else {
+      skillRequirementPaths[4].color = lockedPathColor;
       skillRequirementPaths[5].color = lockedPathColor;
-      skillRequirementPaths[6].color = lockedPathColor;
     }
 
-    if(relationship.unlockedSkill[3]) {
+    if(relationship.skilltree.skills[4].isUnlocked) {
       skillRequirementPaths[7].color = Color.white;
       skillRequirementPaths[8].color = Color.white;
     } else {
@@ -96,9 +108,38 @@ public class SkilltreeScreen : MonoBehaviour {
 
   public void SelectSkill(int id) {
     selectedSkillId = id;
-    Skill skill = BattleController.instance.GetSkillById(relationship.skillIds[selectedSkillId]);
-    skillNameText.text = skill.GetPrintableName();
-    skillDescriptionText.text = skill.GetPrintableDescription();
+    Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
+    SetSkillDescription(skill);
+  }
+
+  public void SetSkillDescription(Skill skill) {
+    if(skill != null) {
+      skillNameText.text = skill.GetPrintableName();
+      skillDescriptionText.text = FullSkilltreeIconDescription(skill);
+    } else {
+      skillNameText.text = "";
+      skillDescriptionText.text = "";
+    }
+  }
+
+  public string FullSkilltreeIconDescription(Skill skill) {
+    string text = "";
+
+    if(skill.type == SkillType.active || skill.type == SkillType.attack) {
+      text += "[Ativa] ";
+    } else {
+      text += "[Passiva] ";
+    }
+    if(selectedSkillId < 4) {
+      text += "para "+relationship.GetBoy().name + "\n";
+    } else if(selectedSkillId < 8) {
+      text += "para " + relationship.GetGirl().name + "\n";
+    } else {
+      text += "para o casal\n";
+    }
+    text = text + skill.GetPrintableDescription();
+
+    return text;
   }
 
   public void OpenBuySkillConfirmationScreen(int id) {
@@ -110,14 +151,14 @@ public class SkilltreeScreen : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     selectedSkillId = id;
     confirmPanelText.text = "Você gostaria de comprar a habilidade <color=yellow>"+
-      BattleController.instance.GetSkillById(relationship.skillIds[selectedSkillId]).GetPrintableName() + "</color>?";
+      BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id).GetPrintableName() + "</color>?";
     buySkillConfirmationPanel.ShowPanel();
   }
 
 
   public void ConfirmSkillBuy() {
     relationship.bondPoints--;
-    relationship.unlockedSkill[selectedSkillId] = true;
+    relationship.skilltree.skills[selectedSkillId].isUnlocked = true;
 
     UpdateUI();
     CoupleStatusScreen.instance.UpdateUI();

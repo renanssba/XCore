@@ -14,6 +14,7 @@ public class CoupleStatusScreen : MonoBehaviour {
 
   public TextMeshProUGUI coupleHpText;
 
+
   public void Awake() {
     instance = this;
   }
@@ -21,15 +22,13 @@ public class CoupleStatusScreen : MonoBehaviour {
   public void Initialize(Relationship newRelationship) {
     instance = this;
     relationship = newRelationship;
-    relationshipCard.Initialize(relationship);
-    personCards[0].Initialize(relationship.GetBoy());
-    personCards[1].Initialize(relationship.GetGirl());
+    UpdateUI();
   }
 
   public void UpdateUI() {
-    relationshipCard.UpdateUI();
-    personCards[0].UpdateUI();
-    personCards[1].UpdateUI();
+    relationshipCard.Initialize(relationship);
+    personCards[0].Initialize(relationship.GetBoy());
+    personCards[1].Initialize(relationship.GetGirl());
     coupleHpText.text = relationship.GetMaxHp().ToString();
   }
 

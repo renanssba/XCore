@@ -1,24 +1,35 @@
-id	name	description	type	range	power	sp cost	skill effect	heals status conditions	gives status conditions	duration	sprite	attribute	debug
-0	Valentia	Causa dano baseado em Valentia (\guts)	attack	one_enemy	8							guts	
-1	Inteligência	Causa dano baseado em Inteligência (\intelligence)	attack	one_enemy	8							intelligence	
-2	Carisma	Causa dano baseado em Carisma (\charisma)	attack	one_enemy	8							charisma	
-3	Super Valentia	Causa muito dano baseado em Valentia	attack	one_enemy	15							guts	
-4	Super Inteligência	Causa muito dano baseado em Inteligência	attack	one_enemy	15							intelligence	
-5	Super Carisma	Causa muito dano baseado em Carisma	attack	one_enemy	15							charisma	
-6	Mega Valentia	Causa dano MASSIVO baseado em Valentia	attack	one_enemy	25							guts	
-7	Mega Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy	25							intelligence	
-8	Mega Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy	25							charisma	
-9	Sensor	Descobre a fraqueza de um Desafio	active	one_enemy		1	sensor				magnifying glass	intelligence	
-10	Flecha Mágica	Causa pequeno dano baseado em Magia (\magic)	attack	one_enemy	5							magic	
-11	Inspirar	Aumenta a Valentia em 2 (dura 3 turnos) e cura Tristeza	active	one_ally	3	1	buffDebuff	sad	encouraged	3	gutsy aura	guts	
-12	Fugir	Escapa do Desafio atual	active	one_enemy		1	flee				run	intelligence	
-13	Gula	Adiciona algum item de comida à mão	active	one_ally		1	buffDebuff				eating	charisma	
-14	Memórias Felizes		passive			1	bondSkill				gutsy aura		
-15	Confissão		passive			1	bondSkill				gutsy aura		
-16			passive			1	bondSkill				gutsy aura		
-17	Amigos por Correspondência		passive			1	bondSkill				gutsy aura		
-18	Companheiros de Leitura		passive			1	bondSkill				gutsy aura		
-19			passive			1	bondSkill				gutsy aura		
-20	Amantes de Omelete		passive			1	bondSkill				gutsy aura		
-21			passive			1	bondSkill				gutsy aura		
-22			passive			1	bondSkill				gutsy aura		
+id	name	description	type	range	power	sp cost	skill special effect	heal hp	heal sp	heals status conditions	give status chance	gives status conditions	duration	sprite	attribute	debug
+0	Valentia	Causa dano baseado em Valentia	attack	one_enemy	8										guts	
+1	Inteligência	Causa dano baseado em Inteligência	attack	one_enemy	8										intelligence	
+2	Carisma	Causa dano baseado em Carisma	attack	one_enemy	8										charisma	
+3	Super Valentia	Causa muito dano baseado em Valentia	attack	one_enemy	15									gutsy aura	guts	
+4	Super Inteligência	Causa muito dano baseado em Inteligência	attack	one_enemy	15									gutsy aura	intelligence	
+5	Super Carisma	Causa muito dano baseado em Carisma	attack	one_enemy	15									gutsy aura	charisma	
+6	Mega Valentia	Causa dano MASSIVO baseado em Valentia	attack	one_enemy	25									gutsy aura	guts	
+7	Mega Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy	25									gutsy aura	intelligence	
+8	Mega Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy	25									gutsy aura	charisma	
+9	Sensor	Descobre a fraqueza de um oponente	active	one_enemy		1	sensor							magnifying glass	intelligence	
+10	Lanche Rápido	Cura fome de um aliado	active	one_ally		1	buffDebuff			hunger				eating	charisma	
+11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy		1	buffDebuff				100	hunger	3	eating	charisma	
+12	Cozinheiro	Duplica o HP recuperado por itens de cura	passive	all_allies	1		healingItemBonus							cook	charisma	
+13	Encorajar	Aumenta a Valentia em 3 (dura 3 turnos) e cura Tristeza	active	one_ally	3	1	buffDebuff			sad	100	encouraged	3	gutsy aura	guts	
+14	Aura Shounen	Deixa um inimigo tonto por 3 turnos	active	one_enemy							100	dizzyness	3	gutsy aura	guts	
+15	Guardiã	Defender dá 70% de chance de receber ataque no lugar do aliado	passive	self	0.7		guardian							shield	guts	
+16	Ofensa Rebuscada	Causa confusão em um oponente por 3 turnos	active	one_enemy		1					100	confusion	3	angry-eyes	intelligence	
+17	Maldição	Causa medo em um oponente por 3 turnos	active	one_enemy		1					100	fear	3	cursed	intelligence	
+18	Elusiva	Aumenta a chance de escapar de um conflito para 95%	active		0.35		fleeChanceBonus							run	intelligence	
+19	Beijo de Cura	Cura 16 HP do casal	active	one_ally		1	buffDebuff	16						heart-plus	charisma	
+20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally		1	buffDebuff			sad, fear, confusion, dizzyness				charmed	charisma	
+21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive				buffDebuff			sad, unclothed, cursed, hunger, dizzyness, confusion, fear, angry				eating	charisma	
+22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	one_ally	0.3		damageTakenBonus							heart-minus	charisma	
+23	Ciumenta	Recebe fúria quando enfrentar um oponente do sexo feminino	passive	one_ally			buffDebuff							angry-eyes	guts	
+24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	one_ally			buffDebuff							tears	intelligence	
+25	Esfomeada	Recebe fome depois do turno 3 de um combate	passive	one_ally			buffDebuff					hunger		eating	charisma	
+26	Proximidade	Aumenta em 10 o HP do casal	passive	all_allies				10						heart-plus		
+27	Dedicação	Aumenta em 2 o SP do casal	passive	all_allies					2					heart-plus		
+28	Guardião	Defender dá 70% de chance de receber ataque no lugar da aliada	passive	self	0.7		guardian							shield		
+29	Memórias Felizes		passive				bondSkill							charmed		
+30	Confissão		passive				bondSkill							charmed		
+31	Amigos por Correspondência		passive				bondSkill							charmed		
+32	Companheiros de Leitura		passive				bondSkill							charmed		
+33	Amantes de Omelete		passive				bondSkill							charmed		

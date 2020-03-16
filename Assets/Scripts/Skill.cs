@@ -11,12 +11,15 @@ public enum ActionRange {
   randomEnemy
 }
 
-public enum SkillEffect {
+public enum SkillSpecialEffect {
   sensor,
   buffDebuff,
-  flee,
-  gluttony,
-  bondSkill,
+  fleeChanceBonus,
+  healingItemBonus,
+  healingSkillBonus,
+  damageTakenBonus,
+  damageGivenBonus,
+  guardian,
   none
 }
 
@@ -24,6 +27,50 @@ public enum SkillType {
   attack,
   active,
   passive
+}
+
+public enum SkillAffectsCharacter {
+  boy,
+  girl,
+  couple
+}
+
+
+[System.Serializable]
+public struct SkilltreeEntry {
+  public int id;
+  public bool isUnlocked;
+  public SkillAffectsCharacter affectsPerson;
+  //public int prerequisite;
+}
+
+public class Skilltree {
+  public SkilltreeEntry[] skills;
+  public static readonly int[] skillRequisites = { 8, 0, 0, -1, 8, 4, 4, -1, -1, 8, 9, 9, -1 };
+
+
+  public Skilltree() {
+    skills = new SkilltreeEntry[13];
+    for(int i = 0; i < skills.Length; i++) {
+      skills[i].isUnlocked = false;
+    }
+
+    for(int i=0; i<4; i++) {
+      skills[i].affectsPerson = SkillAffectsCharacter.boy;
+      skills[4 + i].affectsPerson = SkillAffectsCharacter.girl;
+      skills[8 + i].affectsPerson = SkillAffectsCharacter.couple;
+    }
+    skills[12].affectsPerson = SkillAffectsCharacter.couple;
+
+    skills[3].isUnlocked = true;
+    skills[7].isUnlocked = true;
+  }
+
+  public void InitializeSkillIds(int[] ids) {
+    for(int i=0; i<skills.Length; i++) {
+      skills[i].id = ids[i];
+    }
+  }
 }
 
 
@@ -48,13 +95,15 @@ public class Skill {
   public ActionRange range;
 
   public Attributes attribute;
-  public int power;
+  public float power;
 
-  public SkillEffect skillEffect;
+  public SkillSpecialEffect skillSpecialEffect;
   public string[] healsConditionNames;
   public string[] givesConditionNames;
+  public int giveStatusChance;
   public int duration;
   public int healHp;
+  public int healSp;
 
   public int spCost;
 

@@ -19,14 +19,19 @@ public class SkilltreeIcon : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    if(relationship.unlockedSkill[skillId]) {
+    Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillId].id);
+    Debug.Log("Updating skill: " + skill.name);
+
+    skillIcon.sprite = skill.sprite;
+    if(relationship.skilltree.skills[skillId].isUnlocked) {
       bg.color = Color.white;
-      skillIcon.sprite = BattleController.instance.GetSkillById(relationship.skillIds[skillId]).sprite;
       skillIcon.gameObject.SetActive(true);
+      skillIcon.color = Color.white;
     } else {
       if(IsRequisiteUnlocked()) {
         bg.color = SkilltreeScreen.instance.unlockableSkillColor;
-        skillIcon.gameObject.SetActive(false);
+        skillIcon.gameObject.SetActive(true);
+        skillIcon.color = SkilltreeScreen.instance.unlockableIconColor;
       } else {
         bg.color = SkilltreeScreen.instance.lockedPathColor;
         skillIcon.gameObject.SetActive(false);
@@ -35,11 +40,11 @@ public class SkilltreeIcon : MonoBehaviour {
   }
 
   public bool IsRequisiteUnlocked() {
-    int requisite = Relationship.skillRequisites[skillId];
-    if(skillId == 11) {
+    int requisite = Skilltree.skillRequisites[skillId];
+    if(skillId == 12) {
       return false;
     }
-    return (requisite == -1 || relationship.unlockedSkill[requisite]);
+    return (requisite == -1 || relationship.skilltree.skills[requisite].isUnlocked);
   }
 
   public void Selected() {
@@ -51,7 +56,7 @@ public class SkilltreeIcon : MonoBehaviour {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
-    if(relationship.unlockedSkill[skillId] == false) {
+    if(relationship.skilltree.skills[skillId].isUnlocked == false) {
       SkilltreeScreen.instance.OpenBuySkillConfirmationScreen(skillId);
     }    
   }

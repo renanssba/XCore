@@ -107,6 +107,20 @@ public class Person {
     return modifier;
   }
 
+  public float DamageTakenMultiplier(int relationshipId, Attributes attribute) {
+    float modifier = 1f;
+    Relationship relationship = GlobalData.instance.relationships[relationshipId];
+    Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
+
+    for(int i=0; i<skills.Length; i++) {
+      if(skills[i].skillSpecialEffect == SkillSpecialEffect.damageTakenBonus &&
+         skills[i].attribute == attribute) {
+        modifier += skills[i].power;
+      }
+    }
+    return modifier;
+  }
+
 
   public void HealSp(int value) {
     sp += value;
@@ -139,10 +153,10 @@ public class Person {
     return skills.ToArray();
   }
 
-  public Skill[] GetAllSkills(int relationshipId) {
+  public Skill[] GetAllCharacterSpecificSkills(int relationshipId) {
     Relationship relationship = GlobalData.instance.relationships[relationshipId];
 
-    return relationship.GetAllSkillsByCharacter(isMale);
+    return relationship.GetAllCharacterSpecificSkills(isMale);
   }
 
 
@@ -307,11 +321,9 @@ public class Relationship {
   public int heartLocksOpened = 0;
 
   public int bondPoints = 0;
-  public int[] skillIds;
-  public bool[] unlockedSkill;
+  public Skilltree skilltree;
 
   public static readonly int[] levelUpCosts = {20, 40, 100, 180, 300, 480, 750, 1150, 1700, 2500};
-  public static readonly int[] skillRequisites = {-1, 0, 0, 0, 1, 1, 2, 2, 3, 3, -1, -1, -1};
   public const int skillTreeSize = 13;
 
   public List<string> talkedDialogs;
@@ -319,14 +331,8 @@ public class Relationship {
 
   public Relationship() {
     level = 0;
-    skillIds = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-    unlockedSkill = new bool[skillTreeSize];
-    for(int i=0; i< unlockedSkill.Length; i++) {
-      unlockedSkill[i] = false;
-    }
-    unlockedSkill[10] = true;
-    unlockedSkill[12] = true;
     talkedDialogs = new List<string>();
+    skilltree = new Skilltree();
   }
 
   public static int LevelStartingExp(int level) {
@@ -362,8 +368,59 @@ public class Relationship {
   }
 
   public int GetMaxHp() {
-    return level * 8 + 26;
+    int count = level * 8 + 10;
+
+    for(int i=0; i<skilltree.skills.Length; i++){
+      if(skilltree.skills[i].isUnlocked) {
+        Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
+        if(skill.type == SkillType.passive && skill.healHp>0) {
+          count += skill.healHp;
+        }
+      }
+    }
+    return count;
   }
+
+  public float HealingSkillMultiplier() {
+    float count = 1;
+
+    for(int i=0; i<skilltree.skills.Length; i++) {
+      Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
+      if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
+         skill.skillSpecialEffect == SkillSpecialEffect.healingSkillBonus) {
+        count += skill.power;
+      }      
+    }
+    return count;
+  }
+
+  public float HealingItemMultiplier() {
+    float count = 1;
+
+    for(int i = 0; i < skilltree.skills.Length; i++) {
+      Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
+      if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
+         skill.skillSpecialEffect == SkillSpecialEffect.healingItemBonus) {
+        count += skill.power;
+      }
+    }
+    return count;
+  }
+
+  public float FleeChance() {
+    float count = 0.6f;
+
+    for(int i = 0; i < skilltree.skills.Length; i++) {
+      Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
+      if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
+         skill.skillSpecialEffect == SkillSpecialEffect.fleeChanceBonus) {
+        count += skill.power;
+      }
+    }
+    return count;
+  }
+
+
 
   public bool GetExp(int value) {
     bool didLevelUp = false;
@@ -386,41 +443,55 @@ public class Relationship {
 
   public Skill[] GetActiveSkillsByCharacter(bool isBoy) {
     List<Skill> skills = new List<Skill>();
-    if(isBoy) {
-      AddSkillToList(skills, 1, true);
-      AddSkillToList(skills, 4, true);
-      AddSkillToList(skills, 5, true);
-    } else {
-      AddSkillToList(skills, 3, true);
-      AddSkillToList(skills, 8, true);
-      AddSkillToList(skills, 9, true);
-    }
-    return skills.ToArray();
-  }
 
-  public void AddSkillToList(List<Skill> list, int id, bool shouldBeActive) {
-    Skill sk = BattleController.instance.GetSkillById(skillIds[id]);
-
-    if(unlockedSkill[id]) {
-      if(!shouldBeActive || sk.type == SkillType.active) {
-        list.Add(sk);
+    for(int i = 0; i < skilltree.skills.Length; i++) {
+      if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
+         (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
+        AddActiveSkillToList(skills, i);
       }
     }
+    return skills.ToArray();
   }
 
-  public Skill[] GetAllSkillsByCharacter(bool isBoy) {
+  public Skill[] GetAllCharacterSpecificSkills(bool isBoy) {
     List<Skill> skills = new List<Skill>();
-    if(isBoy) {
-      AddSkillToList(skills, 10, false);
-      AddSkillToList(skills, 1, false);
-      AddSkillToList(skills, 4, false);
-      AddSkillToList(skills, 5, false);
-    } else {
-      AddSkillToList(skills, 12, false);
-      AddSkillToList(skills, 3, false);
-      AddSkillToList(skills, 8, false);
-      AddSkillToList(skills, 9, false);
+
+    for(int i=0; i<skilltree.skills.Length; i++) {
+      if((isBoy && skilltree.skills[i].affectsPerson == SkillAffectsCharacter.boy) ||
+         (!isBoy && skilltree.skills[i].affectsPerson == SkillAffectsCharacter.girl) ) {
+        AddActiveSkillToList(skills, i);
+        AddPassiveSkillToList(skills, i);
+      }
     }
     return skills.ToArray();
+  }
+
+  public Skill[] GetPassiveSkillsByCharacter(bool isBoy) {
+    List<Skill> skills = new List<Skill>();
+
+    for(int i = 0; i < skilltree.skills.Length; i++) {
+      if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
+         (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
+        AddPassiveSkillToList(skills, 0);
+      }
+    }
+    return skills.ToArray();
+  }
+
+
+  public void AddActiveSkillToList(List<Skill> list, int id) {
+    Skill sk = BattleController.instance.GetSkillById(skilltree.skills[id].id);
+
+    if(skilltree.skills[id].isUnlocked && (sk.type == SkillType.active || sk.type == SkillType.attack)) {
+      list.Add(sk);
+    }
+  }
+
+  public void AddPassiveSkillToList(List<Skill> list, int id) {
+    Skill sk = BattleController.instance.GetSkillById(skilltree.skills[id].id);
+
+    if(skilltree.skills[id].isUnlocked && sk.type == SkillType.passive) {
+      list.Add(sk);
+    }
   }
 }

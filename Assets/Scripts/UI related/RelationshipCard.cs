@@ -87,6 +87,7 @@ public class RelationshipCard : MonoBehaviour {
     VsnController.instance.GotCustomInput();
     screenTransitions.HidePanel();
 
+    UIController.instance.UpdateUI();
 
     VsnArgument[] sayArgs = new VsnArgument[2];
     sayArgs[0] = new VsnString("char_name/none");

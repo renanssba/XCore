@@ -216,7 +216,7 @@ public class BattleController : MonoBehaviour {
   public int CalculateCharacterDamage(Person attacker, Skill usedSkill, DateEvent defender) {
     float damage;
 
-    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f*defender.attributes[4] + defender.attributes[(int)usedSkill.attribute], 1f));
+    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f*defender.attributes[(int)Attributes.endurance] + defender.attributes[(int)usedSkill.attribute], 1f));
 
     Debug.LogWarning("Character Hits! Damage:");
     Debug.Log("Defensive ratio (ATK/DEF):" + damage);
@@ -279,6 +279,7 @@ public class BattleController : MonoBehaviour {
 
   public IEnumerator ExecuteCharacterSkill(int partyMemberId, int targetId, Skill usedSkill) {
     TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+    //Person targetPerson
 
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("heal_default");
@@ -286,19 +287,33 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(attackAnimationTime);
     VsnUIManager.instance.PassBattleDialog();
 
-    switch(usedSkill.skillEffect) {
-      case SkillEffect.sensor:
+    switch(usedSkill.skillSpecialEffect) {
+      case SkillSpecialEffect.sensor:
         TheaterController.instance.enemyActor.ShineRed();
         TheaterController.instance.enemyActor.ShowWeaknessCard(true);
         yield return new WaitForSeconds(1f);
         break;
-      case SkillEffect.buffDebuff:
+      case SkillSpecialEffect.buffDebuff:
         TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
 
+        // heal status condition
         if(usedSkill.healsConditionNames.Length > 0) {
           partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
         }
 
+        // heal HP and SP
+        if(usedSkill.healHp > 0) {
+          HealPartyHp((int)(usedSkill.healHp * GlobalData.instance.GetCurrentRelationship().HealingSkillMultiplier()));
+          TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedSkill.healHp);
+          yield return new WaitForSeconds(1f);
+        }
+        if(usedSkill.healSp > 0) {
+          partyMembers[targetId].HealSp(usedSkill.healSp);
+          TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedSkill.healSp);
+          yield return new WaitForSeconds(1f);
+        }
+
+        // give status condition
         foreach(string givenCondition in usedSkill.givesConditionNames) {
           partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
           StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
@@ -345,8 +360,9 @@ public class BattleController : MonoBehaviour {
 
     // heal HP and SP
     if(usedItem.healHp > 0) {
-      HealPartyHp(usedItem.healHp);
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedItem.healHp);
+      int healingpower = (int)(usedItem.healHp * GlobalData.instance.GetCurrentRelationship().HealingItemMultiplier());
+      HealPartyHp(healingpower);
+      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(healingpower);
       yield return new WaitForSeconds(1f);
     }
     if(usedItem.healSp > 0) {
@@ -391,7 +407,7 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ExecuteTryToFlee() {
     VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
 
-    bool fleeSuccess = Random.Range(0, 100) < 60;
+    bool fleeSuccess = Random.Range(0f, 1f) < GlobalData.instance.GetCurrentRelationship().FleeChance();
     //fleeSuccess = true; // DEBUG TO TEST DAMAGE
     if(fleeSuccess) {
       yield return new WaitForSeconds(0.5f);
@@ -427,6 +443,8 @@ public class BattleController : MonoBehaviour {
     Debug.Log("Defensive ratio (ATK/DEF):" + damage);
 
     damage *= (float)attacker.attackPower * Random.Range(0.9f, 1.1f);
+
+    damage *= defender.DamageTakenMultiplier(GlobalData.instance.GetCurrentRelationship().id, attacker.attackAttribute);
     Debug.Log("Final damage: " + damage);
 
     // defend?
@@ -457,7 +475,7 @@ public class BattleController : MonoBehaviour {
       if(selectedActionType[targetId] == TurnActionType.defend) {
         targetActor.ShowDefendHitParticle();
       }
-      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, 1f);
+      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, partyMembers[targetId].DamageTakenMultiplier(GlobalData.instance.GetCurrentRelationship().id, currentEvent.attackAttribute));
       yield return new WaitForSeconds(1f);
 
       VsnUIManager.instance.PassBattleDialog();
@@ -673,14 +691,13 @@ public class BattleController : MonoBehaviour {
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
-      magic = GetEffectivityByName(dic["magic effectivity"]);
       allDateEvents.Add(new DateEvent {
         id = int.Parse(dic["id"]),
         name = dic["name"],
         scriptName = dic["script name"],
         level = int.Parse(dic["level"]),
         maxHp = int.Parse(dic["max hp"]),
-        attributeEffectivity = new float[] { guts, intelligence, charisma, magic },
+        attributeEffectivity = new float[] { guts, intelligence, charisma },
         spriteName = dic["sprite name"],
         attackSfxName = dic["attack sfx"],
         appearSfxName = dic["appear sfx"],
@@ -689,7 +706,7 @@ public class BattleController : MonoBehaviour {
         attackAttribute = Utils.GetAttributeByString(dic["attack attribute"]),
         attackPower = int.Parse(dic["attack power"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
-          int.Parse(dic["charisma"]), int.Parse(dic["magic"]), int.Parse(dic["endurance"])},
+          int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
         giveStatusConditionChance = int.Parse(dic["give status chance"])
     });
@@ -714,7 +731,7 @@ public class BattleController : MonoBehaviour {
 
     allSkills = new List<Skill>();
     foreach(Dictionary<string, string> entry in data.data) {
-      //Debug.LogWarning("Importing Card: ");
+      Debug.LogWarning("Importing skill: " + entry["name"]);
 
       Skill newSkill = new Skill();
 
@@ -747,7 +764,7 @@ public class BattleController : MonoBehaviour {
 
       newSkill.attribute = Utils.GetAttributeByString(entry["attribute"]);
       if(!string.IsNullOrEmpty(entry["power"])) {
-        newSkill.power = int.Parse(entry["power"]);
+        newSkill.power = float.Parse(entry["power"]);
       }
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
@@ -759,9 +776,19 @@ public class BattleController : MonoBehaviour {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
       
-      newSkill.skillEffect = GetSkillEffectByString(entry["skill effect"]);
+      newSkill.skillSpecialEffect = GetSkillEffectByString(entry["skill special effect"]);
       newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
+      
+      if(!string.IsNullOrEmpty(entry["heal hp"])) {
+        newSkill.healHp = int.Parse(entry["heal hp"]);
+      }
+      if(!string.IsNullOrEmpty(entry["heal sp"])) {
+        newSkill.healSp = int.Parse(entry["heal sp"]);
+      }
+      if(!string.IsNullOrEmpty(entry["give status chance"])) {
+        newSkill.giveStatusChance = int.Parse(entry["give status chance"]);
+      }
       if(!string.IsNullOrEmpty(entry["duration"])) {
         newSkill.duration = int.Parse(entry["duration"]);
       }
@@ -770,13 +797,13 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public SkillEffect GetSkillEffectByString(string skillEffect) {
-    for(int i = 0; i <= (int)SkillEffect.none; i++) {
-      if(((SkillEffect)i).ToString() == skillEffect) {
-        return (SkillEffect)i;
+  public SkillSpecialEffect GetSkillEffectByString(string skillEffect) {
+    for(int i = 0; i <= (int)SkillSpecialEffect.none; i++) {
+      if(((SkillSpecialEffect)i).ToString() == skillEffect) {
+        return (SkillSpecialEffect)i;
       }
     }
-    return SkillEffect.none;
+    return SkillSpecialEffect.none;
   }
 
   public SkillType GetSkillTypeByString(string skillType) {

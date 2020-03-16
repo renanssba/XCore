@@ -15,6 +15,7 @@ namespace Command {
       switch(BattleController.instance.selectedActionType[partyMemberId]) {
         case TurnActionType.useSkill:
           Skill usedSkill = BattleController.instance.selectedSkills[partyMemberId];
+          VsnSaveSystem.SetVariable("selected_action_name", usedSkill.GetPrintableName());
           if(usedSkill.type == SkillType.attack) {
             if(usedSkill.attribute != Attributes.endurance) {
               scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentDateEventName();
@@ -29,7 +30,7 @@ namespace Command {
           break;
         case TurnActionType.useItem:
           Item usedItem = BattleController.instance.selectedItems[partyMemberId];
-          VsnSaveSystem.SetVariable("selected_item_name", usedItem.GetPrintableName());
+          VsnSaveSystem.SetVariable("selected_action_name", usedItem.GetPrintableName());
           newArgs[0] = new VsnString("item");
       break;
         case TurnActionType.flee:
