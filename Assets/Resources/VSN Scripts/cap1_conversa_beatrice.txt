@@ -36,14 +36,14 @@ if #day == 2
   say "Ricardo" "Hein?"
   say "" "Ricardo se vira rapidamente."
   change_person_sprite 2 6
-  say "" "Em sua frente está uma menina pálida de cabelos pretos desarrumados e um vestido escuro e exótico, vindo direto da era vitoriana. Por trás da lente dos óculos Ricardo nota que a menina possui olheiras enormes."
+  say "" "Em sua frente está uma menina pálida de cabelos pretos desarrumados. Por trás das lentes dos óculos, Ricardo nota que a menina possui olheiras enormes."
   say "Ricardo" "...Beatrice?"
   say "" "Ricardo está apreensivo. A menina o ignora e aponta para o livro que ele estava lendo."
   say "Beatrice" "Esta edição proporciona uma experiência agradável, mas não é comparável à versão retraduzida."
   say "Beatrice" "Uma reinterpretação das expressões idiomáticas da obra original é absolutamente necessária para uma apreciação completa."
   say "" "Ricardo parece um pouco desnorteado." 
   say "" "A menina faz uma reverência super cordial curvando bastante a coluna."
-  say "" "Me chamo Beatrice Hartley. Estou extasiada por ter respondido minha última missiva, Ricardo."
+  say "Beatrice" "Me chamo Beatrice Hartley. Estou extasiada por ter respondido minha última missiva, Ricardo."
   say "" "A garota discursa com um olhar vago e uma voz monótona que contrasta com sua escolha de palavras rebuscada."
   say "Beatrice" "Venha. Temos tópicos importantes a tratar."
   wait 1
@@ -304,7 +304,7 @@ say "Ricardo" "Achei que já tivéssemos passado dessa fase de cartas."
 say "" "A garota vira o rosto, envergonhada."
 say "Beatrice" "...Considerei apropriado. Adquiri mais revistas para recortar."
 say "" "Ricardo ri. O garoto abre o envelope e começa a ler a carta que estava contida dentro."
-fade_out 0 2 //Is this syntax correct?
+fade_out 1.0
 say "Carta" "Ricardo, \n Os dias que passamos juntos foram muito prazeirosos."
 say "Não me recordo da última vez na qual estive tão feliz. Agradeço muitíssimo."
 say "" "Ricardo sorri."
@@ -331,10 +331,10 @@ say "Beatrice" "...Apenas um amigo?"
 say "" "Ricardo pausa por um momento. Seus olhos se encontram com os de Beatrice."
 say "Ricardo" "Talvez seja mais do que isso."
 say "Eu...eu te amo."
-say "" "O coração de Ricardo se abriu!" //PLACEHOLDER, seria legal um efeitozim
+say "" "O coração de Ricardo se abriu!" 
 say "Beatrice" "Eu...eu te amo também."
 say "" "O coração de Beatrice se abriu!"
-say "Fertiliel" "É agora!" //CUTSCENE LEGAL
+say "Fertiliel" "É agora!"
 say "" "Fertiliel atira a flecha do amor eterno!"
 
 
