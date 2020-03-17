@@ -66,6 +66,12 @@ public class Actor2D : MonoBehaviour {
           renderers[2].sprite = null;
           break;
       }
+      renderers[3].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.bruises);
+      if(person.CurrentStatusConditionStacks("injured") > 0) {
+        renderers[3].gameObject.SetActive(true);
+      } else {
+        renderers[3].gameObject.SetActive(false);
+      }
       SetAuraVisibility();
     } else {
       gameObject.SetActive(false);

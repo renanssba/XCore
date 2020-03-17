@@ -210,13 +210,15 @@ public class TheaterController : MonoBehaviour {
     for(int i=0; i<2; i++) {
       actorsToFocus[i].SetFocusedSortingLayer(true);
     }
-    focusShade.DOFade(0.5f, focusAnimationDuration);
     PositionActorsInFocus();
+    focusShade.DOFade(0.5f, focusAnimationDuration);
   }
 
   public void FocusActor(Actor2D actorToFocus) {
     focusedCharacters = new Actor2D[] { actorToFocus};
+    actorToFocus.SetFocusedSortingLayer(true);
     PositionActorsInFocus();
+    focusShade.DOFade(0.5f, focusAnimationDuration);
   }
 
   public void PositionActorsInFocus() {

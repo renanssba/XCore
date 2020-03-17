@@ -13,6 +13,7 @@ public class CharacterSpriteCollection {
   public Sprite schoolClothes;
   public Sprite casualClothes;
   public Sprite incompleteCasualClothes;
+  public Sprite bruises;
 }
 
 public enum CharacterSpritePart {
@@ -21,7 +22,8 @@ public enum CharacterSpritePart {
   underwear,
   school,
   unclothed,
-  casual
+  casual,
+  bruises
 }
 
 
@@ -70,6 +72,8 @@ public class ResourcesManager : MonoBehaviour {
         return col.schoolClothes;
       case CharacterSpritePart.unclothed:
         return col.incompleteCasualClothes;
+      case CharacterSpritePart.bruises:
+        return col.bruises;
       case CharacterSpritePart.casual:
       default:
         return col.casualClothes;
@@ -95,6 +99,8 @@ public class ResourcesManager : MonoBehaviour {
 
     spriteCollection.schoolClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-uniform");
     spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
+
+    spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
 
     //Sprite aux = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
     //if(aux != null) {
