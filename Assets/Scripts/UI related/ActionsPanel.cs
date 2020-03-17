@@ -16,6 +16,9 @@ public class ActionsPanel : MonoBehaviour {
   public GameObject[] baseActionButtonShades;
   public GameObject turnIndicator;
 
+  public Vector2[] fourButtonPositions;
+  public Vector2[] threeButtonPositions;
+
 
   public void Awake() {
     instance = this;
@@ -40,21 +43,55 @@ public class ActionsPanel : MonoBehaviour {
 
 
   public void SetupBaseActionButtons(int currentPartyMember) {
-    if(BattleController.instance.partyMembers[currentPartyMember].id == 10) {
+    List<GameObject> availableButtons = new List<GameObject>();
+
+    if (BattleController.instance.partyMembers[currentPartyMember].id == 10) {
+      baseActionButtons[0].SetActive(true);
+      availableButtons.Add(baseActionButtons[0]);
       baseActionButtons[1].SetActive(true);
-    } else {
-      baseActionButtons[1].SetActive(false);
-    }
-
-    if(currentPartyMember == 0) {
-      baseActionButtons[3].SetActive(true);
-      baseActionButtons[4].SetActive(false);
-    } else {
+      availableButtons.Add(baseActionButtons[1]);
+      baseActionButtons[2].SetActive(true);
+      availableButtons.Add(baseActionButtons[2]);
       baseActionButtons[3].SetActive(false);
-      baseActionButtons[4].SetActive(true);
+    } else {
+      baseActionButtons[0].SetActive(false);
+      baseActionButtons[1].SetActive(false);
+      baseActionButtons[2].SetActive(true);
+      availableButtons.Add(baseActionButtons[2]);
+      baseActionButtons[3].SetActive(true);
+      availableButtons.Add(baseActionButtons[3]);
     }
 
-    baseActionButtonShades[1].SetActive(!ThereAreItemsAvailable());
+    if (currentPartyMember == 0) {
+      baseActionButtons[4].SetActive(true);
+      availableButtons.Add(baseActionButtons[4]);
+      baseActionButtons[5].SetActive(false);
+    } else {
+      baseActionButtons[4].SetActive(false);
+      baseActionButtons[5].SetActive(true);
+      availableButtons.Add(baseActionButtons[5]);
+    }
+
+    SetupBaseActionButtonsPositions(availableButtons);
+
+    baseActionButtonShades[2].SetActive(!ThereAreItemsAvailable());
+  }
+
+  public void SetupBaseActionButtonsPositions(List<GameObject> buttons){
+    if (buttons.Count == 4)
+    {
+      for (int i=0; i<buttons.Count; i++)
+      {
+        buttons[i].GetComponent<RectTransform>().anchoredPosition = fourButtonPositions[i];
+      }
+    }
+    else if(buttons.Count == 3)
+    {
+      for (int i = 0; i < buttons.Count; i++)
+      {
+        buttons[i].GetComponent<RectTransform>().anchoredPosition = threeButtonPositions[i];
+      }
+    }
   }
 
   public void SetupCharacterActions(int currentPartyMember) {

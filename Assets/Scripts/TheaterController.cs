@@ -23,15 +23,20 @@ public class TheaterController : MonoBehaviour {
   public Vector3 angelPosition;
   public Vector3 challengePosition;
 
+  public Vector3[] focusPositionForTwo;
+  public Vector3 focusPositionForOne;
+  public SpriteRenderer focusShade;
+  public Actor2D[] focusedCharacters;
+
   public Actor2D mainActor;
   public Actor2D supportActor;
   public Actor2D angelActor;
   public Actor2D enemyActor;
 
-  //public GameObject[] bgObjects;
   public SpriteRenderer bgRenderer;
 
   public const float enterAnimationDuration = 1.5f;
+  public float focusAnimationDuration = 0.2f;
 
 
   public void Awake() {
@@ -50,10 +55,12 @@ public class TheaterController : MonoBehaviour {
       Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName+". Using default prefab");
       spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, challengePosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
-      enemyActor.SetEnemyGraphics(dateEvent);
+      enemyActor.SetEnemy(dateEvent);
+      enemyActor.SetEnemyGraphics();
     } else {
       spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
+      enemyActor.SetEnemy(dateEvent);
     }
   }
 
@@ -61,23 +68,6 @@ public class TheaterController : MonoBehaviour {
     Destroy(enemyActor.gameObject);
   }
 
-  public void CharacterAttackAnimation(int actorId, int animId) {
-    switch(actorId) {
-      case 0:
-        mainActor.CharacterAttackAnim();
-        break;
-      case 1:
-        supportActor.CharacterAttackAnim();
-        break;
-      case 2:
-        angelActor.CharacterAttackAnim();
-        break;
-    }
-  }
-
-  public void EnemyAttackAnimation() {
-    enemyActor.EnemyAttackAnim();
-  }
 
   public void ShineCharacter(int actorId) {
     switch(actorId) {
@@ -101,6 +91,8 @@ public class TheaterController : MonoBehaviour {
         return supportActor;
       case 2:
         return angelActor;
+      case 3:
+        return enemyActor;
     }
     return null;
   }
@@ -129,12 +121,12 @@ public class TheaterController : MonoBehaviour {
     angelActor.transform.localPosition = angelPosition - distance;
 
     if(GlobalData.instance.CurrentBoy() != null) {
-      mainActor.SetCharacterGraphics(GlobalData.instance.CurrentBoy());
+      mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
       mainActor.SetClothing("uniform");
       mainActor.FaceRight();
     }
     if(GlobalData.instance.CurrentGirl() != null) {
-      supportActor.SetCharacterGraphics(GlobalData.instance.CurrentGirl());
+      supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
       supportActor.SetClothing("uniform");
       supportActor.FaceLeft();
       supportActor.gameObject.SetActive(true);
@@ -142,6 +134,7 @@ public class TheaterController : MonoBehaviour {
       supportActor.gameObject.SetActive(false);
     }
 
+    angelActor.SetCharacter(GlobalData.instance.people[4]);
     angelActor.FaceRight();
   }
 
@@ -150,8 +143,9 @@ public class TheaterController : MonoBehaviour {
 
     ClearBattle();
 
-    mainActor.SetCharacterGraphics(GlobalData.instance.observedPeople[0]);
-    supportActor.SetCharacterGraphics(GlobalData.instance.observedPeople[1]);
+    mainActor.SetCharacter(GlobalData.instance.observedPeople[0]);
+    supportActor.SetCharacter(GlobalData.instance.observedPeople[1]);
+    angelActor.SetCharacter(GlobalData.instance.people[4]);
 
     mainActor.transform.localPosition = mainPosition - distance;
     supportActor.transform.localPosition = supportPosition - distance;
@@ -203,6 +197,51 @@ public class TheaterController : MonoBehaviour {
       InitializeChallengeLevelAndHp();
       PartyEntersBattleMode();
     });
+  }
+
+
+  public void FocusActors(Actor2D[] actorsToFocus) {
+    if(actorsToFocus[0] == actorsToFocus[1]) {
+      FocusActor(actorsToFocus[0]);
+      return;
+    }
+    focusedCharacters = actorsToFocus;
+
+    for(int i=0; i<2; i++) {
+      actorsToFocus[i].SetFocusedSortingLayer(true);
+    }
+    focusShade.DOFade(0.5f, focusAnimationDuration);
+    PositionActorsInFocus();
+  }
+
+  public void FocusActor(Actor2D actorToFocus) {
+    focusedCharacters = new Actor2D[] { actorToFocus};
+    PositionActorsInFocus();
+  }
+
+  public void PositionActorsInFocus() {
+    if(focusedCharacters.Length == 2) {
+      focusedCharacters[0].transform.DOLocalMove(focusPositionForTwo[0], focusAnimationDuration);
+      focusedCharacters[1].transform.DOLocalMove(focusPositionForTwo[1], focusAnimationDuration);
+    } else {
+      focusedCharacters[0].transform.DOLocalMove(focusPositionForOne, focusAnimationDuration);
+    }
+  }
+
+  public void UnfocusActors() {
+    focusShade.DOFade(0f, focusAnimationDuration).OnComplete( ()=> {
+      for(int i = 0; i < focusedCharacters.Length; i++) {
+        focusedCharacters[i].SetFocusedSortingLayer(false);
+      }
+    } );
+    PositionActorsBack();
+  }
+
+  public void PositionActorsBack() {
+    mainActor.transform.DOLocalMove(mainPosition, focusAnimationDuration);
+    supportActor.transform.DOLocalMove(supportPosition, focusAnimationDuration);
+    angelActor.transform.DOLocalMove(angelPosition, focusAnimationDuration);
+    enemyActor.transform.DOLocalMove(challengePosition, focusAnimationDuration);
   }
 
 

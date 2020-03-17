@@ -71,15 +71,15 @@ public class VsnUIManager : MonoBehaviour {
   public void SetText(string msg) {
     ShowClickMessageIcon(false);
     Utils.SelectUiElement(screenButton.gameObject);
-    if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
-      if(msg[0] == '(') {
-        vsnMessageText.text = "(" + msg.Substring(1, msg.Length-2) + ")";
-      } else {
-        vsnMessageText.text = "\"" + msg + "\"";
-      }      
-    } else{
-      vsnMessageText.text = msg;
-    }    
+    //if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
+    //  if(msg[0] == '(') {
+    //    vsnMessageText.text = "(" + msg.Substring(1, msg.Length - 2) + ")";
+    //  } else {
+    //    vsnMessageText.text = "\"" + msg + "\"";
+    //  }
+    //} else{
+    vsnMessageText.text = msg;
+    //}
     vsnMessageText.GetComponent<VsnConsoleSimulator>().StartShowingCharacters();
   }
 

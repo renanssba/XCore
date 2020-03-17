@@ -95,6 +95,11 @@ public class SkilltreeScreen : MonoBehaviour {
 
 
   public void Open() {
+    if(BattleController.instance.IsBattleHappening()) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize();
     screenTransitions.ShowPanel();
@@ -156,9 +161,17 @@ public class SkilltreeScreen : MonoBehaviour {
   }
 
 
+  public void HealCharactersSP() {
+    relationship.GetBoy().HealSp(100);
+    relationship.GetGirl().HealSp(100);
+  }
+
   public void ConfirmSkillBuy() {
     relationship.bondPoints--;
+    Skill unlockedSkill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
     relationship.skilltree.skills[selectedSkillId].isUnlocked = true;
+
+    HealCharactersSP();
 
     UpdateUI();
     CoupleStatusScreen.instance.UpdateUI();

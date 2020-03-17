@@ -96,10 +96,10 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickGiveGiftButton() {
-    //if(relationshipCard.relationship.heartLocksOpened < 1) {
-    //  ShowForbiddenMessage("give_gift");
-    //  return;
-    //}
+    if(relationshipCard.relationship.heartLocksOpened < 1) {
+      ShowForbiddenMessage("give_gift");
+      return;
+    }
 
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
@@ -126,10 +126,12 @@ public class GirlInteractionScreen : MonoBehaviour {
 
     Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
 
-    VsnSaveSystem.SetVariable("dateId", dateId);
-    BattleController.instance.SetupBattleStart(currentRelationship.GetBoy(), currentRelationship.GetGirl(), dateId);
-
     SfxManager.StaticPlayBigConfirmSfx();
+    VsnSaveSystem.SetVariable("dateId", dateId);
+
+
+    BattleController.instance.SetupBattleStart(dateId);
+
     HideGirlInteractionScreen();
     Command.EndScriptCommand.StaticExecute(new VsnArgument[0]);
     VsnController.instance.GotCustomInput();

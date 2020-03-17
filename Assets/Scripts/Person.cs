@@ -28,7 +28,7 @@ public class Person {
 
   public int[] attributes;
 
-  public int maxSp;
+  protected int maxSp;
   public int sp;
 
   public string favoriteMatter;
@@ -107,12 +107,12 @@ public class Person {
     return modifier;
   }
 
-  public float DamageTakenMultiplier(int relationshipId, Attributes attribute) {
+  public float DamageTakenMultiplier(Attributes attribute) {
     float modifier = 1f;
-    Relationship relationship = GlobalData.instance.relationships[relationshipId];
+    Relationship relationship = GlobalData.instance.relationships[GlobalData.instance.GetCurrentRelationship().id];
     Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
 
-    for(int i=0; i<skills.Length; i++) {
+   for(int i=0; i<skills.Length; i++) {
       if(skills[i].skillSpecialEffect == SkillSpecialEffect.damageTakenBonus &&
          skills[i].attribute == attribute) {
         modifier += skills[i].power;
@@ -121,17 +121,30 @@ public class Person {
     return modifier;
   }
 
+  public int GetMaxSp(int relationshipId) {
+    int count = maxSp;
+    Relationship relationship = GlobalData.instance.relationships[relationshipId];
+    Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
+
+    for(int i = 0; i < skills.Length; i++) {
+      if(skills[i].skillSpecialEffect == SkillSpecialEffect.raiseMaxSp) {
+        count += (int)skills[i].power;
+      }
+    }
+    return count;
+  }
+
 
   public void HealSp(int value) {
     sp += value;
-    sp = Mathf.Min(sp, maxSp);
+    sp = Mathf.Min(sp, GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
     sp = Mathf.Max(sp, 0);
     UIController.instance.UpdateDateUI();
   }
 
   public void SpendSp(int value) {
     sp -= value;
-    sp = Mathf.Min(sp, maxSp);
+    //sp = Mathf.Min(sp, maxSp);
     sp = Mathf.Max(sp, 0);
     UIController.instance.UpdateDateUI();
   }
@@ -351,11 +364,14 @@ public class Relationship {
     return levelUpCosts[level];
   }
 
-  public void OpenHeartLock(int lockId) {
+  public bool OpenHeartLock(int lockId) {
+    bool raised = false;
     if(lockId > heartLocksOpened) {
       heartLocksOpened = lockId;
+      raised = true;
     }
     UIController.instance.UpdateUI();
+    return raised;
   }
 
 
@@ -373,8 +389,8 @@ public class Relationship {
     for(int i=0; i<skilltree.skills.Length; i++){
       if(skilltree.skills[i].isUnlocked) {
         Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
-        if(skill.type == SkillType.passive && skill.healHp>0) {
-          count += skill.healHp;
+        if(skill.type == SkillType.passive && skill.skillSpecialEffect == SkillSpecialEffect.raiseMaxHp) {
+          count += (int)skill.power;
         }
       }
     }
@@ -417,6 +433,7 @@ public class Relationship {
         count += skill.power;
       }
     }
+    Debug.LogWarning("Flee chance: " + (100*count)+"%");
     return count;
   }
 
@@ -472,7 +489,7 @@ public class Relationship {
     for(int i = 0; i < skilltree.skills.Length; i++) {
       if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
          (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
-        AddPassiveSkillToList(skills, 0);
+        AddPassiveSkillToList(skills, i);
       }
     }
     return skills.ToArray();

@@ -99,7 +99,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 10,
-      attributes = new int[] { 4, 9, 4, 1 }
+      attributes = new int[] { 4, 8, 4, 2 }
     };
     people.Add(p);
     p = new Person() {
@@ -133,9 +133,9 @@ public class GlobalData : MonoBehaviour {
     }
 
     /// RELATIONSHIP SKILLTREES
-    relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 3, 23, 26, 26, 26, 26, 29 });
-    relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 16, 17, 4, 24, 26, 26, 26, 26, 29 });
-    relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 26, 26, 26, 29 });
+    relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 3, 23, 26, 26, 27, 26, 30 });
+    relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 18, 17, 4, 24, 27, 27, 27, 26, 30 });
+    relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 27, 27, 26, 30 });
 
     /// OLD SKILLTRESS
     //relationships[0].skillIds = new int[] { 0, 10, 0, 11, 4, 14, 0, 0, 3, 14, 1, 15, 1 };
@@ -168,7 +168,7 @@ public class GlobalData : MonoBehaviour {
     people[3].inventory.AddItem("chocolate_cake", 1);
 
 
-    VsnSaveSystem.SetVariable("money", 500);
+    VsnSaveSystem.SetVariable("money", 200);
 
 
     /// DEBUG: TESTING SKILLS IN BATTLE

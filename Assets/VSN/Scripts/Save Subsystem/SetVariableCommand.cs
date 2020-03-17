@@ -12,8 +12,11 @@ namespace Command {
       string svalue = args[1].GetStringValue();
       Debug.Log("SET VAR FLOAT: "+fvalue+  ", STRING: " + svalue);
 
-      if(args[1].GetType() == typeof(VsnString) ||
-        (args[1].GetType() == typeof(VsnReference) && args[1].GetStringValue() != "")){
+      if(args[1].GetType() == typeof(VsnBoolean)) {
+        VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetBooleanValue());
+        return;
+      } else if(args[1].GetType() == typeof(VsnString) ||
+        (args[1].GetType() == typeof(VsnReference) && args[1].GetStringValue() != "")) {
         VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetStringValue());
         return;
       } else if(args[1].GetType() == typeof(VsnNumber) ||
@@ -35,6 +38,11 @@ namespace Command {
         VsnArgType.referenceArg,
         VsnArgType.stringArg
       } );
+
+      signatures.Add(new VsnArgType[]{
+        VsnArgType.referenceArg,
+        VsnArgType.booleanArg
+      });
     }
   }
 }

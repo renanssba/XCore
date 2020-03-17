@@ -25,22 +25,29 @@ public class Actor2D : MonoBehaviour {
 
   public MaterialPropertyBlock materialProperties;
 
+
+
   [ContextMenu("Print Material Property Block")]
   public void PrintMaterialPropertyBlock(){
       print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
       print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
   }
+
   void Awake() {
       materialProperties = new MaterialPropertyBlock();
   }
 
 
-  public void SetCharacterGraphics(Person p) {
+  public void SetCharacter(Person p) {
     person = p;
     UpdateCharacterGraphics();
   }
 
   public void UpdateCharacterGraphics() {
+    if(person.id == 10) {
+      return;
+    }
+
     if(!string.IsNullOrEmpty(person.name)) {
       if(person.CurrentStatusConditionStacks("sad") == 0) {
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
@@ -117,10 +124,13 @@ public class Actor2D : MonoBehaviour {
     buffAuraRenderers[0].gameObject.SetActive(true);
   }
 
-  public void SetEnemyGraphics(DateEvent currentEvent) {
+  public void SetEnemy(DateEvent currentEvent) {
     dateChallenge = currentEvent;
-    if(!string.IsNullOrEmpty(currentEvent.spriteName)) {
-      renderers[0].sprite = LoadSprite("Enemies/" + currentEvent.spriteName);
+  }
+
+  public void SetEnemyGraphics() {
+    if(!string.IsNullOrEmpty(dateChallenge.spriteName)) {
+      renderers[0].sprite = LoadSprite("Enemies/" + dateChallenge.spriteName);
     } else {
       gameObject.SetActive(false);
     }
@@ -140,11 +150,11 @@ public class Actor2D : MonoBehaviour {
 
 
   public void CharacterAttackAnim() {
-    transform.DOMoveX(0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    renderers[0].transform.DOMoveX(0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
   public void EnemyAttackAnim() {
-    transform.DOMoveX(-0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    renderers[0].transform.DOMoveX(-0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
   public void UseItemAnimation(Actor2D destiny, Item item) {
@@ -318,5 +328,21 @@ public class Actor2D : MonoBehaviour {
     UIController.instance.HideHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
     VsnController.instance.GotCustomInput();
+  }
+
+
+  public void SetFocusedSortingLayer(bool value) {
+    foreach(SpriteRenderer s in renderers)
+    {
+      if(value && s.sortingOrder < 100)
+      {
+        s.sortingOrder += 100;
+      }
+      else if(!value && s.sortingOrder >= 100)
+      {
+        s.sortingOrder -= 100;
+      }
+    }
+    
   }
 }

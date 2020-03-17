@@ -24,12 +24,16 @@ public class SkillButton : MonoBehaviour {
 
   public void UpdateUI() {
     if(skill != null) {
-      bg.SetAlpha(1f);
+      if(skill.type == SkillType.active) {
+        bg.color = CoupleStatusScreen.instance.activeSkillButtonColor;
+      } else {
+        bg.color = CoupleStatusScreen.instance.passiveSkillButtonColor;
+      }
       skillName.text = skill.GetPrintableName();
       skillIcon.sprite = skill.sprite;
       skillIcon.gameObject.SetActive(true);
     } else {
-      bg.SetAlpha(0.4f);
+      bg.color = CoupleStatusScreen.instance.lockedSkillButtonColor;
       skillName.text = "";
       skillIcon.gameObject.SetActive(false);
     }

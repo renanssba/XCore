@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//public enum DateEventInteractionType{
-//  male,
-//  female,
-//  couple
-//}
-
-
 public enum RewardType{
   none,
   item,
@@ -36,7 +29,6 @@ public class DateEvent {
   public string location;
   public string spriteName;
   public string appearSfxName;
-  //public DateEventInteractionType interactionType;
 
   public int maxHp;
   public int hp;
@@ -63,7 +55,7 @@ public class DateEvent {
 
   public Attributes[] GetResistances() {
     List<Attributes> att = new List<Attributes>();
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i<3; i++) {
       if(attributeEffectivity[i] < 1f) {
         att.Add((Attributes)i);
       }

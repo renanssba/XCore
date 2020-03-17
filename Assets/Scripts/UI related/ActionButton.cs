@@ -57,10 +57,14 @@ public class ActionButton : MonoBehaviour {
   public void UpdateUIAsSkill() {
     nameText.text = skill.GetPrintableName();
     if(skill.type == SkillType.attack) {
-      //if(skill.id != 9) {
-        ActionSkin actionSkin = GetActionSkin();
-        nameText.text = actionSkin.buttonName;
-      //}
+      string prefix = "";
+      string[] nameParts = skill.name.Split(' ');
+      if(nameParts.Length > 1) {
+        prefix = nameParts[0] + " ";
+      }
+
+      ActionSkin actionSkin = GetActionSkin();
+      nameText.text = prefix + actionSkin.buttonName;
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];
     } else {

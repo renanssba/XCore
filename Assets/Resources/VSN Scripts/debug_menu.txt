@@ -11,6 +11,8 @@ waypoint beatrice
 set_current_couple 2
 set_var girl_script_name "cap1_conversa_beatrice"
 set_var conhece_beatrice 1
+change_person_sprite 2 6
+change_person_name 2 "Beatrice"
 goto girl_menu
 
 waypoint clara
@@ -43,14 +45,20 @@ waypoint date
 choices "Date 1 (Parque)" date_1 "Date 2 (Shopping)" date_2 "Date 3 (Parque)" date_3 "Cancelar" end
 
 waypoint date_1
+set_var dateId 1
+setup_date
 goto_script girl_script_name "date_intro_1"
 goto end
 
 waypoint date_2
+set_var dateId 2
+setup_date
 goto_script girl_script_name "date_intro_2"
 goto end
 
 waypoint date_3
+set_var dateId 3
+setup_date
 goto_script girl_script_name "date_intro_3"
 goto end
 

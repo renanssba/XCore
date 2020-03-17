@@ -231,7 +231,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '<sprite="Attributes" index=3 tint>SP: 5<size=16>/10</size>'
+  m_text: '<sprite="hpANDsp" index=1 tint>SP: 5<size=16>/10</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
   m_sharedMaterial: {fileID: 21403774303905336, guid: 560daa827add036478d564a2f42284a2,
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 1908110080, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 21349954397413112, guid: e697ba554bbef0e4e96575cf83639390,
+  m_Material: {fileID: 21314460495444990, guid: 5b3fd51fcd465ce40ad6f34e67847a57,
     type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -401,9 +401,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_fontAsset: {fileID: 11400000, guid: 560daa827add036478d564a2f42284a2, type: 2}
-  m_spriteAsset: {fileID: 11400000, guid: e697ba554bbef0e4e96575cf83639390, type: 2}
+  m_spriteAsset: {fileID: 11400000, guid: 5b3fd51fcd465ce40ad6f34e67847a57, type: 2}
   m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 21349954397413112, guid: e697ba554bbef0e4e96575cf83639390,
+  m_sharedMaterial: {fileID: 21314460495444990, guid: 5b3fd51fcd465ce40ad6f34e67847a57,
     type: 2}
   m_isDefaultMaterial: 1
   m_padding: 0
@@ -541,7 +541,6 @@ MonoBehaviour:
     isHuman: 1
     state: 0
     attributes: 
-    maxSp: 0
     sp: 0
     favoriteMatter: 0
     mostHatedMatter: 0
@@ -552,7 +551,6 @@ MonoBehaviour:
         isHuman: 1
         state: 0
         attributes: 
-        maxSp: 0
         sp: 0
         favoriteMatter: 0
         mostHatedMatter: 0
@@ -563,7 +561,6 @@ MonoBehaviour:
             isHuman: 1
             state: 0
             attributes: 
-            maxSp: 0
             sp: 0
             favoriteMatter: 0
             mostHatedMatter: 0
@@ -574,7 +571,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -589,7 +585,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -608,7 +603,6 @@ MonoBehaviour:
             isHuman: 1
             state: 0
             attributes: 
-            maxSp: 0
             sp: 0
             favoriteMatter: 0
             mostHatedMatter: 0
@@ -619,7 +613,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -634,7 +627,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -657,7 +649,6 @@ MonoBehaviour:
         isHuman: 1
         state: 0
         attributes: 
-        maxSp: 0
         sp: 0
         favoriteMatter: 0
         mostHatedMatter: 0
@@ -668,7 +659,6 @@ MonoBehaviour:
             isHuman: 1
             state: 0
             attributes: 
-            maxSp: 0
             sp: 0
             favoriteMatter: 0
             mostHatedMatter: 0
@@ -679,7 +669,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -694,7 +683,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -713,7 +701,6 @@ MonoBehaviour:
             isHuman: 1
             state: 0
             attributes: 
-            maxSp: 0
             sp: 0
             favoriteMatter: 0
             mostHatedMatter: 0
@@ -724,7 +711,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -739,7 +725,6 @@ MonoBehaviour:
                 isHuman: 1
                 state: 0
                 attributes: 
-                maxSp: 0
                 sp: 0
                 favoriteMatter: 0
                 mostHatedMatter: 0
@@ -767,6 +752,9 @@ MonoBehaviour:
   shade: {fileID: 1081071864800738}
   spText: {fileID: 114114052894755130}
   statusConditionsContent: {fileID: 224648012760137110}
+  skillDescriptionPanel: {fileID: 0}
+  skillNameText: {fileID: 0}
+  skillDescriptionText: {fileID: 0}
   skillButtons: []
   coupleEntryLayout: 1
 --- !u!114 &114729715280005576

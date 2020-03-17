@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class CoupleStatusScreen : MonoBehaviour {
@@ -11,6 +12,13 @@ public class CoupleStatusScreen : MonoBehaviour {
   public Relationship relationship;
   public RelationshipCard relationshipCard;
   public PersonCard[] personCards;
+
+  public Button skilltreeButton;
+  public GameObject unusedBondPointsIcon;
+
+  public Color activeSkillButtonColor;
+  public Color passiveSkillButtonColor;
+  public Color lockedSkillButtonColor;
 
   public TextMeshProUGUI coupleHpText;
 
@@ -30,6 +38,17 @@ public class CoupleStatusScreen : MonoBehaviour {
     personCards[0].Initialize(relationship.GetBoy());
     personCards[1].Initialize(relationship.GetGirl());
     coupleHpText.text = relationship.GetMaxHp().ToString();
+
+    if(BattleController.instance.IsBattleHappening())
+    {
+      Utils.SetButtonDisabledGraphics(skilltreeButton);
+      unusedBondPointsIcon.SetActive(false);
+    }
+    else
+    {
+      Utils.SetButtonEnabledGraphics(skilltreeButton);
+      unusedBondPointsIcon.SetActive(relationship.bondPoints != 0);
+    }    
   }
 
   public void ClickRightCoupleButton() {

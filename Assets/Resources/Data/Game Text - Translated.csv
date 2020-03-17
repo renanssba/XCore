@@ -124,8 +124,10 @@ status_condition/name/hunger,Faminto,Hungry
 status_condition/description/hunger,Diminui o dano de todo ataque realizado pela metade,Halves every executed attack's damage by half
 status_condition/name/blindness,Cego,Blind
 status_condition/description/blindness,Diminui a chance de acerto de todo ataque realizado,Lowers executed attack's accuracy
-add_heart/say_0,<color=yellow>\couple tornaram-se mais próximos!</color>,<color=yellow>\couple became closer to each other!</color>
-add_heart/say_1,<color=yellow>\couple tornaram-se muito mais próximos!</color>,<color=yellow>\couple became much closer to each other!</color>
+improve_relationship/say_0,<color=yellow>\couple tornaram-se mais próximos!</color>,<color=yellow>\couple became closer to each other!</color>
+improve_relationship/say_1,<color=yellow>\couple tornaram-se muito mais próximos!</color>,<color=yellow>\couple became much closer to each other!</color>
+improve_relationship/say_2,<color=yellow>O relacionamento de \couple avançou! Agora eles tornaram-se Amigos Próximos!</color>,
+improve_relationship/say_3,<color=yellow>O relacionamento de \couple avançou bastante! Agora eles estão Apaixonados!</color>,
 check_end_game/say_0,"Olha só, o nosso tempo acabou!","Look, our time is up!"
 check_end_game/say_1,"Olha só, parece que você já cumpriu sua missão!","Look, it seems like you've already accomplished your mission!"
 check_end_game/say_2,"Com suas forças recuperadas, você começa um novo dia para juntar casais!","Having your strength restored, you start a new day to form couples!"
@@ -173,7 +175,7 @@ part_time_job/say_0,Você pode gastar energia trabalhando para ganhar dinheiro. 
 part_time_job/choices_0_0,Gastar 2 AP -> $60,Spend 2 AP -> $60
 part_time_job/choices_0_1,Gastar 3 AP -> $120,Spend 3 AP -> $120
 part_time_job/say_1,"Você trabalhou bastante e ganhou <sprite=""Attributes"" index=4>\vsn[gain]!",You worked hard and won \vsn[gain] Heavenly Money!
-shop/say_0,Bem-vindo à loja!,Welcome to the shop!
+shop/say_0,Oi Fertiliel! Bem-vinda à minha lojinha de itens humanos!,Welcome to the shop!
 shop/choices_0_0,Comprar,Purchase
 shop/choices_0_1,Vender,Sell
 shop/say_1,"Você quer comprar <color=yellow>\vsn[item_name]</color> por <sprite=""Attributes"" index=4><color=yellow>\vsn[item_price]</color>?",Do you want to buy \vsn[item_name] for \vsn[item_price]?
@@ -181,7 +183,7 @@ shop/say_2,"Me desculpe, parece que você não tem dinheiro o suficiente para co
 shop/say_3,Você não tem nenhum item para vender.,You have no items to sell.
 shop/say_4,"Você quer vender <color=yellow>\vsn[item_name]</color> por <sprite=""Attributes"" index=4><color=yellow>\vsn[item_price]</color>?",Do you want to sell \vsn [item_name] for \vsn[item_price]?
 shop/say_5,Você adquiriu <color=yellow>\vsn[item_name]</color>!,You purchased \vsn[item_name]!
-shop/say_6,Obrigado!,Thank you!
+shop/say_6,Muito obrigada! Isso vai ficar lindo na minha coleção.,Thank you!
 spend_day/say_0,Você foi dormir e descansar para o próximo dia.,You went to sleep and rest for the next day.
 spend_day/say_1,Você descansou um pouco até de tarde.,You rested a little until afternoon.
 tutorial_choose_date/say_0,Durante a <color=yellow>Tarde</color> você pode influenciar um casal de humanos que já se conhece e se gosta para ir a um <color=yellow>Encontro</color>.,During the <color=yellow>Afternoon</color> you can influence a couple of humans who already know and like each other to go on a <color=yellow>Date</color>.

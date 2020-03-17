@@ -50,9 +50,7 @@ public class GameController : MonoBehaviour {
         VsnSaveSystem.SetVariable("tutorial_observation", 1);
       }
       //VsnController.instance.StartVSN("cap0_intro");
-      //VsnController.instance.StartVSN("cap1_manha");
-      VsnController.instance.StartVSN("cap0_intro");
-      //VsnController.instance.StartVSN("cap1_manha");
+      VsnController.instance.StartVSN("cap1_manha");
       //VsnController.instance.StartVSN("tutorial_intro");
     }
   }
@@ -82,6 +80,13 @@ public class GameController : MonoBehaviour {
     }
     if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
       VsnController.instance.StartVSN("debug_menu");
+    }
+    if (Input.GetKeyDown(KeyCode.P) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+      if(VsnController.instance.state != ExecutionState.PLAYING){
+        VsnController.instance.state = ExecutionState.PLAYING;
+      } else {
+        VsnController.instance.state = ExecutionState.STOPPED;
+      }
     }
   }
 

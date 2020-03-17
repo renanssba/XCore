@@ -62,7 +62,9 @@ public class BattleController : MonoBehaviour {
     dateLength = 3;
   }
 
-  public void SetupBattleStart(Person boy, Person girl, int dateId) {
+  public void SetupBattleStart(int dateId) {
+    Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
+    Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
     GlobalData.instance.observedPeople = new Person[] {boy, girl};
 
     currentDateId = dateId;
@@ -79,8 +81,14 @@ public class BattleController : MonoBehaviour {
     UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
 
+    VsnSaveSystem.SetVariable("battle_is_happening", true);
+
     SetDateLengthAndLocation();
     GenerateDateEnemies();
+  }
+
+  public bool IsBattleHappening() {
+    return VsnSaveSystem.GetBoolVariable("battle_is_happening");
   }
 
 
@@ -88,7 +96,7 @@ public class BattleController : MonoBehaviour {
     HealPartyHp(maxHp);
     RemovePartyStatusConditions();
     for(int i=0; i < partyMembers.Length; i++) {
-      partyMembers[i].HealSp(partyMembers[i].maxSp);
+      partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) );
     }
   }
 
@@ -143,6 +151,10 @@ public class BattleController : MonoBehaviour {
         if(selectedSkills[currentPlayerTurn].range == ActionRange.oneAlly) {
           WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
           return;
+        }
+        else
+        {
+          selectedTargetPartyId[currentPlayerTurn] = 3;
         }
         break;
       case TurnActionType.flee:
@@ -219,7 +231,7 @@ public class BattleController : MonoBehaviour {
     damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f*defender.attributes[(int)Attributes.endurance] + defender.attributes[(int)usedSkill.attribute], 1f));
 
     Debug.LogWarning("Character Hits! Damage:");
-    Debug.Log("Defensive ratio (ATK/DEF):" + damage);
+    Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
     damage *= (float)usedSkill.power * Random.Range(0.9f, 1.1f);
 
@@ -238,13 +250,18 @@ public class BattleController : MonoBehaviour {
     float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
     int effectiveAttackDamage = CalculateCharacterDamage(partyMembers[partyMemberId], usedSkill, GetCurrentDateEvent());
     int initialHp = hp;
+    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
 
     VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
 
 
+    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, TheaterController.instance.enemyActor });
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
+
     DamageEnemyHp(effectiveAttackDamage);
 
-    TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+    attackingActor.CharacterAttackAnim();
 
     DateEvent currentEvent = GetCurrentDateEvent();
 
@@ -255,7 +272,7 @@ public class BattleController : MonoBehaviour {
       VsnAudioManager.instance.PlaySfx("action_magic_arrow");
     }
 
-    yield return new WaitForSeconds(attackAnimationTime);
+    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
 
     TheaterController.instance.enemyActor.ShineRed();
     TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
@@ -266,7 +283,12 @@ public class BattleController : MonoBehaviour {
     enemyHpSlider.maxValue = currentEvent.maxHp;
     enemyHpSlider.DOValue(currentEvent.hp, 1f);
 
-    yield return new WaitForSeconds(1.2f);
+    yield return new WaitForSeconds(1f);
+
+
+    TheaterController.instance.UnfocusActors();
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -278,13 +300,21 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteCharacterSkill(int partyMemberId, int targetId, Skill usedSkill) {
-    TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
+    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(selectedTargetPartyId[partyMemberId]);
+
+
+    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
+
+    attackingActor.CharacterAttackAnim();
     //Person targetPerson
 
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("heal_default");
 
-    yield return new WaitForSeconds(attackAnimationTime);
+    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
     VsnUIManager.instance.PassBattleDialog();
 
     switch(usedSkill.skillSpecialEffect) {
@@ -328,14 +358,22 @@ public class BattleController : MonoBehaviour {
     }
     
     yield return new WaitForSeconds(0.5f);
+
+
+    TheaterController.instance.UnfocusActors();
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
 
   public IEnumerator ExecuteUseItem(int partyMemberId, int targetId, Item usedItem) {
-    //TheaterController.instance.CharacterAttackAnimation(partyMemberId, 0);
     Actor2D userActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+
+
+    TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("challenge_default");
@@ -389,6 +427,10 @@ public class BattleController : MonoBehaviour {
     }
 
     yield return new WaitForSeconds(0.5f);
+
+    TheaterController.instance.UnfocusActors();
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -430,7 +472,7 @@ public class BattleController : MonoBehaviour {
   public void EnemyAttack() {
     int targetId = VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
-    StartCoroutine(ExecuteEnemyAttack(targetId, attackAnimationTime));
+    StartCoroutine(ExecuteEnemyAttack(targetId));
   }
 
   public int CalculateEnemyDamage(DateEvent attacker, int targetId) {
@@ -440,11 +482,14 @@ public class BattleController : MonoBehaviour {
     damage = (3f * attacker.attributes[((int)attacker.attackAttribute)] / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)attacker.attackAttribute), 1) );
 
     Debug.LogWarning("Enemy Hits! Damage:");
-    Debug.Log("Defensive ratio (ATK/DEF):" + damage);
+    Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
     damage *= (float)attacker.attackPower * Random.Range(0.9f, 1.1f);
 
-    damage *= defender.DamageTakenMultiplier(GlobalData.instance.GetCurrentRelationship().id, attacker.attackAttribute);
+    damage *= defender.DamageTakenMultiplier(attacker.attackAttribute);
+
+    Debug.Log("Defender damage multiplier:" + defender.DamageTakenMultiplier(attacker.attackAttribute));
+
     Debug.Log("Final damage: " + damage);
 
     // defend?
@@ -453,8 +498,7 @@ public class BattleController : MonoBehaviour {
     return Mathf.Max(1, Mathf.RoundToInt(damage));
   }
 
-  public IEnumerator ExecuteEnemyAttack(int targetId, float time) {
-    // damage party HP
+  public IEnumerator ExecuteEnemyAttack(int targetId) {
     DateEvent currentEvent = GetCurrentDateEvent();
     int attributeId = (int)currentEvent.attackAttribute;
     int effectiveAttackDamage = CalculateEnemyDamage(currentEvent, targetId);
@@ -462,11 +506,16 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     bool causeDamage = (currentEvent.attackPower != 0);
 
-    TheaterController.instance.EnemyAttackAnimation();
+
+    TheaterController.instance.FocusActors(new Actor2D[] { targetActor, TheaterController.instance.enemyActor });
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
+
+    TheaterController.instance.enemyActor.EnemyAttackAnim();
 
     VsnAudioManager.instance.PlaySfx(currentEvent.attackSfxName);
 
-    yield return new WaitForSeconds(time + 0.4f);
+    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
 
     TheaterController.instance.ShineCharacter(targetId);
 
@@ -475,7 +524,7 @@ public class BattleController : MonoBehaviour {
       if(selectedActionType[targetId] == TurnActionType.defend) {
         targetActor.ShowDefendHitParticle();
       }
-      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, partyMembers[targetId].DamageTakenMultiplier(GlobalData.instance.GetCurrentRelationship().id, currentEvent.attackAttribute));
+      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, partyMembers[targetId].DamageTakenMultiplier(currentEvent.attackAttribute));
       yield return new WaitForSeconds(1f);
 
       VsnUIManager.instance.PassBattleDialog();
@@ -505,11 +554,20 @@ public class BattleController : MonoBehaviour {
           args[2] = new VsnString(statusCondition.GetPrintableName());
 
           StartCoroutine(WaitThenShowActionDescription(1f, args));
+          yield return new WaitForSeconds(1f);
+
+          TheaterController.instance.UnfocusActors();
           yield break;
         }
       }
     }
+
+
     yield return new WaitForSeconds(0.2f);
+
+    TheaterController.instance.UnfocusActors();
+    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 

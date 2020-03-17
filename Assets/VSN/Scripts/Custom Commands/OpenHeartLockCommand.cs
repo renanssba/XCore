@@ -9,14 +9,20 @@ namespace Command {
 
     public override void Execute() {
       Relationship relation = GlobalData.instance.GetCurrentRelationship();
+      int levelToRaise = (int)args[0].GetNumberValue();
 
-      relation.OpenHeartLock((int)args[0].GetNumberValue());
+      if(relation.OpenHeartLock(levelToRaise) ) {
+        SfxManager.StaticPlayBigConfirmSfx();
+        VsnArgument[] sayArgs = new VsnArgument[2];
+        sayArgs[0] = new VsnString("char_name/none");
 
-      SfxManager.StaticPlayBigConfirmSfx();
-      VsnArgument[] sayArgs = new VsnArgument[2];
-      sayArgs[0] = new VsnString("char_name/none");
-      sayArgs[1] = new VsnString("add_heart/say_1");
-      Command.SayCommand.StaticExecute(sayArgs);
+        if(levelToRaise == 1) {
+          sayArgs[1] = new VsnString("improve_relationship/say_2");
+        } else {
+          sayArgs[1] = new VsnString("improve_relationship/say_3");
+        }
+        Command.SayCommand.StaticExecute(sayArgs);
+      }      
     }
 
 

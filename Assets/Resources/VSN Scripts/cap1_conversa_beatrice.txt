@@ -304,8 +304,8 @@ say "Ricardo" "Achei que já tivéssemos passado dessa fase de cartas."
 say "" "A garota vira o rosto, envergonhada."
 say "Beatrice" "...Considerei apropriado. Adquiri mais revistas para recortar."
 say "" "Ricardo ri. O garoto abre o envelope e começa a ler a carta que estava contida dentro."
-fade_out 1.0
-say "Carta" "Ricardo, \n Os dias que passamos juntos foram muito prazeirosos."
+fade_music 0 2.0
+say "Carta" "Ricardo, \n Os dias que passamos juntos foram muito prazerosos."
 say "Não me recordo da última vez na qual estive tão feliz. Agradeço muitíssimo."
 say "" "Ricardo sorri."
 say "Carta" ""
@@ -336,6 +336,7 @@ say "Beatrice" "Eu...eu te amo também."
 say "" "O coração de Beatrice se abriu!"
 say "Fertiliel" "É agora!"
 say "" "Fertiliel atira a flecha do amor eterno!"
+goto end
 
 
 
@@ -412,6 +413,7 @@ waypoint date_end_3
 say "Beatrice" "É aqui, chegamos. Não é uma árvore deveras formosa?"
 say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
 say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
+goto dialog_after_date_3
 end_script
 
 

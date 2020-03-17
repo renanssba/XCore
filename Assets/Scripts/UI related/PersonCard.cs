@@ -45,6 +45,7 @@ public class PersonCard : MonoBehaviour {
       return;
     }
 
+
     /// BG AND FACE / NAME
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
     nameText.text = person.name;
@@ -56,10 +57,12 @@ public class PersonCard : MonoBehaviour {
 
     if(coupleEntryLayout == PersonCardLayout.dateUI) {
       faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
-      spText.text = "<sprite=\"Attributes\" index=3 tint>SP: " + person.sp + "<size=16>/" + person.maxSp+ "</size>";
-
+      spText.text = "<sprite=\"hpANDsp\" index=1 tint>SP: " + person.sp + "<size=16>/" + person.GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) + "</size>";
       return;
     }
+
+
+    int relationshipId = CoupleStatusScreen.instance.relationship.id;
 
     bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
     bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
@@ -72,12 +75,11 @@ public class PersonCard : MonoBehaviour {
       attributeNamesTexts[i].gameObject.SetActive(true);
       attrString += person.AttributeValue(i).ToString() + "\n";
     }
-    attrString += person.sp+"/"+person.maxSp;
+    attrString += person.sp+"/"+person.GetMaxSp(relationshipId);
     attributeValuesText.text = attrString;
 
 
     /// SKILLS
-    int relationshipId = CoupleStatusScreen.instance.relationship.id;
     Skill[] allSkills = person.GetAllCharacterSpecificSkills(relationshipId);
     for(int i=0; i<skillButtons.Length; i++) {
       if(i < allSkills.Length) {

@@ -91,10 +91,10 @@ public class RelationshipCard : MonoBehaviour {
 
     VsnArgument[] sayArgs = new VsnArgument[2];
     sayArgs[0] = new VsnString("char_name/none");
-    if(actualRaise > 20) {
-      sayArgs[1] = new VsnString("add_heart/say_1");
+    if(expToAdd > 20) {
+      sayArgs[1] = new VsnString("improve_relationship/say_1");
     } else {
-      sayArgs[1] = new VsnString("add_heart/say_0");
+      sayArgs[1] = new VsnString("improve_relationship/say_0");
     }
     Command.SayCommand.StaticExecute(sayArgs);
   }

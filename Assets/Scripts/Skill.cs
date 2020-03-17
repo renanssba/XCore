@@ -19,6 +19,8 @@ public enum SkillSpecialEffect {
   healingSkillBonus,
   damageTakenBonus,
   damageGivenBonus,
+  raiseMaxHp,
+  raiseMaxSp,
   guardian,
   none
 }
@@ -44,6 +46,8 @@ public struct SkilltreeEntry {
   //public int prerequisite;
 }
 
+
+[System.Serializable]
 public class Skilltree {
   public SkilltreeEntry[] skills;
   public static readonly int[] skillRequisites = { 8, 0, 0, -1, 8, 4, 4, -1, -1, 8, 9, 9, -1 };
