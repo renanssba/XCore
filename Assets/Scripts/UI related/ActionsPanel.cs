@@ -28,11 +28,7 @@ public class ActionsPanel : MonoBehaviour {
     currentPartyMember = partyMemberId;
     SetupBaseActionButtons(partyMemberId);
 
-    skillsPanel.gameObject.SetActive(false);
-    //itemsPanel.gameObject.SetActive(false);
-    baseActionsPanel.gameObject.SetActive(true);
     turnIndicator.SetActive(true);
-    Utils.SelectUiElement(baseActionButtons[0]);
 
     PositionPanels(partyMemberId);
   }
@@ -44,8 +40,13 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupBaseActionButtons(int currentPartyMember) {
     List<GameObject> availableButtons = new List<GameObject>();
+    Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
 
-    if (BattleController.instance.partyMembers[currentPartyMember].id == 10) {
+    baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
+    baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
+    baseActionButtons[4].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
+
+    if(BattleController.instance.partyMembers[currentPartyMember].id == 10) {
       baseActionButtons[0].SetActive(true);
       availableButtons.Add(baseActionButtons[0]);
       baseActionButtons[1].SetActive(true);
@@ -74,21 +75,36 @@ public class ActionsPanel : MonoBehaviour {
 
     SetupBaseActionButtonsPositions(availableButtons);
 
-    baseActionButtonShades[2].SetActive(!ThereAreItemsAvailable());
+
+    skillsPanel.gameObject.SetActive(false);
+    baseActionsPanel.gameObject.SetActive(true);
+
+    Utils.SelectUiElement(availableButtons[0]);
+
+    SetupBaseActionButtonsShades();
   }
 
+  public void SetupBaseActionButtonsShades() {
+    Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
+
+    /// itens button
+    baseActionButtonShades[1].SetActive(!ThereAreItemsAvailable());
+
+    /// skills button
+    baseActionButtonShades[2].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useSkill));
+
+    /// defend button
+    //baseActionButtonShades[3].SetActive(!currentPerson.CanExecuteAction(TurnActionType.defend));
+  }
+
+
   public void SetupBaseActionButtonsPositions(List<GameObject> buttons){
-    if (buttons.Count == 4)
-    {
-      for (int i=0; i<buttons.Count; i++)
-      {
+    if(buttons.Count == 4) {
+      for(int i=0; i<buttons.Count; i++) {
         buttons[i].GetComponent<RectTransform>().anchoredPosition = fourButtonPositions[i];
       }
-    }
-    else if(buttons.Count == 3)
-    {
-      for (int i = 0; i < buttons.Count; i++)
-      {
+    } else if(buttons.Count == 3) {
+      for(int i = 0; i < buttons.Count; i++) {
         buttons[i].GetComponent<RectTransform>().anchoredPosition = threeButtonPositions[i];
       }
     }
@@ -125,6 +141,11 @@ public class ActionsPanel : MonoBehaviour {
 
 
   public void ClickSkillsPanel() {
+    if(!BattleController.instance.partyMembers[currentPartyMember].CanExecuteAction(TurnActionType.useSkill)) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.gameObject.SetActive(false);
     SetupCharacterActions(currentPartyMember);
@@ -175,7 +196,11 @@ public class ActionsPanel : MonoBehaviour {
     SfxManager.StaticPlayCancelSfx();
     skillsPanel.gameObject.SetActive(false);
     baseActionsPanel.gameObject.SetActive(true);
-    Utils.SelectUiElement(baseActionButtons[0]);
+    if(BattleController.instance.partyMembers[currentPartyMember].id == 10) {
+      Utils.SelectUiElement(baseActionButtons[0]);
+    } else {
+      Utils.SelectUiElement(baseActionButtons[2]);
+    }    
     UIController.instance.selectTargetPanel.SetActive(false);
     UIController.instance.HideHelpMessagePanel();
   }

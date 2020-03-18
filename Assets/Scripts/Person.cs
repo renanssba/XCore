@@ -97,6 +97,34 @@ public class Person {
     return Mathf.Max(sum, 0);
   }
 
+
+  public bool CanExecuteAction(TurnActionType action) {
+    switch(action) {
+      case TurnActionType.defend:
+        if(CurrentStatusConditionStacks("angry") > 0) {
+          return false;
+        }
+        break;
+      case TurnActionType.useSkill:
+        if(CurrentStatusConditionStacks("fear") > 0) {
+          return false;
+        }
+        break;
+    }
+    return true;
+  }
+
+  public bool CanExecuteSkill(Skill skillToUse) {
+    if(sp < skillToUse.spCost) {
+      return false;
+    }
+    if(CurrentStatusConditionStacks("angry") > 0 && (skillToUse.type == SkillType.active || skillToUse.attribute != Attributes.guts)) {
+      return false;
+    }
+    return true;
+  }
+
+
   public float DamageMultiplier() {
     float modifier = 1f;
     if(statusConditions != null) {
@@ -189,7 +217,10 @@ public class Person {
     for(int i=0; i<usedSkill.givesConditionNames.Length; i++) {
       newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[i]);
       newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedSkill.duration + 1;
+      newCondition.duration = usedSkill.duration;
+      if(newCondition.duration > 0) {
+        newCondition.duration++;
+      }
       newCondition.maxDurationShowable = usedSkill.duration;
       //newCondition.name = usedSkill.GetPrintableName();
       //newCondition.sprite = usedSkill.sprite;
@@ -202,7 +233,10 @@ public class Person {
     foreach(string condName in usedItem.givesConditionNames) {
       newCondition = BattleController.instance.GetStatusConditionByName(condName);
       newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedItem.duration + 1;
+      newCondition.duration = usedItem.duration;
+      if(newCondition.duration > 0) {
+        newCondition.duration++;
+      }
       newCondition.maxDurationShowable = usedItem.duration;
       //newCondition.name = usedItem.GetPrintableName();
       //newCondition.sprite = usedItem.sprite;
@@ -285,7 +319,7 @@ public class Person {
 
     for(int i=0; i<sc.statusEffect.Length; i++) {
       if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
-         sc.statusEffect[i] <= StatusConditionEffect.turnDamageMagic) {
+         sc.statusEffect[i] <= StatusConditionEffect.turnDamageCharisma) {
         damageDealtBefore = false;
         for(int j=0; j < statusCondPos; j++) {
           if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {

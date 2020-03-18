@@ -38,6 +38,7 @@ for currentDateEvent #dateLength
   wait 0.8
   
   theater_animation "enemy_enters"
+  set_var currentBattleTurn -1
   wait 1.2
   
   goto_script "\currentEventName" event_statement
@@ -51,6 +52,8 @@ for currentDateEvent #dateLength
   
   show_date_ui true
   wait 0.5
+  
+  goto_script "check_passive_triggers" "enemy_appears"
 
   // if tutorial_date2 == 0
     // goto_script "tutorial_date2"
@@ -58,6 +61,9 @@ for currentDateEvent #dateLength
 
 
   waypoint start_new_turn
+  
+  add_var currentBattleTurn 1
+  goto_script "check_passive_triggers" "turn_started"
   
   // receive effects from conditions (like take poison damage)
   for currentPlayerTurn #partyLength
@@ -172,7 +178,7 @@ enable_input false
 say "" "\couple decidem que o encontro não está dando certo."
 say "\boy" "Podemos continuar esse encontro outro dia..."
 say "\girl" "Sim, com certeza será melhor..."
-say "" "date/say_6"
+say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
 // show_date_ui false
 goto end
 

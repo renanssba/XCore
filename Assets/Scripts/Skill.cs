@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillType {
+  attack,
+  active,
+  passive
+}
+
 public enum ActionRange {
   self,
   oneAlly,
@@ -25,10 +31,10 @@ public enum SkillSpecialEffect {
   none
 }
 
-public enum SkillType {
-  attack,
-  active,
-  passive
+public enum PassiveSkillActivationTrigger {
+  enemy_appears,
+  turn_started,
+  none
 }
 
 public enum SkillAffectsCharacter {
@@ -110,6 +116,10 @@ public class Skill {
   public int healSp;
 
   public int spCost;
+
+  public PassiveSkillActivationTrigger activationTrigger;
+  public string triggerCondition;
+  public float triggerChance;
 
 
   public string GetPrintableName() {

@@ -3272,11 +3272,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3914,6 +3914,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21314460495444990, guid: 5b3fd51fcd465ce40ad6f34e67847a57,
         type: 2}
+    - target: {fileID: 114909184194128608, guid: 77cebdf78cef5c943a674acfaf22cf58,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0.69803923
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77cebdf78cef5c943a674acfaf22cf58, type: 2}
   m_IsPrefabParent: 0
@@ -7032,11 +7037,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8578,6 +8583,9 @@ MonoBehaviour:
     healHp: 0
     healSp: 0
     spCost: 0
+    activationTrigger: 0
+    triggerCondition: 
+    triggerChance: 0
   itemListing:
     id: 0
     amount: 0
@@ -10909,6 +10917,9 @@ MonoBehaviour:
     healHp: 0
     healSp: 0
     spCost: 0
+    activationTrigger: 0
+    triggerCondition: 
+    triggerChance: 0
   itemListing:
     id: 0
     amount: 0
@@ -11431,11 +11442,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -15094,11 +15105,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -19473,7 +19484,7 @@ Prefab:
     - target: {fileID: 224078255707829424, guid: 1ad290d9b7146db4f8f20d527db3c477,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 224396083769882292, guid: 1ad290d9b7146db4f8f20d527db3c477,
         type: 2}
@@ -20549,11 +20560,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -22781,6 +22792,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1632851052894012, guid: caaebff3b377bf04e8431b352f57810e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: caaebff3b377bf04e8431b352f57810e, type: 2}
   m_IsPrefabParent: 0
@@ -23484,7 +23499,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1217694195}
   - component: {fileID: 1217694197}
-  - component: {fileID: 1217694196}
   - component: {fileID: 1217694199}
   - component: {fileID: 1217694198}
   m_Layer: 5
@@ -23516,33 +23530,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 110}
   m_SizeDelta: {x: 1366.6, y: 197.90002}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1217694196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1217694194}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 74656d802c1a49740b49b6e1213b3d04, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &1217694197
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24616,11 +24603,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -25561,8 +25548,8 @@ MonoBehaviour:
   currentPartyMember: 0
   baseActionButtonShades:
   - {fileID: 1126763852}
-  - {fileID: 1467756305}
   - {fileID: 632317503}
+  - {fileID: 1467756305}
   - {fileID: 1070551248}
   - {fileID: 310472907}
   - {fileID: 1185905389}
@@ -36191,6 +36178,9 @@ MonoBehaviour:
     healHp: 0
     healSp: 0
     spCost: 0
+    activationTrigger: 0
+    triggerCondition: 
+    triggerChance: 0
   itemListing:
     id: 0
     amount: 0
@@ -36199,7 +36189,7 @@ MonoBehaviour:
   spCostText: {fileID: 0}
   iconImage: {fileID: 764087203}
   improvementIconImage: {fileID: 0}
-  shade: {fileID: 0}
+  shade: {fileID: 1126763852}
 --- !u!1 &2115570987
 GameObject:
   m_ObjectHideFlags: 0

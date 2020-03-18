@@ -1,0 +1,21 @@
+﻿goto *arg1
+
+
+
+waypoint enemy_appears
+for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked "enemy_appears"
+endfor
+end_script
+
+
+waypoint turn_started
+for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked "turn_started"
+endfor
+end_script
+
+
+waypoint receive_status_condition
+end_script
+

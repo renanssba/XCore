@@ -40,6 +40,8 @@ public class DateEvent {
   public string[] givesConditionNames;
   public int giveStatusConditionChance;
 
+  public string[] tags;
+
   public RewardType rewardType;
   public int rewardId;
 

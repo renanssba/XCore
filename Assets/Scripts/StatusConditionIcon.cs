@@ -10,13 +10,17 @@ public enum StatusConditionEffect {
   raiseGuts,
   raiseIntelligence,
   raiseCharisma,
-  raiseMagic,
+  raiseEndurance,
   turnDamageGuts,
   turnDamageIntelligence,
   turnDamageCharisma,
-  turnDamageMagic,
   damageMultiplier,
   missAttacks,
+  confusion,
+  limitActionsToGuts,
+  limitActionsToIntelligence,
+  limitActionsToCharisma,
+  limitActionsToDefense,
   count
 }
 
@@ -79,21 +83,18 @@ public class StatusCondition {
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/charisma");
         break;
-      case StatusConditionEffect.raiseMagic:
+      case StatusConditionEffect.raiseEndurance:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
-        desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/magic");
+        desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/endurance");
         break;
       case StatusConditionEffect.turnDamageGuts:
-        desc += "Receive "+ Lean.Localization.LeanLocalization.GetTranslationText("attribute/guts")+"-based damage every turn.";
+        desc += "Recebe dano baseado em "+ Lean.Localization.LeanLocalization.GetTranslationText("attribute/guts") + " todo turno.";
         break;
       case StatusConditionEffect.turnDamageIntelligence:
-        desc += "Receive " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/intelligence") + "-based damage every turn.";
+        desc += "Recebe dano baseado em " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/intelligence") + " todo turno.";
         break;
       case StatusConditionEffect.turnDamageCharisma:
-        desc += "Receive " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/charisma") + "-based damage every turn.";
-        break;
-      case StatusConditionEffect.turnDamageMagic:
-        desc += "Receive " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/magic") + "-based damage every turn.";
+        desc += "Recebe dano baseado em " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/charisma") + " todo turno.";
         break;
       default:
         desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/"+name);

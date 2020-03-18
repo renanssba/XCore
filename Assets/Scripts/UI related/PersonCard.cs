@@ -73,7 +73,13 @@ public class PersonCard : MonoBehaviour {
     for(int i=0; i<4; i++){
       attributeNamesTexts[i].gameObject.SetActive(false);
       attributeNamesTexts[i].gameObject.SetActive(true);
-      attrString += person.AttributeValue(i).ToString() + "\n";
+      string colorTag = ColorTag(i);
+      if(colorTag == null) {
+        attrString += person.AttributeValue(i).ToString() + "\n";
+      }else {
+        attrString += colorTag+person.AttributeValue(i).ToString() + "</color>\n";
+      }
+      
     }
     attrString += person.sp+"/"+person.GetMaxSp(relationshipId);
     attributeValuesText.text = attrString;
@@ -96,6 +102,19 @@ public class PersonCard : MonoBehaviour {
     } else {
       SetSkillDescription(null);
     }
+  }
+
+  public string ColorTag(int attributeId) {
+    int currentValue = person.AttributeValue(attributeId);
+    int baseValue = person.attributes[attributeId];
+
+    if(currentValue > baseValue) {
+      return "<color=#00D900>";
+    }
+    if(currentValue < baseValue) {
+      return "<color=red>";
+    }
+    return null;
   }
 
   public void SetSkillDescription(Skill skill) {

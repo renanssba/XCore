@@ -14,6 +14,7 @@ public class TargetSelectButton : MonoBehaviour {
     BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = currentTargetId;
     UIController.instance.HideHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
+    ActionsPanel.instance.turnIndicator.SetActive(false);
     VsnController.instance.GotCustomInput();
   }
 }

@@ -43,6 +43,11 @@ public class ActionButton : MonoBehaviour {
     UpdateUI();
   }
 
+  public void InitializeGeneric(Person p) {
+    person = p;
+    UpdateUI();
+  }
+
   public void UpdateUI() {
     switch(actionType) {
       case TurnActionType.useSkill:
@@ -50,6 +55,11 @@ public class ActionButton : MonoBehaviour {
         break;
       case TurnActionType.useItem:
         UpdateUIAsItem();
+        break;
+      case TurnActionType.defend:
+      case TurnActionType.idle:
+      case TurnActionType.flee:
+        shade.gameObject.SetActive(!ActionCanBeUsed());
         break;
     }
   }
@@ -67,19 +77,25 @@ public class ActionButton : MonoBehaviour {
       nameText.text = prefix + actionSkin.buttonName;
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];
+
+      /// improvement icon
+      improvementIconImage.gameObject.SetActive(skill.id >= 3);
     } else {
       iconImage.sprite = skill.sprite;
       iconImage.color = Color.white;
+      improvementIconImage.gameObject.SetActive(false);
     }
 
+    /// SP cost
     if(skill.spCost > 0) {
       spCostText.text = "SP: " + skill.spCost;
       spCostText.gameObject.SetActive(true);
-      shade.gameObject.SetActive(!SkillCanBeUsed());
     } else {
       spCostText.gameObject.SetActive(false);
-      shade.gameObject.SetActive(false);
     }
+
+    /// shade
+    shade.gameObject.SetActive(!ActionCanBeUsed());
   }
 
   public ActionSkin GetActionSkin() {
@@ -133,7 +149,7 @@ public class ActionButton : MonoBehaviour {
 
 
   public void ClickedActionButton() {
-    if(!SkillCanBeUsed()) {
+    if(!ActionCanBeUsed()) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -154,7 +170,12 @@ public class ActionButton : MonoBehaviour {
     BattleController.instance.FinishSelectingCharacterAction();
   }
 
-  public bool SkillCanBeUsed() {
-    return person.sp >= skill.spCost;
+  public bool ActionCanBeUsed() {
+    bool value = true;
+    if(actionType == TurnActionType.useSkill) {
+      value = value && person.CanExecuteSkill(skill);
+    }
+    value = value && person.CanExecuteAction(actionType);
+    return value;
   }
 }

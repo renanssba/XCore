@@ -177,6 +177,17 @@ public class SpecialCodes {
           return currentPlayer.statusConditions.Count;
         }
         break;
+      case "#currentCoupleSkillsCount":
+        Relationship rel = GlobalData.instance.GetCurrentRelationship();
+        if(rel != null)
+        {
+          return rel.skilltree.skills.Length;
+        }
+        else
+        {
+          return -1;
+        }
+        break;
       default:
         return 0f;
     }

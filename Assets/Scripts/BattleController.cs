@@ -151,9 +151,7 @@ public class BattleController : MonoBehaviour {
         if(selectedSkills[currentPlayerTurn].range == ActionRange.oneAlly) {
           WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
           return;
-        }
-        else
-        {
+        } else {
           selectedTargetPartyId[currentPlayerTurn] = 3;
         }
         break;
@@ -301,8 +299,11 @@ public class BattleController : MonoBehaviour {
 
   public IEnumerator ExecuteCharacterSkill(int partyMemberId, int targetId, Skill usedSkill) {
     Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
-    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(selectedTargetPartyId[partyMemberId]);
+    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
+
+    UIController.instance.SetHelpMessageText(usedSkill.GetPrintableName());
+    UIController.instance.ShowHelpMessagePanel();
 
     TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -353,6 +354,11 @@ public class BattleController : MonoBehaviour {
           args[2] = new VsnString(statusCondition.GetPrintableName());
 
           StartCoroutine(WaitThenShowActionDescription(1f, args));
+          yield return new WaitForSeconds(0.5f);
+
+          TheaterController.instance.UnfocusActors();
+          UIController.instance.HideHelpMessagePanel();
+          yield break;
         }
         break;
     }
@@ -361,6 +367,7 @@ public class BattleController : MonoBehaviour {
 
 
     TheaterController.instance.UnfocusActors();
+    UIController.instance.HideHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -742,13 +749,19 @@ public class BattleController : MonoBehaviour {
   public void LoadAllEnemies() {
     allDateEvents = new List<DateEvent>();
 
-    float guts, intelligence, charisma, magic;
+    float guts, intelligence, charisma;
+    string[] loadedTags;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
+      loadedTags = dic["tags"].Split(',');
+      for(int i=0; i<loadedTags.Length; i++) {
+        loadedTags[i] = loadedTags[i].Trim();
+      }
+
       allDateEvents.Add(new DateEvent {
         id = int.Parse(dic["id"]),
         name = dic["name"],
@@ -766,8 +779,9 @@ public class BattleController : MonoBehaviour {
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
-        giveStatusConditionChance = int.Parse(dic["give status chance"])
-    });
+        giveStatusConditionChance = int.Parse(dic["give status chance"]),
+        tags = loadedTags
+      });
     }
   }
 
@@ -837,7 +851,19 @@ public class BattleController : MonoBehaviour {
       newSkill.skillSpecialEffect = GetSkillEffectByString(entry["skill special effect"]);
       newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
-      
+
+      if(!string.IsNullOrEmpty(entry["passive trigger"])) {
+        newSkill.activationTrigger = GetPassiveSkillTriggerByString(entry["passive trigger"]);
+      } else {
+        newSkill.activationTrigger = PassiveSkillActivationTrigger.none;
+      }
+      if(!string.IsNullOrEmpty(entry["trigger condition"])) {
+        newSkill.triggerCondition = entry["trigger condition"].Trim();
+      }
+      if(!string.IsNullOrEmpty(entry["trigger chance"])) {
+        newSkill.triggerChance = float.Parse(entry["trigger chance"]);
+      }
+
       if(!string.IsNullOrEmpty(entry["heal hp"])) {
         newSkill.healHp = int.Parse(entry["heal hp"]);
       }
@@ -862,6 +888,17 @@ public class BattleController : MonoBehaviour {
       }
     }
     return SkillSpecialEffect.none;
+  }
+
+  public PassiveSkillActivationTrigger GetPassiveSkillTriggerByString(string passiveTrigger) {
+    for(int i = 0; i <= (int)PassiveSkillActivationTrigger.none; i++)
+    {
+      if(((PassiveSkillActivationTrigger)i).ToString() == passiveTrigger)
+      {
+        return (PassiveSkillActivationTrigger)i;
+      }
+    }
+    return PassiveSkillActivationTrigger.none;
   }
 
   public SkillType GetSkillTypeByString(string skillType) {
@@ -938,6 +975,7 @@ public class BattleController : MonoBehaviour {
 
       List<StatusConditionEffect> effects = new List<StatusConditionEffect>();
       List<float> effectsPower = new List<float>();
+      Debug.LogWarning("Status Condition: " + newStatusCondition.name);
       for(int i=1; i<=3; i++) {
         if(!string.IsNullOrEmpty(entry["effect "+i])) {
           effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
@@ -952,6 +990,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public StatusConditionEffect GetStatusConditionEffectByString(string effect) {
+    Debug.LogWarning("effect: " + effect);
     for(int i = 0; i <= (int)StatusConditionEffect.count; i++) {
       if(((StatusConditionEffect)i).ToString() == effect) {
         return (StatusConditionEffect)i;

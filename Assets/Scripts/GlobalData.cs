@@ -137,11 +137,6 @@ public class GlobalData : MonoBehaviour {
     relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 18, 17, 4, 24, 27, 27, 27, 26, 30 });
     relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 27, 27, 26, 30 });
 
-    /// OLD SKILLTRESS
-    //relationships[0].skillIds = new int[] { 0, 10, 0, 11, 4, 14, 0, 0, 3, 14, 1, 15, 1 };
-    //relationships[1].skillIds = new int[] { 0, 10, 0, 12, 4, 14, 0, 0, 4, 17, 1, 15, 1 };
-    //relationships[2].skillIds = new int[] { 0, 10, 0, 13, 4, 14, 0, 0, 5, 20, 1, 15, 1 };
-
 
     /// INITIAL INVENTORIES
     /// PLAYER

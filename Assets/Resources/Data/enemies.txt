@@ -1,16 +1,17 @@
-id	name	script name	level	max hp	appear sfx	attack sfx	attack attribute	attack power	guts	intelligence	charisma	endurance	gives status conditions	give status chance	guts effectivity	intelligence effectivity	charisma effectivity	location	sprite name	stage	notes
-0	Bola de Futebol	ball_a	2	26	challenge_default	hit_default	guts	8	7	3	3	5		0	super	normal	baixa	park	bola	2	parque
-1	Valentão	bully_a	2	30	enemy_appear_bully	enemy_attack_bully	charisma	8	7	2	6	4		0	normal	baixa	super	generic	valentao	2	caminho
-2	Coelhinho Ferido	bunny_a	2	30	enemy_appear_bunny	enemy_attack_bunny	intelligence	4	5	5	5	5	sad	70	baixa	normal	super	park	coelho	2	parque/floresta
-3	Parente Chato	call_a	2	30	enemy_appear_call	enemy_attack_call	charisma	8	4	4	4	7		0	super	baixa	normal	generic	celular	2	qualquer
-4	Tornado Misterioso	clothing_a	2	30	enemy_appear_clothing	enemy_attack_clothing	---	0	5	5	5	5	unclothed	100	normal	super	baixa	park	tornado_c_roupas	2	outdoors
-5	Fotógrafo	photographer_a	2	30	enemy_appear_photographer	enemy_attack_photographer	charisma	8	5	5	5	5		0	super	normal	normal	shopping	fotografo	2	urbano
-6	Horda de Consumidores	sale_a	2	42	enemy_appear_sale	enemy_attack_sale	guts	8	6	3	3	2	injured	30	normal	baixa	super	shopping	multidao	2	shopping
-7	Máquina de Comida	vending_a	2	38	enemy_appear_vending	enemy_attack_vending	guts	4	6	1	3	7	hunger	50	baixa	super	normal	generic	maquina salgadinhos	2	urbano
-8	Vendedores Insistentes	vendor_a	2	50	enemy_appear_vendor	enemy_attack_vendor	intelligence	8	5	4	5	4		0	normal	super	normal	shopping	vendedores	2	urbano/lojas
-9	Pai Exigente	dad_a	2	30	enemy_appear_dad	enemy_attack_dad	intelligence	8	6	6	6	5		0	baixa	normal	super	generic	pai	2	início date
-10	Escada Rolante	escalator_a	2	40	enemy_appear_escalator	enemy_attack_escalator	guts	8	5	2	5	6		0	baixa	super	normal	shopping	escada	2	shopping
-11	Pote de Doces	open_jar_a	2	38	challenge_default	hit_default	---	1	5	5	5	5	hunger	100	super	normal	baixa	park	pote	2	casa/culinária/piquenique/festival
-12	Hot Dog Jones	jones_hotdog	2	0	challenge_default	hit_default	---	0	0	0	0	0		0	normal	normal	normal	park		2	parque
-13	Revelação Íntima	revelation_a	2	30	challenge_default	hit_default	---	0	5	5	5	5		0	normal	normal	super	generic		2	qualquer
-14	Discussão Metafísica	discussion_a	2	30	challenge_default	hit_default	---	0	5	5	5	5		0	baixa	normal	super	park		2	outdoors/ noite
+id	name	script name	level	max hp	appear sfx	attack sfx	attack attribute	attack power	guts	intelligence	charisma	endurance	gives status conditions	give status chance	guts effectivity	intelligence effectivity	charisma effectivity	location	sprite name	stage	tags	notes
+0	Bola de Futebol	ball_a	2	26	challenge_default	hit_default	guts	8	7	3	3	5		0	super	normal	baixa	park	bola	2	object	parque
+1	Valentão	bully_a	2	45	enemy_appear_bully	enemy_attack_bully	charisma	8	7	2	6	4		0	normal	baixa	super	generic	valentao	2	human, male, bully	caminho
+2	Coelhinho Ferido	bunny_a	2	30	enemy_appear_bunny	enemy_attack_bunny	intelligence	4	5	5	5	5	sad	70	baixa	normal	super	park	coelho	2	animal	parque/floresta
+3	Parente Chato	call_a	2	30	enemy_appear_call	enemy_attack_call	charisma	8	4	4	4	7		0	super	baixa	normal	generic	celular	2	object, machine	qualquer
+4	Tornado Misterioso	clothing_a	2	30	enemy_appear_clothing	enemy_attack_clothing	---	0	5	5	5	5	unclothed	100	normal	super	baixa	park	tornado_c_roupas	2	object, magical, mysteryous	outdoors
+5	Fotógrafo	photographer_a	2	30	enemy_appear_photographer	enemy_attack_photographer	charisma	8	5	5	5	5		0	super	normal	normal	shopping	fotografo	2	human, male	urbano
+6	Horda de Consumidores	sale_a	2	42	enemy_appear_sale	enemy_attack_sale	guts	8	6	3	3	2	injured	30	normal	baixa	super	shopping	multidao	2	human, male, female, horde	shopping
+7	Máquina de Comida	vending_a	2	38	enemy_appear_vending	enemy_attack_vending	guts	4	6	1	3	7	hunger	50	baixa	super	normal	generic	maquina salgadinhos	2	object, magical	urbano
+8	Vendedores Insistentes	vendor_a	2	50	enemy_appear_vendor	enemy_attack_vendor	intelligence	8	5	4	5	4		0	normal	super	normal	shopping	vendedores	2	human, male, female	urbano/lojas
+9	Pai Exigente	dad_a	2	30	enemy_appear_dad	enemy_attack_dad	intelligence	8	6	6	6	5		0	baixa	normal	super	generic	pai	2	human, male	início date
+10	Escada Rolante	escalator_a	2	40	enemy_appear_escalator	enemy_attack_escalator	guts	8	5	2	5	6		0	baixa	super	normal	shopping	escada	2	object	shopping
+11	Pote de Doces	open_jar_a	2	38	challenge_default	hit_default	---	1	5	5	5	5	hunger	100	super	normal	baixa	park	pote	2	object	casa/culinária/piquenique/festival
+12	Hot Dog Jones	jones_hotdog	2	0	challenge_default	hit_default	---	0	0	0	0	0		0	normal	normal	normal	park	hotdog_man	2	human, male, criminal	parque
+13	Ana	girl_ana	5	70	challenge_default	hit_default	guts	12	6	3	2	8		0	normal	normal	normal	shopping	actor(ana)	2	human, female	
+14	Beatrice	girl_beatrice	5	45	challenge_default	hit_default	intelligence	12	4	8	4	2		0	normal	normal	normal	shopping	actor(beatrice)	2	human, female	
+15	Clara	girl_claire	5	50	challenge_default	hit_default	charisma	12	4	4	7	4		0	normal	normal	normal	shopping	actor(clara)	2	human, female	
