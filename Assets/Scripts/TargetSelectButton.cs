@@ -15,6 +15,7 @@ public class TargetSelectButton : MonoBehaviour {
     UIController.instance.HideHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
     ActionsPanel.instance.turnIndicator.SetActive(false);
+    TheaterController.instance.SetCharacterChoosingAction(-1);
     VsnController.instance.GotCustomInput();
   }
 }

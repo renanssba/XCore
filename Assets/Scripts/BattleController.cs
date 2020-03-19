@@ -160,6 +160,7 @@ public class BattleController : MonoBehaviour {
         break;
     }
 
+    TheaterController.instance.SetCharacterChoosingAction(-1);
     UIController.instance.actionsPanel.EndActionSelect();
     VsnController.instance.GotCustomInput();
     UIController.instance.HideHelpMessagePanel();

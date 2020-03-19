@@ -13,6 +13,7 @@ namespace Command {
     }
 
     public static void WaitForCharacterInput(int currentPlayer) {
+      TheaterController.instance.SetCharacterChoosingAction(currentPlayer);
       UIController.instance.SetupCurrentCharacterUi(currentPlayer);
       UIController.instance.actionsPanel.Initialize(currentPlayer);
       VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;

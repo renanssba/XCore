@@ -20,6 +20,8 @@ public class Actor2D : MonoBehaviour {
 
   public Button targetSelectButton;
 
+  public GameObject choosingActionIndicator;
+
 
   const float attackAnimTime = 0.18f;
 
@@ -152,6 +154,11 @@ public class Actor2D : MonoBehaviour {
 
   public void SetBattleMode(bool value) {
     animator.SetBool("Battle", value);
+  }
+
+  public void SetChooseActionMode(bool value) {
+    animator.SetBool("Choosing Action", value);
+    choosingActionIndicator.SetActive(value);
   }
 
 

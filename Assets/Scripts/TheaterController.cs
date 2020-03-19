@@ -199,6 +199,15 @@ public class TheaterController : MonoBehaviour {
     });
   }
 
+  public void SetCharacterChoosingAction(int characterId) {
+    for(int i=0; i<3; i++) {
+      GetActorByIdInParty(i).SetChooseActionMode(false);
+    }
+    if(characterId >= 0 && characterId <=2) {
+      GetActorByIdInParty(characterId).SetChooseActionMode(true);
+    }
+  }
+
 
   public void FocusActors(Actor2D[] actorsToFocus) {
     if(actorsToFocus[0] == actorsToFocus[1]) {
