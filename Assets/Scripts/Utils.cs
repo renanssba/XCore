@@ -355,6 +355,18 @@ public class Utils {
     c.a = alpha;
     return c;
   }
+
+  public static string[] SeparateTags(string raw) {
+    if(string.IsNullOrEmpty(raw)) {
+      return new string[0];
+    }
+
+    string[] loadedTags = raw.Split(',');
+    for(int i=0; i<loadedTags.Length; i++) {
+      loadedTags[i] = loadedTags[i].Trim();
+    }
+    return loadedTags;
+  }
 }
 
 public static class MyExtensions {

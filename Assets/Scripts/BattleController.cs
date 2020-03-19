@@ -176,7 +176,7 @@ public class BattleController : MonoBehaviour {
       UIController.instance.SetHelpMessageText("Escolha um aliado para usar a habilidade:");
       UIController.instance.ShowHelpMessagePanel();
     }
-    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPartyMemberId()]);
+    Utils.SelectUiElement(UIController.instance.selectTargets[0]);
     UIController.instance.selectTargetPanel.SetActive(true);
   }
 
@@ -370,8 +370,13 @@ public class BattleController : MonoBehaviour {
           yield break;
         }
         break;
+      case SkillSpecialEffect.becomeEnemyTarget:
+        VsnSaveSystem.SetVariable("enemyAttackTargetId", partyMemberId);
+        break;
+      case SkillSpecialEffect.divertEnemyTarget:
+        VsnSaveSystem.SetVariable("enemyAttackTargetId", OtherPartyMemberId(partyMemberId));
+        break;
     }
-
     yield return new WaitForSeconds(0.5f);
 
 
@@ -380,6 +385,13 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+  public int OtherPartyMemberId(int id) {
+    if(id == 0) {
+      return 1;
+    }
+    return 0;
   }
 
 
@@ -545,13 +557,16 @@ public class BattleController : MonoBehaviour {
 
       if(selectedActionType[targetId] == TurnActionType.defend) {
         VsnAudioManager.instance.PlaySfx("damage_block");
-      } else if (effectivity > 1f){
+      } else if(effectivity > 1f) {
         VsnAudioManager.instance.PlaySfx("damage_effective");
-      }else if(effectivity < 1f){
+      } else if(effectivity < 1f) {
         VsnAudioManager.instance.PlaySfx("damage_ineffective");
-      }else{
+      } else {
         VsnAudioManager.instance.PlaySfx("damage_default");
       }
+
+      TheaterController.instance.Screenshake();
+
       targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
       yield return new WaitForSeconds(1f);
 
@@ -778,10 +793,7 @@ public class BattleController : MonoBehaviour {
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
-      loadedTags = dic["tags"].Split(',');
-      for(int i=0; i<loadedTags.Length; i++) {
-        loadedTags[i] = loadedTags[i].Trim();
-      }
+      loadedTags = Utils.SeparateTags(dic["tags"]);
 
       allDateEvents.Add(new DateEvent {
         id = int.Parse(dic["id"]),
@@ -879,11 +891,13 @@ public class BattleController : MonoBehaviour {
         newSkill.activationTrigger = PassiveSkillActivationTrigger.none;
       }
       if(!string.IsNullOrEmpty(entry["trigger condition"])) {
-        newSkill.triggerCondition = entry["trigger condition"].Trim();
+        newSkill.triggerConditions = entry["trigger condition"].Split(',');
       }
       if(!string.IsNullOrEmpty(entry["trigger chance"])) {
         newSkill.triggerChance = float.Parse(entry["trigger chance"]);
       }
+
+      newSkill.tags = Utils.SeparateTags(entry["tags"]);
 
       if(!string.IsNullOrEmpty(entry["heal hp"])) {
         newSkill.healHp = int.Parse(entry["heal hp"]);

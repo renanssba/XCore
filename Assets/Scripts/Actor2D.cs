@@ -161,6 +161,10 @@ public class Actor2D : MonoBehaviour {
     choosingActionIndicator.SetActive(value);
   }
 
+  public void SetAttackMode(bool value) {
+    animator.SetBool("Attacking", value);
+  }
+
 
   public void CharacterAttackAnim() {
     renderers[0].transform.DOMoveX(0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
@@ -345,14 +349,10 @@ public class Actor2D : MonoBehaviour {
 
 
   public void SetFocusedSortingLayer(bool value) {
-    foreach(SpriteRenderer s in renderers)
-    {
-      if(value && s.sortingOrder < 100)
-      {
+    foreach(SpriteRenderer s in renderers) {
+      if(value && s.sortingOrder < 100) {
         s.sortingOrder += 100;
-      }
-      else if(!value && s.sortingOrder >= 100)
-      {
+      } else if(!value && s.sortingOrder >= 100) {
         s.sortingOrder -= 100;
       }
     }

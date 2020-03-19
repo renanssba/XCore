@@ -234,8 +234,11 @@ public class TheaterController : MonoBehaviour {
     if(focusedCharacters.Length == 2) {
       focusedCharacters[0].transform.DOLocalMove(focusPositionForTwo[0], focusAnimationDuration);
       focusedCharacters[1].transform.DOLocalMove(focusPositionForTwo[1], focusAnimationDuration);
+      focusedCharacters[0].SetAttackMode(true);
+      focusedCharacters[1].SetAttackMode(true);
     } else {
       focusedCharacters[0].transform.DOLocalMove(focusPositionForOne, focusAnimationDuration);
+      focusedCharacters[0].SetAttackMode(true);
     }
   }
 
@@ -243,6 +246,7 @@ public class TheaterController : MonoBehaviour {
     focusShade.DOFade(0f, focusAnimationDuration).OnComplete( ()=> {
       for(int i = 0; i < focusedCharacters.Length; i++) {
         focusedCharacters[i].SetFocusedSortingLayer(false);
+        focusedCharacters[i].SetAttackMode(false);
       }
     } );
     PositionActorsBack();
@@ -294,5 +298,12 @@ public class TheaterController : MonoBehaviour {
 
   public void MoveCamera(Vector3 newPosition, float time) {
     mainCamera.transform.DOMove(newPosition, time);
+  }
+
+  public void Screenshake() {
+    DOTween.Kill(transform);
+    transform.DOShakeRotation(0.3f, 1f).OnComplete( ()=>{
+      transform.position = Vector3.zero;
+    } );
   }
 }

@@ -48,6 +48,7 @@ public class ItemDatabase : MonoBehaviour {
       if(entry["sells_in_store"] == "yes"){
         itemsForSale.Add(newItem.id);
       }
+      newItem.tags = Utils.SeparateTags(entry["tags"]);
       database.Add(newItem);
     }
   }

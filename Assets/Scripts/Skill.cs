@@ -27,13 +27,17 @@ public enum SkillSpecialEffect {
   damageGivenBonus,
   raiseMaxHp,
   raiseMaxSp,
-  guardian,
+  becomeEnemyTarget,
+  divertEnemyTarget,
   none
 }
 
 public enum PassiveSkillActivationTrigger {
   enemy_appears,
   turn_started,
+  before_enemy_attack,
+  after_enemy_attack,
+  after_action,
   none
 }
 
@@ -118,8 +122,10 @@ public class Skill {
   public int spCost;
 
   public PassiveSkillActivationTrigger activationTrigger;
-  public string triggerCondition;
+  public string[] triggerConditions;
   public float triggerChance;
+
+  public string[] tags;
 
 
   public string GetPrintableName() {

@@ -34,6 +34,9 @@ public class Item {
   public int price;
   public Sprite sprite;
 
+  public string[] tags;
+
+
   public Item(){
     types = new List<ItemType>();
   }

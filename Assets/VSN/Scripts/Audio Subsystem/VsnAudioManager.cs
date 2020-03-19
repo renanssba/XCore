@@ -82,7 +82,7 @@ public class VsnAudioManager : MonoBehaviour {
     if(clip == null) {
       clip = Resources.Load<AudioClip>(clipName);
       if(clip == null) {
-        Debug.LogError("Error loading audio clip: " + clipName + ". Please check the provided path.");
+        Debug.LogWarning("Error loading audio clip: " + clipName + ". Please check the provided path.");
       }
     }
     return clip;
@@ -199,7 +199,7 @@ public class VsnAudioManager : MonoBehaviour {
   public void PlayAmbience(string clipName){
     AudioClip audioClip = GetAudioClip(clipName);
     if(audioClip == null){
-      Debug.LogError("Error loading " + clipName + " ambience sfx. Please check its path");
+      Debug.LogWarning("Error loading " + clipName + " ambience sfx. Please check its path");
       return;
     }
     AudioSource s = GetAvailableAmbienceSource();

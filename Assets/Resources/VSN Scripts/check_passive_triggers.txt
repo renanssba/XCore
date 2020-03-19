@@ -1,5 +1,10 @@
-﻿goto *arg1
+﻿for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked arg1
+endfor
+end_script
 
+
+goto *arg1
 
 
 waypoint enemy_appears
@@ -15,12 +20,20 @@ for currentSkillChecked #currentCoupleSkillsCount
 endfor
 end_script
 
-waypoint battle_ended
+waypoint enemy_defeated
 for currentSkillChecked #currentCoupleSkillsCount
   check_skill_activation currentSkillChecked "battle_ended"
 endfor
 end_script
 
+waypoint before_enemy_attack
+for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked "before_enemy_attack"
+endfor
+end_script
 
-waypoint receive_status_condition
+waypoint after_enemy_attack
+for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked "after_enemy_attack"
+endfor
 end_script

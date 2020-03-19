@@ -93,6 +93,7 @@ for currentDateEvent #dateLength
     check_action_skip currentPlayerTurn
     character_action_description currentPlayerTurn
     character_action currentPlayerTurn
+    goto_script "check_passive_triggers" "after_action"
     wait 0.5
   endfor
 
@@ -106,7 +107,6 @@ for currentDateEvent #dateLength
     play_sfx "ui_success"
     wait 2
 
-    goto_script "check_passive_triggers" "battle_ended"
     goto_script "check_passive_triggers" "enemy_defeated"
 
     show_date_ui false
@@ -141,7 +141,9 @@ for currentDateEvent #dateLength
   // enemy turn
   set_var currentPlayerTurn 0
   enemy_attack_description
+  goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
+  goto_script "check_passive_triggers" "after_enemy_attack"
 
   if #currentHp <= 0
     goto fail_date
@@ -178,9 +180,6 @@ challenge_result false
 update_ui
 play_sfx "ui_fail"
 wait 2
-
-goto_script "check_passive_triggers" "battle_ended"
-
 enable_input false
 say "" "\couple decidem que o encontro não está dando certo."
 say "\boy" "Podemos continuar esse encontro outro dia..."
