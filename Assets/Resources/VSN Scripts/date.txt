@@ -36,11 +36,11 @@ for currentDateEvent #dateLength
   move_camera "battle_view" 0.5
   play_music "battle1_intro" "battle1_loop"
   wait 0.8
-  
+
   theater_animation "enemy_enters"
   set_var currentBattleTurn -1
   wait 1.2
-  
+
   goto_script "\currentEventName" event_statement
   // if currentDateEvent == 0
     // say "\boy" "E agora, o que faremos?"
@@ -49,10 +49,10 @@ for currentDateEvent #dateLength
     // say "\girl" "Fica comigo!"
     // say "\boy" "Vamos lutar juntos."
   // endif
-  
+
   show_date_ui true
   wait 0.5
-  
+
   goto_script "check_passive_triggers" "enemy_appears"
 
   // if tutorial_date2 == 0
@@ -61,10 +61,10 @@ for currentDateEvent #dateLength
 
 
   waypoint start_new_turn
-  
+
   add_var currentBattleTurn 1
   goto_script "check_passive_triggers" "turn_started"
-  
+
   // receive effects from conditions (like take poison damage)
   for currentPlayerTurn #partyLength
     for currentStatusCondition #currentPlayerStatusConditionsCount
@@ -73,18 +73,18 @@ for currentDateEvent #dateLength
   endfor
   // end turn (to pass time on status conditions)
   end_turn
-  
-  
+
+
   if #currentHp <= 0
     goto fail_date
   endif
-  
+
 
   // character action inputs
   for currentPlayerTurn #partyLength
     action_input currentPlayerTurn
   endfor
-  
+
   set_current_character_turn -1
   wait 0.5
 
@@ -95,7 +95,7 @@ for currentDateEvent #dateLength
     character_action currentPlayerTurn
     wait 0.5
   endfor
-  
+
   // if oponent is defeated, go to new event
   if #currentChallengeHp <= 0
     goto_script "\currentEventName" defeated
@@ -105,6 +105,10 @@ for currentDateEvent #dateLength
     update_ui
     play_sfx "ui_success"
     wait 2
+
+    goto_script "check_passive_triggers" "battle_ended"
+    goto_script "check_passive_triggers" "enemy_defeated"
+
     show_date_ui false
     wait 0.5
     fade_music 0 1
@@ -142,7 +146,7 @@ for currentDateEvent #dateLength
   if #currentHp <= 0
     goto fail_date
   endif
-  
+
   goto start_new_turn
 endfor
 
@@ -174,6 +178,9 @@ challenge_result false
 update_ui
 play_sfx "ui_fail"
 wait 2
+
+goto_script "check_passive_triggers" "battle_ended"
+
 enable_input false
 say "" "\couple decidem que o encontro não está dando certo."
 say "\boy" "Podemos continuar esse encontro outro dia..."

@@ -15,7 +15,12 @@ for currentSkillChecked #currentCoupleSkillsCount
 endfor
 end_script
 
+waypoint battle_ended
+for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation currentSkillChecked "battle_ended"
+endfor
+end_script
+
 
 waypoint receive_status_condition
 end_script
-

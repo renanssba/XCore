@@ -270,7 +270,15 @@ public class BattleController : MonoBehaviour {
       VsnAudioManager.instance.PlaySfx("action_magic_arrow");
     }
 
-    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
+    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
+
+    if (effectivity > 1f) {
+      VsnAudioManager.instance.PlaySfx("damage_effective");
+    } else if (effectivity < 1f) {
+      VsnAudioManager.instance.PlaySfx("damage_ineffective");
+    } else {
+      VsnAudioManager.instance.PlaySfx("damage_default");
+    }
 
     TheaterController.instance.enemyActor.ShineRed();
     TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
@@ -315,7 +323,7 @@ public class BattleController : MonoBehaviour {
     DateEvent currentEvent = GetCurrentDateEvent();
     VsnAudioManager.instance.PlaySfx("heal_default");
 
-    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
+    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
     VsnUIManager.instance.PassBattleDialog();
 
     switch(usedSkill.skillSpecialEffect) {
@@ -362,7 +370,7 @@ public class BattleController : MonoBehaviour {
         }
         break;
     }
-    
+
     yield return new WaitForSeconds(0.5f);
 
 
@@ -472,7 +480,7 @@ public class BattleController : MonoBehaviour {
       VsnArgument[] args = new VsnArgument[1];
       args[0] = new VsnString("flee_fail");
       Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
-    }    
+    }
   }
 
 
@@ -522,7 +530,7 @@ public class BattleController : MonoBehaviour {
 
     VsnAudioManager.instance.PlaySfx(currentEvent.attackSfxName);
 
-    yield return new WaitForSeconds(attackAnimationTime + 0.4f);
+    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
 
     TheaterController.instance.ShineCharacter(targetId);
 
@@ -531,7 +539,19 @@ public class BattleController : MonoBehaviour {
       if(selectedActionType[targetId] == TurnActionType.defend) {
         targetActor.ShowDefendHitParticle();
       }
-      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, partyMembers[targetId].DamageTakenMultiplier(currentEvent.attackAttribute));
+
+      float effectivity = partyMembers[targetId].DamageTakenMultiplier(currentEvent.attackAttribute);
+
+      if(selectedActionType[targetId] == TurnActionType.defend) {
+        VsnAudioManager.instance.PlaySfx("damage_block");
+      } else if (effectivity > 1f){
+        VsnAudioManager.instance.PlaySfx("damage_effective");
+      }else if(effectivity < 1f){
+        VsnAudioManager.instance.PlaySfx("damage_ineffective");
+      }else{
+        VsnAudioManager.instance.PlaySfx("damage_default");
+      }
+      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
       yield return new WaitForSeconds(1f);
 
       VsnUIManager.instance.PassBattleDialog();
@@ -640,7 +660,7 @@ public class BattleController : MonoBehaviour {
 
   public void GenerateDateEnemies() {
     List<int> selectedEnemies = new List<int>();
-    
+
     dateSegments = new DateEvent[dateLength];
     for(int i = 0; i < dateLength; i++) {
       int selectedId = GetNewEnemy(selectedEnemies);
@@ -796,7 +816,7 @@ public class BattleController : MonoBehaviour {
     }
     return 1f;
   }
-  
+
 
   public void LoadAllSkills() {
     SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(skillsFile, 1);
@@ -847,7 +867,7 @@ public class BattleController : MonoBehaviour {
       } else {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
-      
+
       newSkill.skillSpecialEffect = GetSkillEffectByString(entry["skill special effect"]);
       newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
@@ -953,7 +973,7 @@ public class BattleController : MonoBehaviour {
     foreach(ActionSkin currentActionSkin in allActionSkins) {
       if(currentActionSkin.name == name) {
         return currentActionSkin;
-      }      
+      }
     }
     return null;
   }

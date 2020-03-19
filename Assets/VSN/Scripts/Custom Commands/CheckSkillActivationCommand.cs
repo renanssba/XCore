@@ -41,6 +41,10 @@ namespace Command {
             return;
           }
           break;
+        case "battle_ended":
+        case "enemy_defeated":
+          ActivatePassiveSkill(skillChecked, skillId);
+          break;
       }
     }
 
@@ -58,8 +62,7 @@ namespace Command {
           partyMemberId = 1;
           break;
         case SkillAffectsCharacter.couple:
-          partyMemberId = 2;
-          break;
+          return;
       }
 
       VsnController.instance.state = ExecutionState.WAITING;
