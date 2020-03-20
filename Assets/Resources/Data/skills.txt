@@ -13,10 +13,10 @@ id	name	description	type	range	power	sp cost	skill special effect	heal hp	heal s
 11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy		1	buffDebuff				100	hunger	3				fragrance	charisma		
 12	Cozinheiro	Duplica o HP recuperado por itens de cura	passive	all_allies	1		healingItemBonus										cook	charisma		
 13	Encorajar	Aumenta a Valentia em 3 (dura 3 turnos) e cura Tristeza	active	one_ally	3	1	buffDebuff			sad	100	encouraged	3				gutsy aura	guts		
-14	Aura Shounen	Deixa um inimigo tonto por 3 turnos	active	one_enemy							100	dizzyness	3				gutsy aura	guts		
+14	Aura Shounen	Deixa um inimigo tonto por 3 turnos	active	one_enemy			buffDebuff				100	dizzyness	3				gutsy aura	guts		
 15	Guardiã	Defender dá 70% de chance de receber ataque no lugar do aliado	passive	self			becomeEnemyTarget							before_enemy_attack	ally_targeted, defending	70	shield	guts		
-16	Ofensa Rebuscada	Causa confusão em um oponente por 3 turnos	active	one_enemy		1					100	confusion	3				dialog	intelligence		
-17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy		1					100	cursed	3				cursed	intelligence		
+16	Ofensa Rebuscada	Causa confusão em um oponente por 3 turnos	active	one_enemy		1	buffDebuff				100	confusion	3				dialog	intelligence		
+17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy		1	buffDebuff				100	cursed	3				cursed	intelligence		
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies	0.35		fleeChanceBonus										run	intelligence		
 19	Beijo de Cura	Cura 16 HP do casal	active	one_ally		1	buffDebuff	16									heart-plus	charisma		
 20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally		1	buffDebuff			sad, fear, confusion, dizzyness							charmed	charisma		

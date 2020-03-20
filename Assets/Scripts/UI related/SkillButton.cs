@@ -24,7 +24,7 @@ public class SkillButton : MonoBehaviour {
 
   public void UpdateUI() {
     if(skill != null) {
-      if(skill.type == SkillType.active) {
+      if(skill.type == SkillType.active || skill.type == SkillType.attack) {
         bg.color = CoupleStatusScreen.instance.activeSkillButtonColor;
       } else {
         bg.color = CoupleStatusScreen.instance.passiveSkillButtonColor;

@@ -14,8 +14,9 @@ public class Actor2D : MonoBehaviour {
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
 
-  public DateEvent dateChallenge;
-  public Person person;
+  public Battler battler;
+  public Enemy enemy;
+  //public Person person;
   public Animator animator;
 
   public Button targetSelectButton;
@@ -30,46 +31,54 @@ public class Actor2D : MonoBehaviour {
 
 
   [ContextMenu("Print Material Property Block")]
-  public void PrintMaterialPropertyBlock(){
-      print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
-      print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
+  public void PrintMaterialPropertyBlock() {
+    print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
+    print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
   }
 
   void Awake() {
-      materialProperties = new MaterialPropertyBlock();
+    materialProperties = new MaterialPropertyBlock();
   }
 
 
   public void SetCharacter(Person p) {
-    person = p;
-    UpdateCharacterGraphics();
+    battler = p;
+    UpdateGraphics();
+  }
+
+  public void UpdateGraphics() {
+    if(battler.GetType() == typeof(Person)) {
+      UpdateCharacterGraphics();
+    } else if(battler.GetType() == typeof(Enemy)) {
+      // do nothing
+    }
   }
 
   public void UpdateCharacterGraphics() {
-    if(person.id == 10) {
+    if(battler.id == 10) {
       return;
     }
 
-    if(!string.IsNullOrEmpty(person.name)) {
-      if(person.CurrentStatusConditionStacks("sad") == 0) {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
+    if(!string.IsNullOrEmpty(battler.name)) {
+      if(battler.CurrentStatusConditionStacks("sad") == 0) {
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.body);
       } else {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.sad);
-      }      
-      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.underwear);
-      switch(person.CurrentStatusConditionStacks("unclothed")) {
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.sad);
+      }
+      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.underwear);
+      switch(battler.CurrentStatusConditionStacks("unclothed")) {
         case 0:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.casual);
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
           break;
         case 1:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.unclothed);
+          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.unclothed);
           break;
         case 2:
           renderers[2].sprite = null;
           break;
       }
-      renderers[3].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.bruises);
-      if(person.CurrentStatusConditionStacks("injured") > 0) {
+      renderers[3].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
+      if(battler.CurrentStatusConditionStacks("injured") > 0) {
         renderers[3].gameObject.SetActive(true);
       } else {
         renderers[3].gameObject.SetActive(false);
@@ -83,11 +92,11 @@ public class Actor2D : MonoBehaviour {
   public void SetClothing(string clothingType) {
     switch(clothingType) {
       case "uniform":
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.school);
         break;
       case "casual":
       default:
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.casual);
+        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
         break;
     }
   }
@@ -106,13 +115,13 @@ public class Actor2D : MonoBehaviour {
 
   public void SetAuraVisibility() {
     Debug.LogWarning("SETTING AURA VISIBILITY");
-    if(person.CurrentStatusConditionStacks("encouraged") > 0) {
-      ShowAura( ResourcesManager.instance.attributeColor[(int)Attributes.guts] );
-    } else if(person.CurrentStatusConditionStacks("focused") > 0) {
+    if(battler.CurrentStatusConditionStacks("encouraged") > 0) {
+      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.guts]);
+    } else if(battler.CurrentStatusConditionStacks("focused") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.intelligence]);
-    } else if(person.CurrentStatusConditionStacks("inspired") > 0) {
+    } else if(battler.CurrentStatusConditionStacks("inspired") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.charisma]);
-    } else if(person.CurrentStatusConditionStacks("blessed") > 0) {
+    } else if(battler.CurrentStatusConditionStacks("blessed") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.endurance]);
     } else {
       Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
@@ -132,13 +141,14 @@ public class Actor2D : MonoBehaviour {
     buffAuraRenderers[0].gameObject.SetActive(true);
   }
 
-  public void SetEnemy(DateEvent currentEvent) {
-    dateChallenge = currentEvent;
+  public void SetEnemy(Enemy currentEvent) {
+    enemy = currentEvent;
+    battler = currentEvent;
   }
 
   public void SetEnemyGraphics() {
-    if(!string.IsNullOrEmpty(dateChallenge.spriteName)) {
-      renderers[0].sprite = LoadSprite("Enemies/" + dateChallenge.spriteName);
+    if(!string.IsNullOrEmpty(enemy.spriteName)) {
+      renderers[0].sprite = LoadSprite("Enemies/" + enemy.spriteName);
     } else {
       gameObject.SetActive(false);
     }
@@ -190,7 +200,7 @@ public class Actor2D : MonoBehaviour {
       r.GetPropertyBlock(materialProperties);
       materialProperties.SetColor("_FlashColor", Color.red);
       r.SetPropertyBlock(materialProperties);
-    }    
+    }
     FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
   }
 
@@ -225,7 +235,7 @@ public class Actor2D : MonoBehaviour {
         r.GetPropertyBlock(materialProperties);
         materialProperties.SetFloat("_FlashAmount", currentFlashPower);
         r.SetPropertyBlock(materialProperties);
-      }).OnComplete(()=> {
+      }).OnComplete(() => {
         r.GetPropertyBlock(materialProperties);
         materialProperties.SetFloat("_FlashAmount", 0f);
         r.SetPropertyBlock(materialProperties);
@@ -239,6 +249,9 @@ public class Actor2D : MonoBehaviour {
 
 
   public void ShowWeaknessCard(bool activate) {
+    if(enemy == null) {
+      return;
+    }
     weaknessCardRenderer.gameObject.SetActive(activate);
     if(activate) {
       VsnAudioManager.instance.PlaySfx("relationship_up");
@@ -247,13 +260,13 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetWeaknessCardText() {
-    if(dateChallenge == null) {
+    if(enemy == null) {
       return;
     }
 
     string text = "";
-    Attributes[] weak = dateChallenge.GetWeaknesses();
-    Attributes[] resistant = dateChallenge.GetResistances();
+    Attributes[] weak = enemy.GetWeaknesses();
+    Attributes[] resistant = enemy.GetResistances();
 
     if(weak.Length > 0) {
       text += "Fraqueza:\n";
@@ -289,7 +302,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowEmpowerParticle(Attributes attribute, int value) {
-    string particleString = "+" + value + " "+ Lean.Localization.LeanLocalization.GetTranslationText("attribute/"+ attribute.ToString());
+    string particleString = "+" + value + " " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + attribute.ToString());
     Color particleColor = ResourcesManager.instance.attributeColor[(int)attribute];
 
     ShowParticleAnimation(particleString, particleColor);
@@ -306,7 +319,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowStatusConditionParticle(StatusCondition statusCondition) {
-    ShowParticleAnimationWithSprite("<size=50%>"+statusCondition.GetPrintableName()+"</size>", Color.gray, statusCondition.sprite);
+    ShowParticleAnimationWithSprite("<size=50%>" + statusCondition.GetPrintableName() + "</size>", Color.gray, statusCondition.sprite);
   }
 
   public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {
@@ -335,10 +348,10 @@ public class Actor2D : MonoBehaviour {
   public void ClickedTargetSelectButton() {
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
 
-    Debug.LogWarning("clicked person: " + person.name);
+    Debug.LogWarning("clicked person: " + battler.name);
 
-    for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
-      if(BattleController.instance.partyMembers[i] == person) {
+    for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
+      if(BattleController.instance.partyMembers[i] == battler) {
         BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = i;
       }
     }
@@ -356,6 +369,6 @@ public class Actor2D : MonoBehaviour {
         s.sortingOrder -= 100;
       }
     }
-    
+
   }
 }

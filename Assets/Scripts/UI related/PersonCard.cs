@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,6 +88,9 @@ public class PersonCard : MonoBehaviour {
 
     /// SKILLS
     Skill[] allSkills = person.GetAllCharacterSpecificSkills(relationshipId);
+
+    Array.Sort(allSkills, (a, b) => a.type.CompareTo(b.type));
+
     for(int i=0; i<skillButtons.Length; i++) {
       if(i < allSkills.Length) {
         skillButtons[i].Initialize(this, allSkills[i]);

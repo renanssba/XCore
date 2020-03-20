@@ -27,6 +27,8 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions datingPeoplePanel;
   public Slider partyHpSlider;
   public TextMeshProUGUI partyHpText;
+  public Slider enemyHpSlider;
+  public TextMeshProUGUI difficultyText;
 
   public ScreenTransitions dateProgressPanel;
   public TextMeshProUGUI dateTitleText;
@@ -49,6 +51,9 @@ public class UIController : MonoBehaviour {
   public InteractionPin[] interactionPins;
 
   public CoupleStatusScreen coupleStatusScreen;
+
+
+  public Transform enemyStatusConditionsContent;
 
 
   public GirlInteractionScreen girlInteractionScreen;
@@ -104,13 +109,25 @@ public class UIController : MonoBehaviour {
       }
     }
     ShowDateProgressUI();
+
+    if(BattleController.instance.GetCurrentEnemy() != null) {
+      BattleController.instance.GetCurrentEnemy().UpdateStatusConditions();
+    }
   }
 
-  public void AnimateHpChange(int initialHp, int finalHp) {
+
+  public void AnimatePartyHpChange(int initialHp, int finalHp) {
     float currentShownHp = initialHp;
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
       partyHpSlider.value = currentShownHp;
       partyHpText.text = ((int)currentShownHp).ToString();
+    } );    
+  }
+
+  public void AnimateEnemyHpChange(int initialHp, int finalHp) {
+    float currentShownHp = initialHp;
+    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
+      enemyHpSlider.value = currentShownHp;
     } );    
   }
 

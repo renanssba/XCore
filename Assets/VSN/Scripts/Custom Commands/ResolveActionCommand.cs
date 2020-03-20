@@ -15,7 +15,7 @@ namespace Command {
 
 
     public void ResolveAction(){
-      DateEvent currentEvent = BattleController.instance.GetCurrentDateEvent();
+      Enemy currentEvent = BattleController.instance.GetCurrentEnemy();
       int attributeToUse;
       //int result = 0;
 

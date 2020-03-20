@@ -8,12 +8,12 @@ namespace Command {
   public class ActivateStatusConditionEffectCommand : VsnCommand {
 
     public override void Execute() {
-      Person p = BattleController.instance.partyMembers[(int)args[0].GetNumberValue()];
-      if(p == null) {
+      Battler battler = BattleController.instance.GetBattlerByTargetId((int)args[0].GetNumberValue());
+      if(battler == null) {
         Debug.LogWarning("No party member found in that position.");
         return;
       }
-      p.ActivateStatusConditionEffect((int)args[1].GetNumberValue());
+      battler.ActivateStatusConditionEffect((int)args[1].GetNumberValue());
     }
 
 

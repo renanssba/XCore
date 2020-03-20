@@ -48,7 +48,7 @@ namespace Command {
 
         if(condition.StartsWith("enemy_has_tag")) {
           conditionArgument = GetArgument(condition);
-          if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentDateEvent().tags)) {
+          if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemy().tags)) {
             return;
           }
         }

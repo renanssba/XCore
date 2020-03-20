@@ -45,14 +45,14 @@ public class TheaterController : MonoBehaviour {
 
 
   public void SpawnEnemyActor() {
-    DateEvent dateEvent = BattleController.instance.GetCurrentDateEvent();
-    BattleController.instance.difficultyText.text = "<size=68>NV </size>" + dateEvent.level;
+    Enemy dateEvent = BattleController.instance.GetCurrentEnemy();
+    UIController.instance.difficultyText.text = "<size=68>NV </size>" + dateEvent.level;
 
     GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + dateEvent.scriptName);
     GameObject spawnedEnemy;
 
     if(prefabToSpawn == null) {
-      Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName+". Using default prefab");
+      Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName + ". Using default prefab");
       spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, challengePosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
       enemyActor.SetEnemy(dateEvent);
@@ -69,20 +69,6 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void ShineCharacter(int actorId) {
-    switch(actorId) {
-      case 0:
-        mainActor.ShineRed();
-        break;
-      case 1:
-        supportActor.ShineRed();
-        break;
-      case 2:
-        angelActor.ShineRed();
-        break;
-    }
-  }
-
   public Actor2D GetActorByIdInParty(int actorId) {
     switch(actorId) {
       case 0:
@@ -97,15 +83,18 @@ public class TheaterController : MonoBehaviour {
     return null;
   }
 
-  public Actor2D GetActorByPerson(Person p) {
-    if(mainActor.person == p) {
+  public Actor2D GetActorByBattlingCharacter(Battler character) {
+    if(mainActor.battler == character) {
       return mainActor;
     }
-    if(supportActor.person == p) {
+    if(supportActor.battler == character) {
       return supportActor;
     }
-    if(angelActor.person == p) {
+    if(angelActor.battler == character) {
       return angelActor;
+    }
+    if(enemyActor.battler == character) {
+      return enemyActor;
     }
     return null;
   }
@@ -116,7 +105,7 @@ public class TheaterController : MonoBehaviour {
 
     ClearBattle();
 
-    mainActor.transform.localPosition = supportPosition -distance;
+    mainActor.transform.localPosition = supportPosition - distance;
     supportActor.transform.localPosition = mainPosition;
     angelActor.transform.localPosition = angelPosition - distance;
 
@@ -184,12 +173,13 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void EnemyEntersScene() {
-    DateEvent currentChallenge = BattleController.instance.GetCurrentDateEvent();
+    Enemy currentChallenge = BattleController.instance.GetCurrentEnemy();
 
     SpawnEnemyActor();
 
     currentChallenge.hp = currentChallenge.maxHp;
-    
+    currentChallenge.RemoveAllStatusConditions();
+
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
@@ -200,10 +190,10 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void SetCharacterChoosingAction(int characterId) {
-    for(int i=0; i<3; i++) {
+    for(int i = 0; i < 3; i++) {
       GetActorByIdInParty(i).SetChooseActionMode(false);
     }
-    if(characterId >= 0 && characterId <=2) {
+    if(characterId >= 0 && characterId <= 2) {
       GetActorByIdInParty(characterId).SetChooseActionMode(true);
     }
   }
@@ -216,7 +206,7 @@ public class TheaterController : MonoBehaviour {
     }
     focusedCharacters = actorsToFocus;
 
-    for(int i=0; i<2; i++) {
+    for(int i = 0; i < 2; i++) {
       actorsToFocus[i].SetFocusedSortingLayer(true);
     }
     PositionActorsInFocus();
@@ -224,7 +214,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void FocusActor(Actor2D actorToFocus) {
-    focusedCharacters = new Actor2D[] { actorToFocus};
+    focusedCharacters = new Actor2D[] { actorToFocus };
     actorToFocus.SetFocusedSortingLayer(true);
     PositionActorsInFocus();
     focusShade.DOFade(0.5f, focusAnimationDuration);
@@ -243,12 +233,12 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void UnfocusActors() {
-    focusShade.DOFade(0f, focusAnimationDuration).OnComplete( ()=> {
+    focusShade.DOFade(0f, focusAnimationDuration).OnComplete(() => {
       for(int i = 0; i < focusedCharacters.Length; i++) {
         focusedCharacters[i].SetFocusedSortingLayer(false);
         focusedCharacters[i].SetAttackMode(false);
       }
-    } );
+    });
     PositionActorsBack();
   }
 
@@ -274,13 +264,13 @@ public class TheaterController : MonoBehaviour {
 
 
   public void InitializeChallengeLevelAndHp() {
-    BattleController.instance.enemyHpSlider.maxValue = BattleController.instance.GetCurrentDateEvent().maxHp;
-    BattleController.instance.enemyHpSlider.value = BattleController.instance.enemyHpSlider.maxValue;
-    BattleController.instance.enemyHpSlider.gameObject.SetActive(true);
+    UIController.instance.enemyHpSlider.maxValue = BattleController.instance.GetCurrentEnemy().maxHp;
+    UIController.instance.enemyHpSlider.value = UIController.instance.enemyHpSlider.maxValue;
+    UIController.instance.enemyHpSlider.gameObject.SetActive(true);
   }
 
   public void EnemyLeavesScene() {
-    BattleController.instance.enemyHpSlider.gameObject.SetActive(false);
+    UIController.instance.enemyHpSlider.gameObject.SetActive(false);  
 
     enemyActor.ShowWeaknessCard(false);
 
@@ -293,7 +283,7 @@ public class TheaterController : MonoBehaviour {
 
 
   public void SetLocation(string place) {
-    bgRenderer.sprite = Resources.Load<Sprite>("Bg/"+place);
+    bgRenderer.sprite = Resources.Load<Sprite>("Bg/" + place);
   }
 
   public void MoveCamera(Vector3 newPosition, float time) {
@@ -302,8 +292,8 @@ public class TheaterController : MonoBehaviour {
 
   public void Screenshake() {
     DOTween.Kill(transform);
-    transform.DOShakeRotation(0.3f, 1f).OnComplete( ()=>{
+    transform.DOShakeRotation(0.3f, 1f).OnComplete(() => {
       transform.position = Vector3.zero;
-    } );
+    });
   }
 }

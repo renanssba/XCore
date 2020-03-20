@@ -18,15 +18,10 @@ public enum PersonState {
 
 
 [System.Serializable]
-public class Person {
+public class Person : Battler {
 
-  public string name;
   public bool isMale;
   public bool isHuman = true;
-
-  public PersonState state = PersonState.unrevealed;
-
-  public int[] attributes;
 
   protected int maxSp;
   public int sp;
@@ -37,16 +32,12 @@ public class Person {
   public Inventory inventory;
   public Inventory giftsReceived;
 
-  public List<StatusCondition> statusConditions;
-
-  public int id;
   public int faceId;
 
 
   public Person() {
     inventory = new Inventory();
     giftsReceived = new Inventory();
-    statusConditions = new List<StatusCondition>();
     inventory.owner = this;
     giftsReceived.owner = this;
     maxSp = 3;
@@ -70,49 +61,13 @@ public class Person {
     }
     attValues = attValues.OrderBy(x => Random.value).ToList();
 
-    state = PersonState.unrevealed;
-
     favoriteMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
     mostHatedMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
 
-    //if (isMale) {
-    //  faceId = Random.Range(0, 5);
-    //} else {
-    //  faceId = 5 + Random.Range(0, 5);
-    //}
     id = personId;
     faceId = personId;
   }
 
-  public int AttributeValue(int att){
-    if(attributes == null) {
-      return 0;
-    }
-    int sum = attributes[att];
-    if(statusConditions != null) {
-      foreach(StatusCondition sc in statusConditions) {
-        sum += sc.AttributeBonus(att);
-      }
-    }
-    return Mathf.Max(sum, 0);
-  }
-
-
-  public bool CanExecuteAction(TurnActionType action) {
-    switch(action) {
-      case TurnActionType.defend:
-        if(CurrentStatusConditionStacks("angry") > 0) {
-          return false;
-        }
-        break;
-      case TurnActionType.useSkill:
-        if(CurrentStatusConditionStacks("fear") > 0) {
-          return false;
-        }
-        break;
-    }
-    return true;
-  }
 
   public bool CanExecuteSkill(Skill skillToUse) {
     if(sp < skillToUse.spCost) {
@@ -124,30 +79,6 @@ public class Person {
     return true;
   }
 
-
-  public float DamageMultiplier() {
-    float modifier = 1f;
-    if(statusConditions != null) {
-      foreach(StatusCondition sc in statusConditions) {
-        modifier *= sc.DamageMultiplier();
-      }
-    }
-    return modifier;
-  }
-
-  public float DamageTakenMultiplier(Attributes attribute) {
-    float modifier = 1f;
-    Relationship relationship = GlobalData.instance.relationships[GlobalData.instance.GetCurrentRelationship().id];
-    Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
-
-   for(int i=0; i<skills.Length; i++) {
-      if(skills[i].skillSpecialEffect == SkillSpecialEffect.damageTakenBonus &&
-         skills[i].attribute == attribute) {
-        modifier += skills[i].power;
-      }
-    }
-    return modifier;
-  }
 
   public int GetMaxSp(int relationshipId) {
     int count = maxSp;
@@ -163,11 +94,19 @@ public class Person {
   }
 
 
-  public void HealSp(int value) {
+  public override void HealSp(int value) {
     sp += value;
     sp = Mathf.Min(sp, GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
     sp = Mathf.Max(sp, 0);
     UIController.instance.UpdateDateUI();
+  }
+
+  public override bool IsDefending() {
+    int partyMemberPosition = BattleController.instance.GetPartyMemberPosition(this);
+    if(partyMemberPosition == -1) {
+      return false;
+    }
+    return BattleController.instance.selectedActionType[partyMemberPosition] == TurnActionType.defend;
   }
 
   public void SpendSp(int value) {
@@ -201,160 +140,31 @@ public class Person {
   }
 
 
-  public int FindStatusCondition(StatusCondition cond) {
-    for(int i=0; i< statusConditions.Count; i++) {
-      if(statusConditions[i].name == cond.name) {
-        return i;
-      }
-    }
-    return -1;
+  public override Skill[] GetPassiveSkills() {
+    Relationship relationship = GlobalData.instance.relationships[GlobalData.instance.GetCurrentRelationship().id];
+    return relationship.GetPassiveSkillsByCharacter(isMale);
+  }
+
+  public override float HealingSkillMultiplier() {
+    return GlobalData.instance.GetCurrentRelationship().HealingSkillMultiplier();
+  }
+
+  public override float GetAttributeEffectivity(Attributes att) {
+    return 1f;
   }
 
 
-  public void ReceiveStatusConditionBySkill(Skill usedSkill) {
-    StatusCondition newCondition;
-    Debug.LogWarning("Used skill: " + usedSkill.name);
-    for(int i=0; i<usedSkill.givesConditionNames.Length; i++) {
-      newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[i]);
-      newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedSkill.duration;
-      if(newCondition.duration > 0) {
-        newCondition.duration++;
-      }
-      newCondition.maxDurationShowable = usedSkill.duration;
-      //newCondition.name = usedSkill.GetPrintableName();
-      //newCondition.sprite = usedSkill.sprite;
-      ReceiveStatusCondition(newCondition);
-    }
+  public override Actor2D GetActor2D() {
+    return TheaterController.instance.GetActorByBattlingCharacter(this);
+  }
+  
+
+  public override void HealHP(int value) {
+    BattleController.instance.HealPartyHp(value);
   }
 
-  public void ReceiveStatusConditionByItem(Item usedItem) {
-    StatusCondition newCondition;
-    foreach(string condName in usedItem.givesConditionNames) {
-      newCondition = BattleController.instance.GetStatusConditionByName(condName);
-      newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedItem.duration;
-      if(newCondition.duration > 0) {
-        newCondition.duration++;
-      }
-      newCondition.maxDurationShowable = usedItem.duration;
-      //newCondition.name = usedItem.GetPrintableName();
-      //newCondition.sprite = usedItem.sprite;
-      ReceiveStatusCondition(newCondition);
-    }
-  }
-
-  public bool ReceiveStatusCondition(StatusCondition newCondition) {
-    int i = FindStatusCondition(newCondition);
-    bool receivedNewStatus = false;
-    Actor2D actor = TheaterController.instance.GetActorByPerson(this);
-
-    if(CurrentStatusConditionStacks(newCondition.name) < newCondition.stackable) {
-      statusConditions.Add(newCondition);
-      actor.ShowStatusConditionParticle(newCondition);
-      receivedNewStatus = true;
-    } else if(statusConditions[i].duration < newCondition.duration) {
-      statusConditions[i].duration = Mathf.Max(statusConditions[i].duration,
-                                               newCondition.duration);
-      statusConditions[i].maxDurationShowable = Mathf.Max(statusConditions[i].maxDurationShowable,
-                                                          newCondition.maxDurationShowable);
-      receivedNewStatus = true;
-    }
-    UIController.instance.UpdateDateUI();
-    actor.UpdateCharacterGraphics();
-    return receivedNewStatus;
-  }
-
-  public int CurrentStatusConditionStacks(string name) {
-    int count = 0;
-    foreach(StatusCondition sc in statusConditions) {
-      if(sc.name == name) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-
-  public void RemoveStatusConditionBySkill(Skill usedSkill) {
-    foreach(string condName in usedSkill.healsConditionNames) {
-      RemoveStatusCondition(condName);
-    }
-  }
-
-  public void RemoveStatusCondition(string name) {
-    Actor2D actor = TheaterController.instance.GetActorByPerson(this);
-
-    for(int i = statusConditions.Count-1; i >= 0; i--) {
-      if(statusConditions[i].name == name) {
-        statusConditions.RemoveAt(i);
-      }
-    }
-    UIController.instance.UpdateDateUI();
-    actor.UpdateCharacterGraphics();
-  }
-
-  public void RemoveAllStatusConditions() {
-    statusConditions.Clear();
-    UIController.instance.UpdateDateUI();
-  }
-
-  public void EndTurn() {
-    for(int i = statusConditions.Count-1; i>=0; i--) {
-      /// pass status conditions turn
-      if(statusConditions[i].duration > 0) {
-        statusConditions[i].duration--;
-      }      
-      if(statusConditions[i].duration == 0) {
-        statusConditions.RemoveAt(i);
-      }
-    }
-    UIController.instance.UpdateDateUI();
-  }
-
-  public void ActivateStatusConditionEffect(int statusCondPos) {
-    StatusCondition sc = statusConditions[statusCondPos];
-    int statusEffectStacks = 0;
-    bool damageDealtBefore;
-
-    for(int i=0; i<sc.statusEffect.Length; i++) {
-      if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
-         sc.statusEffect[i] <= StatusConditionEffect.turnDamageCharisma) {
-        damageDealtBefore = false;
-        for(int j=0; j < statusCondPos; j++) {
-          if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {
-            damageDealtBefore = true;
-          }
-        }
-        if(damageDealtBefore) {
-          continue;
-        }
-
-        statusEffectStacks = 0;
-        for(int j = 0; j < statusConditions.Count; j++) {
-          if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {
-            statusEffectStacks++;
-          }
-        }
-
-        //Debug.LogWarning("Activating "+ sc.statusEffect[i]);
-        int damage = (int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i])-4)/3;
-        damage = Mathf.Max(1, damage);
-        damage *= statusEffectStacks;
-        BattleController.instance.DamagePartyHp(damage);
-        GetActor2D().ShowDamageParticle(((int)sc.statusEffect[i])-4, damage, 1f);
-        VsnController.instance.WaitForCustomInput();
-        BattleController.instance.ShowActionDescription("receive_damage_" + statusConditions[statusCondPos].name, name);
-      }
-    }
-  }
-
-  public Actor2D GetActor2D() {
-    int partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
-    if(partyMemberPos == -1) {
-      return null;
-    }
-    return TheaterController.instance.GetActorByIdInParty(partyMemberPos);
+  public override void TakeDamage(int value) {
+    BattleController.instance.DamagePartyHp(value);
   }
 }
 

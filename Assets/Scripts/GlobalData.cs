@@ -22,10 +22,10 @@ public class GlobalData : MonoBehaviour {
 
   public static GlobalData instance;
 
-  void Awake () {
-    if (instance == null) {
+  void Awake() {
+    if(instance == null) {
       instance = this;
-    } else if (instance != this) {
+    } else if(instance != this) {
       Destroy(gameObject);
       return;
     }
@@ -34,13 +34,13 @@ public class GlobalData : MonoBehaviour {
     observedPeople = new Person[1];
   }
 
-  public void InitializeChapter(){
+  public void InitializeChapter() {
     Person newPerson;
     List<string> usedNames = new List<string>();
     string auxName;
 
     people = new List<Person>();
-    relationships = new Relationship[boysToGenerate + girlsToGenerate -1];
+    relationships = new Relationship[boysToGenerate + girlsToGenerate - 1];
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("objective", objective);
@@ -50,16 +50,16 @@ public class GlobalData : MonoBehaviour {
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
-      if(ModsManager.instance.GetName(i) != null){
+      if(ModsManager.instance.GetName(i) != null) {
         auxName = ModsManager.instance.GetName(2 * i);
       }
-      newPerson = new Person { isMale = true, name = auxName};
+      newPerson = new Person { isMale = true, name = auxName };
       newPerson.Initialize(i);
       people.Add(newPerson);
     }
     for(int i = 0; i < girlsToGenerate; i++) {
       auxName = GetNewName(usedNames, false);
-      if(ModsManager.instance.GetName(5+i) != null){
+      if(ModsManager.instance.GetName(5 + i) != null) {
         auxName = ModsManager.instance.GetName(5 + i);
       }
       newPerson = new Person { isMale = false, name = auxName };
@@ -121,14 +121,14 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
 
-    ResourcesManager.instance.GenerateCharacterSprites(new string[] {"ricardo", "ana", "beatrice", "clara", "fertiliel"});
+    ResourcesManager.instance.GenerateCharacterSprites(new string[] { "ricardo", "ana", "beatrice", "clara", "fertiliel" });
 
 
     relationships = new Relationship[3];
     for(int i = 0; i < girlsToGenerate; i++) {
       relationships[i] = new Relationship {
         id = i,
-        people = new Person[] {people[0], people[i+1]}
+        people = new Person[] { people[0], people[i + 1] }
       };
     }
 
@@ -178,21 +178,21 @@ public class GlobalData : MonoBehaviour {
 
     do {
       newName = (isBoy) ? Utils.GetRandomBoyName() : Utils.GetRandomGirlName();
-    } while (usedNames.Contains(newName));
+    } while(usedNames.Contains(newName));
 
     usedNames.Add(newName);
     return newName;
   }
 
 
-  public string CurrentCoupleName(){
+  public string CurrentCoupleName() {
     if(observedPeople.Length < 2) {
       return "";
     }
     return Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple");
   }
 
-  public Person CurrentBoy(){
+  public Person CurrentBoy() {
     if(observedPeople.Length < 1) {
       return null;
     }
@@ -206,8 +206,8 @@ public class GlobalData : MonoBehaviour {
     return observedPeople[1];
   }
 
-  public Person ObservedPerson(){
-    if(observedPeople.Length<1) {
+  public Person ObservedPerson() {
+    if(observedPeople.Length < 1) {
       return null;
     }
     return observedPeople[0];
@@ -220,9 +220,9 @@ public class GlobalData : MonoBehaviour {
     return observedPeople[1];
   }
 
-  public int CurrentCharacterAttribute(int attr){
+  public int CurrentCharacterAttribute(int attr) {
 
-    if(BattleController.instance.GetCurrentDateEvent() == null) {
+    if(BattleController.instance.GetCurrentEnemy() == null) {
       return 0;
     }
 
@@ -242,20 +242,20 @@ public class GlobalData : MonoBehaviour {
       VsnSaveSystem.SetVariable("daytime", 0);
       day++;
     } else {
-      VsnSaveSystem.SetVariable("daytime", daytime+1);
+      VsnSaveSystem.SetVariable("daytime", daytime + 1);
     }
     UIController.instance.UpdateUI();
   }
 
-  public Person GetDateablePerson(Person p){
+  public Person GetDateablePerson(Person p) {
     List<Person> dateable = new List<Person>();
-    foreach(Person p2 in people){
-      if(p.isMale != p2.isMale){
+    foreach(Person p2 in people) {
+      if(p.isMale != p2.isMale) {
         dateable.Add(p2);
       }
     }
-    
-    if (dateable.Count > 0) {
+
+    if(dateable.Count > 0) {
       int selected = Random.Range(0, dateable.Count);
       //Debug.Log("Dateable: selected "+selected+" from "+ dateable.Count);
       return dateable[selected];
@@ -310,7 +310,7 @@ public class GlobalData : MonoBehaviour {
     foreach(Person p in people) {
       if(p.name == name) {
         return ResourcesManager.instance.faceSprites[p.faceId];
-      }      
+      }
     }
     return null;
   }

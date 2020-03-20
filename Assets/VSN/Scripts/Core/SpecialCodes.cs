@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SpecialCodes {
 
-  public static string InterpretStrings(string initialString){
+  public static string InterpretStrings(string initialString) {
     string currentString = initialString;
 
-    if (initialString == null) {
+    if(initialString == null) {
       return "";
     }
 
-    if(!initialString.Contains("\\")){
+    if(!initialString.Contains("\\")) {
       return initialString;
     }
 
@@ -19,7 +19,7 @@ public class SpecialCodes {
       initialString = currentString;
 
       currentString = InterpretVariableValue(currentString);
-      
+
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentDateEventName());
       if(BattleController.instance.GetCurrentPlayer() != null) {
@@ -32,11 +32,11 @@ public class SpecialCodes {
         currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
       }
-      if (GlobalData.instance.EncounterPerson() != null) {
+      if(GlobalData.instance.EncounterPerson() != null) {
         currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().name);
         currentString = currentString.Replace("\\favoriteMatter2", GlobalData.instance.EncounterPerson().favoriteMatter);
       }
-      if (GlobalData.instance.CurrentBoy() != null) {
+      if(GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
         currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.intelligence).ToString());
@@ -49,53 +49,53 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
-    } while (currentString != initialString);
+    } while(currentString != initialString);
 
     return currentString;
   }
 
-  public static string InterpretVariableValue(string initial){
+  public static string InterpretVariableValue(string initial) {
     int start = initial.IndexOf("\\vsn[");
     int end = initial.IndexOf("]");
 
-    if(start == -1 || end == -1){
+    if(start == -1 || end == -1) {
       return initial;
     }
 
-    string varName = initial.Substring(start+5, (end-start-5));
+    string varName = initial.Substring(start + 5, (end - start - 5));
     string varString = GetPrintableVariableValue(varName);
 
     //Debug.LogWarning("VAR NAME IS: " + varName +", its value is " + varString);
 
     string final = initial.Substring(0, start);
-    final += varString + initial.Substring(end+1, initial.Length-end-1);
+    final += varString + initial.Substring(end + 1, initial.Length - end - 1);
 
     //Debug.LogWarning("VARIABLE INTERPRETATION:\nFrom: "+initial+"\nTo: "+final);
 
     return final;
   }
 
-  static string GetPrintableVariableValue(string varName){
+  static string GetPrintableVariableValue(string varName) {
     int intValue = VsnSaveSystem.GetIntVariable(varName);
     string stringValue = VsnSaveSystem.GetStringVariable(varName);
 
-    if(stringValue != ""){
+    if(stringValue != "") {
       return stringValue;
-    }else{
+    } else {
       return intValue.ToString();
     }
   }
 
 
-  public static float InterpretFloat(string keycode){
-    if(!keycode.Contains("#")){
+  public static float InterpretFloat(string keycode) {
+    if(!keycode.Contains("#")) {
       return 0f;
     }
 
     return InterpretSpecialNumber(keycode);
   }
 
-  static float InterpretSpecialNumber(string keycode){
+  static float InterpretSpecialNumber(string keycode) {
     if(keycode.Contains("#char[") && keycode.Contains("]item_count[") &&
        keycode.Contains("]from[")) {
       int result = InterpretIfCharactersHasItemFromOtherChar(keycode);
@@ -115,25 +115,19 @@ public class SpecialCodes {
 
     Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
 
-    switch(keycode){
+    switch(keycode) {
       case "#random100":
         return Random.Range(0, 100);
       case "#dateLength":
         return BattleController.instance.dateLength;
       case "#partyLength":
         return BattleController.instance.partyMembers.Length;
-      case "#isEncounterPersonUnrevealed":
-        if(GlobalData.instance.EncounterPerson()!=null) {
-          return GlobalData.instance.EncounterPerson().state == PersonState.unrevealed ? 1 : 0;
-        } else {
-          return -1;
-        }
       case "#day":
         return GlobalData.instance.day;
       case "#max_days":
         return GlobalData.instance.maxDays;
       case "#currentChallengeHp":
-        return BattleController.instance.GetCurrentDateEvent().hp;
+        return BattleController.instance.GetCurrentEnemy().hp;
       case "#currentDateId":
         return BattleController.instance.currentDateId;
       case "#currentDateLocation":
@@ -177,14 +171,16 @@ public class SpecialCodes {
           return currentPlayer.statusConditions.Count;
         }
         break;
+      case "#currentEnemyStatusConditionsCount":
+        if(BattleController.instance.GetCurrentEnemy() != null) {
+          return BattleController.instance.GetCurrentEnemy().statusConditions.Count;
+        }
+        break;
       case "#currentCoupleSkillsCount":
         Relationship rel = GlobalData.instance.GetCurrentRelationship();
-        if(rel != null)
-        {
+        if(rel != null) {
           return rel.skilltree.skills.Length;
-        }
-        else
-        {
+        } else {
           return -1;
         }
         break;

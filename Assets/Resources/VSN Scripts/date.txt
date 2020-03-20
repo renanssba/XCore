@@ -65,11 +65,16 @@ for currentDateEvent #dateLength
   add_var currentBattleTurn 1
   goto_script "check_passive_triggers" "turn_started"
 
-  // receive effects from conditions (like take poison damage)
+  // PARTY MEMBERS receive effects from conditions (like take poison damage)
   for currentPlayerTurn #partyLength
     for currentStatusCondition #currentPlayerStatusConditionsCount
       activate_status_condition_effect currentPlayerTurn currentStatusCondition
     endfor
+  endfor
+
+  // ENEMY receives effects from conditions
+  for currentStatusCondition #currentEnemyStatusConditionsCount
+    activate_status_condition_effect 3 currentStatusCondition
   endfor
   // end turn (to pass time on status conditions)
   end_turn

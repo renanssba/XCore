@@ -17,7 +17,7 @@ namespace Command {
       }
 
       // if enemy is already dead
-      if(BattleController.instance.GetCurrentDateEvent().hp <= 0 &&
+      if(BattleController.instance.GetCurrentEnemy().hp <= 0 &&
          BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.useSkill &&
          BattleController.instance.selectedSkills[partyMemberId].type == SkillType.attack) {
         Command.ContinueCommand.StaticExecute();

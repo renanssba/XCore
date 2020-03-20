@@ -9,8 +9,8 @@ using DG.Tweening;
 public class BattleController : MonoBehaviour {
   public static BattleController instance;
 
-  public List<DateEvent> allDateEvents;
-  public TextAsset dateEventsFile;
+  public List<Enemy> allEnemies;
+  public TextAsset enemiesFile;
 
   public List<Skill> allSkills;
   public TextAsset skillsFile;
@@ -30,7 +30,7 @@ public class BattleController : MonoBehaviour {
   public int[] selectedTargetPartyId;
   public int dateLength;
 
-  public DateEvent[] dateSegments;
+  public Enemy[] dateSegments;
   public DateLocation currentDateLocation;
   public int currentDateId;
 
@@ -40,8 +40,7 @@ public class BattleController : MonoBehaviour {
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
-  public TextMeshProUGUI difficultyText;
-  public Slider enemyHpSlider;
+
   const float attackAnimationTime = 0.15f;
 
   public Color greenColor;
@@ -105,7 +104,15 @@ public class BattleController : MonoBehaviour {
     hp += value;
     hp = Mathf.Min(hp, maxHp);
     hp = Mathf.Max(hp, 0);
-    UIController.instance.AnimateHpChange(initialHp, hp);
+    UIController.instance.AnimatePartyHpChange(initialHp, hp);
+  }
+
+  public void HealEnemyHp(int value) {
+    int initialHp = hp;
+    GetCurrentEnemy().hp += value;
+    GetCurrentEnemy().hp = Mathf.Min(GetCurrentEnemy().hp, GetCurrentEnemy().maxHp);
+    GetCurrentEnemy().hp = Mathf.Max(GetCurrentEnemy().hp, 0);
+    UIController.instance.AnimateEnemyHpChange(initialHp, GetCurrentEnemy().hp);
   }
 
   public void RemovePartyStatusConditions() {
@@ -114,7 +121,7 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public DateEvent GetCurrentDateEvent() {
+  public Enemy GetCurrentEnemy() {
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
     if(dateSegments.Length <= currentDateEvent) {
       return null;
@@ -123,17 +130,19 @@ public class BattleController : MonoBehaviour {
   }
 
   public string GetCurrentDateEventName() {
-    if(GetCurrentDateEvent() == null) {
+    if(GetCurrentEnemy() == null) {
       return "";
     }
     return dateSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
-  public int GetPartyMemberPosition(Person p) {
-    for(int i=0; i<partyMembers.Length; i++) {
-      if(partyMembers[i].id == p.id) {
-        return i;
-      }
+  public int GetPartyMemberPosition(Battler character) {
+    if(partyMembers[0] == character) {
+      return 0;
+    }if(partyMembers[1] == character) {
+      return 1;
+    }if(GetCurrentEnemy() == character) {
+      return 3;
     }
     return -1;
   }
@@ -141,7 +150,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void FinishSelectingCharacterAction() {
-    int currentPlayerTurn = CurrentPartyMemberId();
+    int currentPlayerTurn = CurrentPlayerTargetId();
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
@@ -181,7 +190,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public void WaitToSelectEnemyTarget() {
-    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPartyMemberId()]);
+    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPlayerTargetId()]);
     UIController.instance.selectTargetPanel.SetActive(true);
   }
 
@@ -211,7 +220,7 @@ public class BattleController : MonoBehaviour {
 
     switch(selectedSkills[partyMemberId].type) {
       case SkillType.attack:
-        StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedSkills[partyMemberId]));
+        StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
       case SkillType.active:
         StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
@@ -224,52 +233,47 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public int CalculateCharacterDamage(Person attacker, Skill usedSkill, DateEvent defender) {
+  public int CalculateAttackDamage(Battler attacker, Skill usedSkill, Battler defender) {
     float damage;
 
-    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f*defender.attributes[(int)Attributes.endurance] + defender.attributes[(int)usedSkill.attribute], 1f));
+    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.attribute), 1f));
 
     Debug.LogWarning("Character Hits! Damage:");
     Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
-    damage *= (float)usedSkill.power * Random.Range(0.9f, 1.1f);
+    damage *= usedSkill.power * Random.Range(0.9f, 1.1f);
 
-    damage *= defender.attributeEffectivity[(int)usedSkill.attribute];
+    damage *= attacker.DamageMultiplier();
+
+    damage *= defender.DamageTakenMultiplier(usedSkill.attribute);
     Debug.Log("Final damage: " + damage);
 
     // defend?
-    //damage /= (selectedActionType[targetId] == TurnActionType.defend ? 2f : 1f);
+    damage /= (defender.IsDefending() ? 2f : 1f);
 
     return Mathf.Max(1, Mathf.RoundToInt(damage));
   }
 
-  public IEnumerator ExecuteCharacterAttack(int partyMemberId, Skill usedSkill) {
-    // damage event HP
-    int attributeId = (int)usedSkill.attribute;
-    float effectivity = GetCurrentDateEvent().attributeEffectivity[attributeId];
-    int effectiveAttackDamage = CalculateCharacterDamage(partyMembers[partyMemberId], usedSkill, GetCurrentDateEvent());
-    int initialHp = hp;
-    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+  public IEnumerator ExecuteCharacterAttack(int attackerId, int targetId, Skill usedSkill) {
+    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(attackerId);
+    Battler attacker = attackingActor.battler;
+    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+    Battler target = GetBattlerByTargetId(targetId);
+    
+    float effectivity = target.GetAttributeEffectivity(usedSkill.attribute);
+    int effectiveAttackDamage = CalculateAttackDamage(attacker, usedSkill, target);
 
     VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
 
 
-    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, TheaterController.instance.enemyActor });
+    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
 
-    DamageEnemyHp(effectiveAttackDamage);
-
     attackingActor.CharacterAttackAnim();
 
-    DateEvent currentEvent = GetCurrentDateEvent();
-
-    if(usedSkill.id != 9) {
-      ActionSkin skin = GetActionSkin(partyMembers[partyMemberId], usedSkill);
-      VsnAudioManager.instance.PlaySfx(skin.sfxName);
-    } else {
-      VsnAudioManager.instance.PlaySfx("action_magic_arrow");
-    }
+    ActionSkin skin = GetActionSkin(partyMembers[attackerId], usedSkill);
+    VsnAudioManager.instance.PlaySfx(skin.sfxName);
 
     yield return new WaitForSeconds(attackAnimationTime + 0.8f);
 
@@ -280,16 +284,14 @@ public class BattleController : MonoBehaviour {
     } else {
       VsnAudioManager.instance.PlaySfx("damage_default");
     }
-
-    TheaterController.instance.enemyActor.ShineRed();
-    TheaterController.instance.enemyActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
+    
+    targetActor.ShineRed();
+    targetActor.ShowDamageParticle((int)usedSkill.attribute, effectiveAttackDamage, effectivity);
 
     yield return new WaitForSeconds(1f);
-
+    
+    target.TakeDamage(effectiveAttackDamage);
     VsnUIManager.instance.PassBattleDialog();
-    enemyHpSlider.maxValue = currentEvent.maxHp;
-    enemyHpSlider.DOValue(currentEvent.hp, 1f);
-
     yield return new WaitForSeconds(1f);
 
 
@@ -306,60 +308,58 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteCharacterSkill(int partyMemberId, int targetId, Skill usedSkill) {
-    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+  public IEnumerator ExecuteCharacterSkill(int skillUserId, int targetId, Skill usedSkill) {
+    Actor2D skillUserActor = TheaterController.instance.GetActorByIdInParty(skillUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+    Battler target = GetBattlerByTargetId(targetId);
 
 
     UIController.instance.SetHelpMessageText(usedSkill.GetPrintableName());
     UIController.instance.ShowHelpMessagePanel();
 
-    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
+    TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-
-    attackingActor.CharacterAttackAnim();
-    //Person targetPerson
-
-    DateEvent currentEvent = GetCurrentDateEvent();
+    
     VsnAudioManager.instance.PlaySfx("heal_default");
+    skillUserActor.CharacterAttackAnim();
 
     yield return new WaitForSeconds(attackAnimationTime + 0.8f);
     VsnUIManager.instance.PassBattleDialog();
 
     switch(usedSkill.skillSpecialEffect) {
       case SkillSpecialEffect.sensor:
-        TheaterController.instance.enemyActor.ShineRed();
-        TheaterController.instance.enemyActor.ShowWeaknessCard(true);
+        targetActor.ShineRed();
+        targetActor.ShowWeaknessCard(true);
         yield return new WaitForSeconds(1f);
         break;
       case SkillSpecialEffect.buffDebuff:
-        TheaterController.instance.GetActorByIdInParty(targetId).ShineGreen();
+        targetActor.ShineGreen();
 
         // heal status condition
         if(usedSkill.healsConditionNames.Length > 0) {
-          partyMembers[targetId].RemoveStatusConditionBySkill(usedSkill);
+          target.RemoveStatusConditionBySkill(usedSkill);
         }
 
         // heal HP and SP
         if(usedSkill.healHp > 0) {
-          HealPartyHp((int)(usedSkill.healHp * GlobalData.instance.GetCurrentRelationship().HealingSkillMultiplier()));
-          TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(usedSkill.healHp);
+          target.HealHP((int)(usedSkill.healHp * skillUserActor.battler.HealingSkillMultiplier()));
+          targetActor.ShowHealHpParticle(usedSkill.healHp);
           yield return new WaitForSeconds(1f);
         }
         if(usedSkill.healSp > 0) {
-          partyMembers[targetId].HealSp(usedSkill.healSp);
-          TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedSkill.healSp);
+          target.HealSp(usedSkill.healSp);
+          targetActor.ShowHealSpParticle(usedSkill.healSp);
           yield return new WaitForSeconds(1f);
         }
 
         // give status condition
         foreach(string givenCondition in usedSkill.givesConditionNames) {
-          partyMembers[targetId].ReceiveStatusConditionBySkill(usedSkill);
+          target.ReceiveStatusConditionBySkill(usedSkill);
           StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
           VsnArgument[] args = new VsnArgument[3];
           args[0] = new VsnString("receive_status_condition");
-          args[1] = new VsnString(partyMembers[targetId].name);
+          args[1] = new VsnString(target.name);
           args[2] = new VsnString(statusCondition.GetPrintableName());
 
           StartCoroutine(WaitThenShowActionDescription(1f, args));
@@ -371,10 +371,10 @@ public class BattleController : MonoBehaviour {
         }
         break;
       case SkillSpecialEffect.becomeEnemyTarget:
-        VsnSaveSystem.SetVariable("enemyAttackTargetId", partyMemberId);
+        VsnSaveSystem.SetVariable("enemyAttackTargetId", skillUserId);
         break;
       case SkillSpecialEffect.divertEnemyTarget:
-        VsnSaveSystem.SetVariable("enemyAttackTargetId", OtherPartyMemberId(partyMemberId));
+        VsnSaveSystem.SetVariable("enemyAttackTargetId", OtherPartyMemberId(skillUserId));
         break;
     }
     yield return new WaitForSeconds(0.5f);
@@ -403,7 +403,7 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    DateEvent currentEvent = GetCurrentDateEvent();
+    Enemy currentEvent = GetCurrentEnemy();
     VsnAudioManager.instance.PlaySfx("challenge_default");
 
     userActor.UseItemAnimation(targetActor, usedItem);
@@ -503,36 +503,15 @@ public class BattleController : MonoBehaviour {
     StartCoroutine(ExecuteEnemyAttack(targetId));
   }
 
-  public int CalculateEnemyDamage(DateEvent attacker, int targetId) {
-    float damage;
-    Person defender = partyMembers[targetId];
-
-    damage = (3f * attacker.attributes[((int)attacker.attackAttribute)] / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)attacker.attackAttribute), 1) );
-
-    Debug.LogWarning("Enemy Hits! Damage:");
-    Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
-
-    damage *= (float)attacker.attackPower * Random.Range(0.9f, 1.1f);
-
-    damage *= defender.DamageTakenMultiplier(attacker.attackAttribute);
-
-    Debug.Log("Defender damage multiplier:" + defender.DamageTakenMultiplier(attacker.attackAttribute));
-
-    Debug.Log("Final damage: " + damage);
-
-    // defend?
-    damage /= (selectedActionType[targetId] == TurnActionType.defend ? 2f : 1f);
-
-    return Mathf.Max(1, Mathf.RoundToInt(damage));
-  }
-
   public IEnumerator ExecuteEnemyAttack(int targetId) {
-    DateEvent currentEvent = GetCurrentDateEvent();
-    int attributeId = (int)currentEvent.attackAttribute;
-    int effectiveAttackDamage = CalculateEnemyDamage(currentEvent, targetId);
-    int initialHp = hp;
+    Enemy attacker = GetCurrentEnemy();
+    int attributeId = (int)attacker.attackAttribute;
+    Battler defender = GetBattlerByTargetId(targetId);
+
+    int effectiveAttackDamage = CalculateAttackDamage(attacker, new Skill() {attribute = attacker.attackAttribute, power = attacker.attackPower}, defender);
+
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
-    bool causeDamage = (currentEvent.attackPower != 0);
+    bool causeDamage = (attacker.attackPower != 0);
 
 
     TheaterController.instance.FocusActors(new Actor2D[] { targetActor, TheaterController.instance.enemyActor });
@@ -541,11 +520,11 @@ public class BattleController : MonoBehaviour {
 
     TheaterController.instance.enemyActor.EnemyAttackAnim();
 
-    VsnAudioManager.instance.PlaySfx(currentEvent.attackSfxName);
+    VsnAudioManager.instance.PlaySfx(attacker.attackSfxName);
 
     yield return new WaitForSeconds(attackAnimationTime + 0.8f);
 
-    TheaterController.instance.ShineCharacter(targetId);
+    targetActor.ShineRed();
 
     // cause damage
     if(causeDamage) {
@@ -553,9 +532,9 @@ public class BattleController : MonoBehaviour {
         targetActor.ShowDefendHitParticle();
       }
 
-      float effectivity = partyMembers[targetId].DamageTakenMultiplier(currentEvent.attackAttribute);
+      float effectivity = defender.DamageTakenMultiplier(attacker.attackAttribute);
 
-      if(selectedActionType[targetId] == TurnActionType.defend) {
+      if(defender.IsDefending()) {
         VsnAudioManager.instance.PlaySfx("damage_block");
       } else if(effectivity > 1f) {
         VsnAudioManager.instance.PlaySfx("damage_effective");
@@ -566,17 +545,16 @@ public class BattleController : MonoBehaviour {
       }
 
       TheaterController.instance.Screenshake();
-
       targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
       yield return new WaitForSeconds(1f);
 
       VsnUIManager.instance.PassBattleDialog();
-      DamagePartyHp(effectiveAttackDamage);
+      defender.TakeDamage(effectiveAttackDamage);
       yield return new WaitForSeconds(1f);
     }
 
     // chance to receive status condition
-    int effectiveStatusConditionChance = currentEvent.giveStatusConditionChance;
+    int effectiveStatusConditionChance = attacker.giveStatusConditionChance;
     if(selectedActionType[targetId] == TurnActionType.defend) {
       effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance/2, 30);
       //if(effectiveStatusConditionChance == 100) {
@@ -586,7 +564,7 @@ public class BattleController : MonoBehaviour {
       //}
     }
     if(Random.Range(0, 100) < effectiveStatusConditionChance) {
-      foreach(string statusConditionName in currentEvent.givesConditionNames) {
+      foreach(string statusConditionName in attacker.givesConditionNames) {
         StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
         bool receivedNewStatus = partyMembers[targetId].ReceiveStatusCondition(statusCondition);
 
@@ -635,15 +613,17 @@ public class BattleController : MonoBehaviour {
 
 
   public void DamageEnemyHp(int dmg) {
-    GetCurrentDateEvent().hp -= dmg;
-    GetCurrentDateEvent().hp = Mathf.Max(GetCurrentDateEvent().hp, 0);
+    int initialHp = GetCurrentEnemy().hp;
+    GetCurrentEnemy().hp -= dmg;
+    GetCurrentEnemy().hp = Mathf.Max(GetCurrentEnemy().hp, 0);
+    UIController.instance.AnimateEnemyHpChange(initialHp, GetCurrentEnemy().hp);
   }
 
   public void DamagePartyHp(int dmg) {
     int initialHp = hp;
     hp -= dmg;
     hp = Mathf.Max(hp, 0);
-    UIController.instance.AnimateHpChange(initialHp, hp);
+    UIController.instance.AnimatePartyHpChange(initialHp, hp);
   }
 
 
@@ -651,6 +631,7 @@ public class BattleController : MonoBehaviour {
     foreach(Person p in partyMembers) {
       p.EndTurn();
     }
+    GetCurrentEnemy().EndTurn();
   }
 
   public void SetDateLengthAndLocation() {
@@ -677,13 +658,13 @@ public class BattleController : MonoBehaviour {
   public void GenerateDateEnemies() {
     List<int> selectedEnemies = new List<int>();
 
-    dateSegments = new DateEvent[dateLength];
+    dateSegments = new Enemy[dateLength];
     for(int i = 0; i < dateLength; i++) {
       int selectedId = GetNewEnemy(selectedEnemies);
-      dateSegments[i] = allDateEvents[selectedId];
+      dateSegments[i] = allEnemies[selectedId];
       selectedEnemies.Add(selectedId);
     }
-    System.Array.Sort(dateSegments, new System.Comparison<DateEvent>(
+    System.Array.Sort(dateSegments, new System.Comparison<Enemy>(
                       (event1, event2) => event1.stage.CompareTo(event2.stage)));
     RecoverEnemiesHp();
   }
@@ -707,22 +688,22 @@ public class BattleController : MonoBehaviour {
       //selectedId = Random.Range(0, allDateEvents.Count);
       selectedEnemyId = Random.Range(0, 12);
 
-      Debug.LogWarning("selected location: " + allDateEvents[selectedEnemyId].location);
+      Debug.LogWarning("selected location: " + allEnemies[selectedEnemyId].location);
       Debug.LogWarning("date location: " + currentDateLocation.ToString());
 
     } while(selectedEvents.Contains(selectedEnemyId) ||
-            (string.Compare(allDateEvents[selectedEnemyId].location, currentDateLocation.ToString()) != 0 &&
-             string.Compare(allDateEvents[selectedEnemyId].location, DateLocation.generic.ToString()) != 0));
+            (string.Compare(allEnemies[selectedEnemyId].location, currentDateLocation.ToString()) != 0 &&
+             string.Compare(allEnemies[selectedEnemyId].location, DateLocation.generic.ToString()) != 0));
 
     return selectedEnemyId;
   }
 
-  public int CurrentPartyMemberId() {
+  public int CurrentPlayerTargetId() {
     return VsnSaveSystem.GetIntVariable("currentPlayerTurn");
   }
 
   public Person GetCurrentPlayer() {
-    int currentPlayer = CurrentPartyMemberId();
+    int currentPlayer = CurrentPlayerTargetId();
     if(currentPlayer < partyMembers.Length) {
       return partyMembers[currentPlayer];
     }
@@ -730,7 +711,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public Person GetCurrentTarget() {
-    int currentPlayer = CurrentPartyMemberId();
+    int currentPlayer = CurrentPlayerTargetId();
     if(currentPlayer < partyMembers.Length) {
       int target = selectedTargetPartyId[currentPlayer];
       if(target < partyMembers.Length) {
@@ -738,6 +719,13 @@ public class BattleController : MonoBehaviour {
       }
     }
     return null;
+  }
+
+  public Battler GetBattlerByTargetId(int targetId) {
+    if(targetId < 3) {
+      return partyMembers[targetId];
+    }
+    return GetCurrentEnemy();
   }
 
 
@@ -749,7 +737,7 @@ public class BattleController : MonoBehaviour {
 
   public void FleeDateSegment(int positionId) {
     List<int> currentUsedEvents = new List<int>();
-    foreach(DateEvent d in dateSegments) {
+    foreach(Enemy d in dateSegments) {
       currentUsedEvents.Add(d.id);
     }
 
@@ -760,7 +748,7 @@ public class BattleController : MonoBehaviour {
 
     int selectedId = GetNewEnemy(currentUsedEvents);
     //selectedId = 1;
-    dateSegments[positionId] = allDateEvents[selectedId];
+    dateSegments[positionId] = allEnemies[selectedId];
     currentUsedEvents.Clear();
 
     RecoverEnemiesHp();
@@ -783,19 +771,19 @@ public class BattleController : MonoBehaviour {
 
 
   public void LoadAllEnemies() {
-    allDateEvents = new List<DateEvent>();
+    allEnemies = new List<Enemy>();
 
     float guts, intelligence, charisma;
     string[] loadedTags;
 
-    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(dateEventsFile, 1);
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
       loadedTags = Utils.SeparateTags(dic["tags"]);
 
-      allDateEvents.Add(new DateEvent {
+      allEnemies.Add(new Enemy {
         id = int.Parse(dic["id"]),
         name = dic["name"],
         scriptName = dic["script name"],

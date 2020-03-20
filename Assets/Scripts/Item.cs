@@ -18,9 +18,9 @@ public enum ItemCategory{
 
 [System.Serializable]
 public class Item {
-
-  public int id;
+  
   public string nameKey;
+  public int id;
   public string descriptionKey;
 
   public List<ItemType> types;
