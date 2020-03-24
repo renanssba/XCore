@@ -79,6 +79,10 @@ public class Person : Battler {
     return true;
   }
 
+  public override bool IsSpotted() {
+    return  id==10 && BattleController.instance.currentStealth <= 0f;
+  }
+
 
   public int GetMaxSp(int relationshipId) {
     int count = maxSp;

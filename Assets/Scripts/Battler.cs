@@ -33,6 +33,10 @@ public abstract class Battler {
   }
 
   public bool CanExecuteAction(TurnActionType action) {
+    if(id == 10 && BattleController.instance.currentStealth <= 0f) {
+      return false;
+    }
+
     switch(action) {
       case TurnActionType.defend:
         if(CurrentStatusConditionStacks("angry") > 0) {
@@ -85,6 +89,8 @@ public abstract class Battler {
   public abstract void HealSp(int value);
 
   public abstract bool IsDefending();
+
+  public virtual bool IsSpotted() { return false; }
 
 
   /// ///

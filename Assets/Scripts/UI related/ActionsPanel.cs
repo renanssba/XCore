@@ -88,7 +88,7 @@ public class ActionsPanel : MonoBehaviour {
     Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
 
     /// itens button
-    baseActionButtonShades[1].SetActive(!ThereAreItemsAvailable());
+    baseActionButtonShades[1].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useItem) || !ThereAreItemsAvailable());
 
     /// skills button
     baseActionButtonShades[2].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useSkill));

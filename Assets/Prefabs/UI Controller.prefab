@@ -519,27 +519,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 0}
   uiControllerPanel: {fileID: 114425796598667614}
-  personCards:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   dayText: {fileID: 114666504652399050}
-  coupleEntryPrefab: {fileID: 1996361097603522, guid: c6dd11a013867ac45b5c6a1d84beb5c9,
-    type: 2}
+  relationshipCardsPanel: {fileID: 0}
+  relationshipCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  relationshipUpAnimationCard: {fileID: 0}
   coupleEntries: []
   moneyText: {fileID: 114287851319660026}
-  bgImage: {fileID: 0}
   menuButtons:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  peopleButtonPanel: {fileID: 0}
-  peopleInfoPanel: {fileID: 0}
-  mapMenuButtonsPanel: {fileID: 0}
   datingPeoplePanel: {fileID: 0}
   partyHpSlider: {fileID: 0}
   partyHpText: {fileID: 0}
+  stealthSlider: {fileID: 0}
+  negativeStealthSlider: {fileID: 0}
+  enemyHpSlider: {fileID: 0}
+  difficultyText: {fileID: 0}
   dateProgressPanel: {fileID: 0}
   dateTitleText: {fileID: 0}
   dateEventToggles:
@@ -574,27 +573,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  actionsPanel: {fileID: 0}
-  actionButtonsContent: {fileID: 0}
-  actionButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   datingPeopleInfoPanel: {fileID: 0}
   partyPeopleCards:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  actionsPanel: {fileID: 0}
+  selectTargetPanel: {fileID: 0}
+  selectTargets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  helpMessagePanel: {fileID: 0}
+  helpMessageText: {fileID: 0}
   interactionPinsBoard: {fileID: 0}
   interactionPins:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  turnIndicators:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  coupleStatusScreen: {fileID: 0}
+  enemyStatusConditionsContent: {fileID: 0}
+  girlInteractionScreen: {fileID: 0}
+  statusConditionIconPrefab: {fileID: 1051060102904592, guid: d6f189a92328b28479f0bae2d69e09c3,
+    type: 2}
 --- !u!114 &114425796598667614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1203,7 +1204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 172.59, y: 0}
+  m_AnchoredPosition: {x: 172.58984, y: 0}
   m_SizeDelta: {x: 569, y: 160}
   m_Pivot: {x: 1, y: 1}
 --- !u!224 &224063166995100268
@@ -1397,7 +1398,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1574642591019028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 152.35109}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224671650202886160}
@@ -1405,7 +1406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -24, y: 24}
+  m_AnchoredPosition: {x: -20, y: 18}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224855165808116166

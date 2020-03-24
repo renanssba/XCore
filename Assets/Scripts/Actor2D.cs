@@ -22,6 +22,7 @@ public class Actor2D : MonoBehaviour {
   public Button targetSelectButton;
 
   public GameObject choosingActionIndicator;
+  public GameObject spottedIcon;
 
 
   const float attackAnimTime = 0.18f;
@@ -35,6 +36,7 @@ public class Actor2D : MonoBehaviour {
     print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
     print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
   }
+
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
@@ -56,6 +58,8 @@ public class Actor2D : MonoBehaviour {
 
   public void UpdateCharacterGraphics() {
     if(battler.id == 10) {
+      renderers[4].sprite = Resources.Load<Sprite>("Characters/hiding-spot-" + BattleController.instance.currentDateLocation.ToString());
+      spottedIcon.SetActive(battler.IsSpotted());
       return;
     }
 

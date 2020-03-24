@@ -27,6 +27,10 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions datingPeoplePanel;
   public Slider partyHpSlider;
   public TextMeshProUGUI partyHpText;
+  public Slider stealthSlider;
+  public Slider negativeStealthSlider;
+  public Image eyeIcon;
+  public Image hiddenEyeIcon;
   public Slider enemyHpSlider;
   public TextMeshProUGUI difficultyText;
 
@@ -121,14 +125,37 @@ public class UIController : MonoBehaviour {
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
       partyHpSlider.value = currentShownHp;
       partyHpText.text = ((int)currentShownHp).ToString();
-    } );    
+    } );
   }
 
   public void AnimateEnemyHpChange(int initialHp, int finalHp) {
     float currentShownHp = initialHp;
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
       enemyHpSlider.value = currentShownHp;
-    } );    
+    } );
+  }
+
+  public void AnimateStealthSliderChange(float initialValue, float finalValue) {
+    float currentShownHp = initialValue;
+    stealthSlider.maxValue = BattleController.maxStealth;
+    negativeStealthSlider.maxValue = BattleController.maxNegativeStealth;
+
+    if(finalValue > 0f) {
+      hiddenEyeIcon.gameObject.SetActive(true);
+      eyeIcon.gameObject.SetActive(false);
+    } else {
+      hiddenEyeIcon.gameObject.SetActive(false);
+      eyeIcon.gameObject.SetActive(true);
+    }
+
+    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
+      stealthSlider.value = currentShownHp;
+    } );
+    if(initialValue < 0f || finalValue < 0f) {
+      DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
+        negativeStealthSlider.value = -currentShownHp;
+    } );
+    }
   }
 
   public void ShowDateProgressUI() {

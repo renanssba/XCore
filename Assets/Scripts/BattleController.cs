@@ -23,6 +23,13 @@ public class BattleController : MonoBehaviour {
   public int maxHp = 10;
   public int hp = 10;
 
+  public const float maxStealth = 50f;
+  public const float maxNegativeStealth = 20f;
+  public float currentStealth;
+  public float stealthLostWhenUsedItem = 20f;
+  public float stealthRecoveredWhenIdle = 10f;
+  public float stealthLostBySecond = 0f;
+
   public Person[] partyMembers;
   public TurnActionType[] selectedActionType;
   public Skill[] selectedSkills;
@@ -61,6 +68,14 @@ public class BattleController : MonoBehaviour {
     dateLength = 3;
   }
 
+  public void Update() {
+    int currentTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    if(currentTurn == 2 && ActionsPanel.instance.skillsPanel.gameObject.activeSelf == true) {
+      RemoveStealth(Time.deltaTime * stealthLostBySecond);
+    }  
+  }
+
+
   public void SetupBattleStart(int dateId) {
     Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
     Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
@@ -97,6 +112,7 @@ public class BattleController : MonoBehaviour {
     for(int i=0; i < partyMembers.Length; i++) {
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) );
     }
+    RecoverStealth(maxStealth);
   }
 
   public void HealPartyHp(int value) {
@@ -119,6 +135,35 @@ public class BattleController : MonoBehaviour {
     for(int i = 0; i < partyMembers.Length; i++) {
       partyMembers[i].RemoveAllStatusConditions();
     }
+  }
+
+  public void RecoverStealth(float value) {
+    Debug.LogWarning("Recover stealth: "+value);
+    float initValue = currentStealth;
+    currentStealth += value;
+    currentStealth = Mathf.Min(currentStealth, maxStealth);
+    if(initValue < 0 && currentStealth >= 0f) {
+      /// SHOW FERTILIEL RECOVERED ANIMATION
+      currentStealth = maxStealth;
+    }
+    UIController.instance.AnimateStealthSliderChange(currentStealth, currentStealth);
+    TheaterController.instance.angelActor.UpdateGraphics();
+  }
+
+  public void RemoveStealth(float value) {
+    Debug.LogWarning("Remove stealth: "+value);
+    float initValue = currentStealth;
+    currentStealth -= value;
+    currentStealth = Mathf.Max(currentStealth, 0f);
+    if(initValue > 0 && currentStealth <= 0f) {
+      /// SHOW FERTILIEL DETECTED ANIMATION
+      SfxManager.StaticPlayCancelSfx();
+      selectedActionType[2] = TurnActionType.idle;
+      currentStealth = -maxNegativeStealth-stealthRecoveredWhenIdle;
+      FinishSelectingCharacterAction();
+    }
+    UIController.instance.AnimateStealthSliderChange(initValue, currentStealth);
+    TheaterController.instance.angelActor.UpdateGraphics();
   }
 
   public Enemy GetCurrentEnemy() {
@@ -166,6 +211,9 @@ public class BattleController : MonoBehaviour {
         break;
       case TurnActionType.flee:
         VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
+        break;
+      case TurnActionType.idle:
+        RecoverStealth(stealthRecoveredWhenIdle);
         break;
     }
 
@@ -400,6 +448,10 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
 
+    // spend stealth bar
+    RemoveStealth(stealthLostWhenUsedItem);
+
+
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
@@ -464,7 +516,6 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteDefend(int partyMemberId) {
-
     Actor2D currentActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
 
     currentActor.DefendActionAnimation();
