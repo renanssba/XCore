@@ -216,7 +216,6 @@ goto end_dialog
 
 waypoint dialog_fallback
 say "Os dois conseguem avançar um pouco mais no trabalho do colégio."
-say "Ricardo está menos nervoso e consegue até conversar um pouco com Clara sobre assuntos fora o trabalho. Ela se empolga sempre que eles conversam sobre comida."
 goto end_dialog
 
 
@@ -304,7 +303,36 @@ say "Clara" "Hahaha, obrigada!"
 say "Ricardo" "(Onde quer que ela esteja agora, eu tenho certeza que a minha mãe ficará orgulhosa.)"
 end_script
 
-
+waypoint dialog_after_date_3 
+say "Clara" "Isso foi bem divertido!"
+say "Ricardo" "Foi mesmo? Você não está falando só pra me agradar, né?"
+say "" "Clara ri."
+say "Clara" "Você é um cara legal, Ricardo. Passar tempo com você é sempre divertido. E gostoso, também!"
+say "" "Ricardo fica vermelho."
+say "Ricardo" "Q-quê?"
+say "Clara" "D-digo, você sempre traz algo pra comer, o que é muito simpático."
+say "Clara" "Você é um ótimo cozinheiro! Espero que continue estudando para ficar cada vez melhor."
+say "Ricardo" "..."
+say "Clara" "Você tá bem?"
+say "Ricardo" "(...Vai, Ricardo, fala alguma coisa!)"
+say "Ricardo" "...Eu espero poder continuar cozinhando pra você!"
+say "Ricardo" "Eu adoro  o quão feliz você fica quando prova minha comida. Me faz querer ser um cozinheiro melhor."
+say "Ricardo" "Eu quero continuar te fazendo feliz. Para sempre."
+say "" "Clara fica surpresa."
+say "Clara" "..."
+say "Minha mãe vai ficar furiosa quando souber."
+say "Ricardo" "...Souber o quê?"
+say "Clara" "Souber que estou namorando um cozinheiro."
+say "Ricardo" "Você..."
+say "" "Clara imediatamente vira o rosto, encabulada."
+say "Clara" "S-se você quiser, é claro."
+say "Ricardo" "Eu quero!"
+say "" "Ricardo chega mais perto de Clara."
+say "Ricardo" "Você sempre foi tão gentil. Eu...eu te amo."
+say "O coração de Ricardo se abriu!"
+say "Clara" "...Eu te amo também."
+say "O coração de Clara se abriu!"
+end_script
 
 waypoint give_gift
 say "" "Escolha qual item dar para Clara:"
