@@ -21,6 +21,7 @@ public enum StatusConditionEffect {
   limitActionsToIntelligence,
   limitActionsToCharisma,
   limitActionsToDefense,
+  cantAct,
   count
 }
 

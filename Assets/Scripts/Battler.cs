@@ -33,7 +33,7 @@ public abstract class Battler {
   }
 
   public bool CanExecuteAction(TurnActionType action) {
-    if(id == 10 && BattleController.instance.currentStealth <= 0f) {
+    if(IsSpotted() && action != TurnActionType.idle) {
       return false;
     }
 

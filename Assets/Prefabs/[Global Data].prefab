@@ -1029,6 +1029,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1104879300573196
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4250393924686784}
+  - component: {fileID: 114213349583239390}
+  m_Layer: 0
+  m_Name: spotted
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1104898634637416
 GameObject:
   m_ObjectHideFlags: 1
@@ -7023,6 +7039,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1770967211227692
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4272266428893152}
+  - component: {fileID: 114391055212164372}
+  m_Layer: 0
+  m_Name: spotted
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1772466756059198
 GameObject:
   m_ObjectHideFlags: 1
@@ -10334,6 +10366,7 @@ Transform:
   - {fileID: 4179870661928886}
   - {fileID: 4234577224634410}
   - {fileID: 4666459593252070}
+  - {fileID: 4250393924686784}
   m_Father: {fileID: 4020664919214342}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11199,6 +11232,19 @@ Transform:
   m_Father: {fileID: 4839306039923016}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4250393924686784
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104879300573196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4126275706725958}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4250399299171392
 Transform:
   m_ObjectHideFlags: 1
@@ -11427,6 +11473,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4934285278694872}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4272266428893152
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770967211227692}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4896331924423158}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4273713624366962
 Transform:
@@ -16958,6 +17017,7 @@ Transform:
   - {fileID: 4932669454472658}
   - {fileID: 4374234652067240}
   - {fileID: 4628480724839258}
+  - {fileID: 4272266428893152}
   m_Father: {fileID: 4020664919214342}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18712,12 +18772,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\"daytimes\" index=1 tint> Tarde <sprite=\"daytimes\" index=1 tint>\r\n<size=46px>Escolha
+    Text: "<sprite=\"daytimes\" index=1 tint> Tarde <sprite=\"daytimes\" index=1 tint>\n<size=46px>Escolha
       sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: "<sprite=\"daytimes\" index=1 tint> Afternoon <sprite=\"daytimes\" index=1
-      tint>\r\n<size=46px>Choose your action"
+    Text: '<sprite="daytimes" index=1 tint> Afternoon <sprite="daytimes" index=1 tint>
+
+      <size=46px>Choose your action'
     Object: {fileID: 0}
 --- !u!114 &114082922910526258
 MonoBehaviour:
@@ -19932,6 +19993,24 @@ MonoBehaviour:
   - Language: English
     Text: \boy and \girl leave the place with the promise of receiving an expensive
       bill by mail.
+    Object: {fileID: 0}
+--- !u!114 &114213349583239390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1104879300573196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "N\xE3o pode atuar por alguns turnos"
+    Object: {fileID: 0}
+  - Language: English
+    Text: Can't act for some turns
     Object: {fileID: 0}
 --- !u!114 &114214242980622166
 MonoBehaviour:
@@ -21372,11 +21451,12 @@ MonoBehaviour:
   translations:
   - Language: Portuguese
     Text: "<sprite=\"daytimes\" index=0 tint> Manh\xE3 <sprite=\"daytimes\" index=0
-      tint>\r\n<size=46px>Escolha sua a\xE7\xE3o"
+      tint>\n<size=46px>Escolha sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: "<sprite=\"daytimes\" index=0 tint> Morning <sprite=\"daytimes\" index=0
-      tint>\r\n<size=46px>Choose your action"
+    Text: '<sprite="daytimes" index=0 tint> Morning <sprite="daytimes" index=0 tint>
+
+      <size=46px>Choose your action'
     Object: {fileID: 0}
 --- !u!114 &114341541426479188
 MonoBehaviour:
@@ -21972,6 +22052,24 @@ MonoBehaviour:
   - Language: English
     Text: \girl tries to argue with the bully so he does not punch \boy.
     Object: {fileID: 0}
+--- !u!114 &114391055212164372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770967211227692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Percebida
+    Object: {fileID: 0}
+  - Language: English
+    Text: Spotted
+    Object: {fileID: 0}
 --- !u!114 &114394875034917842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -22343,12 +22441,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\"daytimes\" index=2 tint> Noite <sprite=\"daytimes\" index=2 tint>\r\n<size=46px>Escolha
+    Text: "<sprite=\"daytimes\" index=2 tint> Noite <sprite=\"daytimes\" index=2 tint>\n<size=46px>Escolha
       sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: "<sprite=\"daytimes\" index=2 tint> Evening <sprite=\"daytimes\" index=2
-      tint>\r\n<size=46px>Choose your action"
+    Text: '<sprite="daytimes" index=2 tint> Evening <sprite="daytimes" index=2 tint>
+
+      <size=46px>Choose your action'
     Object: {fileID: 0}
 --- !u!114 &114438225973574720
 MonoBehaviour:

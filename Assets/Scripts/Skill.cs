@@ -111,6 +111,8 @@ public class Skill {
   public Attributes attribute;
   public float power;
 
+  public int spCost;
+
   public SkillSpecialEffect skillSpecialEffect;
   public string[] healsConditionNames;
   public string[] givesConditionNames;
@@ -119,11 +121,11 @@ public class Skill {
   public int healHp;
   public int healSp;
 
-  public int spCost;
-
   public PassiveSkillActivationTrigger activationTrigger;
   public string[] triggerConditions;
   public float triggerChance;
+
+  public string animation;
 
   public string[] tags;
 

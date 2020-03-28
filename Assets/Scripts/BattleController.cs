@@ -47,6 +47,7 @@ public class BattleController : MonoBehaviour {
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
+  public GameObject detectParticlePrefab;
 
   const float attackAnimationTime = 0.15f;
 
@@ -145,6 +146,7 @@ public class BattleController : MonoBehaviour {
     if(initValue < 0 && currentStealth >= 0f) {
       /// SHOW FERTILIEL RECOVERED ANIMATION
       currentStealth = maxStealth;
+      partyMembers[2].RemoveStatusCondition("spotted");
     }
     UIController.instance.AnimateStealthSliderChange(currentStealth, currentStealth);
     TheaterController.instance.angelActor.UpdateGraphics();
@@ -156,15 +158,35 @@ public class BattleController : MonoBehaviour {
     currentStealth -= value;
     currentStealth = Mathf.Max(currentStealth, 0f);
     if(initValue > 0 && currentStealth <= 0f) {
-      /// SHOW FERTILIEL DETECTED ANIMATION
-      SfxManager.StaticPlayCancelSfx();
-      selectedActionType[2] = TurnActionType.idle;
-      currentStealth = -maxNegativeStealth-stealthRecoveredWhenIdle;
-      FinishSelectingCharacterAction();
+      StartCoroutine(ShowDetectionAnimation());
+    } else {
+      if(VsnController.instance.state == ExecutionState.WAITING) {
+        VsnController.instance.state = ExecutionState.PLAYING;
+      }
     }
     UIController.instance.AnimateStealthSliderChange(initValue, currentStealth);
-    TheaterController.instance.angelActor.UpdateGraphics();
   }
+
+  public IEnumerator ShowDetectionAnimation() {
+    /// SHOW FERTILIEL DETECTED ANIMATION
+    //SfxManager.StaticPlayCancelSfx();
+    HideActionButtons();
+    yield return TheaterController.instance.DetectAngelAnimation();
+    
+    currentStealth = -maxNegativeStealth-stealthRecoveredWhenIdle;
+
+    if(VsnController.instance.state == ExecutionState.WAITINGCUSTOMINPUT) {
+      TheaterController.instance.SetCharacterChoosingAction(2);
+      UIController.instance.SetupCurrentCharacterUi(2);
+      UIController.instance.actionsPanel.Initialize(2);
+    
+      TheaterController.instance.angelActor.UpdateGraphics();
+    } else {
+      VsnController.instance.state = ExecutionState.PLAYING;
+    }
+  }
+
+
 
   public Enemy GetCurrentEnemy() {
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
@@ -184,9 +206,9 @@ public class BattleController : MonoBehaviour {
   public int GetPartyMemberPosition(Battler character) {
     if(partyMembers[0] == character) {
       return 0;
-    }if(partyMembers[1] == character) {
+    }else if(partyMembers[1] == character) {
       return 1;
-    }if(GetCurrentEnemy() == character) {
+    }else if(GetCurrentEnemy() == character) {
       return 3;
     }
     return -1;
@@ -217,11 +239,15 @@ public class BattleController : MonoBehaviour {
         break;
     }
 
+    HideActionButtons();
     TheaterController.instance.SetCharacterChoosingAction(-1);
-    UIController.instance.actionsPanel.EndActionSelect();
     VsnController.instance.GotCustomInput();
-    UIController.instance.HideHelpMessagePanel();
+  }
+
+  public void HideActionButtons() {
+    UIController.instance.actionsPanel.EndActionSelect();
     ActionsPanel.instance.turnIndicator.SetActive(false);
+    UIController.instance.HideHelpMessagePanel();
   }
 
   public void WaitToSelectAllyTarget(TurnActionType actionType) {
@@ -448,10 +474,6 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
 
-    // spend stealth bar
-    RemoveStealth(stealthLostWhenUsedItem);
-
-
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
@@ -511,7 +533,13 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.UnfocusActors();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    VsnController.instance.state = ExecutionState.PLAYING;
+
+    if(currentStealth <= stealthLostWhenUsedItem) {
+      TheaterController.instance.angelActor.SetAttackMode(true);
+    }
+
+    // spend stealth bar
+    RemoveStealth(stealthLostWhenUsedItem);
   }
 
 
@@ -920,6 +948,8 @@ public class BattleController : MonoBehaviour {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
 
+      newSkill.animation = entry["animation"];
+
       newSkill.skillSpecialEffect = GetSkillEffectByString(entry["skill special effect"]);
       newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
@@ -1053,7 +1083,11 @@ public class BattleController : MonoBehaviour {
       for(int i=1; i<=3; i++) {
         if(!string.IsNullOrEmpty(entry["effect "+i])) {
           effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
-          effectsPower.Add(float.Parse(entry["effect " + i+" power"]));
+          if(!string.IsNullOrEmpty(entry["effect " + i + " power"])) {
+            effectsPower.Add(float.Parse(entry["effect " + i + " power"]));
+          } else {
+            effectsPower.Add(1f);
+          }
         }
       }
       newStatusCondition.statusEffect = effects.ToArray();

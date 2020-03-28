@@ -151,11 +151,9 @@ public class UIController : MonoBehaviour {
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
       stealthSlider.value = currentShownHp;
     } );
-    if(initialValue < 0f || finalValue < 0f) {
-      DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
+    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
         negativeStealthSlider.value = -currentShownHp;
     } );
-    }
   }
 
   public void ShowDateProgressUI() {

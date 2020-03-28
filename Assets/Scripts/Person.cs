@@ -70,6 +70,9 @@ public class Person : Battler {
 
 
   public bool CanExecuteSkill(Skill skillToUse) {
+    if(CurrentStatusConditionStacks("spotted") > 0) {
+      return false;
+    }
     if(sp < skillToUse.spCost) {
       return false;
     }
@@ -80,7 +83,7 @@ public class Person : Battler {
   }
 
   public override bool IsSpotted() {
-    return  id==10 && BattleController.instance.currentStealth <= 0f;
+    return CurrentStatusConditionStacks("spotted") > 0;
   }
 
 

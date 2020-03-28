@@ -93,7 +93,7 @@ public class ResourcesManager : MonoBehaviour {
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
     spriteCollection.name = charName;
     spriteCollection.baseBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
-    spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-shy");
+    spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-sad");
 
     spriteCollection.underwear = Resources.Load<Sprite>(characterSpritesPath + charName + "-underwear");
 

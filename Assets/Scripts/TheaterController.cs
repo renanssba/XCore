@@ -281,6 +281,40 @@ public class TheaterController : MonoBehaviour {
     });
   }
 
+  public void HumansDetectAngel() {
+    StartCoroutine(DetectAngelAnimation());
+  }
+
+  public IEnumerator DetectAngelAnimation() {
+    yield return new WaitForSeconds(0.5f);
+
+    mainActor.FaceLeft();
+    supportActor.FaceLeft();
+    yield return new WaitForSeconds(0.5f);
+
+    mainActor.DetectAnimation();
+    supportActor.DetectAnimation();
+    yield return new WaitForSeconds(0.5f);
+
+    //VsnAudioManager.instance.PlaySfx("ui_detect_fertiliel");
+    //angelActor.DetectAnimation();
+    //yield return new WaitForSeconds(0.5f);
+    
+    StatusCondition status = BattleController.instance.GetStatusConditionByName("spotted");
+    status.duration = -1;
+    angelActor.battler.ReceiveStatusCondition(status);
+    yield return new WaitForSeconds(1f);
+
+    angelActor.SetChooseActionMode(false);
+    angelActor.SetAttackMode(false);
+
+    yield return new WaitForSeconds(1f);
+    mainActor.FaceRight();
+    supportActor.FaceRight();
+
+    yield return new WaitForSeconds(0.5f);
+  }
+
 
   public void SetLocation(string place) {
     bgRenderer.sprite = Resources.Load<Sprite>("Bg/" + place);
