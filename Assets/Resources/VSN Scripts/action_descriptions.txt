@@ -4,7 +4,7 @@
 
 waypoint skill
 waypoint item
-say "" "\active usa \vsn[selected_action_name]!"
+say "" "\active usa \vsn(selected_action_name)!"
 end_script
 
 
@@ -34,20 +34,20 @@ end_script
 
 
 waypoint receive_status_condition
-say "" "\vsn[arg2] fica <color=yellow>\vsn[arg3]</color>."
+say "" "\vsn(arg2) fica <color=yellow>\vsn(arg3)</color>."
 end_script
 
 
 waypoint receive_damage_injured
-say "" "\vsn[arg2] sente a dor do seu machucado."
+say "" "\vsn(arg2) sente a dor do seu machucado."
 end_script
 
 waypoint receive_damage_sad
-say "" "A tristeza de \vsn[arg2] machuca seu coração."
+say "" "A tristeza de \vsn(arg2) machuca seu coração."
 end_script
 
 waypoint receive_damage_unclothed
-say "" "\vsn[arg2] sente vergonha por não estar totalmente vestido(a)."
+say "" "\vsn(arg2) sente vergonha por não estar totalmente vestido(a)."
 end_script
 
 

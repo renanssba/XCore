@@ -57,36 +57,45 @@ public class GameController : MonoBehaviour {
 
 
   public void Update() {
-    if(Input.GetKeyDown(KeyCode.F4) && Application.isEditor){
+
+    /// CHEAT INPUTS
+    if(!Application.isEditor) {
+      return;
+    }
+
+    if(Input.GetKeyDown(KeyCode.F4)) {
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
-    if(Input.GetKeyDown(KeyCode.F5) && Application.isEditor) {
+    if(Input.GetKeyDown(KeyCode.F5)) {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    if(Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+    if(Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift)) {
       GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
                                                          GlobalData.instance.people[1]};
       VsnController.instance.StartVSNContent("add_exp 100", "custom");
     }
-    if(Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+    if(Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKey(KeyCode.LeftShift)) {
       GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
                                                          GlobalData.instance.people[2]};
       VsnController.instance.StartVSNContent("add_exp 100", "custom");
     }
-    if(Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+    if(Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKey(KeyCode.LeftShift)) {
       GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
                                                          GlobalData.instance.people[3]};
       VsnController.instance.StartVSNContent("add_exp 100", "custom");
     }
-    if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+    if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift)) {
       VsnController.instance.StartVSN("debug_menu");
     }
-    if (Input.GetKeyDown(KeyCode.P) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+    if (Input.GetKeyDown(KeyCode.P) && Input.GetKey(KeyCode.LeftShift)) {
       if(VsnController.instance.state != ExecutionState.PLAYING){
         VsnController.instance.state = ExecutionState.PLAYING;
       } else {
         VsnController.instance.state = ExecutionState.STOPPED;
       }
+    }
+    if(Input.GetKeyDown(KeyCode.B) && Input.GetKey(KeyCode.LeftShift)) {
+      BattleController.instance.DamageEnemyHp(BattleController.instance.GetCurrentEnemy().hp-1);
     }
   }
 

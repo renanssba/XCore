@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LogWindow : MonoBehaviour {
+public class VsnLogWindow : MonoBehaviour {
   
-  public GameObject logWindow;
+  public ScreenTransitions logWindowPanel;
   public TextMeshProUGUI logText;
   public ScrollRect logScrollRect;
-
   public string logString;
 
 
   public void Awake(){
-//    ResetLog();
+    //ResetLog();
+    //UpdateText();
   }
 
 
@@ -28,10 +28,12 @@ public class LogWindow : MonoBehaviour {
       logString += "\n\n";
     }
 
-    if(speakerName != null && speakerName.CompareTo("")!=0){
+    if(!string.IsNullOrEmpty(speakerName)){
       logString += "<color=#E18F9D>" + speakerName + "</color>\n";
+      logString += text;
+    } else {
+      logString += "<i>"+text+"</i>";
     }
-    logString += text;
     UpdateText();
   }
 
@@ -47,11 +49,12 @@ public class LogWindow : MonoBehaviour {
 
 
   public void OpenLogWindow(){
-    logWindow.SetActive(true);
+    UpdateText();
+    logWindowPanel.ShowPanel();
     logScrollRect.verticalNormalizedPosition = 0f;
   }
 
   public void CloseLogWindow(){
-    logWindow.SetActive(false);
+    logWindowPanel.HidePanel();
   }
 }

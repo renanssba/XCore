@@ -80,6 +80,15 @@ public class ResourcesManager : MonoBehaviour {
     }
   }
 
+  public CharacterSpriteCollection GetCharacterSpriteCollection(string charName) {
+    foreach(CharacterSpriteCollection collection in characterSpritesCollections) {
+      if(collection.name == charName) {
+        return collection;
+      }
+    }
+    return null;
+  }
+
   public void GenerateCharacterSprites(string[] characterNames) {
     foreach(string charName in characterNames) {
       NewSpriteCollection(charName);
@@ -91,6 +100,7 @@ public class ResourcesManager : MonoBehaviour {
     Color[] bodyPixels, casualPixels, uniformPixels, auxColorArray;
     Sprite newSprite;
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
+
     spriteCollection.name = charName;
     spriteCollection.baseBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
     spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-sad");
@@ -101,53 +111,10 @@ public class ResourcesManager : MonoBehaviour {
     spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
 
     spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
-
-    //Sprite aux = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
-    //if(aux != null) {
-    //  spriteCollection.incompleteCasualClothes = aux;
-    //}
     spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
 
     characterSpritesCollections.Add(spriteCollection);
     return;
-
-
-    Texture2D bodyTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-base");
-    bodyPixels = bodyTex.GetPixels();
-    Texture2D casualTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-casual");
-
-    // If there's no casual texture, use the base for everything
-    if(casualTex == null) {
-      spriteCollection.schoolClothes = spriteCollection.baseBody;
-      spriteCollection.casualClothes = spriteCollection.baseBody;
-      return;
-    }
-    casualPixels = casualTex.GetPixels();
-    Texture2D uniformTex = Resources.Load<Texture2D>(characterSpritesPath + charName + "-uniform");
-    uniformPixels = uniformTex.GetPixels();
-
-
-    Debug.LogWarning("body texture format: " + bodyTex.format);
-    Debug.LogWarning("casual texture format: " + casualTex.format);
-    Debug.LogWarning("uniform texture format: " + uniformTex.format);
-
-    auxColorArray = ImageAddition(bodyPixels, uniformPixels);
-    Texture2D auxTexture = new Texture2D(casualTex.width, casualTex.height);
-    auxTexture.SetPixels(auxColorArray);
-    auxTexture.Apply();
-    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f), 1000);
-    spriteCollection.schoolClothes = newSprite;
-
-
-    auxColorArray = ImageAddition(bodyPixels, casualPixels);
-    auxTexture = new Texture2D(casualTex.width, casualTex.height);
-    auxTexture.SetPixels(auxColorArray);
-    auxTexture.Apply();
-    newSprite = Sprite.Create(auxTexture, new Rect(0, 0, auxTexture.width, auxTexture.height), new Vector2(0.5f, 0f));
-    spriteCollection.casualClothes = newSprite;
-    
-
-    characterSpritesCollections.Add(spriteCollection);
   }
 
   public Color[] ImageAddition(Color[] a, Color[] b) {

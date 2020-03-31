@@ -1,39 +1,9 @@
 ﻿for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked arg1
+  check_skill_activation "players" currentSkillChecked arg1
 endfor
-end_script
 
-
-goto *arg1
-
-
-waypoint enemy_appears
-for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked "enemy_appears"
+for currentSkillChecked #enemySkillsCount
+  check_skill_activation "enemy" currentSkillChecked arg1
 endfor
-end_script
 
-
-waypoint turn_started
-for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked "turn_started"
-endfor
-end_script
-
-waypoint enemy_defeated
-for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked "battle_ended"
-endfor
-end_script
-
-waypoint before_enemy_attack
-for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked "before_enemy_attack"
-endfor
-end_script
-
-waypoint after_enemy_attack
-for currentSkillChecked #currentCoupleSkillsCount
-  check_skill_activation currentSkillChecked "after_enemy_attack"
-endfor
 end_script

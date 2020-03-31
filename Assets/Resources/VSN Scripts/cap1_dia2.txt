@@ -9,24 +9,21 @@ say "Ricardo" "Ei, o que é isso? Mais uma carta na minha mesa?"
 say "" "O garoto pega o envelope e lê a carta. O conteúdo está escrito com recortes de revistas, como anteriormente:"
 
 if foi_na_biblioteca == 1
-  say "Carta" "mEus CumPRImeNtOs. DesCUlpe-ME  pElO  trAnSTorNO de ONTEM."
-  say "AcoVARDEI-me E fuGi aNtEs de cuMPrIr mEU objETiVO."
-  say "AgrAdeÇO pOr sEu EsFOrço em cOMpARecer."
+  say "Carta" "Meus cumprimentos. Desculpe-me pelo transtorno de ontem."
+  say "Acovardei-me e fugi antes de cumprir meu objetivo."
+  say "Agradeço por seu esforço em comparecer."
   add_exp 20 1
   
-  say "Carta" "Me cHAmo bEAtrIce. pRazEr em coNHEcê-lO, RICARDO."
-  say "aGOrA eStaMoS aPrEsENtAdOs. pOdEMOS tENtAR nOvaMENTE?"
-  say "" "O resto da carta é escrito à caneta, em uma caligrafia apertada."
-  say "Carta" "Ps: Minhas revistas velhas acabaram. Caso possua interesse em me responder, deixe uma carta em meu armário. É a quarta porta no corredor."
-
+  say "Carta" "Me chamo Beatrice. Prazer em conhecê-lo, Ricardo."
+  say "Agora estamos apresentados. Podemos tentar novamente?"
 else
-  say "Carta" "mInha carTA de onTem foi UM erRO."
-  say "cOmPreEnDo suA reLutAnCiA eM mE cOrrEsPoNdEr. uMa reaÇao coMum, jÁ qUE sOMOs deSCOnHecidOs."
-  say "Carta" "Me cHAmo bEAtrIce. pRazEr em coNHEcê-lO, RICARDO."
-  say "aGOrA eStaMoS aPrEsENtAdOs. pOdEMOS tENtAR nOvaMENTE?"
-  say "O resto da carta é escrito à caneta, em uma caligrafia apertada."
-  say "Ps: Minhas revistas velhas acabaram. Caso possua interesse em me responder, deixe uma carta em meu armário. É a quarta porta no corredor."
+  say "Carta" "Minha carta de ontem foi um erro."
+  say "Compreendo sua relutancia em me corresponder. Uma reação comum, já que somos desconhecidos."
+  say "Me chamo beatrice. Prazer em conhecê-lo, Ricardo."
+  say "Agora estamos apresentados. Podemos tentar novamente?"
 endif
+say "O resto da carta é escrito à caneta, em uma caligrafia apertada."
+say "Carta" "Ps: Minhas revistas velhas acabaram. Caso possua interesse em me responder, deixe uma carta em meu armário. É a quarta porta no corredor."
 
 change_person_name 2 "Beatrice"
 
@@ -64,6 +61,6 @@ end_script
 
 
 waypoint dia_5
-goto_script "cap1_dia5"
+goto_script "cap1_dia_festa"
 goto_script "show_people_screen"
 end_script

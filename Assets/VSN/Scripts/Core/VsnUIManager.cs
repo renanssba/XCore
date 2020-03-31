@@ -38,6 +38,8 @@ public class VsnUIManager : MonoBehaviour {
   public TextMeshProUGUI textInputPanelDescriptionText;
   public TMP_InputField textInputField;
 
+  public VsnLogWindow logWindow;
+
   public Button skipButton;
   public string skipButtonWaypoint;
 
@@ -116,6 +118,10 @@ public class VsnUIManager : MonoBehaviour {
       vsnMessageText.GetComponent<VsnConsoleSimulator>().FinishShowingCharacters();
     } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH) {
       VsnAudioManager.instance.PlaySfx("ui_dialogue_advance");
+
+      /// Log text
+      logWindow.AddToLog(vsnMessageTitle.text, vsnMessageText.text);
+
       VsnController.instance.state = ExecutionState.PLAYING;
       ShowClickMessageIcon(false);
       if(vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen == false) {
@@ -355,23 +361,17 @@ public class VsnUIManager : MonoBehaviour {
   }
 
   public void SetDialogBoxPosition(string position) {
-    RectTransform rect = vsnMessagePanel.GetComponent<RectTransform>();
+    RectTransform rect = vsnMessageText.transform.parent.GetComponent<RectTransform>();
 
     switch(position) {
       case "center":
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchorMin = new Vector2(0.5f, 0.5f);
-        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
         break;
       case "up":
-        rect.pivot = new Vector2(0.5f, 1f);
-        rect.anchorMin = new Vector2(0.5f, 1f);
-        rect.anchorMax = new Vector2(0.5f, 1f);
+        rect.anchoredPosition = new Vector2(0f, 305f);
         break;
       case "down":
-        rect.pivot = new Vector2(0.5f, 0f);
-        rect.anchorMin = new Vector2(0.5f, 0f);
-        rect.anchorMax = new Vector2(0.5f, 0f);
+        rect.anchoredPosition = new Vector2(0f, -382f);
         break;
     }
   }

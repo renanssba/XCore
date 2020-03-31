@@ -37,6 +37,8 @@ public class Enemy : Battler {
   public string[] givesConditionNames;
   public int giveStatusConditionChance;
 
+  public int[] skills;
+
   public string[] tags;
 
   public RewardType rewardType;

@@ -10,6 +10,7 @@ public class Actor2D : MonoBehaviour {
   public SpriteRenderer[] renderers;
   public SpriteRenderer[] buffAuraRenderers;
   public new ParticleSystem particleSystem;
+  public SpriteRenderer shadowRenderer;
 
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
@@ -33,8 +34,8 @@ public class Actor2D : MonoBehaviour {
 
   [ContextMenu("Print Material Property Block")]
   public void PrintMaterialPropertyBlock() {
-    print("Flash Color:" + materialProperties.GetColor("_FlashColor"));
-    print("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
+    Debug.Log("Flash Color:" + materialProperties.GetColor("_FlashColor"));
+    Debug.Log("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
   }
 
 
@@ -151,10 +152,29 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetEnemyGraphics() {
-    if(!string.IsNullOrEmpty(enemy.spriteName)) {
-      renderers[0].sprite = LoadSprite("Enemies/" + enemy.spriteName);
-    } else {
+    if(string.IsNullOrEmpty(enemy.spriteName)){
       gameObject.SetActive(false);
+      return;
+    }
+
+    if(enemy.spriteName.StartsWith("actor(")) {
+      string actorName = Utils.GetStringArgument(enemy.spriteName);
+
+      Debug.LogWarning("Setting enemy sprite to: " + actorName);
+
+      CharacterSpriteCollection spriteCollection = ResourcesManager.instance.GetCharacterSpriteCollection(actorName);
+
+      renderers[0].sprite = spriteCollection.baseBody;
+      renderers[0].flipX = true;
+      renderers[1].sprite = spriteCollection.casualClothes;
+      renderers[1].gameObject.SetActive(true);
+      renderers[1].flipX = true;
+      shadowRenderer.transform.localScale = Vector3.one;
+    } else {
+      renderers[0].sprite = LoadSprite("Enemies/" + enemy.spriteName);
+      renderers[0].flipX = false;
+      renderers[1].gameObject.SetActive(false);
+      shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
     }
   }
 

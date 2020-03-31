@@ -8,12 +8,54 @@ namespace Command {
   public class CheckSkillActivationCommand : VsnCommand {
 
     public override void Execute() {
-      int skillId = (int)args[0].GetNumberValue();
-      string situation = args[1].GetStringValue();
+      int skillId = (int)args[1].GetNumberValue();
+      string situation = args[2].GetStringValue();
+
+      switch(args[0].GetStringValue()) {
+        case "players":
+          CheckPlayersSkills(skillId, situation);
+          break;
+        case "enemy":
+          CheckEnemySkills(skillId, situation);
+          break;
+      }
+    }
+
+
+    public void CheckEnemySkills(int skillId, string situation) {
+      Enemy enemy = BattleController.instance.GetCurrentEnemy();
+      int partyMemberId = 3;
+      Skill skillChecked = BattleController.instance.GetSkillById(enemy.skills[skillId]);
+
+
+      Debug.LogWarning("CHECKING for ENEMY skill activation. skill: "+skillChecked.name+", situation: "+situation);
+      // return if not checking the correct activation trigger, or the skill is not passive / unlocked
+      if(skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
+        return;
+      }
+
+      // check trigger chance
+      if(Random.Range(0, 100) >= skillChecked.triggerChance) {
+        return;
+      }
+      Debug.LogWarning("Check for skill activation. Passed trigger chance.");
+
+
+      // check all trigger conditions
+      if(!AreAllConditionsMet(skillChecked.triggerConditions, partyMemberId)) {
+        return;
+      }
+
+
+      Debug.LogWarning("Skill activated.");
+      // activate passive skill
+      ActivatePassiveSkill(skillChecked, partyMemberId);
+    }
+
+
+    public void CheckPlayersSkills(int skillId, string situation) {
       Relationship relationship = GlobalData.instance.GetCurrentRelationship();
       int partyMemberId = -1;
-      int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
-      string conditionArgument;
       switch(relationship.skilltree.skills[skillId].affectsPerson) {
         case SkillAffectsCharacter.boy:
           partyMemberId = 0;
@@ -24,72 +66,91 @@ namespace Command {
       }
       Skill skillChecked = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillId].id);
 
-      Debug.LogWarning("CHECKING for skill activation. skill: "+skillChecked.name+", situation: "+situation);
 
+      Debug.LogWarning("CHECKING for PLAYER skill activation. skill: "+skillChecked.name+", situation: "+situation);
       // return if not checking the correct activation trigger, or the skill is not passive / unlocked
-      if(!relationship.skilltree.skills[skillId].isUnlocked || skillChecked.type != SkillType.passive  || skillChecked.activationTrigger.ToString() != situation) {
+      if(!relationship.skilltree.skills[skillId].isUnlocked || skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
         return;
       }
-
-      Debug.LogWarning("Skill is viable.");
+      Debug.LogWarning("Skill is trigged.");
 
       // check trigger chance
       if(Random.Range(0, 100) >= skillChecked.triggerChance) {
         return;
       }
-
       Debug.LogWarning("Check for skill activation. Passed trigger chance.");
 
-      // check trigger conditions
-      foreach(string rawCondition in skillChecked.triggerConditions) {
-        string condition = rawCondition.Trim();
+
+
+      // check all trigger conditions
+      if(!AreAllConditionsMet(skillChecked.triggerConditions, partyMemberId)) {
+        return;
+      }
+
+      
+      Debug.LogWarning("Skill activated.");
+      // activate passive skill
+      ActivatePassiveSkill(skillChecked, partyMemberId);
+    }
+
+
+    public bool AreAllConditionsMet(string[] allConditions, int partyMemberId) {
+      string conditionArgument;
+      int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+
+
+      foreach(string condition in allConditions) {
+        conditionArgument = Utils.GetStringArgument(condition);
 
         Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
 
         if(condition.StartsWith("enemy_has_tag")) {
-          conditionArgument = GetArgument(condition);
           if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemy().tags)) {
-            return;
+            return false;
           }
         }
 
-        if(condition.StartsWith("turn")) {
-          conditionArgument = GetArgument(condition);
+        if(condition.StartsWith("is_turn")) {
           if(VsnSaveSystem.GetIntVariable("currentBattleTurn") != int.Parse(conditionArgument)) {
-            return;
+            return false;
+          }
+        }
+
+        if(condition.StartsWith("turn_is_multiple")) {
+          if(VsnSaveSystem.GetIntVariable("currentBattleTurn") % int.Parse(conditionArgument) != 0) {
+            return false;
           }
         }
 
         if(condition.StartsWith("received_item_with_tag")) {
           Debug.LogWarning("Checking received_item_with_tag. Action: " + BattleController.instance.selectedActionType[currentPlayerTurn]);
           if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useItem) {
-            return;
+            return false;
           }
-          conditionArgument = GetArgument(condition);
+          conditionArgument = Utils.GetStringArgument(condition);
           Debug.LogWarning("Condition argument: " + conditionArgument);
           if(!TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].tags) ||
              BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != partyMemberId) {
-            return;
+            return false;
           }
         }
 
 
         if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == partyMemberId) {
-          return;
+          return false;
         }
 
         if(condition == "self_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") != partyMemberId) {
-          return;
+          return false;
         }
 
         if(condition == "defending" && BattleController.instance.selectedActionType[partyMemberId] != TurnActionType.defend) {
-          return;
+          return false;
         }
       }
-
-      // activate passive skill
-      ActivatePassiveSkill(skillChecked, skillId);
+      return true;
     }
+
 
     public bool TagIsInArray(string tagToCheck, string[] tags) {
       foreach(string tag in tags) {
@@ -100,39 +161,11 @@ namespace Command {
       return false;
     }
 
-
-    public string GetArgument(string condition) {
-      int start = condition.IndexOf("(");
-      int end = condition.IndexOf(")");
-
-      if(start == -1 || end == -1){
-        return null;
-      }
-
-      string argumentName = condition.Substring(start+1, (end-start-1));
-      Debug.LogWarning("GET ARGUMENT: '"+argumentName+"'  ");
-
-      return argumentName;
-    }
-
-
-    public static void ActivatePassiveSkill(Skill skillToActivate, int skillPosition) {
-      Debug.LogWarning("Activating passive skill: " + skillToActivate);
+    
+    public static void ActivatePassiveSkill(Skill skillToActivate, int partyMemberId) {
       BattleController battle = BattleController.instance;
-      Relationship relationship = GlobalData.instance.GetCurrentRelationship();
-      int partyMemberId = 0;
 
-      switch(relationship.skilltree.skills[skillPosition].affectsPerson) {
-        case SkillAffectsCharacter.boy:
-          partyMemberId = 0;
-          break;
-        case SkillAffectsCharacter.girl:
-          partyMemberId = 1;
-          break;
-        case SkillAffectsCharacter.couple:
-          return;
-      }
-
+      Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);
       VsnController.instance.state = ExecutionState.WAITING;
       battle.StartCoroutine(battle.ExecuteCharacterSkill(partyMemberId, partyMemberId, skillToActivate));
     }
@@ -140,6 +173,7 @@ namespace Command {
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
+        VsnArgType.stringArg,
         VsnArgType.numberArg,
         VsnArgType.stringArg
       });

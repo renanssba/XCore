@@ -25,7 +25,19 @@ else
 endif
 
 waypoint ir_ana
-say "" "Ricardo chega mais perto de Ana e do outro cara. Ele acena para a amiga discretamente, mas ela está distraída com o rapaz."
+set_current_couple 1
+if #currentRelationshipHeartLocksOpened < 2
+  say "" "Ricardo chega mais perto de Ana e encosta em seu ombro. A garota se vira pra ele."
+  say "Ricardo" "Tá tudo bem, Ana?"
+  say "" "A garota, meio tonta, responde com uma voz amaciada."
+  say "Ana" "Eu tô ótima. Tá tudo bem por aqui."
+  say "" "Percebendo que a garota está alterada, Ricardo fica preocupado."
+  say "Ricardo" "Eu não acho que esteja tudo bem, Ana. Vem comigo, eu te levo pra casa."
+  say "Ana" "Sai! Para de me tratar como criança. Você não é o meu pai!"
+  say "" "A garota empurra Ricardo pra longe e se volta novamente para o outro rapaz com quem estava conversando."
+  goto bad_end
+endif
+say "" "Ricardo chega mais perto de Ana. Ele acena para a amiga discretamente, mas ela está distraída com o rapaz."
 say "Ana" "Você é tão lindo, deixa eu te dar um beijo!"
 say "Rapaz" "Sai daqui, para com isso!"
 say "" "O rapaz parece estar resistindo aos avanços de Ana."
@@ -56,7 +68,7 @@ say "Ana continua chorando baixinho. Sem saber o que fazer, Ricardo a abraça."
 say "Ana" "Me desculpa..."
 say "Ricardo" "Calma, vai ficar tudo bem."
 say "Ana" "Me desculpa, desculpa..."
-say "" "Ana não tem o costume de chorar. Alguma coisa deve está-la deixando muito angustiada."
+say "" "Ana não tem o costume de chorar. Alguma coisa deve estar deixando-a muito angustiada."
 say "Ricardo" "Tá tudo bem... Não precisa pedir desculpa. Eu não sabia que você gostava daquele idiota."
 say "Ana" "Eu.. Eu não gosto... Mas a pessoa que eu gosto.. *snif* nunca vai ficar comigo..."
 say "" "Ricardo parece surpreso com a frase."
@@ -83,7 +95,7 @@ say "Ana" "O que você tá dizendo?"
 say "Ricardo" "Que.. que eu quero ficar junto contigo pra sempre. Como a gente sempre esteve!"
 say "Ana" "É... sério?"
 say "Ricardo" "Sério!"
-say "Ana" "A gente pode ir.. num encontro?"
+say "Ana" "A gente pode ir... num encontro?"
 say "Ricardo" "Claro! Quando você quiser."
 
 add_exp 100
@@ -91,8 +103,19 @@ goto end
 
 
 waypoint ir_beatrice
+set_current_couple 2
 say "" "Ricardo chega mais perto de Beatrice, que está isolada."
 say "Ricardo" "Oi, que bom que veio! Eu não sabia se você viria."
+if #currentRelationshipHeartLocksOpened < 2
+  say "" "A garota se vira para Ricardo."
+  say "Beatrice" "Saia. Deixe-me em paz."
+  say "Ricardo" "Você está bem?"
+  say "Beatrice" "Tentei vir aqui e me expôr  a pessoas, mas este lugar é péssimo: apertado, escuro demais e com música muito alta."
+  say "Ricardo" "Entendo. Quer conversar um pouco em outro lugar?"
+  say "Beatrice" "Não. Estou me retirando daqui. E sujiro que faça o mesmo."
+  say "" "A garota se afasta de Ricardo e vai embora."
+  goto bad_end
+endif
 say "" "A garota não responde."
 say "Ricardo" "Hum.. Beatrice?"
 say "" "Beatrice levanta o rosto com uma certa dificuldade."
@@ -112,14 +135,14 @@ say "Beatrice" "Eu vou morrer, Ricardo... eu vou morrer..."
 say "Ricardo" "Calma, eu tô aqui com você. Vai ficar tudo bem."
 say "" "Ricardo continua tranquilizando a garota."
 say "A crise de ansiedade perdura por mais alguns angustiantes minutos que parecem não ter fim."
-say "Felizmente, Beatrice consegue retomar o controle de si e superar sua crise."
+say "Felizmente, Beatrice consegue retomar o controle de si e sentir-se um pouco melhor."
 say "Beatrice" "...Desculpe-me por ter feito você testemunhar algo assim."
 say "Ricardo" "Relaxa, não precisa se desculpar."
 say "Beatrice" "Eu... não me sinto muito bem em lugares muito lotados."
 say "Ricardo" "Eu imagino. Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal..."
 say "Beatrice" "Tudo bem. Não haveria como você saber."
 say "Eu tenho tentado superar, porém creio que vir a um local tão lotado ainda seja demais para mim."
-say "...Mas quando estamos juntos eu...me sinto mais segura."
+say "Mas quando estamos juntos... eu me sinto mais segura."
 
 add_exp 100
 goto end
@@ -129,11 +152,16 @@ goto end
 
 
 waypoint ir_clara
+set_current_couple 3
 say "" "Ricardo tira um pequeno presente do bolso e vai em direção ao grupo de Clara."
 say "A garota está com a atenção focada nas outras pessoas e não percebe sua aproximação."
 say "Ele tenta se colocar dentro do círculo de pessoas discretamente, mas ninguém percebe sua presença lá."
 say "Ricardo" "(Droga...)"
 say "" "Ele tenta acenar para a garota por cima do grupo e chamar seu nome baixinho."
+if #currentRelationshipHeartLocksOpened < 2
+  say "" "...Mesmo assim ela não percebe a presença dele."
+  goto bad_end
+endif
 say "Ricardo" "Cla-Clara..."
 say "" "...Mesmo assim ela não percebe a presença dele. Um dos garotos do lado dela, no entanto, percebe."
 say "Rapaz" "Ei Clara, parece que o Biscoitinho aqui quer falar com você."
@@ -210,6 +238,12 @@ say "Portanto, fica comigo."
 say "" "Ricardo e Clara se abraçam novamente."
 
 goto end
+
+
+waypoint bad_end
+say "" "Ricardo se sente mal e decide ir embora da festa."
+goto end
+
 
 
 waypoint end
