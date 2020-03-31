@@ -400,12 +400,15 @@ MonoBehaviour:
   - {fileID: 212671571431646902}
   buffAuraRenderers: []
   particleSystem: {fileID: 0}
+  shadowRenderer: {fileID: 212790983289272396}
   weaknessCardRenderer: {fileID: 212791035993478718}
   weaknessCardText: {fileID: 114077906113043638}
-  dateChallenge:
+  enemy:
     name: 
-    scriptName: 
     id: 0
+    attributes: 00000000000000000000000000000000
+    statusConditions: []
+    scriptName: 
     attributeEffectivity: []
     level: 0
     stage: 0
@@ -414,224 +417,19 @@ MonoBehaviour:
     appearSfxName: 
     maxHp: 0
     hp: 0
-    attributes: 
     attackAttribute: 0
     attackPower: 0
     attackSfxName: 
     givesConditionNames: []
     giveStatusConditionChance: 0
+    skills: 
+    tags: []
     rewardType: 0
     rewardId: 0
-  person:
-    name: 
-    isMale: 0
-    isHuman: 1
-    state: 0
-    attributes: 
-    sp: 3
-    favoriteMatter: 
-    mostHatedMatter: 
-    inventory:
-      owner:
-        name: 
-        isMale: 0
-        isHuman: 1
-        state: 0
-        attributes: 
-        sp: 3
-        favoriteMatter: 
-        mostHatedMatter: 
-        inventory:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        giftsReceived:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        statusConditions: []
-        id: 0
-        faceId: 0
-      itemListings: []
-    giftsReceived:
-      owner:
-        name: 
-        isMale: 0
-        isHuman: 1
-        state: 0
-        attributes: 
-        sp: 3
-        favoriteMatter: 
-        mostHatedMatter: 
-        inventory:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        giftsReceived:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        statusConditions: []
-        id: 0
-        faceId: 0
-      itemListings: []
-    statusConditions: []
-    id: 0
-    faceId: 0
   animator: {fileID: 95008165558837914}
   targetSelectButton: {fileID: 0}
+  choosingActionIndicator: {fileID: 0}
+  spottedIcon: {fileID: 0}
 --- !u!212 &212197706070645912
 SpriteRenderer:
   m_ObjectHideFlags: 1

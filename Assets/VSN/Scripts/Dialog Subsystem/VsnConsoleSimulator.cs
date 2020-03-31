@@ -29,6 +29,7 @@ public class VsnConsoleSimulator : MonoBehaviour {
     showLettersCoroutine = StartCoroutine(RevealCharacters());
   }
 
+
   public void FinishShowingCharacters(){
     VsnUIManager.instance.ShowClickMessageIcon(true);
     VsnUIManager.instance.isTextAppearing = false;

@@ -19,9 +19,10 @@ public class SpecialCodes {
       initialString = currentString;
 
       currentString = InterpretVariableValue(currentString);
+      currentString = InterpretEnemyName(currentString);
 
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentDateEventName());
+      currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentEnemyName());
       if(BattleController.instance.GetCurrentPlayer() != null) {
         currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().name);
       }
@@ -55,8 +56,8 @@ public class SpecialCodes {
   }
 
   public static string InterpretVariableValue(string initial) {
-    int start = initial.IndexOf("\\vsn[");
-    int end = initial.IndexOf("]");
+    int start = initial.IndexOf("\\vsn(");
+    int end = initial.IndexOf(")");
 
     if(start == -1 || end == -1) {
       return initial;
@@ -71,6 +72,23 @@ public class SpecialCodes {
     final += varString + initial.Substring(end + 1, initial.Length - end - 1);
 
     //Debug.LogWarning("VARIABLE INTERPRETATION:\nFrom: "+initial+"\nTo: "+final);
+
+    return final;
+  }
+
+  public static string InterpretEnemyName(string initial) {
+    int start = initial.IndexOf("\\enemy_name(");
+    int end = initial.IndexOf(")");
+
+    if(start == -1 || end == -1) {
+      return initial;
+    }
+
+    string enemyId = initial.Substring(start + 12, (end - start - 12));
+    string enemyName = BattleController.instance.allEnemies[int.Parse(enemyId)].name;
+
+    string final = initial.Substring(0, start);
+    final += enemyName + initial.Substring(end + 1, initial.Length - end - 1);
 
     return final;
   }
@@ -122,6 +140,8 @@ public class SpecialCodes {
         return BattleController.instance.dateLength;
       case "#partyLength":
         return BattleController.instance.partyMembers.Length;
+      case "#enemiesLength":
+        return 1; // TODO: implement
       case "#day":
         return GlobalData.instance.day;
       case "#max_days":
@@ -183,7 +203,13 @@ public class SpecialCodes {
         } else {
           return -1;
         }
-        break;
+      case "#enemySkillsCount":
+        Enemy bat = BattleController.instance.GetCurrentEnemy();
+        if(bat != null) {
+          return bat.skills.Length;
+        } else {
+          return -1;
+        }
       default:
         return 0f;
     }

@@ -5,13 +5,12 @@ endif
 goto_script "enter_observation" "school morning"
 if daytime == 0
   say "" "Chegando no telhado..."
-  say "Ana e Ricardo sentam-se para lanchar."
+  say "Ana e Ricardo se sentam para lanchar."
   fade_in 1
 endif
 if daytime == 1
   say "" "Ricardo e Ana encontram-se no clube esportivo."
-  say "Eles jogam futebol e treinam queimada. Ana obriga Ricardo a jogar até ficar esgotado, sob a desculpa de que isso irá aumentar sua resistência física."
-  say "Cansados e esgotados, eles compram um lanche e sentam-se em um banquinho para conversar."
+  say "Eles se sentam em um banquinho para conversar."
   fade_in 1
 endif
 
@@ -34,9 +33,9 @@ select_dialog
 
 waypoint dialog_acquaintances_1
 say "Ricardo" "Como andam os treinos, Ana?"
-say "Ana" "Estão ótimos, tô progredindo bastante."
+say "Ana" "Tão ótimos, tô progredindo bastante."
 say "" "Ricardo percebe que o braço de Ana está com um grande hematoma."
-say "Ricardo" "Tá tudo bem, Ana? Seu braço parece machucado."
+say "Ricardo" "Tá tudo bem mesmo? Seu braço parece machucado."
 say "Ana" "Tá sim. É um machucado pequeno, acontece o tempo todo por lá."
 say "Ricardo" "Tudo bem. Só tenta tomar mais cuidado, tá?"
 say "Ana" "Não se preocupa, é preciso muito mais que isso pra me parar."
@@ -116,7 +115,7 @@ say "Ana" "Você odiou, não é?"
 say "Ricardo" "Na-não... Eu g-gostei."
 say "" "Ana faz uma cara de choro."
 say "Ana" "Me desculpa, eu sei que tá horrível. Eu passei a noite toda ontem tentando, mas esse foi o que ficou melhorzinho."
-say "Eu só queria te agradecer por ser um amigo tão legal..."
+say "Você sempre cozinha pra mim, então eu quis retribuir..."
 say "" "Ricardo abre um sorriso."
 say "Ricardo" "O que importa é a intenção. Obrigado por ter se esforçado por mim, Ana."
 say "" "A garota sorri. Em seguida o estômago de Ricardo faz barulhos estranhos e ele corre para o banheiro."
@@ -152,7 +151,7 @@ say "Ana" "O único porém é que eu não vou ser pivô, entrei como armadora. M
 say "Ricardo" "Que ótimo! Fico feliz em ajudar."
 say "" "A garota fica com olhar distante por um momento."
 say "Ana" "Mas é uma pena... Acho que eu nunca vou ser a maior pivô de todos os tempos, afinal..."
-say "Ricardo" "Não, não desiste! A Ana que eu conheço nunca desiste!"
+say "Ricardo" "Não, não desista! A Ana que eu conheço nunca desiste!"
 say "Ana" "Eles têm uma pivô tão alta, e vivem dizendo que alguém da minha altura não serviria."
 say "Ricardo" "Mas não importa! Mostra pra eles que estão errados."
 say "Seja a melhor armadora que a nossa seleção já teve! E aí eles devem te deixar escolher jogar em outra posição."
@@ -186,7 +185,7 @@ goto end_dialog
 
 
 waypoint dialog_fallback
-say "" "Eles conversam sobre assuntos do dia-a-dia como livros que Ricardo está lendo e esportes que Ana gosta."
+say "" "Eles conversam sobre assuntos os livros que Ricardo está lendo e o último jogo de basquete que Ana assistiu."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 goto end_dialog
 
@@ -288,7 +287,6 @@ endif
 say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
 give_item 1 item_id 1
 play_sfx "relationship_up"
-//say "" "Ricardo entrega \vsn[item_name] para Ana."
 say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
 say "Ricardo" "Que bom que você gostou!"
 
@@ -306,7 +304,7 @@ end_script
 waypoint date_intro_2
 say "Ana" "Sabia que estreou o filme do Hopping James? Eu tô tão animada pra ver!"
 say "Ricardo" "Sério? Que legal! Quer ir comigo assistir?"
-say "Ana" "Quero! Vamo no cinema do shopping? É o cinema que eu mais gosto aqui na cidade."
+say "Ana" "Quero! Vamos no cinema do shopping? É o cinema que eu mais gosto aqui na cidade."
 say "Ricardo" "Ótimo! Vou comprar um baldão de pipoca pra gente."
 set_var date_objective "do cinema"
 goto_script "date"
@@ -325,7 +323,7 @@ end_script
 waypoint date_end_1
 say "" "Depois de caminharem um pouco, os dois ficam satisfeitos com o passeio."
 say "Ana" "Obrigada por ter vindo comigo, Ricardo. A gente devia passear mais vezes."
-say "Ricardo" "Claro!"
+say "Ricardo" "Vamos sim!"
 end_script
 
 waypoint date_end_2

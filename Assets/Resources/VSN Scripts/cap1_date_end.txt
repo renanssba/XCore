@@ -1,4 +1,12 @@
 ﻿
+if #currentDateId == 2
+  set_var dia_festa_clara #day
+  add_var dia_festa_clara 2
+  set_var vespera_festa_clara #day
+  add_var vespera_festa_clara 1
+endif
+
+
 if #currentGirlId == 1
   if #currentDateId == 1
     goto_script "cap1_conversa_ana" "date_end_1"

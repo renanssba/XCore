@@ -37,7 +37,7 @@ public class BattleController : MonoBehaviour {
   public int[] selectedTargetPartyId;
   public int dateLength;
 
-  public Enemy[] dateSegments;
+  public Enemy[] dateEnemies;
   public DateLocation currentDateLocation;
   public int currentDateId;
 
@@ -99,7 +99,6 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("battle_is_happening", true);
 
     SetDateLengthAndLocation();
-    GenerateDateEnemies();
   }
 
   public bool IsBattleHappening() {
@@ -190,17 +189,17 @@ public class BattleController : MonoBehaviour {
 
   public Enemy GetCurrentEnemy() {
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if(dateSegments.Length <= currentDateEvent) {
+    if(dateEnemies.Length <= currentDateEvent) {
       return null;
     }
-    return dateSegments[currentDateEvent];
+    return dateEnemies[currentDateEvent];
   }
 
-  public string GetCurrentDateEventName() {
+  public string GetCurrentEnemyName() {
     if(GetCurrentEnemy() == null) {
       return "";
     }
-    return dateSegments[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
+    return dateEnemies[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
   }
 
   public int GetPartyMemberPosition(Battler character) {
@@ -377,7 +376,7 @@ public class BattleController : MonoBehaviour {
 
   public ActionSkin GetActionSkin(Person user, Skill usedSkill) {
     string sexModifier = (user.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn[" + usedSkill.attribute.ToString() + "_action" + sexModifier + "_name]");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.attribute.ToString() + "_action" + sexModifier + "_name)");
     return GetActionSkinByName(actionSkinName);
   }
 
@@ -716,34 +715,44 @@ public class BattleController : MonoBehaviour {
   public void SetDateLengthAndLocation() {
     switch(currentDateId) {
       case 1:
-        dateLength = 3;
+        dateLength = 2;
+        dateEnemies = new Enemy[] {allEnemies[0], allEnemies[9]};
         currentDateLocation = DateLocation.park;
         break;
       case 2:
-        dateLength = 4;
+        dateLength = 3;
         currentDateLocation = DateLocation.shopping;
+        GenerateDateEnemies();
         break;
       case 3:
-        dateLength = 5;
+        dateLength = 4;
         currentDateLocation = DateLocation.park;
+        GenerateDateEnemies();
         break;
       default:
         dateLength = 1;
         currentDateLocation = DateLocation.park;
+        GenerateDateEnemies();
         break;
     }
+  }
+
+  public void SetCustomBattle(int enemyId) {
+    currentDateLocation = DateLocation.park;
+    dateLength = 1;
+    dateEnemies = new Enemy[] {allEnemies[enemyId]};
   }
 
   public void GenerateDateEnemies() {
     List<int> selectedEnemies = new List<int>();
 
-    dateSegments = new Enemy[dateLength];
+    dateEnemies = new Enemy[dateLength];
     for(int i = 0; i < dateLength; i++) {
       int selectedId = GetNewEnemy(selectedEnemies);
-      dateSegments[i] = allEnemies[selectedId];
+      dateEnemies[i] = allEnemies[selectedId];
       selectedEnemies.Add(selectedId);
     }
-    System.Array.Sort(dateSegments, new System.Comparison<Enemy>(
+    System.Array.Sort(dateEnemies, new System.Comparison<Enemy>(
                       (event1, event2) => event1.stage.CompareTo(event2.stage)));
     RecoverEnemiesHp();
   }
@@ -765,7 +774,7 @@ public class BattleController : MonoBehaviour {
     int selectedEnemyId;
     do {
       //selectedId = Random.Range(0, allDateEvents.Count);
-      selectedEnemyId = Random.Range(0, 12);
+      selectedEnemyId = Random.Range(0, 9);
 
       Debug.LogWarning("selected location: " + allEnemies[selectedEnemyId].location);
       Debug.LogWarning("date location: " + currentDateLocation.ToString());
@@ -810,13 +819,13 @@ public class BattleController : MonoBehaviour {
 
   public void RecoverEnemiesHp() {
     for(int i = 0; i < dateLength; i++) {
-      dateSegments[i].hp = dateSegments[i].maxHp;
+      dateEnemies[i].hp = dateEnemies[i].maxHp;
     }
   }
 
   public void FleeDateSegment(int positionId) {
     List<int> currentUsedEvents = new List<int>();
-    foreach(Enemy d in dateSegments) {
+    foreach(Enemy d in dateEnemies) {
       currentUsedEvents.Add(d.id);
     }
 
@@ -827,7 +836,7 @@ public class BattleController : MonoBehaviour {
 
     int selectedId = GetNewEnemy(currentUsedEvents);
     //selectedId = 1;
-    dateSegments[positionId] = allEnemies[selectedId];
+    dateEnemies[positionId] = allEnemies[selectedId];
     currentUsedEvents.Clear();
 
     RecoverEnemiesHp();
@@ -878,10 +887,11 @@ public class BattleController : MonoBehaviour {
         attackPower = int.Parse(dic["attack power"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
+        skills = Utils.SeparateInts(dic["skill ids"]),
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
         giveStatusConditionChance = int.Parse(dic["give status chance"]),
         tags = loadedTags
-      });
+      }); ;
     }
   }
 

@@ -100,7 +100,7 @@ public class ActionButton : MonoBehaviour {
 
   public ActionSkin GetActionSkin() {
     string sexModifier = (person.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn[" + skill.attribute.ToString() + "_action" + sexModifier + "_name]");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + skill.attribute.ToString() + "_action" + sexModifier + "_name)");
     return BattleController.instance.GetActionSkinByName(actionSkinName);
   }
 

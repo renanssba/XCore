@@ -11,6 +11,23 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1407134549672380}
   m_IsPrefabParent: 1
+--- !u!1 &1014746350792112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4145434904781356}
+  - component: {fileID: 212100792775340686}
+  - component: {fileID: 95229141121419944}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1077894525437926
 GameObject:
   m_ObjectHideFlags: 1
@@ -64,21 +81,20 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1488955813021410
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4746019315825970}
   - component: {fileID: 212255736803506778}
-  - component: {fileID: 95411191820016784}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Extra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1565366184384062
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +127,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!4 &4145434904781356
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014746350792112}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4746019315825970}
+  m_Father: {fileID: 4162589284178532}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4162589284178532
 Transform:
   m_ObjectHideFlags: 1
@@ -122,7 +152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4672036275419760}
-  - {fileID: 4746019315825970}
+  - {fileID: 4145434904781356}
   - {fileID: 4358942511139566}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -178,8 +208,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4162589284178532}
-  m_RootOrder: 1
+  m_Father: {fileID: 4145434904781356}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23221578943477206
 MeshRenderer:
@@ -223,13 +253,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226262314541930}
   m_Mesh: {fileID: 0}
---- !u!95 &95411191820016784
+--- !u!95 &95229141121419944
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488955813021410}
+  m_GameObject: {fileID: 1014746350792112}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ae5ac24bcb536f34aa6bf971777fa026, type: 2}
@@ -367,15 +397,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
+  - {fileID: 212100792775340686}
   - {fileID: 212255736803506778}
   buffAuraRenderers: []
   particleSystem: {fileID: 0}
+  shadowRenderer: {fileID: 212774079780565214}
   weaknessCardRenderer: {fileID: 212412870717371696}
   weaknessCardText: {fileID: 114240051784135032}
-  dateChallenge:
+  enemy:
     name: 
-    scriptName: 
     id: 0
+    attributes: 00000000000000000000000000000000
+    statusConditions: []
+    scriptName: 
     attributeEffectivity: []
     level: 0
     stage: 0
@@ -384,245 +418,25 @@ MonoBehaviour:
     appearSfxName: 
     maxHp: 0
     hp: 0
-    attributes: 
     attackAttribute: 0
     attackPower: 0
     attackSfxName: 
     givesConditionNames: []
     giveStatusConditionChance: 0
+    skills: 
+    tags: []
     rewardType: 0
     rewardId: 0
-  person:
-    name: 
-    isMale: 0
-    isHuman: 1
-    state: 0
-    attributes: 
-    maxSp: 3
-    sp: 3
-    favoriteMatter: 
-    mostHatedMatter: 
-    inventory:
-      owner:
-        name: 
-        isMale: 0
-        isHuman: 1
-        state: 0
-        attributes: 
-        maxSp: 3
-        sp: 3
-        favoriteMatter: 
-        mostHatedMatter: 
-        inventory:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            maxSp: 3
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        giftsReceived:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            maxSp: 3
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        statusConditions: []
-        id: 0
-        faceId: 0
-      itemListings: []
-    giftsReceived:
-      owner:
-        name: 
-        isMale: 0
-        isHuman: 1
-        state: 0
-        attributes: 
-        maxSp: 3
-        sp: 3
-        favoriteMatter: 
-        mostHatedMatter: 
-        inventory:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            maxSp: 3
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        giftsReceived:
-          owner:
-            name: 
-            isMale: 0
-            isHuman: 1
-            state: 0
-            attributes: 
-            maxSp: 3
-            sp: 3
-            favoriteMatter: 
-            mostHatedMatter: 
-            inventory:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                name: 
-                isMale: 0
-                isHuman: 1
-                state: 0
-                attributes: 
-                maxSp: 3
-                sp: 3
-                favoriteMatter: 
-                mostHatedMatter: 
-                statusConditions: []
-                id: 0
-                faceId: 0
-              itemListings: []
-            statusConditions: []
-            id: 0
-            faceId: 0
-          itemListings: []
-        statusConditions: []
-        id: 0
-        faceId: 0
-      itemListings: []
-    statusConditions: []
-    id: 0
-    faceId: 0
-  animator: {fileID: 95411191820016784}
+  animator: {fileID: 95229141121419944}
   targetSelectButton: {fileID: 0}
---- !u!212 &212255736803506778
+  choosingActionIndicator: {fileID: 0}
+  spottedIcon: {fileID: 0}
+--- !u!212 &212100792775340686
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488955813021410}
+  m_GameObject: {fileID: 1014746350792112}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -661,6 +475,51 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!212 &212255736803506778
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1488955813021410}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 13eef7c7b6d814844881051c38f70ab3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 14.1, y: 18.8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!212 &212412870717371696
 SpriteRenderer:

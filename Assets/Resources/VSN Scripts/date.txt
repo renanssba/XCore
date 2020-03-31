@@ -3,7 +3,6 @@ bg null
 
 wait 0.5
 set_var currentDateEvent 0
-setup_date
 theater_animation "setup_date"
 
 move_camera "close_shot" 0
@@ -19,7 +18,7 @@ wait 0.5
 theater_animation "party_enters"
 wait 1.5
 
-say "" "\couple estavam andando tranquilamente em direção ao local \vsn[date_objective], quando de repente..."
+say "" "\couple estavam andando tranquilamente em direção ao local \vsn(date_objective), quando de repente..."
 
 /// DATE TUTORIAL (?)
 // if tutorial_date == 0
@@ -163,7 +162,7 @@ endfor
 waypoint win_date
 enable_input false
 //say "" "Depois de muitos percalços..."
-goto_script "date_end"
+goto_script "cap1_date_end"
 say "char_name/none" "date/say_4"
 // show_date_ui false
 

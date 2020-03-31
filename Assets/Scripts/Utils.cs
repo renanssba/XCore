@@ -367,6 +367,32 @@ public class Utils {
     }
     return loadedTags;
   }
+
+  public static int[] SeparateInts(string raw) {
+    if(string.IsNullOrEmpty(raw)) {
+      return new int[0];
+    }
+
+    string[] loadedTags = raw.Split(',');
+    int[] ints = new int[loadedTags.Length];
+    for(int i=0; i<loadedTags.Length; i++) {
+      ints[i] = int.Parse(loadedTags[i].Trim());
+    }
+    return ints;
+  }
+
+  public static string GetStringArgument(string clause) {
+      int start = clause.IndexOf("(");
+      int end = clause.IndexOf(")");
+
+      if(start == -1 || end == -1){
+        return null;
+      }
+
+      string argumentName = clause.Substring(start+1, (end-start-1));
+      Debug.Log("GET ARGUMENT: '"+argumentName+"'  ");
+      return argumentName;
+    }
 }
 
 public static class MyExtensions {
