@@ -1,0 +1,73 @@
+goto *arg1
+
+waypoint event_statement
+say "Imp" "Hihihahaha!"
+say "Fertiliel" "Um demônio...!"
+say "Imp" "Tome isso!"
+say "Ana" "Ricardo, não estou me sentindo bem..."
+//ANIMATION HERE
+theater_animation "enemy_enters"
+say "Ana Sombria" "Grrr..."
+say "Ricardo" "O que é isso...?"
+say "Ana" "Ela... se parece exatamente comigo!"
+say "Ana Sombria" "Grrr!!!"
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "think"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "talk"
+end_script
+
+
+waypoint guts_action_boy
+say "Ana Sombria" "Ricardo..."
+say "\active" "Fique longe!"
+set_var pre_attack  "\active empurra a sombra!"
+end_script
+
+waypoint guts_action_girl
+say "\active" "Fique longe!"
+set_var pre_attack  "\active empurra a sombra!"
+end_script
+
+waypoint intelligence_action_boy
+say "\active" "Que tipo de criatura é você? Nos deixe em paz!"
+say "Ana Sombria" "Ricardo..."
+set_var pre_attack "\active pressiona a sombra!"
+end_script
+
+waypoint intelligence_action_girl
+say "\active" "(Eu acho que ela é...parte de mim.)"
+say "\active" "(Se eu me concentrar, talvez eu consiga fazê-la desaparecer!)"
+set_var pre_attack "\active se concentra em pensamentos felizes!"
+end_script
+
+waypoint charisma_action_boy
+say "Ana Sombria" "Ricardo, fica comigo..."
+say "\active" "(Ela parece estar desesperada...)"
+set_var pre_attack "\active diz que tudo ficará bem!"
+end_script
+
+waypoint charisma_action_girl
+say "\active" "Você... sou eu?"
+say "Ana Sombria" "Você...eu...iguais..."
+say "\active" "Então..."
+set_var pre_attack "\active implora para que a sombra não ataque!"
+end_script
+
+
+waypoint attack_boy
+say "Ana Sombria" "Porque você não gosta de mim...?"
+set_var pre_attack "A sombra envolve \boy!"
+end_script
+
+waypoint attack_girl
+say "Ana Sombria" "Ele não te ama...ele não nos ama..."
+set_var pre_attack "A sombra envolve \girl!"
+end_script
+
+waypoint defeated
+say "" "A sombra de Ana se dissolve em névoa..."
+end_script
