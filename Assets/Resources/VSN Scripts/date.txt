@@ -16,7 +16,6 @@ fade_in 0.7
 wait 0.5
 
 theater_animation "party_enters"
-wait 1.5
 
 say "" "\couple estavam andando tranquilamente em direção ao local \vsn(date_objective), quando de repente..."
 
@@ -36,11 +35,9 @@ for currentDateEvent #dateLength
   play_music "battle1_intro" "battle1_loop"
   wait 0.8
 
-  theater_animation "enemy_enters"
   set_var currentBattleTurn -1
-  wait 1.2
-
   goto_script "\currentEventName" event_statement
+
   // if currentDateEvent == 0
     // say "\boy" "E agora, o que faremos?"
     // say "\girl" "Eu vou te proteger!"
@@ -105,7 +102,6 @@ for currentDateEvent #dateLength
   if #currentChallengeHp <= 0
     goto_script "\currentEventName" defeated
     theater_animation "enemy_leaves"
-    wait 0.7
     challenge_result true
     update_ui
     play_sfx "ui_success"

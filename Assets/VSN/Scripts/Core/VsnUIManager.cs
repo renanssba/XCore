@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Command;
 using TMPro;
-using TMPro.Examples;
 using DG.Tweening;
 
 public class VsnUIManager : MonoBehaviour {
@@ -19,6 +18,7 @@ public class VsnUIManager : MonoBehaviour {
   public Image vsnMessageTitlePanel;
   public GameObject talkingDialogArrow;
   public Image[] dialogBoxImages;
+  public VsnConsoleSimulator consoleSimulator;
 
   public Button screenButton;
   public RectTransform charactersPanel;
@@ -56,7 +56,7 @@ public class VsnUIManager : MonoBehaviour {
       instance = this;
     }
 
-    screenButton.onClick.AddListener(OnScreenButtonClick);
+    screenButton.onClick.AddListener(AdvanceTextInput);
     characters = new List<VsnCharacter>();
   }
 
@@ -70,7 +70,7 @@ public class VsnUIManager : MonoBehaviour {
     vsnMessagePanel.SetActive(value);
   }
 
-  public void SetText(string msg) {
+  public void ShowText(string msg) {
     ShowClickMessageIcon(false);
     Utils.SelectUiElement(screenButton.gameObject);
     //if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
@@ -82,15 +82,22 @@ public class VsnUIManager : MonoBehaviour {
     //} else{
     vsnMessageText.text = msg;
     //}
-    vsnMessageText.GetComponent<VsnConsoleSimulator>().StartShowingCharacters();
+    consoleSimulator.callAfterShowCharacters = FinishShowingCharacters;
+    consoleSimulator.StartShowingCharacters();
+  }
+
+
+  public void FinishShowingCharacters(){
+    ShowClickMessageIcon(true);
+    isTextAppearing = false;
+    if(consoleSimulator.autopass) {
+      AdvanceTextInput();
+      consoleSimulator.autopass = false;
+    }
   }
 
   public void SetTextAuto() {
-    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetAutoPassText();
-  }
-
-  public void SetTextBattle() {
-    vsnMessageText.GetComponent<VsnConsoleSimulator>().SetBattleText();
+    consoleSimulator.SetAutoPassText();
   }
 
   public void ShowClickMessageIcon(bool value){
@@ -112,10 +119,10 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void OnScreenButtonClick() {
+  public void AdvanceTextInput() {
     if(isTextAppearing) {
       isTextAppearing = false;
-      vsnMessageText.GetComponent<VsnConsoleSimulator>().FinishShowingCharacters();
+      consoleSimulator.FinishShowingCharacters();
     } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH) {
       VsnAudioManager.instance.PlaySfx("ui_dialogue_advance");
 
@@ -124,15 +131,15 @@ public class VsnUIManager : MonoBehaviour {
 
       VsnController.instance.state = ExecutionState.PLAYING;
       ShowClickMessageIcon(false);
-      if(vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen == false) {
+      if(consoleSimulator.dontHideMessageScreen == false) {
         ShowDialogPanel(false);
       }      
     }
   }
 
   public void PassBattleDialog() {
-    if(vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen) {
-      vsnMessageText.GetComponent<VsnConsoleSimulator>().dontHideMessageScreen = false;
+    if(consoleSimulator.dontHideMessageScreen) {
+      consoleSimulator.dontHideMessageScreen = false;
       ShowDialogPanel(false);
     }
   }

@@ -86,6 +86,11 @@ choices/no,Não,No
 choices/cancel,Cancelar,Cancel
 location/park,Parque,Park
 location/shopping,Shopping,Mall
+action/use_skill,\vsn(active) usa <color=yellow>\vsn(selected_action_name)</color>!,
+action/use_item,\vsn(active) usa <color=yellow>\vsn(selected_action_name)</color>!,
+action/defend,\active se prepara para o ataque do oponente.,
+action/flee,\couple tentam fugir da situação...,
+action/flee_fail,...mas não conseguem.,
 item/give/message,\boy entrega <color=yellow>\vsn[item_name]</color> para \girl.,\boy gives \girl a <color=yellow>\vsn[item_name]</color>.
 item/name/sports_clothes,Roupas Esportivas,Fitness Clothing
 item/description/sports_clothes,Um conjunto de roupas ideal para se exercitar.,
@@ -133,6 +138,10 @@ status_condition/name/angry,Irritado,Angry
 status_condition/description/angry,Incapaz de usar ações diferentes de atacar com Valentia,
 status_condition/name/spotted,Percebida,Spotted
 status_condition/description/spotted,Não pode atuar por alguns turnos,Can't act for some turns
+status_condition/receive,\vsn(target_name) fica <color=yellow>\vsn(status_condition)</color>.,
+status_condition/effect/turnDamageGuts,\vsn(target_name) sente a dor do seu machucado.,
+status_condition/effect/turnDamageIntelligence,A tristeza de \vsn(target_name) machuca seu coração.,
+status_condition/effect/turnDamageCharisma,\vsn(target_name) sente vergonha por não estar totalmente vestido(a).,
 improve_relationship/say_0,<color=yellow>\couple tornaram-se mais próximos!</color>,<color=yellow>\couple became closer to each other!</color>
 improve_relationship/say_1,<color=yellow>\couple tornaram-se muito mais próximos!</color>,<color=yellow>\couple became much closer to each other!</color>
 improve_relationship/say_2,<color=yellow>O relacionamento de \couple avançou! Agora eles tornaram-se Amigos Próximos!</color>,

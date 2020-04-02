@@ -1,6 +1,7 @@
 goto *arg1
 
 waypoint event_statement
+theater_animation "enemy_enters"
 say "" "O casal é abordado por dois vendedores de cartão de crédito! Os juros são exorbitantes!"
 
 set_var guts_action_boy_name "shout"
@@ -15,32 +16,32 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-say "" "\active diz na cara dos vendedores que não quer o cartão!"
-say "" "Os vendedores perdem a compostura!"
+set_var pre_attack "\active diz na cara dos vendedores que não quer o cartão!"
+//say "" "Os vendedores perdem a compostura!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active afirma que já possui o cartão e adora!"
-say "" "Os vendedores ficam surpresos!"
+set_var pre_attack "\active afirma que já possui o cartão e adora!"
+//say "" "Os vendedores ficam surpresos!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active puxa assunto com os vendedores sobre todas as coisas que irá comprar com o cartão novo!"
-say "" "Os vendedores ficam com pena!"
+set_var pre_attack "\active puxa assunto com os vendedores sobre todas as coisas que irá comprar com o cartão novo!"
+//say "" "Os vendedores ficam com pena!"
 end_script
 
 
 
 waypoint attack_boy
-say "" "Os vendedores oferecem o cartão para \boy fazendo um discurso ensaiado!"
-say "" "\boy fica sem jeito!"
+set_var pre_attack "Os vendedores oferecem o cartão para \boy fazendo um discurso ensaiado!"
+//say "" "\boy fica sem jeito!"
 end_script
 
 waypoint attack_girl
-say "" "Os vendedores oferecem o cartão para \girl fazendo um discurso ensaiado!"
-say "" "\girl fica sem jeito!"
+set_var pre_attack "Os vendedores oferecem o cartão para \girl fazendo um discurso ensaiado!"
+//say "" "\girl fica sem jeito!"
 end_script
 
 waypoint defeated

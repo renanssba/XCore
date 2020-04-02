@@ -63,6 +63,11 @@ public class GameController : MonoBehaviour {
       return;
     }
 
+    if(Input.GetKeyDown(KeyCode.S)) {
+      if(VsnUIManager.instance.skipButton.gameObject.activeSelf) {
+        //VsnUIManager.instance.skipButton.OnPointerDown();
+      }
+    }
     if(Input.GetKeyDown(KeyCode.F4)) {
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }

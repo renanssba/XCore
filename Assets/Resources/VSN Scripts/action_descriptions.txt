@@ -4,50 +4,27 @@
 
 waypoint skill
 waypoint item
-say "" "\active usa \vsn(selected_action_name)!"
+set_var pre_attack "\active usa <color=yellow>\vsn(selected_action_name)</color>!"
 end_script
 
 
 
 waypoint Sensor_skill
-say "" "\active analisa bastante o problema..."
+set_var pre_attack "\active analisa bastante o problema..."
 end_script
 
 waypoint Inspirar_skill
-say "" "\active encoraja \target a ser mais forte!"
+set_var pre_attack "\active encoraja \target a ser mais forte!"
 end_script
 
 
 
 waypoint flee
+set_var pre_attack "\couple tentam fugir da situação..."
 say "" "\couple tentam fugir da situação..."
 end_script
 
 waypoint flee_fail
+set_var pre_attack "...mas não conseguem."
 say "" "...mas não conseguem."
 end_script
-
-waypoint defend
-say "" "\active se prepara para o ataque do oponente."
-end_script
-
-
-
-waypoint receive_status_condition
-say "" "\vsn(arg2) fica <color=yellow>\vsn(arg3)</color>."
-end_script
-
-
-waypoint receive_damage_injured
-say "" "\vsn(arg2) sente a dor do seu machucado."
-end_script
-
-waypoint receive_damage_sad
-say "" "A tristeza de \vsn(arg2) machuca seu coração."
-end_script
-
-waypoint receive_damage_unclothed
-say "" "\vsn(arg2) sente vergonha por não estar totalmente vestido(a)."
-end_script
-
-

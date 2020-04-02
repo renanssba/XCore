@@ -49,6 +49,8 @@ public class BattleController : MonoBehaviour {
   public GameObject defendHitParticlePrefab;
   public GameObject detectParticlePrefab;
 
+  public VsnConsoleSimulator consoleSimulator;
+
   const float attackAnimationTime = 0.15f;
 
   public Color greenColor;
@@ -338,6 +340,8 @@ public class BattleController : MonoBehaviour {
 
     VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
 
+    yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
+
 
     TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -359,20 +363,93 @@ public class BattleController : MonoBehaviour {
     }
     
     targetActor.ShineRed();
-    targetActor.ShowDamageParticle((int)usedSkill.attribute, effectiveAttackDamage, effectivity);
+    targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
 
     yield return new WaitForSeconds(1f);
     
     target.TakeDamage(effectiveAttackDamage);
-    VsnUIManager.instance.PassBattleDialog();
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(1.5f);
 
-
+    UIController.instance.HideHelpMessagePanel();
     TheaterController.instance.UnfocusActors();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     VsnController.instance.state = ExecutionState.PLAYING;
   }
+
+
+
+  public IEnumerator ShowBattleDescription(string text) {
+    //UIController.instance.helpMessagePanel.ShowPanel();
+    UIController.instance.helpMessageText.text = text;
+    yield return consoleSimulator.ShowCharactersFromTheStart();
+  }
+
+  public IEnumerator AddtoBattleDescription(string textAdded) {
+    //UIController.instance.helpMessagePanel.ShowPanel();
+    int oldLength = UIController.instance.helpMessageText.text.Length;
+    string oldText = UIController.instance.helpMessageText.text;
+
+    if(!string.IsNullOrEmpty(consoleSimulator.consoleText.text)) {
+      consoleSimulator.consoleText.text = oldText + "\n" + textAdded;
+    } else {
+      consoleSimulator.consoleText.text = oldText + textAdded;
+    }
+
+    Debug.LogWarning("AddtoBattleDescription: " + textAdded + ". old length: " + oldLength+". old text: " + consoleSimulator.consoleText.text);
+    yield return consoleSimulator.ShowCharactersFromPoint(oldLength);
+  }
+
+
+
+  public IEnumerator ShowUseSkillMessage(string userName, string actionName) {
+    VsnSaveSystem.SetVariable("active", userName);
+    VsnSaveSystem.SetVariable("selected_action_name", actionName);
+
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_skill"));
+    yield return ShowBattleDescription(code);
+  }
+
+  public IEnumerator ShowUseItemMessage(string userName, string actionName) {
+    VsnSaveSystem.SetVariable("active", userName);
+    VsnSaveSystem.SetVariable("selected_action_name", actionName);
+
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_item"));
+    yield return ShowBattleDescription(code);
+  }
+
+  public IEnumerator ShowDefendMessage() {
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/defend"));
+    yield return ShowBattleDescription(code);
+  }
+
+  public IEnumerator ShowGetStatusConditionMessage(string targetName, string statusConditionName) {
+    VsnSaveSystem.SetVariable("target_name", targetName);
+    VsnSaveSystem.SetVariable("status_condition", statusConditionName);
+
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/receive"));
+    yield return new WaitForSeconds(0.5f);
+    yield return AddtoBattleDescription(code);
+    yield return new WaitForSeconds(0.8f);
+  }
+
+  public void ShowTakeStatusConditionDescription(string targetName, StatusConditionEffect statusEffect) {    
+    VsnSaveSystem.SetVariable("target_name", targetName);
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/effect/"+statusEffect.ToString()));
+    StartCoroutine(ShowStatusConditionDamage(code));
+  }
+
+  public IEnumerator ShowStatusConditionDamage(string code) {
+    VsnController.instance.state = ExecutionState.WAITING;
+
+    yield return ShowBattleDescription(code);
+    yield return new WaitForSeconds(1.5f);
+
+    UIController.instance.HideHelpMessagePanel();
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
 
   public ActionSkin GetActionSkin(Person user, Skill usedSkill) {
     string sexModifier = (user.isMale ? "_boy" : "_girl");
@@ -387,8 +464,8 @@ public class BattleController : MonoBehaviour {
     Battler target = GetBattlerByTargetId(targetId);
 
 
-    UIController.instance.SetHelpMessageText(usedSkill.GetPrintableName());
-    UIController.instance.ShowHelpMessagePanel();
+    yield return ShowUseSkillMessage(skillUserActor.battler.name, usedSkill.GetPrintableName());
+
 
     TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -430,17 +507,7 @@ public class BattleController : MonoBehaviour {
         foreach(string givenCondition in usedSkill.givesConditionNames) {
           target.ReceiveStatusConditionBySkill(usedSkill);
           StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
-          VsnArgument[] args = new VsnArgument[3];
-          args[0] = new VsnString("receive_status_condition");
-          args[1] = new VsnString(target.name);
-          args[2] = new VsnString(statusCondition.GetPrintableName());
-
-          StartCoroutine(WaitThenShowActionDescription(1f, args));
-          yield return new WaitForSeconds(0.5f);
-
-          TheaterController.instance.UnfocusActors();
-          UIController.instance.HideHelpMessagePanel();
-          yield break;
+          yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
         }
         break;
       case SkillSpecialEffect.becomeEnemyTarget:
@@ -472,6 +539,7 @@ public class BattleController : MonoBehaviour {
     Actor2D userActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
 
+    yield return ShowUseItemMessage(userActor.battler.name, usedItem.GetPrintableName());
 
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -517,19 +585,13 @@ public class BattleController : MonoBehaviour {
 
       if(receivedNewStatus) {
         StatusCondition statusCondition = GetStatusConditionByName(usedItem.givesConditionNames[0]);
-        VsnArgument[] args = new VsnArgument[3];
-        args[0] = new VsnString("receive_status_condition");
-        args[1] = new VsnString(partyMembers[targetId].name);
-        args[2] = new VsnString(statusCondition.GetPrintableName());
-
-        StartCoroutine(WaitThenShowActionDescription(1f, args));
-        yield break;
+        yield return ShowGetStatusConditionMessage(targetActor.battler.name, statusCondition.GetPrintableName());
       }
     }
-
     yield return new WaitForSeconds(0.5f);
 
     TheaterController.instance.UnfocusActors();
+    UIController.instance.HideHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
 
@@ -545,9 +607,11 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ExecuteDefend(int partyMemberId) {
     Actor2D currentActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
 
+    yield return ShowDefendMessage();
     currentActor.DefendActionAnimation();
 
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(1.5f);
+    UIController.instance.HideHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -581,6 +645,7 @@ public class BattleController : MonoBehaviour {
     StartCoroutine(ExecuteEnemyAttack(targetId));
   }
 
+
   public IEnumerator ExecuteEnemyAttack(int targetId) {
     Enemy attacker = GetCurrentEnemy();
     int attributeId = (int)attacker.attackAttribute;
@@ -592,14 +657,15 @@ public class BattleController : MonoBehaviour {
     bool causeDamage = (attacker.attackPower != 0);
 
 
+    yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
+
+
     TheaterController.instance.FocusActors(new Actor2D[] { targetActor, TheaterController.instance.enemyActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
 
-    TheaterController.instance.enemyActor.EnemyAttackAnim();
-
     VsnAudioManager.instance.PlaySfx(attacker.attackSfxName);
-
+    TheaterController.instance.enemyActor.EnemyAttackAnim();
     yield return new WaitForSeconds(attackAnimationTime + 0.8f);
 
     targetActor.ShineRed();
@@ -623,7 +689,7 @@ public class BattleController : MonoBehaviour {
       }
 
       TheaterController.instance.Screenshake();
-      targetActor.ShowDamageParticle(attributeId, effectiveAttackDamage, effectivity);
+      targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
       yield return new WaitForSeconds(1f);
 
       VsnUIManager.instance.PassBattleDialog();
@@ -647,23 +713,14 @@ public class BattleController : MonoBehaviour {
         bool receivedNewStatus = partyMembers[targetId].ReceiveStatusCondition(statusCondition);
 
         if(receivedNewStatus) {
-          VsnArgument[] args = new VsnArgument[3];
-          args[0] = new VsnString("receive_status_condition");
-          args[1] = new VsnString(partyMembers[targetId].name);
-          args[2] = new VsnString(statusCondition.GetPrintableName());
-
-          StartCoroutine(WaitThenShowActionDescription(1f, args));
-          yield return new WaitForSeconds(1f);
-
-          TheaterController.instance.UnfocusActors();
-          yield break;
+          yield return ShowGetStatusConditionMessage(targetActor.battler.name, statusCondition.GetPrintableName());
         }
       }
     }
+    yield return new WaitForSeconds(0.5f);
 
 
-    yield return new WaitForSeconds(0.2f);
-
+    UIController.instance.HideHelpMessagePanel();
     TheaterController.instance.UnfocusActors();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
@@ -840,20 +897,6 @@ public class BattleController : MonoBehaviour {
     currentUsedEvents.Clear();
 
     RecoverEnemiesHp();
-  }
-
-  public void ShowActionDescription(string waypointToLoad, string personName) {
-    VsnArgument[] args = new VsnArgument[2];
-    args[0] = new VsnString(waypointToLoad);
-    args[1] = new VsnString(personName);
-    Debug.LogWarning("WaitThenShowActionDescription. waypoint: " + waypointToLoad + ", person: " + personName);
-
-    StartCoroutine(WaitThenShowActionDescription(1f, args));
-  }
-
-  public IEnumerator WaitThenShowActionDescription(float waitTime, VsnArgument[] args) {
-    yield return new WaitForSeconds(waitTime);
-    Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
   }
 
 

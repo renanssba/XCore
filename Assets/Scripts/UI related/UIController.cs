@@ -269,8 +269,8 @@ public class UIController : MonoBehaviour {
   }
 
   public void ShowHelpMessagePanel() {
-    Debug.LogWarning("Show Help Message Panel!");
-    helpMessagePanel.ShowPanel();
+    //Debug.LogWarning("Show Help Message Panel!");
+    //helpMessagePanel.ShowPanel();
   }
 
   public void SetHelpMessageText(string helpMessage) {
@@ -278,7 +278,8 @@ public class UIController : MonoBehaviour {
   }
 
   public void HideHelpMessagePanel() {
-    helpMessagePanel.HidePanel();
+    helpMessageText.text = "";
+    //helpMessagePanel.HidePanel();
   }
 
 

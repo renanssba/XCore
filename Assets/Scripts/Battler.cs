@@ -240,9 +240,11 @@ public abstract class Battler {
         damage = Mathf.Max(1, damage);
         damage *= statusEffectStacks;
         TakeDamage(damage);
-        GetActor2D().ShowDamageParticle(((int)sc.statusEffect[i])-4, damage, 1f);
+        GetActor2D().ShowDamageParticle(damage, 1f);
         VsnController.instance.WaitForCustomInput();
-        BattleController.instance.ShowActionDescription("receive_damage_" + statusConditions[statusCondPos].name, name);
+
+        VsnSaveSystem.SetVariable("target_name", name);
+        BattleController.instance.ShowTakeStatusConditionDescription(name, sc.statusEffect[i]);
       }
     }
   }

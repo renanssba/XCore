@@ -1,0 +1,63 @@
+goto *arg1
+
+waypoint event_statement
+theater_animation "enemy_enters"
+say "" "Ao tentarem subir para o segundo andar, \boy dá um passo em falso e fica com o pé preso na escada rolante! Ele entra em pânico."
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "improvise"
+set_var intelligence_action_girl_name "improvise"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
+end_script
+
+
+
+
+waypoint guts_action_boy
+set_var pre_attack "\boy chuta a escada rolante para se libertar!"
+//say "A armadilha da escada-rolante se afrouxa!"
+end_script
+
+waypoint guts_action_girl
+set_var pre_attack "\girl chuta o motor da escada rolante!"
+//say "A armadilha da escada-rolante se afrouxa!"
+end_script
+
+waypoint intelligence_action_boy
+set_var pre_attack "\boy joga água no vão da escada rolante!"
+//say "" "O motor da escada começa a pifar!"
+end_script
+
+waypoint intelligence_action_girl
+set_var pre_attack "\girl joga água no vão da escada rolante!"
+//say "" "O motor da escada começa a pifar!"
+end_script
+
+waypoint charisma_action_boy
+set_var pre_attack "\boy puxa assunto com \girl para se acalmar e passar o tempo!"
+//say "A armadilha da escada-rolante se afrouxa!"
+end_script
+
+waypoint charisma_action_girl
+set_var pre_attack "\girl passa a mão na cabeça de \boy e diz que tudo ficará bem!"
+//say "A armadilha da escada-rolante se afrouxa!"
+end_script
+
+
+
+waypoint attack_boy
+set_var pre_attack "A escada machuca o pé de \boy!"
+set_var pre_attack "\boy sente dor!"
+end_script
+
+waypoint attack_girl
+set_var pre_attack "A escada rolante ruge de forma ameaçadora na direção de \girl!"
+//say "" "\girl fica receosa!"
+end_script
+
+
+waypoint defeated
+say "" "A escada rolante explode, libertando \boy!"
+end_script

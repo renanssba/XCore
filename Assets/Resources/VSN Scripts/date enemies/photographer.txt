@@ -1,6 +1,7 @@
 goto *arg1
 
 waypoint event_statement
+theater_animation "enemy_enters"
 say "" "FLASH! Um fotógrafo sem-noção aparece e começa a tirar fotos!"
 
 set_var guts_action_boy_name "shout"
@@ -15,32 +16,32 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-say "" "\active enche o ouvido do fotógrafo de poucas e boas!"
-say "" "O fotógrafo considera deixar o casal em paz!"
+set_var pre_attack "\active enche o ouvido do fotógrafo de poucas e boas!"
+//say "" "O fotógrafo considera deixar o casal em paz!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active argumenta sobre direitos de imagem!"
-say "" "O fotógrafo considera deixar o casal em paz!"
+set_var pre_attack "\active argumenta sobre direitos de imagem!"
+//say "" "O fotógrafo considera deixar o casal em paz!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active faz uma pose maneira!"
-say "" "O fotógrafo fica satisfeito!"
+set_var pre_attack "\active faz uma pose maneira!"
+//say "" "O fotógrafo fica satisfeito!"
 end_script
 
 
 
 waypoint attack_boy
-say "" "FLASH! O fotógrafo bate uma foto!"
-say "" "\boy é incomodado pela luz forte!"
+set_var pre_attack "FLASH! O fotógrafo bate uma foto!"
+//say "" "\boy é incomodado pela luz forte!"
 end_script
 
 waypoint attack_girl
-say "" "FLASH! O fotógrafo bate uma foto!"
-say "" "\girl é incomodada pela luz forte!"
+set_var pre_attack "FLASH! O fotógrafo bate uma foto!"
+//say "" "\girl é incomodada pela luz forte!"
 end_script
 
 waypoint defeated

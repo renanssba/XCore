@@ -17,9 +17,9 @@ namespace Command {
 
       if (args.Length >= 2) {
         VsnUIManager.instance.SetTextTitle(args[0].GetStringValue());
-        VsnUIManager.instance.SetText(args[1].GetStringValue());
+        VsnUIManager.instance.ShowText(args[1].GetStringValue());
       } else {
-        VsnUIManager.instance.SetText(args[0].GetStringValue());
+        VsnUIManager.instance.ShowText(args[0].GetStringValue());
       }
     }
 

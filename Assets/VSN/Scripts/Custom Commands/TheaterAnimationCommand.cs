@@ -14,12 +14,15 @@ namespace Command {
           break;
         case "party_enters":
           TheaterController.instance.PartyEntersScene();
+          VsnController.instance.WaitForSeconds(1.5f);
           break;
         case "enemy_enters":
           TheaterController.instance.EnemyEntersScene();
+          VsnController.instance.WaitForSeconds(1.2f);
           break;
         case "enemy_leaves":
           TheaterController.instance.EnemyLeavesScene();
+          VsnController.instance.WaitForSeconds(0.7f);
           break;
         case "setup_girl_interaction":
           TheaterController.instance.SetupGirlInteraction();

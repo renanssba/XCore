@@ -322,7 +322,7 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public void ShowDamageParticle(int attribute, int damage, float effectivity) {
+  public void ShowDamageParticle(int damage, float effectivity) {
     string particleString = damage.ToString();
     Color particleColor = ResourcesManager.instance.attributeColor[0];
 

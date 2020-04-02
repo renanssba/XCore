@@ -1,6 +1,7 @@
 goto *arg1
 
 waypoint event_statement
+theater_animation "enemy_enters"
 say "" "O casal encontra um coelhinho ferido, precisando de ajuda!"
 
 set_var guts_action_boy_name "motivate"
@@ -15,30 +16,30 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-say "" "\active diz para o coelho acreditar no seu potencial!"
-say "" "O coelhinho se sente mais motivado!"
+set_var pre_attack "\active diz para o coelho acreditar no seu potencial!"
+//say "" "O coelhinho se sente mais motivado!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active improvisa um curativo!"
-say "" "O coelhinho se sente um pouco melhor!"
+set_var pre_attack "\active improvisa um curativo!"
+//say "" "O coelhinho se sente um pouco melhor!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active tranquiliza o coelhinho com um gesto acolhedor!"
-say "" "O pobre animal se emociona!"
+set_var pre_attack "\active tranquiliza o coelhinho com um gesto acolhedor!"
+//say "" "O pobre animal se emociona!"
 end_script
 
 
 
 waypoint attack_boy
-say "" "O coelho olha para \boy com um olhar triste!"
+set_var pre_attack "O coelho olha para \boy com um olhar triste!"
 end_script
 
 waypoint attack_girl
-say "" "O coelho olha para \girl com um olhar triste!"
+set_var pre_attack "O coelho olha para \girl com um olhar triste!"
 end_script
 
 waypoint defeated

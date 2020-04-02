@@ -51,8 +51,7 @@ public class ActionsPanel : MonoBehaviour {
       availableButtons.Add(baseActionButtons[0]);
       baseActionButtons[1].SetActive(true);
       availableButtons.Add(baseActionButtons[1]);
-      baseActionButtons[2].SetActive(true);
-      availableButtons.Add(baseActionButtons[2]);
+      baseActionButtons[2].SetActive(false);
       baseActionButtons[3].SetActive(false);
     } else {
       baseActionButtons[0].SetActive(false);

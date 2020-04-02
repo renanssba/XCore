@@ -3,67 +3,91 @@ using System.Collections;
 using TMPro;
 
 public class VsnConsoleSimulator : MonoBehaviour {
-  public TMP_Text TmpText;
+  public TMP_Text consoleText;
 
   int totalCharacters;
   public bool autopass = false;
   public bool dontHideMessageScreen = false;
 
+  public voidFunctionDelegate callAfterShowCharacters;
+  public delegate void voidFunctionDelegate();
+
+  public float elapsedTime;
+  int numberOfCharsToShow;
+  float lastPlayedSfx;
+
   Coroutine showLettersCoroutine = null;
 
-  void Awake() {
-    TmpText = gameObject.GetComponent<TMP_Text>();
-  }
+  //void Awake() {
+  //  consoleText = gameObject.GetComponent<TMP_Text>();
+  //}
 
 
   public void SetAutoPassText(){
     autopass = true;
   }
 
-  public void SetBattleText() {
-    autopass = true;
-    dontHideMessageScreen = true;
-  }
-
   public void StartShowingCharacters(){
-    showLettersCoroutine = StartCoroutine(RevealCharacters());
+    showLettersCoroutine = StartCoroutine(ShowCharactersFromTheStart());
   }
 
 
   public void FinishShowingCharacters(){
-    VsnUIManager.instance.ShowClickMessageIcon(true);
-    VsnUIManager.instance.isTextAppearing = false;
-
-    TmpText.maxVisibleCharacters = totalCharacters;
-    TmpText.ForceMeshUpdate();
+    consoleText.maxVisibleCharacters = totalCharacters;
+    consoleText.ForceMeshUpdate();
     if(showLettersCoroutine != null){
       StopCoroutine(showLettersCoroutine);
     }
     showLettersCoroutine = null;
     Debug.LogWarning("Finished Showing Characters. Autopass is "+autopass);
-    if(autopass) {
-      VsnUIManager.instance.OnScreenButtonClick();
-      autopass = false;
+
+    if(callAfterShowCharacters != null) {
+      callAfterShowCharacters();
     }
   }
 
+  public void UpdateText() {
+    TMP_TextInfo textInfo = consoleText.textInfo;
 
-  public IEnumerator RevealCharacters() {
-    VsnUIManager.instance.isTextAppearing = true;
-    TMP_TextInfo textInfo = TmpText.textInfo;
-    int numberOfCharsToShow;
-    float elapsedTime = 0f;
-    float lastPlayedSfx = 0f;
-    TmpText.ForceMeshUpdate();
-
-    numberOfCharsToShow = 0;
+    consoleText.ForceMeshUpdate();
     totalCharacters = textInfo.characterCount;
+  }
 
+  public IEnumerator ShowCharactersFromTheStart() {
+    VsnUIManager.instance.isTextAppearing = true;
+    elapsedTime = 0;
+    numberOfCharsToShow = 0;
+    lastPlayedSfx = 0f;
+
+    UpdateText();
     while(numberOfCharsToShow < totalCharacters) {
-      TmpText.maxVisibleCharacters = numberOfCharsToShow;
+      consoleText.maxVisibleCharacters = numberOfCharsToShow;
 
       elapsedTime += Time.unscaledDeltaTime;
       numberOfCharsToShow = (int)(elapsedTime * VsnUIManager.instance.charsToShowPerSecond);
+      if(elapsedTime - lastPlayedSfx > VsnAudioManager.instance.dialogSfxTime){
+        lastPlayedSfx = elapsedTime;
+        VsnAudioManager.instance.PlayDialogSfx();
+      }
+      yield return null;
+    }
+    FinishShowingCharacters();
+  }
+
+  public IEnumerator ShowCharactersFromPoint(int minCharsToShow) {
+    VsnUIManager.instance.isTextAppearing = true;
+    elapsedTime = 0;
+    numberOfCharsToShow = minCharsToShow;
+    lastPlayedSfx = 0f;
+
+    UpdateText();
+    Debug.LogWarning("number of chars to show: " + numberOfCharsToShow + ", new length (totalCharacters): " + totalCharacters);
+    while(numberOfCharsToShow < totalCharacters) {
+      Debug.LogWarning("INSIDE LOOP. Showing "+numberOfCharsToShow+" chars. String: "+consoleText.text);
+      consoleText.maxVisibleCharacters = numberOfCharsToShow;
+
+      elapsedTime += Time.unscaledDeltaTime;
+      numberOfCharsToShow = minCharsToShow + (int)(elapsedTime * VsnUIManager.instance.charsToShowPerSecond);
       if(elapsedTime - lastPlayedSfx > VsnAudioManager.instance.dialogSfxTime){
         lastPlayedSfx = elapsedTime;
         VsnAudioManager.instance.PlayDialogSfx();

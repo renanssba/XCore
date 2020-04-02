@@ -1,6 +1,7 @@
 goto *arg1
 
 waypoint event_statement
+theater_animation "enemy_enters"
 say "Beatrice" "..."
 say "\boy" "Beatrice?"
 say "Beatrice" "...Então esta é a Ana, correto?"
@@ -20,28 +21,27 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-say "" "\active chuta o hot-dog gigante!"
-//say "" "\active chuta a salsicha de Jones!"
+set_var pre_attack "\active chuta o hot-dog gigante!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active insiste que atacar pessoas não vai fazer Jones se sentir melhor!"
+set_var pre_attack "\active insiste que atacar pessoas não vai fazer Jones se sentir melhor!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active promete ajudar Jones a conseguir um emprego que ele goste!"
+set_var pre_attack "\active promete ajudar Jones a conseguir um emprego que ele goste!"
 end_script
 
 
 
 waypoint attack_boy
-say "" "Jones esguicha ketchup e mostarda em \boy!"
+set_var pre_attack "Jones esguicha ketchup e mostarda em \boy!"
 end_script
 
 waypoint attack_girl
-say "" "Jones esguicha ketchup e mostarda em \girl!"
+set_var pre_attack "Jones esguicha ketchup e mostarda em \girl!"
 end_script
 
 waypoint defeated

@@ -1,6 +1,7 @@
 goto *arg1
 
 waypoint event_statement
+theater_animation "enemy_enters"
 say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
 
 set_var guts_action_boy_name "strike"
@@ -15,31 +16,32 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-say "" "\active soca o valentão no meio da cara!"
+set_var pre_attack "\active soca o valentão no meio da cara!"
 // say "" "O valentão limpa o rosto e se levanta com raiva!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-say "" "\active argumenta que as pessoas boas devem amar seus inimigos!"
+set_var pre_attack "\active argumenta que as pessoas boas devem amar seus inimigos!"
 // say "" "O valentão se sente confuso!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-say "" "\active elogia o topete do valentão!"
+set_var pre_attack "\active elogia o topete do valentão!"
 // say "" "O valentão se sente satisfeito!"
 end_script
 
 
 
 waypoint attack_boy
-say "" "O valentão humilha \boy com apelidos!"
+set_var pre_attack "O valentão humilha \boy com apelidos!"
 end_script
 
 waypoint attack_girl
-say "" " O valentão aplica uma cantada de mau-gosto em \girl!"
+set_var pre_attack "O valentão aplica uma cantada de mau-gosto em \girl!"
 end_script
+
 
 waypoint defeated
 say "" "O valentão vai embora!"
