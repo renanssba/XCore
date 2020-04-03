@@ -1,4 +1,4 @@
-﻿Shader "Fertiliel/Vertical Oscillation"
+﻿Shader "Fertiliel/Trippy/Vertical Oscillation"
 {
 	Properties
 	{
@@ -62,50 +62,4 @@
 		}
 	}
 }
-/*
-varying vec2 vTextureCoord;
-uniform sampler2D uSampler;
-
-uniform vec4 filterArea;
-uniform vec4 filterClamp;
-uniform vec2 dimensions;
-
-uniform float time;
-uniform float speed;
-uniform int lineHeight;
-uniform float intensity;
-uniform float frequency;
-vec2 loopCoord(vec2 v) {
-	if (v.x > filterClamp.z) {
-		v.x -= filterClamp.z;
-	}
-	else if (v.x < filterClamp.x) {
-		v.x += filterClamp.z;
-	}
-
-	if (v.y > filterClamp.w) {
-		v.y -= filterClamp.w;
-	}
-	else if (v.y < filterClamp.y) {
-		v.y += filterClamp.w;
-	}
-	return v;
-}
-
-void main(void)
-{
-	vec2 pixelCoord = vTextureCoord.xy * filterArea.xy;
-	vec2 coord = pixelCoord / dimensions;
-	if (coord.x > 1.0 || coord.y > 1.0) {
-		return;
-	}
-
-	float lh = float(lineHeight);
-	float sign = (mod(floor(pixelCoord.x), lh*2.0) < lh) ? 1.0 : -1.0;
-	float disp = sign * intensity * sin((time *speed) + frequency * coord.y) / 10.0;
-	vec2 displacedCoord = vec2(coord.x, coord.y + disp);
-
-	gl_FragColor = texture2D(uSampler, loopCoord(displacedCoord));
-}
-*/
 
