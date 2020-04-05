@@ -12,6 +12,13 @@ public enum TheaterEvent {
 }
 
 
+public enum BgEffect {
+  pulsingEffect,
+  distortingEffect,
+  count
+}
+
+
 public class TheaterController : MonoBehaviour {
 
   public static TheaterController instance;
@@ -33,7 +40,10 @@ public class TheaterController : MonoBehaviour {
   public Actor2D angelActor;
   public Actor2D enemyActor;
 
+  public GameObject[] bgEffectPrefabs;
+
   public SpriteRenderer bgRenderer;
+  public GameObject bgEffect;
 
   public const float enterAnimationDuration = 1.5f;
   public float focusAnimationDuration = 0.2f;
@@ -44,15 +54,15 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void SpawnEnemyActor() {
+  public GameObject SpawnEnemyActor(string enemyPrefabName) {
     Enemy dateEvent = BattleController.instance.GetCurrentEnemy();
     UIController.instance.difficultyText.text = "<size=68>NV </size>" + dateEvent.level;
 
-    GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + dateEvent.scriptName);
+    GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + enemyPrefabName);
     GameObject spawnedEnemy;
 
     if(prefabToSpawn == null) {
-      Debug.LogWarning("No prefab to load for enemy: " + dateEvent.scriptName + ". Using default prefab");
+      Debug.LogWarning("No prefab to load for enemy: " + enemyPrefabName + ". Using default prefab");
       spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, challengePosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
       enemyActor.SetEnemy(dateEvent);
@@ -61,6 +71,46 @@ public class TheaterController : MonoBehaviour {
       spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
       enemyActor.SetEnemy(dateEvent);
+    }
+    return spawnedEnemy;
+  }
+
+  public void ChangeActor(string actorName, string newActorPrefabName) {
+    Actor2D targetActor = null;
+
+    switch(actorName) {
+      case "main":
+        targetActor = mainActor;
+        break;
+      case "support":
+        targetActor = supportActor;
+        break;
+      case "angel":
+        targetActor = angelActor;
+        break;
+      case "enemy":
+        targetActor = enemyActor;
+        break;
+    }
+
+    if(targetActor != null) {
+      Destroy(targetActor.gameObject);
+    }
+
+    GameObject newObj = SpawnEnemyActor(newActorPrefabName);
+    switch(actorName) {
+      case "main":
+        mainActor = newObj.GetComponent<Actor2D>();
+        break;
+      case "support":
+        supportActor = newObj.GetComponent<Actor2D>();
+        break;
+      case "angel":
+        angelActor = newObj.GetComponent<Actor2D>();
+        break;
+      case "enemy":
+        enemyActor = newObj.GetComponent<Actor2D>();
+        break;
     }
   }
 
@@ -173,20 +223,31 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void EnemyEntersScene() {
-    Enemy currentChallenge = BattleController.instance.GetCurrentEnemy();
+    Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
 
-    SpawnEnemyActor();
+    SpawnEnemyActor(currentEnemy.scriptName);
 
-    currentChallenge.hp = currentChallenge.maxHp;
-    currentChallenge.RemoveAllStatusConditions();
+    currentEnemy.hp = currentEnemy.maxHp;
+    currentEnemy.RemoveAllStatusConditions();
 
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
-      VsnAudioManager.instance.PlaySfx(currentChallenge.appearSfxName);
+      VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
       InitializeChallengeLevelAndHp();
       PartyEntersBattleMode();
     });
+  }
+
+  public void ApplyBgEffect(BgEffect type, int intensity) {
+    if(bgEffect != null) {
+      Destroy(bgEffect);
+    }
+
+    if(intensity > 0) {
+      bgEffect = Instantiate(bgEffectPrefabs[(int)type], gameObject.transform);
+      bgEffect.GetComponent<Animator>().SetInteger("Intensity", intensity);
+    }
   }
 
   public void SetCharacterChoosingAction(int characterId) {
@@ -249,6 +310,25 @@ public class TheaterController : MonoBehaviour {
     enemyActor.transform.DOLocalMove(challengePosition, focusAnimationDuration);
   }
 
+
+
+
+  public void SetActorAnimatorParameter(string actorName, string parameterName, bool value) {
+    Actor2D actor = null;
+
+    switch(actorName) {
+      case "main":
+        actor = mainActor;
+        break;
+      case "support":
+        actor = supportActor;
+        break;
+      case "angel":
+        actor = angelActor;
+        break;
+    }
+    actor.SetParameter(parameterName, value);
+  }
 
   public void PartyEntersBattleMode() {
     mainActor.SetBattleMode(true);

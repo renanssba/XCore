@@ -19,8 +19,10 @@ public class VsnEffectManager : MonoBehaviour {
 		
   }
 
-  public void FlashScreen(float duration) {
-    flashScreenImage.GetComponent<CanvasGroup>().DOFade(1f, 0f);
+  public void FlashScreen(string colorName, float duration) {
+    flashScreenImage.color = Utils.GetColorByString(colorName);
+
+    flashScreenImage.GetComponent<CanvasGroup>().DOFade(0.8f, 0f);
     flashScreenImage.GetComponent<CanvasGroup>().DOFade(0f, duration);
   }
 

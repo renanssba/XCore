@@ -8,18 +8,13 @@ namespace Command{
 	public class FlashScreenCommand : VsnCommand {
 
 		public override void Execute (){
-      if(args.Length >= 1) {
-        VsnEffectManager.instance.FlashScreen(args[0].GetNumberValue());
-      } else {
-        VsnEffectManager.instance.FlashScreen(0.2f);
-      }
-		}
+      VsnEffectManager.instance.FlashScreen(args[0].GetStringValue(), args[1].GetNumberValue());
+    }
 
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[0]);
-
       signatures.Add(new VsnArgType[] {
+        VsnArgType.stringArg,
         VsnArgType.numberArg
       });
     }

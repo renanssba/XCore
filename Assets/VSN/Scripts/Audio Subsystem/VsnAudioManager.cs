@@ -119,8 +119,7 @@ public class VsnAudioManager : MonoBehaviour {
       return;
     }
 
-    if(introMusic == null &&
-       loopMusic == null){
+    if(introMusic == null && loopMusic == null){
       Debug.LogWarning("Setting music to null.");
       return;
     }

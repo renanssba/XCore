@@ -1,16 +1,34 @@
 goto *arg1
 
 waypoint event_statement
+theater_bg_effect "pulsingEffect" 1
+fade_music 0 2
+wait 2
+say "Ricardo" "Você tá sentindo isso?"
+say "Ana" "O ar... ele está ficando quente e pesado."
+theater_animation "enemy_enters"
 say "Imp" "Hihihahaha!"
-say "Fertiliel" "Um demônio...!"
+set_actor_animator_parameter "angel" "Choosing Action" true
+say "Fertiliel" "(Um... demônio?!)"
 say "Imp" "Tome isso!"
 say "Ana" "Ricardo, não estou me sentindo bem..."
+
+flash "red" 0.3
+wait 0.8
+flash "red" 0.3
+wait 0.8
+flash "red" 0.4
+change_actor "enemy" "boss_anna2"
+wait 1.2
+play_music "placeholder_boss"
+wait 0.5
+
 //ANIMATION HERE
-theater_animation "enemy_enters"
 say "Ana Sombria" "Grrr..."
 say "Ricardo" "O que é isso...?"
 say "Ana" "Ela... se parece exatamente comigo!"
 say "Ana Sombria" "Grrr!!!"
+set_actor_animator_parameter "angel" "Choosing Action" false
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"

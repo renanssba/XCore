@@ -199,6 +199,10 @@ public class Actor2D : MonoBehaviour {
     animator.SetBool("Attacking", value);
   }
 
+  public void SetParameter(string param, bool value) {
+    animator.SetBool(param, value);
+  }
+
 
   public void CharacterAttackAnim() {
     renderers[0].transform.DOMoveX(0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);

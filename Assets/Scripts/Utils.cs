@@ -351,6 +351,35 @@ public class Utils {
     return Attributes.guts;
   }
 
+  public static Color GetColorByString(string colorName) {
+    switch(colorName) {
+      case "red":
+        return Color.red;
+      case "green":
+        return Color.green;
+      case "blue":
+        return Color.blue;
+      case "yellow":
+        return Color.yellow;
+      case "cyan":
+        return Color.cyan;
+      case "magenta":
+        return Color.magenta;
+      case "gray":
+      case "grey":
+        return Color.gray;
+      case "white":
+        return Color.white;
+      case "black":
+        return Color.black;
+    }
+    Color c;
+    if(ColorUtility.TryParseHtmlString(colorName, out c)) {
+      return c;
+    }
+    return Color.magenta;
+  }
+
   public static Color ChangeColorAlpha(Color c, float alpha) {
     c.a = alpha;
     return c;
