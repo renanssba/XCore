@@ -108,12 +108,14 @@ public class Skill {
   public SkillType type;
   public ActionRange range;
 
-  public Attributes attribute;
-  public float power;
-
   public int spCost;
 
-  public SkillSpecialEffect skillSpecialEffect;
+  public SkillSpecialEffect specialEffect;
+  public float effectPower;
+
+  public Attributes damageAttribute;
+  public int damagePower;
+
   public string[] healsConditionNames;
   public string[] givesConditionNames;
   public int giveStatusChance;

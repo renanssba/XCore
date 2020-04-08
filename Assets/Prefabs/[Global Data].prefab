@@ -2284,6 +2284,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1253889479444918
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4510982304558276}
+  - component: {fileID: 114554042054546666}
+  m_Layer: 0
+  m_Name: sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1253916674241226
 GameObject:
   m_ObjectHideFlags: 1
@@ -6499,6 +6515,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1695367067033662
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4117841505169772}
+  - component: {fileID: 114073066948579034}
+  m_Layer: 0
+  m_Name: sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1696643068002322
 GameObject:
   m_ObjectHideFlags: 1
@@ -10466,6 +10498,19 @@ Transform:
   m_Father: {fileID: 4975530398143854}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4117841505169772
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695367067033662}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4350124372961818}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4119049968120004
 Transform:
   m_ObjectHideFlags: 1
@@ -12458,6 +12503,7 @@ Transform:
   - {fileID: 4832348393673146}
   - {fileID: 4789944693314760}
   - {fileID: 4574248467272978}
+  - {fileID: 4117841505169772}
   m_Father: {fileID: 4423280905515716}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14124,6 +14170,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4403768652475048}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4510982304558276
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253889479444918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4839306039923016}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4511721664669050
 Transform:
@@ -16803,6 +16862,7 @@ Transform:
   - {fileID: 4291930295862552}
   - {fileID: 4555349627684434}
   - {fileID: 4246214262635836}
+  - {fileID: 4510982304558276}
   m_Father: {fileID: 4423280905515716}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18943,6 +19003,25 @@ MonoBehaviour:
   - Language: English
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114073066948579034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695367067033662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Use em um inimigo para detectar suas fraquezas. Recarrega no final de cada
+      Encontro.
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114073141526302122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19118,13 +19197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\"daytimes\" index=1 tint> Tarde <sprite=\"daytimes\" index=1 tint>\n<size=46px>Escolha
+    Text: "<sprite=\"daytimes\" index=1 tint> Tarde <sprite=\"daytimes\" index=1 tint>\r\n<size=46px>Escolha
       sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: '<sprite="daytimes" index=1 tint> Afternoon <sprite="daytimes" index=1 tint>
-
-      <size=46px>Choose your action'
+    Text: "<sprite=\"daytimes\" index=1 tint> Afternoon <sprite=\"daytimes\" index=1
+      tint>\r\n<size=46px>Choose your action"
     Object: {fileID: 0}
 --- !u!114 &114082922910526258
 MonoBehaviour:
@@ -21833,12 +21911,11 @@ MonoBehaviour:
   translations:
   - Language: Portuguese
     Text: "<sprite=\"daytimes\" index=0 tint> Manh\xE3 <sprite=\"daytimes\" index=0
-      tint>\n<size=46px>Escolha sua a\xE7\xE3o"
+      tint>\r\n<size=46px>Escolha sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: '<sprite="daytimes" index=0 tint> Morning <sprite="daytimes" index=0 tint>
-
-      <size=46px>Choose your action'
+    Text: "<sprite=\"daytimes\" index=0 tint> Morning <sprite=\"daytimes\" index=0
+      tint>\r\n<size=46px>Choose your action"
     Object: {fileID: 0}
 --- !u!114 &114341541426479188
 MonoBehaviour:
@@ -22895,13 +22972,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\"daytimes\" index=2 tint> Noite <sprite=\"daytimes\" index=2 tint>\n<size=46px>Escolha
+    Text: "<sprite=\"daytimes\" index=2 tint> Noite <sprite=\"daytimes\" index=2 tint>\r\n<size=46px>Escolha
       sua a\xE7\xE3o"
     Object: {fileID: 0}
   - Language: English
-    Text: '<sprite="daytimes" index=2 tint> Evening <sprite="daytimes" index=2 tint>
-
-      <size=46px>Choose your action'
+    Text: "<sprite=\"daytimes\" index=2 tint> Evening <sprite=\"daytimes\" index=2
+      tint>\r\n<size=46px>Choose your action"
     Object: {fileID: 0}
 --- !u!114 &114438225973574720
 MonoBehaviour:
@@ -24061,6 +24137,24 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: \girl is impressed by the wisdom of \boy!
+    Object: {fileID: 0}
+--- !u!114 &114554042054546666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253889479444918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Sensor
+    Object: {fileID: 0}
+  - Language: English
+    Text: Sensor
     Object: {fileID: 0}
 --- !u!114 &114554769888082248
 MonoBehaviour:

@@ -2576,6 +2576,41 @@ Prefab:
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
+        type: 2}
+      propertyPath: m_textInfo.materialCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbeabc4ad34f7964c9f52ca2adf12e26, type: 2}
   m_IsPrefabParent: 0
@@ -4755,7 +4790,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -85.399414}
+  m_AnchoredPosition: {x: 0, y: -85.40039}
   m_SizeDelta: {x: 843.9, y: 170.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278328486
@@ -5640,8 +5675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -750.7098, y: 489.00003}
-  m_SizeDelta: {x: 232, y: 32}
+  m_AnchoredPosition: {x: -716.9, y: 379.3}
+  m_SizeDelta: {x: 139.42, y: 22.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &338546242
 GameObject:
@@ -8744,10 +8779,11 @@ MonoBehaviour:
     sprite: {fileID: 0}
     type: 0
     range: 0
-    attribute: 0
-    power: 0
     spCost: 0
-    skillSpecialEffect: 0
+    specialEffect: 0
+    effectPower: 0
+    damageAttribute: 0
+    damagePower: 0
     healsConditionNames: []
     givesConditionNames: []
     giveStatusChance: 0
@@ -11331,10 +11367,11 @@ MonoBehaviour:
     sprite: {fileID: 0}
     type: 0
     range: 0
-    attribute: 0
-    power: 0
     spCost: 0
-    skillSpecialEffect: 0
+    specialEffect: 0
+    effectPower: 0
+    damageAttribute: 0
+    damagePower: 0
     healsConditionNames: []
     givesConditionNames: []
     giveStatusChance: 0
@@ -18172,12 +18209,12 @@ Prefab:
     - target: {fileID: 114567016198921710, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114567016198921710, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1237282964663588, guid: dbeabc4ad34f7964c9f52ca2adf12e26, type: 2}
       propertyPath: m_IsActive
@@ -18269,12 +18306,12 @@ Prefab:
     - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114114052894755130, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114524010473801002, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 2}
@@ -18290,6 +18327,10 @@ Prefab:
         type: 2}
       propertyPath: m_Navigation.m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504592003366380, guid: dbeabc4ad34f7964c9f52ca2adf12e26, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbeabc4ad34f7964c9f52ca2adf12e26, type: 2}
@@ -20102,8 +20143,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 468, y: 72}
+  m_AnchoredPosition: {x: -0.0000044107, y: 0}
+  m_SizeDelta: {x: 278.84, y: 44.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036227210
 MonoBehaviour:
@@ -24350,6 +24391,11 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 760662d4bfd26dd4a80dad8fe68ef012, type: 2}
+    - target: {fileID: 114607790724795698, guid: 7397ec74f9972d24ba0b68ff138f4036,
+        type: 2}
+      propertyPath: m_ScrollSensitivity
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7397ec74f9972d24ba0b68ff138f4036, type: 2}
   m_IsPrefabParent: 0
@@ -30377,15 +30423,15 @@ RectTransform:
   m_GameObject: {fileID: 1365169287}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9999912, y: 1.9999912, z: 1.9999912}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 817546304}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -912.7, y: 488.50003}
-  m_SizeDelta: {x: 46, y: 41}
+  m_AnchoredPosition: {x: -807.7, y: 378.8}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1365169289
 MonoBehaviour:
@@ -41319,10 +41365,11 @@ MonoBehaviour:
     sprite: {fileID: 0}
     type: 0
     range: 0
-    attribute: 0
-    power: 0
     spCost: 0
-    skillSpecialEffect: 0
+    specialEffect: 0
+    effectPower: 0
+    damageAttribute: 0
+    damagePower: 0
     healsConditionNames: []
     givesConditionNames: []
     giveStatusChance: 0

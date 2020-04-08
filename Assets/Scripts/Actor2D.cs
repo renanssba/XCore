@@ -58,7 +58,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void UpdateCharacterGraphics() {
-    if(battler.id == 10) {
+    if(battler.id == (int)PersonId.fertiliel) {
       renderers[4].sprite = Resources.Load<Sprite>("Characters/hiding-spot-" + BattleController.instance.currentDateLocation.ToString());
       spottedIcon.SetActive(battler.IsSpotted());
       return;

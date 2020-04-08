@@ -7,6 +7,7 @@ public enum ItemType{
   gift,
   battle,
   night,
+  celestial,
   key
 }
 

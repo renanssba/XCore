@@ -34,7 +34,8 @@ public class VsnVariablesDebugPanel : MonoBehaviour {
   }
 
   public void Update() {
-    if(Input.GetKeyDown(KeyCode.Return) && customizeVariablePanel.gameObject.activeSelf) {
+    if((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+       && customizeVariablePanel.gameObject.activeSelf) {
       ConfirmVariableCustomization();
     }
   }

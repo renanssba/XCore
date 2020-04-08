@@ -5,19 +5,21 @@ theater_bg_effect "pulsingEffect" 1
 fade_music 0 2
 wait 2
 say "Ricardo" "Você tá sentindo isso?"
-say "Ana" "O ar... ele está ficando quente e pesado."
+say "Ana" "O ar... está ficando quente e pesado."
 theater_animation "enemy_enters"
-say "Imp" "Hihihahaha!"
+say "Demônio" "Inveja..."
 set_actor_animator_parameter "angel" "Choosing Action" true
-say "Fertiliel" "(Um... demônio?!)"
-say "Imp" "Tome isso!"
+say "Fertiliel" "(Um... demônio das sombras?!)"
+say "(Por que tem um desses por aqui?)"
+say "Demônio" "Raiva, insegurança..."
+say "Eu preciso... dessa humana..."
 say "Ana" "Ricardo, não estou me sentindo bem..."
 
-flash "red" 0.3
+flash "#BA2D21" 0.3
 wait 0.8
-flash "red" 0.3
+flash "#BA2D21" 0.3
 wait 0.8
-flash "red" 0.4
+flash "#BA2D21" 0.4
 change_actor "enemy" "boss_anna2"
 wait 1.2
 play_music "placeholder_boss"

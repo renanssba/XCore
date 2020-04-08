@@ -311,16 +311,16 @@ public class BattleController : MonoBehaviour {
   public int CalculateAttackDamage(Battler attacker, Skill usedSkill, Battler defender) {
     float damage;
 
-    damage = (3f*attacker.AttributeValue((int)usedSkill.attribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.attribute), 1f));
+    damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
     Debug.LogWarning("Character Hits! Damage:");
     Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
-    damage *= usedSkill.power * Random.Range(0.9f, 1.1f);
+    damage *= usedSkill.damagePower * Random.Range(0.9f, 1.1f);
 
     damage *= attacker.DamageMultiplier();
 
-    damage *= defender.DamageTakenMultiplier(usedSkill.attribute);
+    damage *= defender.DamageTakenMultiplier(usedSkill.damageAttribute);
     Debug.Log("Final damage: " + damage);
 
     // defend?
@@ -335,10 +335,10 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     Battler target = GetBattlerByTargetId(targetId);
     
-    float effectivity = target.GetAttributeEffectivity(usedSkill.attribute);
+    float effectivity = target.GetAttributeEffectivity(usedSkill.damageAttribute);
     int effectiveAttackDamage = CalculateAttackDamage(attacker, usedSkill, target);
 
-    VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.attribute);
+    VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.damageAttribute);
 
     yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
 
@@ -453,7 +453,7 @@ public class BattleController : MonoBehaviour {
 
   public ActionSkin GetActionSkin(Person user, Skill usedSkill) {
     string sexModifier = (user.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.attribute.ToString() + "_action" + sexModifier + "_name)");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
     return GetActionSkinByName(actionSkinName);
   }
 
@@ -477,7 +477,7 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(attackAnimationTime + 0.8f);
     VsnUIManager.instance.PassBattleDialog();
 
-    switch(usedSkill.skillSpecialEffect) {
+    switch(usedSkill.specialEffect) {
       case SkillSpecialEffect.sensor:
         targetActor.ShineRed();
         targetActor.ShowWeaknessCard(true);
@@ -1000,24 +1000,20 @@ public class BattleController : MonoBehaviour {
           newSkill.range = ActionRange.randomEnemy;
           break;
       }
-
-      newSkill.attribute = Utils.GetAttributeByString(entry["attribute"]);
-      if(!string.IsNullOrEmpty(entry["power"])) {
-        newSkill.power = float.Parse(entry["power"]);
-      }
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
       }
 
-      if(newSkill.type == SkillType.attack) {
-        newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.attribute];
-      } else {
-        newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
+      newSkill.specialEffect = GetSkillEffectByString(entry["special effect"]);
+      if(!string.IsNullOrEmpty(entry["effect power"])) {
+        newSkill.effectPower = float.Parse(entry["effect power"]);
       }
 
-      newSkill.animation = entry["animation"];
+      newSkill.damageAttribute = Utils.GetAttributeByString(entry["damage attribute"]);
+      if(!string.IsNullOrEmpty(entry["damage power"])) {
+        newSkill.damagePower = int.Parse(entry["damage power"]);
+      }
 
-      newSkill.skillSpecialEffect = GetSkillEffectByString(entry["skill special effect"]);
       newSkill.healsConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["heals status conditions"]);
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
 
@@ -1032,6 +1028,13 @@ public class BattleController : MonoBehaviour {
       if(!string.IsNullOrEmpty(entry["trigger chance"])) {
         newSkill.triggerChance = float.Parse(entry["trigger chance"]);
       }
+
+      if(newSkill.type == SkillType.attack) {
+        newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.damageAttribute];
+      } else {
+        newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
+      }
+      newSkill.animation = entry["animation"];
 
       newSkill.tags = Utils.SeparateTags(entry["tags"]);
 

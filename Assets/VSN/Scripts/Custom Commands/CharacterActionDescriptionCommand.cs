@@ -17,9 +17,9 @@ namespace Command {
           Skill usedSkill = BattleController.instance.selectedSkills[partyMemberId];
           VsnSaveSystem.SetVariable("selected_action_name", usedSkill.GetPrintableName());
           if(usedSkill.type == SkillType.attack) {
-            if(usedSkill.attribute != Attributes.endurance) {
+            if(usedSkill.damageAttribute != Attributes.endurance) {
               scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentEnemyName();
-              newArgs[0] = new VsnString(usedSkill.attribute.ToString() + "_action"+(BattleController.instance.partyMembers[partyMemberId].isMale ? "_boy":"_girl") );
+              newArgs[0] = new VsnString(usedSkill.damageAttribute.ToString() + "_action"+(BattleController.instance.partyMembers[partyMemberId].isMale ? "_boy":"_girl") );
             } else {
               scriptToLoadPath = "action_descriptions";
               newArgs[0] = new VsnString("magic_arrow_action");

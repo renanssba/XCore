@@ -39,7 +39,12 @@ public class RelationshipCard : MonoBehaviour {
 
     proximityLevelText.text = relationship.GetRelationshipLevelDescription();
 
-    expText.text = currentLevelExp.ToString()+" /"+neededExp;
+    if(relationship.level < 10) {
+      expText.text = currentLevelExp.ToString() + " /" + neededExp;
+    } else {
+      expText.text = "MAX";
+    }
+    
 
     coupleNameText.text = relationship.GetBoy().name + " e " + relationship.GetGirl().name;
     levelText.text = relationship.level.ToString();

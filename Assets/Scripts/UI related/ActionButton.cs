@@ -75,8 +75,8 @@ public class ActionButton : MonoBehaviour {
 
       ActionSkin actionSkin = GetActionSkin();
       nameText.text = prefix + actionSkin.buttonName;
-      iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.attribute];
-      iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.attribute];
+      iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.damageAttribute];
+      iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.damageAttribute];
 
       /// improvement icon
       improvementIconImage.gameObject.SetActive(skill.id >= 3);
@@ -100,7 +100,7 @@ public class ActionButton : MonoBehaviour {
 
   public ActionSkin GetActionSkin() {
     string sexModifier = (person.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + skill.attribute.ToString() + "_action" + sexModifier + "_name)");
+    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + skill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
     return BattleController.instance.GetActionSkinByName(actionSkinName);
   }
 

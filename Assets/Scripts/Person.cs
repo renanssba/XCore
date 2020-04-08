@@ -16,6 +16,11 @@ public enum PersonState {
   shipped
 }
 
+public enum PersonId {
+  main = 0,
+  fertiliel = 10
+}
+
 
 [System.Serializable]
 public class Person : Battler {
@@ -76,7 +81,7 @@ public class Person : Battler {
     if(sp < skillToUse.spCost) {
       return false;
     }
-    if(CurrentStatusConditionStacks("angry") > 0 && (skillToUse.type == SkillType.active || skillToUse.attribute != Attributes.guts)) {
+    if(CurrentStatusConditionStacks("angry") > 0 && (skillToUse.type == SkillType.active || skillToUse.damageAttribute != Attributes.guts)) {
       return false;
     }
     return true;
@@ -93,8 +98,8 @@ public class Person : Battler {
     Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
 
     for(int i = 0; i < skills.Length; i++) {
-      if(skills[i].skillSpecialEffect == SkillSpecialEffect.raiseMaxSp) {
-        count += (int)skills[i].power;
+      if(skills[i].specialEffect == SkillSpecialEffect.raiseMaxSp) {
+        count += (int)skills[i].effectPower;
       }
     }
     return count;
@@ -127,7 +132,7 @@ public class Person : Battler {
     List<Skill> skills = new List<Skill>();
     Relationship relationship = GlobalData.instance.relationships[relationshipId];
 
-    if(id == 10) {
+    if(id == (int)PersonId.fertiliel) {
       skills.Add(BattleController.instance.GetSkillById(9));
       return skills.ToArray();
     } else {
@@ -240,8 +245,8 @@ public class Relationship {
     for(int i=0; i<skilltree.skills.Length; i++){
       if(skilltree.skills[i].isUnlocked) {
         Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
-        if(skill.type == SkillType.passive && skill.skillSpecialEffect == SkillSpecialEffect.raiseMaxHp) {
-          count += (int)skill.power;
+        if(skill.type == SkillType.passive && skill.specialEffect == SkillSpecialEffect.raiseMaxHp) {
+          count += (int)skill.effectPower;
         }
       }
     }
@@ -254,8 +259,8 @@ public class Relationship {
     for(int i=0; i<skilltree.skills.Length; i++) {
       Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
       if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
-         skill.skillSpecialEffect == SkillSpecialEffect.healingSkillBonus) {
-        count += skill.power;
+         skill.specialEffect == SkillSpecialEffect.healingSkillBonus) {
+        count += skill.effectPower;
       }      
     }
     return count;
@@ -267,8 +272,8 @@ public class Relationship {
     for(int i = 0; i < skilltree.skills.Length; i++) {
       Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
       if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
-         skill.skillSpecialEffect == SkillSpecialEffect.healingItemBonus) {
-        count += skill.power;
+         skill.specialEffect == SkillSpecialEffect.healingItemBonus) {
+        count += skill.effectPower;
       }
     }
     return count;
@@ -280,8 +285,8 @@ public class Relationship {
     for(int i = 0; i < skilltree.skills.Length; i++) {
       Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
       if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
-         skill.skillSpecialEffect == SkillSpecialEffect.fleeChanceBonus) {
-        count += skill.power;
+         skill.specialEffect == SkillSpecialEffect.fleeChanceBonus) {
+        count += skill.effectPower;
       }
     }
     Debug.LogWarning("Flee chance: " + (100*count)+"%");

@@ -69,9 +69,9 @@ public abstract class Battler {
     Skill[] skills = GetPassiveSkills();
 
    for(int i=0; i<skills.Length; i++) {
-      if(skills[i].skillSpecialEffect == SkillSpecialEffect.damageTakenBonus &&
-         skills[i].attribute == attribute) {
-        modifier += skills[i].power;
+      if(skills[i].specialEffect == SkillSpecialEffect.damageTakenBonus &&
+         skills[i].damageAttribute == attribute) {
+        modifier += skills[i].effectPower;
       }
     }
     return modifier;
