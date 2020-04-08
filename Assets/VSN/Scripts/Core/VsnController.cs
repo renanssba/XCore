@@ -269,5 +269,8 @@ public class VsnController : MonoBehaviour {
     //      break;
     //  }
     //}
+    if(Input.GetKeyDown(KeyCode.V) && Input.GetKey(KeyCode.LeftShift) && Application.isEditor) {
+      VsnUIManager.instance.variablesDebugPanel.Initialize();
+    }
   }
 }

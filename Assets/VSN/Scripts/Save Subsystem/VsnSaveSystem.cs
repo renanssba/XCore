@@ -5,7 +5,7 @@ using System;
 
 public class VsnSaveSystem {
 
-  static Dictionary<string, string> savedDataDictionary;
+  public static Dictionary<string, string> savedDataDictionary;
 
   static readonly string varFloatPrefix = "VARNUMBER";
   static readonly string varStringPrefix = "VARSTRING";
@@ -72,6 +72,13 @@ public class VsnSaveSystem {
     //Debug.Log("Variable " + key + " saved with float value " + value);
     string savedKey = GetVariableFloatPrefix(key);
 
+    if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableStringPrefix(key));
+    }
+    if(savedDataDictionary.ContainsKey(GetVariableBoolPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableBoolPrefix(key));
+    }
+
     if(savedDataDictionary.ContainsKey(savedKey)) {
       savedDataDictionary[savedKey] = value.ToString();
     } else {
@@ -84,6 +91,13 @@ public class VsnSaveSystem {
     Debug.Log("Variable " + key + " saved with bool value " + value);
     string savedKey = GetVariableBoolPrefix(key);
 
+    if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableStringPrefix(key));
+    }
+    if(savedDataDictionary.ContainsKey(GetVariableFloatPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableFloatPrefix(key));
+    }
+
     if (savedDataDictionary.ContainsKey(savedKey)) {
       savedDataDictionary[savedKey] = value.ToString();
     } else {
@@ -95,6 +109,13 @@ public class VsnSaveSystem {
   public static void SetVariable(string key, string value) {
     Debug.Log("Variable " + key + " saved with string value " + value);
     string savedKey = GetVariableStringPrefix(key);
+
+    if(savedDataDictionary.ContainsKey(GetVariableFloatPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableFloatPrefix(key));
+    }
+    if(savedDataDictionary.ContainsKey(GetVariableBoolPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableBoolPrefix(key));
+    }
 
     if(savedDataDictionary.ContainsKey(savedKey)) {
       savedDataDictionary[savedKey] = value;

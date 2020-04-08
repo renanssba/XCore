@@ -40,6 +40,8 @@ public class VsnUIManager : MonoBehaviour {
 
   public VsnLogWindow logWindow;
 
+  public VsnVariablesDebugPanel variablesDebugPanel;
+
   public Button skipButton;
   public string skipButtonWaypoint;
 
