@@ -298,7 +298,7 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
       case SkillType.active:
-        StartCoroutine(ExecuteCharacterSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
+        StartCoroutine(ExecuteBattlerSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
       case SkillType.passive:
         Debug.LogError("Passive skill " + selectedSkills[partyMemberId].name + " used actively.");
@@ -458,7 +458,7 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteCharacterSkill(int skillUserId, int targetId, Skill usedSkill) {
+  public IEnumerator ExecuteBattlerSkill(int skillUserId, int targetId, Skill usedSkill) {
     Actor2D skillUserActor = TheaterController.instance.GetActorByIdInParty(skillUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     Battler target = GetBattlerByTargetId(targetId);
@@ -642,7 +642,14 @@ public class BattleController : MonoBehaviour {
   public void EnemyAttack() {
     int targetId = VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
-    StartCoroutine(ExecuteEnemyAttack(targetId));
+
+    Skill skillUsed = GetCurrentEnemy().DecideWhichSkillToUse();
+
+    if(skillUsed.type == SkillType.attack) {
+      StartCoroutine(ExecuteEnemyAttack(targetId));
+    } else {
+      StartCoroutine(ExecuteBattlerSkill(3, targetId, skillUsed));
+    }
   }
 
 
@@ -651,7 +658,11 @@ public class BattleController : MonoBehaviour {
     int attributeId = (int)attacker.attackAttribute;
     Battler defender = GetBattlerByTargetId(targetId);
 
-    int effectiveAttackDamage = CalculateAttackDamage(attacker, new Skill() {attribute = attacker.attackAttribute, power = attacker.attackPower}, defender);
+    Skill skillUsed = attacker.DecideWhichSkillToUse();
+
+    Debug.LogWarning("Skill decided to use: " + skillUsed.name);
+
+    int effectiveAttackDamage = CalculateAttackDamage(attacker, skillUsed, defender);
 
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     bool causeDamage = (attacker.attackPower != 0);
@@ -909,10 +920,12 @@ public class BattleController : MonoBehaviour {
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
+      Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] + "}");
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
       loadedTags = Utils.SeparateTags(dic["tags"]);
+
 
       allEnemies.Add(new Enemy {
         id = int.Parse(dic["id"]),
@@ -930,7 +943,8 @@ public class BattleController : MonoBehaviour {
         attackPower = int.Parse(dic["attack power"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
-        skills = Utils.SeparateInts(dic["skill ids"]),
+        passiveSkills = Utils.SeparateInts(dic["passive skills"]),
+        activeSkillLogics = loadedEnemy.activeSkillLogics,
         givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
         giveStatusConditionChance = int.Parse(dic["give status chance"]),
         tags = loadedTags

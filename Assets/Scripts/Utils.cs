@@ -411,17 +411,86 @@ public class Utils {
   }
 
   public static string GetStringArgument(string clause) {
-      int start = clause.IndexOf("(");
-      int end = clause.IndexOf(")");
+    int start = clause.IndexOf("(");
+    int end = clause.IndexOf(")");
 
-      if(start == -1 || end == -1){
-        return null;
+    if(start == -1 || end == -1){
+      return null;
+    }
+
+    string argumentName = clause.Substring(start+1, (end-start-1));
+    Debug.Log("GET ARGUMENT: '"+argumentName+"'  ");
+    return argumentName;
+  }
+
+
+  public static bool TagIsInArray(string tagToCheck, string[] tags) {
+    foreach(string tag in tags) {
+      if(tag == tagToCheck) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  public static bool AreAllConditionsMet(string[] allConditions, int partyMemberId) {
+    string conditionArgument;
+    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+
+
+    foreach(string condition in allConditions) {
+      conditionArgument = GetStringArgument(condition);
+
+      Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
+
+      if(condition.StartsWith("enemy_has_tag")) {
+        if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemy().tags)) {
+          return false;
+        }
       }
 
-      string argumentName = clause.Substring(start+1, (end-start-1));
-      Debug.Log("GET ARGUMENT: '"+argumentName+"'  ");
-      return argumentName;
+      if(condition.StartsWith("is_turn")) {
+        if(VsnSaveSystem.GetIntVariable("currentBattleTurn") != int.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
+      if(condition.StartsWith("turn_is_multiple")) {
+        if(VsnSaveSystem.GetIntVariable("currentBattleTurn") % int.Parse(conditionArgument) != 0) {
+          return false;
+        }
+      }
+
+      if(condition.StartsWith("received_item_with_tag")) {
+        Debug.LogWarning("Checking received_item_with_tag. Action: " + BattleController.instance.selectedActionType[currentPlayerTurn]);
+        if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useItem) {
+          return false;
+        }
+        conditionArgument = GetStringArgument(condition);
+        Debug.LogWarning("Condition argument: " + conditionArgument);
+        if(!TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].tags) ||
+           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != partyMemberId) {
+          return false;
+        }
+      }
+
+
+      if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == partyMemberId) {
+        return false;
+      }
+
+      if(condition == "self_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") != partyMemberId) {
+        return false;
+      }
+
+      if(condition == "defending" && BattleController.instance.selectedActionType[partyMemberId] != TurnActionType.defend) {
+        return false;
+      }
     }
+    return true;
+  }
+
 }
 
 public static class MyExtensions {

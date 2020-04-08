@@ -1,20 +1,17 @@
-id	name	script name	level	max hp	appear sfx	attack sfx	skill ids	attack attribute	attack power	guts	intelligence	charisma	endurance	gives status conditions	give status chance	guts effectivity	intelligence effectivity	charisma effectivity	location	sprite name	stage	tags	notes
-0	Coelhinho Ferido	bunny	2	30	enemy_appear_bunny	enemy_attack_bunny		intelligence	4	5	5	5	5	sad	70	baixa	normal	super	park	coelho	2	animal	parque/floresta
-1	Tornado Misterioso	clothing_tornado	2	30	enemy_appear_clothing	enemy_attack_clothing		---	0	5	5	5	5	unclothed	100	normal	super	baixa	park	tornado_c_roupas	2	object, magical, mysteryous	outdoors
-2	Fotógrafo	photographer	2	30	enemy_appear_photographer	enemy_attack_photographer	2	charisma	8	5	5	5	5		0	super	normal	normal	shopping	fotografo	2	human, male	urbano
-3	Horda de Consumidores	sale_crowd	2	42	enemy_appear_sale	enemy_attack_sale	0	guts	8	6	3	3	2	injured	30	normal	baixa	super	shopping	multidao	2	human, male, female, horde	shopping
-4	Máquina de Comida	vending_machine	2	38	enemy_appear_vending	enemy_attack_vending		guts	4	6	1	3	7	hunger	50	baixa	super	normal	generic	maquina salgadinhos	2	object, magical	urbano
-5	Vendedores Insistentes	card_vendors	2	50	enemy_appear_vendor	enemy_attack_vendor	1	intelligence	8	5	4	5	4		0	normal	super	normal	shopping	vendedores	2	human, male, female	urbano/lojas
-6	Pai Exigente	dad	2	30	enemy_appear_dad	enemy_attack_dad	1	intelligence	8	6	6	6	5		0	baixa	normal	super	generic	pai	2	human, male	início date
-7	Escada Rolante	escalator	2	40	enemy_appear_escalator	enemy_attack_escalator	0	guts	8	5	2	5	6		0	baixa	super	normal	shopping	escada	2	object	shopping
-8	Hot Dog Jones	jones_hotdog	2	60	enemy_attack_jones_hotdog	enemy_appear_jones_hotdog	2	charisma	8	8	4	4	8		0	normal	normal	normal	park	hotdog_man	2	human, male, criminal	parque
-9	Valentão	bully	2	45	enemy_appear_bully	enemy_attack_bully	2	charisma	8	7	2	6	4		0	normal	baixa	super	generic	valentao	2	human, male, bully	boss battle
-10	Ana	girl_ana	5	70	challenge_default	hit_default		guts	12	6	3	2	8		0	normal	normal	normal	shopping	actor(ana)	2	human, female	rival boss battle
-11	Beatrice	girl_beatrice	5	45	challenge_default	hit_default		intelligence	12	4	8	4	2		0	normal	normal	normal	shopping	actor(beatrice)	2	human, female	rival boss battle
-12	Clara	girl_claire	5	50	challenge_default	hit_default		charisma	12	4	4	7	4		0	normal	normal	normal	shopping	actor(clara)	2	human, female	rival boss battle
-13	Ana (Ira)	boss_anna	5	70	challenge_default	hit_default		guts	15	6	3	2	8		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle
-14	Beatrice (Preguiça)	boss_beatrice	5	45	challenge_default	hit_default		intelligence	15	4	8	4	2		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle
-15	Clara (Gula)	boss_claire	5	50	challenge_default	hit_default		charisma	15	4	4	7	4		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle
-16	Bola de Futebol	ball_a	2	26	challenge_default	hit_default		---	8	7	3	3	5		0	super	normal	baixa	park	bola	2	object	parque
-17	Parente Chato	call_a	2	30	enemy_appear_call	enemy_attack_call		---	8	4	4	4	7		0	super	baixa	normal	generic	celular	2	object, machine	qualquer
-18	Pote de Doces	open_jar_a	2	38	challenge_default	hit_default		---	1	5	5	5	5	hunger	100	super	normal	baixa	park	pote	2	object	casa/culinária/piquenique/festival
+id	name	script name	level	max hp	appear sfx	attack sfx	passive skills	active skills logic	attack attribute	attack power	guts	intelligence	charisma	endurance	gives status conditions	give status chance	guts effectivity	intelligence effectivity	charisma effectivity	location	sprite name	stage	tags	notes
+0	Coelhinho Ferido	bunny	2	30	enemy_appear_bunny	enemy_attack_bunny		[{"skillId":1,"frequency":10,"conditions":[]}]	intelligence	4	5	5	5	5	sad	70	baixa	normal	super	park	coelho	2	animal	parque/floresta
+1	Tornado Misterioso	clothing_tornado	2	30	enemy_appear_clothing	enemy_attack_clothing		[{"skillId":2,"frequency":10,"conditions":[]}]	---	0	5	5	5	5	unclothed	100	normal	super	baixa	park	tornado_c_roupas	2	object, magical, mysteryous	outdoors
+2	Fotógrafo	photographer	2	30	enemy_appear_photographer	enemy_attack_photographer		[{"skillId":2,"frequency":10,"conditions":[]}]	charisma	8	5	5	5	5		0	super	normal	normal	shopping	fotografo	2	human, male	urbano
+3	Horda de Consumidores	sale_crowd	2	42	enemy_appear_sale	enemy_attack_sale		[{"skillId":0,"frequency":10,"conditions":[]}]	guts	8	6	3	3	2	injured	30	normal	baixa	super	shopping	multidao	2	human, male, female, horde	shopping
+4	Máquina de Comida	vending_machine	2	38	enemy_appear_vending	enemy_attack_vending		[{"skillId":0,"frequency":5,"conditions":[]},{"skillId":11,"frequency":10,"conditions":[]}]	guts	4	6	1	3	7	hunger	50	baixa	super	normal	generic	maquina salgadinhos	2	object, magical	urbano
+5	Vendedores Insistentes	card_vendors	2	50	enemy_appear_vendor	enemy_attack_vendor		[{"skillId":1,"frequency":10,"conditions":[]}]	intelligence	8	5	4	5	4		0	normal	super	normal	shopping	vendedores	2	human, male, female	urbano/lojas
+6	Pai Exigente	dad	2	30	enemy_appear_dad	enemy_attack_dad		[{"skillId":1,"frequency":10,"conditions":[]}]	intelligence	8	6	6	6	5		0	baixa	normal	super	generic	pai	2	human, male	início date
+7	Escada Rolante	escalator	2	40	enemy_appear_escalator	enemy_attack_escalator		[{"skillId":0,"frequency":10,"conditions":[]}]	guts	8	5	2	5	6		0	baixa	super	normal	shopping	escada	2	object	shopping
+8	Hot Dog Jones	jones_hotdog	2	60	enemy_attack_jones_hotdog	enemy_appear_jones_hotdog		[{"skillId":2,"frequency":10,"conditions":[]}]	charisma	8	8	4	4	8		0	normal	normal	normal	park	hotdog_man	2	human, male, criminal	parque
+9	Valentão	bully	2	45	enemy_appear_bully	enemy_attack_bully		[{"skillId":2,"frequency":10,"conditions":[]}]	charisma	8	7	2	6	4		0	normal	baixa	super	generic	valentao	2	human, male, bully	boss battle
+10	Ana	girl_ana	5	70	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	guts	12	6	3	2	8		0	normal	normal	normal	shopping	actor(ana)	2	human, female	rival boss battle
+11	Beatrice	girl_beatrice	5	45	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	intelligence	12	4	8	4	2		0	normal	normal	normal	shopping	actor(beatrice)	2	human, female	rival boss battle
+12	Clara	girl_claire	5	50	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	charisma	12	4	4	7	4		0	normal	normal	normal	shopping	actor(clara)	2	human, female	rival boss battle
+13	Ana (Ira)	boss_anna	5	70	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	guts	15	6	3	2	8		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle
+14	Beatrice (Preguiça)	boss_beatrice	5	45	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	intelligence	15	4	8	4	2		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle
+15	Clara (Gula)	boss_claire	5	50	challenge_default	hit_default		[{"skillId":0,"frequency":10,"conditions":[]}]	charisma	15	4	4	7	4		0	normal	normal	normal	park	demonio_shapeshifter	2	human, female	boss battle

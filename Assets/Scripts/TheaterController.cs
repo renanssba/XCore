@@ -282,6 +282,12 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void PositionActorsInFocus() {
+    if(focusedCharacters[0].transform.position.x > focusedCharacters[1].transform.position.x) {
+      Actor2D aux = focusedCharacters[0];
+      focusedCharacters[0] = focusedCharacters[1];
+      focusedCharacters[1] = aux;
+    }
+
     if(focusedCharacters.Length == 2) {
       focusedCharacters[0].transform.DOLocalMove(focusPositionForTwo[0], focusAnimationDuration);
       focusedCharacters[1].transform.DOLocalMove(focusPositionForTwo[1], focusAnimationDuration);

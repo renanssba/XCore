@@ -206,7 +206,7 @@ public class SpecialCodes {
       case "#enemySkillsCount":
         Enemy bat = BattleController.instance.GetCurrentEnemy();
         if(bat != null) {
-          return bat.skills.Length;
+          return bat.passiveSkills.Length;
         } else {
           return -1;
         }

@@ -16,6 +16,13 @@ public enum DateLocation{
   generic
 }
 
+[System.Serializable]
+public class ActiveSkillLogic {
+  public int skillId;
+  public int frequency;
+  public string[] conditions;
+}
+
 
 [System.Serializable]
 public class Enemy : Battler {
@@ -37,12 +44,14 @@ public class Enemy : Battler {
   public string[] givesConditionNames;
   public int giveStatusConditionChance;
 
-  public int[] skills;
+  public ActiveSkillLogic[] activeSkillLogics;
+  public int[] passiveSkills;
 
   public string[] tags;
 
   public RewardType rewardType;
   public int rewardId;
+
 
   public Attributes[] GetWeaknesses() {
     List<Attributes> att = new List<Attributes>();
@@ -103,6 +112,35 @@ public class Enemy : Battler {
 
   public override bool IsDefending() {
     return false;
+  }
+
+
+  public Skill DecideWhichSkillToUse() {
+    List<ActiveSkillLogic> availableSkills = new List<ActiveSkillLogic>();
+    int count = 0;
+
+    // decide which skills are available
+    for(int i=0; i<activeSkillLogics.Length; i++) {
+      if(Utils.AreAllConditionsMet(activeSkillLogics[i].conditions, 3)) {
+        availableSkills.Add(activeSkillLogics[i]);
+        count += activeSkillLogics[i].frequency;
+      }
+    }
+    
+    // if only one skill available, use it
+    if(availableSkills.Count == 1) {
+      return BattleController.instance.GetSkillById(availableSkills[0].skillId);
+    }
+
+    // decide which available skill to use
+    int selection = Random.Range(0, count);
+    for(int i = 0; i < availableSkills.Count; i++) {
+      if(selection < availableSkills[i].frequency) {
+        return BattleController.instance.GetSkillById(availableSkills[i].skillId);
+      }
+      selection -= availableSkills[i].frequency;
+    }
+    return null;
   }
 
 
