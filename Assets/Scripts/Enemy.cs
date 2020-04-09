@@ -38,11 +38,7 @@ public class Enemy : Battler {
   public int maxHp;
   public int hp;
 
-  public Attributes attackAttribute;
-  public int attackPower;
   public string attackSfxName;
-  public string[] givesConditionNames;
-  public int giveStatusConditionChance;
 
   public ActiveSkillLogic[] activeSkillLogics;
   public int[] passiveSkills;

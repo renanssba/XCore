@@ -7,7 +7,6 @@ public class VsnConsoleSimulator : MonoBehaviour {
 
   int totalCharacters;
   public bool autopass = false;
-  public bool dontHideMessageScreen = false;
 
   public voidFunctionDelegate callAfterShowCharacters;
   public delegate void voidFunctionDelegate();
@@ -18,9 +17,6 @@ public class VsnConsoleSimulator : MonoBehaviour {
 
   Coroutine showLettersCoroutine = null;
 
-  //void Awake() {
-  //  consoleText = gameObject.GetComponent<TMP_Text>();
-  //}
 
 
   public void SetAutoPassText(){

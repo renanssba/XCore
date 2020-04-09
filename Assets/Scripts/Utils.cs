@@ -484,7 +484,7 @@ public class Utils {
         return false;
       }
 
-      if(condition == "defending" && BattleController.instance.selectedActionType[partyMemberId] != TurnActionType.defend) {
+      if(condition == "defending" && !TheaterController.instance.GetActorByIdInParty(partyMemberId).battler.IsDefending()) {
         return false;
       }
     }

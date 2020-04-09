@@ -205,11 +205,11 @@ public class Actor2D : MonoBehaviour {
 
 
   public void CharacterAttackAnim() {
-    renderers[0].transform.DOMoveX(0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
-  }
-
-  public void EnemyAttackAnim() {
-    renderers[0].transform.DOMoveX(-0.3f, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    float movementX = 0.3f;
+    if(transform.position.x > 0f) {
+      movementX = -0.3f;
+    }
+    renderers[0].transform.DOMoveX(movementX, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
   }
 
   public void UseItemAnimation(Actor2D destiny, Item item) {
@@ -330,6 +330,8 @@ public class Actor2D : MonoBehaviour {
     string particleString = damage.ToString();
     Color particleColor = ResourcesManager.instance.attributeColor[0];
 
+    Debug.LogWarning("damage: "+damage+", effectivity: "+effectivity);
+
     if(effectivity > 1f) {
       particleString += "\n<size=12>SUPER!</size>";
     } else if(effectivity < 1f) {
@@ -358,6 +360,10 @@ public class Actor2D : MonoBehaviour {
 
   public void ShowStatusConditionParticle(StatusCondition statusCondition) {
     ShowParticleAnimationWithSprite("<size=50%>" + statusCondition.GetPrintableName() + "</size>", Color.gray, statusCondition.sprite);
+  }
+
+  public void ShowResistConditionParticle() {
+    ShowParticleAnimation("<size=12>Resistiu</size>", Color.gray);
   }
 
   public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {
@@ -413,6 +419,5 @@ public class Actor2D : MonoBehaviour {
         s.sortingOrder -= 100;
       }
     }
-
   }
 }

@@ -133,15 +133,6 @@ public class VsnUIManager : MonoBehaviour {
 
       VsnController.instance.state = ExecutionState.PLAYING;
       ShowClickMessageIcon(false);
-      if(consoleSimulator.dontHideMessageScreen == false) {
-        ShowDialogPanel(false);
-      }      
-    }
-  }
-
-  public void PassBattleDialog() {
-    if(consoleSimulator.dontHideMessageScreen) {
-      consoleSimulator.dontHideMessageScreen = false;
       ShowDialogPanel(false);
     }
   }

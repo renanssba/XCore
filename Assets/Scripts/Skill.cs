@@ -47,6 +47,16 @@ public enum SkillAffectsCharacter {
   couple
 }
 
+public enum SkillAnimation {
+  attack,
+  charged_attack,
+  active,
+  active_support,
+  active_offensive,
+  passive,
+  none
+}
+
 
 [System.Serializable]
 public struct SkilltreeEntry {
@@ -127,7 +137,7 @@ public class Skill {
   public string[] triggerConditions;
   public float triggerChance;
 
-  public string animation;
+  public SkillAnimation animation;
 
   public string[] tags;
 

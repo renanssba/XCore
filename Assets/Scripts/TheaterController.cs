@@ -289,10 +289,11 @@ public class TheaterController : MonoBehaviour {
     }
 
     if(focusedCharacters.Length == 2) {
-      focusedCharacters[0].transform.DOLocalMove(focusPositionForTwo[0], focusAnimationDuration);
-      focusedCharacters[1].transform.DOLocalMove(focusPositionForTwo[1], focusAnimationDuration);
-      focusedCharacters[0].SetAttackMode(true);
-      focusedCharacters[1].SetAttackMode(true);
+      for(int i=0; i<2; i++) {
+        float heightDifference = 1f - focusedCharacters[i].transform.localScale.y;
+        focusedCharacters[i].transform.DOLocalMove(focusPositionForTwo[i] + new Vector3(0f, heightDifference*1.25f, 0f), focusAnimationDuration);
+        focusedCharacters[i].SetAttackMode(true);
+      }
     } else {
       focusedCharacters[0].transform.DOLocalMove(focusPositionForOne, focusAnimationDuration);
       focusedCharacters[0].SetAttackMode(true);
@@ -410,9 +411,9 @@ public class TheaterController : MonoBehaviour {
     mainCamera.transform.DOMove(newPosition, time);
   }
 
-  public void Screenshake() {
+  public void Screenshake(float effectivity) {
     DOTween.Kill(transform);
-    transform.DOShakeRotation(0.3f, 1f).OnComplete(() => {
+    transform.DOShakeRotation(0.3f, effectivity).OnComplete(() => {
       transform.position = Vector3.zero;
     });
   }

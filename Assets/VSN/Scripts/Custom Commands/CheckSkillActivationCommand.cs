@@ -72,7 +72,7 @@ namespace Command {
       if(!relationship.skilltree.skills[skillId].isUnlocked || skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
         return;
       }
-      Debug.LogWarning("Skill is trigged.");
+      Debug.LogWarning("Skill " + skillChecked.name + " is trigged.");
 
       // check trigger chance
       if(Random.Range(0, 100) >= skillChecked.triggerChance) {
@@ -87,8 +87,8 @@ namespace Command {
         return;
       }
 
-      
-      Debug.LogWarning("Skill activated.");
+
+      Debug.LogWarning("Skill " + skillChecked.name + " activated.");
       // activate passive skill
       ActivatePassiveSkill(skillChecked, partyMemberId);
     }

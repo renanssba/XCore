@@ -295,8 +295,8 @@ public class BattleController : MonoBehaviour {
 
     switch(selectedSkills[partyMemberId].type) {
       case SkillType.attack:
-        StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
-        break;
+        //StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
+        //break;
       case SkillType.active:
         StartCoroutine(ExecuteBattlerSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
@@ -329,53 +329,53 @@ public class BattleController : MonoBehaviour {
     return Mathf.Max(1, Mathf.RoundToInt(damage));
   }
 
-  public IEnumerator ExecuteCharacterAttack(int attackerId, int targetId, Skill usedSkill) {
-    Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(attackerId);
-    Battler attacker = attackingActor.battler;
-    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
-    Battler target = GetBattlerByTargetId(targetId);
+  //public IEnumerator ExecuteCharacterAttack(int attackerId, int targetId, Skill usedSkill) {
+  //  Actor2D attackingActor = TheaterController.instance.GetActorByIdInParty(attackerId);
+  //  Battler attacker = attackingActor.battler;
+  //  Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+  //  Battler target = GetBattlerByTargetId(targetId);
     
-    float effectivity = target.GetAttributeEffectivity(usedSkill.damageAttribute);
-    int effectiveAttackDamage = CalculateAttackDamage(attacker, usedSkill, target);
+  //  float effectivity = target.GetAttributeEffectivity(usedSkill.damageAttribute);
+  //  int effectiveAttackDamage = CalculateAttackDamage(attacker, usedSkill, target);
 
-    VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.damageAttribute);
+  //  VsnSaveSystem.SetVariable("selected_attribute", (int)usedSkill.damageAttribute);
 
-    yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
-
-
-    TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
-    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+  //  yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
 
 
-    attackingActor.CharacterAttackAnim();
+  //  TheaterController.instance.FocusActors(new Actor2D[] { attackingActor, targetActor });
+  //  yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    ActionSkin skin = GetActionSkin(partyMembers[attackerId], usedSkill);
-    VsnAudioManager.instance.PlaySfx(skin.sfxName);
 
-    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
+  //  attackingActor.CharacterAttackAnim();
 
-    if (effectivity > 1f) {
-      VsnAudioManager.instance.PlaySfx("damage_effective");
-    } else if (effectivity < 1f) {
-      VsnAudioManager.instance.PlaySfx("damage_ineffective");
-    } else {
-      VsnAudioManager.instance.PlaySfx("damage_default");
-    }
+  //  ActionSkin skin = GetActionSkin(partyMembers[attackerId], usedSkill);
+  //  VsnAudioManager.instance.PlaySfx(skin.sfxName);
+
+  //  yield return new WaitForSeconds(attackAnimationTime + 0.8f);
+
+  //  if (effectivity > 1f) {
+  //    VsnAudioManager.instance.PlaySfx("damage_effective");
+  //  } else if (effectivity < 1f) {
+  //    VsnAudioManager.instance.PlaySfx("damage_ineffective");
+  //  } else {
+  //    VsnAudioManager.instance.PlaySfx("damage_default");
+  //  }
     
-    targetActor.ShineRed();
-    targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
+  //  targetActor.ShineRed();
+  //  targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
 
-    yield return new WaitForSeconds(1f);
+  //  yield return new WaitForSeconds(1f);
     
-    target.TakeDamage(effectiveAttackDamage);
-    yield return new WaitForSeconds(1.5f);
+  //  target.TakeDamage(effectiveAttackDamage);
+  //  yield return new WaitForSeconds(1.5f);
 
-    UIController.instance.HideHelpMessagePanel();
-    TheaterController.instance.UnfocusActors();
-    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+  //  UIController.instance.HideHelpMessagePanel();
+  //  TheaterController.instance.UnfocusActors();
+  //  yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    VsnController.instance.state = ExecutionState.PLAYING;
-  }
+  //  VsnController.instance.state = ExecutionState.PLAYING;
+  //}
 
 
 
@@ -402,9 +402,9 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public IEnumerator ShowUseSkillMessage(string userName, string actionName) {
+  public IEnumerator ShowUseSkillMessage(string userName, Skill skill) {
     VsnSaveSystem.SetVariable("active", userName);
-    VsnSaveSystem.SetVariable("selected_action_name", actionName);
+    VsnSaveSystem.SetVariable("selected_action_name", skill.GetPrintableName());
 
     string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_skill"));
     yield return ShowBattleDescription(code);
@@ -461,54 +461,98 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ExecuteBattlerSkill(int skillUserId, int targetId, Skill usedSkill) {
     Actor2D skillUserActor = TheaterController.instance.GetActorByIdInParty(skillUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
-    Battler target = GetBattlerByTargetId(targetId);
+    Battler target = targetActor.battler;
+    Battler skillUser = skillUserActor.battler;
 
 
-    yield return ShowUseSkillMessage(skillUserActor.battler.name, usedSkill.GetPrintableName());
-
+    if(usedSkill.type == SkillType.attack) {
+      yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
+    } else {
+      yield return ShowUseSkillMessage(skillUser.name, usedSkill);
+    }
 
     TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    
-    VsnAudioManager.instance.PlaySfx("heal_default");
-    skillUserActor.CharacterAttackAnim();
 
-    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
-    VsnUIManager.instance.PassBattleDialog();
+    // skill cast animation
+    if(usedSkill.animation != SkillAnimation.none &&
+       usedSkill.animation != SkillAnimation.passive) {
+      switch(usedSkill.animation) {
+        case SkillAnimation.attack:
+          if(skillUserId < 3) {
+            ActionSkin skin = GetActionSkin(partyMembers[skillUserId], usedSkill);
+            VsnAudioManager.instance.PlaySfx(skin.sfxName);
+          } else {
+            VsnAudioManager.instance.PlaySfx(skillUserActor.enemy.attackSfxName);
+          }
+          break;
+        case SkillAnimation.active_offensive:
+        case SkillAnimation.active_support:
+          VsnAudioManager.instance.PlaySfx("skill_cast");
+          break;
+      }
+      skillUserActor.CharacterAttackAnim();
+      yield return new WaitForSeconds(attackAnimationTime + 0.8f);
+    }
 
+
+    // skill receive animation
+    if(usedSkill.animation != SkillAnimation.none &&
+       usedSkill.animation != SkillAnimation.passive) {
+      switch(usedSkill.animation) {
+        case SkillAnimation.attack:
+        case SkillAnimation.charged_attack:
+        case SkillAnimation.active_offensive:
+          targetActor.ShineRed();
+          break;
+        case SkillAnimation.active_support:
+          targetActor.ShineGreen();
+          break;
+      }
+      //yield return new WaitForSeconds(0.4f);
+    }
+
+
+    // cause damage
+    if(usedSkill.damagePower != 0) {
+      int effectiveAttackDamage = CalculateAttackDamage(skillUser, usedSkill, target);
+
+      if(target.IsDefending()) {
+        targetActor.ShowDefendHitParticle();
+      }
+
+      float effectivity = target.DamageTakenMultiplier(usedSkill.damageAttribute);
+
+      if(target.IsDefending()) {
+        VsnAudioManager.instance.PlaySfx("damage_block");
+        TheaterController.instance.Screenshake(0.5f);
+      } else if(effectivity > 1f) {
+        VsnAudioManager.instance.PlaySfx("damage_effective");
+        TheaterController.instance.Screenshake(2f);
+      } else if(effectivity < 1f) {
+        VsnAudioManager.instance.PlaySfx("damage_ineffective");
+        TheaterController.instance.Screenshake(0.5f);
+      } else {
+        VsnAudioManager.instance.PlaySfx("damage_default");
+        TheaterController.instance.Screenshake(1f);
+      }
+
+      targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
+      yield return new WaitForSeconds(1f);
+
+      target.TakeDamage(effectiveAttackDamage);
+      yield return new WaitForSeconds(1f);
+    }
+
+
+    // execute special effects
     switch(usedSkill.specialEffect) {
       case SkillSpecialEffect.sensor:
+        VsnAudioManager.instance.PlaySfx("skill_activate_good");
         targetActor.ShineRed();
         targetActor.ShowWeaknessCard(true);
         yield return new WaitForSeconds(1f);
-        break;
-      case SkillSpecialEffect.buffDebuff:
-        targetActor.ShineGreen();
-
-        // heal status condition
-        if(usedSkill.healsConditionNames.Length > 0) {
-          target.RemoveStatusConditionBySkill(usedSkill);
-        }
-
-        // heal HP and SP
-        if(usedSkill.healHp > 0) {
-          target.HealHP((int)(usedSkill.healHp * skillUserActor.battler.HealingSkillMultiplier()));
-          targetActor.ShowHealHpParticle(usedSkill.healHp);
-          yield return new WaitForSeconds(1f);
-        }
-        if(usedSkill.healSp > 0) {
-          target.HealSp(usedSkill.healSp);
-          targetActor.ShowHealSpParticle(usedSkill.healSp);
-          yield return new WaitForSeconds(1f);
-        }
-
-        // give status condition
-        foreach(string givenCondition in usedSkill.givesConditionNames) {
-          target.ReceiveStatusConditionBySkill(usedSkill);
-          StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
-          yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
-        }
         break;
       case SkillSpecialEffect.becomeEnemyTarget:
         VsnSaveSystem.SetVariable("enemyAttackTargetId", skillUserId);
@@ -517,6 +561,54 @@ public class BattleController : MonoBehaviour {
         VsnSaveSystem.SetVariable("enemyAttackTargetId", OtherPartyMemberId(skillUserId));
         break;
     }
+
+
+    // heal status condition
+    if(usedSkill.healsConditionNames.Length > 0) {
+      target.RemoveStatusConditionBySkill(usedSkill);
+    }
+
+
+    // heal HP and SP
+    if(usedSkill.healHp > 0 || usedSkill.healSp > 0) {
+      VsnAudioManager.instance.PlaySfx("heal_default");
+
+      if(usedSkill.healHp > 0) {
+        target.HealHP((int)(usedSkill.healHp * skillUser.HealingSkillMultiplier()));
+        targetActor.ShowHealHpParticle(usedSkill.healHp);
+        yield return new WaitForSeconds(1f);
+      }
+      if(usedSkill.healSp > 0) {
+        target.HealSp(usedSkill.healSp);
+        targetActor.ShowHealSpParticle(usedSkill.healSp);
+        yield return new WaitForSeconds(1f);
+      }
+    }
+
+
+    // chance to give status condition
+    if(usedSkill.givesConditionNames.Length > 0) {
+      int effectiveStatusConditionChance = usedSkill.giveStatusChance;
+      if(target.IsDefending()) {
+        effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance / 2, 30);
+      }
+
+      if(Random.Range(0, 100) < effectiveStatusConditionChance) {
+        VsnAudioManager.instance.PlaySfx("skill_activate_bad");
+
+        foreach(string givenCondition in usedSkill.givesConditionNames) {
+          target.ReceiveStatusConditionBySkill(usedSkill);
+          StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
+          yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
+        }
+      } else {
+        targetActor.ShowResistConditionParticle();
+      }
+      yield return new WaitForSeconds(1f);
+    }
+
+
+    // wait then end
     yield return new WaitForSeconds(0.5f);
 
 
@@ -646,97 +738,91 @@ public class BattleController : MonoBehaviour {
     Skill skillUsed = GetCurrentEnemy().DecideWhichSkillToUse();
 
     if(skillUsed.type == SkillType.attack) {
-      StartCoroutine(ExecuteEnemyAttack(targetId));
+      StartCoroutine(ExecuteBattlerSkill(3, targetId, skillUsed));
     } else {
       StartCoroutine(ExecuteBattlerSkill(3, targetId, skillUsed));
     }
   }
 
 
-  public IEnumerator ExecuteEnemyAttack(int targetId) {
-    Enemy attacker = GetCurrentEnemy();
-    int attributeId = (int)attacker.attackAttribute;
-    Battler defender = GetBattlerByTargetId(targetId);
+  //public IEnumerator ExecuteEnemyAttack(int targetId) {
+  //  Enemy attacker = GetCurrentEnemy();
+  //  int attributeId = (int)attacker.attackAttribute;
+  //  Battler target = GetBattlerByTargetId(targetId);
 
-    Skill skillUsed = attacker.DecideWhichSkillToUse();
+  //  Skill skillUsed = attacker.DecideWhichSkillToUse();
 
-    Debug.LogWarning("Skill decided to use: " + skillUsed.name);
+  //  Debug.LogWarning("Skill decided to use: " + skillUsed.name);
 
-    int effectiveAttackDamage = CalculateAttackDamage(attacker, skillUsed, defender);
+  //  int effectiveAttackDamage = CalculateAttackDamage(attacker, skillUsed, target);
 
-    Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
-    bool causeDamage = (attacker.attackPower != 0);
-
-
-    yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
+  //  Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+  //  bool causeDamage = (attacker.attackPower != 0);
 
 
-    TheaterController.instance.FocusActors(new Actor2D[] { targetActor, TheaterController.instance.enemyActor });
-    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+  //  yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
 
 
-    VsnAudioManager.instance.PlaySfx(attacker.attackSfxName);
-    TheaterController.instance.enemyActor.EnemyAttackAnim();
-    yield return new WaitForSeconds(attackAnimationTime + 0.8f);
-
-    targetActor.ShineRed();
-
-    // cause damage
-    if(causeDamage) {
-      if(selectedActionType[targetId] == TurnActionType.defend) {
-        targetActor.ShowDefendHitParticle();
-      }
-
-      float effectivity = defender.DamageTakenMultiplier(attacker.attackAttribute);
-
-      if(defender.IsDefending()) {
-        VsnAudioManager.instance.PlaySfx("damage_block");
-      } else if(effectivity > 1f) {
-        VsnAudioManager.instance.PlaySfx("damage_effective");
-      } else if(effectivity < 1f) {
-        VsnAudioManager.instance.PlaySfx("damage_ineffective");
-      } else {
-        VsnAudioManager.instance.PlaySfx("damage_default");
-      }
-
-      TheaterController.instance.Screenshake();
-      targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
-      yield return new WaitForSeconds(1f);
-
-      VsnUIManager.instance.PassBattleDialog();
-      defender.TakeDamage(effectiveAttackDamage);
-      yield return new WaitForSeconds(1f);
-    }
-
-    // chance to receive status condition
-    int effectiveStatusConditionChance = attacker.giveStatusConditionChance;
-    if(selectedActionType[targetId] == TurnActionType.defend) {
-      effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance/2, 30);
-      //if(effectiveStatusConditionChance == 100) {
-      //  effectiveStatusConditionChance -= 20;
-      //} else {
-      //  effectiveStatusConditionChance /= 2;
-      //}
-    }
-    if(Random.Range(0, 100) < effectiveStatusConditionChance) {
-      foreach(string statusConditionName in attacker.givesConditionNames) {
-        StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
-        bool receivedNewStatus = partyMembers[targetId].ReceiveStatusCondition(statusCondition);
-
-        if(receivedNewStatus) {
-          yield return ShowGetStatusConditionMessage(targetActor.battler.name, statusCondition.GetPrintableName());
-        }
-      }
-    }
-    yield return new WaitForSeconds(0.5f);
+  //  TheaterController.instance.FocusActors(new Actor2D[] { targetActor, TheaterController.instance.enemyActor });
+  //  yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
 
-    UIController.instance.HideHelpMessagePanel();
-    TheaterController.instance.UnfocusActors();
-    yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+  //  VsnAudioManager.instance.PlaySfx(attacker.attackSfxName);
+  //  TheaterController.instance.enemyActor.EnemyAttackAnim();
+  //  yield return new WaitForSeconds(attackAnimationTime + 0.8f);
 
-    VsnController.instance.state = ExecutionState.PLAYING;
-  }
+  //  targetActor.ShineRed();
+
+  //  // cause damage
+  //  if(causeDamage) {
+  //    if(selectedActionType[targetId] == TurnActionType.defend) {
+  //      targetActor.ShowDefendHitParticle();
+  //    }
+
+  //    float effectivity = target.DamageTakenMultiplier(attacker.attackAttribute);
+
+  //    if(target.IsDefending()) {
+  //      VsnAudioManager.instance.PlaySfx("damage_block");
+  //    } else if(effectivity > 1f) {
+  //      VsnAudioManager.instance.PlaySfx("damage_effective");
+  //    } else if(effectivity < 1f) {
+  //      VsnAudioManager.instance.PlaySfx("damage_ineffective");
+  //    } else {
+  //      VsnAudioManager.instance.PlaySfx("damage_default");
+  //    }
+
+  //    TheaterController.instance.Screenshake(1f);
+  //    targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
+  //    yield return new WaitForSeconds(1f);
+
+  //    target.TakeDamage(effectiveAttackDamage);
+  //    yield return new WaitForSeconds(1f);
+  //  }
+
+  //  // chance to receive status condition
+  //  int effectiveStatusConditionChance = attacker.giveStatusConditionChance;
+  //  if(selectedActionType[targetId] == TurnActionType.defend) {
+  //    effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance/2, 30);
+  //  }
+  //  if(Random.Range(0, 100) < effectiveStatusConditionChance) {
+  //    foreach(string statusConditionName in attacker.givesConditionNames) {
+  //      StatusCondition statusCondition = GetStatusConditionByName(statusConditionName);
+  //      bool receivedNewStatus = partyMembers[targetId].ReceiveStatusCondition(statusCondition);
+
+  //      if(receivedNewStatus) {
+  //        yield return ShowGetStatusConditionMessage(targetActor.battler.name, statusCondition.GetPrintableName());
+  //      }
+  //    }
+  //  }
+  //  yield return new WaitForSeconds(0.5f);
+
+
+  //  UIController.instance.HideHelpMessagePanel();
+  //  TheaterController.instance.UnfocusActors();
+  //  yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
+
+  //  VsnController.instance.state = ExecutionState.PLAYING;
+  //}
 
   public void ShowChallengeResult(bool success) {
     Vector3 v = damageParticlePrefab.transform.localPosition;
@@ -939,14 +1025,10 @@ public class BattleController : MonoBehaviour {
         appearSfxName = dic["appear sfx"],
         stage = int.Parse(dic["stage"]),
         location = dic["location"],
-        attackAttribute = Utils.GetAttributeByString(dic["attack attribute"]),
-        attackPower = int.Parse(dic["attack power"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         passiveSkills = Utils.SeparateInts(dic["passive skills"]),
         activeSkillLogics = loadedEnemy.activeSkillLogics,
-        givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(dic["gives status conditions"]),
-        giveStatusConditionChance = int.Parse(dic["give status chance"]),
         tags = loadedTags
       }); ;
     }
@@ -1022,8 +1104,8 @@ public class BattleController : MonoBehaviour {
       } else {
         newSkill.activationTrigger = PassiveSkillActivationTrigger.none;
       }
-      if(!string.IsNullOrEmpty(entry["trigger condition"])) {
-        newSkill.triggerConditions = entry["trigger condition"].Split(',');
+      if(!string.IsNullOrEmpty(entry["trigger conditions"])) {
+        newSkill.triggerConditions = Utils.SeparateTags(entry["trigger conditions"]);
       }
       if(!string.IsNullOrEmpty(entry["trigger chance"])) {
         newSkill.triggerChance = float.Parse(entry["trigger chance"]);
@@ -1034,7 +1116,7 @@ public class BattleController : MonoBehaviour {
       } else {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
-      newSkill.animation = entry["animation"];
+      newSkill.animation = GetSkillAnimationByString(entry["animation"]);
 
       newSkill.tags = Utils.SeparateTags(entry["tags"]);
 
@@ -1065,10 +1147,8 @@ public class BattleController : MonoBehaviour {
   }
 
   public PassiveSkillActivationTrigger GetPassiveSkillTriggerByString(string passiveTrigger) {
-    for(int i = 0; i <= (int)PassiveSkillActivationTrigger.none; i++)
-    {
-      if(((PassiveSkillActivationTrigger)i).ToString() == passiveTrigger)
-      {
+    for(int i = 0; i <= (int)PassiveSkillActivationTrigger.none; i++) {
+      if(((PassiveSkillActivationTrigger)i).ToString() == passiveTrigger) {
         return (PassiveSkillActivationTrigger)i;
       }
     }
@@ -1086,6 +1166,15 @@ public class BattleController : MonoBehaviour {
       default:
         return SkillType.active;
     }
+  }
+
+  public SkillAnimation GetSkillAnimationByString(string skillAnimation) {
+    for(int i = 0; i <= (int)SkillAnimation.none; i++) {
+      if(((SkillAnimation)i).ToString() == skillAnimation) {
+        return (SkillAnimation)i;
+      }
+    }
+    return SkillAnimation.none;
   }
 
   public Skill GetSkillById(int id) {
