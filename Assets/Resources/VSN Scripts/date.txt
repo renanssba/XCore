@@ -76,6 +76,7 @@ for currentDateEvent #dateLength
   end_turn
 
 
+  goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
     goto fail_date
   endif
@@ -144,7 +145,9 @@ for currentDateEvent #dateLength
   goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
   goto_script "check_passive_triggers" "after_enemy_attack"
-
+  
+  
+  goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
     goto fail_date
   endif

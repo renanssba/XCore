@@ -434,7 +434,7 @@ public class Utils {
   }
 
 
-  public static bool AreAllConditionsMet(string[] allConditions, int partyMemberId) {
+  public static bool AreAllConditionsMet(Skill usedSkill, string[] allConditions, int partyMemberId) {
     string conditionArgument;
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
 
@@ -475,6 +475,15 @@ public class Utils {
         }
       }
 
+      if(condition.StartsWith("hp_percent_is_less")) {
+        float hpPercent = ((float)BattleController.instance.GetBattlerByTargetId(partyMemberId).CurrentHP()) /
+                          (float)BattleController.instance.GetBattlerByTargetId(partyMemberId).MaxHP();
+        Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
+        if(hpPercent > float.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
 
       if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == partyMemberId) {
         return false;
@@ -486,6 +495,26 @@ public class Utils {
 
       if(condition == "defending" && !TheaterController.instance.GetActorByIdInParty(partyMemberId).battler.IsDefending()) {
         return false;
+      }
+
+
+      /// CHECKING FOR SKILL-DEPENDANT TRIGGERS
+      if(usedSkill == null) {
+        continue;
+      }
+
+      if(condition.StartsWith("limit_uses_in_date")) {
+        if(BattleController.instance.GetBattlerByTargetId(partyMemberId).CheckSkillUsesInDate(usedSkill.id)
+           >= int.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
+      if(condition.StartsWith("limit_uses_in_battle")) {
+        if(BattleController.instance.GetBattlerByTargetId(partyMemberId).CheckSkillUsesInBattle(usedSkill.id)
+           >= int.Parse(conditionArgument)) {
+          return false;
+        }
       }
     }
     return true;

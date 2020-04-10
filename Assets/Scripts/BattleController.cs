@@ -6,6 +6,12 @@ using TMPro;
 using DG.Tweening;
 
 
+public class SkillsUsedEntry {
+  public int partyMemberUsed;
+  public int skillId;
+}
+
+
 public class BattleController : MonoBehaviour {
   public static BattleController instance;
 
@@ -60,6 +66,9 @@ public class BattleController : MonoBehaviour {
   public float damageShineAlpha;
 
 
+  public Enemy loadedEnemyCustomEvents;
+
+
   public void Awake() {
     instance = this;
     partyMembers = new Person[0];
@@ -95,6 +104,7 @@ public class BattleController : MonoBehaviour {
     maxHp = GlobalData.instance.GetCurrentRelationship().GetMaxHp();
 
     FullHealParty();
+    ClearSkillsUsageRegistry();
     UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
 
@@ -115,6 +125,11 @@ public class BattleController : MonoBehaviour {
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) );
     }
     RecoverStealth(maxStealth);
+  }
+
+  public void ClearSkillsUsageRegistry() {
+    partyMembers[0].ClearAllSkillsUsage();
+    partyMembers[1].ClearAllSkillsUsage();
   }
 
   public void HealPartyHp(int value) {
@@ -465,6 +480,9 @@ public class BattleController : MonoBehaviour {
     Battler skillUser = skillUserActor.battler;
 
 
+    /// register skill usage
+    skillUser.RegisterUsedSkill(usedSkill.id);
+
     if(usedSkill.type == SkillType.attack) {
       yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
     } else {
@@ -518,13 +536,10 @@ public class BattleController : MonoBehaviour {
     if(usedSkill.damagePower != 0) {
       int effectiveAttackDamage = CalculateAttackDamage(skillUser, usedSkill, target);
 
-      if(target.IsDefending()) {
-        targetActor.ShowDefendHitParticle();
-      }
-
       float effectivity = target.DamageTakenMultiplier(usedSkill.damageAttribute);
 
       if(target.IsDefending()) {
+        targetActor.ShowDefendHitParticle();
         VsnAudioManager.instance.PlaySfx("damage_block");
         TheaterController.instance.Screenshake(0.5f);
       } else if(effectivity > 1f) {
@@ -570,12 +585,20 @@ public class BattleController : MonoBehaviour {
 
 
     // heal HP and SP
-    if(usedSkill.healHp > 0 || usedSkill.healSp > 0) {
+    if(usedSkill.healHp > 0 || usedSkill.healHpPercent > 0f || usedSkill.healSp > 0) {
       VsnAudioManager.instance.PlaySfx("heal_default");
+      int effectiveHeal;
 
       if(usedSkill.healHp > 0) {
-        target.HealHP((int)(usedSkill.healHp * skillUser.HealingSkillMultiplier()));
-        targetActor.ShowHealHpParticle(usedSkill.healHp);
+        effectiveHeal = (int)(usedSkill.healHp * skillUser.HealingSkillMultiplier());
+        target.HealHP(effectiveHeal);
+        targetActor.ShowHealHpParticle(effectiveHeal);
+        yield return new WaitForSeconds(1f);
+      }
+      if(usedSkill.healHpPercent > 0) {
+        effectiveHeal = (int)(usedSkill.healHpPercent * skillUser.HealingSkillMultiplier() * target.MaxHP());
+        target.HealHP(effectiveHeal);
+        targetActor.ShowHealHpParticle(effectiveHeal);
         yield return new WaitForSeconds(1f);
       }
       if(usedSkill.healSp > 0) {
@@ -589,7 +612,7 @@ public class BattleController : MonoBehaviour {
     // chance to give status condition
     if(usedSkill.givesConditionNames.Length > 0) {
       int effectiveStatusConditionChance = usedSkill.giveStatusChance;
-      if(target.IsDefending()) {
+      if(target.IsDefending() && target != skillUser) {
         effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance / 2, 30);
       }
 
@@ -1006,7 +1029,10 @@ public class BattleController : MonoBehaviour {
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
-      Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] + "}");
+      Debug.LogWarning("Loading enemy: " + dic["name"]);
+
+      Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] +
+                                                      ", \"customEvents\" :" + dic["custom events"] + "}");
       guts = GetEffectivityByName(dic["guts effectivity"]);
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
@@ -1029,6 +1055,7 @@ public class BattleController : MonoBehaviour {
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         passiveSkills = Utils.SeparateInts(dic["passive skills"]),
         activeSkillLogics = loadedEnemy.activeSkillLogics,
+        customEvents = loadedEnemy.customEvents,
         tags = loadedTags
       }); ;
     }
@@ -1122,6 +1149,9 @@ public class BattleController : MonoBehaviour {
 
       if(!string.IsNullOrEmpty(entry["heal hp"])) {
         newSkill.healHp = int.Parse(entry["heal hp"]);
+      }
+      if(!string.IsNullOrEmpty(entry["heal hp percent"])) {
+        newSkill.healHpPercent = float.Parse(entry["heal hp percent"]);
       }
       if(!string.IsNullOrEmpty(entry["heal sp"])) {
         newSkill.healSp = int.Parse(entry["heal sp"]);

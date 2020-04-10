@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour {
     }
     if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift)) {
       if(BattleController.instance.hp < BattleController.instance.maxHp) {
-        BattleController.instance.FullHealParty();
+        BattleController.instance.HealPartyHp(BattleController.instance.maxHp);
       } else {
         BattleController.instance.DamagePartyHp(BattleController.instance.hp-1);
       }

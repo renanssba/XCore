@@ -88,7 +88,7 @@ public class ActionButton : MonoBehaviour {
 
     /// SP cost
     if(skill.spCost > 0) {
-      spCostText.text = "SP: " + skill.spCost;
+      spCostText.text = Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp")+ ": " + skill.spCost;
       spCostText.gameObject.SetActive(true);
     } else {
       spCostText.gameObject.SetActive(false);
@@ -117,6 +117,9 @@ public class ActionButton : MonoBehaviour {
     /// quantity
     spCostText.text = "x" + itemListing.amount;
     spCostText.gameObject.SetActive(true);
+
+    /// shade
+    shade.gameObject.SetActive(false);
   }
 
 

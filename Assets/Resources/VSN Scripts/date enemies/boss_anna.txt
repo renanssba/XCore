@@ -88,6 +88,22 @@ say "Ana Sombria" "Ele não te ama...ele não nos ama..."
 set_var pre_attack "A sombra envolve \girl!"
 end_script
 
+
+waypoint midbattle_dialog
+say "Ana Sombria" "Hahaha! Diálogo do meio da batalha!"
+say "Ricardo" "Eita, que legal."
+say "Ana" "Vamos continuar a batalha, pessoal!"
+theater_bg_effect "pulsingEffect" 2
+wait 1.5
+screenshake 2
+say "Ana Sombria" "Rraaaaaug!!!"
+end_script
+
+
+
 waypoint defeated
 say "" "A sombra de Ana se dissolve em névoa..."
+wait 1
+theater_bg_effect "pulsingEffect" 0
+wait 1
 end_script

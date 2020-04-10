@@ -275,6 +275,7 @@ public class UIController : MonoBehaviour {
 
   public void SetHelpMessageText(string helpMessage) {
     helpMessageText.text = helpMessage;
+    helpMessageText.maxVisibleCharacters = helpMessage.Length;
   }
 
   public void HideHelpMessagePanel() {

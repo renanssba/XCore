@@ -229,6 +229,9 @@ public class TheaterController : MonoBehaviour {
 
     currentEnemy.hp = currentEnemy.maxHp;
     currentEnemy.RemoveAllStatusConditions();
+    currentEnemy.ClearAllSkillsUsage();
+    BattleController.instance.partyMembers[0].ClearSkillUsesInBattle();
+    BattleController.instance.partyMembers[1].ClearSkillUsesInBattle();
 
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
@@ -240,7 +243,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void ApplyBgEffect(BgEffect type, int intensity) {
-    if(bgEffect != null) {
+    if(bgEffect != null && intensity <= 0) {
       Destroy(bgEffect);
     }
 

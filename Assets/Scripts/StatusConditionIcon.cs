@@ -71,7 +71,6 @@ public class StatusCondition {
   public string GetStatusEffectDescription(int i) {
     string desc = "";
 
-    Debug.LogWarning("GetStatusEffectDescription for: " + statusEffect[i]);
     switch(statusEffect[i]) {
       case StatusConditionEffect.raiseGuts:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
@@ -90,7 +89,6 @@ public class StatusCondition {
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/endurance");
         break;
       default:
-        Debug.LogWarning("Checking description for: "+ name);
         desc += SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/" + name));
         break;
     }

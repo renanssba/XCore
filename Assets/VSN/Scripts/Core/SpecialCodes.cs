@@ -132,6 +132,8 @@ public class SpecialCodes {
   }
 
   static float InterpretSpecialNumber(string keycode) {
+    Enemy enemy = BattleController.instance.GetCurrentEnemy();
+
     if(keycode.Contains("#char[") && keycode.Contains("]item_count[") &&
        keycode.Contains("]from[")) {
       int result = InterpretIfCharactersHasItemFromOtherChar(keycode);
@@ -222,9 +224,15 @@ public class SpecialCodes {
           return -1;
         }
       case "#enemySkillsCount":
+        if(enemy != null) {
+          return enemy.passiveSkills.Length;
+        } else {
+          return -1;
+        }
+      case "#enemyCustomEventsCount":
         Enemy bat = BattleController.instance.GetCurrentEnemy();
-        if(bat != null) {
-          return bat.passiveSkills.Length;
+        if(enemy != null) {
+          return enemy.customEvents.Length;
         } else {
           return -1;
         }

@@ -9,7 +9,9 @@ public abstract class Battler {
   public int id;
   public int[] attributes;
   public List<StatusCondition> statusConditions;
-
+  
+  public List<int> usedSkillsInBattle;
+  public List<int> usedSkillsInDate;
 
 
   public Battler() {
@@ -92,11 +94,53 @@ public abstract class Battler {
 
   public virtual bool IsSpotted() { return false; }
 
+  public abstract int MaxHP();
+
+  public abstract int CurrentHP();
+
+  public void ClearAllSkillsUsage() {
+    ClearSkillUsesInBattle();
+    ClearSkillUsesInDate();
+  }
+
+  public void RegisterUsedSkill(int skillId) {
+    usedSkillsInBattle.Add(skillId);
+    usedSkillsInDate.Add(skillId);
+  }
+
+  public int CheckSkillUsesInBattle(int skillPos) {
+    int count = 0;
+    foreach(int used in usedSkillsInBattle) {
+      if(skillPos == used) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public int CheckSkillUsesInDate(int skillPos) {
+    int count = 0;
+    foreach(int used in usedSkillsInDate) {
+      if(skillPos == used) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public void ClearSkillUsesInBattle() {
+    usedSkillsInBattle = new List<int>();
+  }
+
+  public void ClearSkillUsesInDate() {
+    usedSkillsInDate = new List<int>();
+  }
+
 
   /// ///
   /// STATUS CONDITIONS SEGMENT
   /// ///
-  
+
   public int FindStatusCondition(StatusCondition cond) {
     for(int i=0; i< statusConditions.Count; i++) {
       if(statusConditions[i].name == cond.name) {

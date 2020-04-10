@@ -91,6 +91,14 @@ public class Person : Battler {
     return CurrentStatusConditionStacks("spotted") > 0;
   }
 
+  public override int MaxHP() {
+    return BattleController.instance.maxHp;
+  }
+
+  public override int CurrentHP() {
+    return BattleController.instance.hp;
+  }
+
 
   public int GetMaxSp(int relationshipId) {
     int count = maxSp;

@@ -4,20 +4,16 @@ using UnityEngine;
 
 namespace Command{
 
-	[CommandAttribute(CommandString="shake")]
+	[CommandAttribute(CommandString="screenshake")]
 	public class ScreenShakeCommand : VsnCommand {
 
 		public override void Execute (){
-
       switch(args.Length){
         case 0:
-          VsnEffectManager.instance.ScreenShake(0.5f, 1f);
+          TheaterController.instance.Screenshake(1f);
           break;
         case 1:
-          VsnEffectManager.instance.ScreenShake(args[0].GetNumberValue(), 1f);
-          break;
-        case 2:
-          VsnEffectManager.instance.ScreenShake(args[0].GetNumberValue(), args[1].GetNumberValue());
+          TheaterController.instance.Screenshake(args[0].GetNumberValue());
           break;
       }
 		}
@@ -27,11 +23,6 @@ namespace Command{
       signatures.Add(new VsnArgType[0]);
 
       signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg
-      });
-
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg,
         VsnArgType.numberArg
       });
     }

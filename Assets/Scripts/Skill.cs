@@ -38,6 +38,7 @@ public enum PassiveSkillActivationTrigger {
   before_enemy_attack,
   after_enemy_attack,
   after_action,
+  before_death_checks,
   none
 }
 
@@ -84,7 +85,7 @@ public class Skilltree {
       skills[4 + i].affectsPerson = SkillAffectsCharacter.girl;
       skills[8 + i].affectsPerson = SkillAffectsCharacter.couple;
     }
-    skills[12].affectsPerson = SkillAffectsCharacter.couple;
+    skills[12].affectsPerson = SkillAffectsCharacter.girl;
 
     skills[3].isUnlocked = true;
     skills[7].isUnlocked = true;
@@ -94,6 +95,9 @@ public class Skilltree {
     for(int i=0; i<skills.Length; i++) {
       skills[i].id = ids[i];
     }
+
+    // DEBUG CONFESSION SKILL
+    skills[12].isUnlocked = true;
   }
 }
 
@@ -131,6 +135,7 @@ public class Skill {
   public int giveStatusChance;
   public int duration;
   public int healHp;
+  public float healHpPercent;
   public int healSp;
 
   public PassiveSkillActivationTrigger activationTrigger;

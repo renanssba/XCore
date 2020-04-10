@@ -23,6 +23,13 @@ public class ActiveSkillLogic {
   public string[] conditions;
 }
 
+[System.Serializable]
+public class CustomEventLogic {
+  public string scriptWaypoint;
+  public string situationTrigger;
+  public string[] conditions;
+}
+
 
 [System.Serializable]
 public class Enemy : Battler {
@@ -41,6 +48,7 @@ public class Enemy : Battler {
   public string attackSfxName;
 
   public ActiveSkillLogic[] activeSkillLogics;
+  public CustomEventLogic[] customEvents;
   public int[] passiveSkills;
 
   public string[] tags;
@@ -110,6 +118,14 @@ public class Enemy : Battler {
     return false;
   }
 
+  public override int MaxHP() {
+    return maxHp;
+  }
+
+  public override int CurrentHP() {
+    return hp;
+  }
+
 
   public Skill DecideWhichSkillToUse() {
     List<ActiveSkillLogic> availableSkills = new List<ActiveSkillLogic>();
@@ -117,7 +133,8 @@ public class Enemy : Battler {
 
     // decide which skills are available
     for(int i=0; i<activeSkillLogics.Length; i++) {
-      if(Utils.AreAllConditionsMet(activeSkillLogics[i].conditions, 3)) {
+      if(Utils.AreAllConditionsMet(BattleController.instance.GetSkillById(activeSkillLogics[i].skillId),
+         activeSkillLogics[i].conditions, 3)) {
         availableSkills.Add(activeSkillLogics[i]);
         count += activeSkillLogics[i].frequency;
       }
