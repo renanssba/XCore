@@ -70,23 +70,28 @@ public class Actor2D : MonoBehaviour {
       } else {
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.sad);
       }
-      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.underwear);
-      switch(battler.CurrentStatusConditionStacks("unclothed")) {
+      //renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.underwear);
+      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
+      renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
+      renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
+      if(battler.CurrentStatusConditionStacks("injured") > 0) {
+        renderers[2].gameObject.SetActive(true);
+      } else {
+        renderers[2].gameObject.SetActive(false);
+      }
+      switch(battler.CurrentStatusConditionStacks("dirty")) {
         case 0:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
+          renderers[3].gameObject.SetActive(false);
+          renderers[4].gameObject.SetActive(false);
           break;
         case 1:
-          renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.unclothed);
+          renderers[3].gameObject.SetActive(true);
+          renderers[4].gameObject.SetActive(false);
           break;
         case 2:
-          renderers[2].sprite = null;
+          renderers[3].gameObject.SetActive(true);
+          renderers[4].gameObject.SetActive(true);
           break;
-      }
-      renderers[3].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
-      if(battler.CurrentStatusConditionStacks("injured") > 0) {
-        renderers[3].gameObject.SetActive(true);
-      } else {
-        renderers[3].gameObject.SetActive(false);
       }
       SetAuraVisibility();
     } else {
@@ -97,11 +102,11 @@ public class Actor2D : MonoBehaviour {
   public void SetClothing(string clothingType) {
     switch(clothingType) {
       case "uniform":
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.school);
+        renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.school);
         break;
       case "casual":
       default:
-        renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
+        renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
         break;
     }
   }
@@ -307,7 +312,7 @@ public class Actor2D : MonoBehaviour {
     Attributes[] resistant = enemy.GetResistances();
 
     if(weak.Length > 0) {
-      text += "Fraqueza:\n";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("date/weakness") + "\n";
       for(int i = 0; i < weak.Length; i++) {
         text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + weak[i].ToString()) + "\n";
       }
@@ -316,7 +321,7 @@ public class Actor2D : MonoBehaviour {
       if(!string.IsNullOrEmpty(text)) {
         text += "\n";
       }
-      text += "Resistência:\n";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("date/resistance") + "\n";
       for(int i = 0; i < resistant.Length; i++) {
         text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + resistant[i].ToString()) + "\n";
       }
@@ -333,9 +338,9 @@ public class Actor2D : MonoBehaviour {
     Debug.LogWarning("damage: "+damage+", effectivity: "+effectivity);
 
     if(effectivity > 1f) {
-      particleString += "\n<size=12>SUPER!</size>";
+      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/super_effective") + "</size>";
     } else if(effectivity < 1f) {
-      particleString += "\n<size=12>fraco</size>";
+      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/ineffective") + "</size>";
       particleColor = new Color(0.3f, 0.3f, 0.3f);
     }
     ShowParticleAnimation(particleString, particleColor);
@@ -349,12 +354,12 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowHealHpParticle(int value) {
-    string particleString = "+" + value + " HP";
+    string particleString = "+" + value +" "+Lean.Localization.LeanLocalization.GetTranslationText("attribute/hp");
     ShowParticleAnimation(particleString, Color.green);
   }
 
   public void ShowHealSpParticle(int value) {
-    string particleString = "+" + value + " SP";
+    string particleString = "+" + value + " " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp");
     ShowParticleAnimation(particleString, Color.cyan);
   }
 
@@ -363,7 +368,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowResistConditionParticle() {
-    ShowParticleAnimation("<size=12>Resistiu</size>", Color.gray);
+    ShowParticleAnimation("<size=12>"+Lean.Localization.LeanLocalization.GetTranslationText("date/resisted") +"</size>", Color.gray);
   }
 
   public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {

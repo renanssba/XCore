@@ -69,8 +69,9 @@ public class StatusCondition {
   }
 
   public string GetStatusEffectDescription(int i) {
-    string desc = "";    
+    string desc = "";
 
+    Debug.LogWarning("GetStatusEffectDescription for: " + statusEffect[i]);
     switch(statusEffect[i]) {
       case StatusConditionEffect.raiseGuts:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
@@ -88,17 +89,9 @@ public class StatusCondition {
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/endurance");
         break;
-      case StatusConditionEffect.turnDamageGuts:
-        desc += "Recebe dano baseado em "+ Lean.Localization.LeanLocalization.GetTranslationText("attribute/guts") + " todo turno.";
-        break;
-      case StatusConditionEffect.turnDamageIntelligence:
-        desc += "Recebe dano baseado em " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/intelligence") + " todo turno.";
-        break;
-      case StatusConditionEffect.turnDamageCharisma:
-        desc += "Recebe dano baseado em " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/charisma") + " todo turno.";
-        break;
       default:
-        desc += Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/"+name);
+        Debug.LogWarning("Checking description for: "+ name);
+        desc += SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/description/" + name));
         break;
     }
     return desc;

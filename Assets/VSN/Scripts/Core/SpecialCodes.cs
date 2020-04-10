@@ -20,6 +20,7 @@ public class SpecialCodes {
 
       currentString = InterpretVariableValue(currentString);
       currentString = InterpretEnemyName(currentString);
+      currentString = InterpretLeanText(currentString);
 
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentEnemyName());
@@ -89,6 +90,23 @@ public class SpecialCodes {
 
     string final = initial.Substring(0, start);
     final += enemyName + initial.Substring(end + 1, initial.Length - end - 1);
+
+    return final;
+  }
+
+  public static string InterpretLeanText(string initial) {
+    int start = initial.IndexOf("\\lean(");
+    int end = initial.IndexOf(")");
+
+    if(start == -1 || end == -1) {
+      return initial;
+    }
+
+    string leanLocalizationKey = initial.Substring(start + 6, (end - start - 6));
+    string leanLocalizationText = Lean.Localization.LeanLocalization.GetTranslationText(leanLocalizationKey);
+
+    string final = initial.Substring(0, start);
+    final += leanLocalizationText + initial.Substring(end + 1, initial.Length - end - 1);
 
     return final;
   }

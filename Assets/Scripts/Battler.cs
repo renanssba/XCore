@@ -215,6 +215,10 @@ public abstract class Battler {
     int statusEffectStacks = 0;
     bool damageDealtBefore;
 
+    if(sc.duration > sc.maxDurationShowable) {
+      return;
+    }
+
     for(int i=0; i<sc.statusEffect.Length; i++) {
       if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
          sc.statusEffect[i] <= StatusConditionEffect.turnDamageCharisma) {

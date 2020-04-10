@@ -100,7 +100,19 @@ public class GameController : MonoBehaviour {
       }
     }
     if(Input.GetKeyDown(KeyCode.B) && Input.GetKey(KeyCode.LeftShift)) {
-      BattleController.instance.DamageEnemyHp(BattleController.instance.GetCurrentEnemy().hp-1);
+      Enemy enemy = BattleController.instance.GetCurrentEnemy();
+      if(enemy.hp > 1) {
+        BattleController.instance.DamageEnemyHp(enemy.hp - 1);
+      } else {
+        enemy.HealHP(enemy.maxHp);
+      }
+    }
+    if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift)) {
+      if(BattleController.instance.hp < BattleController.instance.maxHp) {
+        BattleController.instance.FullHealParty();
+      } else {
+        BattleController.instance.DamagePartyHp(BattleController.instance.hp-1);
+      }
     }
   }
 

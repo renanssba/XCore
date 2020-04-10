@@ -20,7 +20,7 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35												run	none		
 19	Beijo de Cura	Cura 16 HP do casal	active	one_ally	1					16									heart-plus	active_support		
 20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally	1							sad, fear, confusion, dizzyness							charmed	active_support		
-21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self								sad, unclothed, cursed, hunger, dizzyness, confusion, fear, angry, unclothed				after_action	received_item_with_tag(food)	100	eating	passive		
+21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self								sad, dirty, cursed, hunger, dizzyness, confusion, fear, angry, unclothed				after_action	received_item_with_tag(food)	100	eating	passive		
 22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	one_ally		damageTakenBonus	0.3												heart-minus	none		
 23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self									angry	100	3	turn_started	is_turn(3)	100	angry-eyes	passive		
 24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	self									fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
@@ -36,5 +36,5 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 34	Auto-Sensor	Revela as próprias fraquezas a cada 3 turnos	passive	self		sensor										turn_started	is_turn(1)	100	magnifying glass	none		
 35	Atropelar	Causa dano baseado em Valentia e pode deixar o alvo Machucado	active	one_enemy				guts	6				injured	40	4				gutsy aura	attack		
 36	Golpes Violentos	Causa dano baseado em Valentia e deixa o alvo Machucado	active	one_enemy				guts	8				injured	100	4				gutsy aura	attack		
-37	Rajada de Molho	Deixa o alvo Melecado	attack	one_enemy									unclothed	100	4				gutsy aura	attack		
+37	Rajada de Molho	Deixa o alvo Melecado	attack	one_enemy				charisma	4				dirty	100	4				gutsy aura	attack		
 38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy									sad	100	4				gutsy aura	attack		
