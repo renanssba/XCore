@@ -28,7 +28,7 @@ namespace Command {
       Skill skillChecked = BattleController.instance.GetSkillById(enemy.passiveSkills[skillPos]);
 
 
-      Debug.LogWarning("CHECKING for ENEMY skill activation. skill: "+skillChecked.name+", situation: "+situation);
+      //Debug.LogWarning("CHECKING for ENEMY skill activation. skill: "+skillChecked.name+", situation: "+situation);
       // return if not checking the correct activation trigger, or the skill is not passive / unlocked
       if(skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
         return;
@@ -38,7 +38,7 @@ namespace Command {
       if(Random.Range(0, 100) >= skillChecked.triggerChance) {
         return;
       }
-      Debug.LogWarning("Check for skill activation. Passed trigger chance.");
+      //Debug.LogWarning("Check for skill activation. Passed trigger chance.");
 
 
       // check all trigger conditions
@@ -47,7 +47,6 @@ namespace Command {
       }
 
 
-      Debug.LogWarning("Skill activated.");
       // activate passive skill
       ActivatePassiveSkill(skillChecked, partyMemberId);
     }
@@ -67,18 +66,18 @@ namespace Command {
       Skill skillChecked = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillPos].id);
 
 
-      Debug.LogWarning("CHECKING for PLAYER skill activation. skill: "+skillChecked.name+", situation: "+situation);
+      //Debug.LogWarning("CHECKING for PLAYER skill activation. skill: "+skillChecked.name+", situation: "+situation);
       // return if not checking the correct activation trigger, or the skill is not passive / unlocked
       if(!relationship.skilltree.skills[skillPos].isUnlocked || skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
         return;
       }
-      Debug.LogWarning("Skill " + skillChecked.name + " is trigged.");
+      //Debug.LogWarning("Skill " + skillChecked.name + " is trigged.");
 
       // check trigger chance
       if(Random.Range(0, 100) >= skillChecked.triggerChance) {
         return;
       }
-      Debug.LogWarning("Check for skill activation. Passed trigger chance.");
+      //Debug.LogWarning("Check for skill activation. Passed trigger chance.");
 
 
 
@@ -88,7 +87,6 @@ namespace Command {
       }
 
 
-      Debug.LogWarning("Skill " + skillChecked.name + " activated.");
       // activate passive skill
       ActivatePassiveSkill(skillChecked, partyMemberId);
     }
@@ -98,6 +96,7 @@ namespace Command {
       BattleController battle = BattleController.instance;
 
       Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);
+
       VsnController.instance.state = ExecutionState.WAITING;
       battle.StartCoroutine(battle.ExecuteBattlerSkill(partyMemberId, partyMemberId, skillToActivate));
     }

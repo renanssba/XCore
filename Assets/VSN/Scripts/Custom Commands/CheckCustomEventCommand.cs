@@ -12,7 +12,7 @@ namespace Command {
       string situation = args[1].GetStringValue();
       Enemy enemy = BattleController.instance.GetCurrentEnemy();
 
-      Debug.LogWarning("CHECKING for custom event activation: " + enemy.customEvents[customEventPos].scriptWaypoint);
+      //Debug.LogWarning("CHECKING for custom event activation: " + enemy.customEvents[customEventPos].scriptWaypoint);
       
       // check all trigger conditions
       if(!Utils.AreAllConditionsMet(null, enemy.customEvents[customEventPos].conditions, 3) ||

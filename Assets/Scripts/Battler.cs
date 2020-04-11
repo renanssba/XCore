@@ -86,6 +86,7 @@ public abstract class Battler {
   public abstract float GetAttributeEffectivity(Attributes att);
 
   public abstract void HealHP(int value);
+  public abstract void HealHpPercent(float fraction);
   public abstract void TakeDamage(int value);
   
   public abstract void HealSp(int value);
@@ -97,6 +98,8 @@ public abstract class Battler {
   public abstract int MaxHP();
 
   public abstract int CurrentHP();
+
+  public abstract int Level();
 
   public void ClearAllSkillsUsage() {
     ClearSkillUsesInBattle();

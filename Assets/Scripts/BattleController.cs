@@ -222,9 +222,9 @@ public class BattleController : MonoBehaviour {
   public int GetPartyMemberPosition(Battler character) {
     if(partyMembers[0] == character) {
       return 0;
-    }else if(partyMembers[1] == character) {
+    } else if(partyMembers[1] == character) {
       return 1;
-    }else if(GetCurrentEnemy() == character) {
+    } else if(GetCurrentEnemy() == character) {
       return 3;
     }
     return -1;
@@ -328,20 +328,41 @@ public class BattleController : MonoBehaviour {
 
     damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
-    Debug.LogWarning("Character Hits! Damage:");
+    Debug.LogWarning(attacker.name + " Hits!");
     Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
+    // skill power
     damage *= usedSkill.damagePower * Random.Range(0.9f, 1.1f);
 
+    // attacker damage multiplier
     damage *= attacker.DamageMultiplier();
 
+    // defender damage taken multiplier
     damage *= defender.DamageTakenMultiplier(usedSkill.damageAttribute);
-    Debug.Log("Final damage: " + damage);
+
+    // level damage scaling
+    damage *= LevelModifier(attacker.Level(), defender.Level());
+
+    Debug.LogWarning("LEVEL MODIFIER: " + LevelModifier(attacker.Level(), defender.Level()));
 
     // defend?
     damage /= (defender.IsDefending() ? 2f : 1f);
 
+    Debug.Log("Final damage: " + damage);
+
     return Mathf.Max(1, Mathf.RoundToInt(damage));
+  }
+
+  public float LevelModifier(int attackerLevel, int defenderLevel) {
+    int levelDiff = attackerLevel - defenderLevel;
+    levelDiff = Mathf.Min(levelDiff, 4);
+    levelDiff = Mathf.Max(levelDiff, -4);
+
+    if(levelDiff >= 0) {
+      return 1f + (levelDiff * levelDiff) / 10f;
+    } else {
+      return 1f - (levelDiff * levelDiff) / 18f;
+    }
   }
 
   //public IEnumerator ExecuteCharacterAttack(int attackerId, int targetId, Skill usedSkill) {
@@ -417,11 +438,19 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public IEnumerator ShowUseSkillMessage(string userName, Skill skill) {
+  public IEnumerator ShowUseActiveSkillMessage(string userName, Skill skill) {
     VsnSaveSystem.SetVariable("active", userName);
     VsnSaveSystem.SetVariable("selected_action_name", skill.GetPrintableName());
 
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_skill"));
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_active_skill"));
+    yield return ShowBattleDescription(code);
+  }
+
+  public IEnumerator ShowUsePassiveSkillMessage(string userName, Skill skill) {
+    VsnSaveSystem.SetVariable("active", userName);
+    VsnSaveSystem.SetVariable("selected_action_name", skill.GetPrintableName());
+
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_passive_skill"));
     yield return ShowBattleDescription(code);
   }
 
@@ -485,8 +514,10 @@ public class BattleController : MonoBehaviour {
 
     if(usedSkill.type == SkillType.attack) {
       yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
-    } else {
-      yield return ShowUseSkillMessage(skillUser.name, usedSkill);
+    } else if(usedSkill.type == SkillType.active) {
+      yield return ShowUseActiveSkillMessage(skillUser.name, usedSkill);
+    } else if(usedSkill.type == SkillType.passive) {
+      yield return ShowUsePassiveSkillMessage(skillUser.name, usedSkill);
     }
 
     TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActor });
@@ -991,6 +1022,20 @@ public class BattleController : MonoBehaviour {
       return partyMembers[targetId];
     }
     return GetCurrentEnemy();
+  }
+
+  public Battler GetBattlerByString(string targetName) {
+    switch(targetName) {
+      case "main":
+        return GetBattlerByTargetId(0);
+      case "support":
+        return GetBattlerByTargetId(1);
+      case "angel":
+        return GetBattlerByTargetId(2);
+      case "enemy":
+        return GetBattlerByTargetId(3);
+    }
+    return null;
   }
 
 

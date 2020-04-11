@@ -162,6 +162,9 @@ public class SkilltreeScreen : MonoBehaviour {
 
 
   public void HealCharactersSP() {
+    if(GlobalData.instance.GetCurrentRelationship() == null) {
+      return;
+    }
     relationship.GetBoy().HealSp(100);
     relationship.GetGirl().HealSp(100);
   }

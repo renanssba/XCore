@@ -154,7 +154,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void ClickItemsPanel() {
-    if(!ThereAreItemsAvailable()) {
+    if(!ThereAreItemsAvailable() || !BattleController.instance.partyMembers[currentPartyMember].CanExecuteAction(TurnActionType.useItem)) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }

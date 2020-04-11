@@ -108,6 +108,10 @@ public class Enemy : Battler {
     BattleController.instance.HealEnemyHp(value);
   }
 
+  public override void HealHpPercent(float fraction) {
+    BattleController.instance.HealEnemyHp((int)(maxHp*fraction));
+  }
+
   public override void TakeDamage(int value) {
     BattleController.instance.DamageEnemyHp(value);
   }
@@ -124,6 +128,10 @@ public class Enemy : Battler {
 
   public override int CurrentHP() {
     return hp;
+  }
+
+  public override int Level() {
+    return level;
   }
 
 

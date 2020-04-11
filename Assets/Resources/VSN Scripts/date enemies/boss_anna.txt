@@ -1,6 +1,10 @@
 goto *arg1
 
 waypoint event_statement
+
+set_var midbattle 0
+set_var first_dialog 0
+
 theater_bg_effect "pulsingEffect" 1
 fade_music 0 2
 wait 2
@@ -12,7 +16,7 @@ set_actor_animator_parameter "angel" "Choosing Action" true
 say "Fertiliel" "(Um... demônio das sombras?!)"
 say "(Por que tem um desses por aqui?)"
 say "Demônio" "Raiva, insegurança..."
-say "Eu preciso... dessa humana..."
+say "Essa sombra... me fará mais forte..."
 say "Ana" "Ricardo, não estou me sentindo bem..."
 
 flash "#BA2D21" 0.3
@@ -28,9 +32,11 @@ wait 0.5
 //ANIMATION HERE
 say "Ana Sombria" "Grrr..."
 say "Ricardo" "O que é isso...?"
-say "Ana" "Ela... se parece exatamente comigo!"
+say "Ana" "Eu não sei... mas ela tem a minha cara!"
 say "Ana Sombria" "Grrr!!!"
+say "Fertiliel" "(Esse demônio é perigoso, preciso proteger meus humanos!)"
 set_actor_animator_parameter "angel" "Choosing Action" false
+wait 0.5
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
@@ -89,14 +95,32 @@ set_var pre_attack "A sombra envolve \girl!"
 end_script
 
 
+waypoint first_dialog
+if first_dialog == 0
+  say "Ana Sombria" "Grraaaaaurrr!!!"
+  say "Ricardo" "Ela parece furiosa."
+  say "Ana" "Vamos continuar a batalha, pessoal!"
+  wait 0.5
+  use_skill "enemy" "enemy" 39
+  wait 1
+  screenshake 0.5
+  say "Ana Sombria" "Grrrrr!!"
+  set_var first_dialog 1
+endif
+end_script
+
+
 waypoint midbattle_dialog
-say "Ana Sombria" "Hahaha! Diálogo do meio da batalha!"
-say "Ricardo" "Eita, que legal."
-say "Ana" "Vamos continuar a batalha, pessoal!"
-theater_bg_effect "pulsingEffect" 2
-wait 1.5
-screenshake 2
-say "Ana Sombria" "Rraaaaaug!!!"
+if midbattle == 0
+  say "Ana Sombria" "Grraaaaaurrr!!!"
+  say "Ricardo" "Ela parece furiosa."
+  say "Ana" "Vamos continuar a batalha, pessoal!"
+  wait 1
+  screenshake 2
+  theater_bg_effect "pulsingEffect" 2
+  say "Ana Sombria" "Grraaaaaurrr!!!"
+  set_var midbattle 1
+endif
 end_script
 
 

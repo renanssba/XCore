@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4016215944865336
 Transform:
   m_ObjectHideFlags: 1
@@ -388,6 +388,8 @@ MonoBehaviour:
     id: 0
     attributes: 00000000000000000000000000000000
     statusConditions: []
+    usedSkillsInBattle: 
+    usedSkillsInDate: 
     scriptName: 
     attributeEffectivity: []
     level: 0
@@ -397,12 +399,10 @@ MonoBehaviour:
     appearSfxName: 
     maxHp: 0
     hp: 0
-    attackAttribute: 0
-    attackPower: 0
     attackSfxName: 
-    givesConditionNames: []
-    giveStatusConditionChance: 0
-    skills: 
+    activeSkillLogics: []
+    customEvents: []
+    passiveSkills: 
     tags: []
     rewardType: 0
     rewardId: 0
@@ -5315,7 +5315,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1ab1b98c2f0f97f47b934e05c2cb610c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

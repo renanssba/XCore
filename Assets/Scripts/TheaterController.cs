@@ -244,13 +244,21 @@ public class TheaterController : MonoBehaviour {
 
   public void ApplyBgEffect(BgEffect type, int intensity) {
     if(bgEffect != null && intensity <= 0) {
-      Destroy(bgEffect);
+      StartCoroutine(WaitThenDeleteBgEffect());
     }
 
     if(intensity > 0) {
-      bgEffect = Instantiate(bgEffectPrefabs[(int)type], gameObject.transform);
+      if(bgEffect == null) {
+        bgEffect = Instantiate(bgEffectPrefabs[(int)type], gameObject.transform);
+      }
       bgEffect.GetComponent<Animator>().SetInteger("Intensity", intensity);
     }
+  }
+
+  public IEnumerator WaitThenDeleteBgEffect() {
+    bgEffect.GetComponent<Animator>().SetInteger("Intensity", 0);
+    yield return new WaitForSeconds(1f);
+    Destroy(bgEffect);
   }
 
   public void SetCharacterChoosingAction(int characterId) {

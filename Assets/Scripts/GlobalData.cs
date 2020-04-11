@@ -133,7 +133,7 @@ public class GlobalData : MonoBehaviour {
     }
 
     /// RELATIONSHIP SKILLTREES
-    relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 3, 23, 26, 26, 27, 26, 30 });
+    relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 14, 23, 26, 26, 27, 26, 30 });
     relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 18, 17, 4, 24, 27, 27, 27, 26, 30 });
     relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 27, 27, 26, 30 });
 
@@ -170,6 +170,7 @@ public class GlobalData : MonoBehaviour {
     /// DEBUG: TESTING SKILLS IN BATTLE
     relationships[0].exp = 100;
     relationships[0].level = 7;
+    relationships[0].bondPoints = 10;
     //relationships[1].hearts = 1;
     //relationships[2].hearts = 1;
   }

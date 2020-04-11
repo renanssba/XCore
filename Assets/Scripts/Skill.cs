@@ -55,6 +55,7 @@ public enum SkillAnimation {
   active_support,
   active_offensive,
   passive,
+  long_charge,
   none
 }
 

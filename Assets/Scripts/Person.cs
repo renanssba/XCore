@@ -99,6 +99,10 @@ public class Person : Battler {
     return BattleController.instance.hp;
   }
 
+  public override int Level() {
+    return GlobalData.instance.GetCurrentRelationship().level;
+  }
+
 
   public int GetMaxSp(int relationshipId) {
     int count = maxSp;
@@ -181,6 +185,10 @@ public class Person : Battler {
 
   public override void HealHP(int value) {
     BattleController.instance.HealPartyHp(value);
+  }
+
+  public override void HealHpPercent(float fraction) {
+    BattleController.instance.HealPartyHp((int)(BattleController.instance.maxHp * fraction));
   }
 
   public override void TakeDamage(int value) {

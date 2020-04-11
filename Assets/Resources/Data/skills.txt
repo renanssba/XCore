@@ -13,14 +13,14 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy	1									hunger	100	4				fragrance	active_offensive		
 12	Cozinheiro	Duplica o HP recuperado por itens de cura	passive	all_allies		healingItemBonus	1													cook	none		
 13	Encorajar	Aumenta a Valentia em 3 (dura 3 turnos) e cura Tristeza	active	one_ally	1		3						sad	encouraged	100	3				gutsy aura	active_support		
-14	Aura Shounen	Deixa um inimigo tonto por 3 turnos	active	one_enemy										dizzyness	100	3				gutsy aura	active_offensive		
+14	Primeiros Socorros	Cura Machucado e Tonto	active	one_ally	1								injured, dizzy							heart-plus	active_support		
 15	Guardiã	Defender dá 70% de chance de receber ataque no lugar do aliado	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
 16	Ofensa Rebuscada	Causa confusão em um oponente por 3 turnos	active	one_enemy	1									confusion	100	3				dialog	active_offensive		
 17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy	1									cursed	100	3				cursed	active_offensive		
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35													run	none		
 19	Beijo de Cura	Cura 16 HP do casal	active	one_ally	1					16										heart-plus	active_support		
 20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally	1								sad, fear, confusion, dizzyness							charmed	active_support		
-21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self									sad, dirty, cursed, hunger, dizzyness, confusion, fear, angry, unclothed				after_action	received_item_with_tag(food)	100	eating	passive		
+21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self									sad, dirty, cursed, hunger, dizzyness, confusion, fear, angry				after_action	received_item_with_tag(food)	100	eating	passive		
 22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
 23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	3	turn_started	is_turn(3)	100	angry-eyes	passive		
 24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
@@ -38,3 +38,5 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 36	Golpes Violentos	Causa dano baseado em Valentia e deixa o alvo Machucado	active	one_enemy				guts	8					injured	100	4				gutsy aura	attack		
 37	Rajada de Molho	Causa dano baseado em Carisma e deixa o alvo Melecado	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	attack		
 38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy										sad	100	4				gutsy aura	attack		
+39	Fúria Reprimida	Fica irritado até o fim do Encontro	active	self	1									angry	100	-1				angry-eyes	active_support		
+40	Concentrar	Aumenta todos os atributos de ataque por 1 turno	passive	self	1									charged	100	1	after_enemy_attack	hp_percent_is_less(0.5)	25	angry-eyes	long_charge		
