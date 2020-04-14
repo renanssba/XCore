@@ -528,4 +528,10 @@ public static class MyExtensions {
     c.a = alpha;
     img.color = c;
   }
+
+  public static void SetAlpha(this SpriteRenderer renderer, float alpha) {
+    Color c = renderer.color;
+    c.a = alpha;
+    renderer.color = c;
+  }
 }

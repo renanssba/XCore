@@ -936,6 +936,7 @@ public class BattleController : MonoBehaviour {
         dateLength = 4;
         currentDateLocation = DateLocation.park;
         GenerateDateEnemies();
+        dateEnemies[3] = allEnemies[12+GlobalData.instance.CurrentGirl().id];
         break;
       default:
         dateLength = 1;

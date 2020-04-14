@@ -33,6 +33,12 @@ public class VsnEffectManager : MonoBehaviour {
     } );
   }
 
+  public void SetFadeColor(Color c) {
+    float alpha = fadeImage.color.a;
+    fadeImage.color = c;
+    fadeImage.SetAlpha(alpha);
+  }
+
   public void FadeOut(float duration) {
     Fade(1f, duration);
   }

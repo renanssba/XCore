@@ -15,6 +15,9 @@ namespace Command{
         case 1:
           TheaterController.instance.Screenshake(args[0].GetNumberValue());
           break;
+        case 2:
+          TheaterController.instance.Screenshake(args[0].GetNumberValue(), args[1].GetNumberValue());
+          break;
       }
 		}
 
@@ -23,6 +26,11 @@ namespace Command{
       signatures.Add(new VsnArgType[0]);
 
       signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg
+      });
+
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg,
         VsnArgType.numberArg
       });
     }

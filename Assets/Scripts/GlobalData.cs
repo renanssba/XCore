@@ -95,10 +95,10 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      name = "'B'",
+      name = "Beatrice",
       isMale = false,
       id = 2,
-      faceId = 10,
+      faceId = 6,
       attributes = new int[] { 4, 8, 4, 2 }
     };
     people.Add(p);
@@ -307,6 +307,15 @@ public class GlobalData : MonoBehaviour {
     //if(name == "Hardiel") {
     //  return ResourcesManager.instance.fixedCharactersFaceSprites[2];
     //}
+    if(name == "Ana Sombria") {
+      return ResourcesManager.instance.faceSprites[2];
+    }
+    if(name == "Beatrice Amaldiçoada") {
+      return ResourcesManager.instance.faceSprites[3];
+    }
+    if(name == "Clara Sombria") {
+      return ResourcesManager.instance.faceSprites[4];
+    }
     if(name == "Carta") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[3];
     }

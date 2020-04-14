@@ -2172,6 +2172,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1214418322981602
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4684125741742054}
+  - component: {fileID: 114589139633897114}
+  m_Layer: 0
+  m_Name: first_aid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1216902172880148
 GameObject:
   m_ObjectHideFlags: 1
@@ -3089,6 +3105,22 @@ GameObject:
   - component: {fileID: 114163248033360416}
   m_Layer: 0
   m_Name: choices_2_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1306356980759168
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4831376281561950}
+  - component: {fileID: 114271066900552750}
+  m_Layer: 0
+  m_Name: calming_tea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7239,6 +7271,22 @@ GameObject:
   - component: {fileID: 114402190148578316}
   m_Layer: 0
   m_Name: play
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1750570361157004
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4749876382817648}
+  - component: {fileID: 114940495647413810}
+  m_Layer: 0
+  m_Name: charged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11476,6 +11524,7 @@ Transform:
   - {fileID: 4294045968824174}
   - {fileID: 4559750823517160}
   - {fileID: 4510615154948872}
+  - {fileID: 4749876382817648}
   m_Father: {fileID: 4932318518674308}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16089,6 +16138,19 @@ Transform:
   m_Father: {fileID: 4175592692661276}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4684125741742054
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214418322981602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4685810608310630}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4685759218051828
 Transform:
   m_ObjectHideFlags: 1
@@ -16127,6 +16189,8 @@ Transform:
   - {fileID: 4501076192542300}
   - {fileID: 4987234628597308}
   - {fileID: 4005804502626644}
+  - {fileID: 4684125741742054}
+  - {fileID: 4831376281561950}
   m_Father: {fileID: 4061730321518412}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16621,6 +16685,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4747496740119076}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4749876382817648
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1750570361157004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4175592692661276}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4752996056008938
 Transform:
@@ -17254,6 +17331,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4979722576445276}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4831376281561950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306356980759168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4685810608310630}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4832554837197302
 Transform:
@@ -19412,8 +19502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<color=yellow>O relacionamento de \\couple avan\xE7ou bastante! Agora eles
-      est\xE3o Apaixonados!</color>"
+    Text: "O relacionamento de \\couple avan\xE7ou bastante! Agora eles est\xE3o <color=yellow>Apaixonados!</color>"
     Object: {fileID: 0}
   - Language: English
     Text: 
@@ -19541,12 +19630,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "H\xE1 uma estrelinha do lado do atributo \\vsn[attr]. Isso quer dizer que
+    Text: "H\xE1 uma estrelinha do lado do atributo \\vsn(attr). Isso quer dizer que
       ele \xE9 o atributo preferido da pessoa, e que ela sempre tentar\xE1 utiliz\xE1-lo
       sua para resolver as situa\xE7\xF5es."
     Object: {fileID: 0}
   - Language: English
-    Text: There is a little star on the side of the \vsn[attr] attribute. This means
+    Text: There is a little star on the side of the \vsn(attr) attribute. This means
       that it is the person's favorite attribute, and that they will always try to
       use it to solve situations.
     Object: {fileID: 0}
@@ -22066,6 +22155,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114271066900552750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1306356980759168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "Ch\xE1 Calmante"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114272504745398060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -23182,11 +23292,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Nesta vers\xE3o Alfa a sua miss\xE3o ser\xE1: juntar \\vsn[objective] casal
+    Text: "Nesta vers\xE3o Alfa a sua miss\xE3o ser\xE1: juntar \\vsn(objective) casal
       em um per\xEDodo de 5 dias."
     Object: {fileID: 0}
   - Language: English
-    Text: 'In this Alpha version, your mission will be: form \vsn[objective] couple
+    Text: 'In this Alpha version, your mission will be: form \vsn(objective) couple
       in a 5 day period.'
     Object: {fileID: 0}
   - Language: Context / Notes
@@ -23549,11 +23659,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Voc\xEA quer vender <color=yellow>\\vsn[item_name]</color> por <sprite=\"Attributes\"
-      index=4><color=yellow>\\vsn[item_price]</color>?"
+    Text: "Voc\xEA quer vender <color=yellow>\\vsn(item_name)</color> por <sprite=\"Attributes\"
+      index=4><color=yellow>\\vsn(item_price)</color>?"
     Object: {fileID: 0}
   - Language: English
-    Text: Do you want to sell \vsn [item_name] for \vsn[item_price]?
+    Text: Do you want to sell \vsn [item_name) for \vsn(item_price)?
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -24653,10 +24763,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Voc\xEA adquiriu <color=yellow>\\vsn[item_name]</color>!"
+    Text: "Voc\xEA adquiriu <color=yellow>\\vsn(item_name)</color>!"
     Object: {fileID: 0}
   - Language: English
-    Text: You purchased \vsn[item_name]!
+    Text: You purchased \vsn(item_name)!
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -25101,10 +25211,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: \boy entrega <color=yellow>\vsn[item_name]</color> para \girl.
+    Text: \boy entrega <color=yellow>\vsn(item_name)</color> para \girl.
     Object: {fileID: 0}
   - Language: English
-    Text: \boy gives \girl a <color=yellow>\vsn[item_name]</color>.
+    Text: \boy gives \girl a <color=yellow>\vsn(item_name)</color>.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -25858,6 +25968,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114589139633897114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1214418322981602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Primeiros Socorros
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114589519181644354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -26082,11 +26213,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Voc\xEA quer comprar <color=yellow>\\vsn[item_name]</color> por <sprite=\"Attributes\"
-      index=4><color=yellow>\\vsn[item_price]</color>?"
+    Text: "Voc\xEA quer comprar <color=yellow>\\vsn(item_name)</color> por <sprite=\"Attributes\"
+      index=4><color=yellow>\\vsn(item_price)</color>?"
     Object: {fileID: 0}
   - Language: English
-    Text: Do you want to buy \vsn[item_name] for \vsn[item_price]?
+    Text: Do you want to buy \vsn(item_name) for \vsn(item_price)?
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -29621,10 +29752,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Voc\xEA trabalhou bastante e ganhou <sprite=\"Attributes\" index=4>\\vsn[gain]!"
+    Text: "Voc\xEA trabalhou bastante e ganhou <sprite=\"Attributes\" index=4>\\vsn(gain)!"
     Object: {fileID: 0}
   - Language: English
-    Text: You worked hard and won \vsn[gain] Heavenly Money!
+    Text: You worked hard and won \vsn(gain) Heavenly Money!
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -30036,6 +30167,27 @@ MonoBehaviour:
   - Language: English
     Text: Now is the moment of truth! To bring this couple together, they must overcome
       the challenges of this <color=yellow>Date</color>.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114940495647413810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1750570361157004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "Dobra o dano do pr\xF3ximo ataque realizado"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -30589,8 +30741,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<color=yellow>O relacionamento de \\couple avan\xE7ou! Agora eles tornaram-se
-      Amigos Pr\xF3ximos!</color>"
+    Text: "O relacionamento de \\couple avan\xE7ou! Eles tornaram-se <color=yellow>Amigos
+      Pr\xF3ximos!</color>"
     Object: {fileID: 0}
   - Language: English
     Text: 

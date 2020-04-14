@@ -75,30 +75,35 @@ public class TheaterController : MonoBehaviour {
     return spawnedEnemy;
   }
 
-  public void ChangeActor(string actorName, string newActorPrefabName) {
-    Actor2D targetActor = null;
+  public Actor2D GetActorByString(string actorPosition) {
+    Actor2D actor = null;
 
-    switch(actorName) {
+    switch(actorPosition) {
       case "main":
-        targetActor = mainActor;
+        actor = mainActor;
         break;
       case "support":
-        targetActor = supportActor;
+        actor = supportActor;
         break;
       case "angel":
-        targetActor = angelActor;
+        actor = angelActor;
         break;
       case "enemy":
-        targetActor = enemyActor;
+        actor = enemyActor;
         break;
     }
+    return actor;
+  }
+
+  public void ChangeActor(string actorPosition, string newActorPrefabName) {
+    Actor2D targetActor = GetActorByString(actorPosition);
 
     if(targetActor != null) {
       Destroy(targetActor.gameObject);
     }
 
     GameObject newObj = SpawnEnemyActor(newActorPrefabName);
-    switch(actorName) {
+    switch(actorPosition) {
       case "main":
         mainActor = newObj.GetComponent<Actor2D>();
         break;
@@ -257,7 +262,7 @@ public class TheaterController : MonoBehaviour {
 
   public IEnumerator WaitThenDeleteBgEffect() {
     bgEffect.GetComponent<Animator>().SetInteger("Intensity", 0);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(2f);
     Destroy(bgEffect);
   }
 
@@ -422,9 +427,9 @@ public class TheaterController : MonoBehaviour {
     mainCamera.transform.DOMove(newPosition, time);
   }
 
-  public void Screenshake(float effectivity) {
+  public void Screenshake(float effectivity, float time = 0.3f) {
     DOTween.Kill(transform);
-    transform.DOShakeRotation(0.3f, effectivity).OnComplete(() => {
+    transform.DOShakeRotation(time, effectivity).OnComplete(() => {
       transform.position = Vector3.zero;
     });
   }

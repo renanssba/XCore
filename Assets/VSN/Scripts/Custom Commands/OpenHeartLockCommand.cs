@@ -20,9 +20,11 @@ namespace Command {
           sayArgs[1] = new VsnString("improve_relationship/say_2");
         } else if(levelToRaise == 2) {
           sayArgs[1] = new VsnString("improve_relationship/say_3");
+        } else if(levelToRaise == 2) {
+          return;
         }
         Command.SayCommand.StaticExecute(sayArgs);
-      }      
+      }
     }
 
 

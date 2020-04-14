@@ -19,6 +19,8 @@ public class VsnVariablesDebugPanel : MonoBehaviour {
 
   public List<VsnVariableEntry> varEntries;
 
+  public TMP_InputField loadVsnInputField;
+
   public string selectedVariable;
 
 
@@ -134,6 +136,15 @@ public class VsnVariablesDebugPanel : MonoBehaviour {
     UpdateEntries();
     customizeVariablePanel.SetActive(false);
     Utils.SelectUiElement(searchInputField.gameObject);
+  }
+
+  public void ClickLoadVsnScriptButton() {
+    if(string.IsNullOrEmpty(loadVsnInputField.text)) {
+      Debug.LogError("Error: load Vsn Input Field is empty");
+      return;
+    }
+    VsnController.instance.StartVSN(loadVsnInputField.text);
+    gameObject.SetActive(false);
   }
 
 

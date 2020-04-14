@@ -108,10 +108,10 @@ public class Item {
     }
 
     if(removeStatusDesc != "") {
-      removeStatusDesc = "Cura um aliado " + removeStatusDesc + ". ";
+      removeStatusDesc = "Cura um aliado de: " + removeStatusDesc + ". ";
     }
     if(givesStatusDesc != "") {
-      givesStatusDesc = "Torna um aliado " + givesStatusDesc + ". ";
+      givesStatusDesc = "Torna um aliado: " + givesStatusDesc + ". ";
     }
 
     return (healDesc + healSpDesc + removeStatusDesc + givesStatusDesc).TrimEnd();
