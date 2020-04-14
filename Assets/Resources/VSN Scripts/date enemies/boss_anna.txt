@@ -10,6 +10,11 @@ fade_music 0 2
 wait 2
 say "Ricardo" "Você tá sentindo isso?"
 say "Ana" "O ar... está ficando quente e pesado."
+
+wait 0.5
+play_music "tension_intro" "tension_loop"
+wait 1
+
 theater_animation "enemy_enters"
 say "Demônio" "Inveja..."
 set_actor_animator_parameter "angel" "Choosing Action" true
@@ -26,15 +31,20 @@ wait 0.8
 flash "#BA2D21" 0.4
 change_actor "enemy" "boss_anna2"
 wait 1.2
-play_music "placeholder_boss"
-wait 0.5
 
 //ANIMATION HERE
 say "Ana Sombria" "Grrr..."
 say "Ricardo" "O que é isso...?"
 say "Ana" "Eu não sei... mas ela tem a minha cara!"
 say "Ana Sombria" "Grrr!!!"
+//say "" "A garota "
+say "Ana Sombria" "Grrr..."
 say "Fertiliel" "(Esse demônio é perigoso, preciso proteger meus humanos!)"
+
+wait 0.5
+play_music "placeholder_boss"
+wait 0.5
+
 set_actor_animator_parameter "angel" "Choosing Action" false
 wait 0.5
 

@@ -27,15 +27,15 @@ if #day == 1
   say "Valentão 1" "Você está me desafiando? Má escolha."
   say "" "O valentão empurra Beatrice. A garota cai  e sua mochila se rasga, o material escolar se espalhando pelo chão."
   say "Ricardo" "(A coisa ficou feia...! Preciso tentar ajudá-la!)"
-  say "" "Ricardo corre, tentando dara volta pela longa fileira de prateleiras."
+  say "" "Ricardo corre, tentando dar a volta pela longa fileira de prateleiras."
   say "Valentão 2" "Tem alguém vindo!"
   say "Valentão 1" "Traga a grana da próxima vez. Vejo você depois, bruxa."
   say "" "Os valentões dão a volta e vão embora. Ricardo se aproxima, ofegante."
   say "Ricardo" "Você tá bem?"
   say "Beatrice" "..."
-  say "A menina ignora a pergunta e começa a recolher seus livros, lápis e outros materiais."
+  say "" "A menina ignora a pergunta e começa a recolher seus livros, lápis e outros materiais."
   say "Ricardo" "Deixa eu te ajudar."
-  say "" "O garoto  estende a mão, fazendo menção de recolher o resto dos objetos no chão."
+  say "" "O garoto estende a mão, fazendo menção de recolher o resto dos objetos no chão."
   say "Beatrice" "Não!"
   say "" "Beatrice puxa o que restou da mochila e arruma tudo de qualquer jeito, muito rapidamente."
   say "" "Beatrice se levanta, com a respiração entrecortada. Ricardo nota que a menina parece prestes a chorar."
@@ -129,7 +129,8 @@ waypoint dialog_acquaintances_3
 say "" "Ricardo retira um saquinho de papel da mochila."
 say "Ricardo" "Sobrou um pouco de pão de queijo da fornada que eu fiz hoje de manhã. Quer?"  
 say "Beatrice" "Não é proibido comer na biblioteca?"
-say "Ricardo" "Só é proibido se alguém ver!" // é uma piada, mas talvez interpretem como out of character?
+say "Ricardo" "Só é proibido se alguém ver!"
+// é uma piada, mas talvez interpretem como out of character?
 say "" "Beatrice ri."
 say "Ricardo" "Come, tá gostoso."
 say "" "Ricardo pega dois pães de queijo do saquinho, come um e dá o outro para Beatrice."
@@ -157,7 +158,7 @@ say "Ricardo" "(...)"
 say "Beatrice" "(...)"
 say "" "Beatrice vira a página."
 say "Ricardo" "Ei, eu não terminei de ler!"
-say "Beatrice" "Eu já terminei faz 5 minutos. Você lê devagar." // Fazer uma piada relacionada com o assunto do livro.
+say "Beatrice" "Eu já terminei faz 5 minutos. Você lê devagar."
 say "Ricardo" "Hmpf! Eu estou saboreando a leitura."
 say "" "Beatrice ri. Os dois passam o tempo lendo."
 goto end_dialog
@@ -231,7 +232,7 @@ say "Valentão 1" "Pfft...Hehe..."
 say "Valentão 2" "Hihi..."
 say "Valentões" "Hahahahahahaha!"
 say "Valentão 2" "O Biscoitinho se levantou pra defender ela!"
-say "" "Ricado abaixa a cabeça."
+say "" "Ricardo abaixa a cabeça."
 say "Valentão 1" "Hilário, ele acha que pode com a gente! Hahahaha!"
 say "Ricardo" "..."
 say "Valentão 2" "Você acha que é um herói, é? Vai lutar pra defender sua namoradinha?"
@@ -264,17 +265,6 @@ say "" "Ricardo e Beatrice se dão as mãos."
 say "Ricardo" "Nós vamos descobrir como lidar com isso...juntos."
 goto end_dialog
 
-set_var aux #random100
-if #currentRelationshipHeartLocksOpened == 0
-  
-endif
-if #currentRelationshipHeartLocksOpened == 1
-  
-endif
-if #currentRelationshipHeartLocksOpened == 2
-  
-endif
-
 waypoint dialog_fallback
 say "" "Os dois conversam sobre os livros que eles leram recentemente."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
@@ -295,65 +285,6 @@ if daytime == 1
 endif
 goto_script "pass_time"
 end_script
-
-waypoint dialog_after_date_2
-say "Ricardo" "Isso foi divertido!"
-say "Beatrice" "É? Meu pai costumava me levar para essas sessões com meus autores favoritos. Eu sempre gostei."
-say "Ricardo" "Porque ele não te leva mais?"
-say "" "Beatrice"
-say "Beatrice" "Bem...Ele se f-foi. Meu pai e minha mãe...não estão mais entre nós."
-say "Ricardo" "M-me desculpa, eu não sabia."
-say "Beatrice" "Tudo bem. Você nunca me perguntou sobre o meu passado."
-say "Beatrice" "Pra ser sincera, passar os dias com você tem sido um sopro de ar fresco."
-say "Beatrice" "Quando eu converso com você, eu quase consigo esquecer, mas..."
-say "" "Lágrimas brotam nos olhos de Beatrice."
-say "Beatrice" "Eles se foram, Ricardo! Eles se foram e a culpa é minha!"
-say "Beatrice" "Eles se foram e eu sobrevivi..."
-say "Beatrice" "...Eu não deveria ter sobrevivido. Ninguém sobreviveu."
-say "Beatrice" "Eles estão certos. Tem algo de errado comigo..."
-say "" "A garota parece inconsolável."
-say "Ricardo" "Beatrice..."
-say "" "Ricardo abraça a garota."
-say "Beatrice" "Ricardo...? "
-say "Ricardo" "Você não é uma bruxa."
-say "Ricardo" "Eu não sei o que aconteceu no passado...e não quero saber."
-say "Ricardo" "A Beatrice que eu conheço não faria algo assim...e pra mim, isso é suficiente. "
-end_script
-
-waypoint dialog_after_date_3
-fade_music 0 1.0
-say "Beatrice" "...Agora eu me lembro."
-say "Beatrice" "Meus pais...tentaram me salvar."
-say "Beatrice" "Naquela noite..."
-fade_out 0.5
-say "Eu disse boa-noite para os meus pais e fui para a cama. Eu comecei a ler um livro, mas provavelmente dormi antes de terminar."
-say "" "Beatrice fica com as mãos trêmulas."
-say "Beatrice" "A próxima coisa que me lembro é do calor do fogo."
-say  "Meu pai estava me carregando. Ele foi até o meu quarto pra me buscar. Se eu tivesse acordado antes, talvez..."
-say "" "Os olhos de Beatrice se enchem de lágrimas."
-say "Ricardo" "Não, não é culpa sua. Não havia como você saber."
-say "" "Beatrice controla o choro."
-say "Beatrice" "O fogo já havia dominado a casa inteira. Não havia como sair. O cheiro de fumaça era muito forte..."
-say "Meu pai me trancou em...algum lugar. Eu não me lembro exatamente o que era. Era muito apertado e... escuro e frio."
-say "Ricardo" "Um freezer, talvez?"
-say "Beatrice" "Eu não sei..."
-say "Eu desmaiei. A próxima coisa de que me lembro é o hospital. O incêndio havia reduzido tudo a cinzas."
-say "Ninguém entendia exatamente como eu havia sobrevivido. As pessoas começaram a espalhar boatos..."
-fade_in 1.0
-say "Ricardo" "Eu não sei o que dizer..."
-say "Beatrice" "Você estava certo, Ricardo. Não foi culpa minha."
-say "Beatrice" "Eu me sinto...mais leve."
-say "Beatrice" "Obrigada."
-say "" "Beatrice abraça Ricardo muito forte."
-say "Beatrice" "Obrigada por acreditar em mim."
-say "Ricardo" "Eu sempre vou acreditar em você."
-say "" "Ricardo pausa por um momento. Seus olhos se encontram com os de Beatrice."
-say "Ricardo" "Eu...eu te amo."
-say "" "O coração de Ricardo se abriu!" 
-say "Beatrice" "Eu...eu te amo também."
-say "" "O coração de Beatrice se abriu!"
-end_script
-
 
 
 
@@ -392,7 +323,8 @@ waypoint date_intro_2
 say "Beatrice" "Ricardo, um autor que eu gosto muito vai fazer uma sessão de autógrafos no shopping."
 say "Beatrice" "Quer ir comigo?"
 say "Ricardo" "Claro!"
-set_var date_objective "do cinema" //TODO: Talvez mudar o valor dessa variável para "da livraria"
+set_var date_objective "do cinema"
+//TODO: Talvez mudar o valor dessa variável para "da livraria"
 goto_script "date"
 end_script
 
@@ -422,14 +354,63 @@ fade_out 0.5
 say "" "O autor assina o livro de Beatrice e agradece. Beatrice parece feliz."
 say "" "Depois da sessão de autógrafos..."
 fade_in 0.5
-goto dialog_after_date_2
+
+say "Ricardo" "Isso foi divertido!"
+say "Beatrice" "É? Meu pai costumava me levar para essas sessões com meus autores favoritos. Eu sempre gostei."
+say "Ricardo" "Porque ele não te leva mais?"
+say "Beatrice" "Bem...Ele se f-foi. Meu pai e minha mãe...não estão mais entre nós."
+say "Ricardo" "M-me desculpa, eu não sabia."
+say "Beatrice" "Tudo bem. Você nunca me perguntou sobre o meu passado."
+say "Beatrice" "Pra ser sincera, passar os dias com você tem sido um sopro de ar fresco."
+say "Beatrice" "Quando eu converso com você, eu quase consigo esquecer, mas..."
+say "" "Lágrimas brotam nos olhos de Beatrice."
+say "Beatrice" "Eles se foram, Ricardo! Eles se foram e a culpa é minha!"
+say "Beatrice" "Eles se foram e eu sobrevivi..."
+say "Beatrice" "...Eu não deveria ter sobrevivido. Ninguém sobreviveu."
+say "Beatrice" "Eles estão certos. Tem algo de errado comigo..."
+say "" "A garota parece inconsolável."
+say "Ricardo" "Beatrice..."
+say "" "Ricardo abraça a garota."
+say "Beatrice" "Ricardo...? "
+say "Ricardo" "Você não é uma bruxa."
+say "Ricardo" "Eu não sei o que aconteceu no passado...e não quero saber."
+say "Ricardo" "A Beatrice que eu conheço não faria algo assim...e pra mim, isso é suficiente. "
 end_script
+
 
 waypoint date_end_3
 say "Beatrice" "É aqui, chegamos. Não é uma árvore deveras formosa?"
 say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
 say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
-goto dialog_after_date_3
+fade_music 0 1.0
+say "Beatrice" "...Agora eu me lembro."
+say "Beatrice" "Meus pais...tentaram me salvar."
+say "Beatrice" "Naquela noite..."
+say "Eu disse boa-noite para os meus pais e fui para a cama. Eu comecei a ler um livro, mas provavelmente dormi antes de terminar."
+say "" "Beatrice fica com as mãos trêmulas."
+say "Beatrice" "A próxima coisa que me lembro é do calor do fogo."
+say  "Meu pai estava me carregando. Ele foi até o meu quarto pra me buscar. Se eu tivesse acordado antes, talvez..."
+say "" "Os olhos de Beatrice se enchem de lágrimas."
+say "Ricardo" "Não, não é culpa sua. Não havia como você saber."
+say "" "Beatrice controla o choro."
+say "Beatrice" "O fogo já havia dominado a casa inteira. Não havia como sair. O cheiro de fumaça era muito forte..."
+say "Meu pai me trancou em...algum lugar. Eu não me lembro exatamente o que era. Era muito apertado e... escuro e frio."
+say "Ricardo" "Um freezer, talvez?"
+say "Beatrice" "Eu não sei..."
+say "Eu desmaiei. A próxima coisa de que me lembro é o hospital. O incêndio havia reduzido tudo a cinzas."
+say "Ninguém entendia exatamente como eu havia sobrevivido. As pessoas começaram a espalhar boatos..."
+say "Ricardo" "Eu não sei o que dizer..."
+say "Beatrice" "Você estava certo, Ricardo. Não foi culpa minha."
+say "Beatrice" "Eu me sinto...mais leve."
+say "Beatrice" "Obrigada."
+say "" "Beatrice abraça Ricardo muito forte."
+say "Beatrice" "Obrigada por acreditar em mim."
+say "Ricardo" "Eu sempre vou acreditar em você."
+say "" "Ricardo pausa por um momento. Seus olhos se encontram com os de Beatrice."
+say "Ricardo" "Eu...eu te amo."
+say "" "O coração de Ricardo se abriu!" 
+say "Beatrice" "Eu...eu te amo também."
+say "" "O coração de Beatrice se abriu!"
 end_script
 
 

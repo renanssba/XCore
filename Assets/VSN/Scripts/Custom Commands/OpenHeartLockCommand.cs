@@ -18,7 +18,7 @@ namespace Command {
 
         if(levelToRaise == 1) {
           sayArgs[1] = new VsnString("improve_relationship/say_2");
-        } else {
+        } else if(levelToRaise == 2) {
           sayArgs[1] = new VsnString("improve_relationship/say_3");
         }
         Command.SayCommand.StaticExecute(sayArgs);
