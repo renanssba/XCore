@@ -196,6 +196,8 @@ public abstract class Battler {
     bool receivedNewStatus = false;
     Actor2D actor = TheaterController.instance.GetActorByBattlingCharacter(this);
 
+    Debug.LogWarning("receiving new condition: " + newCondition.name+", turns: "+newCondition.duration);
+
     if(CurrentStatusConditionStacks(newCondition.name) < newCondition.stackable) {
       statusConditions.Add(newCondition);
       actor.ShowStatusConditionParticle(newCondition);
@@ -238,7 +240,7 @@ public abstract class Battler {
       }
     }
     UIController.instance.UpdateDateUI();
-    actor.UpdateCharacterGraphics();
+    actor.UpdateGraphics();
   }
 
   public void RemoveAllStatusConditions() {
@@ -247,14 +249,23 @@ public abstract class Battler {
   }
 
   public void EndTurn() {
+    bool shouldRecoverStealth = false;
+
     for(int i = statusConditions.Count-1; i>=0; i--) {
       /// pass status conditions turn
       if(statusConditions[i].duration > 0) {
         statusConditions[i].duration--;
       }      
       if(statusConditions[i].duration == 0) {
+        if(statusConditions[i].name == "spotted") {
+          shouldRecoverStealth = true;
+        }
         statusConditions.RemoveAt(i);
       }
+    }
+    if(shouldRecoverStealth) {
+      Debug.LogWarning("RESETING STEALTH");
+      BattleController.instance.RecoverStealth(BattleController.maxStealth);
     }
     UIController.instance.UpdateDateUI();
   }

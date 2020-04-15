@@ -58,48 +58,57 @@ for currentDateEvent #dateLength
   goto_script "check_passive_triggers" "turn_started"
 
   // PARTY MEMBERS receive effects from conditions (like take poison damage)
-  for currentPlayerTurn #partyLength
-    for currentStatusCondition #currentPlayerStatusConditionsCount
-      activate_status_condition_effect currentPlayerTurn currentStatusCondition
-    endfor
-  endfor
+  // for currentPlayerTurn #partyLength
+    // for currentStatusCondition #currentPlayerStatusConditionsCount
+      // activate_status_condition_effect currentPlayerTurn currentStatusCondition
+    // endfor
+  // endfor
 
   // ENEMY receives effects from conditions
-  for currentStatusCondition #currentEnemyStatusConditionsCount
-    activate_status_condition_effect 3 currentStatusCondition
-  endfor
+  // for currentStatusCondition #currentEnemyStatusConditionsCount
+    // activate_status_condition_effect 3 currentStatusCondition
+  // endfor
   // end turn (to pass time on status conditions)
-  end_turn
-  
-  goto_script "check_passive_triggers" "before_death_checks"
-  if #currentHp <= 0
-    goto fail_date
-  endif
-  
-  
-  // if opponent is defeated, go to new event
-  if #currentChallengeHp <= 0
-    goto defeat_enemy
-  endif
+  // end_turn
 
 
   // character action inputs
   for currentPlayerTurn #partyLength
     action_input currentPlayerTurn
-  endfor
+  // endfor
 
   set_current_character_turn -1
   wait 0.5
 
-  // execute player actions
-  for currentPlayerTurn #partyLength
+  // execute player turn
+  // for currentPlayerTurn #partyLength
     check_action_skip currentPlayerTurn
+    
+    // do actions
     character_action_description currentPlayerTurn
     character_action currentPlayerTurn
+    
+    // receive effects from conditions
     goto_script "check_passive_triggers" "after_action"
+    for currentStatusCondition #currentPlayerStatusConditionsCount
+      activate_status_condition_effect currentPlayerTurn currentStatusCondition
+    endfor
+    end_turn currentPlayerTurn
+    
+    // check death
+    goto_script "check_passive_triggers" "before_death_checks"
+    if #currentHp <= 0
+      goto fail_date
+    endif
+    
     wait 0.5
+    // if opponent is defeated, go to new event
+    if #currentChallengeHp <= 0
+      goto defeat_enemy
+    endif
   endfor
-  
+
+
   // if opponent is defeated, go to new event
   if #currentChallengeHp <= 0
     goto defeat_enemy
@@ -112,6 +121,18 @@ for currentDateEvent #dateLength
   goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
   goto_script "check_passive_triggers" "after_enemy_attack"
+  
+  // ENEMY receives effects from conditions
+  for currentStatusCondition #currentEnemyStatusConditionsCount
+    activate_status_condition_effect 3 currentStatusCondition
+  endfor
+  end_turn 3
+  
+  // if opponent is defeated, go to new event
+  if #currentChallengeHp <= 0
+    goto defeat_enemy
+  endif
+  
   
   
   goto_script "check_passive_triggers" "before_death_checks"
@@ -174,6 +195,7 @@ endif
 
 
 
+
 waypoint win_date
 enable_input false
 //say "" "Depois de muitos percalços..."
@@ -192,6 +214,7 @@ if #currentDateId == 3
 endif
 open_heart_lock #currentDateId
 goto end
+
 
 
 waypoint fail_date

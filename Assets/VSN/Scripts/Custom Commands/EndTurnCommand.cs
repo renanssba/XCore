@@ -9,12 +9,21 @@ namespace Command {
 
     public override void Execute() {
       Debug.LogWarning("END TURN CALLED");
-      BattleController.instance.EndTurn();
+      if(args.Length == 0) {
+        BattleController.instance.EndTurn();
+      } else {
+        Battler target = BattleController.instance.GetBattlerByTargetId((int)args[0].GetNumberValue());
+        target.EndTurn();
+      }
     }
 
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[0]);
+
+      signatures.Add(new VsnArgType[] {
+          VsnArgType.numberArg
+      });
     }
   }
 }

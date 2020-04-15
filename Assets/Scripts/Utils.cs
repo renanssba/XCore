@@ -463,12 +463,12 @@ public class Utils {
       }
 
       if(condition.StartsWith("received_item_with_tag")) {
-        Debug.LogWarning("Checking received_item_with_tag. Action: " + BattleController.instance.selectedActionType[currentPlayerTurn]);
+        //Debug.LogWarning("Checking received_item_with_tag. Action: " + BattleController.instance.selectedActionType[currentPlayerTurn]);
         if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useItem) {
           return false;
         }
         conditionArgument = GetStringArgument(condition);
-        Debug.LogWarning("Condition argument: " + conditionArgument);
+        //Debug.LogWarning("Condition argument: " + conditionArgument);
         if(!TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].tags) ||
            BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != partyMemberId) {
           return false;
@@ -478,7 +478,7 @@ public class Utils {
       if(condition.StartsWith("hp_percent_is_less")) {
         float hpPercent = ((float)BattleController.instance.GetBattlerByTargetId(partyMemberId).CurrentHP()) /
                           (float)BattleController.instance.GetBattlerByTargetId(partyMemberId).MaxHP();
-        Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
+        //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
         if(hpPercent > float.Parse(conditionArgument)) {
           return false;
         }

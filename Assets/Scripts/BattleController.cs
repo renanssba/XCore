@@ -157,20 +157,26 @@ public class BattleController : MonoBehaviour {
   public void RecoverStealth(float value) {
     Debug.LogWarning("Recover stealth: "+value);
     float initValue = currentStealth;
+
+    if(TheaterController.instance.angelActor.battler.CurrentStatusConditionStacks("spotted") > 0) {
+      return;
+    }
+
     currentStealth += value;
     currentStealth = Mathf.Min(currentStealth, maxStealth);
-    if(initValue < 0 && currentStealth >= 0f) {
-      /// SHOW FERTILIEL RECOVERED ANIMATION
-      currentStealth = maxStealth;
-      partyMembers[2].RemoveStatusCondition("spotted");
-    }
+    //if(initValue < 0 && currentStealth >= 0f) {
+    //  /// SHOW FERTILIEL RECOVERED ANIMATION
+    //  currentStealth = maxStealth;
+    //  partyMembers[2].RemoveStatusCondition("spotted");
+    //}
     UIController.instance.AnimateStealthSliderChange(currentStealth, currentStealth);
     TheaterController.instance.angelActor.UpdateGraphics();
   }
 
   public void RemoveStealth(float value) {
-    Debug.LogWarning("Remove stealth: "+value);
+    //Debug.LogWarning("Remove stealth: "+value);
     float initValue = currentStealth;
+
     currentStealth -= value;
     currentStealth = Mathf.Max(currentStealth, 0f);
     if(initValue > 0 && currentStealth <= 0f) {
@@ -189,7 +195,7 @@ public class BattleController : MonoBehaviour {
     HideActionButtons();
     yield return TheaterController.instance.DetectAngelAnimation();
     
-    currentStealth = -maxNegativeStealth-stealthRecoveredWhenIdle;
+    currentStealth = 0;
 
     if(VsnController.instance.state == ExecutionState.WAITINGCUSTOMINPUT) {
       TheaterController.instance.SetCharacterChoosingAction(2);
@@ -655,6 +661,8 @@ public class BattleController : MonoBehaviour {
       }
       effectiveStatusConditionChance -= target.StatusResistance(usedSkill.givesConditionNames[i]);
 
+      Debug.LogWarning("effective Status Condition Chance: " + effectiveStatusConditionChance);
+
       if(effectiveStatusConditionChance <= 0) {
         targetActor.ShowImmuneConditionParticle();
       } else if(Random.Range(0, 100) < effectiveStatusConditionChance) {
@@ -711,9 +719,10 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteUseItem(int partyMemberId, int targetId, Item usedItem) {
-    Actor2D userActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+  public IEnumerator ExecuteUseItem(int itemUserId, int targetId, Item usedItem) {
+    Actor2D userActor = TheaterController.instance.GetActorByIdInParty(itemUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
+    Battler target = targetActor.battler;
 
     yield return ShowUseItemMessage(userActor.battler.name, usedItem.GetPrintableName());
 
@@ -734,29 +743,37 @@ public class BattleController : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("item_use");
     targetActor.ShineGreen();
 
+    // sensor effect
+    if(usedItem.nameKey == "sensor") {
+      VsnAudioManager.instance.PlaySfx("skill_activate_good");
+      targetActor.ShineRed();
+      targetActor.ShowWeaknessCard(true);
+      yield return new WaitForSeconds(1f);
+    }
+
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
       foreach(string condName in usedItem.healsConditionNames) {
-        partyMembers[targetId].RemoveStatusCondition(condName);
+        target.RemoveStatusCondition(condName);
       }
     }
 
     // heal HP and SP
     if(usedItem.healHp > 0) {
       int healingpower = (int)(usedItem.healHp * GlobalData.instance.GetCurrentRelationship().HealingItemMultiplier());
-      HealPartyHp(healingpower);
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealHpParticle(healingpower);
+      target.HealHP(healingpower);
+      targetActor.ShowHealHpParticle(healingpower);
       yield return new WaitForSeconds(1f);
     }
     if(usedItem.healSp > 0) {
-      partyMembers[targetId].HealSp(usedItem.healSp);
-      TheaterController.instance.GetActorByIdInParty(targetId).ShowHealSpParticle(usedItem.healSp);
+      target.HealSp(usedItem.healSp);
+      targetActor.ShowHealSpParticle(usedItem.healSp);
       yield return new WaitForSeconds(1f);
     }
 
     // give status condition
     if(usedItem.GivesStatusCondition()) {
-      partyMembers[targetId].ReceiveStatusConditionByItem(usedItem);
+      target.ReceiveStatusConditionByItem(usedItem);
       bool receivedNewStatus = true;
 
       if(receivedNewStatus) {

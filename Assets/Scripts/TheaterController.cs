@@ -384,10 +384,6 @@ public class TheaterController : MonoBehaviour {
     });
   }
 
-  public void HumansDetectAngel() {
-    StartCoroutine(DetectAngelAnimation());
-  }
-
   public IEnumerator DetectAngelAnimation() {
     yield return new WaitForSeconds(0.5f);
 
@@ -395,16 +391,14 @@ public class TheaterController : MonoBehaviour {
     supportActor.FaceLeft();
     yield return new WaitForSeconds(0.5f);
 
+    VsnAudioManager.instance.PlaySfx("skill_cast");
     mainActor.DetectAnimation();
     supportActor.DetectAnimation();
     yield return new WaitForSeconds(0.5f);
-
-    //VsnAudioManager.instance.PlaySfx("ui_detect_fertiliel");
-    //angelActor.DetectAnimation();
-    //yield return new WaitForSeconds(0.5f);
     
     StatusCondition status = BattleController.instance.GetStatusConditionByName("spotted");
-    status.duration = -1;
+    status.duration = 3;
+    status.maxDurationShowable = 2;
     angelActor.battler.ReceiveStatusCondition(status);
     yield return new WaitForSeconds(1f);
 

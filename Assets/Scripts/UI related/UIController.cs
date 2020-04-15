@@ -237,16 +237,13 @@ public class UIController : MonoBehaviour {
   public void SetupCurrentCharacterUi(int currentPartyMember) {
     int partyLength = BattleController.instance.partyMembers.Length;
 
-
     // set no character's turn
     if(currentPartyMember == -1) {
       for(int i = 0; i < 3; i++) {
         partyPeopleCards[i].ShowShade(false);
-        //turnIndicators[i].SetActive(false);
       }
       return;
     }
-
 
     // position actions panel
     actionsPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f*currentPartyMember, 0f, 0f);
@@ -254,10 +251,8 @@ public class UIController : MonoBehaviour {
     // turn characters UI
     for(int i = 0; i < 3; i++) {
       partyPeopleCards[i].ShowShade(true);
-      //turnIndicators[i].SetActive(false);
     }
     partyPeopleCards[currentPartyMember].ShowShade(false);
-    //turnIndicators[currentPartyMember].SetActive(true);
   }
 
   public void ShowDateUI(bool value) {
