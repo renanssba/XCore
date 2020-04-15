@@ -248,7 +248,13 @@ public class BattleController : MonoBehaviour {
         }
         break;
       case TurnActionType.flee:
-        VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
+        if(!GetCurrentEnemy().HasTag("boss")) {
+          VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
+        } else {
+          VsnArgument[] args = new VsnArgument[1];
+          args[0] = new VsnString("forbid_fleeing");
+          Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
+        }
         break;
       case TurnActionType.idle:
         RecoverStealth(stealthRecoveredWhenIdle);

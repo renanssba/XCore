@@ -1,14 +1,6 @@
 ﻿goto *arg1
 
 
-
-//waypoint skill
-//waypoint item
-//set_var pre_attack "\active usa <color=yellow>\vsn(selected_action_name)</color>!"
-//end_script
-
-
-
 waypoint Sensor_skill
 set_var pre_attack "\active analisa bastante o problema..."
 end_script
@@ -27,4 +19,9 @@ end_script
 waypoint flee_fail
 set_var pre_attack "...mas não conseguem."
 say "" "...mas não conseguem."
+end_script
+
+waypoint forbid_fleeing
+say "" "Não é possível escapar desse combate."
+set_var currentPlayerTurn -1
 end_script

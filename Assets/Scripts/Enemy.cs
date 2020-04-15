@@ -183,4 +183,8 @@ public class Enemy : Battler {
       MonoBehaviour.Destroy(UIController.instance.enemyStatusConditionsContent.transform.GetChild(i).gameObject);
     }
   }
+
+  public bool HasTag(string tagToSearch) {
+    return Utils.TagIsInArray(tagToSearch, tags);
+  }
 }

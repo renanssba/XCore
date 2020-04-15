@@ -94,6 +94,9 @@ public class ActionsPanel : MonoBehaviour {
 
     /// defend button
     //baseActionButtonShades[3].SetActive(!currentPerson.CanExecuteAction(TurnActionType.defend));
+
+    /// flee button
+    baseActionButtonShades[4].SetActive(BattleController.instance.GetCurrentEnemy().HasTag("boss"));
   }
 
 
