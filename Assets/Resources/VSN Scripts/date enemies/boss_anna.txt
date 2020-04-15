@@ -23,7 +23,6 @@ say "Fertiliel" "(Um... demônio de sombra?!)"
 say "(Por que tem um desses por aqui?)"
 say "Demônio" "Tanta raiva, tanta insegurança..."
 say "A sombra desta garota... preciso devorá-la."
-//say "Demônio" "Vou devorar... esta sombra..."
 say "Ana" "Ricardo, Estou com um pressentimento ruim."
 
 
@@ -67,13 +66,13 @@ wait 0.5
 actor_face "main" "right"
 wait 0.5
 say "Ricardo" "Quem é você?"
-say "Ana Sombria" "Grrr! Você não me reconhece? Eu sou ANA, a sua DONA!"
+say "Ana Sombria" "Grrr! Você não me reconhece? Eu sou Ana, a sua <b>dona</b>!"
 
 say "Ana" "Do que você tá falando? Você não sou eu!"
-say "Ana Sombria" "Você é fraca, o Ricardo é MEU!"
+say "Ana Sombria" "Você é fraca, o Ricardo é <b>meu</b>!"
 
 say "Ricardo" "Eu não sei quem ela é, mas não parece estar pra brincadeiras."
-say "Ana Sombria" "Grrr!!! Se você se nega a ser meu, eu vou pegar você à FORÇA!"
+say "Ana Sombria" "Grrr!!! Se você se nega a ser meu, eu vou pegar você à <b>força</b>!"
 say "Ana" "Só passando por cima de mim!"
 say "Fertiliel" "(Esse demônio parece perigoso, tenho que ajudar meus humanos!)"
 
@@ -140,18 +139,18 @@ waypoint first_dialog
 if first_dialog == 0
   say "Ricardo" "O que está havendo por aqui? Será que isso tudo é um pesadelo?"
   say "Ana" "Não parece ser só um pesadelo, os golpes dessa coisa doem de verdade."
-  say "Ana Sombria" "Eu não sou uma \qCOISA\q, eu sou a ANA!"
+  say "Ana Sombria" "Eu não sou uma <b>\qcoisa\q</b>, eu sou a <b>Ana</b>!"
   
   say "Ana" "Você não sou eu!"
   say "Ricardo" "Por que você está tão furiosa?"
-  say "Ana Sombria" "Eu estou furiosa por que o Ricardo não gosta de mim!\nEu protejo ele de tudo, mas ele não retribui o meu AMOR!!!"
+  say "Ana Sombria" "Eu estou furiosa por que o Ricardo não gosta de mim!\nEu protejo ele de tudo, mas ele não retribui o meu <b>amor</b>!!!"
   wait 0.3
   actor_face "main" "left"
   wait 0.3
   say "Ricardo" "Ana...?"
   say "Ana" "Não é verdade, Ricardo..."
   
-  say "Ana Sombria" "É CLARO que é! Eu sou tão VIOLENTA porque ele não me ama de volta!"
+  say "Ana Sombria" "É <b>claro</b> que é! Eu sou tão <b>violenta</b> porque ele não me ama de volta!"
   wait 0.3
   actor_face "main" "right"
   wait 0.3
@@ -176,7 +175,7 @@ end_script
 waypoint midbattle_dialog
 if midbattle == 0
   say "Ana Sombria" "Ricardo, por que você não gosta de mim?"
-  say "Eu faço tudo por você há anos, mas você só tem olhos praquela IDIOTA da Clara!"
+  say "Eu faço tudo por você há anos, mas você só tem olhos praquela <b>idiota</b> da Clara!"
   
   wait 0.3
   actor_face "main" "left"
@@ -190,12 +189,12 @@ if midbattle == 0
   say "Ricardo" "..."
   say "É assim que você se sente, Ana? Você pensa tão mal assim de si mesma?"
   say "Ana" "..."
-  say "Ana Sombria" "Eu sei por que você não gosta de mim, Ricardo. É porque não tem NADA em mim pra você gostar."
+  say "Ana Sombria" "Eu sei por que você não gosta de mim, Ricardo. É porque não tem <b>nada</b> em mim pra você gostar."
   say "Ana" "Para..."
-  say "Para com isso sua MONSTRA!"
+  say "Para com isso sua <b>monstra</b>!"
   
   wait 0.5
-  say "Ana Sombria" "Eu não sou nenhuma \qMONSTRA\q. Eu sou VOCÊ! Você e eu somos uma SÓ!!!"
+  say "Ana Sombria" "Eu não sou nenhuma <b>\qmonstra\q</b>. Eu sou <b>você</b>! Você e eu somos uma só!!!"
   say "Ana" "Somos... uma só?"
   wait 1
   say "Ana Sombria" "Raaaaaaawwww!!!"
@@ -206,13 +205,13 @@ if midbattle == 0
   wait 0.3
   actor_face "main" "right"
   wait 0.3
-  say "Ricardo" "NÃO, NÃO SÃO!"
+  say "Ricardo" "Não, não são!"
   say "A Ana que eu conheço não é cruel como você."
   say "Ela é muito forte, esforçada e nunca desiste!!"
   say "Ana" "Ricardo..."
   say "Ricardo" "E é a pessoa mais especial do mundo pra mim. Eu não vou deixar alguém como você machucá-la desse jeito!"
   say "Ana" "..."
-  say "É isso aí, vamos acabar com essa impostora!"
+  say "Você tá certo, vamos acabar com essa impostora!"
   set_var midbattle 1
 endif
 end_script
@@ -227,13 +226,36 @@ wait 2
 theater_bg_effect "pulsingEffect" 0
 wait 2
 say "" "O demônio de sombra se dissolve em névoa."
+
+set_actor_animator_parameter "main" "Battle" false
+set_actor_animator_parameter "support" "Battle" false
 // demon dissolving animation
 wait 2
+
+say "" "Esgotados, Ricardo e Ana caem no chão, desacordados."
+fade_out 1
+dialog_style "normal"
+say "Fertiliel" "(Parece que eu vou ter que cuidar deles até acordarem.)"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "" "Alguns minutos depois, os dois acordam."
+fade_in 1
+
+say "Ricardo" "Ai, minha cabeça dói... Que pesadelo estranho foi esse?"
+say "Ana" "Você também teve um pesadelo? Com uma... versão deturpada de mim?"
+
+wait 0.5
 actor_face "main" "left"
 wait 0.5
-say "Ana" "Eu não entendi bem o que aconteceu aqui, mas acho que você ouviu algumas coisas que eu não queria te falar."
+
+say "Ricardo" "Sim. Que estranho, parece que tivemos o mesmo sonho. Você tá bem?"
+say "Ana" "Só um pouco cansada."
+wait 1
+say "Ana" "No sonho... acho que falei algumas coisas que eu não queria que você soubesse."
 say "Me desculpa."
-say "Ricardo" "Tudo bem, Ana. Fico feliz que conseguimos vencer aquela criatura, seja lá o que fosse."
+say "Ricardo" "Tudo bem, Ana. O que importa é que está tudo bem agora, seja lá o que aconteceu."
 say "Ana" "Eu... realmente me sinto daquela forma às vezes. Insegura."
-say "Ricardo" "Tá tudo bem. Todo mundo tem seus pensamentos ruins de vez em quando. Mas você nunca se deixou dominar por eles. É isso que eu mais admiro em você."
+say "Ricardo" "Tá tudo bem. Todo mundo tem seus pensamentos ruins de vez em quando."
+say "Mas você nunca se deixou dominar por eles. É isso que eu mais admiro em você."
 end_script
