@@ -203,6 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4699643138090558}
   - component: {fileID: 114893402868312272}
+  - component: {fileID: 210943973892851504}
   m_Layer: 0
   m_Name: Actor 2D
   m_TagString: Untagged
@@ -757,6 +758,8 @@ MonoBehaviour:
   - {fileID: 212686188473121024}
   particleSystem: {fileID: 198424215877436506}
   shadowRenderer: {fileID: 212471050468495352}
+  rendererColors: []
+  rendererFlashAmounts: []
   weaknessCardRenderer: {fileID: 212036596087716516}
   weaknessCardText: {fileID: 114524990421771026}
   enemy:
@@ -764,6 +767,8 @@ MonoBehaviour:
     id: 0
     attributes: 00000000000000000000000000000000
     statusConditions: []
+    usedSkillsInBattle: 
+    usedSkillsInDate: 
     scriptName: 
     attributeEffectivity: []
     level: 0
@@ -775,6 +780,7 @@ MonoBehaviour:
     hp: 0
     attackSfxName: 
     activeSkillLogics: []
+    customEvents: []
     passiveSkills: 
     tags: []
     rewardType: 0
@@ -5375,6 +5381,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210943973892851504
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826726817519878}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212036596087716516
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -5660,7 +5676,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 13eef7c7b6d814844881051c38f70ab3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5795,7 +5811,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 13eef7c7b6d814844881051c38f70ab3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6020,11 +6036,11 @@ SpriteMask:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 08d2d2e7250c3754bad1a43ba6f8486f, type: 3}
-  m_MaskAlphaCutoff: 1
+  m_MaskAlphaCutoff: 0
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
   m_BackSortingLayer: 0
-  m_FrontSortingOrder: 0
-  m_BackSortingOrder: 0
+  m_FrontSortingOrder: 4
+  m_BackSortingOrder: 3
   m_IsCustomRangeActive: 0

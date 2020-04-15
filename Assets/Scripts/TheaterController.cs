@@ -230,7 +230,7 @@ public class TheaterController : MonoBehaviour {
   public void EnemyEntersScene() {
     Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
 
-    SpawnEnemyActor(currentEnemy.scriptName);
+    SpawnEnemyActor(currentEnemy.spriteName);
 
     currentEnemy.hp = currentEnemy.maxHp;
     currentEnemy.RemoveAllStatusConditions();

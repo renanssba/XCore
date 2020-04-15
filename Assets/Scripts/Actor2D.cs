@@ -11,6 +11,8 @@ public class Actor2D : MonoBehaviour {
   public SpriteRenderer[] buffAuraRenderers;
   public new ParticleSystem particleSystem;
   public SpriteRenderer shadowRenderer;
+  public Color[] rendererColors;
+  public float[] rendererFlashAmounts;
 
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
@@ -41,6 +43,9 @@ public class Actor2D : MonoBehaviour {
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
+
+    rendererColors = new Color[renderers.Length];
+    rendererFlashAmounts = new float[renderers.Length];
   }
 
 
@@ -238,21 +243,23 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShineRed() {
-    foreach(SpriteRenderer r in renderers) {
-      r.GetPropertyBlock(materialProperties);
-      materialProperties.SetColor("_FlashColor", Color.red);
-      r.SetPropertyBlock(materialProperties);
-    }
-    FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
+    //for(int i=0; i<renderers.Length; i++) {
+    //  renderers[i].GetPropertyBlock(materialProperties);
+    //  materialProperties.SetColor("_FlashColor", Color.red);
+    //  rendererColors[i] = renderers[i].color;
+    //  renderers[i].SetPropertyBlock(materialProperties);
+    //}
+    FlashRenderer(transform, 0.1f, 0.8f, 0.2f, Color.red);
   }
 
   public void ShineGreen() {
-    foreach(SpriteRenderer r in renderers) {
-      r.GetPropertyBlock(materialProperties);
-      materialProperties.SetColor("_FlashColor", Color.green);
-      r.SetPropertyBlock(materialProperties);
-    }
-    FlashRenderer(transform, 0.1f, 0.8f, 0.2f);
+    //for(int i = 0; i < renderers.Length; i++) {
+    //  renderers[i].GetPropertyBlock(materialProperties);
+    //  materialProperties.SetColor("_FlashColor", Color.green);
+    //  rendererColors[i] = renderers[i].color;
+    //  renderers[i].SetPropertyBlock(materialProperties);
+    //}
+    FlashRenderer(transform, 0.1f, 0.8f, 0.2f, Color.green);
   }
 
   public void ShowDefendHitParticle() {
@@ -263,29 +270,46 @@ public class Actor2D : MonoBehaviour {
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
   }
 
-  public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime) {
-    foreach(SpriteRenderer r in renderers) {
-      DOTween.Kill(r.material);
+  public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime, Color finalColor) {
+    //MaterialPropertyBlock materialProperties = new MaterialPropertyBlock();
 
-      r.GetPropertyBlock(materialProperties);
+    foreach(SpriteRenderer currentRenderer in renderers) {
+    //for(int i = 0; i < renderers.Length; i++) {
+      //DOTween.Kill(renderers[i].material);
+      float initialFlashPower;
+      Color initialColor;
+
+      currentRenderer.GetPropertyBlock(materialProperties);
+
+      initialColor = currentRenderer.material.GetColor("_FlashColor");
+      initialFlashPower = currentRenderer.material.GetFloat("_FlashAmount");
+
+      minFlash = Mathf.Max(initialFlashPower, minFlash);
+      maxFlash = Mathf.Max(initialFlashPower, maxFlash);
+
+      materialProperties.SetColor("_FlashColor", finalColor);
       materialProperties.SetFloat("_FlashAmount", minFlash);
-      r.SetPropertyBlock(materialProperties);
+      currentRenderer.SetPropertyBlock(materialProperties);
 
-      //r.material.SetFloat("_FlashAmount", minFlash);
-      float currentFlashPower = minFlash;
+      float currentFlashPower = Mathf.Max(initialFlashPower, minFlash);
+      Color currentColor = finalColor;
+
+      //DOTween.To(() => currentColor, y => currentColor = y, finalColor, flashTime).SetLoops(2, LoopType.Yoyo);
 
       DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
-        r.GetPropertyBlock(materialProperties);
+        currentRenderer.GetPropertyBlock(materialProperties);
         materialProperties.SetFloat("_FlashAmount", currentFlashPower);
-        r.SetPropertyBlock(materialProperties);
+        materialProperties.SetColor("_FlashColor", currentColor);
+        currentRenderer.SetPropertyBlock(materialProperties);
       }).OnComplete(() => {
-        r.GetPropertyBlock(materialProperties);
-        materialProperties.SetFloat("_FlashAmount", 0f);
-        r.SetPropertyBlock(materialProperties);
+        currentRenderer.GetPropertyBlock(materialProperties);
+        materialProperties.SetFloat("_FlashAmount", initialFlashPower);
+        materialProperties.SetColor("_FlashColor", initialColor);
+        currentRenderer.SetPropertyBlock(materialProperties);
       });
 
-      //r.material.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
-      //  r.material.SetFloat("_FlashAmount", 0f);
+      //currentRenderermaterial.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
+      // currentRenderer.material.SetFloat("_FlashAmount", 0f);
       //});
     }
   }

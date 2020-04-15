@@ -29,8 +29,8 @@ public class BattleController : MonoBehaviour {
   public int maxHp = 10;
   public int hp = 10;
 
-  public const float maxStealth = 50f;
-  public const float maxNegativeStealth = 20f;
+  public const float maxStealth = 60f;
+  public const float maxNegativeStealth = -20f;
   public float currentStealth;
   public float stealthLostWhenUsedItem = 20f;
   public float stealthRecoveredWhenIdle = 10f;
