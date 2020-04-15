@@ -647,25 +647,49 @@ public class BattleController : MonoBehaviour {
 
 
     // chance to give status condition
-    if(usedSkill.givesConditionNames.Length > 0) {
+    for(int i=0; i< usedSkill.givesConditionNames.Length; i++) {
       int effectiveStatusConditionChance = usedSkill.giveStatusChance;
+
       if(target.IsDefending() && target != skillUser) {
         effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance / 2, 30);
       }
+      effectiveStatusConditionChance -= target.StatusResistance(usedSkill.givesConditionNames[i]);
 
-      if(Random.Range(0, 100) < effectiveStatusConditionChance) {
+      if(effectiveStatusConditionChance <= 0) {
+        targetActor.ShowImmuneConditionParticle();
+      } else if(Random.Range(0, 100) < effectiveStatusConditionChance) {
         VsnAudioManager.instance.PlaySfx("skill_activate_bad");
 
-        foreach(string givenCondition in usedSkill.givesConditionNames) {
-          target.ReceiveStatusConditionBySkill(usedSkill);
-          StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
-          yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
-        }
+        target.ReceiveStatusConditionBySkill(usedSkill);
+        StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[i]);
+        yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
       } else {
         targetActor.ShowResistConditionParticle();
       }
       yield return new WaitForSeconds(1f);
     }
+    //if(usedSkill.givesConditionNames.Length > 0) {
+    //  int effectiveStatusConditionChance = usedSkill.giveStatusChance;
+
+    //  if(target.IsDefending() && target != skillUser) {
+    //    effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance / 2, 30);
+    //  }
+
+    //  if(effectiveStatusConditionChance == 0) {
+    //    targetActor.ShowImmuneConditionParticle();
+    //  } else if(Random.Range(0, 100) < effectiveStatusConditionChance) {
+    //    VsnAudioManager.instance.PlaySfx("skill_activate_bad");
+
+    //    foreach(string givenCondition in usedSkill.givesConditionNames) {
+    //      target.ReceiveStatusConditionBySkill(usedSkill);
+    //      StatusCondition statusCondition = GetStatusConditionByName(givenCondition);
+    //      yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
+    //    }
+    //  } else {
+    //    targetActor.ShowResistConditionParticle();
+    //  }
+    //  yield return new WaitForSeconds(1f);
+    //}
 
 
     // wait then end
@@ -1077,7 +1101,7 @@ public class BattleController : MonoBehaviour {
     allEnemies = new List<Enemy>();
 
     float guts, intelligence, charisma;
-    string[] loadedTags;
+    string[] loadedTags, loadedImmunities;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
@@ -1089,6 +1113,7 @@ public class BattleController : MonoBehaviour {
       intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
       charisma = GetEffectivityByName(dic["charisma effectivity"]);
       loadedTags = Utils.SeparateTags(dic["tags"]);
+      loadedImmunities = Utils.SeparateTags(dic["status immunities"]);
 
 
       allEnemies.Add(new Enemy {
@@ -1108,7 +1133,8 @@ public class BattleController : MonoBehaviour {
         passiveSkills = Utils.SeparateInts(dic["passive skills"]),
         activeSkillLogics = loadedEnemy.activeSkillLogics,
         customEvents = loadedEnemy.customEvents,
-        tags = loadedTags
+        tags = loadedTags,
+        statusImmunities = loadedImmunities
       }); ;
     }
   }

@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4557846074231940}
   - component: {fileID: 114144339701665674}
+  - component: {fileID: 210947035867088816}
   m_Layer: 0
   m_Name: boss_anna2
   m_TagString: Untagged
@@ -381,6 +382,8 @@ MonoBehaviour:
   buffAuraRenderers: []
   particleSystem: {fileID: 0}
   shadowRenderer: {fileID: 212029092257038154}
+  rendererColors: []
+  rendererFlashAmounts: []
   weaknessCardRenderer: {fileID: 212110810893604984}
   weaknessCardText: {fileID: 114737968779721250}
   enemy:
@@ -403,6 +406,7 @@ MonoBehaviour:
     activeSkillLogics: []
     customEvents: []
     passiveSkills: 
+    statusImmunities: []
     tags: []
     rewardType: 0
     rewardId: 0
@@ -5144,6 +5148,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210947035867088816
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1247420460506792}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212029092257038154
 SpriteRenderer:
   m_ObjectHideFlags: 1

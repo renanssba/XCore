@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 using DG.Tweening;
 using TMPro;
 
@@ -392,7 +393,11 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowResistConditionParticle() {
-    ShowParticleAnimation("<size=12>"+Lean.Localization.LeanLocalization.GetTranslationText("date/resisted") +"</size>", Color.gray);
+    ShowParticleAnimation("<size=12>"+Lean.Localization.LeanLocalization.GetTranslationText("status_condition/resisted") +"</size>", Color.gray);
+  }
+
+  public void ShowImmuneConditionParticle() {
+    ShowParticleAnimation("<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/immune") + "</size>", Color.gray);
   }
 
   public void ShowParticleAnimationWithSprite(string text, Color color, Sprite particleSprite) {
@@ -441,12 +446,10 @@ public class Actor2D : MonoBehaviour {
 
 
   public void SetFocusedSortingLayer(bool value) {
-    foreach(SpriteRenderer s in renderers) {
-      if(value && s.sortingOrder < 100) {
-        s.sortingOrder += 100;
-      } else if(!value && s.sortingOrder >= 100) {
-        s.sortingOrder -= 100;
-      }
+    if(value) {
+      GetComponent<SortingGroup>().sortingOrder = 100;
+    } else if(!value) {
+      GetComponent<SortingGroup>().sortingOrder = 0;
     }
   }
 }

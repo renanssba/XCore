@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4308228327119286}
   - component: {fileID: 114171384375053960}
+  - component: {fileID: 210711341498635624}
   m_Layer: 0
   m_Name: shadow_demon
   m_TagString: Untagged
@@ -330,6 +331,7 @@ MonoBehaviour:
       conditions:
       - hp_percent_is_less(0.5)
     passiveSkills: 28000000
+    statusImmunities: []
     tags:
     - human
     - female
@@ -453,6 +455,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
+--- !u!210 &210711341498635624
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1304117555898830}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212067219753868398
 SpriteRenderer:
   m_ObjectHideFlags: 1

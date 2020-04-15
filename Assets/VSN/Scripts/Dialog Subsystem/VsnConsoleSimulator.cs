@@ -77,9 +77,9 @@ public class VsnConsoleSimulator : MonoBehaviour {
     lastPlayedSfx = 0f;
 
     UpdateText();
-    Debug.LogWarning("number of chars to show: " + numberOfCharsToShow + ", new length (totalCharacters): " + totalCharacters);
+    //Debug.LogWarning("number of chars to show: " + numberOfCharsToShow + ", new length (totalCharacters): " + totalCharacters);
     while(numberOfCharsToShow < totalCharacters) {
-      Debug.LogWarning("INSIDE LOOP. Showing "+numberOfCharsToShow+" chars. String: "+consoleText.text);
+      //Debug.LogWarning("INSIDE LOOP. Showing "+numberOfCharsToShow+" chars. String: "+consoleText.text);
       consoleText.maxVisibleCharacters = numberOfCharsToShow;
 
       elapsedTime += Time.unscaledDeltaTime;

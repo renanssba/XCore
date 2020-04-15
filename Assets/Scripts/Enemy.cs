@@ -51,6 +51,7 @@ public class Enemy : Battler {
   public CustomEventLogic[] customEvents;
   public int[] passiveSkills;
 
+  public string[] statusImmunities;
   public string[] tags;
 
   public RewardType rewardType;
@@ -120,6 +121,14 @@ public class Enemy : Battler {
 
   public override bool IsDefending() {
     return false;
+  }
+
+  public override int StatusResistance(string statusName) {
+    if(Utils.TagIsInArray(statusName, statusImmunities)) {
+      Debug.LogWarning("Resitance: 100%");
+      return 100;
+    }
+    return 0;
   }
 
   public override int MaxHP() {

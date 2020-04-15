@@ -93,6 +93,10 @@ public abstract class Battler {
 
   public abstract bool IsDefending();
 
+  public virtual int StatusResistance(string statusName) {
+    return 0;
+  }
+
   public virtual bool IsSpotted() { return false; }
 
   public abstract int MaxHP();

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4080751957273680}
   - component: {fileID: 114885186187012800}
+  - component: {fileID: 210998489713389362}
   m_Layer: 0
   m_Name: boss_beatrice2
   m_TagString: Untagged
@@ -433,6 +434,8 @@ MonoBehaviour:
   buffAuraRenderers: []
   particleSystem: {fileID: 0}
   shadowRenderer: {fileID: 212118654681802772}
+  rendererColors: []
+  rendererFlashAmounts: []
   weaknessCardRenderer: {fileID: 212000024955131196}
   weaknessCardText: {fileID: 114720918307083994}
   enemy:
@@ -455,6 +458,7 @@ MonoBehaviour:
     activeSkillLogics: []
     customEvents: []
     passiveSkills: 
+    statusImmunities: []
     tags: []
     rewardType: 0
     rewardId: 0
@@ -5049,6 +5053,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210998489713389362
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014163707251612}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212000024955131196
 SpriteRenderer:
   m_ObjectHideFlags: 1

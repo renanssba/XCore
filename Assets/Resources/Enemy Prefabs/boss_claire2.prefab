@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4209459339884280}
   - component: {fileID: 114727011021802748}
+  - component: {fileID: 210038913822425852}
   m_Layer: 0
   m_Name: boss_claire2
   m_TagString: Untagged
@@ -509,6 +510,8 @@ MonoBehaviour:
   buffAuraRenderers: []
   particleSystem: {fileID: 0}
   shadowRenderer: {fileID: 212477695517763270}
+  rendererColors: []
+  rendererFlashAmounts: []
   weaknessCardRenderer: {fileID: 212390106035246648}
   weaknessCardText: {fileID: 114378225480323128}
   enemy:
@@ -534,6 +537,7 @@ MonoBehaviour:
     activeSkillLogics: []
     customEvents: []
     passiveSkills: 
+    statusImmunities: []
     tags:
     - human
     - female
@@ -5149,6 +5153,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210038913822425852
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978642948354340}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!212 &212244806317237652
 SpriteRenderer:
   m_ObjectHideFlags: 1
