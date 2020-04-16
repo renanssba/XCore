@@ -153,7 +153,6 @@ public class ActionsPanel : MonoBehaviour {
     SetupCharacterActions(currentPartyMember);
     skillsPanel.gameObject.SetActive(true);
     Utils.SelectUiElement(skillButtons[0].gameObject);
-    UIController.instance.ShowHelpMessagePanel();
   }
 
   public void ClickItemsPanel() {
@@ -167,7 +166,6 @@ public class ActionsPanel : MonoBehaviour {
     SetupItemButtons();
     skillsPanel.gameObject.SetActive(true);
     Utils.SelectUiElement(skillButtons[0].gameObject);
-    UIController.instance.ShowHelpMessagePanel();
   }
 
   //public void ClickDefendButton() {
@@ -204,7 +202,7 @@ public class ActionsPanel : MonoBehaviour {
       Utils.SelectUiElement(baseActionButtons[2]);
     }    
     UIController.instance.selectTargetPanel.SetActive(false);
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
   }
 
   public IEnumerator WaitAndShowActionsPanel(ScreenTransitions panel) {

@@ -45,8 +45,8 @@ public class Person : Battler {
     giftsReceived = new Inventory();
     inventory.owner = this;
     giftsReceived.owner = this;
-    maxSp = 3;
-    sp = 3;
+    maxSp = 5;
+    sp = 5;
   }
 
 
@@ -97,6 +97,14 @@ public class Person : Battler {
 
   public override int CurrentHP() {
     return BattleController.instance.hp;
+  }
+
+  public override int MaxSP() {
+    return GetMaxSp(GlobalData.instance.GetCurrentRelationship().id);
+  }
+
+  public override int CurrentSP() {
+    return sp;
   }
 
   public override int Level() {

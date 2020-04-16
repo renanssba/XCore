@@ -114,6 +114,13 @@ public class GameController : MonoBehaviour {
         BattleController.instance.DamagePartyHp(BattleController.instance.hp-1);
       }
     }
+    if(Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.LeftShift)) {
+      foreach(Relationship rel in GlobalData.instance.relationships) {
+        for(int i=0; i<rel.skilltree.skills.Length; i++) {
+          rel.skilltree.skills[i].isUnlocked = true;
+        }
+      }
+    }
   }
 
 

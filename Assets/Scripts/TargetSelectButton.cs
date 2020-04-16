@@ -14,7 +14,7 @@ public class TargetSelectButton : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
 
     BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = currentTargetId;
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
     ActionsPanel.instance.turnIndicator.SetActive(false);
     TheaterController.instance.SetCharacterChoosingAction(-1);

@@ -36,6 +36,7 @@ public class ItemDatabase : MonoBehaviour {
       newItem.nameKey = entry["name"];
       newItem.descriptionKey = entry["description"];
       newItem.types = GetItemTypes(entry["types"]);
+      newItem.range = BattleController.GetActionRangeByString(entry["range"]);
       newItem.duration = int.Parse(entry["duration"]);
       newItem.healsConditionNames = GetStatusConditionNamesByString(entry["heals status conditions"]);
       newItem.givesConditionNames = GetStatusConditionNamesByString(entry["gives status conditions"]);

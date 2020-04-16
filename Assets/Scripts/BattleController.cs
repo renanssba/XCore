@@ -65,8 +65,7 @@ public class BattleController : MonoBehaviour {
   public float damageShineTime;
   public float damageShineAlpha;
 
-
-  public Enemy loadedEnemyCustomEvents;
+  public Inventory usedCelestialItems;
 
 
   public void Awake() {
@@ -81,10 +80,10 @@ public class BattleController : MonoBehaviour {
   }
 
   public void Update() {
-    int currentTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
-    if(currentTurn == 2 && ActionsPanel.instance.skillsPanel.gameObject.activeSelf == true) {
-      RemoveStealth(Time.deltaTime * stealthLostBySecond);
-    }  
+    //int currentTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    //if(currentTurn == 2 && ActionsPanel.instance.skillsPanel.gameObject.activeSelf == true) {
+    //  RemoveStealth(Time.deltaTime * stealthLostBySecond);
+    //}  
   }
 
 
@@ -100,6 +99,7 @@ public class BattleController : MonoBehaviour {
     selectedItems = new Item[partyMembers.Length];
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedTargetPartyId = new int[partyMembers.Length];
+    usedCelestialItems = new Inventory();
 
     maxHp = GlobalData.instance.GetCurrentRelationship().GetMaxHp();
 
@@ -115,6 +115,19 @@ public class BattleController : MonoBehaviour {
 
   public bool IsBattleHappening() {
     return VsnSaveSystem.GetBoolVariable("battle_is_happening");
+  }
+
+  public void EndDate() {
+    VsnSaveSystem.SetVariable("battle_is_happening", false);
+
+    // fully heal the party
+    FullHealParty();
+
+    // recover used celestial items
+    foreach(ItemListing itemToRecharge in usedCelestialItems.itemListings) {
+      Inventory ivt = GlobalData.instance.people[0].inventory;
+      ivt.AddItem(itemToRecharge.id, itemToRecharge.amount);
+    }
   }
 
 
@@ -182,9 +195,7 @@ public class BattleController : MonoBehaviour {
     if(initValue > 0 && currentStealth <= 0f) {
       StartCoroutine(ShowDetectionAnimation());
     } else {
-      if(VsnController.instance.state == ExecutionState.WAITING) {
-        VsnController.instance.state = ExecutionState.PLAYING;
-      }
+      VsnController.instance.state = ExecutionState.PLAYING;
     }
     UIController.instance.AnimateStealthSliderChange(initValue, currentStealth);
   }
@@ -192,10 +203,17 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ShowDetectionAnimation() {
     /// SHOW FERTILIEL DETECTED ANIMATION
     //SfxManager.StaticPlayCancelSfx();
+
+    yield return new WaitForSeconds(1f);
+
     HideActionButtons();
+
     yield return TheaterController.instance.DetectAngelAnimation();
-    
+
     currentStealth = 0;
+
+    yield return ShowBattleDescription(Lean.Localization.LeanLocalization.GetTranslationText("action/detect_angel"));
+    yield return new WaitForSeconds(1f);
 
     if(VsnController.instance.state == ExecutionState.WAITINGCUSTOMINPUT) {
       TheaterController.instance.SetCharacterChoosingAction(2);
@@ -243,16 +261,11 @@ public class BattleController : MonoBehaviour {
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
-        WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
+        WaitToSelectTarget(selectedActionType[currentPlayerTurn], selectedItems[currentPlayerTurn].range, currentPlayerTurn);
         return;
       case TurnActionType.useSkill:
-        if(selectedSkills[currentPlayerTurn].range == ActionRange.oneAlly) {
-          WaitToSelectAllyTarget(selectedActionType[currentPlayerTurn]);
-          return;
-        } else {
-          selectedTargetPartyId[currentPlayerTurn] = 3;
-        }
-        break;
+        WaitToSelectTarget(selectedActionType[currentPlayerTurn], selectedSkills[currentPlayerTurn].range, currentPlayerTurn);
+        return;
       case TurnActionType.flee:
         if(!GetCurrentEnemy().HasTag("boss")) {
           VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
@@ -275,25 +288,64 @@ public class BattleController : MonoBehaviour {
   public void HideActionButtons() {
     UIController.instance.actionsPanel.EndActionSelect();
     ActionsPanel.instance.turnIndicator.SetActive(false);
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
   }
 
-  public void WaitToSelectAllyTarget(TurnActionType actionType) {
+  public void WaitToSelectTarget(TurnActionType actionType, ActionRange range, int currentPlayerTurn) {
     UIController.instance.actionsPanel.EndActionSelect();
     if(actionType == TurnActionType.useItem) {
-      UIController.instance.SetHelpMessageText("Escolha um aliado para usar o item:");
-      UIController.instance.ShowHelpMessagePanel();
+      UIController.instance.SetHelpMessageText(Lean.Localization.LeanLocalization.GetTranslationText("action/target/item"));
     } else if(actionType == TurnActionType.useSkill) {
-      UIController.instance.SetHelpMessageText("Escolha um aliado para usar a habilidade:");
-      UIController.instance.ShowHelpMessagePanel();
+      UIController.instance.SetHelpMessageText(Lean.Localization.LeanLocalization.GetTranslationText("action/target/skill"));
     }
-    Utils.SelectUiElement(UIController.instance.selectTargets[0]);
+
     UIController.instance.selectTargetPanel.SetActive(true);
+    switch(range) {
+      case ActionRange.self:
+        SetAllTargetSelections(false);
+        UIController.instance.selectTargets[currentPlayerTurn].SetActive(true);
+        break;
+      case ActionRange.one_ally:
+        SetAllTargetSelections(true);
+        UIController.instance.selectTargets[2].SetActive(false);
+        break;
+      case ActionRange.other_ally:
+        SetAllTargetSelections(true);
+        UIController.instance.selectTargets[2].SetActive(false);
+        for(int i = 0; i < 2; i++) {
+          if(i == currentPlayerTurn) {
+            UIController.instance.selectTargets[i].SetActive(false);
+          }
+        }
+        break;
+      case ActionRange.one_enemy:
+        SetAllTargetSelections(false);
+        UIController.instance.selectTargets[2].SetActive(true);
+        break;
+      case ActionRange.anyone:
+        SetAllTargetSelections(true);
+        break;
+      case ActionRange.random_enemy:
+        UIController.instance.selectTargetPanel.SetActive(false);
+        selectedTargetPartyId[currentPlayerTurn] = 3;
+        HideActionButtons();
+        TheaterController.instance.SetCharacterChoosingAction(-1);
+        VsnController.instance.GotCustomInput();
+        return;
+    }
+
+    for(int i = 0; i < UIController.instance.selectTargets.Length; i++) {
+      if(UIController.instance.selectTargets[i].activeSelf) {
+        Utils.SelectUiElement(UIController.instance.selectTargets[i]);
+        return;
+      }
+    }
   }
 
-  public void WaitToSelectEnemyTarget() {
-    Utils.SelectUiElement(UIController.instance.selectTargets[CurrentPlayerTargetId()]);
-    UIController.instance.selectTargetPanel.SetActive(true);
+  public void SetAllTargetSelections(bool value) {
+    for(int i = 0; i < UIController.instance.selectTargets.Length; i++) {
+      UIController.instance.selectTargets[i].SetActive(value);
+    }
   }
 
   public void CharacterTurn(int partyMemberId) {
@@ -322,8 +374,6 @@ public class BattleController : MonoBehaviour {
 
     switch(selectedSkills[partyMemberId].type) {
       case SkillType.attack:
-        //StartCoroutine(ExecuteCharacterAttack(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
-        //break;
       case SkillType.active:
         StartCoroutine(ExecuteBattlerSkill(partyMemberId, selectedTargetPartyId[partyMemberId], selectedSkills[partyMemberId]));
         break;
@@ -479,6 +529,11 @@ public class BattleController : MonoBehaviour {
     yield return ShowBattleDescription(code);
   }
 
+  public IEnumerator ShowRecoverMessage() {
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/angel_can_act"));
+    yield return ShowBattleDescription(code);
+  }
+
   public IEnumerator ShowGetStatusConditionMessage(string targetName, string statusConditionName) {
     VsnSaveSystem.SetVariable("target_name", targetName);
     VsnSaveSystem.SetVariable("status_condition", statusConditionName);
@@ -501,7 +556,7 @@ public class BattleController : MonoBehaviour {
     yield return ShowBattleDescription(code);
     yield return new WaitForSeconds(1.5f);
 
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -705,7 +760,7 @@ public class BattleController : MonoBehaviour {
 
 
     TheaterController.instance.UnfocusActors();
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -738,6 +793,9 @@ public class BattleController : MonoBehaviour {
 
     // spend item
     Inventory ivt = GlobalData.instance.people[0].inventory;
+    if(usedItem.HasTag("celestial")) {
+      usedCelestialItems.AddItem(usedItem.id, 1);
+    }
     ivt.ConsumeItem(usedItem.id, 1);
 
     VsnAudioManager.instance.PlaySfx("item_use");
@@ -784,7 +842,7 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(0.5f);
 
     TheaterController.instance.UnfocusActors();
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
 
@@ -798,13 +856,43 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteDefend(int partyMemberId) {
-    Actor2D currentActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+    Actor2D defendingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+    Battler defender = defendingActor.battler;
 
     yield return ShowDefendMessage();
-    currentActor.DefendActionAnimation();
+    defendingActor.DefendActionAnimation();
 
-    yield return new WaitForSeconds(1.5f);
-    UIController.instance.HideHelpMessagePanel();
+    if(defender.CurrentSP() < defender.MaxSP()) {
+      yield return new WaitForSeconds(1f);
+      defender.HealSp(1);
+      defendingActor.ShowHealSpParticle(1);
+      yield return new WaitForSeconds(0.5f);
+    } else {
+      yield return new WaitForSeconds(1.5f);
+    }
+
+    UIController.instance.CleanHelpMessagePanel();
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
+  public IEnumerator ShowRecoverStealth() {
+    VsnController.instance.state = ExecutionState.WAITING;
+
+    Actor2D angelActor = TheaterController.instance.angelActor;
+
+    RecoverStealth(maxStealth);
+    angelActor.SetAttackMode(true);
+    yield return new WaitForSeconds(0.5f);
+
+    VsnAudioManager.instance.PlaySfx("skill_activate_good");
+
+    yield return ShowRecoverMessage();
+    yield return new WaitForSeconds(1f);
+    angelActor.SetAttackMode(false);
+    yield return new WaitForSeconds(0.5f);
+
+    UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -1183,27 +1271,8 @@ public class BattleController : MonoBehaviour {
       newSkill.name = entry["name"];
       newSkill.description = entry["description"];
       newSkill.type = GetSkillTypeByString(entry["type"]);
+      newSkill.range = GetActionRangeByString(entry["range"]);
 
-      switch(entry["range"]) {
-        case "self":
-          newSkill.range = ActionRange.self;
-          break;
-        case "one_ally":
-          newSkill.range = ActionRange.oneAlly;
-          break;
-        case "one_enemy":
-          newSkill.range = ActionRange.oneEnemy;
-          break;
-        case "all_allies":
-          newSkill.range = ActionRange.allAllies;
-          break;
-        case "all_enemies":
-          newSkill.range = ActionRange.allEnemies;
-          break;
-        case "random_enemy":
-          newSkill.range = ActionRange.randomEnemy;
-          break;
-      }
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
       }
@@ -1260,6 +1329,15 @@ public class BattleController : MonoBehaviour {
 
       allSkills.Add(newSkill);
     }
+  }
+
+  public static ActionRange GetActionRangeByString(string actionRange) {
+    for(int i = 0; i <= (int)ActionRange.none; i++) {
+      if(((ActionRange)i).ToString() == actionRange) {
+        return (ActionRange)i;
+      }
+    }
+    return ActionRange.anyone;
   }
 
   public SkillSpecialEffect GetSkillEffectByString(string skillEffect) {

@@ -442,7 +442,7 @@ public class Utils {
     foreach(string condition in allConditions) {
       conditionArgument = GetStringArgument(condition);
 
-      Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
+      //Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
 
       if(condition.StartsWith("enemy_has_tag")) {
         if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemy().tags)) {

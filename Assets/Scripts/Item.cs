@@ -25,6 +25,7 @@ public class Item {
   public string descriptionKey;
 
   public List<ItemType> types;
+  public ActionRange range;
 
   public string[] healsConditionNames;
   public string[] givesConditionNames;
@@ -159,6 +160,11 @@ public class Item {
     string itemUseMsg = "*Nada aconteceu.*";
 
     return itemUseMsg;
+  }
+
+
+  public bool HasTag(string tagToSearch) {
+    return Utils.TagIsInArray(tagToSearch, tags);
   }
 }
 

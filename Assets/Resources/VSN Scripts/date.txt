@@ -100,7 +100,7 @@ for currentDateEvent #dateLength
     wait 0.5
   endfor
   
-  // if opponent is defeated, go to new event
+  // if enemy is defeated, go to new enemy
   if #currentChallengeHp <= 0
     goto defeat_enemy
   endif
@@ -143,7 +143,7 @@ wait 2
 play_music "observacao2_intro" "observacao2_loop"
 wait 0.5
 if currentDateEvent == last_enemy
-  goto goto_new_enemy
+  goto advance_battle
 endif
 if currentDateEvent == 0
   say "" "O casal continua indo em direção ao seu objetivo."
@@ -160,14 +160,14 @@ endif
 if currentDateEvent > 1
   say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."
 endif
-goto goto_new_enemy
+goto advance_battle
 
 
-waypoint goto_new_enemy
-if  currentDateEvent >= #dateLength
+waypoint advance_battle
+add_var currentDateEvent 1
+if currentDateEvent >= #dateLength
   goto win_date
 else
-  add_var currentDateEvent 1
   goto new_enemy_appears
 endif
 
@@ -210,6 +210,6 @@ goto end
 
 
 waypoint end
-full_heal_party
-set_var battle_is_happening false
+end_date
+//full_heal_party
 goto_script "pass_time"

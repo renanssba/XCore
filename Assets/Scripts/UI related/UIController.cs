@@ -263,19 +263,13 @@ public class UIController : MonoBehaviour {
     }    
   }
 
-  public void ShowHelpMessagePanel() {
-    //Debug.LogWarning("Show Help Message Panel!");
-    //helpMessagePanel.ShowPanel();
-  }
-
   public void SetHelpMessageText(string helpMessage) {
     helpMessageText.text = helpMessage;
     helpMessageText.maxVisibleCharacters = helpMessage.Length;
   }
 
-  public void HideHelpMessagePanel() {
+  public void CleanHelpMessagePanel() {
     helpMessageText.text = "";
-    //helpMessagePanel.HidePanel();
   }
 
 

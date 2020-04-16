@@ -384,7 +384,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShowHealSpParticle(int value) {
-    string particleString = "+" + value + " " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp");
+    string particleString = "<size=80%>+" + value + " " + Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp")+ "</size>";
     ShowParticleAnimation(particleString, Color.cyan);
   }
 
@@ -439,7 +439,7 @@ public class Actor2D : MonoBehaviour {
         BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = i;
       }
     }
-    UIController.instance.HideHelpMessagePanel();
+    UIController.instance.CleanHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
     VsnController.instance.GotCustomInput();
   }

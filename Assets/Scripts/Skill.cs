@@ -10,11 +10,14 @@ public enum SkillType {
 
 public enum ActionRange {
   self,
-  oneAlly,
-  oneEnemy,
-  allAllies,
-  allEnemies,
-  randomEnemy
+  one_ally,
+  other_ally,
+  one_enemy,
+  anyone,
+  all_allies,
+  all_enemies,
+  random_enemy,
+  none
 }
 
 public enum SkillSpecialEffect {
@@ -156,6 +159,10 @@ public class Skill {
   public string GetPrintableDescription() {
     //return Lean.Localization.LeanLocalization.GetTranslationText("skill/description/" + descriptionKey);
     return SpecialCodes.InterpretStrings(description);
+  }
+
+  public bool HasTag(string tagToSearch) {
+    return Utils.TagIsInArray(tagToSearch, tags);
   }
 }
 

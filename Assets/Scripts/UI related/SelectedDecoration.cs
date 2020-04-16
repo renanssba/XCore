@@ -6,21 +6,27 @@ using UnityEngine.EventSystems;
 public class SelectedDecoration : MonoBehaviour {
 
   public GameObject selectedObject;
+  public bool invert = false;
   CanvasGroup group;
 
-	void OnEnable () {
+	void OnEnable() {
     group = GetComponent<CanvasGroup>();
-    StartCoroutine(Check());
+    CheckIfShouldShow();
+    StartCoroutine(KeepChecking());
   }
 
-  public IEnumerator Check() {
+  public IEnumerator KeepChecking() {
     while(true) {
-      yield return new WaitForSeconds(0.1f);
-      if(EventSystem.current.currentSelectedGameObject == selectedObject) {
-        group.alpha = 1f;
-      } else {
-        group.alpha = 0f;
-      }
+      yield return new WaitForSeconds(0.05f);
+      CheckIfShouldShow();
+    }
+  }
+
+  public void CheckIfShouldShow() {
+    if(EventSystem.current.currentSelectedGameObject == selectedObject) {
+      group.alpha = !invert ? 1f : 0f;
+    } else {
+      group.alpha = !invert ? 0f : 1f;
     }
   }
 }

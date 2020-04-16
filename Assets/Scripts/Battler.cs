@@ -103,6 +103,10 @@ public abstract class Battler {
 
   public abstract int CurrentHP();
 
+  public virtual int MaxSP() { return 0; }
+
+  public virtual int CurrentSP() { return 0; }
+
   public abstract int Level();
 
   public void ClearAllSkillsUsage() {
@@ -265,7 +269,7 @@ public abstract class Battler {
     }
     if(shouldRecoverStealth) {
       Debug.LogWarning("RESETING STEALTH");
-      BattleController.instance.RecoverStealth(BattleController.maxStealth);
+      BattleController.instance.StartCoroutine(BattleController.instance.ShowRecoverStealth());
     }
     UIController.instance.UpdateDateUI();
   }
