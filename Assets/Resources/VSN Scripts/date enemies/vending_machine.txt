@@ -3,12 +3,13 @@ goto *arg1
 waypoint event_statement
 say "" "O casal fica com fome e vai até uma máquina de venda de comida."
 theater_animation "enemy_enters"
-say "Oh não! A máquina de salgadinhos ficou fora de controle!"
+say "Quando \boy ia colocar uma moedinha para pedir um lanche, a máquina começa a pular e se debater!"
+//say "A máquina de salgadinhos ficou fora de controle!"
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
-set_var intelligence_action_boy_name "hack"
-set_var intelligence_action_girl_name "hack"
+set_var intelligence_action_boy_name "improvise"
+set_var intelligence_action_girl_name "improvise"
 set_var charisma_action_boy_name "flatter"
 set_var charisma_action_girl_name "flatter"
 end_script
@@ -22,7 +23,7 @@ end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active puxa um teclado do bolso e começa a digitar!"
+set_var pre_attack "\active aperta vários botões na máquina, sobrecarregando-a!"
 end_script
 
 waypoint charisma_action_boy
@@ -33,11 +34,11 @@ end_script
 
 
 waypoint attack_boy
-set_var pre_attack "A máquina cospe lixo por todos os lados, acertando \boy!"
+set_var pre_attack "A máquina pula e se agita, acertando \boy!"
 end_script
 
 waypoint attack_girl
-set_var pre_attack "A máquina cospe lixo por todos os lados, acertando \girl!"
+set_var pre_attack "A máquina pula e se agita, acertando \girl!"
 end_script
 
 waypoint defeated
