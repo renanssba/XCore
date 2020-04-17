@@ -9,7 +9,7 @@ public class TargetSelectButton : MonoBehaviour {
   public void ClickedTargetSelectButton() {
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
 
-    Debug.LogWarning("clicked person: " + BattleController.instance.GetBattlerByTargetId(currentTargetId).name);
+    Debug.LogWarning("clicked person: " + BattleController.instance.GetBattlerByTargetId(currentTargetId).GetName());
 
     SfxManager.StaticPlayConfirmSfx();
 

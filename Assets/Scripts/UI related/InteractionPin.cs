@@ -16,7 +16,7 @@ public class InteractionPin : MonoBehaviour {
   public void SetPinContent(string scriptToLoad, string location) {
     vsnEntryPoint.scriptToPlay = scriptToLoad;
     if(GetPerson() != null) {
-      descriptionText.text = GetPerson().name + "\n<size=16>" + location + "</size>";
+      descriptionText.text = GetPerson().GetName() + "\n<size=16>" + location + "</size>";
     } else {
       descriptionText.text = location;
     }

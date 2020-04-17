@@ -8,7 +8,7 @@ namespace Command {
   public class ActorFaceCommand : VsnCommand {
 
     public override void Execute() {
-      Actor2D actor = TheaterController.instance.GetActorByString(args[0].GetStringValue());
+      Actor2D actor = TheaterController.instance.GetActorByString(args[0].GetReference());
 
       switch(args[1].GetStringValue()) {
         case "right":

@@ -39,8 +39,8 @@ public class ItemUI : MonoBehaviour {
     string description_suffix = "";
     if(itemListing.ownerId != -1) {
       Person owner = GlobalData.instance.people[itemListing.ownerId];
-      name_suffix = " d" + (owner.isMale ? "o" : "a") + " " + owner.name;
-      description_suffix = " Pertence a " + owner.name + ".";
+      name_suffix = " d" + (owner.isMale ? "o" : "a") + " " + owner.GetName();
+      description_suffix = " Pertence a " + owner.GetName() + ".";
     }
 
     nameText.text = item.GetPrintableName() + name_suffix;

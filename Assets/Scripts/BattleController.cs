@@ -390,7 +390,7 @@ public class BattleController : MonoBehaviour {
 
     damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
-    Debug.LogWarning(attacker.name + " Hits!");
+    Debug.LogWarning(attacker.GetName() + " Hits!");
     Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
     // skill power
@@ -582,9 +582,9 @@ public class BattleController : MonoBehaviour {
     if(usedSkill.type == SkillType.attack) {
       yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
     } else if(usedSkill.type == SkillType.active) {
-      yield return ShowUseActiveSkillMessage(skillUser.name, usedSkill);
+      yield return ShowUseActiveSkillMessage(skillUser.GetName(), usedSkill);
     } else if(usedSkill.type == SkillType.passive) {
-      yield return ShowUsePassiveSkillMessage(skillUser.name, usedSkill);
+      yield return ShowUsePassiveSkillMessage(skillUser.GetName(), usedSkill);
     }
 
     TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActor });
@@ -725,7 +725,7 @@ public class BattleController : MonoBehaviour {
 
         target.ReceiveStatusConditionBySkill(usedSkill);
         StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[i]);
-        yield return ShowGetStatusConditionMessage(target.name, statusCondition.GetPrintableName());
+        yield return ShowGetStatusConditionMessage(target.GetName(), statusCondition.GetPrintableName());
       } else {
         targetActor.ShowResistConditionParticle();
       }
@@ -779,7 +779,7 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     Battler target = targetActor.battler;
 
-    yield return ShowUseItemMessage(userActor.battler.name, usedItem.GetPrintableName());
+    yield return ShowUseItemMessage(userActor.battler.GetName(), usedItem.GetPrintableName());
 
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -836,7 +836,7 @@ public class BattleController : MonoBehaviour {
 
       if(receivedNewStatus) {
         StatusCondition statusCondition = GetStatusConditionByName(usedItem.givesConditionNames[0]);
-        yield return ShowGetStatusConditionMessage(targetActor.battler.name, statusCondition.GetPrintableName());
+        yield return ShowGetStatusConditionMessage(targetActor.battler.GetName(), statusCondition.GetPrintableName());
       }
     }
     yield return new WaitForSeconds(0.5f);
@@ -1210,7 +1210,7 @@ public class BattleController : MonoBehaviour {
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
-      Debug.LogWarning("Loading enemy: " + dic["name"]);
+      Debug.LogWarning("Loading enemy: " + dic["name key"]);
 
       Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] +
                                                       ", \"customEvents\" :" + dic["custom events"] + "}");
@@ -1223,7 +1223,7 @@ public class BattleController : MonoBehaviour {
 
       allEnemies.Add(new Enemy {
         id = int.Parse(dic["id"]),
-        name = dic["name"],
+        nameKey = dic["name key"],
         scriptName = dic["script name"],
         level = int.Parse(dic["level"]),
         maxHp = int.Parse(dic["max hp"]),

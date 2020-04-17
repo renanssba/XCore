@@ -26,6 +26,9 @@ namespace Command {
         case "girl_interaction":
           cameraPos = new Vector3(-0.85f, 1.57f, -2.92f);
           break;
+        case "main_and_enemy":
+          cameraPos = new Vector3(0.5f, 1.52f, -3.6f);
+          break;
         case "battle_view":
         default:
           cameraPos = new Vector3(0f, 1.45f, -6.4f);

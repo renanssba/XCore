@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 public abstract class Battler {
-  public string name;
+  public string nameKey;
   public int id;
   public int[] attributes;
   public List<StatusCondition> statusConditions;
@@ -20,6 +20,8 @@ public abstract class Battler {
   }
 
 
+
+  public abstract string GetName();
 
   public int AttributeValue(int att){
     if(attributes == null) {
@@ -313,8 +315,8 @@ public abstract class Battler {
         GetActor2D().ShowDamageParticle(damage, 1f);
         VsnController.instance.WaitForCustomInput();
 
-        VsnSaveSystem.SetVariable("target_name", name);
-        BattleController.instance.ShowTakeStatusConditionDescription(name, sc.statusEffect[i]);
+        VsnSaveSystem.SetVariable("target_name", GetName());
+        BattleController.instance.ShowTakeStatusConditionDescription(GetName(), sc.statusEffect[i]);
       }
     }
   }

@@ -12,8 +12,7 @@ waypoint beatrice
 set_current_couple 2
 set_var girl_script_name "cap1_conversa_beatrice"
 set_var conhece_beatrice 1
-change_person_sprite 2 6
-change_person_name 2 "Beatrice"
+// change_person_sprite 2 6
 goto girl_menu
 
 waypoint clara
@@ -154,7 +153,7 @@ waypoint custom_date
 play_music "observacao2_intro" "observacao2_loop"
 set_var date_objective "TESTE"
 goto_script "date"
-goto_end
+goto end
 
 
 

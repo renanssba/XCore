@@ -54,14 +54,14 @@ public class ModsManager : MonoBehaviour {
     string[] girlPaths = GetCharSpritePaths(modFolderName, "Girls");// Directory.GetFiles(modsPath + modFolderName + "\\Girls");
 
     for(int i=0; i<5; i++){
-      GlobalData.instance.people[i].name = GetNameFromPath(boyPaths[i]);
+      //GlobalData.instance.people[i].name = GetNameFromPath(boyPaths[i]);
       yield return LoadSprite(boyPaths[i]);
       //SpritesDatabase.instance.faceSprites[i] = loadedSprite;
       //      Debug.Log(name);
     }
       
     for(int i=0; i<5; i++){
-      GlobalData.instance.people[5+i].name = GetNameFromPath(girlPaths[i]);
+      //GlobalData.instance.people[5+i].name = GetNameFromPath(girlPaths[i]);
       yield return LoadSprite(girlPaths[i]);
       //SpritesDatabase.instance.faceSprites[5+i] = loadedSprite;
       //      Debug.Log(name);

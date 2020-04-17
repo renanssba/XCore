@@ -58,6 +58,10 @@ public class Enemy : Battler {
   public int rewardId;
 
 
+  public override string GetName() {
+    return Lean.Localization.LeanLocalization.GetTranslationText("enemy/name/" + nameKey);
+  }
+
   public Attributes[] GetWeaknesses() {
     List<Attributes> att = new List<Attributes>();
     for(int i=0; i<3; i++) {

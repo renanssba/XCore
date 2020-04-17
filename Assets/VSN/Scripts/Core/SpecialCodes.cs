@@ -25,28 +25,28 @@ public class SpecialCodes {
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentEnemyName());
       if(BattleController.instance.GetCurrentPlayer() != null) {
-        currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().name);
+        currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().GetName());
       }
       if(BattleController.instance.GetCurrentTarget() != null) {
-        currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().name);
+        currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
       }
       if(GlobalData.instance.ObservedPerson() != null) {
-        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().name);
+        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().GetName());
         currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
       }
       if(GlobalData.instance.EncounterPerson() != null) {
-        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().name);
+        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().GetName());
         currentString = currentString.Replace("\\favoriteMatter2", GlobalData.instance.EncounterPerson().favoriteMatter);
       }
       if(GlobalData.instance.CurrentBoy() != null) {
-        currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().name);
+        currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().GetName());
         currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
         currentString = currentString.Replace("\\intelligence", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.intelligence).ToString());
         currentString = currentString.Replace("\\charisma", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.charisma).ToString());
         currentString = currentString.Replace("\\magic", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.endurance).ToString());
       }
       if(GlobalData.instance.CurrentGirl() != null) {
-        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().name);
+        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().GetName());
       }
       currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
       currentString = currentString.Replace("\\n", "\n");
@@ -86,7 +86,7 @@ public class SpecialCodes {
     }
 
     string enemyId = initial.Substring(start + 12, (end - start - 12));
-    string enemyName = BattleController.instance.allEnemies[int.Parse(enemyId)].name;
+    string enemyName = BattleController.instance.allEnemies[int.Parse(enemyId)].GetName();
 
     string final = initial.Substring(0, start);
     final += enemyName + initial.Substring(end + 1, initial.Length - end - 1);

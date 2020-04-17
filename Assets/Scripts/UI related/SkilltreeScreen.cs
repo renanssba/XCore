@@ -136,9 +136,9 @@ public class SkilltreeScreen : MonoBehaviour {
       text += "[Passiva] ";
     }
     if(selectedSkillId < 4) {
-      text += "para "+relationship.GetBoy().name + "\n";
+      text += "para "+relationship.GetBoy().GetName() + "\n";
     } else if(selectedSkillId < 8) {
-      text += "para " + relationship.GetGirl().name + "\n";
+      text += "para " + relationship.GetGirl().GetName() + "\n";
     } else {
       text += "para o casal\n";
     }

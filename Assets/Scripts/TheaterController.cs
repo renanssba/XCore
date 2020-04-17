@@ -28,7 +28,10 @@ public class TheaterController : MonoBehaviour {
   public Vector3 mainPosition;
   public Vector3 supportPosition;
   public Vector3 angelPosition;
-  public Vector3 challengePosition;
+  public Vector3 enemyPosition;
+
+  public Vector3 outPositionRight;
+  public Vector3 outPositionLeft;
 
   public Vector3[] focusPositionForTwo;
   public Vector3 focusPositionForOne;
@@ -39,6 +42,7 @@ public class TheaterController : MonoBehaviour {
   public Actor2D supportActor;
   public Actor2D angelActor;
   public Actor2D enemyActor;
+  public List<Actor2D> extraCharacters;
 
   public GameObject[] bgEffectPrefabs;
 
@@ -51,28 +55,36 @@ public class TheaterController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
+    extraCharacters = new List<Actor2D>();
   }
 
 
-  public GameObject SpawnEnemyActor(string enemyPrefabName) {
-    Enemy dateEvent = BattleController.instance.GetCurrentEnemy();
-    UIController.instance.difficultyText.text = "<size=68>NV </size>" + dateEvent.level;
+  public void ClearTheater() {
+    mainActor.MoveToPosition(outPositionLeft, 0f);
+    supportActor.MoveToPosition(outPositionLeft, 0f);
+    angelActor.MoveToPosition(outPositionLeft, 0f);
+    DestroyEnemyActor();
+  }
 
+  public GameObject SpawnActor(string enemyPrefabName) {
     GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + enemyPrefabName);
     GameObject spawnedEnemy;
 
     if(prefabToSpawn == null) {
       Debug.LogWarning("No prefab to load for enemy: " + enemyPrefabName + ". Using default prefab");
-      spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, challengePosition, Quaternion.identity, transform);
+      spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, enemyPosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
-      enemyActor.SetEnemy(dateEvent);
-      enemyActor.SetEnemyGraphics();
+      enemyActor.SetActorGraphics(enemyPrefabName);
     } else {
-      spawnedEnemy = Instantiate(prefabToSpawn, challengePosition, Quaternion.identity, transform);
+      spawnedEnemy = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
       enemyActor = spawnedEnemy.GetComponent<Actor2D>();
-      enemyActor.SetEnemy(dateEvent);
     }
     return spawnedEnemy;
+  }
+
+  public void SetEnemyFeatures(Enemy enemyData) {
+    UIController.instance.difficultyText.text = "<size=68>NV </size>" + enemyData.level;
+    enemyActor.SetEnemy(enemyData);
   }
 
   public Actor2D GetActorByString(string actorPosition) {
@@ -95,32 +107,66 @@ public class TheaterController : MonoBehaviour {
     return actor;
   }
 
+  public Vector3 GetPositionByString(string positionName) {
+    switch(positionName) {
+      case "main":
+        return mainPosition;
+      case "support":
+        return supportPosition;
+      case "angel":
+        return angelPosition;
+      case "enemy":
+        return enemyPosition;
+      case "out_right":
+        return outPositionRight;
+      case "out_left":
+        return outPositionLeft;
+    }
+    return Vector3.zero;
+  }
+
   public void ChangeActor(string actorPosition, string newActorPrefabName) {
     Actor2D targetActor = GetActorByString(actorPosition);
 
-    if(targetActor != null) {
-      Destroy(targetActor.gameObject);
+    if(actorPosition == "enemy") {
+      if(targetActor != null) {
+        Destroy(targetActor.gameObject);
+      }
+      GameObject newObj = SpawnActor(newActorPrefabName);
+      enemyActor = newObj.GetComponent<Actor2D>();
+      return;
     }
 
-    GameObject newObj = SpawnEnemyActor(newActorPrefabName);
+    Person person = null;
+    for(int i=0; i< GlobalData.instance.people.Count; i++) {
+      if(GlobalData.instance.people[i].nameKey == Utils.GetStringArgument(newActorPrefabName)) {
+        person = GlobalData.instance.people[i];
+        break;
+      }
+    }
     switch(actorPosition) {
       case "main":
-        mainActor = newObj.GetComponent<Actor2D>();
+        mainActor.SetCharacter(person);
+        mainActor.FaceRight();
+        mainActor.gameObject.SetActive(true);
         break;
       case "support":
-        supportActor = newObj.GetComponent<Actor2D>();
+        supportActor.SetCharacter(person);
+        supportActor.FaceRight();
+        supportActor.gameObject.SetActive(true);
         break;
       case "angel":
-        angelActor = newObj.GetComponent<Actor2D>();
-        break;
-      case "enemy":
-        enemyActor = newObj.GetComponent<Actor2D>();
+        angelActor.SetCharacter(person);
+        angelActor.FaceRight();
+        angelActor.gameObject.SetActive(true);
         break;
     }
   }
 
   public void DestroyEnemyActor() {
-    Destroy(enemyActor.gameObject);
+    if(enemyActor != null) {
+      Destroy(enemyActor.gameObject);
+    }
   }
 
 
@@ -155,7 +201,7 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void SetupGirlInteraction() {
+  public void SetupGirlWaitingForBoy() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
 
     ClearBattle();
@@ -166,12 +212,10 @@ public class TheaterController : MonoBehaviour {
 
     if(GlobalData.instance.CurrentBoy() != null) {
       mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
-      mainActor.SetClothing("uniform");
       mainActor.FaceRight();
     }
     if(GlobalData.instance.CurrentGirl() != null) {
       supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
-      supportActor.SetClothing("uniform");
       supportActor.FaceLeft();
       supportActor.gameObject.SetActive(true);
     } else {
@@ -181,6 +225,33 @@ public class TheaterController : MonoBehaviour {
     angelActor.SetCharacter(GlobalData.instance.people[4]);
     angelActor.FaceRight();
   }
+
+  public void SetupBoyWaitingForGirl() {
+    Vector3 distance = new Vector3(3f, 0f, 0f);
+
+    ClearBattle();
+
+    mainActor.transform.localPosition = mainPosition;
+    supportActor.transform.localPosition = supportPosition - distance;
+    angelActor.transform.localPosition = angelPosition - distance;
+
+    if(GlobalData.instance.CurrentBoy() != null) {
+      mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
+      mainActor.FaceLeft();
+    }
+    if(GlobalData.instance.CurrentGirl() != null) {
+      supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
+      supportActor.FaceRight();
+      supportActor.gameObject.SetActive(true);
+    } else {
+      supportActor.gameObject.SetActive(false);
+    }
+
+    angelActor.SetCharacter(GlobalData.instance.people[4]);
+    angelActor.FaceRight();
+  }
+
+
 
   public void SetupDate() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
@@ -210,9 +281,7 @@ public class TheaterController : MonoBehaviour {
     supportActor.SetBattleMode(false);
     angelActor.SetBattleMode(false);
 
-    if(enemyActor != null) {
-      DestroyEnemyActor();
-    }
+    DestroyEnemyActor();
   }
 
   public void PartyEntersScene() {
@@ -223,14 +292,16 @@ public class TheaterController : MonoBehaviour {
 
   public void MainActorEntersScene() {
     mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
-    //supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
-    //angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+  }
+
+  public void SupportActorEntersScene() {
+    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
   }
 
   public void EnemyEntersScene() {
     Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
-
-    SpawnEnemyActor(currentEnemy.spriteName);
+    ChangeActor("enemy", currentEnemy.spriteName);
+    enemyActor.SetEnemy(currentEnemy);
 
     currentEnemy.hp = currentEnemy.maxHp;
     currentEnemy.RemoveAllStatusConditions();
@@ -239,8 +310,8 @@ public class TheaterController : MonoBehaviour {
     BattleController.instance.partyMembers[1].ClearSkillUsesInBattle();
 
     enemyActor.gameObject.SetActive(true);
-    enemyActor.transform.localPosition = challengePosition + new Vector3(2.5f, 0f, 0f);
-    enemyActor.transform.DOLocalMoveX(challengePosition.x, 0.5f).OnComplete(() => {
+    enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);
+    enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
       VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
       InitializeChallengeLevelAndHp();
       PartyEntersBattleMode();
@@ -330,7 +401,7 @@ public class TheaterController : MonoBehaviour {
     mainActor.transform.DOLocalMove(mainPosition, focusAnimationDuration);
     supportActor.transform.DOLocalMove(supportPosition, focusAnimationDuration);
     angelActor.transform.DOLocalMove(angelPosition, focusAnimationDuration);
-    enemyActor.transform.DOLocalMove(challengePosition, focusAnimationDuration);
+    enemyActor.transform.DOLocalMove(enemyPosition, focusAnimationDuration);
   }
 
 

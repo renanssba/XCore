@@ -53,7 +53,7 @@ public class GlobalData : MonoBehaviour {
       if(ModsManager.instance.GetName(i) != null) {
         auxName = ModsManager.instance.GetName(2 * i);
       }
-      newPerson = new Person { isMale = true, name = auxName };
+      newPerson = new Person { isMale = true };
       newPerson.Initialize(i);
       people.Add(newPerson);
     }
@@ -62,7 +62,7 @@ public class GlobalData : MonoBehaviour {
       if(ModsManager.instance.GetName(5 + i) != null) {
         auxName = ModsManager.instance.GetName(5 + i);
       }
-      newPerson = new Person { isMale = false, name = auxName };
+      newPerson = new Person { isMale = false };
       newPerson.Initialize(5 + i);
       people.Add(newPerson);
     }
@@ -79,7 +79,7 @@ public class GlobalData : MonoBehaviour {
 
     people = new List<Person>();
     Person p = new Person() {
-      name = "Ricardo",
+      nameKey = "daniel",
       isMale = true,
       id = 0,
       faceId = 0,
@@ -87,7 +87,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      name = "Ana",
+      nameKey = "anna",
       isMale = false,
       id = 1,
       faceId = 5,
@@ -95,7 +95,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      name = "Beatrice",
+      nameKey = "beatrice",
       isMale = false,
       id = 2,
       faceId = 6,
@@ -103,7 +103,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      name = "Clara",
+      nameKey = "claire",
       isMale = false,
       id = 3,
       faceId = 7,
@@ -112,7 +112,7 @@ public class GlobalData : MonoBehaviour {
     people.Add(p);
 
     p = new Person() {
-      name = "Fertiliel",
+      nameKey = "fertiliel",
       isMale = false,
       isHuman = false,
       id = 10,
@@ -304,9 +304,9 @@ public class GlobalData : MonoBehaviour {
     if(name == "Graciel") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[1];
     }
-    //if(name == "Hardiel") {
-    //  return ResourcesManager.instance.fixedCharactersFaceSprites[2];
-    //}
+    if(name == "Hardiel") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[2];
+    }
     if(name == "Ana Sombria") {
       return ResourcesManager.instance.faceSprites[2];
     }
@@ -320,7 +320,7 @@ public class GlobalData : MonoBehaviour {
       return ResourcesManager.instance.fixedCharactersFaceSprites[3];
     }
     foreach(Person p in people) {
-      if(p.name == name) {
+      if(p.GetName() == name) {
         return ResourcesManager.instance.faceSprites[p.faceId];
       }
     }

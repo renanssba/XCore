@@ -159,33 +159,6 @@ public class Utils {
 
 
 
-  public static string GroupNameString(List<Person> peopleGroup) {
-    string currentString = "";
-
-    if (peopleGroup.Count == 0)
-      return "Ninguém";
-
-    for (int i = 0; i < peopleGroup.Count; i++) {
-      currentString += peopleGroup[i].name;
-      if (i == peopleGroup.Count - 2) {
-        currentString += " e ";
-      } else if (i < peopleGroup.Count - 2) {
-        currentString += ", ";
-      }
-    }
-    return currentString;
-  }
-
-  public static string GroupNameString(Person[] peopleArray) {
-    List<Person> peopleList = new List<Person>();
-
-    foreach (Person p in peopleArray) {
-      peopleList.Add(p);
-    }
-
-    return GroupNameString(peopleList);
-  }
-
   public static string GetWeekdayName(int day) {
     switch (day % 5) {
       case 1:

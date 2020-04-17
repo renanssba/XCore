@@ -29,6 +29,11 @@ if #currentRelationshipLevel == 0
   wait 1
   say "" "A campainha toca e Ricardo tem um leve infarto."
   say "Ele anda até a entrada da casa. Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
+  
+  wait 0.5
+  theater_animation "support_actor_enters"
+  wait 1.5
+  
   say "Ricardo" "C-Clara! Q-que bom que você veio!"
   say "Clara" "Oi Ricardo, obrigada por me receber."
   say "" "Ricardo consente em silêncio, pois não sabe como reagir."
@@ -71,7 +76,7 @@ endif
 
 say "Clara chega e se senta à mesa com Ricardo."
   
-theater_animation "main_actor_enters"
+theater_animation "support_actor_enters"
 wait 1.8
 
 waypoint action_choice

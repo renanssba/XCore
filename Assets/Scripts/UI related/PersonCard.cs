@@ -49,7 +49,7 @@ public class PersonCard : MonoBehaviour {
 
     /// BG AND FACE / NAME
     bgImage.sprite = ResourcesManager.instance.cardSprites[(person.isMale ? 0 : 1)];
-    nameText.text = person.name;
+    nameText.text = person.GetName();
 
 
     /// STATUS CONDITIONS

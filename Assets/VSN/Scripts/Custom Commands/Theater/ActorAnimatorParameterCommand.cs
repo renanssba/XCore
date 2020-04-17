@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace Command {
 
-  [CommandAttribute(CommandString = "set_actor_animator_parameter")]
-  public class SetActorAnimatorCommand : VsnCommand {
+  [CommandAttribute(CommandString = "actor_animator_parameter")]
+  public class ActorAnimatorParameterCommand : VsnCommand {
 
     public override void Execute() {
-      TheaterController.instance.SetActorAnimatorParameter(args[0].GetStringValue(),
+      TheaterController.instance.SetActorAnimatorParameter(args[0].GetReference(),
         args[1].GetStringValue(),
         args[2].GetBooleanValue());
     }
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
-        VsnArgType.stringArg,
+        VsnArgType.referenceArg,
         VsnArgType.stringArg,
         VsnArgType.booleanArg
       });

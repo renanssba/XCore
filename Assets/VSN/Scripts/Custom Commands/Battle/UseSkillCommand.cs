@@ -14,7 +14,7 @@ namespace Command {
       int targetPos = BattleController.instance.GetPartyMemberPosition(target);
       Skill usedSkill = BattleController.instance.GetSkillById((int)args[2].GetNumberValue());
 
-      Debug.LogWarning("USE SKILL: "+usedSkill+", user: "+user.name+", target: "+target.name);
+      Debug.LogWarning("USE SKILL: " + usedSkill + ", user: " + user.GetName() + ", target: " + target.GetName());
 
       BattleController battle = BattleController.instance;
       VsnController.instance.state = ExecutionState.WAITING;

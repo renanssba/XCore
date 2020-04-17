@@ -124,7 +124,7 @@ public class GirlInteractionScreen : MonoBehaviour {
     }
 
 
-    Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().name + " and " + currentRelationship.GetGirl().name);
+    Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().GetName() + " and " + currentRelationship.GetGirl().GetName());
 
     SfxManager.StaticPlayBigConfirmSfx();
     VsnSaveSystem.SetVariable("dateId", dateId);

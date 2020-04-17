@@ -8,7 +8,7 @@ namespace Command {
   public class ChangePersonNameCommand : VsnCommand {
 
     public override void Execute() {
-      GlobalData.instance.people[(int)args[0].GetNumberValue()].name = args[1].GetStringValue();
+      //GlobalData.instance.people[(int)args[0].GetNumberValue()].name = args[1].GetStringValue();
     }
 
     public override void AddSupportedSignatures() {

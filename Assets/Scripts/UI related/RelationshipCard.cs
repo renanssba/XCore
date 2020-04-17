@@ -46,7 +46,7 @@ public class RelationshipCard : MonoBehaviour {
     }
     
 
-    coupleNameText.text = relationship.GetBoy().name + " e " + relationship.GetGirl().name;
+    coupleNameText.text = relationship.GetBoy().GetName() + " e " + relationship.GetGirl().GetName();
     levelText.text = relationship.level.ToString();
   }
 

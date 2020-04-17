@@ -24,11 +24,17 @@ namespace Command {
           TheaterController.instance.EnemyLeavesScene();
           VsnController.instance.WaitForSeconds(0.7f);
           break;
-        case "setup_girl_interaction":
-          TheaterController.instance.SetupGirlInteraction();
+        case "girl_waiting_for_boy":
+          TheaterController.instance.SetupGirlWaitingForBoy();
+          break;
+        case "boy_waiting_for_girl":
+          TheaterController.instance.SetupBoyWaitingForGirl();
           break;
         case "main_actor_enters":
           TheaterController.instance.MainActorEntersScene();
+          break;
+        case "support_actor_enters":
+          TheaterController.instance.SupportActorEntersScene();
           break;
       }      
     }

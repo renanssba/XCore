@@ -58,6 +58,11 @@ public class Actor2D : MonoBehaviour {
   public void UpdateGraphics() {
     if(battler.GetType() == typeof(Person)) {
       UpdateCharacterGraphics();
+      if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
+        SetClothing("uniform");
+      } else {
+        SetClothing("casual");
+      }
     } else if(battler.GetType() == typeof(Enemy)) {
       // do nothing
     }
@@ -70,7 +75,7 @@ public class Actor2D : MonoBehaviour {
       return;
     }
 
-    if(!string.IsNullOrEmpty(battler.name)) {
+    if(!string.IsNullOrEmpty(battler.GetName())) {
       if(battler.CurrentStatusConditionStacks("sad") == 0) {
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.body);
       } else {
@@ -106,6 +111,9 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetClothing(string clothingType) {
+    if(battler.GetType() != typeof(Person)) {
+      return;
+    }
     switch(clothingType) {
       case "uniform":
         renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.school);
@@ -127,6 +135,14 @@ public class Actor2D : MonoBehaviour {
     Vector3 scale = transform.localScale;
     scale.x = Mathf.Abs(scale.x);
     transform.localScale = scale;
+  }
+
+  public void MoveToPosition(Vector3 destination, float duration) {
+    if(duration == 0f) {
+      transform.position = destination;
+    } else {
+      transform.DOLocalMove(destination, duration);
+    }
   }
 
   public void SetAuraVisibility() {
@@ -160,16 +176,20 @@ public class Actor2D : MonoBehaviour {
   public void SetEnemy(Enemy currentEvent) {
     enemy = currentEvent;
     battler = currentEvent;
+    SetActorGraphics(enemy.spriteName);
   }
 
-  public void SetEnemyGraphics() {
-    if(string.IsNullOrEmpty(enemy.spriteName)){
-      gameObject.SetActive(false);
+  public void SetActorGraphics(string spriteName) {
+    //if(string.IsNullOrEmpty(spriteName)){
+    //  gameObject.SetActive(false);
+    //  return;
+    //}
+    if(gameObject.name.Contains(spriteName)) {
       return;
     }
 
-    if(enemy.spriteName.StartsWith("actor(")) {
-      string actorName = Utils.GetStringArgument(enemy.spriteName);
+    if(spriteName.StartsWith("person(")) {
+      string actorName = Utils.GetStringArgument(spriteName);
 
       Debug.LogWarning("Setting enemy sprite to: " + actorName);
 
@@ -182,7 +202,7 @@ public class Actor2D : MonoBehaviour {
       renderers[1].flipX = true;
       shadowRenderer.transform.localScale = Vector3.one;
     } else {
-      renderers[0].sprite = LoadSprite("Enemies/" + enemy.spriteName);
+      renderers[0].sprite = LoadSprite("Enemies/" + spriteName);
       renderers[0].flipX = false;
       renderers[1].gameObject.SetActive(false);
       shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
@@ -432,7 +452,7 @@ public class Actor2D : MonoBehaviour {
   public void ClickedTargetSelectButton() {
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
 
-    Debug.LogWarning("clicked person: " + battler.name);
+    Debug.LogWarning("clicked person: " + battler.GetName());
 
     for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
       if(BattleController.instance.partyMembers[i] == battler) {
