@@ -2,7 +2,8 @@ goto *arg1
 
 waypoint event_statement
 theater_animation "enemy_enters"
-say "" "Um vendaval extremamente localizado se aproxima em alta velocidade! Várias roupas rodopiam pelo ar!"
+say "" "Um tornado misterioso começa a se aproximar do casal!"
+say "Ele parece estar carregando várias roupas."
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
@@ -16,32 +17,29 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active joga uma pedra no furacão!"
-//say "" "O vendaval desacelera!"
+set_var pre_attack "\active joga uma pedra no tornado!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
 set_var pre_attack "\active checa a previsão do tempo e confirma: sem furacões para hoje!"
-//say "" "O vendaval fica confuso!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active elogia as roupas que o vendaval está usando!"
-//say "" "O vendaval fica satisfeito!"
+set_var pre_attack "\active elogia as roupas que o tornado está usando!"
 end_script
 
 
 
 waypoint attack_boy
-set_var pre_attack "\boy é envolvido pelo vendaval! Vestimentas voam pelo ar!"
+set_var pre_attack "\boy é atingido por peças de vestimenta!"
 end_script
 
 waypoint attack_girl
-set_var pre_attack "\girl é envolvida pelo vendaval! Vestimentas voam pelo ar!"
+set_var pre_attack "\girl é atingida por peças de vestimenta!"
 end_script
 
 waypoint defeated
-say "" "O vendaval se desfaz subitamente!"
+say "" "O tornado se desfaz subitamente!"
 end_script

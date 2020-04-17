@@ -178,6 +178,7 @@ public class SkilltreeScreen : MonoBehaviour {
 
     UpdateUI();
     CoupleStatusScreen.instance.UpdateUI();
+    UIController.instance.UpdateUI();
 
     SfxManager.StaticPlayBigConfirmSfx();
     buySkillConfirmationPanel.HidePanel();

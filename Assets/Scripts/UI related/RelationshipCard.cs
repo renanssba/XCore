@@ -19,6 +19,7 @@ public class RelationshipCard : MonoBehaviour {
   public TextMeshProUGUI proximityLevelText;
 
   public Relationship relationship;
+  public GameObject unusedBondPointIcon;
 
 
   public void Initialize(Relationship rel) {
@@ -44,10 +45,10 @@ public class RelationshipCard : MonoBehaviour {
     } else {
       expText.text = "MAX";
     }
-    
 
     coupleNameText.text = relationship.GetBoy().GetName() + " e " + relationship.GetGirl().GetName();
     levelText.text = relationship.level.ToString();
+    unusedBondPointIcon.SetActive(relationship.bondPoints > 0);
   }
 
   public void RaiseExp(int expToAdd) {
