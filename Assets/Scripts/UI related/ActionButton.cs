@@ -74,7 +74,7 @@ public class ActionButton : MonoBehaviour {
       }
 
       ActionSkin actionSkin = GetActionSkin();
-      nameText.text = prefix + actionSkin.buttonName;
+      nameText.text = prefix + Lean.Localization.LeanLocalization.GetTranslationText("action/button/" + actionSkin.name);
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.damageAttribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.damageAttribute];
 

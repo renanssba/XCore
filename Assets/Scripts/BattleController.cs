@@ -1407,7 +1407,6 @@ public class BattleController : MonoBehaviour {
       ActionSkin newSkin = new ActionSkin() {
         id = entry["id"],
         name = entry["name"],
-        buttonName = entry["button name"],
         sfxName = entry["sfx"]
       };
 

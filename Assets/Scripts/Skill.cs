@@ -110,7 +110,6 @@ public class Skilltree {
 public class ActionSkin{
   public string name;
   public string id;
-  public string buttonName;
   public string sfxName;
 }
 
