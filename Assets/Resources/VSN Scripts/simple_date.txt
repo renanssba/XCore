@@ -1,53 +1,15 @@
-fade_out 0.7
-bg null
-
-wait 0.5
-set_var currentDateEvent 0
-theater_animation "setup_date"
-
-move_camera "close_shot" 0
-
-set_screen "date"
+set_var last_enemy 0
 enable_input true
-set_current_character_turn -1
-
-fade_in 0.7
-
-wait 0.5
-
-theater_animation "party_enters"
-say "" "\couple estavam andando tranquilamente em direção ao local \vsn(date_objective), quando de repente..."
-
-/// DATE TUTORIAL (?)
-// if tutorial_date == 0
-  // goto_script "tutorial_date"
-// endif
-
-
-set_var last_enemy #dateLength
-add_var last_enemy -1
 
 
 for currentDateEvent #dateLength
   waypoint new_enemy_appears
-  wait 0.3
-  actor_face main "right"
-  wait 0.3
   move_camera "battle_view" 0.5
   play_music "battle1_intro" "battle1_loop"
   wait 0.8
 
   set_var currentBattleTurn -1
-  goto_script "\currentEventName" event_statement
-  actor_animator_parameter enemy "Battle" true
-
-  // if currentDateEvent == 0
-    // say "\boy" "E agora, o que faremos?"
-    // say "\girl" "Eu vou te proteger!"
-  // else
-    // say "\girl" "Fica comigo!"
-    // say "\boy" "Vamos lutar juntos."
-  // endif
+  //goto_script "\currentEventName" event_statement
 
   show_date_ui true
   wait 0.5
@@ -129,12 +91,12 @@ endfor
 
 
 waypoint defeat_enemy
-goto_script "\currentEventName" defeated
-theater_animation "enemy_leaves"
-challenge_result true
-update_ui
-play_sfx "ui_success"
-wait 2
+//goto_script "\currentEventName" defeated
+//theater_animation "enemy_leaves"
+//challenge_result true
+//update_ui
+//play_sfx "ui_success"
+//wait 2
 
 goto_script "check_passive_triggers" "enemy_defeated"
 
@@ -144,58 +106,14 @@ fade_music 0 1
 move_camera "close_shot" 1.5
 wait 2
 play_music "observacao2_intro" "observacao2_loop"
-wait 0.3
-actor_face main "left"
-wait 0.3
-if currentDateEvent == last_enemy
-  goto advance_battle
-endif
-if currentDateEvent == 0
-  say "" "O casal continua indo em direção ao seu objetivo."
-  say "\boy" "Isso foi estranho, né?"
-  say "\girl" "Sim, mas ainda bem que deu tudo certo."
-  say "" "Subitamente, um novo desafio aparece..."
-endif
-if currentDateEvent == 1
-  say "" "Após os ânimos se acalmarem, o casal continua conversando."
-  say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
-  say "\girl" "É mesmo? O que é?"
-  say "" "Antes que \boy pudesse continuar..."
-endif
-if currentDateEvent > 1
-  say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."
-endif
-goto advance_battle
-
-
-waypoint advance_battle
-add_var currentDateEvent 1
-if currentDateEvent >= #dateLength
-  goto win_date
-else
-  goto new_enemy_appears
-endif
-
+wait 0.5
+goto win_date
 
 
 
 waypoint win_date
 enable_input false
-//say "" "Depois de muitos percalços..."
-goto_script "cap1_date_end"
-say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
-// show_date_ui false
-
-if #currentDateId == 1
-  add_exp 120
-endif
-if #currentDateId == 2
-  add_exp 400
-endif
-if #currentDateId == 3
-  add_exp 2000
-endif
-open_heart_lock #currentDateId
+say "char_name/none" "date/say_4"
 goto end
 
 
@@ -216,5 +134,3 @@ goto end
 
 waypoint end
 end_date
-//full_heal_party
-goto_script "pass_time"

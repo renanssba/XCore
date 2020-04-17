@@ -23,6 +23,9 @@ namespace Command {
         case "close_shot":
           cameraPos = new Vector3(-0.91f, 1.52f, -2.8f);
           break;
+        case "close_focus_main":
+          cameraPos = new Vector3(-0.4f, 1.52f, -2.8f);
+          break;
         case "girl_interaction":
           cameraPos = new Vector3(-0.85f, 1.57f, -2.92f);
           break;

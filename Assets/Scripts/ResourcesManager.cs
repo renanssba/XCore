@@ -66,12 +66,8 @@ public class ResourcesManager : MonoBehaviour {
         return col.baseBody;
       case CharacterSpritePart.sad:
         return col.sadBody;
-      case CharacterSpritePart.underwear:
-        return col.underwear;
       case CharacterSpritePart.school:
         return col.schoolClothes;
-      case CharacterSpritePart.unclothed:
-        return col.incompleteCasualClothes;
       case CharacterSpritePart.bruises:
         return col.bruises;
       case CharacterSpritePart.casual:
@@ -97,8 +93,6 @@ public class ResourcesManager : MonoBehaviour {
 
   public void NewSpriteCollection(string charName) {
     string characterSpritesPath = "Characters/";
-    Color[] bodyPixels, casualPixels, uniformPixels, auxColorArray;
-    Sprite newSprite;
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
 
     spriteCollection.name = charName;

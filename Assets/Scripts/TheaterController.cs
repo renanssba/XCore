@@ -42,7 +42,7 @@ public class TheaterController : MonoBehaviour {
   public Actor2D supportActor;
   public Actor2D angelActor;
   public Actor2D enemyActor;
-  public List<Actor2D> extraCharacters;
+  public List<Actor2D> extraActors;
 
   public GameObject[] bgEffectPrefabs;
 
@@ -55,7 +55,7 @@ public class TheaterController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
-    extraCharacters = new List<Actor2D>();
+    extraActors = new List<Actor2D>();
   }
 
 
@@ -63,23 +63,25 @@ public class TheaterController : MonoBehaviour {
     mainActor.MoveToPosition(outPositionLeft, 0f);
     supportActor.MoveToPosition(outPositionLeft, 0f);
     angelActor.MoveToPosition(outPositionLeft, 0f);
+    for(int i = 0; i < extraActors.Count; i++) {
+      Destroy(extraActors[i].gameObject);
+    }
+    extraActors = new List<Actor2D>();
     DestroyEnemyActor();
   }
 
-  public GameObject SpawnActor(string enemyPrefabName) {
-    GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + enemyPrefabName);
-    GameObject spawnedEnemy;
+  public GameObject SpawnActor(string actorPrefabName) {
+    GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + actorPrefabName);
+    GameObject spawnedActor;
 
     if(prefabToSpawn == null) {
-      Debug.LogWarning("No prefab to load for enemy: " + enemyPrefabName + ". Using default prefab");
-      spawnedEnemy = Instantiate(BattleController.instance.defaultEnemyPrefab, enemyPosition, Quaternion.identity, transform);
-      enemyActor = spawnedEnemy.GetComponent<Actor2D>();
-      enemyActor.SetActorGraphics(enemyPrefabName);
+      Debug.LogWarning("No prefab to load for enemy: " + actorPrefabName + ". Using default prefab");
+      spawnedActor = Instantiate(BattleController.instance.defaultEnemyPrefab, enemyPosition, Quaternion.identity, transform);
+      spawnedActor.GetComponent<Actor2D>().SetActorGraphics(actorPrefabName);
     } else {
-      spawnedEnemy = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
-      enemyActor = spawnedEnemy.GetComponent<Actor2D>();
+      spawnedActor = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
     }
-    return spawnedEnemy;
+    return spawnedActor;
   }
 
   public void SetEnemyFeatures(Enemy enemyData) {
@@ -87,10 +89,10 @@ public class TheaterController : MonoBehaviour {
     enemyActor.SetEnemy(enemyData);
   }
 
-  public Actor2D GetActorByString(string actorPosition) {
+  public Actor2D GetActorByString(string actorReference) {
     Actor2D actor = null;
 
-    switch(actorPosition) {
+    switch(actorReference) {
       case "main":
         actor = mainActor;
         break;
@@ -102,6 +104,14 @@ public class TheaterController : MonoBehaviour {
         break;
       case "enemy":
         actor = enemyActor;
+        break;
+      default:
+        foreach(Actor2D aux in extraActors) {
+          if(aux.actorReference == actorReference) {
+            actor = aux;
+            break;
+          }
+        }
         break;
     }
     return actor;
@@ -117,22 +127,35 @@ public class TheaterController : MonoBehaviour {
         return angelPosition;
       case "enemy":
         return enemyPosition;
+      case "enemy_0":
+        return enemyPosition + new Vector3(-1f, 0f, 0f);
+      case "enemy_2":
+        return enemyPosition + new Vector3(1f, 0f, 0f);
       case "out_right":
         return outPositionRight;
+      case "out_right_up":
+        return outPositionRight + new Vector3(0.5f, 0f, 1f);
+      case "out_right_down":
+        return outPositionRight + new Vector3(0.5f, 0f, -1f);
       case "out_left":
         return outPositionLeft;
+      case "out_left_up":
+        return outPositionLeft + new Vector3(-0.5f, 0f, 1f);
+      case "out_left_down":
+        return outPositionLeft + new Vector3(-0.5f, 0f, -1f);
     }
     return Vector3.zero;
   }
 
-  public void ChangeActor(string actorPosition, string newActorPrefabName) {
-    Actor2D targetActor = GetActorByString(actorPosition);
+  public void ChangeActor(string actorReference, string newActorPrefabName) {
+    Actor2D targetActor = GetActorByString(actorReference);
+    GameObject newObj;
 
-    if(actorPosition == "enemy") {
+    if(actorReference == "enemy") {
       if(targetActor != null) {
         Destroy(targetActor.gameObject);
       }
-      GameObject newObj = SpawnActor(newActorPrefabName);
+      newObj = SpawnActor(newActorPrefabName);
       enemyActor = newObj.GetComponent<Actor2D>();
       return;
     }
@@ -144,7 +167,7 @@ public class TheaterController : MonoBehaviour {
         break;
       }
     }
-    switch(actorPosition) {
+    switch(actorReference) {
       case "main":
         mainActor.SetCharacter(person);
         mainActor.FaceRight();
@@ -159,6 +182,20 @@ public class TheaterController : MonoBehaviour {
         angelActor.SetCharacter(person);
         angelActor.FaceRight();
         angelActor.gameObject.SetActive(true);
+        break;
+      default:
+        targetActor = null;
+        foreach(Actor2D currentActor in extraActors) {
+          if(currentActor.actorReference == actorReference) {
+            targetActor = currentActor;
+            extraActors.Remove(targetActor);
+            Destroy(targetActor.gameObject);
+            break;
+          }
+        }
+        newObj = SpawnActor(newActorPrefabName);
+        extraActors.Add(newObj.GetComponent<Actor2D>());
+        newObj.GetComponent<Actor2D>().actorReference = actorReference;
         break;
     }
   }
@@ -204,6 +241,7 @@ public class TheaterController : MonoBehaviour {
   public void SetupGirlWaitingForBoy() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
 
+    ClearTheater();
     ClearBattle();
 
     mainActor.transform.localPosition = supportPosition - distance;
@@ -229,6 +267,7 @@ public class TheaterController : MonoBehaviour {
   public void SetupBoyWaitingForGirl() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
 
+    ClearTheater();
     ClearBattle();
 
     mainActor.transform.localPosition = mainPosition;
@@ -256,7 +295,10 @@ public class TheaterController : MonoBehaviour {
   public void SetupDate() {
     Vector3 distance = new Vector3(3f, 0f, 0f);
 
+    ClearTheater();
     ClearBattle();
+
+    BattleController.instance.SetupDateLocation();
 
     mainActor.SetCharacter(GlobalData.instance.observedPeople[0]);
     supportActor.SetCharacter(GlobalData.instance.observedPeople[1]);
@@ -272,8 +314,6 @@ public class TheaterController : MonoBehaviour {
     mainActor.FaceRight();
     supportActor.FaceRight();
     angelActor.FaceRight();
-
-    BattleController.instance.SetupDateLocation();
   }
 
   public void ClearBattle() {
@@ -407,19 +447,11 @@ public class TheaterController : MonoBehaviour {
 
 
 
-  public void SetActorAnimatorParameter(string actorName, string parameterName, bool value) {
-    Actor2D actor = null;
+  public void SetActorAnimatorParameter(string actorReference, string parameterName, bool value) {
+    Actor2D actor = GetActorByString(actorReference);
 
-    switch(actorName) {
-      case "main":
-        actor = mainActor;
-        break;
-      case "support":
-        actor = supportActor;
-        break;
-      case "angel":
-        actor = angelActor;
-        break;
+    if(actor == null) {
+      return;
     }
     actor.SetParameter(parameterName, value);
   }

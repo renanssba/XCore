@@ -3,7 +3,10 @@ goto *arg1
 waypoint event_statement
 say "" "O casal fica com fome e vai até uma máquina de venda de comida."
 theater_animation "enemy_enters"
-say "Quando \boy ia colocar uma moedinha para pedir um lanche, a máquina começa a pular e se debater!"
+say "Quando \boy ia colocar uma moedinha para pedir um lanche..."
+actor_animator_parameter enemy "Battle" true
+wait 4.5
+say "...a máquina começa a pular e se debater, atacando o casal!"
 //say "A máquina de salgadinhos ficou fora de controle!"
 
 set_var guts_action_boy_name "strike"
@@ -42,5 +45,8 @@ set_var pre_attack "A máquina pula e se agita, acertando \girl!"
 end_script
 
 waypoint defeated
-say "" "A máquina de salgadinhos explode!"
+actor_animator_parameter enemy "Battle" false
+wait 1
+say "" "A máquina de salgadinhos parece se acalmar e voltar ao normal."
+say "O casal consegue comprar um lanche e comer em paz."
 end_script

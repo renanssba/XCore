@@ -21,9 +21,12 @@ namespace Command {
         TheaterController.instance.ChangeActor(targetActor, newActorPrefabName);
         actor = TheaterController.instance.GetActorByString(targetActor);
         actor.MoveToPosition(positionToPut, 0f);
+        if(actor.transform.position.x < 0f) {
+          actor.FaceRight();
+        } else {
+          actor.FaceLeft();
+        }
       }
-      actor = TheaterController.instance.GetActorByString("angel");
-      actor.MoveToPosition(TheaterController.instance.GetPositionByString("angel"), 0f);
     }
 
 

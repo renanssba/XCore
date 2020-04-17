@@ -7,7 +7,7 @@ using DG.Tweening;
 using TMPro;
 
 public class Actor2D : MonoBehaviour {
-
+  public string actorReference;
   public SpriteRenderer[] renderers;
   public SpriteRenderer[] buffAuraRenderers;
   public new ParticleSystem particleSystem;
@@ -127,13 +127,21 @@ public class Actor2D : MonoBehaviour {
 
   public void FaceLeft() {
     Vector3 scale = transform.localScale;
-    scale.x = -Mathf.Abs(scale.x);
+    if(battler == null || battler.GetType() == typeof(Enemy)) {
+      scale.x = Mathf.Abs(scale.x);
+    } else {
+      scale.x = -Mathf.Abs(scale.x);
+    }
     transform.localScale = scale;
   }
 
   public void FaceRight() {
     Vector3 scale = transform.localScale;
-    scale.x = Mathf.Abs(scale.x);
+    if(battler == null || battler.GetType() == typeof(Enemy)) {
+      scale.x = -Mathf.Abs(scale.x);
+    } else {
+      scale.x = Mathf.Abs(scale.x);
+    }
     transform.localScale = scale;
   }
 
@@ -197,7 +205,12 @@ public class Actor2D : MonoBehaviour {
 
       renderers[0].sprite = spriteCollection.baseBody;
       renderers[0].flipX = true;
-      renderers[1].sprite = spriteCollection.casualClothes;
+
+      if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
+        renderers[1].sprite = spriteCollection.schoolClothes;
+      } else {
+        renderers[1].sprite = spriteCollection.casualClothes;
+      }
       renderers[1].gameObject.SetActive(true);
       renderers[1].flipX = true;
       shadowRenderer.transform.localScale = Vector3.one;

@@ -121,7 +121,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
 
-    ResourcesManager.instance.GenerateCharacterSprites(new string[] { "ricardo", "ana", "beatrice", "clara", "fertiliel" });
+    ResourcesManager.instance.GenerateCharacterSprites(new string[] { "daniel", "anna", "beatrice", "claire", "fertiliel" });
 
 
     relationships = new Relationship[3];
