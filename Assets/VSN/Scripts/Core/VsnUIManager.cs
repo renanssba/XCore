@@ -193,6 +193,22 @@ public class VsnUIManager : MonoBehaviour {
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
+  public void SetCharacterSprite(string characterFilename, string characterLabel) {
+    Sprite characterSprite = Resources.Load<Sprite>("Characters/" + characterFilename);
+    if(characterSprite == null) {
+      Debug.LogError("Error loading " + characterFilename + " character sprite. Please check its path");
+      return;
+    }
+
+    foreach(VsnCharacter character in characters) {
+      if(character.label == characterLabel) {
+        character.SetData(characterSprite, characterLabel);
+        return;
+      }
+    }
+    CreateNewCharacter(characterSprite, characterFilename, characterLabel);
+  }
+
   public void CreateNewCharacter(Sprite characterSprite, string characterFilename, string characterLabel) {
     GameObject vsnCharacterObject = Instantiate(vsnCharacterPrefab, charactersPanel.transform) as GameObject;
     vsnCharacterObject.transform.localScale = Vector3.one;
@@ -201,10 +217,7 @@ public class VsnUIManager : MonoBehaviour {
     Vector2 newPosition = Vector2.zero;
     vsnCharacter.GetComponent<RectTransform>().anchoredPosition = newPosition;
 
-    vsnCharacter.GetComponent<Image>().sprite = characterSprite;
-    vsnCharacter.label = characterLabel;
-    vsnCharacter.characterFilename = characterFilename;
-
+    vsnCharacter.SetData(characterSprite, characterLabel);
     characters.Add(vsnCharacter);
   }
 

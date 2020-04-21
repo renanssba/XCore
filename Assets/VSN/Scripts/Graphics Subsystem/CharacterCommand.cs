@@ -11,12 +11,7 @@ namespace Command {
       string characterLabel = args[0].GetReference();
       string characterFilename = args[1].GetStringValue();
 
-      Sprite characterSprite = Resources.Load<Sprite>("Characters/" + characterFilename);
-      if(characterSprite == null){
-        Debug.LogError("Error loading " + characterFilename + " character sprite. Please check its path");
-        return;
-      }
-      VsnUIManager.instance.CreateNewCharacter(characterSprite, characterFilename, characterLabel);
+      VsnUIManager.instance.SetCharacterSprite(characterFilename, characterLabel);
     }
 
     public override void AddSupportedSignatures() {

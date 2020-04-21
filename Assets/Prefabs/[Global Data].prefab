@@ -8171,6 +8171,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1754294749941938
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4145595189549946}
+  - component: {fileID: 114562631700565112}
+  m_Layer: 0
+  m_Name: guardian
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1755297558535948
 GameObject:
   m_ObjectHideFlags: 1
@@ -10460,6 +10476,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1974358724200614
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4898720387595736}
+  - component: {fileID: 114576472189882786}
+  m_Layer: 0
+  m_Name: guardian
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1975641870925490
 GameObject:
   m_ObjectHideFlags: 1
@@ -10701,6 +10733,7 @@ Transform:
   - {fileID: 4025324448811526}
   - {fileID: 4812259304264464}
   - {fileID: 4247101664509132}
+  - {fileID: 4145595189549946}
   m_Father: {fileID: 4299627661038536}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12086,6 +12119,7 @@ Transform:
   - {fileID: 4438316811923372}
   - {fileID: 4658992351231702}
   - {fileID: 4907939533356946}
+  - {fileID: 4898720387595736}
   m_Father: {fileID: 4299627661038536}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12287,6 +12321,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4941328037509068}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4145595189549946
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754294749941938}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4000700337358628}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4145902244411300
 Transform:
@@ -19236,6 +19283,19 @@ Transform:
   m_Father: {fileID: 4270948371490060}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4898720387595736
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1974358724200614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4122855775248148}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4900059737356318
 Transform:
   m_ObjectHideFlags: 1
@@ -20615,6 +20675,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2fb2be97ceeb12843a086003094e8de5, type: 3}
   - {fileID: 21300000, guid: b12f6dc6d0c14184ba0defc9fb98d3c2, type: 3}
   - {fileID: 21300000, guid: 589e1c50de5b2624f98d21973309da38, type: 3}
+  - {fileID: 21300000, guid: cd46d29dac9334c44a676e6a52661153, type: 3}
   cardSprites:
   - {fileID: 21300000, guid: 3779f651261efde45b4799d3bc247398, type: 3}
   - {fileID: 21300000, guid: 694e173149f0cfc4aae79987403d5dc1, type: 3}
@@ -27738,6 +27799,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114562631700565112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754294749941938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "Se torna o alvo do pr\xF3ximo ataque"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114563694474528086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -27840,6 +27922,27 @@ MonoBehaviour:
   translations:
   - Language: Portuguese
     Text: 
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114576472189882786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1974358724200614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Guardando
     Object: {fileID: 0}
   - Language: English
     Text: 

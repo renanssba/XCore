@@ -308,6 +308,12 @@ public class GlobalData : MonoBehaviour {
     if(name == "Hardiel") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[2];
     }
+    if(name == "Carta") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[3];
+    }
+    if(name == "Valentão" || name == "Delinquente") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[4];
+    }
     if(name == "Ana Sombria") {
       return ResourcesManager.instance.faceSprites[2];
     }
@@ -316,9 +322,6 @@ public class GlobalData : MonoBehaviour {
     }
     if(name == "Clara Sombria") {
       return ResourcesManager.instance.faceSprites[4];
-    }
-    if(name == "Carta") {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[3];
     }
     foreach(Person p in people) {
       if(p.GetName() == name) {
