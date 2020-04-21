@@ -14,20 +14,20 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 12	Cozinheiro	Aumenta em 50% o HP recuperado por itens de cura	passive	all_allies		healingItemBonus	0.5													cook	none		
 13	Encorajar	Aumenta a Valentia do parceiro temporariamente e cura Tristeza	active	other_ally	2		3						sad	encouraged	100	3				gutsy aura	active_support		
 14	Primeiros Socorros	Cura Machucado e Tonto	active	one_ally	2								injured, dizzy							medical-pack	active_support		
-15	Guardiã	Defender dá 70% de chance de receber ataque no lugar do aliado	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
-16	Ofensa Rebuscada	Causa confusão em um oponente por 3 turnos	active	one_enemy	2									confusion	100	3				dialog	active_offensive		
+15	Guardiã	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
+16	História Triste	Causa dano baseado em Inteligência por 4 turnos	active	one_enemy	2									sad	100	4				dialog	active_offensive		
 17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35													run	none		
-19	Beijo de Cura	Cura 16 HP do casal	active	one_ally	2					16										heart-plus	active_support		
+19	Beijo de Cura	Cura 16 HP do casal	active	other_ally	2					16										heart-plus	active_support		
 20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally	2								sad, fear, confusion, dizzyness							charmed	active_support		
 21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self									sad, dirty, cursed, hunger, dizzyness, confusion, fear, angry				after_action	received_item_with_tag(food)	100	eating	passive		
 22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
-23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	3	turn_started	is_turn(3)	100	angry-eyes	passive		
+23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	2	turn_started	is_turn(3)	100	angry-eyes	passive		
 24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
-25	Esfomeada	Recebe fome ao passar 3 turnos em um combate	passive	self										hunger	100	-1	turn_started	is_turn(3)	100	eating	passive		
+25	Esfomeada	Recebe fome ao passar 2 turnos em um combate	passive	self										hunger	100	-1	turn_started	is_turn(2)	100	eating	passive		
 26	Proximidade	Aumenta o HP do casal em 10	passive	all_allies		raiseMaxHp	10													heart-plus	none		
 27	Dedicação	Aumenta o SP do casal em 2	passive	all_allies		raiseMaxSp	2													skill-points	none		
-28	Guardião	Defender dá 70% de chance de receber ataque no lugar da aliada	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
+28	Guardião	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
 29	Memórias Felizes		passive	all_allies																charmed	none		
 30	Confissão	Recupera 50% do HP do casal quando ele chegar a 0 (uma vez por Encontro)	passive	all_allies							0.5						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
 31	Amigos por Correspondência		passive	all_allies																charmed	none		
@@ -37,6 +37,7 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 35	Atropelar	Causa dano baseado em Valentia e pode deixar o alvo Machucado	active	one_enemy				guts	6					injured	40	4				gutsy aura	attack		
 36	Golpes Violentos	Causa dano baseado em Valentia e deixa o alvo Machucado	active	one_enemy				guts	8					injured	100	4				gutsy aura	attack		
 37	Rajada de Molho	Causa dano baseado em Carisma e deixa o alvo Melecado	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	attack		
-38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy										sad	100	4				gutsy aura	attack		
+38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy				intelligence	4					sad	100	4				gutsy aura	attack		
 39	Fúria Reprimida	Fica irritado até o fim do Encontro	active	self	2									angry	100	-1				angry-eyes	active_support		
 40	Concentrar	Duplica o dano do próximo ataque	passive	self	2									charged	100	1	after_enemy_attack	hp_percent_is_less(0.5), turn_is_multiple(2)	60	angry-eyes	long_charge		
+41	Guardião (Antigo)	Defender dá 70% de chance de receber ataque no lugar da aliada	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		

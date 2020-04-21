@@ -41,17 +41,23 @@ public abstract class Battler {
       return false;
     }
 
-    switch(action) {
-      case TurnActionType.defend:
-        if(CurrentStatusConditionStacks("angry") > 0) {
+    // limit actions to defend
+    if(action != TurnActionType.defend) {
+      foreach(StatusCondition sc in statusConditions) {
+        if(sc.ContainsStatusEffect(StatusConditionEffect.limitActionsToDefense)) {
+          Debug.LogWarning("cant execute action different from defend");
           return false;
         }
-        break;
-      case TurnActionType.useSkill:
-        if(CurrentStatusConditionStacks("fear") > 0) {
+      }
+    }
+    // limit actions to guts
+    if(action != TurnActionType.useSkill) {
+      foreach(StatusCondition sc in statusConditions) {
+        if(sc.ContainsStatusEffect(StatusConditionEffect.limitActionsToGuts)) {
+          Debug.LogWarning("cant execute action different from guts");
           return false;
         }
-        break;
+      }
     }
     return true;
   }
@@ -79,6 +85,15 @@ public abstract class Battler {
       }
     }
     return modifier;
+  }
+
+  public bool IsPreferredTarget() {
+    foreach(StatusCondition sc in statusConditions) {
+      if(sc.ContainsStatusEffect(StatusConditionEffect.becomeTarget)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public abstract Skill[] GetPassiveSkills();

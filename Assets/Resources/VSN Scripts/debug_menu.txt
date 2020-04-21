@@ -22,11 +22,15 @@ goto girl_menu
 
 
 waypoint girl_menu
-choices "Adicionar Exp" add_exp "Adicionar Pontos de Vínculo" add_bond_points "Aumentar Nível de Proximidade" open_lock "Iniciar Date" date "Cancelar" end
+choices "Adicionar Nível" add_level "Adicionar Pontos de Vínculo" add_bond_points "Adicionar Exp" add_exp "Aumentar Nível de Proximidade" open_lock "Iniciar Date" date "Cancelar" end
 
 
 waypoint add_exp
 add_exp 100
+goto girl_menu
+
+waypoint add_level
+add_level 1
 goto girl_menu
 
 waypoint add_bond_points

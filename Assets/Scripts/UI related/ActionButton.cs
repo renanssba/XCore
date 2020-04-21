@@ -37,7 +37,8 @@ public class ActionButton : MonoBehaviour {
     UpdateUI();
   }
 
-  public void InitializeAsItem(ItemListing newItem) {
+  public void InitializeAsItem(Person p, ItemListing newItem) {
+    person = p;
     itemListing = newItem;
     actionType = TurnActionType.useItem;
     UpdateUI();

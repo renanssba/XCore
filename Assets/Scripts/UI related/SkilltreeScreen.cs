@@ -135,12 +135,17 @@ public class SkilltreeScreen : MonoBehaviour {
     } else {
       text += "[Passiva] ";
     }
-    if(selectedSkillId < 4) {
-      text += "para "+relationship.GetBoy().GetName() + "\n";
-    } else if(selectedSkillId < 8) {
-      text += "para " + relationship.GetGirl().GetName() + "\n";
-    } else {
-      text += "para o casal\n";
+
+    switch(relationship.skilltree.skills[selectedSkillId].affectsPerson) {
+      case SkillAffectsCharacter.boy:
+        text += "para " + relationship.GetBoy().GetName() + "\n";
+        break;
+      case SkillAffectsCharacter.girl:
+        text += "para " + relationship.GetGirl().GetName() + "\n";
+        break;
+      case SkillAffectsCharacter.couple:
+        text += "para o casal\n";
+        break;
     }
     text = text + skill.GetPrintableDescription();
 

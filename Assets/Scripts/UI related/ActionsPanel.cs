@@ -129,7 +129,7 @@ public class ActionsPanel : MonoBehaviour {
     List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
     for(int i = 0; i < skillButtons.Length; i++) {
       if(i < battleItems.Count) {
-        skillButtons[i].InitializeAsItem(battleItems[i]);
+        skillButtons[i].InitializeAsItem(CurrentCharacter(), battleItems[i]);
         skillButtons[i].gameObject.SetActive(true);
       } else {
         skillButtons[i].gameObject.SetActive(false);

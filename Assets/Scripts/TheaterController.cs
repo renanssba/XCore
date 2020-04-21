@@ -84,11 +84,6 @@ public class TheaterController : MonoBehaviour {
     return spawnedActor;
   }
 
-  public void SetEnemyFeatures(Enemy enemyData) {
-    UIController.instance.difficultyText.text = "<size=68>NV </size>" + enemyData.level;
-    enemyActor.SetEnemy(enemyData);
-  }
-
   public Actor2D GetActorByString(string actorReference) {
     Actor2D actor = null;
 
@@ -157,6 +152,8 @@ public class TheaterController : MonoBehaviour {
       }
       newObj = SpawnActor(newActorPrefabName);
       enemyActor = newObj.GetComponent<Actor2D>();
+      enemyActor.enemy = BattleController.instance.GetCurrentEnemy();
+      enemyActor.battler = BattleController.instance.GetCurrentEnemy();
       return;
     }
 
@@ -353,7 +350,7 @@ public class TheaterController : MonoBehaviour {
     enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
       VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-      InitializeChallengeLevelAndHp();
+      InitializeEnemyLevelAndHp();
       PartyEntersBattleMode();
     });
   }
@@ -469,10 +466,13 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void InitializeChallengeLevelAndHp() {
-    UIController.instance.enemyHpSlider.maxValue = BattleController.instance.GetCurrentEnemy().maxHp;
+  public void InitializeEnemyLevelAndHp() {
+    Debug.LogWarning("Called InitializeChallengeLevelAndHp");
+    Enemy enemy = BattleController.instance.GetCurrentEnemy();
+    UIController.instance.enemyHpSlider.maxValue = enemy.maxHp;
     UIController.instance.enemyHpSlider.value = UIController.instance.enemyHpSlider.maxValue;
     UIController.instance.enemyHpSlider.gameObject.SetActive(true);
+    UIController.instance.difficultyText.text = "<size=68>NV </size>" + enemy.level;
   }
 
   public void EnemyLeavesScene() {

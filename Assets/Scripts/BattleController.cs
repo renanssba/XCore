@@ -105,7 +105,7 @@ public class BattleController : MonoBehaviour {
 
     FullHealParty();
     ClearSkillsUsageRegistry();
-    UIController.instance.ShowPartyPeopleCards();
+    //UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
@@ -387,6 +387,10 @@ public class BattleController : MonoBehaviour {
 
   public int CalculateAttackDamage(Battler attacker, Skill usedSkill, Battler defender) {
     float damage;
+
+    Debug.Log("used skill: " +usedSkill.damagePower+", attr: "+usedSkill.damageAttribute);
+    Debug.Log("attacker: " + attacker.GetName());
+    Debug.Log("defender: " + defender.GetName());
 
     damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
@@ -924,6 +928,13 @@ public class BattleController : MonoBehaviour {
     int targetId = VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
 
+    // change target if the other party member is using Guardian
+    if(partyMembers.Length > 1) {
+      if(!partyMembers[targetId].IsPreferredTarget() && partyMembers[OtherPartyMemberId(targetId)].IsPreferredTarget()) {
+        targetId = OtherPartyMemberId(targetId);
+      }
+    }
+
     Skill skillUsed = GetCurrentEnemy().DecideWhichSkillToUse();
 
     if(skillUsed.type == SkillType.attack) {
@@ -1059,19 +1070,20 @@ public class BattleController : MonoBehaviour {
     switch(currentDateId) {
       case 1:
         dateLength = 2;
-        dateEnemies = new Enemy[] {allEnemies[0], allEnemies[9]};
+        dateEnemies = new Enemy[] { GetEnemyByString("bunny"), GetEnemyByString("bully") };
         currentDateLocation = DateLocation.park;
         break;
       case 2:
         dateLength = 3;
         currentDateLocation = DateLocation.shopping;
-        GenerateDateEnemies();
+        dateEnemies = new Enemy[] { GetEnemyByString("card_vendors"), GetEnemyByString("vending_machine"), GetEnemyByString("sale_crowd") };
+        //GenerateDateEnemies();
         break;
       case 3:
         dateLength = 4;
         currentDateLocation = DateLocation.park;
-        GenerateDateEnemies();
-        dateEnemies[3] = allEnemies[12+GlobalData.instance.CurrentGirl().id];
+        dateEnemies = new Enemy[] { GetEnemyByString("protographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[12 + GlobalData.instance.CurrentGirl().id] };
+        //GenerateDateEnemies();
         break;
       default:
         dateLength = 1;
@@ -1104,6 +1116,15 @@ public class BattleController : MonoBehaviour {
   public void SetupDateLocation(){
     TheaterController.instance.SetLocation(currentDateLocation.ToString());
     UIController.instance.dateTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("location/" + currentDateLocation.ToString());
+  }
+
+  public Enemy GetEnemyByString(string nameKey) {
+    foreach(Enemy enemy in allEnemies) {
+      if(enemy.nameKey == nameKey) {
+        return enemy;
+      }
+    }
+    return null;
   }
 
   public int GetNewEnemy(List<int> selectedEvents) {

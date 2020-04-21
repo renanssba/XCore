@@ -75,8 +75,9 @@ public class UIController : MonoBehaviour {
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
     int relationshipCardsVisible = 0;
+
     for(int i = 0; i < relationshipCards.Length; i++) {
-      if(i < GlobalData.instance.relationships.Length && GlobalData.instance.relationships[i].exp>0) {
+      if(i < GlobalData.instance.relationships.Length && (GlobalData.instance.relationships[i].exp>0 || GlobalData.instance.relationships[i].level > 0)) {
         relationshipCards[i].gameObject.SetActive(true);
         relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
         relationshipCardsVisible++;
@@ -85,7 +86,6 @@ public class UIController : MonoBehaviour {
       }
     }
     relationshipCardsPanel.sizeDelta = new Vector2(relationshipCardsPanel.sizeDelta.x, 18f+126f*relationshipCardsVisible);
-
 
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day;
     moneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
@@ -102,7 +102,6 @@ public class UIController : MonoBehaviour {
     partyHpSlider.maxValue = BattleController.instance.maxHp;
     partyHpSlider.value = BattleController.instance.hp;
     partyHpText.text = BattleController.instance.hp.ToString();
-
 
     for(int i=0; i<3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
@@ -311,9 +310,10 @@ public class UIController : MonoBehaviour {
 
 
   public void ShowPartyPeopleCards() {
-    for(int i=0; i<3; i++) {
+    for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
       partyPeopleCards[i].Initialize( BattleController.instance.partyMembers[i]);
     }
+
   }
 
   public void ShowDateProgressPanel(bool value) {

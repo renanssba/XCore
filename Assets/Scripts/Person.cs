@@ -26,7 +26,6 @@ public enum PersonId {
 public class Person : Battler {
 
   public bool isMale;
-  public bool isHuman = true;
 
   protected int maxSp;
   public int sp;
@@ -45,8 +44,9 @@ public class Person : Battler {
     giftsReceived = new Inventory();
     inventory.owner = this;
     giftsReceived.owner = this;
-    maxSp = 5;
-    sp = 5;
+    maxSp = 3;
+    sp = 3;
+    attributes = new int[] { 1, 1, 1, 1 };
   }
 
 
@@ -142,7 +142,8 @@ public class Person : Battler {
     if(partyMemberPosition == -1) {
       return false;
     }
-    return BattleController.instance.selectedActionType[partyMemberPosition] == TurnActionType.defend;
+    return BattleController.instance.selectedActionType[partyMemberPosition] == TurnActionType.defend ||
+           CurrentStatusConditionStacks("guardian")>0;
   }
 
   public void SpendSp(int value) {
@@ -268,7 +269,7 @@ public class Relationship {
   }
 
   public int GetMaxHp() {
-    int count = level * 8 + 10;
+    int count = level * 8 + 30;
 
     for(int i=0; i<skilltree.skills.Length; i++){
       if(skilltree.skills[i].isUnlocked) {
