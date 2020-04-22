@@ -27,7 +27,7 @@ public class Person : Battler {
 
   public bool isMale;
 
-  protected int maxSp;
+  protected int initialMaxSp;
   public int sp;
 
   public string favoriteMatter;
@@ -44,7 +44,7 @@ public class Person : Battler {
     giftsReceived = new Inventory();
     inventory.owner = this;
     giftsReceived.owner = this;
-    maxSp = 3;
+    initialMaxSp = 3;
     sp = 3;
     attributes = new int[] { 1, 1, 1, 1 };
   }
@@ -117,9 +117,16 @@ public class Person : Battler {
 
 
   public int GetMaxSp(int relationshipId) {
-    int count = maxSp;
     Relationship relationship = GlobalData.instance.relationships[relationshipId];
+    int count = initialMaxSp;
     Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
+
+    if(relationship.level >= 4) {
+      count += 3;
+    }
+    if(relationship.level >= 6) {
+      count += 5;
+    }
 
     for(int i = 0; i < skills.Length; i++) {
       if(skills[i].specialEffect == SkillSpecialEffect.raiseMaxSp) {

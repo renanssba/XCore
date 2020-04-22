@@ -111,21 +111,28 @@ public class SkilltreeScreen : MonoBehaviour {
   }
 
 
-  public void SelectSkill(int id) {
-    selectedSkillId = id;
-    Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
-    SetSkillDescription(skill);
+  public void SetSkillLocked(bool hasSkillRequisite) {
+    skillNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("skilltree/locked");
+    if(hasSkillRequisite) {
+      skillDescriptionText.text = Lean.Localization.LeanLocalization.GetTranslationText("skilltree/unlockRequisiteSkill");
+    } else {
+      skillDescriptionText.text = Lean.Localization.LeanLocalization.GetTranslationText("skilltree/noRequisiteSkill");
+    }
   }
 
-  public void SetSkillDescription(Skill skill) {
+  public void SetSkillDescription(Skill skill, bool isUnlocked) {
     if(skill != null) {
       skillNameText.text = skill.GetPrintableName();
+      if(!isUnlocked) {
+        skillNameText.text += " " + Lean.Localization.LeanLocalization.GetTranslationText("skilltree/locked");
+      }
       skillDescriptionText.text = FullSkilltreeIconDescription(skill);
     } else {
       skillNameText.text = "";
       skillDescriptionText.text = "";
     }
   }
+
 
   public string FullSkilltreeIconDescription(Skill skill) {
     string text = "";

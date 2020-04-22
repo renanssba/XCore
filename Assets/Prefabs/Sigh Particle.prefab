@@ -41,10 +41,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95fbc05c021f8fb48b3a15224fb9596c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 114493218670115258}
   initialSpeed: {x: -3, y: -3}
   position: {fileID: 224201467151280576}
   rotateSpeed: 0
   gravity: {x: 0, y: 0}
+  timeToStartFade: 0.4
+  fadeTime: 0.5
 --- !u!114 &114493218670115258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46ec03ebb57f1245b67807f43804ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToWait: 0.5
+  timeToWait: 1
 --- !u!222 &222085247280000506
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -105,6 +108,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -113, y: 185}
+  m_AnchoredPosition: {x: -87, y: 57}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

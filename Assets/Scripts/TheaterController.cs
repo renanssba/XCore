@@ -113,33 +113,53 @@ public class TheaterController : MonoBehaviour {
   }
 
   public Vector3 GetPositionByString(string positionName) {
+    Vector3 position = Vector3.zero;
+
     switch(positionName) {
-      case "main":
-        return mainPosition;
-      case "support":
-        return supportPosition;
       case "angel":
-        return angelPosition;
-      case "enemy":
-        return enemyPosition;
-      case "enemy_0":
-        return enemyPosition + new Vector3(-1f, 0f, 0f);
-      case "enemy_2":
-        return enemyPosition + new Vector3(1f, 0f, 0f);
-      case "out_right":
-        return outPositionRight;
-      case "out_right_up":
-        return outPositionRight + new Vector3(0.5f, 0f, 1f);
-      case "out_right_down":
-        return outPositionRight + new Vector3(0.5f, 0f, -1f);
+        position = angelPosition;
+        break;
       case "out_left":
-        return outPositionLeft;
-      case "out_left_up":
-        return outPositionLeft + new Vector3(-0.5f, 0f, 1f);
-      case "out_left_down":
-        return outPositionLeft + new Vector3(-0.5f, 0f, -1f);
+      case "grid_0":
+        position = outPositionLeft;
+        break;
+      case "grid_1":
+        position = supportPosition + new Vector3(-1f, 0f, 0f);
+        break;
+      case "support":
+      case "grid_2":
+        position = supportPosition;
+        break;
+      case "main":
+      case "grid_3":
+        position = mainPosition;
+        break;
+      case "enemy_0":
+      case "grid_4":
+        position = enemyPosition + new Vector3(-1f, 0f, 0f);
+        break;
+      case "enemy":
+      case "enemy_1":
+      case "grid_5":
+        position = enemyPosition;
+        break;
+      case "enemy_2":
+      case "grid_6":
+        position = enemyPosition + new Vector3(1f, 0f, 0f);
+        break;
+      case "out_right":
+      case "grid_7":
+        position = outPositionRight;
+        break;
     }
-    return Vector3.zero;
+    if(positionName.Contains("_back")) {
+      position = position + new Vector3(0f, 0f, 1f);
+    }
+    if(positionName.Contains("_front")) {
+      position = position + new Vector3(0f, 0f, -1f);
+    }
+
+    return position;
   }
 
   public void ChangeActor(string actorReference, string newActorPrefabName) {

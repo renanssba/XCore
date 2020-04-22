@@ -10,6 +10,7 @@ public class SkilltreeIcon : MonoBehaviour {
 
   public Image bg;
   public Image skillIcon;
+  public GameObject lockedIcon;
 
 
   public void Initialize(Relationship argrelationship, int id) {
@@ -27,14 +28,17 @@ public class SkilltreeIcon : MonoBehaviour {
       bg.color = Color.white;
       skillIcon.gameObject.SetActive(true);
       skillIcon.color = Color.white;
+      lockedIcon.SetActive(false);
     } else {
       if(IsRequisiteUnlocked()) {
         bg.color = SkilltreeScreen.instance.unlockableSkillColor;
         skillIcon.gameObject.SetActive(true);
         skillIcon.color = SkilltreeScreen.instance.unlockableIconColor;
+        lockedIcon.SetActive(true);
       } else {
         bg.color = SkilltreeScreen.instance.lockedPathColor;
         skillIcon.gameObject.SetActive(false);
+        lockedIcon.SetActive(false);
       }
     }
   }
@@ -48,8 +52,21 @@ public class SkilltreeIcon : MonoBehaviour {
   }
 
   public void Selected() {
-    SkilltreeScreen.instance.SelectSkill(skillId);
+    SelectSkill(skillId);
   }
+
+
+  public void SelectSkill(int selectedSkillId) {
+    SkilltreeScreen.instance.selectedSkillId = selectedSkillId;
+    Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
+
+    if(IsRequisiteUnlocked()) {
+      SkilltreeScreen.instance.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
+    } else {
+      SkilltreeScreen.instance.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);
+    }
+  }
+
 
   public void Clicked() {
     if(IsRequisiteUnlocked() == false) {

@@ -202,7 +202,7 @@ say "Ricardo" "Er.. Valeu pelo apoio."
 wait 1
 fade_out 0.5
 say "" "No início da próxima aula..."
-theater_setup main "person(daniel)" "main" enemy "professor" "enemy" support "person(beatrice)" "out_right_up" ana "person(anna)" "support"
+theater_setup main "person(daniel)" "main" enemy "professor" "enemy" support "person(beatrice)" "out_right_back" ana "person(anna)" "support"
 move_camera "main_and_enemy" 0
 fade_in 0.5
 say "Professor" "Bom dia, classe!"
@@ -225,7 +225,7 @@ say "Ricardo" "Bruxa? Como assim?"
 say "Professor" "Quietos, quietos. Beatrice, pode se sentar."
 
 wait 0.5
-actor_move support "out_left_up" 3
+actor_move support "out_left_back" 3
 wait 3
 
 say "" "A garota caminha até a última fileira de carteiras, sob o olhar opressor da turma, e se senta, isolada."
@@ -233,7 +233,7 @@ say "Ana" "Tenho visto as pessoas comentando sobre ela há um tempo. Dizem que e
 say "Ricardo" "É mesmo?"
 //Talvez Ana soe babaca nessa conversa. Diminuir o tom caso recebamos feedback negativo. (Ex: ana mencionar que não acredita nos boatos, ou remover esse diálogo completamente, movendo os boatos para a próxima cena (bullying)
 say "" "Ricardo olha pra trás, espiando Beatrice. A menina está sentada, escondendo a face atrás de um livro."
-say "Professor" "Ok, agora que estamos devidamente assentados, vamos começar a aula?"
+say "Professor" "Ok, agora que estamos devidamente sentados, vamos começar a aula?"
 set_var conhece_beatrice 1
 //fade_out 0.5
 //say "" "No final da aula..."

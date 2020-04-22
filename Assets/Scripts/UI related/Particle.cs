@@ -2,19 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Particle : MonoBehaviour {
 
+  public Image image;
   public Vector2 initialSpeed;
   public RectTransform position;
   public float rotateSpeed;
   public Vector2 gravity;
+
+  public float timeToStartFade = -1;
+  public float fadeTime;
 
   private Vector2 speed;
 
 
   public void Start(){
     speed = initialSpeed;
+    if(timeToStartFade > 0f) {
+      StartCoroutine(WaitToFade());
+    }
   }
 
   void Update(){
@@ -30,5 +38,10 @@ public class Particle : MonoBehaviour {
     initialSpeed = initialSpeed + new Vector2(Random.Range(-speedMagnitude*0.6f, speedMagnitude*0.6f), 0f);
     initialSpeed.Normalize();
     initialSpeed = initialSpeed * speedMagnitude;
+  }
+
+  public IEnumerator WaitToFade() {
+    yield return new WaitForSeconds(timeToStartFade);
+    image.DOFade(0f, fadeTime);
   }
 }

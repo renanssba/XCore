@@ -101,7 +101,7 @@ public class Skilltree {
     }
 
     // DEBUG CONFESSION SKILL
-    skills[12].isUnlocked = true;
+    //skills[12].isUnlocked = true;
   }
 }
 

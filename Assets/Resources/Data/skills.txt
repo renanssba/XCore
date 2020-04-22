@@ -9,27 +9,27 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 7	MEGA Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
 8	MEGA Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
 9	Sensor	Descobre a fraqueza de um oponente	active	one_enemy	2	sensor														magnifying glass	active		
-10	Lanche Calmante	Cura fome e raiva de um aliado	active	one_ally	2								hunger, angry							eating	active_support		
-11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy	2									hunger	100	4				fragrance	active_offensive		
-12	Cozinheiro	Aumenta em 50% o HP recuperado por itens de cura	passive	all_allies		healingItemBonus	0.5													cook	none		
+10	Lanche Reforçado	Cura fome e aumenta a defesa de um aliado por 3 turnos	active	one_ally	2								hunger	fortified	100	3				hamburger	active_support		
+11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy	2									hunger	100	3				fragrance	active_offensive		
+12	Cozinheiro	Aumenta em 50% os PC recuperados por itens de cura	passive	all_allies		healingItemBonus	0.5													cook	none		
 13	Encorajar	Aumenta a Valentia do parceiro temporariamente e cura Tristeza	active	other_ally	2		3						sad	encouraged	100	3				gutsy aura	active_support		
 14	Primeiros Socorros	Cura Machucado e Tonto	active	one_ally	2								injured, dizzy							medical-pack	active_support		
 15	Guardiã	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
 16	História Triste	Causa dano baseado em Inteligência por 4 turnos	active	one_enemy	2									sad	100	4				dialog	active_offensive		
 17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35													run	none		
-19	Beijo de Cura	Cura 16 HP do casal	active	other_ally	2					16										heart-plus	active_support		
+19	Beijo de Cura	Cura 16 PC do casal	active	other_ally	2					16										heart-plus	active_support		
 20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	one_ally	2								sad, fear, confusion, dizzyness							charmed	active_support		
 21	Barriga Cheia	Recupera todos as condições negativas ao consumir comida	passive	self									sad, dirty, cursed, hunger, dizzyness, confusion, fear, angry				after_action	received_item_with_tag(food)	100	eating	passive		
 22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
 23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	2	turn_started	is_turn(3)	100	angry-eyes	passive		
 24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
 25	Esfomeada	Recebe fome ao passar 2 turnos em um combate	passive	self										hunger	100	-1	turn_started	is_turn(2)	100	eating	passive		
-26	Proximidade	Aumenta o HP do casal em 10	passive	all_allies		raiseMaxHp	10													heart-plus	none		
+26	Proximidade	Aumenta os PC do casal em 10	passive	all_allies		raiseMaxHp	10													heart-plus	none		
 27	Dedicação	Aumenta o SP do casal em 2	passive	all_allies		raiseMaxSp	2													skill-points	none		
 28	Guardião	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
 29	Memórias Felizes		passive	all_allies																charmed	none		
-30	Confissão	Recupera 50% do HP do casal quando ele chegar a 0 (uma vez por Encontro)	passive	all_allies							0.5						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
+30	Confissão	Recupera 50% dos PC do casal quando chegarem a 0 (uma vez por Encontro)	passive	all_allies							0.5						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
 31	Amigos por Correspondência		passive	all_allies																charmed	none		
 32	Companheiros de Leitura		passive	all_allies																charmed	none		
 33	Amantes de Omelete		passive	all_allies																charmed	none		
