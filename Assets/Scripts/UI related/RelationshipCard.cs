@@ -66,6 +66,8 @@ public class RelationshipCard : MonoBehaviour {
     int actualRaise = finalValue - relationship.exp;
     const int totalParts = 100;
 
+    VsnSaveSystem.SetVariable("previousLevel", relationship.level);
+
     if(relationship.level == 10) {
       yield break;
     }
@@ -95,14 +97,9 @@ public class RelationshipCard : MonoBehaviour {
 
     UIController.instance.UpdateUI();
 
-    VsnArgument[] sayArgs = new VsnArgument[2];
-    sayArgs[0] = new VsnString("char_name/none");
-    if(expToAdd > 20) {
-      sayArgs[1] = new VsnString("improve_relationship/say_1");
-    } else {
-      sayArgs[1] = new VsnString("improve_relationship/say_0");
-    }
-    Command.SayCommand.StaticExecute(sayArgs);
+    VsnArgument[] sayArgs = new VsnArgument[1];
+    sayArgs[0] = new VsnString("get_exp");
+    Command.GotoScriptCommand.StaticExecute("after_get_exp", sayArgs);
   }
 
   public void HeartPulseAnimation() {

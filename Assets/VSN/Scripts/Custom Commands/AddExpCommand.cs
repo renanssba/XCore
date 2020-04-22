@@ -11,6 +11,8 @@ namespace Command {
       Relationship relation = GlobalData.instance.GetCurrentRelationship();
       int expToGet = (int)args[0].GetNumberValue();
 
+      Debug.LogWarning("Add exp: "+expToGet);
+
       if(args.Length > 1) {
         relation = GlobalData.instance.relationships[(int)args[1].GetNumberValue()];
       }

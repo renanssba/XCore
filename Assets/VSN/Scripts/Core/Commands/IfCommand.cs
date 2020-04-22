@@ -27,6 +27,12 @@ namespace Command {
         VsnArgType.operatorArg,
         VsnArgType.stringArg
       } );
+
+      signatures.Add(new VsnArgType[]{
+        VsnArgType.booleanArg,
+        VsnArgType.operatorArg,
+        VsnArgType.booleanArg
+      });
     }
   }
 }

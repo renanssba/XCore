@@ -16,7 +16,6 @@ public class GirlInteractionScreen : MonoBehaviour {
   public Button[] dateSelectButtons;
 
 
-
   public void ShowGirlInteractionScreen() {
     Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
     if(currentRelationship == null) {
@@ -123,12 +122,9 @@ public class GirlInteractionScreen : MonoBehaviour {
       return;
     }
 
-
     Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().GetName() + " and " + currentRelationship.GetGirl().GetName());
-
     SfxManager.StaticPlayBigConfirmSfx();
     VsnSaveSystem.SetVariable("dateId", dateId);
-
 
     BattleController.instance.SetupBattleStart(dateId);
 

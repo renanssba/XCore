@@ -24,7 +24,6 @@ namespace Command {
         VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetNumberValue());
         return;
       }
-
       Debug.LogWarning(args[0].GetReference() + " var value: " + args[1].GetPrintableValue());
     }
 

@@ -370,7 +370,7 @@ public class VsnScriptReader {
               string line = commandName+": ";
 
               foreach(VsnArgument c in vsnArguments){
-                line += c.GetStringValue() + "/" + c.GetReference() + "/" + c.GetNumberValue()+" - ";
+                line += c.GetPrintableValue()+", ";
               }
               Debug.LogError("Invalid syntax for this command: " + line);
               return new InvalidCommand();
