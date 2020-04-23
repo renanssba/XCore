@@ -8,6 +8,9 @@ set_var level_up false
 if previousLevel < #currentRelationshipLevel
   say "" "O relacionamento de \couple passou de Nível!"
   set_var level_up true
+  if #currentRelationshipLevel > 2
+    say "" "Você ganhou uma Chave de Coração para desbloquear uma nova habilidade do casal."
+  endif
 endif
 
 if previousLevel < 2
@@ -24,13 +27,13 @@ if previousLevel < 4
   endif
 endif
 
-if previousLevel < 6
-  if #currentRelationshipLevel >= 6
+if previousLevel < 7
+  if #currentRelationshipLevel >= 7
     say "" "Agora o Encontro <color=yellow>Parque 2</color> está disponível para este casal!"
   endif
 endif
 if level_up == false
-  say "" "\couple tornaram-se mais próximos!"
+  say "" "\couple tornaram-se mais próximos."
 endif
 end_script
 

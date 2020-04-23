@@ -27,7 +27,7 @@ namespace Command {
           expToGet *= 2;
           break;
         case 2:
-          expToGet *= 3;
+          expToGet *= 5;
           break;
       }
       GlobalData.instance.AddExpForRelationship(relation, expToGet);

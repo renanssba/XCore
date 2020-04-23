@@ -337,7 +337,9 @@ public class Relationship {
     exp += value;
     while(level < 10 && exp - LevelStartingExp(level) >= LevelUpNeededExp(level)) {
       level++;
-      bondPoints++;
+      if(level > 2) {
+        bondPoints++;
+      }
       didLevelUp = true;
     }
     return didLevelUp;
