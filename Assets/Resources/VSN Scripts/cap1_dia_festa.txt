@@ -1,25 +1,25 @@
 goto_script "enter_observation" "school morning"
-say "" "No dia seguinte, Ricardo vai para o colégio."
+say "" "No dia seguinte, Daniel vai para o colégio."
 fade_in 1
 
-say "Ana" "Ei Ricardo! Você ficou sabendo do aniversário da Clara na casa dela? Vai ser hoje à noite."
+say "Ana" "Ei Daniel! Você ficou sabendo do aniversário da Clara na casa dela? Vai ser hoje à noite."
 if clara_convidou_festa == 1
-  say "Ricardo" "Fiquei sim, ela me convidou ontem depois do estudo."
+  say "Daniel" "Fiquei sim, ela me convidou ontem depois do estudo."
   say "Ana" "Ah.. Ela convidou, foi?"
-  say "Ricardo" "Foi, eu tô tão feliz! E parece que vai ser bem legal, os pais dela contrataram banda e vai ter sorvete liberado!"
+  say "Daniel" "Foi, eu tô tão feliz! E parece que vai ser bem legal, os pais dela contrataram banda e vai ter sorvete liberado!"
   say "Ana" "É, vai sim."
-  say "Ricardo" "Você vem também, não é?"
+  say "Daniel" "Você vem também, não é?"
   say "Ana" "Claro."
 else
-  say "Ricardo" "Não, não fui convidado."
+  say "Daniel" "Não, não fui convidado."
   say "Ana" "Vai ser muito legal! Os pais dela contrataram banda e vai ter sorvete liberado, além de uma porrada de comida também! Vamos?"
-  say "Ricardo" "Não sei... Eu não acho uma boa ir sem ter sido convidado..."
+  say "Daniel" "Não sei... Eu não acho uma boa ir sem ter sido convidado..."
   say "Ana" "Eu também não, mas vamo! Comida de graça!"
   wait 1
-  say "Ricardo" "..."
-  say "Ricardo" "Tá bom, eu vou. Você sabe mesmo me convencer a fazer tudo que quiser."
+  say "Daniel" "..."
+  say "Daniel" "Tá bom, eu vou. Você sabe mesmo me convencer a fazer tudo que quiser."
   say "Ana" "Ah, é? Então faz minha tarefa de casa de história pra mim?"
-  say "Ricardo" "Não abusa..."
+  say "Daniel" "Não abusa..."
 endif
 
 fade_out 1

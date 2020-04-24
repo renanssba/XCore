@@ -9,11 +9,11 @@ if #day == 1
   set_var foi_na_biblioteca 1
   say "" "Na biblioteca..."
   fade_in 1
-  say "" "Ricardo passeia por entre as estantes de livros e entreouve vozes risonhas."
+  say "" "Daniel passeia por entre as estantes de livros e entreouve vozes risonhas."
   say "Valentão A" "Ora, veja só quem apareceu no nosso colégio, galera!"
   say "Valentão B" "Hahahaha! A bruxa! Eu ouvi dizer que ela pode queimar pessoas com os olhos!"
   say "Beatrice" "..."
-  say "" "Ricardo move alguns livros para espiar através de uma estante. Dois garotos mais velhos estão provocando a aluna nova."
+  say "" "Daniel move alguns livros para espiar através de uma estante. Dois garotos mais velhos estão provocando a aluna nova."
   say "Beatrice" "Por favor, me deixem em paz."
   say "Valentão A" "Nós somos os guardiões da escola, bruxa. Pra estudar aqui, você precisa pagar pedágio."
   say "Valentão B" "Eu ouvi os boatos! A família dela é cheia da grana!"
@@ -26,67 +26,67 @@ if #day == 1
   say "" "A garota reage e tenta puxar a mochila de volta. O líder da gangue fica furioso."
   say "Valentão A" "Você está me desafiando? Má escolha."
   say "" "O valentão empurra Beatrice. A garota cai  e sua mochila se rasga, o material escolar se espalhando pelo chão."
-  say "Ricardo" "(A coisa ficou feia...! Preciso tentar ajudá-la!)"
-  say "" "Ricardo corre, tentando dar a volta pela longa fileira de prateleiras."
+  say "Daniel" "(A coisa ficou feia...! Preciso tentar ajudá-la!)"
+  say "" "Daniel corre, tentando dar a volta pela longa fileira de prateleiras."
   say "Valentão B" "Tem alguém vindo!"
   say "Valentão A" "Traga a grana da próxima vez. Vejo você depois, bruxa."
-  say "" "Os valentões dão a volta e vão embora. Ricardo se aproxima, ofegante."
-  say "Ricardo" "Você tá bem?"
+  say "" "Os valentões dão a volta e vão embora. Daniel se aproxima, ofegante."
+  say "Daniel" "Você tá bem?"
   say "Beatrice" "..."
   say "" "A menina ignora a pergunta e começa a recolher seus livros, lápis e outros materiais."
-  say "Ricardo" "Deixa eu te ajudar."
+  say "Daniel" "Deixa eu te ajudar."
   say "" "O garoto estende a mão, fazendo menção de recolher o resto dos objetos no chão."
   say "Beatrice" "Não!"
   say "" "Beatrice puxa o que restou da mochila e arruma tudo de qualquer jeito, muito rapidamente."
-  say "" "Beatrice se levanta, com a respiração entrecortada. Ricardo nota que a menina parece prestes a chorar."
+  say "" "Beatrice se levanta, com a respiração entrecortada. Daniel nota que a menina parece prestes a chorar."
   say "Beatrice" "...Por favor, me deixe em paz."
   say "" "A garota corre da biblioteca, apressada."
-  say "Ricardo" "(...)"
-  say "Ricardo" "...O que é isso?"
-  say "" "Ricardo olha para baixo, reparando em um pequeno caderno. O menino o apanha."
+  say "Daniel" "(...)"
+  say "Daniel" "...O que é isso?"
+  say "" "Daniel olha para baixo, reparando em um pequeno caderno. O menino o apanha."
   say "" "É um caderno preto e fino. Inscrita com letras brancas na capa, há a assinatura B. Hartley."
-  say "Ricardo" "...Acho que ela esqueceu isso."
-  say "" "Ricardo vai embora, pensativo."
+  say "Daniel" "...Acho que ela esqueceu isso."
+  say "" "Daniel vai embora, pensativo."
   goto_script "pass_time"
   end_script
 endif
 
 //TODO: Mudar o cenário e as condições deste evento:
 if #day == 2
-  say "" "Ricardo vai até a biblioteca novamente."
+  say "" "Daniel vai até a biblioteca novamente."
   fade_in 1
   say "" "Beatrice está concentrada, engatinhando no chão e procurando freneticamente embaixo das  estantes de livros."
-  say "Ricardo" "Beatrice?"
+  say "Daniel" "Beatrice?"
   say "" "A garota se assusta."
   say "Beatrice" "Ah!"
-  say "" "A menina levanta e se endireita. Ela olha para Ricardo com um olhar inquisitivo."
+  say "" "A menina levanta e se endireita. Ela olha para Daniel com um olhar inquisitivo."
   say "Beatrice" "Você é o menino de antes. ...Você está me seguindo?"
-  say "" "Ricardo fica surpreso."
-  say "Ricardo" "Não, não! Eu só gosto de ler. Eu venho aqui na biblioteca com frequência."
-  say "Ricardo" "Além disso, eu vim te devolver..."
-  say "" "Ricardo abre a mochila e retira o caderno de Beatrice."
-  say "Ricardo" "...Isso."
+  say "" "Daniel fica surpreso."
+  say "Daniel" "Não, não! Eu só gosto de ler. Eu venho aqui na biblioteca com frequência."
+  say "Daniel" "Além disso, eu vim te devolver..."
+  say "" "Daniel abre a mochila e retira o caderno de Beatrice."
+  say "Daniel" "...Isso."
   say "Beatrice" "Meu caderno! Você o encontrou!"
-  say "Ricardo" "Você saiu tão apressada naquela hora que esqueceu."
+  say "Daniel" "Você saiu tão apressada naquela hora que esqueceu."
   say "Beatrice" "Ah..."
   say "" "Beatrice encara o chão."
   say "Beatrice" "...Me desculpa por aquilo."
-  say "Ricardo" "Não tem problema. Estou feliz por ter te ajudado, o caderno parece importante pra você."
+  say "Daniel" "Não tem problema. Estou feliz por ter te ajudado, o caderno parece importante pra você."
   say "Beatrice" "Você leu?"
-  say "Ricardo" "Quê?"
+  say "Daniel" "Quê?"
   say "Beatrice" "Meu caderno, você leu o que tinha dentro...?"
-  say "Ricardo" "Ah, não. Porque eu leria? Ele é seu."
+  say "Daniel" "Ah, não. Porque eu leria? Ele é seu."
   say "" "Beatrice parece aliviada."
   say "Beatrice" "Obrigada, er..."
-  say "Ricardo" "Ricardo."
-  say "Beatrice" "Obrigada, Ricardo."
+  say "Daniel" "Daniel."
+  say "Beatrice" "Obrigada, Daniel."
   add_exp 20
   goto_script "pass_time"
   end_script
 endif
 
 
-say "" "Chegando na biblioteca, Ricardo encontra Beatrice lendo."
+say "" "Chegando na biblioteca, Daniel encontra Beatrice lendo."
 fade_in 1
 
 theater_animation "main_actor_enters"
@@ -101,119 +101,119 @@ select_dialog
 
 
 waypoint dialog_acquaintances_1
-say "Ricardo" "Beatrice, está se adaptando bem aqui? Mudar de colégio pode ser difícil."
+say "Daniel" "Beatrice, está se adaptando bem aqui? Mudar de colégio pode ser difícil."
 say "Beatrice" "...Está ok. Nada fora do normal."
-say "" "Ricardo olha para a mochila de Beatrice. O rasgo no meio foi costurado de forma desajeitada, com linha vermelha."
-say "Ricardo" "..."
-say "Ricardo" "Me lembro do meu primeiro semestre aqui. Os estudantes podem ser cruéis."
+say "" "Daniel olha para a mochila de Beatrice. O rasgo no meio foi costurado de forma desajeitada, com linha vermelha."
+say "Daniel" "..."
+say "Daniel" "Me lembro do meu primeiro semestre aqui. Os estudantes podem ser cruéis."
 say "Beatrice" "Verdade."
 goto end_dialog
 
 
 waypoint dialog_acquaintances_2
-say "Ricardo" "Na aula antes de você chegar, o professor de história passou um trabalho em dupla."
-say "Ricardo" "Conseguiu alguém pra fazer com você?"
+say "Daniel" "Na aula antes de você chegar, o professor de história passou um trabalho em dupla."
+say "Daniel" "Conseguiu alguém pra fazer com você?"
 say "Beatrice" "Ah, como eu cheguei depois, não consegui. Tive que fazer o trabalho sozinha."
-say "Ricardo" "Sério? Que droga!"
+say "Daniel" "Sério? Que droga!"
 say "Beatrice" "Sim, foi bastante chato. Passei a noite acordada pra conseguir terminar."
-say "Ricardo" "Espera, você fez o trabalho toda sozinha em um dia?"
+say "Daniel" "Espera, você fez o trabalho toda sozinha em um dia?"
 say "Beatrice" "...Sim?"
-say "Ricardo" "Que legal! Você é muito inteligente, Beatrice!"
+say "Daniel" "Que legal! Você é muito inteligente, Beatrice!"
 say "Beatrice" "Acho que você tá exagerando."
 say "Beatrice" "Mas obrigada."
 say "" "Beatrice parece satisfeita."
 goto end_dialog
 
 waypoint dialog_acquaintances_3
-say "" "Ricardo retira um saquinho de papel da mochila."
-say "Ricardo" "Sobrou um pouco de pão de queijo da fornada que eu fiz hoje de manhã. Quer?"  
+say "" "Daniel retira um saquinho de papel da mochila."
+say "Daniel" "Sobrou um pouco de pão de queijo da fornada que eu fiz hoje de manhã. Quer?"  
 say "Beatrice" "Não é proibido comer na biblioteca?"
-say "Ricardo" "Só é proibido se alguém ver!"
+say "Daniel" "Só é proibido se alguém ver!"
 // é uma piada, mas talvez interpretem como out of character?
 say "" "Beatrice ri."
-say "Ricardo" "Come, tá gostoso."
-say "" "Ricardo pega dois pães de queijo do saquinho, come um e dá o outro para Beatrice."
+say "Daniel" "Come, tá gostoso."
+say "" "Daniel pega dois pães de queijo do saquinho, come um e dá o outro para Beatrice."
 say "Beatrice" "*mastiga, *mastiga* Isso é muito bom!"
-say "Ricardo" "Valeu! Quando eu era pequeno, minha mãe fazia pão de queijo comigo toda manhã. Eu aprendi com ela."
+say "Daniel" "Valeu! Quando eu era pequeno, minha mãe fazia pão de queijo comigo toda manhã. Eu aprendi com ela."
 //say "Beatrice" "Meu pai lia histórias pra mim todas as noites antes de dormir."
 //say "" "Os dois suspiram, perdidos em pensamentos do passado por um instante."
-say "" "Ricardo suspira, perdido em pensamentos do passado."
-// No diálogo Apaixonados 3, Beatrice pergunta sobre a mãe de Ricardo e ele se abre. Os dois se consolam. Acho melhor assim porque Beatrice demonstra mais interesse.
+say "" "Daniel suspira, perdido em pensamentos do passado."
+// No diálogo Apaixonados 3, Beatrice pergunta sobre a mãe de Daniel e ele se abre. Os dois se consolam. Acho melhor assim porque Beatrice demonstra mais interesse.
 goto end_dialog
 
 waypoint dialog_friends_1
 say "Beatrice" "Ei, o que você está lendo?"
-say "Ricardo" "Ah, um livro de mistério."
-say "Ricardo" "Andar da Morte: É sobre quatro pessoas que ficam trancadas em um elevador durante um apocalipse zumbi!"
+say "Daniel" "Ah, um livro de mistério."
+say "Daniel" "Andar da Morte: É sobre quatro pessoas que ficam trancadas em um elevador durante um apocalipse zumbi!"
 say "Beatrice" "Parece legal. Você está gostando?"
-say "Ricardo" "Não sei ainda, comecei agora."
+say "Daniel" "Não sei ainda, comecei agora."
 say "Beatrice" "Posso ler com você?"
-say "Ricardo" "Ok!"
-say "" "Beatrice puxa uma cadeira, se senta ao lado de Ricardo e começa a ler em silêncio."
+say "Daniel" "Ok!"
+say "" "Beatrice puxa uma cadeira, se senta ao lado de Daniel e começa a ler em silêncio."
 fade_out 0.5
 wait 1.0
 fade_in 0.5
-say "Ricardo" "(...)"
+say "Daniel" "(...)"
 say "Beatrice" "(...)"
 say "" "Beatrice vira a página."
-say "Ricardo" "Ei, eu não terminei de ler!"
+say "Daniel" "Ei, eu não terminei de ler!"
 say "Beatrice" "Eu já terminei faz 5 minutos. Você lê devagar."
-say "Ricardo" "Hmpf! Eu estou saboreando a leitura."
+say "Daniel" "Hmpf! Eu estou saboreando a leitura."
 say "" "Beatrice ri. Os dois passam o tempo lendo."
 goto end_dialog
 
 
 waypoint dialog_friends_2
-say "Beatrice" "Ricardo! Eu queria te mostrar uma coisa."
-say "" "Beatrice abre a mochila. Com cuidado, ela retira um caderno preto e estende para que Ricardo veja."
-say "Ricardo" "Ah, o seu caderno de antes! O que foi? Algo aconteceu com ele?"
-say "" "Ricardo examina a capa atentamente."
+say "Beatrice" "Daniel! Eu queria te mostrar uma coisa."
+say "" "Beatrice abre a mochila. Com cuidado, ela retira um caderno preto e estende para que Daniel veja."
+say "Daniel" "Ah, o seu caderno de antes! O que foi? Algo aconteceu com ele?"
+say "" "Daniel examina a capa atentamente."
 say "" "Beatrice desvia o olhar, encabulada."
 say "Beatrice" "...Eu quero que você leia."
-say "Ricardo" "!!!"
+say "Daniel" "!!!"
 say "Beatrice" "Eu venho tentando escrever minhas próprias histórias há um tempo."
 say "Beatrice" "Eu não acho que elas estejam boas o suficiente, mas..."
 say "Beatrice" "Eu gostaria que você lesse e me dissesse o que acha."
-say "" "Beatrice entrega o caderno para Ricardo."
-say "Ricardo" "V-você tem certeza?"
+say "" "Beatrice entrega o caderno para Daniel."
+say "Daniel" "V-você tem certeza?"
 say "Beatrice" "...Tenho."
 say "Beatrice" "Eu nunca mostrei minhas histórias pra ninguém, mas..."
 say "Beatrice" "...Acho que não tem problema se você der uma olhada."
 goto end_dialog
 
 waypoint dialog_friends_3
-say "Ricardo" "Beatrice, qual é a sua comida favorita?"
+say "Daniel" "Beatrice, qual é a sua comida favorita?"
 say "Beatrice" "Hmmm...Quando eu era criança, meu pai me levou numa padaria chique e eu comi uma sobremesa muito boa..."
 say "...mas eu não lembro o nome."
-say "Ricardo" "Como ela era?"
+say "Daniel" "Como ela era?"
 say "Beatrice" "Era como um pavê, com camadas de biscoito e creme..."
 say "Beatrice" "...Tinha gosto de café."
-say "Ricardo" "Ah!...Tiramisù?"
+say "Daniel" "Ah!...Tiramisù?"
 say "Beatrice" "É! Isso! Era muito bom, mas faz anos que eu não como e acho que nenhum lugar por aqui vende..."
-say "Ricardo" "Pois tá decidido: eu vou preparar tiramisù pra você. Melhor: Vou te ensinar a fazer! "
+say "Daniel" "Pois tá decidido: eu vou preparar tiramisù pra você. Melhor: Vou te ensinar a fazer! "
 say "Beatrice" "Tem certeza? Eu não sou boa cozinhando, esse prato parece difícil..."
-say "Ricardo" "É difícil, mas com treino, a gente consegue!"
+say "Daniel" "É difícil, mas com treino, a gente consegue!"
 say "Beatrice" "Hmmm... Ok. Tá combinado, então!"
-say "Ricardo" "Ok, primeiro a gente precisa encontrar um mercado que venda queijo mascarpone..."
-say "" "Ricardo continua falando sobre culinária, empolgado."
+say "Daniel" "Ok, primeiro a gente precisa encontrar um mercado que venda queijo mascarpone..."
+say "" "Daniel continua falando sobre culinária, empolgado."
 goto end_dialog
 
 waypoint dialog_lovers_1
-say "Ricardo" "Beatrice, sobre as suas histórias..."
+say "Daniel" "Beatrice, sobre as suas histórias..."
 say "Beatrice" "O que foi?"
-say "Ricardo" "Eu terminei de ler. São muito boas!"
-say "Ricardo" "Já pensou em publicar seus contos em algum lugar?"
+say "Daniel" "Eu terminei de ler. São muito boas!"
+say "Daniel" "Já pensou em publicar seus contos em algum lugar?"
 say "Beatrice" " E-eu? Não, ninguém iria querer ler!"
-say "Ricardo" "Bem, eu quero! Você escreve muito bem."
+say "Daniel" "Bem, eu quero! Você escreve muito bem."
 say "Beatrice" "Sério? B-bem, eu comecei a escrever uma história nova ontem..."
-say "Ricardo" "Legal! Sobre o que é?"
+say "Daniel" "Legal! Sobre o que é?"
 say "Beatrice" "É sobre...culinária."
-say "" "Ricardo fica surpreso."
+say "" "Daniel fica surpreso."
 say "Beatrice" "O personagem principal é um menino que tem o sonho de se tornar o melhor cozinheiro do mundo."
 say "Beatrice" "Ele parte em uma jornada para encontrar uma bruxa, que segundo as lendas, pode realizar qualquer desejo..."
 say "Beatrice" "Mas quando ele finalmente chega no templo da bruxa, ele descobre que na verdade-"
-say "Ricardo" "Espera, espera, não conta o final!"
-say "Ricardo" "Eu quero ler quando você terminar."
+say "Daniel" "Espera, espera, não conta o final!"
+say "Daniel" "Eu quero ler quando você terminar."
 say "" "Beatrice sorri."
 goto end_dialog
 
@@ -223,45 +223,45 @@ say "" "Dois alunos mal-encarados se aproximam."
 say "Valentão A" "Estou surpreso por você ainda estar na escola, bruxa."
 say "Valentão B" "É, deixamos bem claro que não toleramos gente como você aqui."
 say "Beatrice" "..."
-say "Ricardo" "Ei."
-say "" "Ricardo se levanta."
-say "Ricardo" "...Deixem ela em paz. Vocês não tem o direito de tratá-la assim."
+say "Daniel" "Ei."
+say "" "Daniel se levanta."
+say "Daniel" "...Deixem ela em paz. Vocês não tem o direito de tratá-la assim."
 say "Valentão A" "..."
 say "Valentão A" "Pfft...Hehe..."
 say "Valentão B" "Hihi..."
 say "Valentões" "Hahahahahahaha!"
 say "Valentão B" "O Biscoitinho se levantou pra defender ela!"
-say "" "Ricardo abaixa a cabeça."
+say "" "Daniel abaixa a cabeça."
 say "Valentão A" "Hilário, ele acha que pode com a gente! Hahahaha!"
-say "Ricardo" "..."
+say "Daniel" "..."
 say "Valentão B" "Você acha que é um herói, é? Vai lutar pra defender sua namoradinha?"
 say "" "Os dois alunos  se preparam para lutar, quando de repente..."
 say "Inspetor" "Ei, o que está acontecendo aqui?"
 say "Valentões" "Ih, sujou!"
 say "" "...um inspetor do colégio se aproxima e os dois alunos saem de fininho."
-say "Ricardo" "...Essa foi por pouco."
-say "Beatrice" "Obrigada por me defender, Ricardo."
-say "Ricardo" "...As pessoas tratam você mal, mas nem te conhecem. Isso é muito injusto."
-say "Beatrice" "Ricardo..."
-say "Ricardo" "Que foi?"
+say "Daniel" "...Essa foi por pouco."
+say "Beatrice" "Obrigada por me defender, Daniel."
+say "Daniel" "...As pessoas tratam você mal, mas nem te conhecem. Isso é muito injusto."
+say "Beatrice" "Daniel..."
+say "Daniel" "Que foi?"
 say "Beatrice" "Que negócio é esse de Biscoitinho?"
-say "Ricardo" "Longa história."
+say "Daniel" "Longa história."
 goto end_dialog
 
 waypoint dialog_lovers_3
-//Ricardo ou Beatrice falam de livros que leram quando eram crianças e como relê-los pode ser  interessante. Ricardo emenda que sente falta da infância, cita algumas coisas, acaba chegando na mãe.
+//Daniel ou Beatrice falam de livros que leram quando eram crianças e como relê-los pode ser  interessante. Daniel emenda que sente falta da infância, cita algumas coisas, acaba chegando na mãe.
 say "Beatrice" "Recentemente eu reli um livro que tinha lido quando era pequena."
 say "Beatrice" "Percebi um monte de coisas que não tinha notado na época."
-say "Ricardo" "É,  a percepção da gente muda bastante conforme a gente cresce."
+say "Daniel" "É,  a percepção da gente muda bastante conforme a gente cresce."
 say "Beatrice" "Sinto falta de ser criança."
-say "Ricardo" "Eu também. Mamãe me levava pra brincar no parque de manhã e só voltávamos quando estava escurecendo."
-say "Ricardo" "...Sinto falta dela."
+say "Daniel" "Eu também. Mamãe me levava pra brincar no parque de manhã e só voltávamos quando estava escurecendo."
+say "Daniel" "...Sinto falta dela."
 say "Beatrice" "Aposto que ela era incrível."
-say "Beatrice" "Será que algum dia essa sensação passa, Ricardo?"
+say "Beatrice" "Será que algum dia essa sensação passa, Daniel?"
 say "Beatrice" "Esse...vazio."
-say "Ricardo" "Eu...não sei dizer."
-say "" "Ricardo e Beatrice se dão as mãos."
-say "Ricardo" "Nós vamos descobrir como lidar com isso...juntos."
+say "Daniel" "Eu...não sei dizer."
+say "" "Daniel e Beatrice se dão as mãos."
+say "Daniel" "Nós vamos descobrir como lidar com isso...juntos."
 goto end_dialog
 
 waypoint dialog_fallback
@@ -277,10 +277,10 @@ goto end
 
 waypoint end
 if daytime == 0
-  say "" "Ricardo e Beatrice voltam para a sala de aula para continuar as próximas lições."
+  say "" "Daniel e Beatrice voltam para a sala de aula para continuar as próximas lições."
 endif
 if daytime == 1
-  say "" "Ricardo e Beatrice voltam para suas casas."
+  say "" "Daniel e Beatrice voltam para suas casas."
 endif
 goto_script "pass_time"
 end_script
@@ -296,42 +296,42 @@ if item_id == -1
   goto action_choice
 endif
 
-say "Ricardo" "Ei Beatrice, eu tenho uma coisinha para te dar."
+say "Daniel" "Ei Beatrice, eu tenho uma coisinha para te dar."
 give_item 2 item_id 1
 if item_owner == 2
   say "Beatrice" "Isso parece muito com algo que eu já tenho.. "
-  say "Ricardo" "De-desculpa... Eu não sei como isso veio parar aqui na minha mochila..."
+  say "Daniel" "De-desculpa... Eu não sei como isso veio parar aqui na minha mochila..."
   say "Beatrice" "Não invada mais a minha privacidade."
 else
   say "Beatrice" "Muito obrigada!"
-  say "Ricardo" "Que bom que você gostou!"
+  say "Daniel" "Que bom que você gostou!"
   add_exp 50
 endif
 goto end
 
 
 waypoint date_intro_1
-say "Ricardo" "Beatrice, você é nova na cidade, né?"
-say "Ricardo" "Nós temos um parque muito bonito. Eu posso te mostrar onde é, se você quiser."
+say "Daniel" "Beatrice, você é nova na cidade, né?"
+say "Daniel" "Nós temos um parque muito bonito. Eu posso te mostrar onde é, se você quiser."
 say "Beatrice" "Pode ser."
 set_var date_objective "de destino"
 goto_script "date"
 end_script
 
 waypoint date_intro_2
-say "Beatrice" "Ricardo, um autor que eu gosto muito vai fazer uma sessão de autógrafos no shopping."
+say "Beatrice" "Daniel, um autor que eu gosto muito vai fazer uma sessão de autógrafos no shopping."
 say "Beatrice" "Quer ir comigo?"
-say "Ricardo" "Claro!"
+say "Daniel" "Claro!"
 set_var date_objective "do cinema"
 //TODO: Talvez mudar o valor dessa variável para "da livraria"
 goto_script "date"
 end_script
 
 waypoint date_intro_3
-say "Ricardo" "Ei, o dia está lindo lá fora. Que tal irmos dar um passeio no parque?"
+say "Daniel" "Ei, o dia está lindo lá fora. Que tal irmos dar um passeio no parque?"
 say "Beatrice" "Eu favoreço caminhadas noturnas. Mas acho que posso abrir uma exceção."
 say "Beatrice" "Há um carvalho que faz uma sombra muito agradável. É um bom lugar para ler."
-say "Ricardo" "Certo, vou levar um livro novo que eu comprei esses dias."
+say "Daniel" "Certo, vou levar um livro novo que eu comprei esses dias."
 set_var date_objective "do carvalho"
 goto_script "date"
 end_script
@@ -341,45 +341,45 @@ end_script
 waypoint date_end_1
 say "" "...Os dois ficaram satisfeitos com o passeio."
 say "Beatrice" "É um parque muito bonito!"
-say "Ricardo" "De nada, devíamos dar uma volta mais vezes!"
+say "Daniel" "De nada, devíamos dar uma volta mais vezes!"
 end_script
 
 waypoint date_end_2
 say "" "...O casal finalmente consegue chegar à livraria."
 say "Beatrice" "Obrigado por ter me acompanhado!"
-say "Ricardo" "De nada! Ó, presta atenção, estamos quase chegando no começo da fila."
+say "Daniel" "De nada! Ó, presta atenção, estamos quase chegando no começo da fila."
 say "Beatrice" "É mesmo!"
 fade_out 0.5
 say "" "O autor assina o livro de Beatrice e agradece. Beatrice parece feliz."
 say "" "Depois da sessão de autógrafos..."
 fade_in 0.5
 
-say "Ricardo" "Isso foi divertido!"
+say "Daniel" "Isso foi divertido!"
 say "Beatrice" "É? Meu pai costumava me levar para essas sessões com meus autores favoritos. Eu sempre gostei."
-say "Ricardo" "Porque ele não te leva mais?"
+say "Daniel" "Porque ele não te leva mais?"
 say "Beatrice" "Bem...Ele se f-foi. Meu pai e minha mãe...não estão mais entre nós."
-say "Ricardo" "M-me desculpa, eu não sabia."
+say "Daniel" "M-me desculpa, eu não sabia."
 say "Beatrice" "Tudo bem. Você nunca me perguntou sobre o meu passado."
 say "Beatrice" "Pra ser sincera, passar os dias com você tem sido um sopro de ar fresco."
 say "Beatrice" "Quando eu converso com você, eu quase consigo esquecer, mas..."
 say "" "Lágrimas brotam nos olhos de Beatrice."
-say "Beatrice" "Eles se foram, Ricardo! Eles se foram e a culpa é minha!"
+say "Beatrice" "Eles se foram, Daniel! Eles se foram e a culpa é minha!"
 say "Beatrice" "Eles se foram e eu sobrevivi..."
 say "Beatrice" "...Eu não deveria ter sobrevivido. Ninguém sobreviveu."
 say "Beatrice" "Eles estão certos. Tem algo de errado comigo..."
 say "" "A garota parece inconsolável."
-say "Ricardo" "Beatrice..."
-say "" "Ricardo abraça a garota."
-say "Beatrice" "Ricardo...? "
-say "Ricardo" "Você não é uma bruxa."
-say "Ricardo" "Eu não sei o que aconteceu no passado...e não quero saber."
-say "Ricardo" "A Beatrice que eu conheço não faria algo assim...e pra mim, isso é suficiente. "
+say "Daniel" "Beatrice..."
+say "" "Daniel abraça a garota."
+say "Beatrice" "Daniel...? "
+say "Daniel" "Você não é uma bruxa."
+say "Daniel" "Eu não sei o que aconteceu no passado...e não quero saber."
+say "Daniel" "A Beatrice que eu conheço não faria algo assim...e pra mim, isso é suficiente. "
 end_script
 
 
 waypoint date_end_3
 say "Beatrice" "É aqui, chegamos. Não é uma árvore deveras formosa?"
-say "Ricardo" "É lindo mesmo! Vamos nos sentar?"
+say "Daniel" "É lindo mesmo! Vamos nos sentar?"
 say "" "Em seguida os dois se sentam e leem seus livros juntos por um bom tempo."
 fade_music 0 1.0
 say "Beatrice" "...Agora eu me lembro."
@@ -390,24 +390,24 @@ say "" "Beatrice fica com as mãos trêmulas."
 say "Beatrice" "A próxima coisa que me lembro é do calor do fogo."
 say  "Meu pai estava me carregando. Ele foi até o meu quarto pra me buscar. Se eu tivesse acordado antes, talvez..."
 say "" "Os olhos de Beatrice se enchem de lágrimas."
-say "Ricardo" "Não, não é culpa sua. Não havia como você saber."
+say "Daniel" "Não, não é culpa sua. Não havia como você saber."
 say "" "Beatrice controla o choro."
 say "Beatrice" "O fogo já havia dominado a casa inteira. Não havia como sair. O cheiro de fumaça era muito forte..."
 say "Meu pai me trancou em...algum lugar. Eu não me lembro exatamente o que era. Era muito apertado e... escuro e frio."
-say "Ricardo" "Um freezer, talvez?"
+say "Daniel" "Um freezer, talvez?"
 say "Beatrice" "Eu não sei..."
 say "Eu desmaiei. A próxima coisa de que me lembro é o hospital. O incêndio havia reduzido tudo a cinzas."
 say "Ninguém entendia exatamente como eu havia sobrevivido. As pessoas começaram a espalhar boatos..."
-say "Ricardo" "Eu não sei o que dizer..."
-say "Beatrice" "Você estava certo, Ricardo. Não foi culpa minha."
+say "Daniel" "Eu não sei o que dizer..."
+say "Beatrice" "Você estava certo, Daniel. Não foi culpa minha."
 say "Beatrice" "Eu me sinto...mais leve."
 say "Beatrice" "Obrigada."
-say "" "Beatrice abraça Ricardo muito forte."
+say "" "Beatrice abraça Daniel muito forte."
 say "Beatrice" "Obrigada por acreditar em mim."
-say "Ricardo" "Eu sempre vou acreditar em você."
-say "" "Ricardo pausa por um momento. Seus olhos se encontram com os de Beatrice."
-say "Ricardo" "Eu...eu te amo."
-say "" "O coração de Ricardo se abriu!" 
+say "Daniel" "Eu sempre vou acreditar em você."
+say "" "Daniel pausa por um momento. Seus olhos se encontram com os de Beatrice."
+say "Daniel" "Eu...eu te amo."
+say "" "O coração de Daniel se abriu!" 
 say "Beatrice" "Eu...eu te amo também."
 say "" "O coração de Beatrice se abriu!"
 end_script

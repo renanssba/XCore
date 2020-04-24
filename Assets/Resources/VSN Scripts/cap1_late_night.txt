@@ -2,13 +2,13 @@ if #day == 3
   end_script
 endif
 
-say "" "Fertiliel volta para a casa de Ricardo." 
+say "" "Fertiliel volta para a casa de Daniel." 
 
 if item_key == "book_draft"
-  say "Ela percebe que Ricardo passou a noite lendo os rascunhos do livro que Beatrice o entregou e terminou a leitura."
+  say "Ela percebe que Daniel passou a noite lendo os rascunhos do livro que Beatrice o entregou e terminou a leitura."
 endif
 if interacted_item_key == "cake_batter"
-  say "Ela percebe que o bolo que Ricardo preparou já ficou pronto!"
+  say "Ela percebe que o bolo que Daniel preparou já ficou pronto!"
   if cake_chosen == 1
     add_item "chocolate_cake" 1
   endif
@@ -20,4 +20,4 @@ if interacted_item_key == "cake_batter"
   endif
 endif
 
-say "" "Fertiliel e Ricardo descansam para o dia seguinte."
+say "" "Fertiliel e Daniel descansam para o dia seguinte."
