@@ -1,0 +1,261 @@
+goto *arg1
+
+waypoint event_statement
+
+set_var midbattle 0
+set_var first_dialog 0
+
+theater_bg_effect "pulsingEffect" 1
+fade_music 0 2
+wait 2
+say "Ricardo" "Você tá sentindo isso?"
+say "Clara" "O ar... está ficando quente e pesado."
+
+play_music "tension_intro" "tension_loop"
+
+wait 0.5
+theater_animation "enemy_enters"
+wait 1
+
+say "Demônio" "Esta... sombra..."
+actor_animator_parameter angel "Choosing Action" true
+say "Fertiliel" "(Um... demônio de sombra?!)"
+say "(Por que tem um desses por aqui?)"
+say "Demônio" "Tanta raiva, tanta insegurança..."
+say "A sombra desta garota... preciso devorá-la."
+say "Clara" "Ricardo, Estou com um pressentimento ruim."
+
+
+flash "#BA2D21" 0.3
+wait 0.8
+flash "#BA2D21" 0.3
+wait 0.8
+say "Clara" "Argh, estou ficando tonta."
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+say "Ricardo" "Você tá bem?"
+
+flash "#BA2D21" 0.5
+wait 0.8
+flash "#BA2D21" 0.5
+wait 0.8
+say "Clara" "Sinto minhas forças... indo embora..."
+
+
+flash "#BA2D21" 0.7
+wait 0.8
+flash "#BA2D21" 0.7
+wait 0.8
+fade_out 1 "#BA2D21"
+
+wait 1
+say "" "<color=white>Aaaaargh!</color>"
+actor_become enemy "boss_claire2"
+wait 0.5
+
+screenshake 2 1
+fade_in 0.7
+wait 1.5
+
+say "Clara Sombria" "Ricardo... Fica comigo!"
+
+//ANIMATION HERE
+wait 0.5
+actor_face main "right"
+wait 0.5
+say "Ricardo" "Quem é você?"
+say "Clara Sombria" "Grrr! Você não me reconhece? Eu sou Clara, a sua <b>dona</b>!"
+
+say "Clara" "Do que você tá falando? Você não sou eu!"
+say "Clara Sombria" "Você é fraca, o Ricardo é <b>meu</b>!"
+
+say "Ricardo" "Eu não sei quem ela é, mas não parece estar pra brincadeiras."
+say "Clara Sombria" "Grrr!!! Se você se nega a ser meu, eu vou pegar você à <b>força</b>!"
+say "Clara" "Só passando por cima de mim!"
+say "Fertiliel" "(Esse demônio parece perigoso, tenho que proteger meus humanos!)"
+
+
+wait 0.5
+play_music "boss1_intro" "boss1_loop"
+wait 0.5
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "think"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "talk"
+end_script
+
+
+waypoint guts_action_boy
+//say "Clara Sombria" "Ricardo..."
+//say "\active" "Fique longe!"
+set_var pre_attack  "\active empurra a sombra!"
+end_script
+
+waypoint guts_action_girl
+//say "\active" "Fique longe!"
+set_var pre_attack  "\active empurra a sombra!"
+end_script
+
+waypoint intelligence_action_boy
+//say "\active" "Que tipo de criatura é você? Nos deixe em paz!"
+//say "Clara Sombria" "Ricardo..."
+set_var pre_attack "\active pressiona a sombra!"
+end_script
+
+waypoint intelligence_action_girl
+//say "\active" "(Eu acho que ela é...parte de mim.)"
+//say "\active" "(Se eu me concentrar, talvez eu consiga fazê-la desaparecer!)"
+set_var pre_attack "\active se concentra em pensamentos felizes!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active diz que eles não precisam lutar!"
+end_script
+
+
+waypoint attack_boy
+//say "Clara Sombria" "Porque você não gosta de mim...?"
+set_var pre_attack "A sombra envolve \boy e o aperta com muita força!"
+end_script
+
+waypoint attack_girl
+//say "Clara Sombria" "Ele não te ama...ele não nos ama..."
+set_var pre_attack "A sombra ataca \girl com força!"
+end_script
+
+
+
+
+waypoint first_dialog
+if first_dialog == 0
+  say "Ricardo" "O que está havendo por aqui? Será que isso tudo é um pesadelo?"
+  say "Clara" "Não parece ser só um pesadelo, os golpes dessa coisa doem de verdade."
+  say "Clara Sombria" "Eu não sou uma <b>\qcoisa\q</b>, eu sou a <b>Clara</b>!"
+  
+  say "Clara" "Você não sou eu!"
+  say "Ricardo" "Por que você está tão furiosa?"
+  say "Clara Sombria" "Eu estou furiosa por que o Ricardo não gosta de mim!\nEu protejo ele de tudo, mas ele não retribui o meu <b>amor</b>!!!"
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Ricardo" "Clara...?"
+  say "Clara" "Não é verdade, Ricardo..."
+  
+  say "Clara Sombria" "É <b>claro</b> que é! Eu sou tão <b>violenta</b> porque ele não me ama de volta!"
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Clara" "Não escuta ela!"
+  
+  actor_animator_parameter angel "Choosing Action" true
+  say "Fertiliel" "(Esse demônio se alimenta de sentimentos reprimidos e negativos dos humanos.)"
+  say "(Não posso deixar que o Ricardo e a Clara percam o controle, ou o demônio ficará mais forte e pode machucar mais pessoas.)"
+  actor_animator_parameter angel "Choosing Action" false
+  
+  wait 0.5
+  use_skill "enemy" "enemy" 39
+  screenshake 1
+  say "Clara Sombria" "Grraaaaaurrr!!!"
+  set_var first_dialog 1
+endif
+end_script
+
+
+
+
+waypoint midbattle_dialog
+if midbattle == 0
+  say "Clara Sombria" "Ricardo, por que você não gosta de mim?"
+  say "Eu faço tudo por você há anos, mas você só tem olhos praquela <b>idiota</b> da Clara!"
+  
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Ricardo" "Clara? Você tem ciúmes da Clara?"
+  say "Clara" "Ta-talvez... Só um pouquinho..."
+  
+  say "Clara Sombria" "Você me odeia porque me acha feia? Você não me acha feminina?"
+  say "Ou é porque eu sou baixa demais e não sirvo pra jogar basquete?"
+  
+  say "Ricardo" "..."
+  say "É assim que você se sente, Clara? Você pensa tão mal assim de si mesma?"
+  say "Clara" "..."
+  say "Clara Sombria" "Eu sei por que você não gosta de mim, Ricardo. É porque não tem <b>nada</b> em mim pra você gostar."
+  say "Clara" "Para..."
+  say "Para com isso sua <b>monstra</b>!"
+  
+  wait 0.5
+  say "Clara Sombria" "Eu não sou nenhuma <b>\qmonstra\q</b>. Eu sou <b>você</b>! Você e eu somos uma só!!!"
+  say "Clara" "Somos... uma só?"
+  wait 1
+  say "Clara Sombria" "Raaaaaaawwww!!!"
+  screenshake 2 2
+  theater_bg_effect "pulsingEffect" 2
+  wait 2
+  
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Ricardo" "Não, não são!"
+  say "A Clara que eu conheço não é cruel como você."
+  say "Ela é muito forte, esforçada e nunca desiste!!"
+  say "Clara" "Ricardo..."
+  say "Ricardo" "E é a pessoa mais especial do mundo pra mim. Eu não vou deixar alguém como você machucá-la desse jeito!"
+  say "Clara" "..."
+  say "Você tá certo, vamos acabar com essa impostora!"
+  set_var midbattle 1
+endif
+end_script
+
+
+
+
+waypoint defeated
+say "Clara Sombria" "Não... Ricardo... Fica comigo..."
+fade_music 0 2
+wait 2
+theater_bg_effect "pulsingEffect" 0
+wait 2
+say "" "O demônio de sombra se dissolve em névoa."
+
+actor_animator_parameter main "Battle" false
+actor_animator_parameter support "Battle" false
+// demon dissolving animation
+wait 2
+
+say "" "Esgotados, Ricardo e Clara caem no chão, desacordados."
+fade_out 1
+dialog_style "normal"
+say "Fertiliel" "(Parece que eu vou ter que cuidar deles até acordarem.)"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "" "Alguns minutos depois, os dois acordam."
+fade_in 1
+
+say "Ricardo" "Ai, minha cabeça dói... Que pesadelo estranho foi esse?"
+say "Clara" "Você também teve um pesadelo? Com uma... versão deturpada de mim?"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "Ricardo" "Sim. Que estranho, parece que tivemos o mesmo sonho. Você tá bem?"
+say "Clara" "Só um pouco cansada."
+wait 1
+say "Clara" "No sonho... acho que falei algumas coisas que eu não queria que você soubesse."
+say "Me desculpa."
+say "Ricardo" "Tudo bem, Clara. O que importa é que está tudo bem agora, seja lá o que aconteceu."
+say "Clara" "Eu... realmente me sinto daquela forma às vezes. Insegura."
+say "Ricardo" "Tá tudo bem. Todo mundo tem seus pensamentos ruins de vez em quando."
+say "Mas você nunca se deixou dominar por eles. É isso que eu mais admiro em você."
+end_script
