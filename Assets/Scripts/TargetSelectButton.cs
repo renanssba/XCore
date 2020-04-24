@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetSelectButton : MonoBehaviour {
 
-  public int currentTargetId;
+  public SkillTarget currentTargetId;
 
   public void ClickedTargetSelectButton() {
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");

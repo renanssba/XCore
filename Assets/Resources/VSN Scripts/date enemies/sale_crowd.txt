@@ -17,29 +17,26 @@ end_script
 waypoint guts_action_boy
 waypoint guts_action_girl
 set_var pre_attack "\active encara a multidão!"
-//say "" "Parte da multidão fica com medo e foge!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
 set_var pre_attack "\active grita '75% de desconto!', apontando para o lado oposto!"
-//say "" "Pessoas correm para o outro corredor!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active implora para que pessoas sejam consumidores conscientes!"
-//say "" "A multidão se sente culpada!"
+set_var pre_attack "\active implora para que as pessoas sejam consumidores conscientes!"
 end_script
 
 
 
 waypoint attack_boy
-set_var pre_attack "A multidão atropela \boy!"
+set_var pre_attack "Uma pessoa da multidão dá uma cotovelada em \boy!"
 end_script
 
 waypoint attack_girl
-set_var pre_attack "A multidão atropela \girl!"
+set_var pre_attack "Uma pessoa da multidão dá uma cotovelada em \girl!"
 end_script
 
 waypoint defeated

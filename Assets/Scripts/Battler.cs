@@ -110,6 +110,10 @@ public abstract class Battler {
 
   public abstract bool IsDefending();
 
+  public abstract int FightingSide();
+
+  public virtual void SpendSp(int value) {}
+
   public virtual int StatusResistance(string statusName) {
     return 0;
   }
@@ -136,20 +140,29 @@ public abstract class Battler {
     usedSkillsInDate.Add(skillId);
   }
 
-  public int CheckSkillUsesInBattle(int skillPos) {
+  public int CheckSkillUsesInBattle(int skillId) {
     int count = 0;
     foreach(int used in usedSkillsInBattle) {
-      if(skillPos == used) {
+      if(skillId == used) {
         count++;
       }
     }
     return count;
   }
 
-  public int CheckSkillUsesInDate(int skillPos) {
+  public int CheckTimeSinceLastUsedSkill(int skillId) {
+    for(int i=0; i<usedSkillsInBattle.Count; i++) {
+      if(usedSkillsInBattle[usedSkillsInBattle.Count-1-i] == skillId) {
+        return i;
+      }
+    }
+    return 1000;
+  }
+
+  public int CheckSkillUsesInDate(int skillId) {
     int count = 0;
     foreach(int used in usedSkillsInDate) {
-      if(skillPos == used) {
+      if(skillId == used) {
         count++;
       }
     }
@@ -242,6 +255,20 @@ public abstract class Battler {
         count++;
       }
     }
+    return count;
+  }
+
+  public float TotalStatusEffectPower(StatusConditionEffect effect) {
+    float count = 0;
+
+    foreach(StatusCondition sc in statusConditions) {
+      for(int i = 0; i < sc.statusEffect.Length; i++) {
+        if(sc.statusEffect[i] == effect) {
+          count += sc.statusEffectPower[i];
+        }
+      }
+    }
+
     return count;
   }
 

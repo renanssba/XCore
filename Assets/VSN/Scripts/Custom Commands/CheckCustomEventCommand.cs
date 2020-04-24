@@ -15,7 +15,7 @@ namespace Command {
       //Debug.LogWarning("CHECKING for custom event activation: " + enemy.customEvents[customEventPos].scriptWaypoint);
       
       // check all trigger conditions
-      if(!Utils.AreAllConditionsMet(null, enemy.customEvents[customEventPos].conditions, 3) ||
+      if(!Utils.AreAllConditionsMet(null, enemy.customEvents[customEventPos].conditions, SkillTarget.enemy1) ||
          enemy.customEvents[customEventPos].situationTrigger != situation) {
         return;
       }

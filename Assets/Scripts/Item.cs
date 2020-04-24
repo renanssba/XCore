@@ -72,11 +72,11 @@ public class Item {
     }
 
     if(healHp > 0) {
-      healDesc += "Restaura "+battleMarkerStart + healHp + " HP"+ battleMarkerEnd+". ";
+      healDesc += "Restaura "+battleMarkerStart + healHp + " PC"+ battleMarkerEnd+". ";
     }
 
     if(healSp > 0) {
-      healSpDesc += "Recupera " + battleMarkerStart + healSp + " SP" + battleMarkerEnd+" de um aliado. ";
+      healSpDesc += "Recupera " + battleMarkerStart + healSp + " PH" + battleMarkerEnd+" de um aliado. ";
     }
 
     if(healsConditionNames.Length > 0) {

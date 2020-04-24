@@ -35,7 +35,7 @@ for currentDateEvent #dateLength
   play_music "battle1_intro" "battle1_loop"
   wait 0.8
 
-  set_var currentBattleTurn -1
+  set_var currentBattleTurn 0
   goto_script "\currentEventName" event_statement
   actor_animator_parameter enemy "Battle" true
 

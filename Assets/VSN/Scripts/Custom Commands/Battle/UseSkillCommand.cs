@@ -10,8 +10,8 @@ namespace Command {
     public override void Execute() {
       Battler user = BattleController.instance.GetBattlerByString(args[0].GetStringValue());
       Battler target = BattleController.instance.GetBattlerByString(args[1].GetStringValue());
-      int userPos = BattleController.instance.GetPartyMemberPosition(user);
-      int targetPos = BattleController.instance.GetPartyMemberPosition(target);
+      SkillTarget userPos = BattleController.instance.GetPartyMemberPosition(user);
+      SkillTarget targetPos = BattleController.instance.GetPartyMemberPosition(target);
       Skill usedSkill = BattleController.instance.GetSkillById((int)args[2].GetNumberValue());
 
       Debug.LogWarning("USE SKILL: " + usedSkill + ", user: " + user.GetName() + ", target: " + target.GetName());

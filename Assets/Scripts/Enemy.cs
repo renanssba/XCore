@@ -101,8 +101,8 @@ public class Enemy : Battler {
 
 
   public override Actor2D GetActor2D() {
-    int partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
-    if(partyMemberPos == -1) {
+    SkillTarget partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
+    if(partyMemberPos == SkillTarget.none) {
       return null;
     }
     return TheaterController.instance.GetActorByIdInParty(partyMemberPos);
@@ -125,6 +125,10 @@ public class Enemy : Battler {
 
   public override bool IsDefending() {
     return false;
+  }
+
+  public override int FightingSide() {
+    return 2;
   }
 
   public override int StatusResistance(string statusName) {
@@ -155,7 +159,7 @@ public class Enemy : Battler {
     // decide which skills are available
     for(int i=0; i<activeSkillLogics.Length; i++) {
       if(Utils.AreAllConditionsMet(BattleController.instance.GetSkillById(activeSkillLogics[i].skillId),
-         activeSkillLogics[i].conditions, 3)) {
+         activeSkillLogics[i].conditions, SkillTarget.enemy1)) {
         availableSkills.Add(activeSkillLogics[i]);
         count += activeSkillLogics[i].frequency;
       }

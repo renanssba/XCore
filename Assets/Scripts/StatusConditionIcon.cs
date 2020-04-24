@@ -21,6 +21,10 @@ public enum StatusConditionEffect {
   limitActionsToIntelligence,
   limitActionsToCharisma,
   limitActionsToDefense,
+  chanceToAutoUseGuts,
+  chanceToAutoUseIntelligence,
+  chanceToAutoUseCharisma,
+  chanceToAutoDefend,
   cantAct,
   becomeTarget,
   count

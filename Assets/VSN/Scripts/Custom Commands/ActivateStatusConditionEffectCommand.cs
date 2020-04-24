@@ -8,7 +8,7 @@ namespace Command {
   public class ActivateStatusConditionEffectCommand : VsnCommand {
 
     public override void Execute() {
-      Battler battler = BattleController.instance.GetBattlerByTargetId((int)args[0].GetNumberValue());
+      Battler battler = BattleController.instance.GetBattlerByTargetId((SkillTarget)(int)args[0].GetNumberValue());
       if(battler == null) {
         Debug.LogWarning("No party member found in that position.");
         return;

@@ -33,7 +33,7 @@ namespace Command {
     public override void AddSupportedSignatures() {
       VsnArgType[] argTypes;
 
-      for(int i=1; i<=5; i++){
+      for(int i=1; i<=18; i++){
         argTypes = new VsnArgType[i*3];
         for(int j=0; j<i; j++){
           argTypes[j*3] = VsnArgType.referenceArg;

@@ -24,7 +24,6 @@ namespace Command {
 
     public void CheckEnemySkills(int skillPos, string situation) {
       Enemy enemy = BattleController.instance.GetCurrentEnemy();
-      int partyMemberId = 3;
       Skill skillChecked = BattleController.instance.GetSkillById(enemy.passiveSkills[skillPos]);
 
 
@@ -42,25 +41,25 @@ namespace Command {
 
 
       // check all trigger conditions
-      if(!Utils.AreAllConditionsMet(skillChecked, skillChecked.triggerConditions, partyMemberId)) {
+      if(!Utils.AreAllConditionsMet(skillChecked, skillChecked.triggerConditions, SkillTarget.enemy1)) {
         return;
       }
 
 
       // activate passive skill
-      ActivatePassiveSkill(skillChecked, partyMemberId);
+      ActivatePassiveSkill(skillChecked, SkillTarget.enemy1);
     }
 
 
     public void CheckPlayersSkills(int skillPos, string situation) {
       Relationship relationship = GlobalData.instance.GetCurrentRelationship();
-      int partyMemberId = -1;
+      SkillTarget partyMemberId = SkillTarget.none;
       switch(relationship.skilltree.skills[skillPos].affectsPerson) {
         case SkillAffectsCharacter.boy:
-          partyMemberId = 0;
+          partyMemberId = SkillTarget.partyMember1;
           break;
         case SkillAffectsCharacter.girl:
-          partyMemberId = 1;
+          partyMemberId = SkillTarget.partyMember2;
           break;
       }
       Skill skillChecked = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillPos].id);
@@ -92,7 +91,7 @@ namespace Command {
     }
 
     
-    public static void ActivatePassiveSkill(Skill skillToActivate, int partyMemberId) {
+    public static void ActivatePassiveSkill(Skill skillToActivate, SkillTarget partyMemberId) {
       BattleController battle = BattleController.instance;
 
       Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);

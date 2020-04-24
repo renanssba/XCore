@@ -407,9 +407,10 @@ public class Utils {
   }
 
 
-  public static bool AreAllConditionsMet(Skill usedSkill, string[] allConditions, int partyMemberId) {
+  public static bool AreAllConditionsMet(Skill usedSkill, string[] allConditions, SkillTarget partyMemberId) {
     string conditionArgument;
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    Battler user = BattleController.instance.GetBattlerByTargetId(partyMemberId);
 
 
     foreach(string condition in allConditions) {
@@ -429,10 +430,29 @@ public class Utils {
         }
       }
 
+      if(condition.StartsWith("turn_minimum")) {
+        if(VsnSaveSystem.GetIntVariable("currentBattleTurn") < int.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
       if(condition.StartsWith("turn_is_multiple")) {
         if(VsnSaveSystem.GetIntVariable("currentBattleTurn") % int.Parse(conditionArgument) != 0) {
           return false;
         }
+      }
+
+      // TODO: improve this with a more thorough/accurate checking
+      if(condition.StartsWith("cured_status")) {
+        if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useItem &&
+           TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].healsConditionNames)) {
+          continue;
+        }
+        if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useSkill &&
+           TagIsInArray(conditionArgument, BattleController.instance.selectedSkills[currentPlayerTurn].healsConditionNames)) {
+          continue;
+        }
+        return false;
       }
 
       if(condition.StartsWith("received_item_with_tag")) {
@@ -440,7 +460,6 @@ public class Utils {
         if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useItem) {
           return false;
         }
-        conditionArgument = GetStringArgument(condition);
         //Debug.LogWarning("Condition argument: " + conditionArgument);
         if(!TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].tags) ||
            BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != partyMemberId) {
@@ -449,20 +468,31 @@ public class Utils {
       }
 
       if(condition.StartsWith("hp_percent_is_less")) {
-        float hpPercent = ((float)BattleController.instance.GetBattlerByTargetId(partyMemberId).CurrentHP()) /
-                          (float)BattleController.instance.GetBattlerByTargetId(partyMemberId).MaxHP();
+        float hpPercent = ((float)user.CurrentHP()) / (float)user.MaxHP();
         //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
         if(hpPercent > float.Parse(conditionArgument)) {
           return false;
         }
       }
 
+      if(condition.StartsWith("has_status_condition")) {
+        if(user.CurrentStatusConditionStacks(conditionArgument) <= 0) {
+          return false;
+        }
+      }
 
-      if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == partyMemberId) {
+      if(condition.StartsWith("dont_have_status_condition")) {
+        if(user.CurrentStatusConditionStacks(conditionArgument) > 0) {
+          return false;
+        }
+      }
+
+
+      if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == (int)partyMemberId) {
         return false;
       }
 
-      if(condition == "self_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") != partyMemberId) {
+      if(condition == "self_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") != (int)partyMemberId) {
         return false;
       }
 
@@ -477,15 +507,19 @@ public class Utils {
       }
 
       if(condition.StartsWith("limit_uses_in_date")) {
-        if(BattleController.instance.GetBattlerByTargetId(partyMemberId).CheckSkillUsesInDate(usedSkill.id)
-           >= int.Parse(conditionArgument)) {
+        if(user.CheckSkillUsesInDate(usedSkill.id) >= int.Parse(conditionArgument)) {
           return false;
         }
       }
 
       if(condition.StartsWith("limit_uses_in_battle")) {
-        if(BattleController.instance.GetBattlerByTargetId(partyMemberId).CheckSkillUsesInBattle(usedSkill.id)
-           >= int.Parse(conditionArgument)) {
+        if(user.CheckSkillUsesInBattle(usedSkill.id) >= int.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
+      if(condition.StartsWith("cooldown")) {
+        if(user.CheckTimeSinceLastUsedSkill(usedSkill.id) < int.Parse(conditionArgument)) {
           return false;
         }
       }

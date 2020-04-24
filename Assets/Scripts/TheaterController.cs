@@ -115,7 +115,7 @@ public class TheaterController : MonoBehaviour {
   public Vector3 GetPositionByString(string positionName) {
     Vector3 position = Vector3.zero;
 
-    switch(positionName) {
+    switch(positionName.Replace("_back", "").Replace("_front", "")) {
       case "angel":
         position = angelPosition;
         break;
@@ -224,18 +224,26 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public Actor2D GetActorByIdInParty(int actorId) {
+  public Actor2D GetActorByIdInParty(SkillTarget actorId) {
     switch(actorId) {
-      case 0:
+      case SkillTarget.partyMember1:
         return mainActor;
-      case 1:
+      case SkillTarget.partyMember2:
         return supportActor;
-      case 2:
+      case SkillTarget.angel:
         return angelActor;
-      case 3:
+      case SkillTarget.enemy1:
         return enemyActor;
     }
     return null;
+  }
+
+  public Actor2D[] GetAllHeroesActors() {
+    return new Actor2D[] { mainActor, supportActor };
+  }
+
+  public Actor2D[] GetAllEnemiesActors() {
+    return new Actor2D[] { enemyActor };
   }
 
   public Actor2D GetActorByBattlingCharacter(Battler character) {
@@ -396,10 +404,10 @@ public class TheaterController : MonoBehaviour {
 
   public void SetCharacterChoosingAction(int characterId) {
     for(int i = 0; i < 3; i++) {
-      GetActorByIdInParty(i).SetChooseActionMode(false);
+      GetActorByIdInParty((SkillTarget)i).SetChooseActionMode(false);
     }
     if(characterId >= 0 && characterId <= 2) {
-      GetActorByIdInParty(characterId).SetChooseActionMode(true);
+      GetActorByIdInParty((SkillTarget)characterId).SetChooseActionMode(true);
     }
   }
 

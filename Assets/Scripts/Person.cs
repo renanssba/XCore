@@ -85,7 +85,9 @@ public class Person : Battler {
     if(sp < skillToUse.spCost) {
       return false;
     }
-    if(CurrentStatusConditionStacks("angry") > 0 && (skillToUse.type == SkillType.active || skillToUse.damageAttribute != Attributes.guts)) {
+
+    if(TotalStatusEffectPower(StatusConditionEffect.limitActionsToGuts) > 0f &&
+       (skillToUse.type == SkillType.active || skillToUse.damageAttribute != Attributes.guts)) {
       return false;
     }
     return true;
@@ -122,7 +124,7 @@ public class Person : Battler {
     Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
 
     if(relationship.level >= 4) {
-      count += 3;
+      count += 2;
     }
     if(relationship.level >= 6) {
       count += 5;
@@ -145,15 +147,19 @@ public class Person : Battler {
   }
 
   public override bool IsDefending() {
-    int partyMemberPosition = BattleController.instance.GetPartyMemberPosition(this);
-    if(partyMemberPosition == -1) {
+    SkillTarget partyMemberPosition = BattleController.instance.GetPartyMemberPosition(this);
+    if(partyMemberPosition == SkillTarget.none) {
       return false;
     }
-    return BattleController.instance.selectedActionType[partyMemberPosition] == TurnActionType.defend ||
+    return BattleController.instance.selectedActionType[(int)partyMemberPosition] == TurnActionType.defend ||
            CurrentStatusConditionStacks("guardian")>0;
   }
 
-  public void SpendSp(int value) {
+  public override int FightingSide() {
+    return 1;
+  }
+
+  public override void SpendSp(int value) {
     sp -= value;
     //sp = Mathf.Min(sp, maxSp);
     sp = Mathf.Max(sp, 0);

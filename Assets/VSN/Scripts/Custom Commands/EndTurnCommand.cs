@@ -12,7 +12,7 @@ namespace Command {
       if(args.Length == 0) {
         BattleController.instance.EndTurn();
       } else {
-        Battler target = BattleController.instance.GetBattlerByTargetId((int)args[0].GetNumberValue());
+        Battler target = BattleController.instance.GetBattlerByTargetId((SkillTarget)(int)args[0].GetNumberValue());
         target.EndTurn();
       }
     }

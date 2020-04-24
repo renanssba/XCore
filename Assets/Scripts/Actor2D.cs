@@ -248,12 +248,39 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public void CharacterAttackAnim() {
+  public IEnumerator CharacterAttackAnim(SkillAnimation animation) {
+    switch(animation) {
+      case SkillAnimation.active:
+      default:
+        yield return TackleAnimation();
+        break;
+      case SkillAnimation.run_over:
+        yield return RunOverAnimation();
+        break;
+    }
+  }
+
+  public IEnumerator TackleAnimation() {
     float movementX = 0.3f;
     if(transform.position.x > 0f) {
       movementX = -0.3f;
     }
-    renderers[0].transform.DOMoveX(movementX, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    transform.DOMoveX(movementX, attackAnimTime).SetRelative().SetLoops(2, LoopType.Yoyo);
+    yield return new WaitForSeconds(attackAnimTime*2f + 0.5f);
+  }
+
+  public IEnumerator RunOverAnimation() {
+    float movementX = -7.8f;
+    Vector3 pos = transform.localPosition;
+    float animTime = 3f;
+
+    TheaterController.instance.Screenshake(2f, animTime+0.7f);
+    transform.DOMoveX(movementX, animTime).SetRelative().SetEase(Ease.InSine);
+    yield return new WaitForSeconds(animTime);
+
+    transform.localPosition = pos + new Vector3(3f, 0f, 0f);
+    transform.DOMoveX(-3f, 0.8f).SetRelative();
+    yield return new WaitForSeconds(0.8f);
   }
 
   public void UseItemAnimation(Actor2D destiny, Item item) {
@@ -469,7 +496,7 @@ public class Actor2D : MonoBehaviour {
 
     for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
       if(BattleController.instance.partyMembers[i] == battler) {
-        BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = i;
+        BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = (SkillTarget)i;
       }
     }
     UIController.instance.CleanHelpMessagePanel();
@@ -479,10 +506,19 @@ public class Actor2D : MonoBehaviour {
 
 
   public void SetFocusedSortingLayer(bool value) {
-    if(value) {
-      GetComponent<SortingGroup>().sortingOrder = 100;
-    } else if(!value) {
-      GetComponent<SortingGroup>().sortingOrder = 0;
+    ArmyAnimatorController army = GetComponent<ArmyAnimatorController>();
+    int orderValue = value ? 100 : 0;
+
+    if(army == null) {
+      GetComponent<SortingGroup>().sortingOrder = orderValue;
+    } else {
+      foreach(Animator sr in army.bodyAnimators) {
+        if(sr.GetComponent<SortingGroup>().sortingOrder > 50 && value == false) {
+          sr.GetComponent<SortingGroup>().sortingOrder -= 100;
+        } else if(sr.GetComponent<SortingGroup>().sortingOrder < 50 && value == true) {
+          sr.GetComponent<SortingGroup>().sortingOrder += 100;
+        }
+      }
     }
   }
 }

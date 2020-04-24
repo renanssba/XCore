@@ -20,6 +20,18 @@ public enum ActionRange {
   none
 }
 
+public enum SkillTarget {
+  partyMember1 = 0,
+  partyMember2 = 1,
+  angel = 2,
+  enemy1 = 3,
+  enemy2 = 4,
+  enemy3 = 5,
+  allEnemies = 6,
+  allHeroes = 7,
+  none = 8
+}
+
 public enum SkillSpecialEffect {
   sensor,
   buffDebuff,
@@ -53,6 +65,7 @@ public enum SkillAffectsCharacter {
 
 public enum SkillAnimation {
   attack,
+  run_over,
   charged_attack,
   active,
   active_support,
