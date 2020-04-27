@@ -112,9 +112,6 @@ public class Skilltree {
     for(int i=0; i<skills.Length; i++) {
       skills[i].id = ids[i];
     }
-
-    // DEBUG CONFESSION SKILL
-    //skills[12].isUnlocked = true;
   }
 }
 
