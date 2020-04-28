@@ -8,7 +8,7 @@ goto ir_clara
 
 fade_out 1
 wait 1
-say "" "Daniel se arruma e vai para a festa."
+say "" "Ricardo se arruma e vai para a festa."
 fade_music 0 1
 wait 1.5
 theater_bg "house afternoon"
@@ -85,8 +85,8 @@ if #currentRelationshipHeartLocksOpened < 2
   wait 0.5
   say "" "A garota, meio tonta, responde com uma voz amaciada."
   say "Ana" "Eu tô ótima. Tá tudo bem por aqui."
-  say "" "Percebendo que a garota está alterada, Daniel fica preocupado."
-  say "Daniel" "Eu não acho que esteja tudo bem, Ana. Vem comigo, eu te levo pra casa."
+  say "" "Percebendo que a garota está alterada, Ricardo fica preocupado."
+  say "Ricardo" "Eu não acho que esteja tudo bem, Ana. Vem comigo, eu te levo pra casa."
   say "Ana" "Sai! Para de me tratar como criança. Você não é o meu pai!"
   actor_move anna "grid_3" 0.3
   wait 0.1
@@ -120,14 +120,14 @@ say "Ricardo" "Você tá bem?"
 say "" "Ela fica em silêncio, cabisbaixa, mas não parece estar machucada. Furioso, Ricardo grita:"
 say "Ricardo" "Qual é, seu covarde! Por que você fez isso com ela?!"
 say "Rapaz" "Essa maluca tava tentando me agarrar aqui."
-say "Daniel" "Não te dá o direito de empurrá-la desse jeito!"
+say "Ricardo" "Não te dá o direito de empurrá-la desse jeito!"
 say "Rapaz" "Fica na tua aí, tu não tem nada a ver com isso."
 actor_move guy1 -1.6 0.22 -0.3 0.5
 actor_move guy2 -1.9 0.22 -0.3 0.6
 say "" "Mais dois amigos fortes do rapaz popular se aproximaram, fazendo uma cara ameaçadora."
-say "" "Daniel hesita diante dos garotos mais fortes, e em seguida se vira para Ana."
+say "" "Ricardo hesita diante dos garotos mais fortes, e em seguida se vira para Ana."
 say "Ela está cabisbaixa e parece estar chorando baixinho."
-say "Daniel" "Vem, vamo sair daqui."
+say "Ricardo" "Vem, vamo sair daqui."
 say "" "Ele segura a mão da garota e a puxa para fora do salão da festa."
 actor_face main "right"
 wait 0.1
@@ -154,37 +154,37 @@ actor_move main -1.1 0.22 -0.4 1.0
 move_camera -1.2 1.52 -2.8 1.0
 wait 1.0
 say "Ana" "Me desculpa..."
-say "Daniel" "Calma, vai ficar tudo bem."
+say "Ricardo" "Calma, vai ficar tudo bem."
 say "Ana" "Me desculpa, desculpa..."
 say "" "Ana não tem o costume de chorar. Alguma coisa deve estar deixando-a muito angustiada."
-say "Daniel" "Tá tudo bem... Não precisa pedir desculpa. Eu não sabia que você gostava daquele idiota."
+say "Ricardo" "Tá tudo bem... Não precisa pedir desculpa. Eu não sabia que você gostava daquele idiota."
 say "Ana" "Eu.. Eu não gosto... Mas a pessoa que eu gosto.. *snif* nunca vai ficar comigo..."
-say "" "Daniel parece surpreso com a frase."
-say "Daniel" "A pessoa de quem você gosta?"
+say "" "Ricardo parece surpreso com a frase."
+say "Ricardo" "A pessoa de quem você gosta?"
 say "Ana" "Eu... *snif* só não queria ficar sozinha..."
 wait 1
-say "Daniel" "A... pessoa de quem você gosta?"
+say "Ricardo" "A... pessoa de quem você gosta?"
 say "Ana" "É! Não me faz falar isso, seu idiota!"
-say "" "Daniel fica apreensivo."
-say "Daniel" "Q-quem é a pessoa de quem você gosta?"
+say "" "Ricardo fica apreensivo."
+say "Ricardo" "Q-quem é a pessoa de quem você gosta?"
 say "Ana" "É VOCÊ, SEU BURRO!"
-say "Daniel" "!!!"
+say "Ricardo" "!!!"
 wait 1
-say "Daniel" "Eu.. eu não sabia."
+say "Ricardo" "Eu.. eu não sabia."
 say "Ana" "Eu sempre gostei de você, mas você nunca percebeu. Você só tinha olhos pra Clara."
-say "Daniel" "Ana..."
+say "Ricardo" "Ana..."
 say "Ana" "Embora a gente sempre tivesse junto, você nunca enxergou meus sentimentos, só me via como amiga."
-say "Daniel" "Você.."
+say "Ricardo" "Você.."
 say "Ana" "...Me desculpa."
-say "Daniel" "Quem disse que eu só te vejo como amiga?"
+say "Ricardo" "Quem disse que eu só te vejo como amiga?"
 say "Ana" "O quê?"
-say "Daniel" "Você é muito mais que uma amiga pra mim. Eu jamais aceitaria te perder."
+say "Ricardo" "Você é muito mais que uma amiga pra mim. Eu jamais aceitaria te perder."
 say "Ana" "O que você tá dizendo?"
-say "Daniel" "Que.. que eu quero ficar junto contigo pra sempre. Como a gente sempre esteve!"
+say "Ricardo" "Que.. que eu quero ficar junto contigo pra sempre. Como a gente sempre esteve!"
 say "Ana" "É... sério?"
-say "Daniel" "Sério!"
+say "Ricardo" "Sério!"
 say "Ana" "A gente pode ir... num encontro?"
-say "Daniel" "Claro! Quando você quiser."
+say "Ricardo" "Claro! Quando você quiser."
 
 unlock_skill 12
 add_exp 100
@@ -211,9 +211,9 @@ if #currentRelationshipHeartLocksOpened < 2
   wait 0.6
   //say "" "A garota se vira para Ricardo."
   say "Beatrice" "...Eu não deveria ter vindo aqui."
-  say "Daniel" "Você está bem?"
+  say "Ricardo" "Você está bem?"
   say "Beatrice" "...Não."
-  say "Daniel" "Entendo. Quer conversar um pouco em outro lugar?"
+  say "Ricardo" "Entendo. Quer conversar um pouco em outro lugar?"
   say "Beatrice" "...Não."
   actor_face beatrice "right"
   wait 0.3
@@ -272,11 +272,11 @@ actor_move main "grid_2" 0
 fade_in 1.0
 wait 1.0
 say "Beatrice" "...Desculpe-me por ter feito você ver algo assim."
-say "Daniel" "Relaxa, não precisa se desculpar."
+say "Ricardo" "Relaxa, não precisa se desculpar."
 say "Beatrice" "As pessoas...me encarando."
 say "Beatrice" "Todas elas acham que eu sou...algum tipo de monstro."
-say "Daniel" "Você não é um monstro, Beatrice."
-say "Daniel" "Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal..."
+say "Ricardo" "Você não é um monstro, Beatrice."
+say "Ricardo" "Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal..."
 say "Beatrice" "Tudo bem. Não tinha como você saber."
 say "Eu tenho tentado superar, porém creio que vir a um local tão lotado ainda seja demais para mim."
 say "Mas quando estamos juntos... eu me sinto mais segura."
@@ -306,14 +306,14 @@ say "" "Ricardo tira um pequeno presente do bolso e vai em direção ao grupo de
 say "A garota está com a atenção focada nas outras pessoas e não percebe sua aproximação."
 actor_move main -1.7 0.2 -0.4 1.5
 say "Ele tenta se colocar dentro do círculo de pessoas discretamente, mas ninguém percebe sua presença lá."
-say "Daniel" "(Droga...)"
+say "Ricardo" "(Droga...)"
 say "" "Ele tenta acenar para a garota por cima do grupo e chamar seu nome baixinho."
 if #currentRelationshipHeartLocksOpened < 0
 //if #currentRelationshipHeartLocksOpened < 2
   say "" "...Mesmo assim ela não percebe a presença dele."
   goto bad_end
 endif
-say "Daniel" "Cla-Clara..."
+say "Ricardo" "Cla-Clara..."
 say "" "...Mesmo assim ela não percebe a presença dele. Um dos garotos do lado dela, no entanto, percebe."
 say "Rapaz" "Ei Clara, parece que o Biscoitinho aqui quer falar com você."
 //say "" "Clara se vira para Ricardo. Um outro rapaz continua:""
@@ -327,8 +327,8 @@ say "Clara" "Eu convidei! Oi Ricardo, vem cá."
 say "" "Um rapaz põe a mão no ombro dela e fala:"
 say "Rapaz" "Você tá andando com esse otário agora, Clarinha?"
 say "Clara" "Para, não fala dele assim! Ele é legal!"
-say "" "Daniel fala baixinho, cabisbaixo."
-say "Daniel" "Desculpa, eu só vim... te desejar um feliz aniversário."
+say "" "Ricardo fala baixinho, cabisbaixo."
+say "Ricardo" "Desculpa, eu só vim... te desejar um feliz aniversário."
 say "Rapaz" "Volta pra cozinha, cara! Vai brincar de fazer bolinho."
 say "" "Após ouvir algumas risadas vindas do grupo, o garoto se vira para longe."
 actor_face main "left"
@@ -349,7 +349,7 @@ fade_in 1.0
 
 play_music "sad1_intro" "sad1_loop"
 say "Após perambular por alguns minutos, ele entra em um banheiro que encontra pelo caminho. Em seguida, se senta no chão, chorando."
-say "Daniel" "Estúpido! Estúpido! Como eu fui idiota de achar que eu teria alguma chance com a Clara..."
+say "Ricardo" "Estúpido! Estúpido! Como eu fui idiota de achar que eu teria alguma chance com a Clara..."
 say "Ela é tão bonita e tão popular... Ela nunca ficaria com alguém como eu..."
 say "" "Ricardo escuta um barulho de batidas de leve na porta. Ele fica em silêncio."
 //say "" "Em seguida, escuta o barulho da porta abrindo. Clara aparece de pé do lado de fora do banheiro."
@@ -380,13 +380,13 @@ say "Ricardo" "Va-valeu."
 say "" "Clara percebe o pequeno embrulho de presente no chão, ao lado do garoto."
 say "Clara" "Você trouxe um presente pra mim?"
 say "" "A garota, curiosa, pega o objeto."
-say "Daniel" "Na-não é nada, esquece. É um presente idiota, você não vai querer isso."
+say "Ricardo" "Na-não é nada, esquece. É um presente idiota, você não vai querer isso."
 say "Clara" "Como você sabe? Tá tão lindo o embrulho, deve ser algo legal."
-say "Daniel" "É sério, por favor não abre..."
+say "Ricardo" "É sério, por favor não abre..."
 say "" "Clara abre o presente e encontra um gatinho artesanal, feito de meia."
-say "Daniel" "Eu não tinha muito dinheiro pra te comprar algo, então resolvi fazer isso pra você."
+say "Ricardo" "Eu não tinha muito dinheiro pra te comprar algo, então resolvi fazer isso pra você."
 say "Clara" "Que fofinho, eu adorei! Muito obrigada!"
-say "Daniel" "É um presente bobo. Eu aprendi a fazê-lo na aula de trabalhos manuais."
+say "Ricardo" "É um presente bobo. Eu aprendi a fazê-lo na aula de trabalhos manuais."
 say "Clara" "Não, eu gostei muito! Ele é especial pra mim porque foi você quem fez."
 say "" "Ricardo dá um sorriso."
 actor_move claire -1.1 0.2 -0.4 1.0
@@ -396,21 +396,21 @@ say "Clara" "Você é muito gentil e atencioso, Ricardo. Eu gosto muito disso em
 actor_move claire -0.9 0.22 -0.4 1.8
 say "" "O abraço caloroso de Clara acelera o coração de Ricardo."
 say "Após pensar em seus sentimentos por alguns segundos, ele fala:"
-say "Daniel" "E-eu queria te dizer uma coisa."
+say "Ricardo" "E-eu queria te dizer uma coisa."
 say "Clara" "Pode falar."
 wait 1
-say "Daniel" "Pode ser inútil te falar isso agora, e talvez isso estrague as coisas entre a gente..."
+say "Ricardo" "Pode ser inútil te falar isso agora, e talvez isso estrague as coisas entre a gente..."
 say "Clara" "O... o que é?"
-say "Daniel" "Eu sei que você é tão popular e eu sou o cara mais zoado no colégio... mas mesmo assim."
+say "Ricardo" "Eu sei que você é tão popular e eu sou o cara mais zoado no colégio... mas mesmo assim."
 wait 1
-say "Daniel" "A gente tá passando um tempo junto pra fazer o trabalho... e eu sei que isso vai acabar em breve."
+say "Ricardo" "A gente tá passando um tempo junto pra fazer o trabalho... e eu sei que isso vai acabar em breve."
 say "Desde aquele dia na aula de culinária... Todas as vezes que eu te vejo, eu só penso em quanto você é incrível."
 say "Então eu só queria te dizer... Antes que seja tarde demais..."
 say "Que eu te amo."
-say "" "A garota fica em silêncio por alguns segundos. As lágrimas não param de escorrer pelo rosto de Daniel."
+say "" "A garota fica em silêncio por alguns segundos. As lágrimas não param de escorrer pelo rosto de Ricardo."
 wait 1
 say "Clara" "É tarde demais."
-say "Daniel" "O quê?"
+say "Ricardo" "O quê?"
 say "Clara" "É tarde demais pra se preocupar com tudo isso agora."
 say "Porque eu já gosto muito de você."
 
@@ -429,7 +429,7 @@ goto end
 
 
 waypoint bad_end
-say "" "Daniel se sente mal e decide ir embora da festa."
+say "" "Ricardo se sente mal e decide ir embora da festa."
 goto end
 
 
