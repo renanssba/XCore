@@ -168,12 +168,15 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("money", 200);
 
 
-    /// DEBUG: TESTING SKILLS IN BATTLE
-    //relationships[0].exp = 100;
-    //relationships[0].level = 7;
-    //relationships[0].bondPoints = 10;
-    //relationships[1].hearts = 1;
-    //relationships[2].hearts = 1;
+    // DEBUG CONFESSION SKILL
+    relationships[0].skilltree.skills[12].isUnlocked = true;
+    relationships[1].skilltree.skills[12].isUnlocked = true;
+    relationships[2].skilltree.skills[12].isUnlocked = true;
+
+    // DEBUG: TESTING SKILLS IN BATTLE
+    relationships[2].exp = 100;
+    relationships[2].level = 7;
+    relationships[2].bondPoints = 10;
   }
 
 

@@ -33,7 +33,7 @@ choices "Mesa" ana_mesa "Cama" ana_cama "Guarda-roupas" ana_roupas "Armário" an
 
 waypoint ana_armario
 say "(No armário eu encontro vários materiais do colégio, além de um porta-retrato.)"
-say "(Na foto há Ana e Ricardo crianças. Ambos estão abraçando um pequeno cachorrinho pug.)"
+say "(Na foto há Ana e Daniel crianças. Ambos estão abraçando um pequeno cachorrinho pug.)"
 if #char[1]item_count[delicate_key] >= 1
   say "(Também encontro uma chave. Eu deveria pegá-la?)"
   choices "Sim" null "Não" depois_investigar
@@ -46,8 +46,8 @@ say "(Em cima da mesa eu encontro um pequeno livro escrito\qDiário\q. Devo abr�
 choices "Sim" null "Não" depois_investigar
 if #char[0]item_count[delicate_key]from[1] >= 1
   say "(Ele está trancado, mas eu consigo destrancá-lo usando a Chave Delicada.)"
-  say "(A maioria dos registros fala sobre como a Ana treinou duro no basquete ou se ela viu o Ricardo e ele a irritou nesse dia.)"
-  say "(Tem um interessante aqui: \qPassei na frente de uma padaria e vi um bolo de pimenta, me deu água na boca. Faz tanto tempo que o Ricardo não faz um desses pra mim...\q)"
+  say "(A maioria dos registros fala sobre como a Ana treinou duro no basquete ou se ela viu o Daniel e ele a irritou nesse dia.)"
+  say "(Tem um interessante aqui: \qPassei na frente de uma padaria e vi um bolo de pimenta, me deu água na boca. Faz tanto tempo que o Daniel não faz um desses pra mim...\q)"
 else
   say "(Ele está trancado. A chave deve estar por aqui em algum lugar...)"
 endif
@@ -98,7 +98,7 @@ say "(A cama está bem arrumada e com lençol dobrado. Sobre ele há um celular.
 say "(Devo abrir o celular para analisar?)"
 choices "Sim" null "Não" investigar_beatrice
 say "(Na tela inicial tem aplicativos de busca, de escrita e a galeria. Curiosamente, nenhum de troca de mensagens ou rede social.)"
-say "(Na galeria tem várias fotos do Ricardo. Na biblioteca, na sala de aula, em outros lugares pelo colégio também.)"
+say "(Na galeria tem várias fotos do Daniel. Na biblioteca, na sala de aula, em outros lugares pelo colégio também.)"
 goto depois_investigar
 
 waypoint beatrice_roupas
@@ -194,7 +194,7 @@ goto depois_investigar
 waypoint clara_checar
 say "(Vou devagarzinho até a porta do quarto observar Clara na sala. Ela está conversando com uma mulher mais velha, que deve ser sua mãe.)"
 if passou_tempo_com_clara_hoje == 1
-  say "(A mulher está reclamando sobre como a Clara demorou para voltar da casa de Ricardo hoje.)"
+  say "(A mulher está reclamando sobre como a Clara demorou para voltar da casa de Daniel hoje.)"
 else
   say "(A mulher está reclamando sobre como a Clara se atrasou para uma das atividades da agenda de hoje.)"  
 endif

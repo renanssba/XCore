@@ -123,6 +123,9 @@ public class BattleController : MonoBehaviour {
     // fully heal the party
     FullHealParty();
 
+    // remove bg effect
+    TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
+
     // recover used celestial items
     foreach(ItemListing itemToRecharge in usedCelestialItems.itemListings) {
       Inventory ivt = GlobalData.instance.people[0].inventory;

@@ -5,11 +5,11 @@ endif
 goto_script "enter_observation" "school morning"
 if daytime == 0
   say "" "Chegando no telhado..."
-  say "Ana e Ricardo se sentam para lanchar."
+  say "Ana e Daniel se sentam para lanchar."
   fade_in 1
 endif
 if daytime == 1
-  say "" "Ricardo e Ana encontram-se no clube esportivo."
+  say "" "Daniel e Ana encontram-se no clube esportivo."
   say "Eles se sentam em um banquinho para conversar."
   fade_in 1
 endif
@@ -32,160 +32,160 @@ waypoint conversation
 select_dialog
 
 waypoint dialog_acquaintances_1
-say "Ricardo" "Como andam os treinos, Ana?"
+say "Daniel" "Como andam os treinos, Ana?"
 say "Ana" "Tão ótimos, tô progredindo bastante."
-say "" "Ricardo percebe que o braço de Ana está com um grande hematoma."
-say "Ricardo" "Tá tudo bem mesmo? Seu braço parece machucado."
+say "" "Daniel percebe que o braço de Ana está com um grande hematoma."
+say "Daniel" "Tá tudo bem mesmo? Seu braço parece machucado."
 say "Ana" "Tá sim. É um machucado pequeno, acontece o tempo todo por lá."
-say "Ricardo" "Tudo bem. Só tenta tomar mais cuidado, tá?"
+say "Daniel" "Tudo bem. Só tenta tomar mais cuidado, tá?"
 say "Ana" "Não se preocupa, é preciso muito mais que isso pra me parar."
 say "" "A garota sorri, confiante."
 goto end_dialog
 
 waypoint dialog_acquaintances_2
-say "Ana" "Ricardo, eu tava assistindo ao jogo dos Monsters ontem e eu decidi em qual posição eu quero jogar."
-say "Ricardo" "Que legal, qual vai ser sua posição?"
+say "Ana" "Daniel, eu tava assistindo ao jogo dos Monsters ontem e eu decidi em qual posição eu quero jogar."
+say "Daniel" "Que legal, qual vai ser sua posição?"
 say "Ana" "Eu vou ser pivô, igual ao Hopping James!"
 say "É a posição mais legal do time, que fica perto da cesta e faz a maior quantidade de pontos!"
-say "Ricardo" "Uou, parece bem incrível."
+say "Daniel" "Uou, parece bem incrível."
 say "Ana" "E eu vou ser a maior pivô de todos os tempos!"
-say "Ricardo" "Não a maior em altura, com certeza..."
+say "Daniel" "Não a maior em altura, com certeza..."
 say "Ana" "Vem cá, eu vou te dar um cascudo!"
-say "Ricardo" "Hahaha."
+say "Daniel" "Hahaha."
 goto end_dialog
 
 waypoint dialog_acquaintances_3
-say "Ana" "Ei Ricardo, eu preparei uma rotina de treinos pra você!"
-say "Ricardo" "Como assim?"
+say "Ana" "Ei Daniel, eu preparei uma rotina de treinos pra você!"
+say "Daniel" "Como assim?"
 say "Ana" "Você tá muito parado, precisa aumentar sua resistência física."
 say "É bem simples: vamos começar com 100 abdominais, 100 apoios de frente, 100 agachamentos e correr 10km..."
-say "Ricardo" "Pera, quê?"
+say "Daniel" "Pera, quê?"
 say "" "Os olhos do garoto exibem um profundo medo por sua vida."
 say "Ana" "Isso todos os dias! E depois pode treinar basquete comigo, se quiser."
-say "Ricardo" "Eu não vou ter resistência alguma se eu estiver morto, Ana!"
+say "Daniel" "Eu não vou ter resistência alguma se eu estiver morto, Ana!"
 say "" "A garota continua tentando convencê-lo, sem sucesso."
 goto end_dialog
 
 
 
 waypoint dialog_friends_1
-say "Ricardo" "Oi Ana! Como foram os testes pra ser pivô na nossa seleção de basquete?"
+say "Daniel" "Oi Ana! Como foram os testes pra ser pivô na nossa seleção de basquete?"
 say "Ana" "Foi péssimo... Eu consegui acertar muitas cestas a distância, mas a marcação e disputa de bola foram muito difíceis..."
 say "Todo mundo era muito alto, eu não tinha como brigar pela bola..."
 say "" "A garota parece bem decepcionada."
-say "Ricardo" "Que droga! Mas eles não te deixaram entrar no time?"
+say "Daniel" "Que droga! Mas eles não te deixaram entrar no time?"
 say "Ana" "Não! Só ficaram me zoando e disseram que uma \qbaixinha\q como eu jamais poderia ser pivô."
-say "Ricardo" "Poxa, que droga."
+say "Daniel" "Poxa, que droga."
 say "Ana" "Mas quero é ver quem vai me chamar de baixinha com a boca inchada!"
-say "Ricardo" "Hum... Por que você não tenta de novo?"
-say "Ana" "Eu já tentei três vezes, Ricardo... Eles nunca me deixam."
-say "Ricardo" "Então por que você... não tenta pra outra posição? Você disse que lança bem, não é? Poderia tentar ser armadora."
+say "Daniel" "Hum... Por que você não tenta de novo?"
+say "Ana" "Eu já tentei três vezes, Daniel... Eles nunca me deixam."
+say "Daniel" "Então por que você... não tenta pra outra posição? Você disse que lança bem, não é? Poderia tentar ser armadora."
 say "Ana" "É, pensando bem... É uma ótima ideia! Vou tentar isso no próximo teste! Não vou desistir!"
-say "" "Ana agradece e Ricardo fica feliz por poder ajudá-la."
+say "" "Ana agradece e Daniel fica feliz por poder ajudá-la."
 goto end_dialog
 
 waypoint dialog_friends_2
-// say "Ricardo" "Parece que o seu super treino tá fazendo efeito, hein Ana! Olha só esses músculos!"
-// say "" "Ricardo toca amigavelmente no braço de Ana, mas a garota se afasta em reflexo."
-say "Ricardo" "...Aí eu tava lendo esse livro e percebi que a história dos Monsters é mesmo bem interessante."
+// say "Daniel" "Parece que o seu super treino tá fazendo efeito, hein Ana! Olha só esses músculos!"
+// say "" "Daniel toca amigavelmente no braço de Ana, mas a garota se afasta em reflexo."
+say "Daniel" "...Aí eu tava lendo esse livro e percebi que a história dos Monsters é mesmo bem interessante."
 say "" "Ana, encostada em uma parede, balança a cabeça lentamente em confirmação."
-say "Ricardo" "Eu não acredito como eles conseguiram virar o jogo e ganhar o último torneio no último minuto!"
-say "" "Ricardo percebe que Ana está com os olhos fechados. E roncando."
-say "Ricardo" "Ana?"
+say "Daniel" "Eu não acredito como eles conseguiram virar o jogo e ganhar o último torneio no último minuto!"
+say "" "Daniel percebe que Ana está com os olhos fechados. E roncando."
+say "Daniel" "Ana?"
 say "Ana" "Hã, oi? Falou comigo?"
-say "Ricardo" "Você tá dormindo em pé?"
+say "Daniel" "Você tá dormindo em pé?"
 say "Ana" "Desculpa, os treinos pra entrar no clube de basquete têm consumido todas as minhas energias..."
-say "Ricardo" "Você tem que cuidar melhor de si! Tenho te visto sempre muito cansada ultimamente, então eu preparei isso aqui pra você."
+say "Daniel" "Você tem que cuidar melhor de si! Tenho te visto sempre muito cansada ultimamente, então eu preparei isso aqui pra você."
 say "" "Ele entrega um pequeno papel escrito a mão para a garota."
 say "Ana" "Hum, uma dieta alimentar?"
-say "Ricardo" "Você precisa se alimentar bem se quiser ter energia pra ser a melhor jogadora de basquete do mundo!"
+say "Daniel" "Você precisa se alimentar bem se quiser ter energia pra ser a melhor jogadora de basquete do mundo!"
 say "Ana" "Obrigada! Com certeza vai me ajudar!"
 goto end_dialog
 
 waypoint dialog_friends_3
-say "Ana" "Hoje eu trouxe um bolo que eu fiz pra você, Ricardo! Espero que goste!"
-say "Ricardo" "Certo, deixa eu provar aqui."
-say "" "Ricardo prova um pedaço do bolo dando uma grande mordida."
+say "Ana" "Hoje eu trouxe um bolo que eu fiz pra você, Daniel! Espero que goste!"
+say "Daniel" "Certo, deixa eu provar aqui."
+say "" "Daniel prova um pedaço do bolo dando uma grande mordida."
 say "Ana" "E aí, o que achou?"
 say "" "O garoto inicialmente fica vermelho, depois começa a suar, ficar verde e com os cabelos em pé. Ana parece preocupada."
 say "Ana" "Você... gostou?"
-say "" "Tremendo e com os olhos esbugalhados, Ricardo engole o pedaço de bolo."
-say "Ricardo" "T-tá... er... \qinteressante\q."
+say "" "Tremendo e com os olhos esbugalhados, Daniel engole o pedaço de bolo."
+say "Daniel" "T-tá... er... \qinteressante\q."
 say "Ana" "Você odiou, não é?"
-say "Ricardo" "Na-não... Eu g-gostei."
+say "Daniel" "Na-não... Eu g-gostei."
 say "" "Ana faz uma cara de choro."
 say "Ana" "Me desculpa, eu sei que tá horrível. Eu passei a noite toda ontem tentando, mas esse foi o que ficou melhorzinho."
 say "Você sempre cozinha pra mim, então eu quis retribuir..."
-say "" "Ricardo abre um sorriso."
-say "Ricardo" "O que importa é a intenção. Obrigado por ter se esforçado por mim, Ana."
-say "" "A garota sorri. Em seguida o estômago de Ricardo faz barulhos estranhos e ele corre para o banheiro."
+say "" "Daniel abre um sorriso."
+say "Daniel" "O que importa é a intenção. Obrigado por ter se esforçado por mim, Ana."
+say "" "A garota sorri. Em seguida o estômago de Daniel faz barulhos estranhos e ele corre para o banheiro."
 goto end_dialog
 
 
 
 waypoint dialog_lovers_1
-say "Ricardo" "Ei Ana, você sabe alguma loja onde eu posso comprar uns shorts esportivos?"
+say "Daniel" "Ei Ana, você sabe alguma loja onde eu posso comprar uns shorts esportivos?"
 say "Ana" "Roupas esportivas? Ué, você vai pra alguma festa a fantasia?"
-say "Ricardo" "Não, pô! Eu vou começar a treinar. Tô considerando começar aquele treinamento que você fez pra mim..."
+say "Daniel" "Não, pô! Eu vou começar a treinar. Tô considerando começar aquele treinamento que você fez pra mim..."
 say "Ana" "Sério? Que legal!"
-say "Ricardo" "É..."
+say "Daniel" "É..."
 say "Ana" "Eu vou contigo! E te ajudar a comprar as roupas também. Se quiser eu te empresto umas camisetas minhas de basquete."
-say "Ricardo" "Haha, obrigado. Mas eu passo, quero ter minhas próprias."
-say "" "Ana comemora animadamente e abraça Ricardo."
+say "Daniel" "Haha, obrigado. Mas eu passo, quero ter minhas próprias."
+say "" "Ana comemora animadamente e abraça Daniel."
 say "Ana" "Você quer ficar bem forte pra jogar basquete comigo?"
-say "Ricardo" "Você sempre me protege... Eu tô cansado de depender sempre de você."
+say "Daniel" "Você sempre me protege... Eu tô cansado de depender sempre de você."
 say "Eu também quero ser forte e poder te proteger, quando for necessário!"
-say "Ana" "Isso é muito legal! Eu sei que você vai conseguir, Ricardo."
+say "Ana" "Isso é muito legal! Eu sei que você vai conseguir, Daniel."
 say "Aí nós vamos proteger os fracos, batendo em todo mundo que faz bullying no colégio!"
-say "Ricardo" "Não foi bem isso que eu quis dizer com \qte proteger\q..."
+say "Daniel" "Não foi bem isso que eu quis dizer com \qte proteger\q..."
 goto end_dialog
 
 waypoint dialog_lovers_2
 // Ana tenta novamente entrar no clube e entra como armadora.
-say "Ana" "Ricardo, Ricardo! Eu preciso muito falar com você!"
+say "Ana" "Daniel, Daniel! Eu preciso muito falar com você!"
 say "" "A garota está com um sorriso radiante."
-say "Ricardo" "Oi, o que aconteceu de tão bom?"
+say "Daniel" "Oi, o que aconteceu de tão bom?"
 say "Ana" "Eu passei no teste pra seleção de basquete do colégio!"
-say "Ricardo" "Caramba, que incrível, Ana! Finalmente eles perceberam o seu talento."
+say "Daniel" "Caramba, que incrível, Ana! Finalmente eles perceberam o seu talento."
 say "Ana" "O único porém é que eu não vou ser pivô, entrei como armadora. Mas pelo menos eu tô dentro, e foi graças à sua sugestão."
-say "Ricardo" "Que ótimo! Fico feliz em ajudar."
+say "Daniel" "Que ótimo! Fico feliz em ajudar."
 say "" "A garota fica com olhar distante por um momento."
 say "Ana" "Mas é uma pena... Acho que eu nunca vou ser a maior pivô de todos os tempos, afinal..."
-say "Ricardo" "Não, não desista! A Ana que eu conheço nunca desiste!"
+say "Daniel" "Não, não desista! A Ana que eu conheço nunca desiste!"
 say "Ana" "Eles têm uma pivô tão alta, e vivem dizendo que alguém da minha altura não serviria."
-say "Ricardo" "Mas não importa! Mostra pra eles que estão errados."
+say "Daniel" "Mas não importa! Mostra pra eles que estão errados."
 say "Seja a melhor armadora que a nossa seleção já teve! E aí eles devem te deixar escolher jogar em outra posição."
-say "Ana" "Você acha, Ricardo?"
-say "Ricardo" "Claro! É assim que você me ensinou a resolver as coisas, nunca desistindo e dando o seu melhor!"
+say "Ana" "Você acha, Daniel?"
+say "Daniel" "Claro! É assim que você me ensinou a resolver as coisas, nunca desistindo e dando o seu melhor!"
 say "" "A garota cerra o punho e abre um grande sorriso. Seus olhos demonstram grande determinação."
 say "Ana" "Você tá certo! Eles só não perceberam ainda o que tão perdendo. Eu vou treinar muito mais e vou mostrar pra todos que sou a melhor!"
-say "Ricardo" "Essa é a Ana que eu conheço!"
+say "Daniel" "Essa é a Ana que eu conheço!"
 goto end_dialog
 
 waypoint dialog_lovers_3
-say "Ana" "Sabe, Ricardo, eu vi uma moça passeando com seu cãozinho no caminho para o colégio hoje."
-say "Ricardo" "Era um cãozinho fofo?"
+say "Ana" "Sabe, Daniel, eu vi uma moça passeando com seu cãozinho no caminho para o colégio hoje."
+say "Daniel" "Era um cãozinho fofo?"
 say "Ana" "Muito fofo. Me lembrou muito o Tobi..."
 say "" "A garota abaixa o rosto, triste."
-say "Ricardo" "Você sente muita falta dele, não é?"
+say "Daniel" "Você sente muita falta dele, não é?"
 say "Ana" "Demais. Você sabe que dia é hoje?"
-say "Ricardo" "Claro. Hoje faz quatro anos desde que ele se foi..."
+say "Daniel" "Claro. Hoje faz quatro anos desde que ele se foi..."
 say "" "Ana mexe a cabeça em confirmação."
-say "Ricardo" "Eu sinto muito... Queria poder fazer algo a mais por você."
+say "Daniel" "Eu sinto muito... Queria poder fazer algo a mais por você."
 say "Ana" "Você sempre faz."
 say "Quando ele se foi, eu costumava chorar muito de noite e não conseguia dormir."
 say "Foi aí que você me deu o ursinho de pelúcia, e eu passei a dormir sempre abraçada com ele."
-say "Ricardo" "É, você adorava aquele ursinho."
+say "Daniel" "É, você adorava aquele ursinho."
 say "Ana" "Ainda gosto. Obrigada por estar aqui pra mim sempre que eu preciso."
-say "Ricardo" "E vou sempre estar."
+say "Daniel" "E vou sempre estar."
 say "" "A garota esboça um leve sorriso."
-say "Ricardo" "Vamos levar flores ao túmulo do Tobi? Eu posso ir contigo mais tarde."
+say "Daniel" "Vamos levar flores ao túmulo do Tobi? Eu posso ir contigo mais tarde."
 say "Ana" "Vamos. Tenho certeza que ele vai gostar."
 goto end_dialog
 
 
 waypoint dialog_fallback
-say "" "Eles conversam sobre assuntos os livros que Ricardo está lendo e o último jogo de basquete que Ana assistiu."
+say "" "Eles conversam sobre assuntos os livros que Daniel está lendo e o último jogo de basquete que Ana assistiu."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 goto end_dialog
 
@@ -197,10 +197,10 @@ goto end
 
 waypoint end
 if daytime == 0
-  say "" "Ricardo e Ana voltam para a sala de aula para continuar as próximas lições."
+  say "" "Daniel e Ana voltam para a sala de aula para continuar as próximas lições."
 endif
 if daytime == 1
-  say "" "Ricardo e Ana voltam para suas casas."
+  say "" "Daniel e Ana voltam para suas casas."
 endif
 goto_script "pass_time"
 end_script
@@ -208,68 +208,68 @@ end_script
 
 waypoint dialog_after_date_2
 say "Ana" "Valeu por ter vindo ao cinema comigo..."
-say "Ricardo" "Ah, eu não tinha nada melhor pra fazer, haha."
+say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
 say "Ana" "..."
-say "Ricardo" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
 say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
-say "Ricardo" "Por quê?"
+say "Daniel" "Por quê?"
 say "Ana" "Você sabe... Toda essa coisa da Clara."
 say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
-say "Ricardo" "É, sim. Eu espero que sim. É a minha grande chance."
+say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
 say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
 say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
-say "Ricardo" "Eu vou sempre ter tempo pra você, sua boba!"
+say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
 say "Ana" "..."
-say "Ricardo" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
 say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
-say "Ricardo" "Ei, aquilo doeu!"
+say "Daniel" "Ei, aquilo doeu!"
 say "Ana" "Pô, o Tobi era um pug tão pequenininho..."
-say "Ricardo" "De qualquer forma. Eu não parei de falar contigo, parei?"
+say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
 say "Ana" "Só por uns dois dias."
-say "Ricardo" "Pois é. Eu não parei naquele dia e não vou parar agora."
+say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
 say "Ana" "..."
 say "Ana" "Valeu. Você é um bobo, mesmo!"
 end_script
 
 waypoint dialog_after_date_3
 say "Ana" "Me sinto energizada! Vamos fazer mais exercícios!"
-say "Ricardo" "Mais? Eu estou exausto!"
-say "Ana" "Qual é, Ricardo! Vamos lá, só mais um tiro de 100 metros!"
-say "Ricardo" "Nããão, eu tô cansado..."
+say "Daniel" "Mais? Eu estou exausto!"
+say "Ana" "Qual é, Daniel! Vamos lá, só mais um tiro de 100 metros!"
+say "Daniel" "Nããão, eu tô cansado..."
 say "Ana" "Eu começo, então. 3...2...1...Já!"
-say "" "Ana começa a correr e logo toma distância de Ricardo."
+say "" "Ana começa a correr e logo toma distância de Daniel."
 say "" "Subitamente, a menina para e segura o tornozelo."
 fade_music 0 2.0
 say "Ana" "Ai! Não, de novo não..."
 say "" "A garota começa a correr novamente, visivelmente mancando. Ela se move bem devagar."
-say "Ricardo" "Ana, espera! Pare!"
+say "Daniel" "Ana, espera! Pare!"
 say "" "O garoto corre na direção de Ana. A garota o empurra."
 say "Ana" "Não é nada, eu estou bem!"
-say "Ricardo" "Deixa eu ver isso."
-say "" "Ricardo nota um hematoma arroxeado no tornozelo de Ana."
+say "Daniel" "Deixa eu ver isso."
+say "" "Daniel nota um hematoma arroxeado no tornozelo de Ana."
 say "Ana" "..."
-say "Ricardo" "Você se machucou assim agora...?"
+say "Daniel" "Você se machucou assim agora...?"
 say "Ana" "...Não. Mas é só um machucado de rotina."
-say "" "Ricardo franze a testa."
-say "Ricardo" "Então quando foi?"
+say "" "Daniel franze a testa."
+say "Daniel" "Então quando foi?"
 say "Ana" "...No último teste para o time de basquete."
-say "Ricardo" "Você deveria ter ido para um pronto-socorro na hora!"
+say "Daniel" "Você deveria ter ido para um pronto-socorro na hora!"
 say "Ana" "Mas se o técnico notasse que eu me machuquei, eu não teria sido selecionada! Eu preciso me esforçar assim sempre!"
-say "Ricardo" "Não dá pra jogar basquete assim, Ana!"
-say "Ana" "Você não sabe o que eu consigo ou não fazer, Ricardo."
-say "Ricardo" "..."
-say "Ricardo" "...Você é muito egoísta."
+say "Daniel" "Não dá pra jogar basquete assim, Ana!"
+say "Ana" "Você não sabe o que eu consigo ou não fazer, Daniel."
+say "Daniel" "..."
+say "Daniel" "...Você é muito egoísta."
 say "Ana" "...O quê?"
-say "Ricardo" "Você sempre faz isso! Fica assumindo riscos, querendo se sacrificar!"
+say "Daniel" "Você sempre faz isso! Fica assumindo riscos, querendo se sacrificar!"
 say "Ana" "E por que isso é egoísmo?"
-say "Ricardo" "As pessoas se preocupam com você! Eu me preocupo com você."
-say "Ricardo" "Como eu vou ficar tranquilo sabendo que você ignora todas as dores e nunca pede ajuda?"
-say "Ricardo" "...Um dia, você pode não ser forte o suficiente. Um dia, um obstáculo pode aparecer e você não vai conseguir aguentar sozinha."
+say "Daniel" "As pessoas se preocupam com você! Eu me preocupo com você."
+say "Daniel" "Como eu vou ficar tranquilo sabendo que você ignora todas as dores e nunca pede ajuda?"
+say "Daniel" "...Um dia, você pode não ser forte o suficiente. Um dia, um obstáculo pode aparecer e você não vai conseguir aguentar sozinha."
 say "Eu estou cansado de ver você me proteger e sofrer!"
 say "Ana" "Você...se preocupa comigo?"
-say "Ricardo" "...Muito. A ideia de ver você sofrer me machuca por dentro..."
-say "Ricardo" "...Porque eu te amo."
-say "" "O coração de Ricardo se abriu!"
+say "Daniel" "...Muito. A ideia de ver você sofrer me machuca por dentro..."
+say "Daniel" "...Porque eu te amo."
+say "" "O coração de Daniel se abriu!"
 say "" "Os olhos de Ana se enchem de água."
 say "Ana" "Eu esperei tanto tempo pra ouvir você dizer isso."
 say "Ana" "Eu sempre te amei."
@@ -284,11 +284,11 @@ if item_id == -1
   goto action_choice
 endif
 
-say "Ricardo" "Ei Ana, eu trouxe uma coisinha para te dar."
+say "Daniel" "Ei Ana, eu trouxe uma coisinha para te dar."
 give_item 1 item_id 1
 play_sfx "relationship_up"
 say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-say "Ricardo" "Que bom que você gostou!"
+say "Daniel" "Que bom que você gostou!"
 
 add_exp 50
 goto end
@@ -296,24 +296,24 @@ goto end
 
 waypoint date_intro_1
 say "Ana" "Ei, você vem comigo ao parque? Estou a fim de respirar um ar fresco."
-say "Ricardo" "Claro, vamos lá."
+say "Daniel" "Claro, vamos lá."
 set_var date_objective "de destino"
 goto_script "date"
 end_script
 
 waypoint date_intro_2
 say "Ana" "Sabia que estreou o filme do Hopping James? Eu tô tão animada pra ver!"
-say "Ricardo" "Sério? Que legal! Quer ir comigo assistir?"
+say "Daniel" "Sério? Que legal! Quer ir comigo assistir?"
 say "Ana" "Quero! Vamos no cinema do shopping? É o cinema que eu mais gosto aqui na cidade."
-say "Ricardo" "Ótimo! Vou comprar um baldão de pipoca pra gente."
+say "Daniel" "Ótimo! Vou comprar um baldão de pipoca pra gente."
 set_var date_objective "do cinema"
 goto_script "date"
 end_script
 
 waypoint date_intro_3
-say "Ricardo" "Ei Ana, está com vontade de ir ao parque?"
+say "Daniel" "Ei Ana, está com vontade de ir ao parque?"
 say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
-say "Ricardo" "Certo, vai ser divertido."
+say "Daniel" "Certo, vai ser divertido."
 set_var date_objective "ideal para jogar frisbee"
 goto_script "date"
 end_script
@@ -322,14 +322,14 @@ end_script
 
 waypoint date_end_1
 say "" "Depois de caminharem um pouco, os dois ficam satisfeitos com o passeio."
-say "Ana" "Obrigada por ter vindo comigo, Ricardo. A gente devia passear mais vezes."
-say "Ricardo" "Vamos sim!"
+say "Ana" "Obrigada por ter vindo comigo, Daniel. A gente devia passear mais vezes."
+say "Daniel" "Vamos sim!"
 end_script
 
 waypoint date_end_2
 say "" "Depois de todos os percalços, o casal finalmente consegue chegar ao cinema."
 say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
-say "Ricardo" "Você tá mesmo empolgada, hein?"
+say "Daniel" "Você tá mesmo empolgada, hein?"
 say "Ana" "Claro! Esse cara é o meu ídolo! Ele levou o time dele até a final praticamente sozinho!"
 fade_out 0.5
 say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
@@ -338,10 +338,10 @@ goto dialog_after_date_2
 end_script
 
 waypoint date_end_3
-say "Ricardo" "Ufa! Chegamos. Que trabalheira, hein."
+say "Daniel" "Ufa! Chegamos. Que trabalheira, hein."
 say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
 fade_out 0.5
-say "" "Em seguida os dois jogam frisbee por vários minutos, até Ricardo cansar."
+say "" "Em seguida os dois jogam frisbee por vários minutos, até Daniel cansar."
 fade_in 0.5
 goto dialog_after_date_3
 end_script
