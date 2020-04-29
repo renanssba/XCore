@@ -93,11 +93,41 @@ namespace Command {
     
     public static void ActivatePassiveSkill(Skill skillToActivate, SkillTarget partyMemberId) {
       BattleController battle = BattleController.instance;
+      SkillTarget target = GetTargetFromSkill(skillToActivate, partyMemberId);
 
       Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);
 
       VsnController.instance.state = ExecutionState.WAITING;
-      battle.StartCoroutine(battle.ExecuteBattlerSkill(partyMemberId, partyMemberId, skillToActivate));
+      battle.StartCoroutine(battle.ExecuteBattlerSkill(partyMemberId, target, skillToActivate));
+    }
+
+
+    public static SkillTarget GetTargetFromSkill(Skill skillToActivate, SkillTarget partyMemberId) {
+      if(skillToActivate.range == ActionRange.self) {
+        return partyMemberId;
+      }
+      
+      switch(partyMemberId) {
+        case SkillTarget.enemy1:
+        case SkillTarget.enemy2:
+        case SkillTarget.enemy3:
+          if(skillToActivate.range == ActionRange.all_allies) {
+            return SkillTarget.allEnemies;
+          }else if(skillToActivate.range == ActionRange.all_enemies) {
+            return SkillTarget.allHeroes;
+          }
+          break;
+        case SkillTarget.partyMember1:
+        case SkillTarget.partyMember2:
+        case SkillTarget.angel:
+          if(skillToActivate.range == ActionRange.all_allies) {
+            return SkillTarget.allHeroes;
+          } else if(skillToActivate.range == ActionRange.all_enemies) {
+            return SkillTarget.allEnemies;
+          }
+          break;
+      }
+      return SkillTarget.none;
     }
 
 

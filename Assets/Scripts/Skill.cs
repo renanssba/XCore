@@ -67,11 +67,12 @@ public enum SkillAnimation {
   attack,
   run_over,
   charged_attack,
-  active,
   active_support,
   active_offensive,
   passive,
   long_charge,
+  throw_object,
+  multi_throw,
   none
 }
 

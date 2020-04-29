@@ -445,10 +445,12 @@ public class Utils {
       // TODO: improve this with a more thorough/accurate checking
       if(condition.StartsWith("cured_status")) {
         if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useItem &&
+           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] == partyMemberId &&
            TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].healsConditionNames)) {
           continue;
         }
         if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useSkill &&
+           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] == partyMemberId &&
            TagIsInArray(conditionArgument, BattleController.instance.selectedSkills[currentPlayerTurn].healsConditionNames)) {
           continue;
         }
@@ -484,6 +486,21 @@ public class Utils {
       if(condition.StartsWith("dont_have_status_condition")) {
         if(user.CurrentStatusConditionStacks(conditionArgument) > 0) {
           return false;
+        }
+      }
+
+      if(condition == "was_attacked_for_damage") {
+        switch(partyMemberId) {
+          case SkillTarget.enemy1:
+          case SkillTarget.enemy2:
+          case SkillTarget.enemy3:
+            if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useSkill) {
+              return false;
+            }
+            if(BattleController.instance.selectedSkills[currentPlayerTurn].damagePower <= 0) {
+              return false;
+            }
+            break;
         }
       }
 

@@ -243,14 +243,20 @@ public class Actor2D : MonoBehaviour {
     animator.SetBool("Attacking", value);
   }
 
-  public void SetParameter(string param, bool value) {
+  public void SetAnimationParameter(string param, bool value) {
     animator.SetBool(param, value);
+  }
+
+  public void SetAnimationTrigger(string triggerName) {
+    animator.SetTrigger(triggerName);
   }
 
 
   public IEnumerator CharacterAttackAnim(SkillAnimation animation) {
     switch(animation) {
-      case SkillAnimation.active:
+      case SkillAnimation.active_offensive:
+      case SkillAnimation.active_support:
+      case SkillAnimation.long_charge:
       default:
         yield return TackleAnimation();
         break;
@@ -283,8 +289,8 @@ public class Actor2D : MonoBehaviour {
     yield return new WaitForSeconds(0.8f);
   }
 
-  public void UseItemAnimation(Actor2D destiny, Item item) {
-    ShowThrowItemAnimation(item.sprite, destiny);
+  public IEnumerator UseItemAnimation(Actor2D destiny, Item item) {
+    yield return ShowThrowItemAnimation(item.sprite, destiny, new Vector3(0.08f, 0.08f, 0.08f));
   }
 
   public void DefendActionAnimation() {
@@ -480,13 +486,16 @@ public class Actor2D : MonoBehaviour {
     newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
   }
 
-  public void ShowThrowItemAnimation(Sprite itemSprite, Actor2D targetPerson) {
+  public IEnumerator ShowThrowItemAnimation(Sprite itemSprite, Actor2D targetPerson, Vector3 scale) {
     GameObject particlePrefab = BattleController.instance.itemParticlePrefab;
     GameObject newParticle = Instantiate(particlePrefab, transform);
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
 
-    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.transform.position.x, particlePrefab.transform.position.y, particlePrefab.transform.position.z);
+    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.renderers[0].transform.position.x, particlePrefab.transform.position.y, particlePrefab.transform.position.z);
     newParticle.GetComponent<SpriteRenderer>().sprite = itemSprite;
+    newParticle.transform.localScale = scale;
+
+    yield return new WaitForSeconds(1.5f);
   }
 
   public void ClickedTargetSelectButton() {

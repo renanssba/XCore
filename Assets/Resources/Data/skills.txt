@@ -8,7 +8,7 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 6	MEGA Valentia	Causa dano MASSIVO baseado em Valentia	attack	one_enemy	5			guts	18											gutsy aura	charged_attack		
 7	MEGA Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
 8	MEGA Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
-9	Sensor	Descobre a fraqueza de um oponente	active	one_enemy	2	sensor														magnifying glass	active		
+9	Sensor	Descobre a fraqueza de um oponente	active	one_enemy	2	sensor														magnifying glass	active_offensive		
 10	Lanche Reforçado	Cura fome e aumenta a defesa de um aliado por 3 turnos	active	one_ally	2								hunger	fortified	100	3				hamburger	active_support	food	
 11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy	2									hunger	100	3				fragrance	active_offensive		
 12	Cozinheiro	Aumenta em 50% os PC recuperados por itens de cura	passive	all_allies		healingItemBonus	0.5													cook	none		
@@ -19,7 +19,7 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
 18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35													run	none		
 19	Beijo de Cura	Cura 16 PC do casal	active	other_ally	2					16										heart-plus	active_support		
-20	Abraço Calmante	Cura medo, tristeza, confusão e tontura de um aliado	active	other_ally	2								sad, fear, confusion, dizzyness							charmed	active_support		
+20	Abraço Calmante	Cura todas as condições negativas do aliado	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry							charmed	active_support		
 21	Saciedade	Recupera todas as condições negativas ao receber um item ou habilidade de comida	passive	self									hunger, dirty, injured, dizzyness, confusion, sad, fear, angry				after_action	cured_status(hunger)	100	eating	passive		
 22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
 23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	3	turn_started	is_turn(4)	100	angry-eyes	passive		
@@ -36,9 +36,12 @@ id	name	description	type	range	sp cost	special effect	effect power	damage attrib
 34	Auto-Sensor	Revela as próprias fraquezas a cada 3 turnos	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		
 35	Atropelar	Causa dano baseado em Valentia e pode deixar o alvo Machucado	active	all_enemies				guts	6					injured	80	4				gutsy aura	run_over		
 36	Golpes Violentos	Causa dano baseado em Valentia e deixa o alvo Machucado	active	one_enemy				guts	8					injured	100	4				gutsy aura	attack		
-37	Rajada de Molho	Causa dano baseado em Carisma e deixa o alvo Melecado	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	attack		
+37	Rajada de Molho	Causa dano baseado em Carisma e deixa o alvo Melecado	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	throw_object		
 38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy				intelligence	4					sad	100	4				gutsy aura	attack		
 39	Fúria Reprimida	Fica irritado até o fim do Encontro	active	self	2									angry	100	-1				angry-eyes	active_support		
 40	Concentrar	Duplica o dano do próximo ataque	passive	self	2									charged	100	1	after_enemy_attack	hp_percent_is_less(0.5), turn_is_multiple(2)	60	angry-eyes	long_charge		
 41	Guardião (Antigo)	Defender dá 70% de chance de receber ataque no lugar da aliada	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
 42	Concentrar	Duplica o dano do próximo ataque	active	self	2									charged	100	1				angry-eyes	long_charge		
+43	Ectoplasma	Deixa todos os inimigos Melecados	active	all_enemies	2			charisma	4					dirty	100	4				dirty	multi_throw		
+44	Indigestão	Contra-ataca se for atacado quando estiver Digerindo	passive	all_enemies				charisma	4					dirty	100	4	after_action	was_attacked_for_damage, has_status_condition(digesting)	100	stomach-red	multi_throw		
+45	Comer Bolo	Recupera um pouco de vida e fica Digerindo	active	self	1					20			hunger	digesting	100	1				eating	throw_object		

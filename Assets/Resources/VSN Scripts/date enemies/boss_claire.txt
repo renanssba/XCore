@@ -5,7 +5,7 @@ waypoint event_statement
 set_var midbattle 0
 set_var first_dialog 0
 
-theater_bg_effect "pulsingEffect" 1
+theater_bg_effect "distortingEffect" 1
 fade_music 0 2
 wait 2
 say "Daniel" "Você tá sentindo isso?"
@@ -19,36 +19,36 @@ wait 1
 
 say "Demônio" "Esta... sombra..."
 actor_animator_parameter angel "Choosing Action" true
-say "Fertiliel" "(Um... demônio de sombra?!)"
+say "Fertiliel" "(Um... demônio sombrio?!)"
 say "(Por que tem um desses por aqui?)"
-say "Demônio" "Tanta raiva, tanta insegurança..."
+say "Demônio" "Tanta incerteza, tanto ressentimento..."
 say "A sombra desta garota... preciso devorá-la."
-say "Clara" "Daniel, Estou com um pressentimento ruim."
+say "Clara" "Daniel, estou com um pressentimento ruim."
 
 
-flash "#BA2D21" 0.3
+flash "#9E54BC" 0.3
 wait 0.8
-flash "#BA2D21" 0.3
+flash "#9E54BC" 0.3
 wait 0.8
-say "Clara" "Argh, estou ficando tonta."
+say "Clara" "Ai, minha cabeça dói..."
 
 wait 0.5
 actor_face main "left"
 wait 0.5
 say "Daniel" "Você tá bem?"
 
-flash "#BA2D21" 0.5
+flash "#9E54BC" 0.5
 wait 0.8
-flash "#BA2D21" 0.5
+flash "#9E54BC" 0.5
 wait 0.8
-say "Clara" "Sinto minhas forças... indo embora..."
+say "Clara" "Acho que vou desmaiar..."
 
 
-flash "#BA2D21" 0.7
+flash "#9E54BC" 0.7
 wait 0.8
-flash "#BA2D21" 0.7
+flash "#9E54BC" 0.7
 wait 0.8
-fade_out 1 "#BA2D21"
+fade_out 1 "#9E54BC"
 
 wait 1
 say "" "<color=white>Aaaaargh!</color>"
@@ -59,21 +59,22 @@ screenshake 2 1
 fade_in 0.7
 wait 1.5
 
-say "Clara Sombria" "Daniel... Fica comigo!"
+say "Clara Sombria" "Vocês dois... sabem quem eu sou?"
 
 //ANIMATION HERE
 wait 0.5
 actor_face main "right"
 wait 0.5
 say "Daniel" "Quem é você?"
-say "Clara Sombria" "Grrr! Você não me reconhece? Eu sou Clara, a sua <b>dona</b>!"
+say "Clara Sombria" "Quem sou eu? Eu... eu não sei..."
 
-say "Clara" "Do que você tá falando? Você não sou eu!"
-say "Clara Sombria" "Você é fraca, o Daniel é <b>meu</b>!"
+say "Clara" "Você precisa de ajuda?"
+say "Clara Sombria" "Eu sou você! Eu sou a <b>Clara</b>."
 
-say "Daniel" "Eu não sei quem ela é, mas não parece estar pra brincadeiras."
-say "Clara Sombria" "Grrr!!! Se você se nega a ser meu, eu vou pegar você à <b>força</b>!"
-say "Clara" "Só passando por cima de mim!"
+say "Clara" "Não, você não sou eu..."
+say "Daniel" "Essa garota me parece suspeita."
+say "Clara" "Ela só deve estar confusa. Vamos ajudá-la, Daniel."
+say "Clara Sombria" "Eu não sei quem eu sou... ME DIGAM!"
 say "Fertiliel" "(Esse demônio parece perigoso, tenho que proteger meus humanos!)"
 
 
@@ -84,52 +85,40 @@ wait 0.5
 actor_animator_parameter angel "Choosing Action" false
 wait 0.5
 
-set_var guts_action_boy_name "strike"
-set_var guts_action_girl_name "strike"
+set_var guts_action_boy_name "motivate"
+set_var guts_action_girl_name "motivate"
 set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "think"
 set_var charisma_action_boy_name "soothe"
-set_var charisma_action_girl_name "talk"
+set_var charisma_action_girl_name "soothe"
 end_script
 
 
 waypoint guts_action_boy
-//say "Clara Sombria" "Daniel..."
-//say "\active" "Fique longe!"
-set_var pre_attack  "\active empurra a sombra!"
-end_script
-
 waypoint guts_action_girl
-//say "\active" "Fique longe!"
-set_var pre_attack  "\active empurra a sombra!"
+set_var pre_attack "\active diz para a sombra que ela vai se lembrar se tentar!"
 end_script
 
 waypoint intelligence_action_boy
-//say "\active" "Que tipo de criatura é você? Nos deixe em paz!"
-//say "Clara Sombria" "Daniel..."
-set_var pre_attack "\active pressiona a sombra!"
+set_var pre_attack "\active pergunta se a sombra se lembra de algo!"
 end_script
 
 waypoint intelligence_action_girl
-//say "\active" "(Eu acho que ela é...parte de mim.)"
-//say "\active" "(Se eu me concentrar, talvez eu consiga fazê-la desaparecer!)"
 set_var pre_attack "\active se concentra em pensamentos felizes!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active diz que eles não precisam lutar!"
+set_var pre_attack "\active pede educadamente para a sombra se acalmar e pensar."
 end_script
 
 
 waypoint attack_boy
-//say "Clara Sombria" "Porque você não gosta de mim...?"
-set_var pre_attack "A sombra envolve \boy e o aperta com muita força!"
+set_var pre_attack "A sombra ofende \boy!"
 end_script
 
 waypoint attack_girl
-//say "Clara Sombria" "Ele não te ama...ele não nos ama..."
-set_var pre_attack "A sombra ataca \girl com força!"
+set_var pre_attack "A sombra ofende a aparência de \girl!"
 end_script
 
 
@@ -137,24 +126,29 @@ end_script
 
 waypoint first_dialog
 if first_dialog == 0
-  say "Daniel" "O que está havendo por aqui? Será que isso tudo é um pesadelo?"
-  say "Clara" "Não parece ser só um pesadelo, os golpes dessa coisa doem de verdade."
-  say "Clara Sombria" "Eu não sou uma <b>\qcoisa\q</b>, eu sou a <b>Clara</b>!"
+  say "Daniel" "O que está havendo por aqui? Será que estamos sonhando?"
   
-  say "Clara" "Você não sou eu!"
-  say "Daniel" "Por que você está tão furiosa?"
-  say "Clara Sombria" "Eu estou furiosa por que o Daniel não gosta de mim!\nEu protejo ele de tudo, mas ele não retribui o meu <b>amor</b>!!!"
+  say "Clara" "Eu não sei, mas algo dentro de mim quer muito ajudá-la."
+  say "Clara Sombria" "Eu sou a <b>Clara</b>. Mas eu não sei quem eu sou."
+  
+  say "Clara" "Você não sou eu. Deve estar confusa..."
+
+  say "Daniel" "Você perdeu a memória?"
+  
+  say "Clara Sombria" "Não, eu sei que meu nome é <b>Clara</b>... Ela sabe quem eu sou, mas não quer me dizer!"
+  
   wait 0.3
   actor_face main "left"
   wait 0.3
-  say "Daniel" "Clara...?"
-  say "Clara" "Não é verdade, Daniel..."
+  say "Daniel" "Clara, você conhece essa garota...?"
+  say "Clara" "Não, eu acho que não..."
   
-  say "Clara Sombria" "É <b>claro</b> que é! Eu sou tão <b>violenta</b> porque ele não me ama de volta!"
+  say "Clara Sombria" "Você sabe sim! Me diga!"
   wait 0.3
   actor_face main "right"
   wait 0.3
-  say "Clara" "Não escuta ela!"
+  say "Clara" "Desculpa, eu vou te ajudar a descobrir... Eu vou te ajudar..."
+  
   
   actor_animator_parameter angel "Choosing Action" true
   say "Fertiliel" "(Esse demônio se alimenta de sentimentos reprimidos e negativos dos humanos.)"
@@ -162,9 +156,9 @@ if first_dialog == 0
   actor_animator_parameter angel "Choosing Action" false
   
   wait 0.5
-  use_skill "enemy" "enemy" 39
+  use_skill "enemy" "enemy" 45
   screenshake 1
-  say "Clara Sombria" "Grraaaaaurrr!!!"
+  say "Clara Sombria" "Me digam quem eu sou!!!"
   set_var first_dialog 1
 endif
 end_script
@@ -174,44 +168,52 @@ end_script
 
 waypoint midbattle_dialog
 if midbattle == 0
-  say "Clara Sombria" "Daniel, por que você não gosta de mim?"
-  say "Eu faço tudo por você há anos, mas você só tem olhos praquela <b>idiota</b> da Clara!"
+  say "Clara Sombria" "Eu me esforço muito, faço de tudo pros outros gostarem de mim..."
+  say "Mas mesmo assim, é como se eu não existisse. Porque ninguém presta atenção no que <b>eu</b> quero?!"
   
   wait 0.3
   actor_face main "left"
   wait 0.3
-  say "Daniel" "Clara? Você tem ciúmes da Clara?"
-  say "Clara" "Ta-talvez... Só um pouquinho..."
+  say "Daniel" "Clara, você também se sente assim?"
+  say "Clara" "N-não... Eu gosto de ajudar os outros..."
   
-  say "Clara Sombria" "Você me odeia porque me acha feia? Você não me acha feminina?"
-  say "Ou é porque eu sou baixa demais e não sirvo pra jogar basquete?"
+  say "Clara Sombria" "É claro que eu gosto de ajudar os outros, senão por que alguém gostaria de mim?"
+  say "Eu faço tudo o que os meus pais mandam, faço tudo que as pessoas querem. Mas não consigo achar o que eu mesma quero alcançar."
+  say "Eu não sei nem <b>o que eu quero</b>, como eu vou saber <b>quem</b> eu sou?!"
   
   say "Daniel" "..."
-  say "É assim que você se sente, Clara? Você pensa tão mal assim de si mesma?"
+  say "É assim que você se sente, Clara? Você tá se sentindo tão sobrecarregada assim?"
   say "Clara" "..."
-  say "Clara Sombria" "Eu sei por que você não gosta de mim, Daniel. É porque não tem <b>nada</b> em mim pra você gostar."
-  say "Clara" "Para..."
-  say "Para com isso sua <b>monstra</b>!"
+  say "Clara Sombria" "Porque você não me ajuda? ME DIZ QUEM EU SOU!"
+  say "Clara" "Não..."
+  say "Não é assim que eu <b>me sinto</b>!"
   
   wait 0.5
-  say "Clara Sombria" "Eu não sou nenhuma <b>\qmonstra\q</b>. Eu sou <b>você</b>! Você e eu somos uma só!!!"
-  say "Clara" "Somos... uma só?"
+  say "Clara Sombria" "Você não sabe me dizer <b>quem eu sou</b> porque eu sou <b>você</b>! Você e eu somos uma só!!!"
+  say "Clara" "Eu acho que não..."
+  say "Nós somos?"
   wait 1
-  say "Clara Sombria" "Raaaaaaawwww!!!"
+  say "Clara Sombria" "Siiim!!!"
+  use_skill "enemy" "enemy" 45
+  use_skill "enemy" "enemy" 43
   screenshake 2 2
   theater_bg_effect "pulsingEffect" 2
   wait 2
   
+  say "Clara Sombria" "E você é como todos os outros, Daniel. Você não gosta de <b>quem</b> eu sou por dentro. Você só gosta de mim porque eu sou bonita!"
+  
   wait 0.3
   actor_face main "right"
   wait 0.3
-  say "Daniel" "Não, não são!"
-  say "A Clara que eu conheço não é cruel como você."
-  say "Ela é muito forte, esforçada e nunca desiste!!"
+  say "Daniel" "Não é verdade!"
+  say "A Clara é a pessoa mais gentil que eu conheço."
+  say "Ela ajuda os outros porque ela se importa, não por egoísmo como você!"
   say "Clara" "Daniel..."
-  say "Daniel" "E é a pessoa mais especial do mundo pra mim. Eu não vou deixar alguém como você machucá-la desse jeito!"
+  say "Daniel" "E é a pessoa mais especial do mundo pra mim. Pare de tentar confundí-la desse jeito!"
   say "Clara" "..."
-  say "Você tá certo, vamos acabar com essa impostora!"
+  say "Clara" "Não, Daniel. Ela tá certa. Eu não tenho todas as respostas."
+  say "Eu não sei exatamente o que eu quero, ainda preciso encontrar quem eu realmente sou..."
+  say "Não vou mais viver fazendo apenas o que agrada os outros. E para começar, vou enfrentá-la!"
   set_var midbattle 1
 endif
 end_script
@@ -225,12 +227,15 @@ fade_music 0 2
 wait 2
 theater_bg_effect "pulsingEffect" 0
 wait 2
-say "" "O demônio de sombra se dissolve em névoa."
+
+actor_animator_parameter enemy "Elimination"
+wait 5
+
+say "" "A sombra se dissolve em névoa."
 
 actor_animator_parameter main "Battle" false
 actor_animator_parameter support "Battle" false
-// demon dissolving animation
-wait 2
+wait 1
 
 say "" "Esgotados, Daniel e Clara caem no chão, desacordados."
 fade_out 1

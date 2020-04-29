@@ -27,6 +27,7 @@ public enum StatusConditionEffect {
   chanceToAutoDefend,
   cantAct,
   becomeTarget,
+  digesting,
   count
 }
 

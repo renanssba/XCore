@@ -14,6 +14,7 @@ public enum TheaterEvent {
 
 public enum BgEffect {
   pulsingEffect,
+  flamingEffect,
   distortingEffect,
   count
 }
@@ -478,7 +479,7 @@ public class TheaterController : MonoBehaviour {
     if(actor == null) {
       return;
     }
-    actor.SetParameter(parameterName, value);
+    actor.SetAnimationParameter(parameterName, value);
   }
 
   public void PartyEntersBattleMode() {

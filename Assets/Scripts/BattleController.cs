@@ -116,7 +116,7 @@ public class BattleController : MonoBehaviour {
   public bool IsBattleHappening() {
     return VsnSaveSystem.GetBoolVariable("battle_is_happening");
   }
-
+  
   public void EndDate() {
     VsnSaveSystem.SetVariable("battle_is_happening", false);
 
@@ -260,7 +260,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void FinishSelectingCharacterAction() {
-    int currentPlayerTurn = CurrentPlayerTargetId();
+    int currentPlayerTurn = CurrentPlayer();
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
@@ -585,24 +585,35 @@ public class BattleController : MonoBehaviour {
 
 
     // skill cast animation
-    if(usedSkill.animation != SkillAnimation.none &&
-       usedSkill.animation != SkillAnimation.passive) {
-      switch(usedSkill.animation) {
-        case SkillAnimation.attack:
-          if(skillUserId == SkillTarget.partyMember1 || skillUserId == SkillTarget.partyMember2) {
-            ActionSkin skin = GetActionSkin(partyMembers[(int)skillUserId], usedSkill);
-            VsnAudioManager.instance.PlaySfx(skin.sfxName);
-          } else {
-            VsnAudioManager.instance.PlaySfx(skillUserActor.enemy.attackSfxName);
-          }
-          break;
-        case SkillAnimation.active_offensive:
-        case SkillAnimation.active_support:
-        case SkillAnimation.long_charge:
-          VsnAudioManager.instance.PlaySfx("skill_cast");
-          break;
-      }
-      yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
+    switch(usedSkill.animation) {
+      case SkillAnimation.attack:
+        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
+        yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
+        break;
+
+      case SkillAnimation.active_offensive:
+      case SkillAnimation.active_support:
+      case SkillAnimation.long_charge:
+        VsnAudioManager.instance.PlaySfx("skill_cast");
+        yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
+        break;
+
+      case SkillAnimation.throw_object:
+        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
+        yield return skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/dirty"), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
+        break;
+      case SkillAnimation.multi_throw:
+        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
+        foreach(Actor2D targetActor in targetActors) {
+          skillUserActor.StartCoroutine( skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Characters/splash-yellow"), targetActor, Vector3.one) );
+        }
+        yield return new WaitForSeconds(1.5f);
+        break;
+
+      case SkillAnimation.none:
+      case SkillAnimation.passive:
+        /// show nothing
+        break;
     }
 
     foreach(Actor2D targetActor in targetActors) {
@@ -611,16 +622,18 @@ public class BattleController : MonoBehaviour {
        usedSkill.animation != SkillAnimation.passive) {
       
         switch(usedSkill.animation) {
+          case SkillAnimation.active_support:
+          case SkillAnimation.long_charge:
+            targetActor.ShineGreen();
+            break;
           case SkillAnimation.attack:
           case SkillAnimation.charged_attack:
           case SkillAnimation.active_offensive:
           case SkillAnimation.run_over:
+          case SkillAnimation.throw_object:
+          case SkillAnimation.multi_throw:
           default:
             targetActor.ShineRed();
-            break;
-          case SkillAnimation.active_support:
-          case SkillAnimation.long_charge:
-            targetActor.ShineGreen();
             break;
         }
         //yield return new WaitForSeconds(0.4f);
@@ -753,6 +766,16 @@ public class BattleController : MonoBehaviour {
   }
 
 
+  public void PlayBasicAttackSFX(SkillTarget skillUserId, Actor2D skillUserActor, Skill usedSkill) {
+    if(skillUserId == SkillTarget.partyMember1 || skillUserId == SkillTarget.partyMember2) {
+      ActionSkin skin = GetActionSkin(partyMembers[(int)skillUserId], usedSkill);
+      VsnAudioManager.instance.PlaySfx(skin.sfxName);
+    } else {
+      VsnAudioManager.instance.PlaySfx(skillUserActor.enemy.attackSfxName);
+    }
+  }
+
+
   public IEnumerator ExecuteUseItem(SkillTarget itemUserId, SkillTarget targetId, Item usedItem) {
     Actor2D userActor = TheaterController.instance.GetActorByIdInParty(itemUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
@@ -766,9 +789,7 @@ public class BattleController : MonoBehaviour {
     Enemy currentEvent = GetCurrentEnemy();
     VsnAudioManager.instance.PlaySfx("challenge_default");
 
-    userActor.UseItemAnimation(targetActor, usedItem);
-
-    yield return new WaitForSeconds(1.5f);
+    yield return userActor.UseItemAnimation(targetActor, usedItem);
 
     // spend item
     Inventory ivt = GlobalData.instance.people[0].inventory;
@@ -1052,12 +1073,12 @@ public class BattleController : MonoBehaviour {
     return selectedEnemyId;
   }
 
-  public int CurrentPlayerTargetId() {
+  public int CurrentPlayer() {
     return VsnSaveSystem.GetIntVariable("currentPlayerTurn");
   }
 
   public Person GetCurrentPlayer() {
-    int currentPlayer = CurrentPlayerTargetId();
+    int currentPlayer = CurrentPlayer();
     if(currentPlayer < partyMembers.Length) {
       return partyMembers[currentPlayer];
     }
@@ -1065,7 +1086,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public Person GetCurrentTarget() {
-    int currentPlayer = CurrentPlayerTargetId();
+    int currentPlayer = CurrentPlayer();
     if(currentPlayer < partyMembers.Length) {
       int target = (int)selectedTargetPartyId[currentPlayer];
       if(target < partyMembers.Length) {
@@ -1192,7 +1213,7 @@ public class BattleController : MonoBehaviour {
 
     allSkills = new List<Skill>();
     foreach(Dictionary<string, string> entry in data.data) {
-      Debug.LogWarning("Importing skill: " + entry["name"]);
+      //Debug.LogWarning("Importing skill: " + entry["name"]);
 
       Skill newSkill = new Skill();
 
@@ -1303,7 +1324,7 @@ public class BattleController : MonoBehaviour {
 
   public SkillAnimation GetSkillAnimationByString(string skillAnimation) {
     for(int i = 0; i <= (int)SkillAnimation.none; i++) {
-      if(((SkillAnimation)i).ToString() == skillAnimation) {
+      if(skillAnimation.StartsWith( ((SkillAnimation)i).ToString() ) ) {
         return (SkillAnimation)i;
       }
     }
@@ -1363,14 +1384,13 @@ public class BattleController : MonoBehaviour {
 
       newStatusCondition.id = int.Parse(entry["id"]);
       newStatusCondition.name = entry["name"];
-      //newStatusCondition.description = entry["description"];
-      newStatusCondition.stackable = int.Parse(entry["stackable"]);//  (entry["stackable"] == "TRUE" ? true : false);
+      newStatusCondition.stackable = int.Parse(entry["stackable"]);
 
       newStatusCondition.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
 
       List<StatusConditionEffect> effects = new List<StatusConditionEffect>();
       List<float> effectsPower = new List<float>();
-      Debug.LogWarning("Status Condition: " + newStatusCondition.name);
+      //Debug.LogWarning("Status Condition: " + newStatusCondition.name);
       for(int i=1; i<=3; i++) {
         if(!string.IsNullOrEmpty(entry["effect "+i])) {
           effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
@@ -1389,7 +1409,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public StatusConditionEffect GetStatusConditionEffectByString(string effect) {
-    Debug.LogWarning("effect: " + effect);
+    //Debug.LogWarning("effect: " + effect);
     for(int i = 0; i <= (int)StatusConditionEffect.count; i++) {
       if(((StatusConditionEffect)i).ToString() == effect) {
         return (StatusConditionEffect)i;

@@ -241,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247420460506792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 0.22, z: -0.4}
+  m_LocalPosition: {x: 1.4, y: 0.22, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4985275245058410}
@@ -380,8 +380,10 @@ MonoBehaviour:
   renderers:
   - {fileID: 212642758397002782}
   - {fileID: 212549487588983480}
-  buffAuraRenderers: []
-  particleSystem: {fileID: 0}
+  buffAuraRenderers:
+  - {fileID: 212949912008394620}
+  - {fileID: 212762293968010570}
+  particleSystem: {fileID: 198057774880711740}
   shadowRenderer: {fileID: 212029092257038154}
   rendererColors: []
   rendererFlashAmounts: []

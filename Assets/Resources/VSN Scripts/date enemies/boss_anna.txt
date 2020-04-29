@@ -19,11 +19,11 @@ wait 1
 
 say "Demônio" "Esta... sombra..."
 actor_animator_parameter angel "Choosing Action" true
-say "Fertiliel" "(Um... demônio de sombra?!)"
+say "Fertiliel" "(Um... demônio sombrio?!)"
 say "(Por que tem um desses por aqui?)"
 say "Demônio" "Tanta raiva, tanta insegurança..."
 say "A sombra desta garota... preciso devorá-la."
-say "Ana" "Daniel, Estou com um pressentimento ruim."
+say "Ana" "Daniel, estou com um pressentimento ruim."
 
 
 flash "#BA2D21" 0.3
@@ -88,31 +88,21 @@ set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
 set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "think"
-set_var charisma_action_boy_name "soothe"
+set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
 end_script
 
 
 waypoint guts_action_boy
-//say "Ana Sombria" "Daniel..."
-//say "\active" "Fique longe!"
-set_var pre_attack  "\active empurra a sombra!"
-end_script
-
 waypoint guts_action_girl
-//say "\active" "Fique longe!"
-set_var pre_attack  "\active empurra a sombra!"
+set_var pre_attack "\active empurra a sombra!"
 end_script
 
 waypoint intelligence_action_boy
-//say "\active" "Que tipo de criatura é você? Nos deixe em paz!"
-//say "Ana Sombria" "Daniel..."
 set_var pre_attack "\active pressiona a sombra!"
 end_script
 
 waypoint intelligence_action_girl
-//say "\active" "(Eu acho que ela é...parte de mim.)"
-//say "\active" "(Se eu me concentrar, talvez eu consiga fazê-la desaparecer!)"
 set_var pre_attack "\active se concentra em pensamentos felizes!"
 end_script
 
@@ -123,12 +113,10 @@ end_script
 
 
 waypoint attack_boy
-//say "Ana Sombria" "Porque você não gosta de mim...?"
 set_var pre_attack "A sombra envolve \boy e o aperta com muita força!"
 end_script
 
 waypoint attack_girl
-//say "Ana Sombria" "Ele não te ama...ele não nos ama..."
 set_var pre_attack "A sombra ataca \girl com força!"
 end_script
 
@@ -211,7 +199,9 @@ if midbattle == 0
   say "Ana" "Daniel..."
   say "Daniel" "E é a pessoa mais especial do mundo pra mim. Eu não vou deixar alguém como você machucá-la desse jeito!"
   say "Ana" "..."
-  say "Você tá certo, vamos acabar com essa impostora!"
+  say "Não, Daniel, ela tem razão. Eu tenho esses pensamentos ruins dentro de mim."
+  say "Mas são meus sentimentos! Não vou deixar que ela fique com eles!"
+  say "Vamos acabar com essa impostora!"
   set_var midbattle 1
 endif
 end_script
@@ -225,12 +215,15 @@ fade_music 0 2
 wait 2
 theater_bg_effect "pulsingEffect" 0
 wait 2
-say "" "O demônio de sombra se dissolve em névoa."
+
+actor_animator_parameter enemy "Elimination"
+wait 5
+
+say "" "A sombra se dissolve em névoa."
 
 actor_animator_parameter main "Battle" false
 actor_animator_parameter support "Battle" false
-// demon dissolving animation
-wait 2
+wait 1
 
 say "" "Esgotados, Daniel e Ana caem no chão, desacordados."
 fade_out 1

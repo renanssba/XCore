@@ -8,9 +8,13 @@ namespace Command {
   public class ActorAnimatorParameterCommand : VsnCommand {
 
     public override void Execute() {
-      TheaterController.instance.SetActorAnimatorParameter(args[0].GetReference(),
-        args[1].GetStringValue(),
-        args[2].GetBooleanValue());
+      Actor2D actor = TheaterController.instance.GetActorByString(args[0].GetReference());
+
+      if(args.Length >= 3) {
+        actor.SetAnimationParameter(args[1].GetStringValue(), args[2].GetBooleanValue());
+      } else if(args.Length == 2) {
+        actor.SetAnimationTrigger(args[1].GetStringValue());
+      }
     }
 
     public override void AddSupportedSignatures() {
@@ -18,6 +22,11 @@ namespace Command {
         VsnArgType.referenceArg,
         VsnArgType.stringArg,
         VsnArgType.booleanArg
+      });
+
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.referenceArg,
+        VsnArgType.stringArg
       });
     }
   }

@@ -101,11 +101,13 @@ public class Enemy : Battler {
 
 
   public override Actor2D GetActor2D() {
-    SkillTarget partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
-    if(partyMemberPos == SkillTarget.none) {
-      return null;
-    }
-    return TheaterController.instance.GetActorByIdInParty(partyMemberPos);
+    return TheaterController.instance.GetActorByBattlingCharacter(this);
+
+    //SkillTarget partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
+    //if(partyMemberPos == SkillTarget.none) {
+    //  return null;
+    //}
+    //return TheaterController.instance.GetActorByIdInParty(partyMemberPos);
   }
   
   

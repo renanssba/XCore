@@ -244,7 +244,7 @@ public abstract class Battler {
       receivedNewStatus = true;
     }
     UIController.instance.UpdateDateUI();
-    actor.UpdateGraphics();
+    UpdateActorGraphics();
     return receivedNewStatus;
   }
 
@@ -280,20 +280,19 @@ public abstract class Battler {
   }
 
   public void RemoveStatusCondition(string name) {
-    Actor2D actor = TheaterController.instance.GetActorByBattlingCharacter(this);
-
     for(int i = statusConditions.Count-1; i >= 0; i--) {
       if(statusConditions[i].name == name) {
         statusConditions.RemoveAt(i);
       }
     }
     UIController.instance.UpdateDateUI();
-    actor.UpdateGraphics();
+    UpdateActorGraphics();
   }
 
   public void RemoveAllStatusConditions() {
     statusConditions.Clear();
     UIController.instance.UpdateDateUI();
+    UpdateActorGraphics();
   }
 
   public void EndTurn() {
@@ -316,6 +315,7 @@ public abstract class Battler {
       BattleController.instance.StartCoroutine(BattleController.instance.ShowRecoverStealth());
     }
     UIController.instance.UpdateDateUI();
+    UpdateActorGraphics();
   }
   
 
@@ -364,5 +364,12 @@ public abstract class Battler {
   }
   
   public abstract Actor2D GetActor2D();
+
+  public void UpdateActorGraphics() {
+    Actor2D actor = GetActor2D();
+    if(actor != null) {
+      actor.UpdateGraphics();
+    }
+  }
 
 }
