@@ -260,7 +260,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void FinishSelectingCharacterAction() {
-    int currentPlayerTurn = CurrentPlayer();
+    int currentPlayerTurn = CurrentPlayerId();
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
@@ -600,7 +600,7 @@ public class BattleController : MonoBehaviour {
 
       case SkillAnimation.throw_object:
         PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
-        yield return skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/dirty"), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
+        yield return skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/" + usedSkill.skillAnimationArgument), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
         break;
       case SkillAnimation.multi_throw:
         PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
@@ -682,6 +682,9 @@ public class BattleController : MonoBehaviour {
           break;
         case SkillSpecialEffect.divertEnemyTarget:
           VsnSaveSystem.SetVariable("enemyAttackTargetId", (int)OtherPartyMemberId(skillUserId));
+          break;
+        case SkillSpecialEffect.reflectEnemyTarget:
+          selectedTargetPartyId[CurrentPlayerId()] = (SkillTarget)CurrentPlayerId();
           break;
       }
 
@@ -1073,12 +1076,12 @@ public class BattleController : MonoBehaviour {
     return selectedEnemyId;
   }
 
-  public int CurrentPlayer() {
+  public int CurrentPlayerId() {
     return VsnSaveSystem.GetIntVariable("currentPlayerTurn");
   }
 
   public Person GetCurrentPlayer() {
-    int currentPlayer = CurrentPlayer();
+    int currentPlayer = CurrentPlayerId();
     if(currentPlayer < partyMembers.Length) {
       return partyMembers[currentPlayer];
     }
@@ -1086,7 +1089,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public Person GetCurrentTarget() {
-    int currentPlayer = CurrentPlayer();
+    int currentPlayer = CurrentPlayerId();
     if(currentPlayer < partyMembers.Length) {
       int target = (int)selectedTargetPartyId[currentPlayer];
       if(target < partyMembers.Length) {
@@ -1259,6 +1262,7 @@ public class BattleController : MonoBehaviour {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
       newSkill.animation = GetSkillAnimationByString(entry["animation"]);
+      newSkill.skillAnimationArgument = Utils.GetStringArgument(entry["animation"]);
 
       newSkill.tags = Utils.SeparateTags(entry["tags"]);
 
@@ -1307,6 +1311,15 @@ public class BattleController : MonoBehaviour {
       }
     }
     return PassiveSkillActivationTrigger.none;
+  }
+
+  public SkillTarget GetSkillTargetByString(string targetName) {
+    for(int i = 0; i <= (int)SkillTarget.none; i++) {
+      if(((SkillTarget)i).ToString() == targetName) {
+        return (SkillTarget)i;
+      }
+    }
+    return SkillTarget.none;
   }
 
   public SkillType GetSkillTypeByString(string skillType) {

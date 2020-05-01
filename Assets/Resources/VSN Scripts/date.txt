@@ -95,6 +95,7 @@ for currentDateEvent #dateLength
   // execute player actions
   for currentPlayerTurn #partyLength
     check_action_skip currentPlayerTurn
+    goto_script "check_passive_triggers" "before_action"
     character_action_description currentPlayerTurn
     character_action currentPlayerTurn
     goto_script "check_passive_triggers" "after_action"

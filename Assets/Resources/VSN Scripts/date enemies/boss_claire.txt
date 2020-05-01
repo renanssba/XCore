@@ -52,7 +52,7 @@ fade_out 1 "#9E54BC"
 
 wait 1
 say "" "<color=white>Aaaaargh!</color>"
-actor_become enemy "boss_claire2"
+actor_become enemy "boss_claire"
 wait 0.5
 
 screenshake 2 1
@@ -96,7 +96,7 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active diz para a sombra que ela vai se lembrar se tentar!"
+set_var pre_attack "\active diz para a sombra não desistir de tentar lembrar quem é!"
 end_script
 
 waypoint intelligence_action_boy
@@ -156,7 +156,7 @@ if first_dialog == 0
   actor_animator_parameter angel "Choosing Action" false
   
   wait 0.5
-  use_skill "enemy" "enemy" 45
+  use_skill enemy "enemy1" 45
   screenshake 1
   say "Clara Sombria" "Me digam quem eu sou!!!"
   set_var first_dialog 1
@@ -194,8 +194,8 @@ if midbattle == 0
   say "Nós somos?"
   wait 1
   say "Clara Sombria" "Siiim!!!"
-  use_skill "enemy" "enemy" 45
-  use_skill "enemy" "enemy" 43
+  use_skill enemy "enemy1" 45
+  use_skill enemy "allHeroes" 43
   screenshake 2 2
   theater_bg_effect "pulsingEffect" 2
   wait 2

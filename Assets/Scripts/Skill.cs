@@ -44,6 +44,7 @@ public enum SkillSpecialEffect {
   raiseMaxSp,
   becomeEnemyTarget,
   divertEnemyTarget,
+  reflectEnemyTarget,
   none
 }
 
@@ -52,6 +53,7 @@ public enum PassiveSkillActivationTrigger {
   turn_started,
   before_enemy_attack,
   after_enemy_attack,
+  before_action,
   after_action,
   before_death_checks,
   none
@@ -157,6 +159,7 @@ public class Skill {
   public float triggerChance;
 
   public SkillAnimation animation;
+  public string skillAnimationArgument;
 
   public string[] tags;
 

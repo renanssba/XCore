@@ -13,6 +13,12 @@ if previousLevel < #currentRelationshipLevel
   endif
 endif
 
+if previousLevel < 1
+  if #currentRelationshipLevel >= 1
+    unlock_skill 8
+  endif
+endif
+
 if previousLevel < 2
   if #currentRelationshipLevel >= 2
     unlock_skill 0

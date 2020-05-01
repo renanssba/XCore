@@ -248,6 +248,9 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetAnimationTrigger(string triggerName) {
+    if(triggerName == "Elimination" && buffAuraRenderers[0] != null) {
+      buffAuraRenderers[0].gameObject.SetActive(false);
+    }
     animator.SetTrigger(triggerName);
   }
 

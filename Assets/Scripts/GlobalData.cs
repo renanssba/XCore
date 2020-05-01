@@ -174,6 +174,14 @@ public class GlobalData : MonoBehaviour {
     relationships[2].skilltree.skills[12].isUnlocked = true;
 
     // DEBUG: TESTING SKILLS IN BATTLE
+    relationships[0].exp = 100;
+    relationships[0].level = 7;
+    relationships[0].bondPoints = 10;
+
+    relationships[1].exp = 100;
+    relationships[1].level = 7;
+    relationships[1].bondPoints = 10;
+
     relationships[2].exp = 100;
     relationships[2].level = 7;
     relationships[2].bondPoints = 10;
@@ -320,7 +328,7 @@ public class GlobalData : MonoBehaviour {
     if(name == "Ana Sombria") {
       return ResourcesManager.instance.faceSprites[2];
     }
-    if(name == "Beatrice Amaldiçoada") {
+    if(name == "Beatrice Sombria") {
       return ResourcesManager.instance.faceSprites[3];
     }
     if(name == "Clara Sombria") {

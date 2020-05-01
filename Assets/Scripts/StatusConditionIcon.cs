@@ -28,6 +28,8 @@ public enum StatusConditionEffect {
   cantAct,
   becomeTarget,
   digesting,
+  reflectOnMain,
+  reflectOnSupport,
   count
 }
 

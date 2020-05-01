@@ -353,8 +353,15 @@ public abstract class Battler {
         int damage = (int)sc.statusEffectPower[i] - AttributeValue(((int)sc.statusEffect[i])-4)/3;
         damage = Mathf.Max(1, damage);
         damage *= statusEffectStacks;
-        TakeDamage(damage);
-        GetActor2D().ShowDamageParticle(damage, 1f);
+
+        float damagePercentage = 0.025f * damage;
+        int totaldamage = Mathf.RoundToInt(damagePercentage * MaxHP());
+        //Debug.LogWarning("STATUS DAMAGE - Damage count: "+damage);
+        //Debug.LogWarning("STATUS DAMAGE - Percentage: " + damagePercentage);
+        //Debug.LogWarning("STATUS DAMAGE - Total damage: " + totaldamage);
+
+        TakeDamage(totaldamage);
+        GetActor2D().ShowDamageParticle(totaldamage, 1f);
         VsnController.instance.WaitForCustomInput();
 
         VsnSaveSystem.SetVariable("target_name", GetName());

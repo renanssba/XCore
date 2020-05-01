@@ -52,7 +52,7 @@ fade_out 1 "#BA2D21"
 
 wait 1
 say "" "<color=white>Aaaaargh!</color>"
-actor_become enemy "boss_anna2"
+actor_become enemy "boss_anna"
 wait 0.5
 
 screenshake 2 1
@@ -150,7 +150,7 @@ if first_dialog == 0
   actor_animator_parameter angel "Choosing Action" false
   
   wait 0.5
-  use_skill "enemy" "enemy" 39
+  use_skill enemy "enemy1" 39
   screenshake 1
   say "Ana Sombria" "Grraaaaaurrr!!!"
   set_var first_dialog 1
