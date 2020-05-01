@@ -8,11 +8,26 @@ goto_script "enter_observation" "school morning"
 if #day == 1
   set_var foi_na_biblioteca 1
   say "" "Na biblioteca..."
+  theater_setup main "person(daniel)" "out_left" support "person(beatrice)" "out_right" bully1 "valentao" "out_right" bully2 "valentao" "out_right" 
+  actor_face support "left"
+  actor_face main "right"
+  actor_face bully1 "right"
+  actor_face bully2 "right"
+  actor_move support "grid_6" 0
+  actor_move bully1 "grid_5" 0
+  actor_move bully2 0.6 0.2 -0.4 0
+  //actor_move bully2 "grid_4" 0
+  move_camera -1.6 1.5 -3.6 0
   fade_in 1
+  actor_move main "grid_1" 1.0
+  wait 1.0
   say "" "Daniel passeia por entre as estantes de livros e entreouve vozes risonhas."
+  move_camera 0 1.45 -6.4 1.5
+  fade_music 0 1.5
   say "Valentão A" "Ora, veja só quem apareceu no nosso colégio, galera!"
   say "Valentão B" "Hahahaha! A bruxa! Eu ouvi dizer que ela pode queimar pessoas com os olhos!"
   say "Beatrice" "..."
+  move_camera 1.5 1.5 -3.3 1.5
   say "" "Daniel move alguns livros para espiar através de uma estante. Dois garotos mais velhos estão provocando a aluna nova."
   say "Beatrice" "Por favor, me deixem em paz."
   say "Valentão A" "Nós somos os guardiões da escola, bruxa. Pra estudar aqui, você precisa pagar pedágio."
@@ -21,15 +36,35 @@ if #day == 1
   say "Valentão A" "Passa todo o dinheiro, bruxa."
   say "Beatrice" "...Eu não tenho nada."
   say "Valentão A" "É mesmo? Vamos ver."
+  actor_move bully1 1.8 0.2 -0.4 0.6
   say "" "Um dos valentões agarra a mochila de Beatrice e começa a puxar, tentando abrir. A menina se desespera."
+  actor_move support 2.5 0.2 -0.4 0.4
   say "Beatrice" "Não, por favor!"
   say "" "A garota reage e tenta puxar a mochila de volta. O líder da gangue fica furioso."
   say "Valentão A" "Você está me desafiando? Má escolha."
+  actor_move bully1 2.0 0.2 -0.4 0.4
+  wait 0.5
+  play_sfx "pushing_beatrice"
+  actor_move bully1 1.8 0.2 -0.4 0.6
+  fade_out 1.0
   say "" "O valentão empurra Beatrice. A garota cai  e sua mochila se rasga, o material escolar se espalhando pelo chão."
+  move_camera -1.6 1.5 -3.6 0
+  fade_in 1.0
   say "Daniel" "(A coisa ficou feia...! Preciso tentar ajudá-la!)"
+  actor_move main "grid_5" 1.5
+  fade_out 1.0
+  wait 1.5
+  actor_move main "out_left" 0
   say "" "Daniel corre, tentando dar a volta pela longa fileira de prateleiras."
+  move_camera 1.5 1.5 -3.3 1.0
+  wait 1.2
   say "Valentão B" "Tem alguém vindo!"
   say "Valentão A" "Traga a grana da próxima vez. Vejo você depois, bruxa."
+  actor_move bully1 "out_right" 1.5
+  wait 0.1
+  actor_move bully2 "out_right" 1.5
+  play_sfx "running_away_men"
+  wait 1.0
   say "" "Os valentões dão a volta e vão embora. Daniel se aproxima, ofegante."
   say "Daniel" "Você tá bem?"
   say "Beatrice" "..."

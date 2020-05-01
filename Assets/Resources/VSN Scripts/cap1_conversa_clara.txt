@@ -4,6 +4,9 @@ endif
 
 goto_script "enter_observation" "house afternoon"
 say "" "Daniel vai para casa e espera a chegada de Clara para estudarem."
+theater_setup main "person(daniel)" "grid_3" support "person(claire)" "out_left"
+move_camera "girl_interaction" 0
+actor_face main "left"
 fade_in 1
 
 
@@ -25,25 +28,33 @@ endif
 if #currentRelationshipLevel == 0
   say "Daniel" "(Será que ela vem mesmo?)"
   say "(Pode ser a única vez na vida que ela virá aqui em casa. Hoje é o dia que eu devo me declarar!)"
-
+  //TODO: play_sfx doorbell
   wait 1
   say "" "A campainha toca e Daniel tem um leve infarto."
-  say "Ele anda até a entrada da casa. Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
-  
+  actor_move main "grid_2" 1.5
+  wait 1.0
+  say "Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
+  //TODO: play_sfx door_open
   wait 0.5
-  theater_animation "support_actor_enters"
+  actor_move main "grid_3" 1.5
+  //theater_animation "support_actor_enters"
+  actor_move support "grid_2" 1.5
   wait 1.5
   
   say "Daniel" "C-Clara! Q-que bom que você veio!"
   say "Clara" "Oi Daniel, obrigada por me receber."
   say "" "Daniel consente em silêncio, pois não sabe como reagir."
-  say "Um pequeno silêncio se segue. A garota sorri e pergunta:"
-  say "Clara" "Vamos entrar?"
-  say "Daniel" "C-Claro!"
-  say "" "A garota sorridente entra, dá uma olhada ao redor e senta-se à mesa da sala. Daniel a segue em silêncio e se senta de frente para ela."
+  //say "Um pequeno silêncio se segue. A garota sorri e pergunta:"
+  //say "Clara" "Vamos entrar?"
+  //say "Daniel" "C-Claro!"
+  //say "" "A garota sorridente entra, dá uma olhada ao redor e senta-se à mesa da sala. Daniel a segue em silêncio e se senta de frente para ela."
+  say "" "A garota, sorridente, dá uma olhada ao redor e senta-se à mesa da sala. Daniel a segue em silêncio e se senta de frente para ela."
   say "Os dois pegam os livros e cadernos."
   say "" "Daniel não tira os olhos do livro. Um silêncio constrangedor se segue."
-  wait 2
+  wait 1.0
+  actor_face support "left"
+  wait 1.5
+  actor_face support "right"
   say "Clara" "Sua casa é tão linda! Eu amei a decoração."
   say "Daniel" "V-valeu!"
   wait 2
@@ -51,6 +62,8 @@ if #currentRelationshipLevel == 0
   say "Daniel" "(Será que eu deveria mesmo me declarar pra ela? Quem sabe se ela vai vir na minha casa outra vez?)"
   say "Clara" "E então, você sabe como podemos começar? História é meio que a minha pior matéria, haha..."
   say "Daniel" "Bem, eu..."
+  play_sfx "status_hungry"
+  wait 1.0
   say "" "Um ronco estomacal é ouvido bem alto pela sala."
   wait 1
   say "Daniel" "(Quê?)"
@@ -59,7 +72,15 @@ if #currentRelationshipLevel == 0
   say "" "Daniel engole em seco mais uma vez."
   say "Daniel" "E-eu sei fazer omelete... Você gosta de omelete?"
   say "Clara" "Ah, eu adoro! Café da manhã é a melhor refeição! Mesmo durante a tarde."
-  say "" "Daniel sorriu e se dirigiu até a cozinha para preparar a refeição."
+  say "" "Daniel sorri."
+  actor_face main "right"
+  actor_move main "out_right" 1.5
+  wait 1.5
+  //TODO: play_sfx "cooking"
+  wait 3.5
+  actor_face main "left"
+  actor_move main "grid_3" 1.5
+  //say "" "Daniel sorri e se dirige até a cozinha para preparar a refeição."
   say "Em alguns minutos ele volta com duas bonitas omeletes em pratinhos decorados. Ele põe os pratos sobre a mesa e se senta."
   say "Daniel" "Espero que goste."
   say "" "Clara balança a cabeça em confirmação e começa a comer. Pode-se ver a tensão nos olhos de Daniel enquanto ele aguarda a avaliação da garota. Até que..."
