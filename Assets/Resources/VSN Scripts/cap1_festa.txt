@@ -4,7 +4,7 @@ set_screen "girl_interaction_screen"
 //set_var conhece_beatrice 1
 //goto ir_beatrice
 //goto ir_anna
-goto ir_clara
+//goto ir_clara
 
 fade_out 1
 wait 1
@@ -187,7 +187,7 @@ say "Ana" "A gente pode ir... num encontro?"
 say "Ricardo" "Claro! Quando você quiser."
 
 unlock_skill 12
-add_exp 100
+add_exp false 150
 goto end
 
 
@@ -282,7 +282,7 @@ say "Eu tenho tentado superar, porém creio que vir a um local tão lotado ainda
 say "Mas quando estamos juntos... eu me sinto mais segura."
 
 unlock_skill 12
-add_exp 100
+add_exp false 150
 goto end
 
 
@@ -415,7 +415,7 @@ say "Clara" "É tarde demais pra se preocupar com tudo isso agora."
 say "Porque eu já gosto muito de você."
 
 unlock_skill 12
-add_exp 100
+add_exp false 150
 
 say "Clara" "Eu não me importo se você é popular ou não. Você é muito mais gentil e atencioso que os outros garotos do colégio."
 say "Portanto, fica comigo."

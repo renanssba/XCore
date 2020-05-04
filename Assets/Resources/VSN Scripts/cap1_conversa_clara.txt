@@ -89,7 +89,7 @@ if #currentRelationshipLevel == 0
   say "Clara" "Claro, isso aqui tá bom demais. Você já pensou em ser cozinheiro?"
   say "" "Daniel fica muito feliz e consegue se acalmar. Após terminarem de comer, eles conversam muito sobre omeletes e tipos de café da manhã."
 
-  add_exp 20
+  add_exp false 20
   goto end
 endif
 
@@ -246,7 +246,7 @@ goto end_dialog
 
 
 waypoint end_dialog
-add_exp 20
+add_exp true 20
 goto end
 
 
@@ -379,7 +379,7 @@ if item_owner == 3
 else
   say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
   say "Daniel" "Que bom que você gostou!"
-  add_exp 50
+  add_exp true 40
 endif
 goto end
 

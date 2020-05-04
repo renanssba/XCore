@@ -51,6 +51,8 @@ public class Enemy : Battler {
   public CustomEventLogic[] customEvents;
   public int[] passiveSkills;
 
+  public int expReward;
+
   public string[] statusImmunities;
   public string[] tags;
 

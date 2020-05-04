@@ -9,26 +9,29 @@ namespace Command {
 
     public override void Execute() {
       Relationship relation = GlobalData.instance.GetCurrentRelationship();
-      int expToGet = (int)args[0].GetNumberValue();
+      bool useMultiplier = args[0].GetBooleanValue();
+      int expToGet = (int)args[1].GetNumberValue();
 
       Debug.LogWarning("Add exp: "+expToGet);
 
-      if(args.Length > 1) {
-        relation = GlobalData.instance.relationships[(int)args[1].GetNumberValue()];
+      if(args.Length >= 3) {
+        relation = GlobalData.instance.relationships[(int)args[2].GetNumberValue()];
       }
       GlobalData.instance.observedPeople = new Person[2];
       GlobalData.instance.observedPeople[0] = relation.GetBoy();
       GlobalData.instance.observedPeople[1] = relation.GetGirl();
 
-      switch(relation.heartLocksOpened) {
-        case 0:
-          break;
-        case 1:
-          expToGet *= 2;
-          break;
-        case 2:
-          expToGet *= 5;
-          break;
+      if(useMultiplier) {
+        switch(relation.heartLocksOpened) {
+          case 0:
+            break;
+          case 1:
+            expToGet *= 2;
+            break;
+          case 2:
+            expToGet *= 4;
+            break;
+        }
       }
       GlobalData.instance.AddExpForRelationship(relation, expToGet);
       VsnController.instance.WaitForCustomInput();
@@ -37,9 +40,11 @@ namespace Command {
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
+        VsnArgType.booleanArg,
         VsnArgType.numberArg
       });
       signatures.Add(new VsnArgType[] {
+        VsnArgType.booleanArg,
         VsnArgType.numberArg,
         VsnArgType.numberArg
       });

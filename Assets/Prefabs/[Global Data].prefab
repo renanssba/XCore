@@ -1677,6 +1677,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1162087519535242
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4900524822982212}
+  - component: {fileID: 114984405957266116}
+  m_Layer: 0
+  m_Name: heal_hp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1162738222014842
 GameObject:
   m_ObjectHideFlags: 1
@@ -4505,6 +4521,22 @@ GameObject:
   - component: {fileID: 114284554235796328}
   m_Layer: 0
   m_Name: defend
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1421516423630894
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4306924582470584}
+  - component: {fileID: 114227553248853156}
+  m_Layer: 0
+  m_Name: heal_status
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14344,6 +14376,19 @@ Transform:
   m_Father: {fileID: 4881531132017314}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4306924582470584
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421516423630894}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4345853657074026}
+  m_RootOrder: 37
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4309795207296514
 Transform:
   m_ObjectHideFlags: 1
@@ -14711,6 +14756,8 @@ Transform:
   - {fileID: 4792594295044166}
   - {fileID: 4160046177987992}
   - {fileID: 4588577532064770}
+  - {fileID: 4900524822982212}
+  - {fileID: 4306924582470584}
   m_Father: {fileID: 4994434489791510}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19864,6 +19911,19 @@ Transform:
   m_Father: {fileID: 4555768439330564}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4900524822982212
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162087519535242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4345853657074026}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4905879396350944
 Transform:
   m_ObjectHideFlags: 1
@@ -24142,6 +24202,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: After a brief pause, the salesmen start to cry.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114227553248853156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421516423630894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "<color=yellow>Todas as condi\xE7\xF5es negativas do casal foram curadas!</color>"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -33981,6 +34062,27 @@ MonoBehaviour:
   - Language: English
     Text: You can either let the person use their favorite attribute or suggest that
       they use another attribute in the situation, but this consumes your <color=yellow>AP</color>.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114984405957266116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162087519535242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: <color=yellow>O casal recuperou \vsn(recovered_hp) PC!</color>
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 

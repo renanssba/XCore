@@ -166,8 +166,10 @@ public class SpecialCodes {
         return GlobalData.instance.day;
       case "#max_days":
         return GlobalData.instance.maxDays;
-      case "#currentChallengeHp":
+      case "#currentEnemyHp":
         return BattleController.instance.GetCurrentEnemy().hp;
+      case "#currentEnemyExp":
+        return BattleController.instance.GetCurrentEnemy().expReward;
       case "#currentDateId":
         return BattleController.instance.currentDateId;
       case "#currentDateLocation":

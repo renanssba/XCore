@@ -9,7 +9,15 @@ namespace Command {
 
     public override void Execute() {
       Battler target = BattleController.instance.GetBattlerByString(args[0].GetStringValue());
-      target.HealHP((int)args[1].GetNumberValue());
+      int valueToHeal = (int)args[1].GetNumberValue();
+      target.HealHP(valueToHeal);
+
+      VsnSaveSystem.SetVariable("recovered_hp", valueToHeal);
+
+      VsnArgument[] sayargs = new VsnArgument[2];
+      sayargs[0] = new VsnString("char_name/none");
+      sayargs[1] = new VsnString("date/heal_hp");
+      SayCommand.StaticExecute(sayargs);
     }
 
     public override void AddSupportedSignatures() {

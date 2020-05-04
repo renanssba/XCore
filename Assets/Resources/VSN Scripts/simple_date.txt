@@ -43,7 +43,7 @@ for currentDateEvent #dateLength
   
   
   // if opponent is defeated, go to new event
-  if #currentChallengeHp <= 0
+  if #currentEnemyHp <= 0
     goto defeat_enemy
   endif
 
@@ -66,7 +66,7 @@ for currentDateEvent #dateLength
   endfor
   
   // if enemy is defeated, go to new enemy
-  if #currentChallengeHp <= 0
+  if #currentEnemyHp <= 0
     goto defeat_enemy
   endif
 

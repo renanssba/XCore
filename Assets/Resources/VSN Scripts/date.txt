@@ -11,6 +11,8 @@ set_screen "date"
 enable_input true
 set_current_character_turn -1
 
+set_var exp_accumulated 0
+
 fade_in 0.7
 
 wait 0.5
@@ -79,7 +81,7 @@ for currentDateEvent #dateLength
   
   
   // if opponent is defeated, go to new event
-  if #currentChallengeHp <= 0
+  if #currentEnemyHp <= 0
     goto defeat_enemy
   endif
 
@@ -103,7 +105,7 @@ for currentDateEvent #dateLength
   endfor
   
   // if enemy is defeated, go to new enemy
-  if #currentChallengeHp <= 0
+  if #currentEnemyHp <= 0
     goto defeat_enemy
   endif
 
@@ -129,6 +131,7 @@ endfor
 
 waypoint defeat_enemy
 goto_script "\currentEventName" defeated
+add_var exp_accumulated #currentEnemyExp
 theater_animation "enemy_leaves"
 challenge_result true
 update_ui
@@ -185,15 +188,17 @@ goto_script "cap1_date_end"
 say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
 // show_date_ui false
 
-if #currentDateId == 1
-  add_exp 120
-endif
-if #currentDateId == 2
-  add_exp 400
-endif
-if #currentDateId == 3
-  add_exp 2000
-endif
+add_exp false exp_accumulated
+
+// if #currentDateId == 1
+  
+// endif
+// if #currentDateId == 2
+  // add_exp false 200
+// endif
+// if #currentDateId == 3
+  // add_exp false 800
+// endif
 open_heart_lock #currentDateId
 goto end
 
@@ -208,6 +213,13 @@ say "" "\couple decidem que o encontro não está dando certo."
 say "\boy" "Podemos continuar esse encontro outro dia..."
 say "\girl" "Sim, com certeza será melhor..."
 say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
+
+if exp_accumulated > 0
+  say "" "Mesmo assim, os desafios que eles venceram os aproximou."
+  add_exp false exp_accumulated
+  set_var exp_accumulated 0
+endif
+
 // show_date_ui false
 goto end
 

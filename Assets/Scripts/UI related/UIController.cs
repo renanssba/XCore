@@ -28,7 +28,6 @@ public class UIController : MonoBehaviour {
   public Slider partyHpSlider;
   public TextMeshProUGUI partyHpText;
   public Slider stealthSlider;
-  public Slider negativeStealthSlider;
   public Image eyeIcon;
   public Image hiddenEyeIcon;
   public Slider enemyHpSlider;
@@ -134,10 +133,9 @@ public class UIController : MonoBehaviour {
     } );
   }
 
-  public void AnimateStealthSliderChange(float initialValue, float finalValue) {
+  public void AnimateStealthSliderChange(int initialValue, int finalValue) {
     float currentShownHp = initialValue;
     stealthSlider.maxValue = BattleController.maxStealth;
-    negativeStealthSlider.maxValue = BattleController.maxNegativeStealth;
 
     if(finalValue > 0f) {
       hiddenEyeIcon.gameObject.SetActive(true);
@@ -149,9 +147,6 @@ public class UIController : MonoBehaviour {
 
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
       stealthSlider.value = currentShownHp;
-    } );
-    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
-        negativeStealthSlider.value = -currentShownHp;
     } );
   }
 

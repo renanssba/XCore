@@ -13,11 +13,11 @@ if previousLevel < #currentRelationshipLevel
   endif
 endif
 
-if previousLevel < 1
-  if #currentRelationshipLevel >= 1
-    unlock_skill 8
-  endif
-endif
+// if previousLevel < 1
+  // if #currentRelationshipLevel >= 1
+    // unlock_skill 8
+  // endif
+// endif
 
 if previousLevel < 2
   if #currentRelationshipLevel >= 2
@@ -49,13 +49,13 @@ waypoint open_heartlock
 if previousOpenedHeartlocks < 1
   if #currentRelationshipHeartLocksOpened >= 1
     say "" "O relacionamento de \couple avançou! Eles tornaram-se <color=yellow>Amigos Próximos!</color>"
-    say "" "Agora a interação <color=yellow>Presentear</color> está disponível para este casal!"
+    say "" "Agora a interação <color=yellow>Presentear</color> está disponível para este casal e <color=yellow>Conversar</color> concede o dobro de EXP!"
   endif
 endif
 
 if previousOpenedHeartlocks < 2
   if #currentRelationshipHeartLocksOpened >= 2
-    say "" "O relacionamento de \couple avançou bastante! Agora eles estão <color=yellow>Apaixonados!</color>"
+    say "" "O relacionamento de \couple avançou bastante! Agora eles estão <color=yellow>Apaixonados!</color> <color=yellow>Conversar</color> e <color=yellow>Presentear</color> concedem o dobro de EXP de anteriormente!"
   endif
 endif
 end_script

@@ -29,12 +29,10 @@ public class BattleController : MonoBehaviour {
   public int maxHp = 10;
   public int hp = 10;
 
-  public const float maxStealth = 60f;
-  public const float maxNegativeStealth = -20f;
-  public float currentStealth;
-  public float stealthLostWhenUsedItem = 20f;
-  public float stealthRecoveredWhenIdle = 10f;
-  public float stealthLostBySecond = 0f;
+  public const int maxStealth = 3;
+  public int currentStealth;
+  public int stealthLostWhenUsedItem = 1;
+  public int stealthRecoveredWhenIdle = 1;
 
   public Person[] partyMembers;
   public TurnActionType[] selectedActionType;
@@ -170,7 +168,7 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public void RecoverStealth(float value) {
+  public void RecoverStealth(int value) {
     Debug.LogWarning("Recover stealth: "+value);
     float initValue = currentStealth;
 
@@ -189,13 +187,13 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.angelActor.UpdateGraphics();
   }
 
-  public void RemoveStealth(float value) {
+  public void RemoveStealth(int value) {
     //Debug.LogWarning("Remove stealth: "+value);
-    float initValue = currentStealth;
+    int initValue = currentStealth;
 
     currentStealth -= value;
-    currentStealth = Mathf.Max(currentStealth, 0f);
-    if(initValue > 0 && currentStealth <= 0f) {
+    currentStealth = Mathf.Max(currentStealth, 0);
+    if(initValue > 0 && currentStealth <= 0) {
       StartCoroutine(ShowDetectionAnimation());
     } else {
       VsnController.instance.state = ExecutionState.PLAYING;
@@ -362,14 +360,17 @@ public class BattleController : MonoBehaviour {
     if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseGuts)) {
       action = TurnActionType.useSkill;
       selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.guts);
+      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
     }
     if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseIntelligence)) {
       action = TurnActionType.useSkill;
       selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.intelligence);
+      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
     }
     if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseCharisma)) {
       action = TurnActionType.useSkill;
       selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.charisma);
+      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
     }
     if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoDefend)) {
       action = TurnActionType.defend;
@@ -594,6 +595,7 @@ public class BattleController : MonoBehaviour {
       case SkillAnimation.active_offensive:
       case SkillAnimation.active_support:
       case SkillAnimation.long_charge:
+      case SkillAnimation.run_over:
         VsnAudioManager.instance.PlaySfx("skill_cast");
         yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
         break;
@@ -1007,7 +1009,7 @@ public class BattleController : MonoBehaviour {
       case 3:
         dateLength = 4;
         currentDateLocation = DateLocation.park;
-        dateEnemies = new Enemy[] { GetEnemyByString("protographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[12 + GlobalData.instance.CurrentGirl().id] };
+        dateEnemies = new Enemy[] { GetEnemyByString("photographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[12 + GlobalData.instance.CurrentGirl().id] };
         //GenerateDateEnemies();
         break;
       default:
@@ -1187,6 +1189,7 @@ public class BattleController : MonoBehaviour {
         appearSfxName = dic["appear sfx"],
         stage = int.Parse(dic["stage"]),
         location = dic["location"],
+        expReward = int.Parse(dic["exp reward"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         passiveSkills = Utils.SeparateInts(dic["passive skills"]),

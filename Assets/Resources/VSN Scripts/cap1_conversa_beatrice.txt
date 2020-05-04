@@ -115,7 +115,7 @@ if #day == 2
   say "Beatrice" "Obrigada, er..."
   say "Daniel" "Daniel."
   say "Beatrice" "Obrigada, Daniel."
-  add_exp 20
+  add_exp false 20
   goto_script "pass_time"
   end_script
 endif
@@ -306,7 +306,7 @@ goto end_dialog
 
 
 waypoint end_dialog
-add_exp 20
+add_exp true 20
 goto end
 
 
@@ -340,7 +340,7 @@ if item_owner == 2
 else
   say "Beatrice" "Muito obrigada!"
   say "Daniel" "Que bom que você gostou!"
-  add_exp 50
+  add_exp true 40
 endif
 goto end
 

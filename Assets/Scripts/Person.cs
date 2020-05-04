@@ -234,7 +234,7 @@ public class Relationship {
   public int bondPoints = 0;
   public Skilltree skilltree;
 
-  public static readonly int[] levelUpCosts = {20, 40, 100, 180, 300, 480, 750, 1150, 1700, 2500};
+  public static readonly int[] levelUpCosts = {20, 40, 60, 100, 180, 240, 340, 500, 600, 800};
   public const int skillTreeSize = 13;
 
   public List<string> talkedDialogs;

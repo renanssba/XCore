@@ -109,6 +109,7 @@ public class Skilltree {
 
     skills[3].isUnlocked = true;
     skills[7].isUnlocked = true;
+    skills[8].isUnlocked = true;
   }
 
   public void InitializeSkillIds(int[] ids) {
