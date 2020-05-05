@@ -322,7 +322,7 @@ public class GlobalData : MonoBehaviour {
     if(name == "Carta") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[3];
     }
-    if(name == "Valent„o" || name == "Delinquente") {
+    if(name == "Valent√£o" || name == "Delinquente") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[4];
     }
     if(name == "Ana Sombria") {

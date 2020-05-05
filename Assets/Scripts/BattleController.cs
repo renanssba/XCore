@@ -1138,20 +1138,20 @@ public class BattleController : MonoBehaviour {
   }
 
   public void FleeDateSegment(int positionId) {
-    List<int> currentUsedEvents = new List<int>();
-    foreach(Enemy d in dateEnemies) {
-      currentUsedEvents.Add(d.id);
-    }
+    //List<int> currentUsedEvents = new List<int>();
+    //foreach(Enemy d in dateEnemies) {
+    //  currentUsedEvents.Add(d.id);
+    //}
 
-    Debug.LogWarning("currentUsedEvents: ");
-    foreach(int i in currentUsedEvents) {
-      Debug.Log("i: " + i);
-    }
+    //Debug.LogWarning("currentUsedEvents: ");
+    //foreach(int i in currentUsedEvents) {
+    //  Debug.Log("i: " + i);
+    //}
 
-    int selectedId = GetNewEnemy(currentUsedEvents);
-    //selectedId = 1;
-    dateEnemies[positionId] = allEnemies[selectedId];
-    currentUsedEvents.Clear();
+    //int selectedId = GetNewEnemy(currentUsedEvents);
+    ////selectedId = 1;
+    //dateEnemies[positionId] = allEnemies[selectedId];
+    //currentUsedEvents.Clear();
 
     RecoverEnemiesHp();
   }
@@ -1190,6 +1190,7 @@ public class BattleController : MonoBehaviour {
         stage = int.Parse(dic["stage"]),
         location = dic["location"],
         expReward = int.Parse(dic["exp reward"]),
+        moneyReward = int.Parse(dic["money reward"]),
         attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
           int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
         passiveSkills = Utils.SeparateInts(dic["passive skills"]),

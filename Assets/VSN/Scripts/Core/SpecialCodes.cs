@@ -170,6 +170,8 @@ public class SpecialCodes {
         return BattleController.instance.GetCurrentEnemy().hp;
       case "#currentEnemyExp":
         return BattleController.instance.GetCurrentEnemy().expReward;
+      case "#currentEnemyMoney":
+        return BattleController.instance.GetCurrentEnemy().moneyReward;
       case "#currentDateId":
         return BattleController.instance.currentDateId;
       case "#currentDateLocation":

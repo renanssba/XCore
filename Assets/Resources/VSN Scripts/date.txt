@@ -12,6 +12,7 @@ enable_input true
 set_current_character_turn -1
 
 set_var exp_accumulated 0
+set_var money_accumulated 0
 
 fade_in 0.7
 
@@ -132,6 +133,7 @@ endfor
 waypoint defeat_enemy
 goto_script "\currentEventName" defeated
 add_var exp_accumulated #currentEnemyExp
+add_var money_accumulated #currentEnemyMoney
 theater_animation "enemy_leaves"
 challenge_result true
 update_ui
@@ -189,16 +191,10 @@ say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
 // show_date_ui false
 
 add_exp false exp_accumulated
+play_sfx "ui_money"
+add_var money money_accumulated
+say "" "Fertiliel adquiriu <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(money_accumulated)</color>!"
 
-// if #currentDateId == 1
-  
-// endif
-// if #currentDateId == 2
-  // add_exp false 200
-// endif
-// if #currentDateId == 3
-  // add_exp false 800
-// endif
 open_heart_lock #currentDateId
 goto end
 
@@ -217,6 +213,9 @@ say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
 if exp_accumulated > 0
   say "" "Mesmo assim, os desafios que eles venceram os aproximou."
   add_exp false exp_accumulated
+  add_var money money_accumulated
+  play_sfx "ui_money"
+  say "" "Fertiliel adquiriu <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(money_accumulated)</color>!"
   set_var exp_accumulated 0
 endif
 

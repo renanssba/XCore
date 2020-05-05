@@ -1,15 +1,49 @@
 goto *arg1
 
 waypoint event_statement
+say "Valentão" "Ora, ora. Olha só quem eu encontrei por aqui!"
+say "Daniel" "Ah, não..."
+wait 0.5
 theater_animation "enemy_enters"
-say "" "Um valentão do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
+wait 0.5
+
+say "Valentão" "Dando um passeio pelo parque, Biscoitinho?"
+say "Daniel" "Qual é cara, me deixa em paz. Eu não quero briga contigo..."
+say "Valentão" "Ah, mas aqui fora do colégio o negócio é diferente."
+say "Dessa vez a sua namoradinha não vai te proteger."
+
+if #currentGirlId == 1
+  say "Ana" "Qual é, cara. Eu já te derrotei uma vez, você voltou pra apanhar mais?"
+  say "Valentão" "Naquela hora eu tava despreparado, não contou."
+endif
+if #currentGirlId == 2
+  say "Beatrice" "Eu acho uma pena... Tem gente que não tem cérebro e precisa recorrer à violência."
+  say "Valentão" "Uma Bruxa e um otário, vocês dois se merecem..."
+endif
+if #currentGirlId == 3
+  say "Clara" "Para com isso, Spike! Deixa o Daniel em paz."
+  say "Valentão" "Não se mete, Clarinha. Ele tá me devendo uma."
+endif
+
+say "Valentão" "Dessa vez eu tenho uma arma secreta."
+
+wait 0.5
+actor_animator_parameter enemy "Battle" true
+actor_animator_parameter enemy "Intro"
+wait 2
+
+say "Agora você vai ver, Biscoitinho!"
+
+
+//say "" "O valentão do colégio aparece do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
+
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
 set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "argue"
-set_var charisma_action_boy_name "flatter"
-set_var charisma_action_girl_name "flatter"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
 end_script
 
 
@@ -26,7 +60,7 @@ end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active elogia o topete do valentão!"
+set_var pre_attack "\active diz que os óculos fazem ele parecer estúpido!"
 end_script
 
 
@@ -41,5 +75,9 @@ end_script
 
 
 waypoint defeated
-say "" "O valentão vai embora!"
+say "" "No meio da briga, os óculos escuros do valentão quebram."
+say "Valentão" "Droga, minha arma secreta! Esse óculos são caros, onde será que eu arranjo conserto?"
+say "" "O valentão vai embora correndo!"
+
+say "\couple riem bastante do ocorrido."
 end_script

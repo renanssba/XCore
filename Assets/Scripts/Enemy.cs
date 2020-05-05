@@ -52,6 +52,7 @@ public class Enemy : Battler {
   public int[] passiveSkills;
 
   public int expReward;
+  public int moneyReward;
 
   public string[] statusImmunities;
   public string[] tags;
