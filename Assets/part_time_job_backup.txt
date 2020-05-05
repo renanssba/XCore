@@ -1,31 +1,13 @@
-﻿if #ap < 2
-  goto_script "not_enough_ap"
-  end_script
-endif
-
-
-set_var hide_buttons 1
+﻿set_var hide_buttons 1
 update_ui
 
 
 waypoint sim
-say_auto "Você pode gastar energia para ganhar dinheiro. Quanto AP você quer gastar?"
-choices "Gastar 2 AP -> $80" ap2 "Gastar 3 AP -> $120" ap3 "Gastar 4 AP -> $160" ap4 "Gastar 5 AP -> $200" ap5 "Cancelar" end
-
-waypoint ap2
-set_var ap_spent 2
-goto start_minigame
-
-waypoint ap3
-set_var ap_spent 3
-goto start_minigame
+say_auto "Você pode usar este turno para trabalhar e ganhar dinheiro. Deseja trabalhar?"
+choices "Trabalhar" ap4 "Cancelar" end
 
 waypoint ap4
-set_var ap_spent 4
-goto start_minigame
-
-waypoint ap5
-set_var ap_spent 5
+set_var ap_spent 3
 goto start_minigame
 
 
