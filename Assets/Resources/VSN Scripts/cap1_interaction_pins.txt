@@ -37,7 +37,7 @@ goto end
 
 
 waypoint tarde
-reset_pins_board "city map"
+reset_pins_board "heartheroby"
 set_interaction_pin 0 true "cap1_conversa_ana" "Clube Esportivo"
 
 if #day > 2
@@ -58,7 +58,7 @@ goto end
 
 
 waypoint noite
-reset_pins_board "city map night"
+reset_pins_board "heartheroby-night"
 
 if #day == dia_festa_clara
   set_interaction_pin 0 false
