@@ -325,6 +325,18 @@ public class GlobalData : MonoBehaviour {
     if(name == "Valentão" || name == "Delinquente") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[4];
     }
+    if(name == "Vendedor") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[5];
+    }
+    if(name == "Vendedora") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[6];
+    }
+    if(name == "Fotógrafo") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[7];
+    }
+    if(name == "Cachorro-quente") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[8];
+    }
     if(name == "Ana Sombria") {
       return ResourcesManager.instance.faceSprites[2];
     }

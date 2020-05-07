@@ -621,24 +621,27 @@ public class BattleController : MonoBehaviour {
     foreach(Actor2D targetActor in targetActors) {
       // skill receive animation
       if(usedSkill.animation != SkillAnimation.none &&
-       usedSkill.animation != SkillAnimation.passive) {
-      
-        switch(usedSkill.animation) {
-          case SkillAnimation.active_support:
-          case SkillAnimation.long_charge:
-            targetActor.ShineGreen();
-            break;
-          case SkillAnimation.attack:
-          case SkillAnimation.charged_attack:
-          case SkillAnimation.active_offensive:
-          case SkillAnimation.run_over:
-          case SkillAnimation.throw_object:
-          case SkillAnimation.multi_throw:
-          default:
-            targetActor.ShineRed();
-            break;
+         usedSkill.animation != SkillAnimation.passive) {
+        if(targetActor.enemy != null && targetActor.enemy.HasTag("ally")) {
+          // special animation for hitting allies
+          targetActor.ShineGreen();
+        } else {
+          switch(usedSkill.animation) {
+            case SkillAnimation.active_support:
+            case SkillAnimation.long_charge:
+              targetActor.ShineGreen();
+              break;
+            case SkillAnimation.attack:
+            case SkillAnimation.charged_attack:
+            case SkillAnimation.active_offensive:
+            case SkillAnimation.run_over:
+            case SkillAnimation.throw_object:
+            case SkillAnimation.multi_throw:
+            default:
+              targetActor.ShineRed();
+              break;
+          }
         }
-        //yield return new WaitForSeconds(0.4f);
       }
 
 
@@ -648,7 +651,11 @@ public class BattleController : MonoBehaviour {
 
         float effectivity = targetActor.battler.DamageTakenMultiplier(usedSkill.damageAttribute);
 
-        if(targetActor.battler.IsDefending()) {
+        if(targetActor.enemy != null && targetActor.enemy.HasTag("ally")) {
+          VsnAudioManager.instance.PlaySfx("heal_default");
+        }
+
+        else if(targetActor.battler.IsDefending()) {
           targetActor.ShowDefendHitParticle();
           VsnAudioManager.instance.PlaySfx("damage_block");
           TheaterController.instance.Screenshake(0.5f);
@@ -663,7 +670,12 @@ public class BattleController : MonoBehaviour {
           TheaterController.instance.Screenshake(1f);
         }
 
-        targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
+
+        if(targetActor.enemy == null || !targetActor.enemy.HasTag("ally")) {
+          targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
+        } else {
+          targetActor.ShowDamageParticle(effectiveAttackDamage, -1f);
+        }
         yield return new WaitForSeconds(1f);
 
         targetActor.battler.TakeDamage(effectiveAttackDamage);

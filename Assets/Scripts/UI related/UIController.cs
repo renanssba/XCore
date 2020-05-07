@@ -141,10 +141,10 @@ public class UIController : MonoBehaviour {
 
     if(finalValue > 0f) {
       hiddenEyeIcon.gameObject.SetActive(true);
-      eyeIcon.gameObject.SetActive(false);
+      //eyeIcon.gameObject.SetActive(false);
     } else {
       hiddenEyeIcon.gameObject.SetActive(false);
-      eyeIcon.gameObject.SetActive(true);
+      //eyeIcon.gameObject.SetActive(true);
     }
 
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {

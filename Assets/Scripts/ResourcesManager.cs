@@ -38,6 +38,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite unknownSprite;
   public Color[] attributeColor;
   public Sprite[] buttonSprites;
+  public Sprite[] heartlockSprites;
   public List<CharacterSpriteCollection> characterSpritesCollections;
 
 

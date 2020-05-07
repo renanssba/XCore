@@ -39,6 +39,7 @@ public class RelationshipCard : MonoBehaviour {
     expSlider.value = currentLevelExp;
 
     proximityLevelText.text = relationship.GetRelationshipLevelDescription();
+    heartIcon.sprite = ResourcesManager.instance.heartlockSprites[relationship.heartLocksOpened];
 
     if(relationship.level < 10) {
       expText.text = currentLevelExp.ToString() + " /" + neededExp;

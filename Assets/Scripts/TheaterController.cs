@@ -544,6 +544,26 @@ public class TheaterController : MonoBehaviour {
     yield return new WaitForSeconds(0.5f);
   }
 
+  public IEnumerator OpenHeartlockAnimation(int levelToRaise) {
+    Relationship relation = GlobalData.instance.GetCurrentRelationship();
+
+    mainActor.TintActorToPink();
+    supportActor.TintActorToPink();
+
+    yield return new WaitForSeconds(1.5f);
+
+    VsnAudioManager.instance.PlaySfx("ui_attribute_up");
+    relation.OpenHeartLock(levelToRaise);
+    mainActor.UpdateGraphics();
+    supportActor.UpdateGraphics();
+
+    yield return new WaitForSeconds(1.5f);
+
+    VsnArgument[] sayArgs = new VsnArgument[1];
+    sayArgs[0] = new VsnString("open_heartlock");
+    Command.GotoScriptCommand.StaticExecute("after_get_exp", sayArgs);
+  }
+
 
   public void SetLocation(string place) {
     bgRenderer.sprite = Resources.Load<Sprite>("Bg/" + place);

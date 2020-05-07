@@ -13,12 +13,9 @@ namespace Command {
 
       VsnSaveSystem.SetVariable("previousOpenedHeartlocks", relation.heartLocksOpened);
 
-      if(relation.OpenHeartLock(levelToRaise) ) {
-        SfxManager.StaticPlayBigConfirmSfx();
-
-        VsnArgument[] sayArgs = new VsnArgument[1];
-        sayArgs[0] = new VsnString("open_heartlock");
-        Command.GotoScriptCommand.StaticExecute("after_get_exp", sayArgs);
+      if(relation.heartLocksOpened < levelToRaise) {
+        VsnController.instance.state = ExecutionState.WAITING;
+        TheaterController.instance.StartCoroutine(TheaterController.instance.OpenHeartlockAnimation(levelToRaise));
       }
     }
 

@@ -13,7 +13,7 @@ say "Valentão" "Ah, mas aqui fora do colégio o negócio é diferente."
 say "Dessa vez a sua namoradinha não vai te proteger."
 
 if #currentGirlId == 1
-  say "Ana" "Qual é, cara. Eu já te derrotei uma vez, você voltou pra apanhar mais?"
+  say "Ana" "Eu já te derrotei uma vez, você voltou pra apanhar mais?"
   say "Valentão" "Naquela hora eu tava despreparado, não contou."
 endif
 if #currentGirlId == 2
@@ -31,11 +31,10 @@ wait 0.5
 actor_animator_parameter enemy "Battle" true
 actor_animator_parameter enemy "Intro"
 wait 2
+play_sfx "action_flatter"
+wait 0.3
 
-say "Agora você vai ver, Biscoitinho!"
-
-
-//say "" "O valentão do colégio aparece do passado do garoto aparece, fazendo-o relembrar traumas de infância!"
+say "Hahaha! Agora você vai ver, Biscoitinho!"
 
 
 set_var guts_action_boy_name "strike"
@@ -55,12 +54,12 @@ end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que o valentão não vai ganhar nada atacando-os."
+set_var pre_attack "\active diz que os óculos fazem ele parecer estúpido!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active diz que os óculos fazem ele parecer estúpido!"
+set_var pre_attack "\active diz que o valentão não vai ganhar nada atacando-os."
 end_script
 
 

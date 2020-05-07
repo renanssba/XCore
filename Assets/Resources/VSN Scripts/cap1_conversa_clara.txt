@@ -97,7 +97,8 @@ endif
 
 say "Clara chega e se senta à mesa com Daniel."
   
-theater_animation "support_actor_enters"
+//theater_animation "support_actor_enters"
+actor_move support "grid_2" 1.5
 wait 1.8
 
 waypoint action_choice
@@ -321,7 +322,7 @@ say "Clara" "Depois que você saiu... Eu não quis desperdiçar algo feito com t
 say "Daniel" "Você... Você comeu os cookies que caíram no chão?"
 say "Clara" "Sim, eu comi. A culinária é realmente uma arte. A maciez, o sabor, tudo... *snif* Mesmo amassados, eles tavam incríveis. Eu pude sentir o quanto de... *snif* amor você pôs naqueles cookies."
 say "Daniel" "S-sério?"
-say "Clara" "Sim... Eu quis muito te dizer no dia seguinte... o quanto eu gostei deles. Mas você nunca mais apareceu nas aulas."
+say "Clara" "Sim... Eu quis muito te dizer no dia seguinte o quanto eu gostei deles. Mas você nunca mais apareceu nas aulas."
 say "Daniel" "..."
 say "Obrigado, isso significa muito pra mim."
 say "Clara" "Eu vi o quanto você gosta de cozinhar. Por favor, não desista. Você deveria fazer essa receita mais vezes."
@@ -422,6 +423,7 @@ say "Clara" "Oba! Você consegue sentir esse cheirinho? Já tô com água na boc
 say "Daniel" "A comida daqui deve ser incrível... Eu quero cozinhar tão bem assim algum dia!"
 say "Clara" "Com certeza você vai conseguir!"
 fade_out 0.5
+full_heal_party
 say "" "Os dois se sentam e provam diversas tortas deliciosas. Saindo da lanchonete..."
 fade_in 0.5
 goto dialog_after_date_2

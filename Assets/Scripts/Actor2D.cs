@@ -81,7 +81,6 @@ public class Actor2D : MonoBehaviour {
       } else {
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.sad);
       }
-      //renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.underwear);
       renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
       renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
       renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
@@ -104,6 +103,11 @@ public class Actor2D : MonoBehaviour {
           renderers[4].gameObject.SetActive(true);
           break;
       }
+
+      if(GlobalData.instance.GetCurrentRelationship() != null) {
+        renderers[5].sprite = ResourcesManager.instance.heartlockSprites[GlobalData.instance.GetCurrentRelationship().heartLocksOpened];
+      }      
+
       SetAuraVisibility();
     } else {
       gameObject.SetActive(false);
@@ -313,23 +317,11 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ShineRed() {
-    //for(int i=0; i<renderers.Length; i++) {
-    //  renderers[i].GetPropertyBlock(materialProperties);
-    //  materialProperties.SetColor("_FlashColor", Color.red);
-    //  rendererColors[i] = renderers[i].color;
-    //  renderers[i].SetPropertyBlock(materialProperties);
-    //}
-    FlashRenderer(transform, 0.1f, 0.8f, 0.2f, Color.red);
+    FlashRenderer(0.1f, 0.8f, 0.2f, Color.red);
   }
 
   public void ShineGreen() {
-    //for(int i = 0; i < renderers.Length; i++) {
-    //  renderers[i].GetPropertyBlock(materialProperties);
-    //  materialProperties.SetColor("_FlashColor", Color.green);
-    //  rendererColors[i] = renderers[i].color;
-    //  renderers[i].SetPropertyBlock(materialProperties);
-    //}
-    FlashRenderer(transform, 0.1f, 0.8f, 0.2f, Color.green);
+    FlashRenderer(0.1f, 0.8f, 0.2f, Color.green);
   }
 
   public void ShowDefendHitParticle() {
@@ -340,19 +332,16 @@ public class Actor2D : MonoBehaviour {
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
   }
 
-  public void FlashRenderer(Transform obj, float minFlash, float maxFlash, float flashTime, Color finalColor) {
-    //MaterialPropertyBlock materialProperties = new MaterialPropertyBlock();
-
+  public void FlashRenderer(float minFlash, float maxFlash, float flashTime, Color finalColor) {
     foreach(SpriteRenderer currentRenderer in renderers) {
-    //for(int i = 0; i < renderers.Length; i++) {
       //DOTween.Kill(renderers[i].material);
       float initialFlashPower;
       Color initialColor;
 
       currentRenderer.GetPropertyBlock(materialProperties);
 
-      initialColor = currentRenderer.material.GetColor("_FlashColor");
-      initialFlashPower = currentRenderer.material.GetFloat("_FlashAmount");
+      initialColor = materialProperties.GetColor("_FlashColor");
+      initialFlashPower = materialProperties.GetFloat("_FlashAmount");
 
       minFlash = Mathf.Max(initialFlashPower, minFlash);
       maxFlash = Mathf.Max(initialFlashPower, maxFlash);
@@ -377,11 +366,54 @@ public class Actor2D : MonoBehaviour {
         materialProperties.SetColor("_FlashColor", initialColor);
         currentRenderer.SetPropertyBlock(materialProperties);
       });
-
-      //currentRenderermaterial.DOFloat(maxFlash, "_FlashAmount", flashTime).SetLoops(2, LoopType.Yoyo).OnComplete(() => {
-      // currentRenderer.material.SetFloat("_FlashAmount", 0f);
-      //});
     }
+  }
+
+  public void TintActorToColor(float finalTint, float animTime, Color finalColor) {
+    foreach(SpriteRenderer currentRenderer in renderers) {
+
+      currentRenderer.GetPropertyBlock(materialProperties);
+      float currentTintPower = materialProperties.GetFloat("_FlashAmount");
+      Color currentColor = materialProperties.GetColor("_FlashColor");
+
+      Debug.Log("Initial tint values. Color: " + currentColor+", amount: "+ currentTintPower);
+
+      DOTween.To(() => currentColor, y => currentColor = y, finalColor, animTime);
+
+      DOTween.To(() => currentTintPower, x => currentTintPower = x, finalTint, animTime).OnUpdate(() => {
+        Debug.Log("New tint values. Color: " + currentColor + ", amount: " + currentTintPower);
+        currentRenderer.GetPropertyBlock(materialProperties);
+        materialProperties.SetFloat("_FlashAmount", currentTintPower);
+        materialProperties.SetColor("_FlashColor", currentColor);
+        currentRenderer.SetPropertyBlock(materialProperties);
+      });
+    }
+
+    if(finalTint == 1f) {
+      ShowInternalSprite();
+    } else {
+      HideInternalSprite();
+    }
+  }
+
+  [ContextMenu("Tint Actor To Pink")]
+  public void TintActorToPink() {
+    Color c = new Color(0.92f, 0.73f, 0.81f);
+    TintActorToColor(1f, 1f, c);
+  }
+
+  [ContextMenu("Tint Actor To Normal")]
+  public void TintActorToNormalColor() {
+    Color c = new Color(0.92f, 0.73f, 0.81f);
+    TintActorToColor(0f, 1f, c);
+  }
+
+  public void ShowInternalSprite() {
+    renderers[renderers.Length - 1].DOFade(1f, 1f);
+  }
+
+  public void HideInternalSprite() {
+    renderers[renderers.Length - 1].DOFade(0f, 1f);
   }
 
 
@@ -431,7 +463,9 @@ public class Actor2D : MonoBehaviour {
 
     Debug.LogWarning("damage: "+damage+", effectivity: "+effectivity);
 
-    if(effectivity > 1f) {
+    if(effectivity < 0f) {
+      particleColor = Color.green;
+    } else if(effectivity > 1f) {
       particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/super_effective") + "</size>";
     } else if(effectivity < 1f) {
       particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/ineffective") + "</size>";
@@ -533,4 +567,5 @@ public class Actor2D : MonoBehaviour {
       }
     }
   }
+
 }

@@ -15,7 +15,27 @@ wait 0.7
 // add_var money 1000
 // update_ui
 
-say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
+if graciel_shop_intro == false
+  say "Graciel" "Oi Fertiliel, como tão indo as coisas?"
+  say "Fertiliel" "Tudo indo bem, na medida do possível. Já encontrei meu humano e algumas garotas com quem eu acho que ele teria muitos filhos."
+  say "Graciel" "Ai, que legal! Eu tô com taaanta inveja!"
+  say "Trabalhar diretamente com humanos deve ser a coisa mais legal do mundo!"
+  say "Fertiliel" "É... Eu não tenho tanta certeza assim. E contigo, como vão as coisas?"
+  say "Graciel" "Tô adorando, eu recebo todo tipo de itens humanos e posso ficar com eles. Tô até colecionando!"
+  say "Fertiliel" "Que legal! Será que tem algo que poderia me ajudar a juntar meu casal?"
+  say "Graciel" "Tenho, sim! Inclusive queria te entregar isso aqui."
+  play_sfx "relationship_up"
+  add_item "chocolate_cake" 3
+  say "Graciel" "Isso vai te ajudar com seus humanos. Eu li num mangá que bolo é a principal fonte de alimento deles."
+  say "Fertiliel" "Valeu! Vai ser útil com certeza."
+  say "Graciel" "Eu tenho mais coisas que podem te ajudar, mas não posso dar mais do que isso de graça."
+  say "Sabe como é, eu preciso de dinheiro pra comprar mais mangá."
+  say "Fertiliel" "Tudo bem. Me mostra o que você tem aí pra vender."
+  set_var graciel_shop_intro true
+else
+  say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
+endif
+
 goto store_choices
 
 

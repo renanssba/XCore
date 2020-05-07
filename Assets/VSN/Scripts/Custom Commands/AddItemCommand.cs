@@ -30,11 +30,16 @@ namespace Command {
 
       VsnSaveSystem.SetVariable("item_id", itemToAdd.id);
       VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(itemToAdd.id));
+      VsnSaveSystem.SetVariable("item_amount", amount);
 
       if(args.Length < 3 || args[2].GetBooleanValue() == true) {
         VsnArgument[] sayargs = new VsnArgument[2];
         sayargs[0] = new VsnString("char_name/none");
-        sayargs[1] = new VsnString("shop/say_5");
+        if(amount == 1) {
+          sayargs[1] = new VsnString("shop/say_5");
+        } else {
+          sayargs[1] = new VsnString("shop/say_7");
+        }        
         SayCommand.StaticExecute(sayargs);
       }
     }
