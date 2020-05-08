@@ -8,13 +8,17 @@ namespace Command {
   public class SetCurrentCoupleCommand : VsnCommand {
 
     public override void Execute() {
-      if(args[0].GetNumberValue() == -1){
+      int coupleId = (int)args[0].GetNumberValue();
+      if(coupleId == 0){
         GlobalData.instance.observedPeople = new Person[] { GlobalData.instance.people[0] };
         return;
+      } else if(coupleId < 0) {
+        GlobalData.instance.observedPeople = new Person[] { GlobalData.instance.people[-coupleId] };
+        return;
+      } else {
+        GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
+                                                         GlobalData.instance.people[coupleId]};
       }
-
-      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
-                                                         GlobalData.instance.people[(int)args[0].GetNumberValue()]};
     }
 
 

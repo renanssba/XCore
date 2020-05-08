@@ -203,21 +203,27 @@ public class Actor2D : MonoBehaviour {
     if(spriteName.StartsWith("person(")) {
       string actorName = Utils.GetStringArgument(spriteName);
 
-      Debug.LogWarning("Setting enemy sprite to: " + actorName);
-
-      CharacterSpriteCollection spriteCollection = ResourcesManager.instance.GetCharacterSpriteCollection(actorName);
-
-      renderers[0].sprite = spriteCollection.baseBody;
-      renderers[0].flipX = true;
-
-      if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
-        renderers[1].sprite = spriteCollection.schoolClothes;
-      } else {
-        renderers[1].sprite = spriteCollection.casualClothes;
+      foreach(Person p in GlobalData.instance.people) {
+        if(p.nameKey == actorName) {
+          SetCharacter(p);
+          return;
+        }
       }
-      renderers[1].gameObject.SetActive(true);
-      renderers[1].flipX = true;
-      shadowRenderer.transform.localScale = Vector3.one;
+      //Debug.LogWarning("Setting enemy sprite to: " + actorName);
+
+      //CharacterSpriteCollection spriteCollection = ResourcesManager.instance.GetCharacterSpriteCollection(actorName);
+
+      //renderers[0].sprite = spriteCollection.baseBody;
+      //renderers[0].flipX = true;
+
+      //if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
+      //  renderers[1].sprite = spriteCollection.schoolClothes;
+      //} else {
+      //  renderers[1].sprite = spriteCollection.casualClothes;
+      //}
+      //renderers[1].gameObject.SetActive(true);
+      //renderers[1].flipX = true;
+      //shadowRenderer.transform.localScale = Vector3.one;
     } else {
       renderers[0].sprite = LoadSprite("Enemies/" + spriteName);
       renderers[0].flipX = false;

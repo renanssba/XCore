@@ -1,0 +1,45 @@
+goto *arg1
+
+waypoint event_statement
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "argue"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "O valentão humilha \boy com apelidos!"
+set_var enemy_attacks_girl "O valentão aplica uma cantada de mau-gosto em \girl!"
+end_script
+
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active dá um soco no valentão!"
+end_script
+
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+set_var pre_attack "\active diz que os óculos fazem ele parecer estúpido!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active diz que o valentão não vai ganhar nada atacando-os."
+end_script
+
+
+
+waypoint attack_boy
+// set_var pre_attack "O valentão humilha \boy com apelidos!"
+end_script
+
+waypoint attack_girl
+// set_var pre_attack "O valentão aplica uma cantada de mau-gosto em \girl!"
+end_script
+
+
+waypoint defeated
+end_script

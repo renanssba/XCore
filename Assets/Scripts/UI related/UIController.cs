@@ -95,8 +95,7 @@ public class UIController : MonoBehaviour {
   }
 
   public void UpdateDateUI() {
-    if(GlobalData.instance.CurrentBoy() == null ||
-       GlobalData.instance.CurrentGirl() == null) {
+    if(BattleController.instance.partyMembers.Length == 0) {
       return;
     }
 
@@ -112,7 +111,7 @@ public class UIController : MonoBehaviour {
         partyPeopleCards[i].gameObject.SetActive(false);
       }
     }
-    ShowDateProgressUI();
+    //ShowDateProgressUI();
 
     if(BattleController.instance.GetCurrentEnemy() != null) {
       BattleController.instance.GetCurrentEnemy().UpdateStatusConditions();

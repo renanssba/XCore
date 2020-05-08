@@ -54,18 +54,38 @@ namespace Command {
     public void CheckPlayersSkills(int skillPos, string situation) {
       Relationship relationship = GlobalData.instance.GetCurrentRelationship();
       SkillTarget partyMemberId = SkillTarget.none;
+
       switch(relationship.skilltree.skills[skillPos].affectsPerson) {
         case SkillAffectsCharacter.boy:
-          partyMemberId = SkillTarget.partyMember1;
+          for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
+            if(BattleController.instance.partyMembers[i].isMale) {
+              partyMemberId = (SkillTarget)i;
+              break;
+            }
+          }
           break;
         case SkillAffectsCharacter.girl:
-          partyMemberId = SkillTarget.partyMember2;
+          for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
+            if(!BattleController.instance.partyMembers[i].isMale) {
+              partyMemberId = (SkillTarget)i;
+              break;
+            }
+          }
+          break;
+        case SkillAffectsCharacter.couple:
+          partyMemberId = SkillTarget.allHeroes;
           break;
       }
       Skill skillChecked = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillPos].id);
 
 
       //Debug.LogWarning("CHECKING for PLAYER skill activation. skill: "+skillChecked.name+", situation: "+situation);
+
+      // return if there are no applicable heroes in party
+      if(partyMemberId == SkillTarget.none) {
+        return;
+      }
+      
       // return if not checking the correct activation trigger, or the skill is not passive / unlocked
       if(!relationship.skilltree.skills[skillPos].isUnlocked || skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
         return;

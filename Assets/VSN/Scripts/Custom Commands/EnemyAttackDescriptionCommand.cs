@@ -8,7 +8,7 @@ namespace Command {
   public class EnemyAttackDescriptionCommand : VsnCommand {
 
     public override void Execute() {
-      int targetId = Random.Range(0, 2);
+      int targetId = Random.Range(0, Mathf.Min(BattleController.instance.partyMembers.Length, 2));
       VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
 
       VsnArgument[] newArgs = new VsnArgument[1];

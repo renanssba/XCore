@@ -45,6 +45,7 @@ public class TheaterController : MonoBehaviour {
   public Actor2D enemyActor;
   public List<Actor2D> extraActors;
 
+  public GameObject personPrefab;
   public GameObject[] bgEffectPrefabs;
 
   public SpriteRenderer bgRenderer;
@@ -76,8 +77,13 @@ public class TheaterController : MonoBehaviour {
     GameObject spawnedActor;
 
     if(prefabToSpawn == null) {
+      prefabToSpawn = BattleController.instance.defaultEnemyPrefab;
+      if(actorPrefabName.StartsWith("person")) {
+        prefabToSpawn = personPrefab;
+      }
+
       Debug.LogWarning("No prefab to load for enemy: " + actorPrefabName + ". Using default prefab");
-      spawnedActor = Instantiate(BattleController.instance.defaultEnemyPrefab, enemyPosition, Quaternion.identity, transform);
+      spawnedActor = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
       spawnedActor.GetComponent<Actor2D>().SetActorGraphics(actorPrefabName);
     } else {
       spawnedActor = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
@@ -368,10 +374,7 @@ public class TheaterController : MonoBehaviour {
     Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
-
-    currentEnemy.hp = currentEnemy.maxHp;
-    currentEnemy.RemoveAllStatusConditions();
-    currentEnemy.ClearAllSkillsUsage();
+    
     BattleController.instance.partyMembers[0].ClearSkillUsesInBattle();
     BattleController.instance.partyMembers[1].ClearSkillUsesInBattle();
 
@@ -464,10 +467,24 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void PositionActorsBack() {
-    mainActor.transform.DOLocalMove(mainPosition, focusAnimationDuration);
-    supportActor.transform.DOLocalMove(supportPosition, focusAnimationDuration);
-    angelActor.transform.DOLocalMove(angelPosition, focusAnimationDuration);
-    enemyActor.transform.DOLocalMove(enemyPosition, focusAnimationDuration);
+    foreach(Actor2D actorToPositionBack in focusedCharacters) {
+      if(actorToPositionBack == mainActor) {
+        mainActor.transform.DOLocalMove(mainPosition, focusAnimationDuration);
+        continue;
+      }
+      if(actorToPositionBack == supportActor) {
+        supportActor.transform.DOLocalMove(supportPosition, focusAnimationDuration);
+        continue;
+      }
+      if(actorToPositionBack == angelActor) {
+        angelActor.transform.DOLocalMove(angelPosition, focusAnimationDuration);
+        continue;
+      }
+      if(actorToPositionBack == enemyActor) {
+        enemyActor.transform.DOLocalMove(enemyPosition, focusAnimationDuration);
+        continue;
+      }
+    }
   }
 
 

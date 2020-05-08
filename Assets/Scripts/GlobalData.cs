@@ -169,22 +169,22 @@ public class GlobalData : MonoBehaviour {
 
 
     // DEBUG CONFESSION SKILL
-    relationships[0].skilltree.skills[12].isUnlocked = true;
-    relationships[1].skilltree.skills[12].isUnlocked = true;
-    relationships[2].skilltree.skills[12].isUnlocked = true;
+    //relationships[0].skilltree.skills[12].isUnlocked = true;
+    //relationships[1].skilltree.skills[12].isUnlocked = true;
+    //relationships[2].skilltree.skills[12].isUnlocked = true;
 
-    // DEBUG: TESTING SKILLS IN BATTLE
-    relationships[0].exp = 100;
-    relationships[0].level = 7;
-    relationships[0].bondPoints = 10;
+    //// DEBUG: TESTING SKILLS IN BATTLE
+    //relationships[0].exp = 100;
+    //relationships[0].level = 7;
+    //relationships[0].bondPoints = 10;
 
-    relationships[1].exp = 100;
-    relationships[1].level = 7;
-    relationships[1].bondPoints = 10;
+    //relationships[1].exp = 100;
+    //relationships[1].level = 7;
+    //relationships[1].bondPoints = 10;
 
-    relationships[2].exp = 100;
-    relationships[2].level = 7;
-    relationships[2].bondPoints = 10;
+    //relationships[2].exp = 100;
+    //relationships[2].level = 7;
+    //relationships[2].bondPoints = 10;
   }
 
 
@@ -208,17 +208,19 @@ public class GlobalData : MonoBehaviour {
   }
 
   public Person CurrentBoy() {
-    if(observedPeople.Length < 1) {
+    if(observedPeople.Length < 1 || !observedPeople[0].isMale) {
       return null;
     }
     return observedPeople[0];
   }
 
   public Person CurrentGirl() {
-    if(observedPeople.Length < 2) {
-      return null;
+    if(observedPeople.Length >= 2) {
+      return observedPeople[1];
+    } else if(observedPeople.Length == 1 && !observedPeople[0].isMale) {
+      return observedPeople[0];
     }
-    return observedPeople[1];
+    return null;
   }
 
   public Person ObservedPerson() {

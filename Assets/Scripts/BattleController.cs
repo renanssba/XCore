@@ -86,13 +86,20 @@ public class BattleController : MonoBehaviour {
 
 
   public void SetupBattleStart(int dateId) {
-    Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
-    Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
-    GlobalData.instance.observedPeople = new Person[] {boy, girl};
-
     currentDateId = dateId;
 
-    partyMembers = new Person[] {boy, girl, GlobalData.instance.people[4]};
+    if(dateId != 0) {
+      Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
+      Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
+      GlobalData.instance.observedPeople = new Person[] { boy, girl };
+
+      partyMembers = new Person[] { boy, girl, GlobalData.instance.people[4] };
+    } else {
+      partyMembers = GlobalData.instance.observedPeople;
+      TheaterController.instance.mainActor.SetCharacter(partyMembers[0]);
+      TheaterController.instance.enemyActor.SetEnemy(dateEnemies[0]);
+    }
+
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
     selectedActionType = new TurnActionType[partyMembers.Length];
@@ -102,13 +109,17 @@ public class BattleController : MonoBehaviour {
     maxHp = GlobalData.instance.GetCurrentRelationship().GetMaxHp();
 
     FullHealParty();
+    FullHealEnemies();
+
+    TheaterController.instance.InitializeEnemyLevelAndHp();
+
     ClearSkillsUsageRegistry();
     //UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
 
-    SetDateLengthAndLocation();
+    SetDateEnemiesAndLocation();
   }
 
   public bool IsBattleHappening() {
@@ -141,9 +152,18 @@ public class BattleController : MonoBehaviour {
     RecoverStealth(maxStealth);
   }
 
+  public void FullHealEnemies() {
+    foreach(Enemy currentEnemy in dateEnemies) {
+      currentEnemy.hp = currentEnemy.maxHp;
+      currentEnemy.RemoveAllStatusConditions();
+      currentEnemy.ClearAllSkillsUsage();
+    }
+  }
+
   public void ClearSkillsUsageRegistry() {
-    partyMembers[0].ClearAllSkillsUsage();
-    partyMembers[1].ClearAllSkillsUsage();
+    foreach(Person p in partyMembers) {
+      p.ClearAllSkillsUsage();
+    }
   }
 
   public void HealPartyHp(int value) {
@@ -572,7 +592,21 @@ public class BattleController : MonoBehaviour {
     skillUser.RegisterUsedSkill(usedSkill.id);
 
     if(usedSkill.type == SkillType.attack) {
-      yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable("pre_attack"));
+      string attackName = "pre_attack";
+
+      switch(skillUserId) {
+        case SkillTarget.enemy1:
+        case SkillTarget.enemy2:
+        case SkillTarget.enemy3:
+          if(((Person)targetActors[0].battler).isMale) {
+            attackName = "enemy_attacks_boy";
+          } else {
+            attackName = "enemy_attacks_girl";
+          }
+          break;
+      }
+
+      yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable(attackName));
     } else if(usedSkill.type == SkillType.active) {
       yield return ShowUseActiveSkillMessage(skillUser.GetName(), usedSkill);
     } else if(usedSkill.type == SkillType.passive) {
@@ -1005,8 +1039,12 @@ public class BattleController : MonoBehaviour {
     GetCurrentEnemy().EndTurn();
   }
 
-  public void SetDateLengthAndLocation() {
+  public void SetDateEnemiesAndLocation() {
     switch(currentDateId) {
+      case 0:
+        dateLength = 1;
+        dateEnemies = new Enemy[] { GetEnemyByString("bully_0") };
+        break;
       case 1:
         dateLength = 2;
         dateEnemies = new Enemy[] { GetEnemyByString("bunny"), GetEnemyByString("bully") };
@@ -1036,6 +1074,7 @@ public class BattleController : MonoBehaviour {
     currentDateLocation = DateLocation.park;
     dateLength = 1;
     dateEnemies = new Enemy[] {allEnemies[enemyId]};
+    FullHealParty();
   }
 
   public void GenerateDateEnemies() {
