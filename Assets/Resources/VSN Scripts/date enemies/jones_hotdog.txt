@@ -1,9 +1,13 @@
 goto *arg1
 
 waypoint event_statement
-say "" "Um vendedor de cachorro-quente fantasiado se revolta!"
+say "" "O casal fica com fome e decide comprar algo no caminho."
+say "\boy" "Você gosta de cachorro-quente? Tem uma lanchonete aqui perto."
+say "\girl" "Eu adoro! Vamos lá comprar uns pra gente."
+
+say "" "Chegando lá... eles encontram o mascote da loja revoltado!"
 theater_animation "enemy_enters"
-say "Hot Dog Jones" "Eu odeio meu emprego!! Vocês todos vão pagar!"
+say "Hot Dog Jones" "Eu odeio meu emprego! Vocês todos vão pagar!"
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
@@ -11,6 +15,9 @@ set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "argue"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "Jones esguicha ketchup e mostarda em \boy!"
+set_var enemy_attacks_girl "Jones esguicha ketchup e mostarda em \girl!"
 end_script
 
 
@@ -31,14 +38,6 @@ set_var pre_attack "\active promete ajudar Jones a conseguir um emprego que ele 
 end_script
 
 
-
-waypoint attack_boy
-set_var pre_attack "Jones esguicha ketchup e mostarda em \boy!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "Jones esguicha ketchup e mostarda em \girl!"
-end_script
 
 waypoint defeated
 say "" "Jones foge prometendo conseguir um novo emprego!"

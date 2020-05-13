@@ -24,6 +24,9 @@ set_var intelligence_action_boy_name "improvise"
 set_var intelligence_action_girl_name "improvise"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "O coelho olha para \boy com um olhar triste!"
+set_var enemy_attacks_girl "O coelho olha para \girl com um olhar triste!"
 end_script
 
 
@@ -44,14 +47,6 @@ set_var pre_attack "\active abraça o coelhinho, tranquilizando-o!"
 end_script
 
 
-
-waypoint attack_boy
-set_var pre_attack "O coelho olha para \boy com um olhar triste!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "O coelho olha para \girl com um olhar triste!"
-end_script
 
 waypoint defeated
 say "" "O coelhinho se sente recuperado e sai correndo feliz pelo parque!"

@@ -91,6 +91,9 @@ set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "think"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "A sombra ofende \boy!"
+set_var enemy_attacks_girl "A sombra ofende a aparência de \girl!"
 end_script
 
 
@@ -110,15 +113,6 @@ end_script
 waypoint charisma_action_boy
 waypoint charisma_action_girl
 set_var pre_attack "\active pede educadamente para a sombra se acalmar e pensar."
-end_script
-
-
-waypoint attack_boy
-set_var pre_attack "A sombra ofende \boy!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "A sombra ofende a aparência de \girl!"
 end_script
 
 

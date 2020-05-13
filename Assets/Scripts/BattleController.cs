@@ -604,6 +604,8 @@ public class BattleController : MonoBehaviour {
             attackName = "enemy_attacks_girl";
           }
           break;
+        case SkillTarget.partyMember1:
+          break;
       }
 
       yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable(attackName));

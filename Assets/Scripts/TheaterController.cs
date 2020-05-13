@@ -377,6 +377,7 @@ public class TheaterController : MonoBehaviour {
     
     BattleController.instance.partyMembers[0].ClearSkillUsesInBattle();
     BattleController.instance.partyMembers[1].ClearSkillUsesInBattle();
+    BattleController.instance.FullHealEnemies();
 
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);

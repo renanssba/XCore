@@ -90,6 +90,9 @@ set_var intelligence_action_boy_name "argue"
 set_var intelligence_action_girl_name "think"
 set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "A sombra envolve \boy e o aperta com muita força!"
+set_var enemy_attacks_girl "A sombra ataca \girl com força!"
 end_script
 
 
@@ -109,15 +112,6 @@ end_script
 waypoint charisma_action_boy
 waypoint charisma_action_girl
 set_var pre_attack "\active diz que eles não precisam lutar!"
-end_script
-
-
-waypoint attack_boy
-set_var pre_attack "A sombra envolve \boy e o aperta com muita força!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "A sombra ataca \girl com força!"
 end_script
 
 

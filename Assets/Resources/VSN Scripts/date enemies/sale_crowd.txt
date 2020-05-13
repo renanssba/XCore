@@ -17,6 +17,9 @@ set_var intelligence_action_boy_name "bluff"
 set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "Uma pessoa da multidão dá uma cotovelada em \boy!"
+set_var enemy_attacks_girl "Uma pessoa da multidão dá uma cotovelada em \girl!"
 end_script
 
 
@@ -36,15 +39,6 @@ waypoint charisma_action_girl
 set_var pre_attack "\active implora para que as pessoas sejam consumidores conscientes!"
 end_script
 
-
-
-waypoint attack_boy
-set_var pre_attack "Uma pessoa da multidão dá uma cotovelada em \boy!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "Uma pessoa da multidão dá uma cotovelada em \girl!"
-end_script
 
 
 waypoint defeated

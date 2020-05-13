@@ -12,8 +12,6 @@ public class Actor2D : MonoBehaviour {
   public SpriteRenderer[] buffAuraRenderers;
   public new ParticleSystem particleSystem;
   public SpriteRenderer shadowRenderer;
-  public Color[] rendererColors;
-  public float[] rendererFlashAmounts;
 
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
@@ -44,9 +42,6 @@ public class Actor2D : MonoBehaviour {
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
-
-    rendererColors = new Color[renderers.Length];
-    rendererFlashAmounts = new float[renderers.Length];
   }
 
 
@@ -413,6 +408,8 @@ public class Actor2D : MonoBehaviour {
     Color c = new Color(0.92f, 0.73f, 0.81f);
     TintActorToColor(0f, 1f, c);
   }
+
+  //public void TintActor
 
   public void ShowInternalSprite() {
     renderers[renderers.Length - 1].DOFade(1f, 1f);

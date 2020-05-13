@@ -120,7 +120,7 @@ for currentDateEvent #dateLength
 
   // enemy turn
   set_var currentPlayerTurn 0
-  enemy_attack_description
+  enemy_attack_target
   goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
   goto_script "check_passive_triggers" "after_enemy_attack"

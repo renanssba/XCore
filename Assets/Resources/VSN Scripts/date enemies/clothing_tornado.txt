@@ -1,9 +1,30 @@
 goto *arg1
 
 waypoint event_statement
+say "" "Um estranho tornado começa a se aproximar do casal!"
+
 theater_animation "enemy_enters"
-say "" "Um tornado misterioso começa a se aproximar do casal!"
-say "Ele parece estar carregando várias roupas."
+say "\boy" "Ei, o que é aquilo?"
+
+say "\girl" "Caramba, sei lá!"
+
+actor_animator_parameter angel "Choosing Action" true
+wait 0.5
+
+say "Fertiliel" "(Deve ser um Imp pregando uma peça. Deixa eu usar minha Lente Angelical.)"
+
+actor_tint enemy 1 1 "#3995CC"
+wait 1
+
+say "Fertiliel" "(Eu sabia! Ele deve estar roubando roupas de humanos.)"
+
+actor_tint enemy 0 1 "#3995CC"
+wait 1
+
+say "" "O tornado persegue \couple. Será que ele quer roubar as roupas deles também?"
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
 
 set_var guts_action_boy_name "strike"
 set_var guts_action_girl_name "strike"
@@ -11,6 +32,9 @@ set_var intelligence_action_boy_name "bluff"
 set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "flatter"
 set_var charisma_action_girl_name "flatter"
+
+set_var enemy_attacks_boy "\boy é atingido por peças de vestimenta!"
+set_var enemy_attacks_girl "\girl é atingida por peças de vestimenta!"
 end_script
 
 
@@ -31,14 +55,6 @@ set_var pre_attack "\active elogia as roupas que o tornado está usando!"
 end_script
 
 
-
-waypoint attack_boy
-set_var pre_attack "\boy é atingido por peças de vestimenta!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "\girl é atingida por peças de vestimenta!"
-end_script
 
 waypoint defeated
 say "" "O tornado se desfaz subitamente!"

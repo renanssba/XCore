@@ -1,5 +1,6 @@
 ﻿say_auto "DEBUG MENU"
 set_var battle_is_happening false
+set_var currentDateEvent 0
 choices "Ana" ana "Beatrice" beatrice "Clara" clara "Cancelar" end
 
 
@@ -74,6 +75,7 @@ play_music "observacao2_intro" "observacao2_loop"
 goto_script girl_script_name "date_intro_3"
 goto end
 
+
 waypoint date_options_1
 set_var dateId 1
 setup_date
@@ -86,8 +88,7 @@ waypoint date_options_3
 choices "\enemy_name(10)" enemy_10 "\enemy_name(11)" enemy_11 "\enemy_name(12)" enemy_12 "\enemy_name(13)" enemy_13 "\enemy_name(14)" enemy_14 ">>>" date_options_4
 
 waypoint date_options_4
-choices "\enemy_name(15)" enemy_15 "Cancelar" end
-//choices "\enemy_name(15)" enemy_15 "\enemy_name(6)" enemy_6 "\enemy_name(7)" enemy_7 "\enemy_name(8)" enemy_8 "\enemy_name(9)" enemy_9 "Cancelar" end
+choices "\enemy_name(15)" enemy_15 "\enemy_name(16)" enemy_16 "Cancelar" end
 
 
 waypoint enemy_0
@@ -152,6 +153,10 @@ goto custom_date
 
 waypoint enemy_15
 set_custom_battle 15
+goto custom_date
+
+waypoint enemy_16
+set_custom_battle 16
 goto custom_date
 
 

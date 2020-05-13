@@ -37,6 +37,9 @@ set_var intelligence_action_boy_name "bluff"
 set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "Os vendedores incomodam \boy com um discurso ensaiado!"
+set_var enemy_attacks_girl "Os vendedores incomodam \girl com um discurso ensaiado!"
 end_script
 
 
@@ -56,15 +59,6 @@ waypoint charisma_action_girl
 set_var pre_attack "\active pede educadamente para os vendedores deixarem-nos em paz."
 end_script
 
-
-
-waypoint attack_boy
-set_var pre_attack "Os vendedores incomodam \boy com um discurso ensaiado!"
-end_script
-
-waypoint attack_girl
-set_var pre_attack "Os vendedores incomodam \girl com um discurso ensaiado!"
-end_script
 
 
 waypoint defeated
