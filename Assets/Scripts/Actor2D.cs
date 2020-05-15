@@ -10,6 +10,7 @@ public class Actor2D : MonoBehaviour {
   public string actorReference;
   public SpriteRenderer[] renderers;
   public SpriteRenderer[] buffAuraRenderers;
+  public List<SpriteRenderer> overlays;
   public new ParticleSystem particleSystem;
   public SpriteRenderer shadowRenderer;
 
@@ -42,6 +43,7 @@ public class Actor2D : MonoBehaviour {
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
+    overlays = new List<SpriteRenderer>();
   }
 
 
@@ -571,4 +573,20 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
+  public void AddOverlay(string name) {
+    GameObject asd = Instantiate(TheaterController.instance.overlayPrefab, renderers[0].transform);
+    asd.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + name);
+    overlays.Add(asd.GetComponent<SpriteRenderer>());
+  }
+
+  public void RemoveOveraly(string name) {
+    SpriteRenderer overlay = null;
+    for(int i=0; i<overlays.Count; i++) {
+      if(overlays[i].sprite.name == name) {
+        overlay = overlays[i];
+      }
+    }
+    overlays.Remove(overlay);
+    Destroy(overlay.gameObject);
+  }
 }

@@ -47,6 +47,7 @@ public class TheaterController : MonoBehaviour {
 
   public GameObject personPrefab;
   public GameObject[] bgEffectPrefabs;
+  public GameObject overlayPrefab;
 
   public SpriteRenderer bgRenderer;
   public GameObject bgEffect;
