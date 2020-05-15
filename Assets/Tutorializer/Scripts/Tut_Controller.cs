@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tut_Controller : MonoBehaviour {
 
-  private static Tut_Controller instance;
+  public static Tut_Controller instance;
 
   public ListedAnimation[] animations;
 //  public Tut_Sliding_Finger slidingFinger;
@@ -15,12 +15,8 @@ public class Tut_Controller : MonoBehaviour {
   };
 
 
-  void Awake(){
+  public void Awake(){
     instance = this;
-  }
-
-  public static Tut_Controller GetInstance(){
-    return instance;
   }
 
 
@@ -57,5 +53,4 @@ public class Tut_Controller : MonoBehaviour {
       anim.arrow.SetActive(false);
     }
   }
-
 }

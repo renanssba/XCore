@@ -5,9 +5,143 @@ goto *arg1
 
 
 
-waypoint tutorial
 
+waypoint first_battle_1
+if tutorial_1 == true
+  goto end
+endif
+say "" "Certos conflitos durante o jogo são resolvidos através de um <color=yellow>combate</color>."
+say "Os dois lados alternam turnos e podem realizar ataques."
+tutorial_icon "hp_party" true
+wait 1
+say "Esta barrinha representa os <color=yellow>Pontos de Coração (ou <sprite=\qhpANDsp\q index=0 tint>PC)</color> dos humanos que você está acompanhando."
+say "Tome cuidado, pois caso eles cheguem a zero você perde o combate."
+tutorial_icon "hp_party" false
+tutorial_icon "hp_enemy" true
+wait 1
+say "Esta barrinha representa os PC do seu oponente. Ataque-o para reduzí-los a zero e vencer o combate."
+
+set_var currentPlayerTurn 0
+tutorial_icon "hp_enemy" false
+
+action_input currentPlayerTurn false
+say "Durante o seu turno, você pode escolher entre: <color=yellow>Ações</color>, <color=yellow>Defender</color> e <color=yellow>Fugir</color>."
+tutorial_icon "action_button" true
+say "Por favor selecione <color=yellow>Ações</color>."
+set_var tut_require_click_action_button true
+vsn_state "WAITINGCUSTOMINPUT"
+
+tutorial_icon "action_button" false
+
+say "" "Você sempre pode usar 3 tipos de ações contra o oponente.\nElas se baseiam em diferentes atributos:\n<sprite=\qAttributes\q index=0>Valentia, <sprite=\qAttributes\q index=1>Inteligência e <sprite=\qAttributes\q index=2>Carisma."
+say "" "Por favor selecione <sprite=\qAttributes\q index=0>Atacar, em seguida clique no valentão."
+vsn_state "WAITINGCUSTOMINPUT"
+set_var input_already_selected true
+set_var tutorial_1 true
 goto end
+
+
+
+waypoint first_battle_2
+if tutorial_2 == true
+  goto end
+endif
+say "" "Diferentes oponentes são mais fracos contra certos tipos de ataque. Portanto teste diferentes ações para descobrir quais são mais efetivas contra eles."
+set_var tutorial_2 true
+goto end
+
+
+
+waypoint first_battle_3
+if tutorial_3 == true
+  goto end
+endif
+set_var currentPlayerTurn 0
+action_input currentPlayerTurn false
+tutorial_icon "defend_button" true
+say "" "Uma outra alternativa durante a batalha é Defender. Ela <color=yellow>reduz o dano recebido</color> pela metade e <color=yellow>recupera <sprite=\qhpANDsp\q index=1 tint>Pontos de Habilidade</color>."
+tutorial_icon "defend_button" false
+say "Ana atualmente não possui nenhuma habilidade utilizável. Elas serão desbloqueadas em um momento posterior."
+vsn_state "WAITINGCUSTOMINPUT"
+set_var input_already_selected true
+set_var tutorial_3 true
+goto end
+
+
+
+waypoint using_skills
+if tutorial_skills == true
+  goto end
+endif
+
+say "" "\couple possuem habilidades ativas que podem usar durante a batalha."
+set_var currentPlayerTurn 0
+action_input currentPlayerTurn false
+tutorial_icon "action_button" true
+say "As habilidades ficam dentro da lista de <color=yellow>Ações</color>."
+set_var tut_require_click_action_button true
+vsn_state "WAITINGCUSTOMINPUT"
+tutorial_icon "action_button" false
+
+tutorial_icon "skill_button" true
+say "Note a habilidade de Daniel: <color=yellow>Lanche Reforçado</color>. Ela cura Fome e aumenta a defesa de um aliado por 3 turnos."
+say "Cada casal possui diferentes habilidades, de acordo com a sua personalidade e sinergia."
+say "Novas habilidades podem ser aprendidas conforme eles progridem no relacionamento."
+tutorial_icon "skill_button" false
+
+tutorial_icon "skill_points" true
+wait 1
+say "Utilizar habilidades gasta <color=yellow><sprite=\qhpANDsp\q index=1 tint>Pontos de Habilidade</color> (ou <sprite=\qhpANDsp\q index=1 tint>PH), que se enchem apenas no início de cada Encontro."
+say "No entanto, você pode sempre <color=yellow>Defender</color>. Isso também recupera uma pequena quantidade de <sprite=\qhpANDsp\q index=1 tint>PH."
+tutorial_icon "skill_points" false
+vsn_state "WAITINGCUSTOMINPUT"
+
+set_var tutorial_skills true
+goto end
+
+
+
+waypoint fertiliel_actions
+if tutorial_fertiliel == true
+  goto end
+endif
+
+actor_animator_parameter angel "Choosing Action" true
+wait 1
+
+say "Fertiliel" "(Agora que o meu humano designado está em um combate, eu posso ajudá-lo.)"
+say "(No entanto, como eu não posso ser vista, as ações que eu posso tomar são diferentes.)"
+
+action_input currentPlayerTurn false
+tutorial_icon "item_button" true
+wait 1
+say "(Eu posso usar diferentes <color=yellow>Itens</color> para a recuperar os <color=yellow><sprite=\qhpANDsp\q index=0 tint>PC</color>, <color=yellow><sprite=\qhpANDsp\q index=1 tint>PH</color> ou condições dos humanos.)"
+say "(No entanto, quando eu uso um item, os humanos ficam desconfiados de que há algo estranho ocorrendo.)"
+tutorial_icon "item_button" false
+tutorial_icon "eyes_highlight" true
+say "(A cada item utilizado, um dos <color=yellow>Indicadores de Atenção</color> se abre)."
+say "(Quando todos se abrem, os humanos me percebem e eu preciso parar de agir por alguns turnos para que se esqueçam da minha presença.)"
+say "(Portanto, preciso tomar cuidado com isso.)"
+tutorial_icon "eyes_highlight" false
+
+tutorial_icon "idle_button" true
+say "(Outra opção é que eu tenho é apenas <color=yellow>Observar</color>, esperando o momento certo de agir.)"
+say "(Observar não ajuda os humanos diretamente, mas fecha um dos Indicadores de Atenção.)"
+tutorial_icon "idle_button" false
+vsn_state "WAITINGCUSTOMINPUT"
+
+set_var tutorial_fertiliel true
+goto end
+
+
+say ""
+say ""
+say ""
+say ""
+say ""
+say ""
+
+
 
 
 

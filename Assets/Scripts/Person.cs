@@ -44,8 +44,8 @@ public class Person : Battler {
     giftsReceived = new Inventory();
     inventory.owner = this;
     giftsReceived.owner = this;
-    initialMaxSp = 3;
-    sp = 3;
+    initialMaxSp = 4;
+    sp = 4;
     attributes = new int[] { 1, 1, 1, 1 };
   }
 
@@ -124,7 +124,7 @@ public class Person : Battler {
     Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
 
     if(relationship.level >= 4) {
-      count += 2;
+      count += 3;
     }
     if(relationship.level >= 6) {
       count += 5;

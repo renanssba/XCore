@@ -157,6 +157,10 @@ public class ActionButton : MonoBehaviour {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
+    if(VsnSaveSystem.GetBoolVariable("tut_require_click_action_button")) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
 
     SfxManager.StaticPlayConfirmSfx();
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");

@@ -92,7 +92,7 @@ public class VsnOperator : VsnArgument{
 
 
   private bool CompareBooleans(bool op1, bool op2) {
-    Debug.Log("Comparing booleans");
+    Debug.Log("Comparing booleans: "+op1+" and "+op2);
 
     switch(operatorType) {
       case "==":

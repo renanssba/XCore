@@ -96,6 +96,22 @@ for currentDateEvent #dateLength
 
   // character action inputs
   for currentPlayerTurn #partyLength
+    
+    // first battle tutorials
+    if tutorial_skills == false
+      goto_script "tutorials" "using_skills"
+      continue
+    endif
+    if tutorial_fertiliel == false
+      if currentPlayerTurn == 2
+        if currentBattleTurn == 1
+          continue
+        endif
+        goto_script "tutorials" "fertiliel_actions"
+        continue
+      endif      
+    endif
+    
     action_input currentPlayerTurn
   endfor
 

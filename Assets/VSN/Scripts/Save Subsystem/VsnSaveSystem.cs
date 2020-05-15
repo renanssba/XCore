@@ -88,7 +88,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, bool value) {
-    Debug.Log("Variable " + key + " saved with bool value " + value);
+    //Debug.Log("Variable " + key + " saved with bool value " + value);
     string savedKey = GetVariableBoolPrefix(key);
 
     if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
@@ -188,7 +188,7 @@ public class VsnSaveSystem {
   public static void Save(int saveSlot) {		
     SaveHandler.Save(savedDataDictionary, saveSlot, (bool success) => {
       if(success) {
-        Debug.Log("VSN SAVE success");
+        //Debug.LogWarning("VSN SAVE success! Slot: " + saveSlot);
       }
     });
   }
@@ -197,7 +197,7 @@ public class VsnSaveSystem {
     SaveHandler.Load(savedDataDictionary, saveSlot, (Dictionary<string,string> dictionary) => {
       if(dictionary != null) {
         savedDataDictionary = dictionary;
-        Debug.Log("VSN LOAD success");
+        Debug.LogWarning("VSN LOAD success! Slot: " + saveSlot);
       }
     });
   }

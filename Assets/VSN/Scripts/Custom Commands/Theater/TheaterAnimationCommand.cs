@@ -36,6 +36,12 @@ namespace Command {
         case "support_actor_enters":
           TheaterController.instance.SupportActorEntersScene();
           break;
+        case "color_bg_dark":
+          TheaterController.instance.bgRenderer.color = new Color(0.8f, 0.8f, 0.8f);
+          break;
+        case "color_bg_normal":
+          TheaterController.instance.bgRenderer.color = Color.white;
+          break;
       }      
     }
 

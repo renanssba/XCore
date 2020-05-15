@@ -153,6 +153,11 @@ public class ActionsPanel : MonoBehaviour {
     SetupCharacterActions(currentPartyMember);
     skillsPanel.gameObject.SetActive(true);
     Utils.SelectUiElement(skillButtons[0].gameObject);
+
+    if(VsnSaveSystem.GetBoolVariable("tut_require_click_action_button")) {
+      VsnSaveSystem.SetVariable("tut_require_click_action_button", false);
+      VsnController.instance.state = ExecutionState.PLAYING;
+    }
   }
 
   public void ClickItemsPanel() {

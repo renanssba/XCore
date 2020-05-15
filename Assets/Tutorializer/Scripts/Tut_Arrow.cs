@@ -14,7 +14,7 @@ public class Tut_Arrow : MonoBehaviour {
   private Vector2 initialPos;
   private Vector2 finalPos;
 
-  void Start () {
+  public void OnEnable() {
     finalRect.gameObject.SetActive(false);
     initialPos = GetComponent<RectTransform>().anchoredPosition;
     finalPos = finalRect.anchoredPosition;
@@ -23,14 +23,14 @@ public class Tut_Arrow : MonoBehaviour {
     Initialize();
 	}
 
-  void Update(){
+  public void Update(){
     if(!hasStarted){
       hasStarted = true;
       Initialize();
     }
   }
 
-  void Initialize(){
+  public void Initialize(){
     StartCoroutine(GoToEnd());
   }
 

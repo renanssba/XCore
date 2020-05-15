@@ -103,6 +103,9 @@ public class BattleController : MonoBehaviour {
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
     selectedActionType = new TurnActionType[partyMembers.Length];
+    for(int i=0; i< selectedActionType.Length; i++) {
+      selectedActionType[i] = TurnActionType.idle;
+    }
     selectedTargetPartyId = new SkillTarget[partyMembers.Length];
     usedCelestialItems = new Inventory();
 
@@ -203,7 +206,7 @@ public class BattleController : MonoBehaviour {
     //  currentStealth = maxStealth;
     //  partyMembers[2].RemoveStatusCondition("spotted");
     //}
-    UIController.instance.AnimateStealthSliderChange(currentStealth, currentStealth);
+    UIController.instance.AnimateStealthValueChange(currentStealth, currentStealth);
     TheaterController.instance.angelActor.UpdateGraphics();
   }
 
@@ -218,7 +221,7 @@ public class BattleController : MonoBehaviour {
     } else {
       VsnController.instance.state = ExecutionState.PLAYING;
     }
-    UIController.instance.AnimateStealthSliderChange(initValue, currentStealth);
+    UIController.instance.AnimateStealthValueChange(initValue, currentStealth);
   }
 
   public IEnumerator ShowDetectionAnimation() {
@@ -1137,7 +1140,7 @@ public class BattleController : MonoBehaviour {
 
   public Person GetCurrentPlayer() {
     int currentPlayer = CurrentPlayerId();
-    if(currentPlayer < partyMembers.Length) {
+    if(currentPlayer < partyMembers.Length && currentPlayer >= 0) {
       return partyMembers[currentPlayer];
     }
     return null;

@@ -20,7 +20,7 @@ namespace Command {
 
       Debug.LogWarning("Adding " + amount + " to item " + itemToAdd.id + "!");
 
-      Inventory inventory = GlobalData.instance.CurrentBoy().inventory;
+      Inventory inventory = GlobalData.instance.people[0].inventory;
 
       if(amount >= 0) {
         inventory.AddItem(itemToAdd.id, amount);

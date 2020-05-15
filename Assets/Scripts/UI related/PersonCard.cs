@@ -172,6 +172,11 @@ public class PersonCard : MonoBehaviour {
   }
 
   public void ClickDateUiPersonCard() {
+    if(VsnSaveSystem.GetBoolVariable("tut_require_click_action_button")) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     UIController.instance.coupleStatusScreen.Initialize(GlobalData.instance.GetCurrentRelationship());
     UIController.instance.coupleStatusScreen.panel.ShowPanel();

@@ -73,6 +73,7 @@ public class GameController : MonoBehaviour {
       SceneManager.LoadScene(StageName.TitleScreen.ToString());
     }
     if(Input.GetKeyDown(KeyCode.F5)) {
+      VsnSaveSystem.Load(1);
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     if(Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift)) {

@@ -33,6 +33,8 @@ public class Item {
   public int healSp;
   public int healHp;
 
+  public int sells_in_store;
+
   public int price;
   public Sprite sprite;
 

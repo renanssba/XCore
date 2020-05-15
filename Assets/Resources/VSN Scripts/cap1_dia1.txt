@@ -73,7 +73,9 @@ actor_animator_parameter main "Battle" true
 actor_animator_parameter enemy "Battle" true
 //wait 1
 // fade_in 0.5
+theater_animation "color_bg_dark"
 goto_script "single_battle"
+theater_animation "color_bg_normal"
 
 actor_animator_parameter main "Battle" false
 actor_animator_parameter support "Battle" false

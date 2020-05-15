@@ -46,7 +46,8 @@ public class ItemDatabase : MonoBehaviour {
       newItem.price = int.Parse(entry["price"]);
       //newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
       newItem.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
-      if(entry["sells_in_store"] == "yes"){
+      newItem.sells_in_store = int.Parse(entry["sells_in_store"]);
+      if(newItem.sells_in_store > 0) {
         itemsForSale.Add(newItem.id);
       }
       newItem.tags = Utils.SeparateTags(entry["tags"]);

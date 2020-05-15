@@ -27,10 +27,9 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions datingPeoplePanel;
   public Slider partyHpSlider;
   public TextMeshProUGUI partyHpText;
-  public Slider stealthSlider;
-  public Image eyeIcon;
-  public Image hiddenEyeIcon;
   public Slider enemyHpSlider;
+  public TextMeshProUGUI enemyHpText;
+  public Image[] stealthEyeIcons;
   public TextMeshProUGUI difficultyText;
 
   public ScreenTransitions dateProgressPanel;
@@ -111,6 +110,11 @@ public class UIController : MonoBehaviour {
         partyPeopleCards[i].gameObject.SetActive(false);
       }
     }
+
+    // set HP slider width
+    partyHpSlider.transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().rect.width, 32f);
+    //partyHpSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x, 32f);
+    //partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x;
     //ShowDateProgressUI();
 
     if(BattleController.instance.GetCurrentEnemy() != null) {
@@ -131,24 +135,21 @@ public class UIController : MonoBehaviour {
     float currentShownHp = initialHp;
     DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
       enemyHpSlider.value = currentShownHp;
+      enemyHpText.text = ((int)currentShownHp).ToString();
     } );
   }
 
-  public void AnimateStealthSliderChange(int initialValue, int finalValue) {
-    float currentShownHp = initialValue;
-    stealthSlider.maxValue = BattleController.maxStealth;
-
-    if(finalValue > 0f) {
-      hiddenEyeIcon.gameObject.SetActive(true);
-      //eyeIcon.gameObject.SetActive(false);
-    } else {
-      hiddenEyeIcon.gameObject.SetActive(false);
-      //eyeIcon.gameObject.SetActive(true);
+  public void AnimateStealthValueChange(int previousValue, int currentValue) {
+    for(int i=0; i<stealthEyeIcons.Length; i++) {
+      if(i < 3-currentValue) {
+        stealthEyeIcons[i].sprite = ResourcesManager.instance.stealthEyeSprites[1];
+        if(i >= 3-previousValue) {
+          stealthEyeIcons[i].transform.DOScale(1.3f, 0.5f).SetLoops(2, LoopType.Yoyo);
+        }
+      } else {
+        stealthEyeIcons[i].sprite = ResourcesManager.instance.stealthEyeSprites[0];
+      }
     }
-
-    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalValue, 1f).OnUpdate( ()=> {
-      stealthSlider.value = currentShownHp;
-    } );
   }
 
   public void ShowDateProgressUI() {
@@ -252,6 +253,7 @@ public class UIController : MonoBehaviour {
 
   public void ShowDateUI(bool value) {
     if(value == true) {
+      UpdateDateUI();
       datingPeoplePanel.OpenMenuScreen();
     } else {
       datingPeoplePanel.CloseMenuScreen();

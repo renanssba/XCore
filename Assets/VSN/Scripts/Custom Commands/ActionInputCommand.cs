@@ -9,20 +9,32 @@ namespace Command {
 
     public override void Execute() {
       int currentPlayer = (int)args[0].GetNumberValue();
-      WaitForCharacterInput(currentPlayer);
+      bool waitForInput = true;
+
+      if(args.Length > 1) {
+        waitForInput = args[1].GetBooleanValue();
+      }
+      WaitForCharacterInput(currentPlayer, waitForInput);
     }
 
-    public static void WaitForCharacterInput(int currentPlayer) {
+    public static void WaitForCharacterInput(int currentPlayer, bool waitForInput = true) {
       TheaterController.instance.SetCharacterChoosingAction(currentPlayer);
       UIController.instance.SetupCurrentCharacterUi(currentPlayer);
       UIController.instance.actionsPanel.Initialize(currentPlayer);
-      VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;
+      if(waitForInput) {
+        VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;
+      }      
     }
 
 
     public override void AddSupportedSignatures() {
       signatures.Add(new VsnArgType[] {
         VsnArgType.numberArg
+      });
+
+      signatures.Add(new VsnArgType[] {
+        VsnArgType.numberArg,
+        VsnArgType.booleanArg
       });
     }
   }
