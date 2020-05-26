@@ -40,6 +40,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] buttonSprites;
   public Sprite[] heartlockSprites;
   public Sprite[] stealthEyeSprites;
+  public Vector2[] heartPositionInActors;
   public List<CharacterSpriteCollection> characterSpritesCollections;
 
 

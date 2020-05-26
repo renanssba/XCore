@@ -55,13 +55,13 @@ public class VsnScriptReader {
       for (int i = 0; i < args.Length; i++) {
         if(args[i].GetType() == typeof(VsnNumber)) {
           VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetNumberValue());
-          Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetNumberValue());
+          Debug.Log("[ARG" + (i + 1) + "] set to: " + args[i].GetNumberValue());
         } else if(args[i].GetType() == typeof(VsnString)) {
           VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetStringValue());
-          Debug.Log("Setting variable arg" + (i+1) + " to value: " + args[i].GetStringValue());
+          Debug.Log("[ARG" + (i+1) + "] set to: " + args[i].GetStringValue());
         } else {
           VsnSaveSystem.SetVariable("arg" + (i + 1), args[i].GetReference());
-          Debug.Log("Setting variable arg" + (i + 1) + " to value: " + args[i].GetReference());
+          Debug.Log("[ARG" + (i + 1) + "] set to: " + args[i].GetReference());
         }
       }
     } else {

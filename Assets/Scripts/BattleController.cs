@@ -854,8 +854,6 @@ public class BattleController : MonoBehaviour {
     }
     ivt.ConsumeItem(usedItem.id, 1);
 
-    VsnAudioManager.instance.PlaySfx("item_use");
-    targetActor.ShineGreen();
 
     // sensor effect
     if(usedItem.nameKey == "sensor") {
@@ -863,6 +861,9 @@ public class BattleController : MonoBehaviour {
       targetActor.ShineRed();
       targetActor.ShowWeaknessCard(true);
       yield return new WaitForSeconds(1f);
+    } else {
+      VsnAudioManager.instance.PlaySfx("item_use");
+      targetActor.ShineGreen();
     }
 
     // heal status condition

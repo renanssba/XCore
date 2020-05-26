@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
   public ParticleGenerator babiesParticleGenerator;
   public Image[] engagementScreenImages;
   public GameObject engagementScreen;
+  public bool hideTutorials;
 
 
 
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour {
       //}
 
       //VsnController.instance.StartVSN("cap0_intro");
+      VsnSaveSystem.SetVariable("hide_tutorials", hideTutorials);
       VsnController.instance.StartVSN("cap1_manha");
       //VsnController.instance.StartVSN("tutorial_intro");
     }

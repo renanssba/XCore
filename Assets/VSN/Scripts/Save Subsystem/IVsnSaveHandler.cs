@@ -8,5 +8,8 @@ public interface IVsnSaveHandler{
 
 	void Load(Dictionary<string, string> dictionary, int saveSlot, Action<Dictionary<string,string>> callback);
 
+  bool IsSaveSlotBusy(int saveSlot);
+
+  Dictionary<string, string> GetSavedDictionary(int saveSlot);
 }
 

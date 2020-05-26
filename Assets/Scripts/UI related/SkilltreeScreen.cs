@@ -100,6 +100,10 @@ public class SkilltreeScreen : MonoBehaviour {
       return;
     }
 
+    if(VsnSaveSystem.GetBoolVariable("tutorial_skilltree") == false) {
+      VsnController.instance.StartVSN("tutorials", new VsnArgument[] { new VsnString("skilltree") });
+    }
+
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize();
     screenTransitions.ShowPanel();

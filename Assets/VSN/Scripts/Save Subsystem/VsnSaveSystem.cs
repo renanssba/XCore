@@ -69,7 +69,7 @@ public class VsnSaveSystem {
   }
 
   public static void SetVariable(string key, float value) {
-    //Debug.Log("Variable " + key + " saved with float value " + value);
+    Debug.Log("[VAR] " + key + " = " + value);
     string savedKey = GetVariableFloatPrefix(key);
 
     if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
@@ -84,11 +84,11 @@ public class VsnSaveSystem {
     } else {
       savedDataDictionary.Add(savedKey, value.ToString());
     }
-    Save(0);
+    //Save(0);
   }
 
   public static void SetVariable(string key, bool value) {
-    //Debug.Log("Variable " + key + " saved with bool value " + value);
+    Debug.Log("[VAR] " + key + " = " + value);
     string savedKey = GetVariableBoolPrefix(key);
 
     if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
@@ -103,11 +103,11 @@ public class VsnSaveSystem {
     } else {
       savedDataDictionary.Add(savedKey, value.ToString());
     }
-    Save(0);
+    //Save(0);
   }
 
   public static void SetVariable(string key, string value) {
-    Debug.Log("Variable " + key + " saved with string value " + value);
+    Debug.Log("[VAR] " + key + " = " + value);
     string savedKey = GetVariableStringPrefix(key);
 
     if(savedDataDictionary.ContainsKey(GetVariableFloatPrefix(key))) {
@@ -122,7 +122,7 @@ public class VsnSaveSystem {
     } else {
       savedDataDictionary.Add(savedKey, value);
     }
-    Save(0);
+    //Save(0);
   }
 
 
@@ -138,7 +138,7 @@ public class VsnSaveSystem {
     } else {
       savedDataDictionary.Add(savedKey, amount.ToString());
     }
-    Save(0);
+    //Save(0);
   }
 
   public static int GetIntVariable(string key, int defaultValue = 0) {
@@ -188,7 +188,7 @@ public class VsnSaveSystem {
   public static void Save(int saveSlot) {		
     SaveHandler.Save(savedDataDictionary, saveSlot, (bool success) => {
       if(success) {
-        //Debug.LogWarning("VSN SAVE success! Slot: " + saveSlot);
+        Debug.LogWarning("VSN SAVE success! Slot: " + saveSlot);
       }
     });
   }
@@ -202,6 +202,14 @@ public class VsnSaveSystem {
     });
   }
 
+  public static bool IsSaveSlotBusy(int saveSlot) {
+    return SaveHandler.IsSaveSlotBusy(saveSlot);
+  }
+
+  public static Dictionary<string, string> GetSavedDictionary(int saveSlot) {
+    return SaveHandler.GetSavedDictionary(saveSlot);
+  }
+
   #endregion
 
-}
+  }

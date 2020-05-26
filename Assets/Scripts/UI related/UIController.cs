@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour {
   public TextMeshProUGUI titleText;
 
   public ScreenTransitions uiControllerPanel;
+  public TextMeshProUGUI dayText;
   public Image daytimeIcon;
 
   public RectTransform relationshipCardsPanel;
@@ -23,6 +24,7 @@ public class UIController : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public Button[] menuButtons;
+  public GameObject[] menuButtonAlertIcons;
 
   public ScreenTransitions datingPeoplePanel;
   public Slider partyHpSlider;
@@ -51,6 +53,9 @@ public class UIController : MonoBehaviour {
 
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
+
+  public ScreenTransitions cellphonePanel;
+
 
   public CoupleStatusScreen coupleStatusScreen;
 
@@ -85,10 +90,12 @@ public class UIController : MonoBehaviour {
     }
     relationshipCardsPanel.sizeDelta = new Vector2(relationshipCardsPanel.sizeDelta.x, 18f+126f*relationshipCardsVisible);
 
-    //dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day;
+    dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + gb.day;
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     daytimeIcon.sprite = ResourcesManager.instance.daytimeSprites[daytime];
     moneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
+
+    SetBoardMenuButtons();
 
     UpdateDateUI();
   }
@@ -282,6 +289,34 @@ public class UIController : MonoBehaviour {
     Debug.LogWarning("SET TITLE TEXT TO: " + titleText.text);
   }
 
+  public void SetBoardMenuButtons() {
+    bool partTimeUnlocked = false;
+    bool shopButton = false;
+
+    for(int i=0; i<menuButtonAlertIcons.Length; i++) {
+      menuButtonAlertIcons[i].SetActive(false);
+    }
+
+    if(GlobalData.instance.day >= 2) {
+      shopButton = true;
+      if(VsnSaveSystem.GetIntVariable("shop_level") == 0 ||
+         VsnSaveSystem.GetIntVariable("shop_unlock_advance") == 1 ||
+         VsnSaveSystem.GetIntVariable("shop_unlock_final") == 1) {
+        menuButtonAlertIcons[1].SetActive(true);
+      }
+    }
+
+    if(GlobalData.instance.day >= 3) {
+      partTimeUnlocked = true;
+      if(VsnSaveSystem.GetBoolVariable("part_time_intro") == false) {
+        menuButtonAlertIcons[0].SetActive(true);
+      }
+    }
+
+    menuButtons[0].gameObject.SetActive(partTimeUnlocked);
+    menuButtons[1].gameObject.SetActive(shopButton);
+  }
+
   public void ResetPinsBoard(string bgName) {
     interactionPinsBoard.GetComponent<Image>().sprite = Resources.Load<Sprite>("Bg/" + bgName);
     foreach(InteractionPin pin in interactionPins) {
@@ -321,5 +356,15 @@ public class UIController : MonoBehaviour {
       dateProgressPanel.HidePanel();
     }
     UpdateUI();
+  }
+
+  public void ClickCellphoneButton() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    cellphonePanel.ShowPanel();
+  }
+
+  public void ClickCloseCellphoneButton() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_close");
+    cellphonePanel.HidePanel();
   }
 }

@@ -69,8 +69,10 @@ end_script
 
 waypoint defeated
 say "" "No meio da briga, os óculos escuros do valentão quebram."
-say "Valentão" "Droga, minha arma secreta! Esse óculos são caros, onde será que eu arranjo conserto?"
+say "Valentão" "Droga! Esses óculos são caros, onde será que eu arranjo conserto?"
 say "" "O valentão vai embora correndo!"
+actor_move enemy "out_right" 0.5
+wait 1
 
 say "\couple riem bastante do ocorrido."
 end_script

@@ -14,6 +14,7 @@ public class ItemDatabase : MonoBehaviour {
     if(instance == null){
       instance = this;
     }
+    itemsForSale = new List<int>();
   }
 
   void Start(){
@@ -27,7 +28,6 @@ public class ItemDatabase : MonoBehaviour {
     data = SpreadsheetReader.ReadSpreadsheet("Data\\items", 1);
 
     database = new List<Item>();
-    itemsForSale = new List<int>();
     foreach(Dictionary<string, string> entry in data.data){
       //Debug.LogWarning("Importing Item");
 
@@ -47,9 +47,6 @@ public class ItemDatabase : MonoBehaviour {
       //newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
       newItem.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       newItem.sells_in_store = int.Parse(entry["sells_in_store"]);
-      if(newItem.sells_in_store > 0) {
-        itemsForSale.Add(newItem.id);
-      }
       newItem.tags = Utils.SeparateTags(entry["tags"]);
       database.Add(newItem);
     }
@@ -89,7 +86,6 @@ public class ItemDatabase : MonoBehaviour {
     return types;
   }
 
-
   public Item GetItemById(int id) {
     foreach(Item it in database) {
       if(it.id == id) {
@@ -106,5 +102,15 @@ public class ItemDatabase : MonoBehaviour {
       }
     }
     return null;
+  }
+
+  public void UpdateItemsForSale(int shopLevel) {
+    Debug.LogWarning("Updating Items for Sale. Level: "+shopLevel);
+    itemsForSale = new List<int>();
+    foreach(Item item in database) {
+      if(item.sells_in_store > 0 && item.sells_in_store <= shopLevel) {
+        itemsForSale.Add(item.id);
+      }
+    }
   }
 }

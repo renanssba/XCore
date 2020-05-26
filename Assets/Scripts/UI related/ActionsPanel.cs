@@ -198,6 +198,16 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void ClickBackToBaseActionsPanel() {
+    if(VsnSaveSystem.GetBoolVariable("tut_require_click_guts")) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
+    if(VsnSaveSystem.GetBoolVariable("tut_cant_cancel_target") == true) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+
     SfxManager.StaticPlayCancelSfx();
     skillsPanel.gameObject.SetActive(false);
     baseActionsPanel.gameObject.SetActive(true);

@@ -164,8 +164,6 @@ public class SpecialCodes {
         return 1; // TODO: implement
       case "#day":
         return GlobalData.instance.day;
-      case "#max_days":
-        return GlobalData.instance.maxDays;
       case "#currentEnemyHp":
         return BattleController.instance.GetCurrentEnemy().hp;
       case "#currentEnemyExp":
@@ -181,7 +179,7 @@ public class SpecialCodes {
       case "#isCurrentPersonMale":
         return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
       case "#inventory_empty":
-        return GlobalData.instance.CurrentBoy().inventory.IsEmpty() ? 1f : 0f;
+        return GlobalData.instance.people[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentGirlId":
         Person girl = GlobalData.instance.CurrentGirl();
         if(girl != null) {

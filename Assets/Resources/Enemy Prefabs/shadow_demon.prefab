@@ -163,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1304117555898830}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.4000001, y: 0.22, z: -0.4}
+  m_LocalPosition: {x: 1.4000001, y: 0, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4596969578729028}
@@ -288,10 +288,11 @@ MonoBehaviour:
   - {fileID: 212067219753868398}
   - {fileID: 212127538255085558}
   buffAuraRenderers: []
+  overlays: []
   particleSystem: {fileID: 0}
   shadowRenderer: {fileID: 212936260612999512}
-  rendererColors: []
-  rendererFlashAmounts: []
+  initialRendererFlashPowers: []
+  initialrendererColors: []
   weaknessCardRenderer: {fileID: 212876956674193256}
   weaknessCardText: {fileID: 114406300429588786}
   enemy:
@@ -332,6 +333,8 @@ MonoBehaviour:
       conditions:
       - hp_percent_is_less(0.5)
     passiveSkills: 28000000
+    expReward: 0
+    moneyReward: 0
     statusImmunities: []
     tags:
     - human

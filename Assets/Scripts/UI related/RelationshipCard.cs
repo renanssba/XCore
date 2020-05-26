@@ -113,5 +113,8 @@ public class RelationshipCard : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     UIController.instance.coupleStatusScreen.Initialize(relationship);
     UIController.instance.coupleStatusScreen.panel.ShowPanel();
+    if(VsnSaveSystem.GetBoolVariable("tutorial_menu_attributes") == false) {
+      VsnController.instance.StartVSN("tutorials", new VsnArgument[] { new VsnString("menu_attributes") });
+    }
   }
 }

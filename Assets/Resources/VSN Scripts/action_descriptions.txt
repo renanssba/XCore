@@ -24,4 +24,15 @@ end_script
 waypoint forbid_fleeing
 say "" "Não é possível escapar desse combate."
 set_var currentPlayerTurn -1
+set_var input_already_selected false
+end_script
+
+waypoint saved_successfully
+say "O jogo foi salvo com sucesso!"
+end_script
+
+waypoint loaded_successfully
+fade_out 1
+load_scene "Gameplay"
+//say "O jogo foi carregado com sucesso!"
 end_script

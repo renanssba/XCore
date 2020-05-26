@@ -13,7 +13,6 @@ public class GlobalData : MonoBehaviour {
   public int girlsToGenerate = 5;
 
   public int day;
-  public int maxDays;
   public int objective;
 
   public bool hideTutorials = false;
@@ -43,10 +42,10 @@ public class GlobalData : MonoBehaviour {
     relationships = new Relationship[boysToGenerate + girlsToGenerate - 1];
 
     VsnSaveSystem.SetVariable("money", 0);
-    VsnSaveSystem.SetVariable("objective", objective);
-    VsnSaveSystem.SetVariable("max_days", maxDays);
+    VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("observation_played", 0);
     day = 1;
+    LoadVsnVariables();
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
@@ -354,5 +353,16 @@ public class GlobalData : MonoBehaviour {
       }
     }
     return null;
+  }
+
+
+  public void SaveVsnVariables() {
+    VsnSaveSystem.SetVariable("day", day);
+  }
+
+  public void LoadVsnVariables() {
+    if(VsnSaveSystem.GetIntVariable("day") != 0) {
+      day = VsnSaveSystem.GetIntVariable("day");
+    }
   }
 }

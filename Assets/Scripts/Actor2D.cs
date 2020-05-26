@@ -14,12 +14,14 @@ public class Actor2D : MonoBehaviour {
   public new ParticleSystem particleSystem;
   public SpriteRenderer shadowRenderer;
 
+  public float[] initialRendererFlashPowers;
+  public Color[] initialrendererColors;
+
   public SpriteRenderer weaknessCardRenderer;
   public TextMeshPro weaknessCardText;
 
   public Battler battler;
   public Enemy enemy;
-  //public Person person;
   public Animator animator;
 
   public Button targetSelectButton;
@@ -37,13 +39,43 @@ public class Actor2D : MonoBehaviour {
   [ContextMenu("Print Material Property Block")]
   public void PrintMaterialPropertyBlock() {
     Debug.Log("Flash Color:" + materialProperties.GetColor("_FlashColor"));
-    Debug.Log("Flash Amount:" + materialProperties.GetColor("_FlashAmount"));
+    Debug.Log("Flash Amount:" + materialProperties.GetFloat("_FlashAmount"));
   }
 
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
     overlays = new List<SpriteRenderer>();
+    //initialRendererFlashPowers = new float[renderers.Length];
+    //initialrendererColors = new Color[renderers.Length];
+
+    //for(int i=0; i<renderers.Length; i++) {
+    //  renderers[i].GetPropertyBlock(materialProperties);
+
+    //  Debug.Log("Flash MATERIAL "+i+" Color:" + renderers[i].material.GetColor("_FlashColor"));
+    //  Debug.Log("Flash MATERIAL " + i + " Amount:" + renderers[i].material.GetFloat("_FlashAmount"));
+
+    //  if(renderers[i].HasPropertyBlock()) {
+    //    Debug.Log("renderer "+i+" has property!");
+    //  } else {
+    //    Debug.Log("renderer " + i + " doesn't have property...");
+    //  }
+
+    //  if(!materialProperties.isEmpty) {
+    //    Debug.Log("property " + i + " has properties!");
+    //  } else {
+    //    Debug.Log("property " + i + " is empty...");
+    //  }
+
+    //  Debug.LogWarning("mat properties to string: "+ materialProperties.ToString());
+
+
+    //  Debug.Log("Flash Color:" + materialProperties.GetColor("_FlashColor"));
+    //  Debug.Log("Flash Amount:" + materialProperties.GetFloat("_FlashAmount"));
+
+    //  initialrendererColors[i] = renderers[i].material.GetColor("_FlashColor");
+    //  initialRendererFlashPowers[i] = renderers[i].material.GetFloat("_FlashAmount");
+    //}
   }
 
 
@@ -56,9 +88,11 @@ public class Actor2D : MonoBehaviour {
     if(battler.GetType() == typeof(Person)) {
       UpdateCharacterGraphics();
       if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
+        Debug.LogWarning("Updating clothing: uniform");
         SetClothing("uniform");
       } else {
         SetClothing("casual");
+        Debug.LogWarning("Updating clothing: casual");
       }
     } else if(battler.GetType() == typeof(Enemy)) {
       // do nothing
@@ -100,6 +134,10 @@ public class Actor2D : MonoBehaviour {
           renderers[4].gameObject.SetActive(true);
           break;
       }
+
+      /// position internal heart
+      Vector2 pos = ResourcesManager.instance.heartPositionInActors[battler.id];
+      renderers[renderers.Length - 1].transform.localPosition = new Vector3(pos.x, pos.y, 0f);
 
       if(GlobalData.instance.GetCurrentRelationship() != null) {
         renderers[5].sprite = ResourcesManager.instance.heartlockSprites[GlobalData.instance.GetCurrentRelationship().heartLocksOpened];
@@ -155,7 +193,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetAuraVisibility() {
-    Debug.LogWarning("SETTING AURA VISIBILITY");
+    //Debug.LogWarning("SETTING AURA VISIBILITY");
     if(battler.CurrentStatusConditionStacks("encouraged") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.guts]);
     } else if(battler.CurrentStatusConditionStacks("focused") > 0) {
@@ -165,7 +203,7 @@ public class Actor2D : MonoBehaviour {
     } else if(battler.CurrentStatusConditionStacks("blessed") > 0) {
       ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.endurance]);
     } else {
-      Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
+      //Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
       buffAuraRenderers[0].gameObject.SetActive(false);
     }
   }
@@ -319,12 +357,14 @@ public class Actor2D : MonoBehaviour {
     GameObject newParticle = Instantiate(particlePrefab, transform);
   }
 
+  [ContextMenu("Shine Red")]
   public void ShineRed() {
-    FlashRenderer(0.1f, 0.8f, 0.2f, Color.red);
+    FlashRenderers(0.1f, 0.8f, 0.2f, Color.red);
   }
 
+  [ContextMenu("Shine Green")]
   public void ShineGreen() {
-    FlashRenderer(0.1f, 0.8f, 0.2f, Color.green);
+    FlashRenderers(0.1f, 0.8f, 0.2f, Color.green);
   }
 
   public void ShowDefendHitParticle() {
@@ -335,41 +375,62 @@ public class Actor2D : MonoBehaviour {
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
   }
 
-  public void FlashRenderer(float minFlash, float maxFlash, float flashTime, Color finalColor) {
+  public void FlashRenderers(float minFlash, float maxFlash, float flashTime, Color shineColor) {
     foreach(SpriteRenderer currentRenderer in renderers) {
-      //DOTween.Kill(renderers[i].material);
-      float initialFlashPower;
-      Color initialColor;
+      float initialFlashPower = 0f;
 
-      currentRenderer.GetPropertyBlock(materialProperties);
+      if(currentRenderer.material.HasProperty("_FlashAmount")) {
+        initialFlashPower = currentRenderer.material.GetFloat("_FlashAmount");
+        Debug.Log("Material has property _FlashColor. Value: " + initialFlashPower);
 
-      initialColor = materialProperties.GetColor("_FlashColor");
-      initialFlashPower = materialProperties.GetFloat("_FlashAmount");
-
-      minFlash = Mathf.Max(initialFlashPower, minFlash);
-      maxFlash = Mathf.Max(initialFlashPower, maxFlash);
-
-      materialProperties.SetColor("_FlashColor", finalColor);
-      materialProperties.SetFloat("_FlashAmount", minFlash);
-      currentRenderer.SetPropertyBlock(materialProperties);
-
-      float currentFlashPower = Mathf.Max(initialFlashPower, minFlash);
-      Color currentColor = finalColor;
-
-      //DOTween.To(() => currentColor, y => currentColor = y, finalColor, flashTime).SetLoops(2, LoopType.Yoyo);
-
-      DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
-        currentRenderer.GetPropertyBlock(materialProperties);
-        materialProperties.SetFloat("_FlashAmount", currentFlashPower);
-        materialProperties.SetColor("_FlashColor", currentColor);
-        currentRenderer.SetPropertyBlock(materialProperties);
-      }).OnComplete(() => {
-        currentRenderer.GetPropertyBlock(materialProperties);
-        materialProperties.SetFloat("_FlashAmount", initialFlashPower);
-        materialProperties.SetColor("_FlashColor", initialColor);
-        currentRenderer.SetPropertyBlock(materialProperties);
-      });
+        if(initialFlashPower == 0f) {
+          FlashRendererAmount(currentRenderer, minFlash, maxFlash, flashTime, shineColor);
+        } else {
+          FlashRendererColor(currentRenderer, shineColor, flashTime);
+        }
+      } else {
+        continue;
+      }
     }
+  }
+
+  public void FlashRendererAmount(SpriteRenderer currentRenderer, float minFlash, float maxFlash, float flashTime, Color shineColor) {
+    float currentFlashPower = minFlash;
+
+    Debug.LogWarning("Calling FlashRendererAmount!");
+
+    DOTween.To(() => currentFlashPower, x => currentFlashPower = x, maxFlash, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
+      currentRenderer.GetPropertyBlock(materialProperties);
+      materialProperties.SetFloat("_FlashAmount", currentFlashPower);
+      materialProperties.SetColor("_FlashColor", shineColor);
+      currentRenderer.SetPropertyBlock(materialProperties);
+    }).OnComplete(() => {
+      //Debug.LogWarning("Finish FLASH: final color: " + shineColor + ", flash amount: " + 0f);
+      currentRenderer.GetPropertyBlock(materialProperties);
+      materialProperties.SetFloat("_FlashAmount", 0f);
+      materialProperties.SetColor("_FlashColor", shineColor);
+      currentRenderer.SetPropertyBlock(materialProperties);
+    });
+  }
+
+  public void FlashRendererColor(SpriteRenderer currentRenderer, Color shineColor, float flashTime) {
+    Color initialColor = currentRenderer.material.GetColor("_FlashColor");
+    Color currentColor = initialColor;
+
+    Debug.LogWarning("Calling FlashRendererColor!");
+
+    DOTween.To(() => currentColor, x => currentColor = x, shineColor, flashTime).SetLoops(2, LoopType.Yoyo).OnUpdate(() => {
+      currentRenderer.GetPropertyBlock(materialProperties);
+      materialProperties.SetFloat("_FlashAmount", 1f);
+      materialProperties.SetColor("_FlashColor", currentColor);
+      currentRenderer.SetPropertyBlock(materialProperties);
+    }).OnComplete(() => {
+      //Debug.LogWarning("Finish FLASH: final color: " + initialColor + ", flash amount: " + 1f);
+      currentRenderer.GetPropertyBlock(materialProperties);
+      materialProperties.SetFloat("_FlashAmount", 1f);
+      materialProperties.SetColor("_FlashColor", initialColor);
+      currentRenderer.SetPropertyBlock(materialProperties);
+    });
   }
 
   public void TintActorToColor(float finalTint, float animTime, Color finalColor) {

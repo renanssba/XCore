@@ -7,7 +7,7 @@ class DiskSaveHandler : IVsnSaveHandler {
 
   private readonly string savePrefix = "VSNSAVE";
 
-  private String GetSaveSlotPrefix(int saveSlot) {
+  private string GetSaveSlotPrefix(int saveSlot) {
     return saveSlot + "_" + savePrefix;
   }
 
@@ -37,6 +37,16 @@ class DiskSaveHandler : IVsnSaveHandler {
     string saveString = GetSaveSlotPrefix(saveSlot);
     Dictionary<string, string> loadedDictionary = LoadSavedVariables(saveString);
     callback(loadedDictionary);
+  }
+
+  bool IVsnSaveHandler.IsSaveSlotBusy(int saveSlot) {
+    string saveSlotName = GetSaveSlotPrefix(saveSlot);
+    return PlayerPrefs.HasKey(saveSlotName);
+  }
+
+  Dictionary<string, string> IVsnSaveHandler.GetSavedDictionary(int saveSlot) {
+    string saveString = GetSaveSlotPrefix(saveSlot);
+    return LoadSavedVariables(saveString);
   }
 
   /// <summary>

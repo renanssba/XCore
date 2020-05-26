@@ -75,6 +75,7 @@ wait 0.5
 // execute player actions
 for currentPlayerTurn #partyLength
   check_action_skip currentPlayerTurn
+  goto_script "check_passive_triggers" "before_action"
   character_action_description currentPlayerTurn
   character_action currentPlayerTurn
   goto_script "check_passive_triggers" "after_action"
@@ -109,9 +110,9 @@ goto start_new_turn
 waypoint defeat_enemy
 //goto_script "\currentEventName" defeated
 //theater_animation "enemy_leaves"
-//challenge_result true
-//update_ui
-//play_sfx "ui_success"
+challenge_result true
+update_ui
+play_sfx "ui_success"
 //wait 2
 
 goto_script "check_passive_triggers" "enemy_defeated"

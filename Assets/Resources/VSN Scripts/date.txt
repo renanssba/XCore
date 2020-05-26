@@ -100,7 +100,9 @@ for currentDateEvent #dateLength
     // first battle tutorials
     if tutorial_skills == false
       goto_script "tutorials" "using_skills"
-      continue
+      if input_already_selected == true
+        continue
+      endif
     endif
     if tutorial_fertiliel == false
       if currentPlayerTurn == 2
@@ -221,9 +223,18 @@ play_sfx "ui_money"
 add_var money money_accumulated
 say "" "Fertiliel adquiriu <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(money_accumulated)</color>!"
 
+if shop_unlock_advance == 0
+  set_var shop_unlock_advance 1
+endif
+if #currentDateId == 2
+  if shop_unlock_final == 0
+    set_var shop_unlock_final 1
+  endif
+endif
 open_heart_lock #currentDateId
 actor_tint main 0 1 "white"
 actor_tint support 0 1 "white"
+wait 1
 goto end
 
 

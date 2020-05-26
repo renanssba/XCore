@@ -44,10 +44,14 @@ choices "Amigos Próximos" lock_1 "Apaixonados" lock_2 "Cancelar" end
 
 waypoint lock_1
 open_heart_lock 1
+actor_tint main 0 1 "white"
+actor_tint support 0 1 "white"
 goto girl_menu
 
 waypoint lock_2
 open_heart_lock 2
+actor_tint main 0 1 "white"
+actor_tint support 0 1 "white"
 goto girl_menu
 
 

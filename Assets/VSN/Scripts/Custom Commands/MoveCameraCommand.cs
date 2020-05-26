@@ -23,23 +23,23 @@ namespace Command {
 
       switch(args[0].GetStringValue()) {
         case "close_shot":
-          cameraPos = new Vector3(-0.91f, 1.52f, -2.8f);
+          cameraPos = new Vector3(-0.91f, 1.3f, -2.8f);
           break;
         case "close_focus_main":
-          cameraPos = new Vector3(-0.4f, 1.52f, -2.8f);
+          cameraPos = new Vector3(-0.4f, 1.3f, -2.8f);
           break;
         case "close_focus_enemy":
-          cameraPos = new Vector3(1.6f, 1.52f, -2.8f);
+          cameraPos = new Vector3(1.6f, 1.3f, -2.8f);
           break;
         case "girl_interaction":
-          cameraPos = new Vector3(-0.85f, 1.57f, -2.92f);
+          cameraPos = new Vector3(-0.85f, 1.35f, -2.92f);
           break;
         case "main_and_enemy":
-          cameraPos = new Vector3(0.5f, 1.52f, -3.6f);
+          cameraPos = new Vector3(0.5f, 1.3f, -3.6f);
           break;
         case "battle_view":
         default:
-          cameraPos = new Vector3(0f, 1.45f, -6.4f);
+          cameraPos = new Vector3(0f, 1.1f, -6.4f);
           break;
       }
 

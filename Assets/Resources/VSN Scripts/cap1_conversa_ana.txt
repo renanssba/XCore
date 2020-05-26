@@ -141,7 +141,6 @@ say "Daniel" "Não foi bem isso que eu quis dizer com \qte proteger\q..."
 goto end_dialog
 
 waypoint dialog_lovers_2
-// Ana tenta novamente entrar no clube e entra como armadora.
 say "Ana" "Daniel, Daniel! Eu preciso muito falar com você!"
 say "" "A garota está com um sorriso radiante."
 say "Daniel" "Oi, o que aconteceu de tão bom?"
@@ -205,31 +204,6 @@ endif
 goto_script "pass_time"
 end_script
 
-
-waypoint dialog_after_date_2
-say "Ana" "Valeu por ter vindo ao cinema comigo..."
-say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
-say "Ana" "..."
-say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
-say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
-say "Daniel" "Por quê?"
-say "Ana" "Você sabe... Toda essa coisa da Clara."
-say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
-say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
-say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
-say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
-say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
-say "Ana" "..."
-say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
-say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
-say "Daniel" "Ei, aquilo doeu!"
-say "Ana" "Pô, o Tobi era um pug tão pequenininho..."
-say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
-say "Ana" "Só por uns dois dias."
-say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
-say "Ana" "..."
-say "Ana" "Valeu. Você é um bobo, mesmo!"
-end_script
 
 waypoint dialog_after_date_3
 say "Ana" "Me sinto energizada! Vamos fazer mais exercícios!"
@@ -327,15 +301,43 @@ say "Daniel" "Vamos sim!"
 end_script
 
 waypoint date_end_2
-say "" "Depois de todos os percalços, o casal finalmente consegue chegar ao cinema."
+say "" "Depois de todos os imprevistos, o casal finalmente consegue chegar ao cinema."
 say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
 say "Daniel" "Você tá mesmo empolgada, hein?"
 say "Ana" "Claro! Esse cara é o meu ídolo! Ele levou o time dele até a final praticamente sozinho!"
 fade_out 0.5
 full_heal_party
-say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
-fade_in 0.5
-goto dialog_after_date_2
+
+/// become lovers dialog
+if #currentRelationshipHeartLocksOpened < 2
+  say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
+  fade_in 0.5
+  say "Ana" "Valeu por ter vindo ao cinema comigo..."
+  say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
+  say "Ana" "..."
+  say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+  say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
+  say "Daniel" "Por quê?"
+  say "Ana" "Você sabe... Toda essa coisa da Clara."
+  say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
+  say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
+  say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
+  say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
+  say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
+  say "Ana" "..."
+  say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+  say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
+  say "Daniel" "Ei, aquilo doeu!"
+  say "Ana" "Pô, o Tobi era um pug tão pequenininho..."
+  say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
+  say "Ana" "Só por uns dois dias."
+  say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
+  say "Ana" "..."
+  say "Ana" "Valeu. Você é um bobo, mesmo!"
+else
+  say "" "Os dois assistem o filme e se divertem bastante."
+  fade_in 0.5
+endif
 end_script
 
 waypoint date_end_3

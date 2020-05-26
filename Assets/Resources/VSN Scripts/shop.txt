@@ -4,20 +4,23 @@ wait 0.5
 fade_in 0.7
 //goto_script "tutorial_shop"
 
-character char_right "graciel"
-char_move_x char_right 1.5
-char_move_x char_right 0.5 0.7
-anim_alpha char_right 0 0
-anim_alpha char_right 1 0.7
-wait 0.7
+goto_script "fertiliel_enter" 0.25
+goto_script "char_right_enter" "graciel"
+
+// character char_right "graciel"
+// char_move_x char_right 1.5
+// char_move_x char_right 0.5 0.7
+// anim_alpha char_right 0 0
+// anim_alpha char_right 1 0.7
+//wait 0.7
 
 /// DEBUG: GET MUCH MONEY
 // add_var money 1000
 // update_ui
 
-if graciel_shop_intro == false
+if shop_level == 0
   say "Graciel" "Oi Fertiliel, como tão indo as coisas?"
-  say "Fertiliel" "Tudo indo bem, na medida do possível. Já encontrei meu humano e algumas garotas com quem eu acho que ele teria muitos filhos."
+  say "Fertiliel" "Tudo indo bem, na medida do possível. Já encontrei meu humano e algumas garotas com quem eu acho que ele tem chance."
   say "Graciel" "Ai, que legal! Eu tô com taaanta inveja!"
   say "Trabalhar diretamente com humanos deve ser a coisa mais legal do mundo!"
   say "Fertiliel" "É... Eu não tenho tanta certeza assim. E contigo, como vão as coisas?"
@@ -31,8 +34,44 @@ if graciel_shop_intro == false
   say "Graciel" "Eu tenho mais coisas que podem te ajudar, mas não posso dar mais do que isso de graça."
   say "Sabe como é, eu preciso de dinheiro pra comprar mais mangá."
   say "Fertiliel" "Tudo bem. Me mostra o que você tem aí pra vender."
-  set_var graciel_shop_intro true
+  say "Graciel" "Claro, esses são os itens que eu tenho pra venda."
+  set_var shop_level 1
+  update_ui
 else
+  if shop_unlock_advance == 1
+    say "Graciel" "Oi Fertiliel! Tenho novos itens à venda!"
+    say "Fertiliel" "Interessante. O que você tem de novo?"
+    say "Graciel" "Tenho essas coisas aqui que os humanos usam pra acalmar a mente e o corpo. Humanos são bem frágeis, né?"
+    say "Fertiliel" "Legal! E... você tem alguma amostra grátis dessa vez?"
+    say "Graciel" "Tenho sim, vou te dar um de cada pra você testar. Mas compra mais depois, por favor."
+    play_sfx "relationship_up"
+    add_item "calming_tea" 1
+    play_sfx "relationship_up"
+    add_item "first_aid" 1
+    say "Fertiliel" "Valeu!"
+    say "Graciel" "Ah, e tem mais coisa! O caminho mais rápido para o coração de um humano é encher ele de presentes."
+    say "Leva uns presentinhos pro seu humano dar pras garotas. Aposto que elas vão se apaixonar rapidinho."
+    say "Fertiliel" "Certo, vou dar uma olhada."
+    set_var shop_level 2
+    set_var shop_unlock_advance 2
+    update_ui
+  endif
+  
+  if shop_unlock_final == 1
+    say "Graciel" "Ei, eu tenho novidades."
+    say "Fertiliel" "Oi! O que foi?"
+    say "Graciel" "A Supervisora Hardiel acabou descobrindo sobre a minha lojinha."
+    say "Fertiliel" "Eita! E ela brigou com você?"
+    say "Graciel" "Brigou sim, ela falou que algo assim era contra as regras."
+    say "Mas depois ela disse que podia \qaproveitar a situação\q e me deu alguns itens angelicais pra te vender também."
+    say "Fertiliel" "Ótimo, podem ser úteis! E você tem alguma amostra grátis?"
+    say "Graciel" "Desculpa, eles não são meus. E também são mais caros."
+    say "Mas são bem úteis. Quer ver o que eu tenho pra vender agora?"
+    set_var shop_level 3
+    set_var shop_unlock_final 2
+    update_ui
+  endif
+  
   say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
 endif
 

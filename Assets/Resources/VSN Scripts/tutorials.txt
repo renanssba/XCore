@@ -25,9 +25,9 @@ set_var currentPlayerTurn 0
 tutorial_icon "hp_enemy" false
 
 action_input currentPlayerTurn false
-say "Durante o seu turno, você pode escolher entre: <color=yellow>Ações</color>, <color=yellow>Defender</color> e <color=yellow>Fugir</color>."
+say "Durante o seu turno, você pode escolher entre: <color=yellow>Ações</color>, <color=yellow>Defender</color> ou <color=yellow>Fugir</color>."
 tutorial_icon "action_button" true
-say "Por favor selecione <color=yellow>Ações</color>."
+say "Por favor, selecione <color=yellow>Ações</color>."
 set_var tut_require_click_action_button true
 vsn_state "WAITINGCUSTOMINPUT"
 
@@ -35,6 +35,8 @@ tutorial_icon "action_button" false
 
 say "" "Você sempre pode usar 3 tipos de ações contra o oponente.\nElas se baseiam em diferentes atributos:\n<sprite=\qAttributes\q index=0>Valentia, <sprite=\qAttributes\q index=1>Inteligência e <sprite=\qAttributes\q index=2>Carisma."
 say "" "Por favor selecione <sprite=\qAttributes\q index=0>Atacar, em seguida clique no valentão."
+set_var tut_require_click_guts true
+set_var tut_cant_cancel_target true
 vsn_state "WAITINGCUSTOMINPUT"
 set_var input_already_selected true
 set_var tutorial_1 true
@@ -56,6 +58,7 @@ waypoint first_battle_3
 if tutorial_3 == true
   goto end
 endif
+set_var tutorial_3 true
 set_var currentPlayerTurn 0
 action_input currentPlayerTurn false
 tutorial_icon "defend_button" true
@@ -63,8 +66,9 @@ say "" "Uma outra alternativa durante a batalha é Defender. Ela <color=yellow>r
 tutorial_icon "defend_button" false
 say "Ana atualmente não possui nenhuma habilidade utilizável. Elas serão desbloqueadas em um momento posterior."
 vsn_state "WAITINGCUSTOMINPUT"
-set_var input_already_selected true
-set_var tutorial_3 true
+if currentPlayerTurn != -1
+  set_var input_already_selected true  
+endif
 goto end
 
 
@@ -73,7 +77,6 @@ waypoint using_skills
 if tutorial_skills == true
   goto end
 endif
-
 say "" "\couple possuem habilidades ativas que podem usar durante a batalha."
 set_var currentPlayerTurn 0
 action_input currentPlayerTurn false
@@ -95,6 +98,9 @@ say "Utilizar habilidades gasta <color=yellow><sprite=\qhpANDsp\q index=1 tint>P
 say "No entanto, você pode sempre <color=yellow>Defender</color>. Isso também recupera uma pequena quantidade de <sprite=\qhpANDsp\q index=1 tint>PH."
 tutorial_icon "skill_points" false
 vsn_state "WAITINGCUSTOMINPUT"
+if currentPlayerTurn != -1
+  set_var input_already_selected true  
+endif
 
 set_var tutorial_skills true
 goto end
@@ -105,7 +111,6 @@ waypoint fertiliel_actions
 if tutorial_fertiliel == true
   goto end
 endif
-
 actor_animator_parameter angel "Choosing Action" true
 wait 1
 
@@ -129,21 +134,56 @@ say "(Outra opção é que eu tenho é apenas <color=yellow>Observar</color>, es
 say "(Observar não ajuda os humanos diretamente, mas fecha um dos Indicadores de Atenção.)"
 tutorial_icon "idle_button" false
 vsn_state "WAITINGCUSTOMINPUT"
-
 set_var tutorial_fertiliel true
 goto end
 
 
-say ""
-say ""
-say ""
-say ""
-say ""
-say ""
+
+waypoint menu_attributes
+if tutorial_menu_attributes == true
+  goto end
+endif
+wait 0.5
+say "" "Esta é a Tela de Atributos do seu casal. Aqui você pode acompanhar o progresso dele."
+tutorial_icon "attributes_level" true
+say "Aqui em cima você pode checar o nível de relacionamento do casal e quanta EXP falta para eles progredirem."
+tutorial_icon "attributes_level" false
+tutorial_icon "attributes_hp" true
+say "Aqui mostra os <color=yellow><sprite=\qhpANDsp\q index=0 tint>Pontos de Coração</color> deles."
+say "Clicando no botão abaixo você pode desbloquear novas habilidades para o casal."
+tutorial_icon "attributes_hp" false
+tutorial_icon "attributes" true
+say "Por fim, temos também os atributos dos humanos individualmente."
+say "<sprite=\qAttributes\q index=0>Valentia, <sprite=\qAttributes\q index=1>Inteligência e <sprite=\qAttributes\q index=2>Carisma afetam o dano que o humano causa com ataques baseados nestes atributos."
+say "<sprite=\qAttributes\q index=3>Resistência afeta a sua defesa. Quanto maior ela for, menos dano o humano recebe de ataques."
+say "<sprite=\qhpANDsp\q index=1 tint>PH são os pontos consumidos para usar habilidades. Eles se recuperam no início de cada Encontro ou ao usar a ação Defender."
+tutorial_icon "attributes" false
+tutorial_icon "attributes_skills" true
+say "Aqui embaixo são as habilidades do humano, tanto ativas quanto passivas. As ativas têm cor roxa, enquanto as passivas têm cor cinza."
+say "Ponha o mouse sobre elas para obter uma breve descrição de cada."
+tutorial_icon "attributes_skills" false
+set_var tutorial_menu_attributes true
+goto end
 
 
 
-
+waypoint skilltree
+if tutorial_skilltree == true
+  goto end
+endif
+wait 0.5
+say "" "Esta é a Árvore de Habilidades deste casal. Aqui você pode desbloquear novas habilidades e visualizar as já liberadas."
+say "Orbs brancas representam habilidades liberadas,\n<color=black>Orbs pretas</color> representam habilidades compráveis e\n<color=#EA7F84>Orbs vazias</color> representam habilidades bloqueadas."
+say "Para tornar uma <color=#EA7F84>Orb vazia</color> comprável é necessário comprar sua habilidade pré-requisito."
+say "As <color=black>Orbs pretas</color> são compradas usando Chaves de Coração, que você consegue ao subir o nível de relacionamento do casal."
+tutorial_icon "skill_exception" true
+wait 0.5
+say "A única excessão é esta habilidade aqui, que é desbloqueada de outra maneira. Jogue para descobrir."
+tutorial_icon "skill_exception" false
+say "Como cada relacionamento é individual e diferente, habilidades liberadas para um casal só servem para ele."
+say "Ou seja: liberar uma habilidade para o Daniel na árvore da Ana, por exemplo, não a habilitará para uso quando ele estiver com a Clara."
+set_var tutorial_skilltree true
+goto end
 
 
 waypoint end

@@ -161,6 +161,14 @@ public class ActionButton : MonoBehaviour {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
+    if(VsnSaveSystem.GetBoolVariable("tut_require_click_guts") ) {
+      if(actionType != TurnActionType.useSkill || skill == null || skill.type != SkillType.attack || skill.damageAttribute != Attributes.guts) {
+        SfxManager.StaticPlayForbbidenSfx();
+        return;
+      } else {
+        VsnSaveSystem.SetVariable("tut_require_click_guts", false);
+     }
+    } 
 
     SfxManager.StaticPlayConfirmSfx();
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
