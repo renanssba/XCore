@@ -26,39 +26,3 @@ say "" "Não é possível escapar desse combate."
 set_var currentPlayerTurn -1
 set_var input_already_selected false
 end_script
-
-
-
-waypoint saved_successfully
-say "O jogo foi salvo com sucesso!"
-end_script
-
-
-
-waypoint system_load
-say "" "Você deseja continuar este arquivo? Todo o progresso não-salvo será perdido."
-choices "Continuar arquivo" load_yes "Cancelar" load_no
-
-waypoint load_yes
-play_sfx "ui_big_confirm"
-fade_out 1
-load save_file_selected
-load_scene "Gameplay"
-end_script
-
-waypoint load_no
-play_sfx "ui_locked"
-end_script
-
-
-
-waypoint back_to_menu
-say "" "Você deseja sair para a tela de título? Todo o progresso não-salvo será perdido."
-choices "Sair do jogo" quit_yes "Cancelar" load_no
-
-waypoint quit_yes
-play_sfx "ui_big_confirm"
-fade_out 1
-load save_file_selected
-load_scene "TitleScreen"
-end_script

@@ -63,23 +63,38 @@ public class SaveSlotEntry : MonoBehaviour {
   public void Clicked() {
     Debug.LogWarning("Clicked entry " + slotId);
 
+    VsnSaveSystem.SetVariable("save_file_selected", slotId);
     if(SystemScreen.instance != null && SystemScreen.instance.isInSaveMode) {
       /// SAVE GAME
       if(slotId == 0) {
         SfxManager.StaticPlayForbbidenSfx();
         return;
       }
-      GlobalData.instance.SavePersistantGlobalData();
-      VsnSaveSystem.Save(slotId);
-      VsnController.instance.StartVSN("action_descriptions", new VsnArgument[] { new VsnString("saved_successfully") });
+      if(HasData()) {
+        VsnController.instance.StartVSN("save_load_functions", new VsnArgument[] { new VsnString("system_save") });
+      } else {
+        VsnController.instance.StartVSN("save_load_functions", new VsnArgument[] { new VsnString("confirm_save") });
+      }
     } else {
       /// LOAD GAME
-      VsnSaveSystem.SetVariable("save_file_selected", slotId);
-      VsnController.instance.StartVSN("action_descriptions", new VsnArgument[] { new VsnString("system_load") });
+      if(!ExecutingInTitleScreen()) {
+        // this is used during 
+        VsnController.instance.StartVSN("save_load_functions", new VsnArgument[] { new VsnString("system_load") });
+      } else {
+        VsnController.instance.StartVSN("save_load_functions", new VsnArgument[] { new VsnString("confirm_load") });
+      }
     }
     UpdateUI(slotId);
     if(MenuController.instance != null) {
       MenuController.instance.myPanel.CloseMenuScreen();
     }
+  }
+
+  public bool ExecutingInTitleScreen() {
+    return MenuController.instance == null;
+  }
+
+  public bool HasData() {
+    return VsnSaveSystem.IsSaveSlotBusy(slotId);
   }
 }

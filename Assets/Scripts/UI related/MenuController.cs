@@ -92,6 +92,7 @@ public class MenuController : MonoBehaviour {
         inventoryScreen.OpenInventory();
         break;
       case MenuTabs.system:
+        systemScreen.Initialize();
         systemScreen.basePanel.ShowPanel();
         break;
     }

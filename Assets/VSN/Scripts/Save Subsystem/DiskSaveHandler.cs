@@ -5,9 +5,9 @@ using System;
 
 class DiskSaveHandler : IVsnSaveHandler {
 
-  private readonly string savePrefix = "VSNSAVE";
+  private static readonly string savePrefix = "VSNSAVE";
 
-  private string GetSaveSlotPrefix(int saveSlot) {
+  public static string GetSaveSlotPrefix(int saveSlot) {
     return saveSlot + "_" + savePrefix;
   }
 

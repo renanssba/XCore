@@ -13,14 +13,17 @@ public class TitleController : MonoBehaviour {
   }
 
   public void ClickNewGame(){
-    //GlobalData.GetInstance().InitializeGameData();
     VsnController.instance.StartVSN("start_game");
   }
 
   public void ClickContinue(){
-    //    SceneManager.LoadScene(StageName.CityMap.ToString());
-    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    SfxManager.StaticPlayConfirmSfx();
     loadPanel.ShowPanel();
+  }
+
+  public void ClickCloseContinueScreen() {
+    SfxManager.StaticPlayCancelSfx();
+    loadPanel.HidePanel();
   }
 
   public void ClickToggleLanguageButton() {
