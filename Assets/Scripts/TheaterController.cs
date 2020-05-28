@@ -264,7 +264,7 @@ public class TheaterController : MonoBehaviour {
     if(angelActor.battler == character) {
       return angelActor;
     }
-    if(enemyActor.battler == character) {
+    if(enemyActor != null && enemyActor.battler == character) {
       return enemyActor;
     }
     return null;

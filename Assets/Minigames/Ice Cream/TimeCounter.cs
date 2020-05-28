@@ -103,12 +103,6 @@ public class TimeCounter : MonoBehaviour {
     }
 
     timeString = (timeInt / 60).ToString();
-//    if((int)(timeInt/60) < 10){
-//      timeString = "0"+(int)(timeInt/60);
-//    } else {
-//      timeString = (timeInt / 60).ToString();
-//    }
-
     timeString += ":";
 
     if(timeInt % 60 < 10) {

@@ -330,6 +330,12 @@ public class Inventory{
 
 
 [System.Serializable]
+public class InventorySaveStruct {
+  public List<ItemListing> itemListings;
+}
+
+
+[System.Serializable]
 public class ItemListing{
   public int id;
   public int amount;

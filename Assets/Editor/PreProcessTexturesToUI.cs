@@ -4,6 +4,7 @@ using UnityEditor;
 class PreProcessTexturesToUI : AssetPostprocessor {
 
   void OnPreprocessTexture () {
+    //return;
 		TextureImporter textureImporter = (TextureImporter)assetImporter;
 
     if(textureImporter.assetPath.Contains("Resources")) {

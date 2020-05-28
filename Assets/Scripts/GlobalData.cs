@@ -13,7 +13,7 @@ public class GlobalData : MonoBehaviour {
   public int girlsToGenerate = 5;
 
   public int day;
-  public int objective;
+  public float playtime = 0f;
 
   public bool hideTutorials = false;
 
@@ -45,7 +45,6 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("observation_played", 0);
     day = 1;
-    LoadVsnVariables();
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
@@ -68,6 +67,9 @@ public class GlobalData : MonoBehaviour {
     usedNames.Clear();
 
     InitializeChapterAlpha();
+
+    // LOAD DATA FROM SAVE
+    LoadPersistantGlobalData();
 
     observedPeople[0] = people[0];
   }
@@ -356,13 +358,72 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void SaveVsnVariables() {
+  public void SavePersistantGlobalData() {
     VsnSaveSystem.SetVariable("day", day);
+    VsnSaveSystem.SetVariable("playtime", playtime);
+
+    SaveInventories();
+    SaveRelationships();
   }
 
-  public void LoadVsnVariables() {
-    if(VsnSaveSystem.GetIntVariable("day") != 0) {
-      day = VsnSaveSystem.GetIntVariable("day");
+  public void SaveInventories() {
+    InventorySaveStruct inv = new InventorySaveStruct();
+
+    //Debug.LogWarning("SAVING INVENTORIES");
+    for(int i=0; i<people.Count; i++) {
+      inv.itemListings = people[i].inventory.itemListings;
+      VsnSaveSystem.SetVariable("person"+i+"_inventory", JsonUtility.ToJson(inv));
+      //Debug.LogWarning("JSON person "+i+" inventory: " + JsonUtility.ToJson(inv));
+
+      inv.itemListings = people[i].giftsReceived.itemListings;
+      VsnSaveSystem.SetVariable("person" + i + "_gifts_received", JsonUtility.ToJson(inv));
+    }
+  }
+
+  public void SaveRelationships() {
+    RelationshipSaveStruct inv;
+
+    Debug.LogWarning("SAVING RELATIONSHIPS");
+    for(int i = 0; i < relationships.Length; i++) {
+      inv = new RelationshipSaveStruct(relationships[i]);
+      VsnSaveSystem.SetVariable("relationship_" + i, JsonUtility.ToJson(inv));
+      Debug.LogWarning("JSON relationship "+i+": " + JsonUtility.ToJson(inv));
+    }
+  }
+
+
+  public void LoadPersistantGlobalData() {
+    if(VsnSaveSystem.GetIntVariable("day") == 0) {
+      return;
+    }
+    day = VsnSaveSystem.GetIntVariable("day");
+    playtime = VsnSaveSystem.GetFloatVariable("playtime");
+
+    LoadInventories();
+    LoadRelationships();
+  }
+
+  public void LoadInventories() {
+    InventorySaveStruct inv = new InventorySaveStruct();
+
+    //Debug.LogWarning("LOADING INVENTORIES");
+    for(int i = 0; i < people.Count; i++) {
+      inv = JsonUtility.FromJson<InventorySaveStruct>(VsnSaveSystem.GetStringVariable("person" + i + "_inventory"));
+      people[i].inventory.itemListings = inv.itemListings;
+
+      inv = JsonUtility.FromJson<InventorySaveStruct>(VsnSaveSystem.GetStringVariable("person" + i + "_gifts_received"));
+      people[i].giftsReceived.itemListings = inv.itemListings;
+    }
+  }
+
+  public void LoadRelationships() {
+    RelationshipSaveStruct inv;
+
+    Debug.LogWarning("LOADING RELATIONSHIPS");
+    for(int i = 0; i < relationships.Length; i++) {
+      inv = JsonUtility.FromJson<RelationshipSaveStruct>(VsnSaveSystem.GetStringVariable("relationship_" + i));
+      relationships[i].LoadFromStruct(inv);
+      Debug.LogWarning("JSON relationship " + i + ": " + JsonUtility.ToJson(inv));
     }
   }
 }

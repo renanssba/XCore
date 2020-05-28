@@ -311,7 +311,6 @@ public class BattleController : MonoBehaviour {
 
   public void HideActionButtons() {
     UIController.instance.actionsPanel.EndActionSelect();
-    ActionsPanel.instance.turnIndicator.SetActive(false);
     UIController.instance.CleanHelpMessagePanel();
   }
 

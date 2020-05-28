@@ -899,6 +899,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1091558725620124
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4981670033483216}
+  - component: {fileID: 114413039393903080}
+  m_Layer: 0
+  m_Name: continue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1093472773293200
 GameObject:
   m_ObjectHideFlags: 1
@@ -7201,22 +7217,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1645995049811270
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4462749175173818}
-  - component: {fileID: 114293312499075984}
-  m_Layer: 0
-  m_Name: play
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1648016121589062
 GameObject:
   m_ObjectHideFlags: 1
@@ -9328,6 +9328,22 @@ GameObject:
   - component: {fileID: 114332025479595340}
   m_Layer: 0
   m_Name: char_name_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1843939035901854
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4998817641009050}
+  - component: {fileID: 114301517335907556}
+  m_Layer: 0
+  m_Name: new_game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15945,19 +15961,6 @@ Transform:
   m_Father: {fileID: 4296956336785278}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4462749175173818
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645995049811270}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4991349485582176}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4462950620417050
 Transform:
   m_ObjectHideFlags: 1
@@ -18335,7 +18338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4991349485582176}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4712293879288958
 Transform:
@@ -19107,7 +19110,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4991349485582176}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4794829996875730
 Transform:
@@ -20664,6 +20667,19 @@ Transform:
   m_Father: {fileID: 4539719587799854}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4981670033483216
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1091558725620124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4991349485582176}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4985290508981882
 Transform:
   m_ObjectHideFlags: 1
@@ -20713,9 +20729,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4462749175173818}
   - {fileID: 4707505190858300}
   - {fileID: 4793754393091058}
+  - {fileID: 4998817641009050}
+  - {fileID: 4981670033483216}
   m_Father: {fileID: 4994434489791510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20825,6 +20842,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4601431402554786}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4998817641009050
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843939035901854}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4991349485582176}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4998843214311658
 Transform:
@@ -25331,27 +25361,6 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
---- !u!114 &114293312499075984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1645995049811270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translations:
-  - Language: Portuguese
-    Text: Jogar
-    Object: {fileID: 0}
-  - Language: English
-    Text: Play
-    Object: {fileID: 0}
-  - Language: Context / Notes
-    Text: 
-    Object: {fileID: 0}
 --- !u!114 &114293409686816772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -25479,6 +25488,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Purchase
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114301517335907556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843939035901854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Novo Jogo
+    Object: {fileID: 0}
+  - Language: English
+    Text: New Game
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -26351,10 +26381,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Desafio n\xE3o superado."
+    Text: DERROTA...
     Object: {fileID: 0}
   - Language: English
-    Text: Challenge failed.
+    Text: DEFEATED...
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -26825,6 +26855,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Sellers
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114413039393903080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1091558725620124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Continuar
+    Object: {fileID: 0}
+  - Language: English
+    Text: Continue
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -31203,8 +31254,7 @@ MonoBehaviour:
   boysToGenerate: 1
   girlsToGenerate: 3
   day: 0
-  maxDays: 5
-  objective: 1
+  playtime: 0
   hideTutorials: 1
 --- !u!114 &114750639238268924
 MonoBehaviour:
@@ -34133,10 +34183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: Desafio superado!
+    Text: "VIT\xD3RIA!"
     Object: {fileID: 0}
   - Language: English
-    Text: Challenge overcome!
+    Text: VICTORY!
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -34240,7 +34290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Valent\xE3o"
+    Text: "Valent\xE3o com \xD3culos"
     Object: {fileID: 0}
   - Language: English
     Text: 

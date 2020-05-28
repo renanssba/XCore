@@ -14,7 +14,6 @@ public class ActionsPanel : MonoBehaviour {
   public int currentPartyMember;
 
   public GameObject[] baseActionButtonShades;
-  public GameObject turnIndicator;
 
   public Vector2[] fourButtonPositions;
   public Vector2[] threeButtonPositions;
@@ -27,8 +26,6 @@ public class ActionsPanel : MonoBehaviour {
   public void Initialize(int partyMemberId) {
     currentPartyMember = partyMemberId;
     SetupBaseActionButtons(partyMemberId);
-
-    turnIndicator.SetActive(true);
 
     PositionPanels(partyMemberId);
   }

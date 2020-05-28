@@ -26,6 +26,7 @@ public class ItemUI : MonoBehaviour {
   public ItemListing itemListing;
   public ItemInteractionType interactionType;
 
+
   public void Initialize(ItemListing listing, ItemInteractionType interaction){
     itemListing = listing;
     interactionType = interaction;

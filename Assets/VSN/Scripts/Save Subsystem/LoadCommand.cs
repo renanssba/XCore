@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace Command {
 
-  [CommandAttribute(CommandString = "save")]
-  public class SaveCommand : VsnCommand {
+  [CommandAttribute(CommandString = "load")]
+  public class LoadCommand : VsnCommand {
 
     public override void Execute() {
       int intSlot = 0;
 
-      if(args.Length > 0){
+      if(args.Length > 0) {
         intSlot = (int)args[0].GetNumberValue();
       }
 
-      GlobalData.instance.SavePersistantGlobalData();
-      VsnSaveSystem.Save(intSlot);
+      VsnSaveSystem.Load(intSlot);
+      GlobalData.instance.LoadPersistantGlobalData();
     }
 
 

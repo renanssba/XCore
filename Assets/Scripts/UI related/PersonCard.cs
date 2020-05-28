@@ -177,8 +177,10 @@ public class PersonCard : MonoBehaviour {
       return;
     }
 
-    VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    UIController.instance.coupleStatusScreen.Initialize(GlobalData.instance.GetCurrentRelationship());
-    UIController.instance.coupleStatusScreen.panel.ShowPanel();
+    //VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    MenuController.instance.OpenMenuOnStatus(GlobalData.instance.GetCurrentRelationship().id);
+
+    //UIController.instance.coupleStatusScreen.Initialize(GlobalData.instance.GetCurrentRelationship());
+    //UIController.instance.coupleStatusScreen.panel.ShowPanel();
   }
 }

@@ -67,6 +67,7 @@ public class ScreenTransitions : MonoBehaviour {
       myRect.DOAnchorPos(new Vector2(0f, 0f), 0f).SetRelative(true);
       gameObject.SetActive(false);
     } );
+    VsnAudioManager.instance.PlaySfx("ui_menu_close");
   }
 
 

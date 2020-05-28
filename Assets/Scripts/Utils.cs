@@ -559,6 +559,22 @@ public class Utils {
     return true;
   }
 
+  public static string GetTimeFormattedAsString(float timePassed) {
+    string timeString = "";
+    int timeInt = (int)timePassed;
+
+    timeString = (timeInt / 60).ToString();
+
+    timeString += ":";
+
+    if(timeInt % 60 < 10) {
+      timeString += "0" + (timeInt % 60);
+    } else {
+      timeString += (timeInt % 60).ToString();
+    }
+
+    return timeString;
+  }
 }
 
 public static class MyExtensions {
@@ -572,5 +588,25 @@ public static class MyExtensions {
     Color c = renderer.color;
     c.a = alpha;
     renderer.color = c;
+  }
+
+  public static Toggle GetSelected(this ToggleGroup group) {
+    foreach(Toggle t in group.ActiveToggles()) {
+      if(t.isOn) {
+        return t;
+      }
+    }
+    return null;
+  }
+
+  public static int GetSelectedId(this ToggleGroup group) {
+    int count = 0;
+    foreach(Toggle t in group.ActiveToggles()) {
+      if(t.isOn) {
+        return count;
+      }
+      count++;
+    }
+    return -1;
   }
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class TitleController : MonoBehaviour {
 
   //public GameObject[] buttons;
+  public ScreenTransitions loadPanel;
 
 
   void Start(){
@@ -19,7 +20,7 @@ public class TitleController : MonoBehaviour {
   public void ClickContinue(){
     //    SceneManager.LoadScene(StageName.CityMap.ToString());
     VsnAudioManager.instance.PlaySfx("ui_confirm");
-    /// TODO: Implement save/load feature
+    loadPanel.ShowPanel();
   }
 
   public void ClickToggleLanguageButton() {

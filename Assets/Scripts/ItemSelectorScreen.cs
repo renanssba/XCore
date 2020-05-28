@@ -26,24 +26,30 @@ public class ItemSelectorScreen : MonoBehaviour {
   public GameObject emptyIcon;
 
   public void Awake() {
-    instance = this;
+    if(instance == null) {
+      instance = this;
+    }    
     gameObject.SetActive(false);
   }
 
   public void OpenBuyStore() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     ItemDatabase.instance.UpdateItemsForSale(VsnSaveSystem.GetIntVariable("shop_level"));
     OpenItemSelectorGeneric(ItemInteractionType.store_buy, new Inventory(ItemDatabase.instance.itemsForSale));
   }
 
   public void OpenSellStore() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.people[0].inventory);
   }
 
   public void OpenEquipSelect() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.people[0].inventory);
   }
 
   public void OpenGiftSelect() {
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.people[0].inventory);
   }
 
@@ -52,10 +58,13 @@ public class ItemSelectorScreen : MonoBehaviour {
   }
 
   public void OpenItemSelectorGeneric(ItemInteractionType interType, Inventory inv) {
-    VsnAudioManager.instance.PlaySfx("ui_menu_open");
     JoystickController.instance.AddContext(screenContext);
     Initialize(interType, inv);
-    screenTransition.OpenMenuScreen();
+    if(interType == ItemInteractionType.inventory) {
+      screenTransition.ShowPanel();
+    } else {
+      screenTransition.OpenMenuScreen();
+    }
   }
 
   public void Initialize(ItemInteractionType type, Inventory currentItems){

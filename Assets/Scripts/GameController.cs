@@ -36,30 +36,19 @@ public class GameController : MonoBehaviour {
       VsnController.instance.StartVSN("back_from_minigame");
     } else {
       GlobalData.instance.InitializeChapter();
-      GlobalData.instance.PassTime();
-
-      //VsnSaveSystem.SetVariable("observation_played", 1);
-      //VsnController.instance.StartVSN("show_people_screen");
-
       UIController.instance.UpdateUI();
 
-      //if(GlobalData.instance.hideTutorials) {
-      //  VsnSaveSystem.SetVariable("tutorial_date", 1);
-      //  VsnSaveSystem.SetVariable("tutorial_date2", 1);
-      //  VsnSaveSystem.SetVariable("tutorial_shop", 1);
-      //  VsnSaveSystem.SetVariable("tutorial_choose_date", 1);
-      //  VsnSaveSystem.SetVariable("tutorial_observation", 1);
-      //}
-
-      //VsnController.instance.StartVSN("cap0_intro");
       VsnSaveSystem.SetVariable("hide_tutorials", hideTutorials);
-      VsnController.instance.StartVSN("cap1_manha");
-      //VsnController.instance.StartVSN("tutorial_intro");
+      //VsnController.instance.StartVSN("cap0_intro");
+      VsnController.instance.StartVSN("select_daytime_interaction");
     }
   }
 
 
   public void Update() {
+
+    // count playtime
+    GlobalData.instance.playtime += Time.deltaTime;
 
     /// CHEAT INPUTS
     if(!Application.isEditor) {

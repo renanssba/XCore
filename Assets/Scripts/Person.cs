@@ -411,4 +411,40 @@ public class Relationship {
       list.Add(sk);
     }
   }
+
+  public void LoadFromStruct(RelationshipSaveStruct origin) {
+    level = origin.level;
+    exp = origin.exp;
+    heartLocksOpened = origin.heartLocksOpened;
+    bondPoints = origin.bondPoints;
+
+    skilltree = origin.skilltree;
+    talkedDialogs = origin.talkedDialogs;
+  }
+}
+
+
+[System.Serializable]
+public class RelationshipSaveStruct {
+  public int id;
+  public int level;
+  public int exp;
+  public int heartLocksOpened;
+
+  public int bondPoints = 0;
+  public Skilltree skilltree;
+
+  public List<string> talkedDialogs;
+
+
+  public RelationshipSaveStruct(Relationship origin) {
+    id = origin.id;
+    level = origin.level;
+    exp = origin.exp;
+    heartLocksOpened = origin.heartLocksOpened;
+    bondPoints = origin.bondPoints;
+
+    skilltree = origin.skilltree;
+    talkedDialogs = origin.talkedDialogs;
+  }
 }

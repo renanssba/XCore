@@ -61,7 +61,8 @@ public class CoupleStatusScreen : MonoBehaviour {
       if(relationshipId >= GlobalData.instance.relationships.Length) {
         relationshipId = 0;
       }
-    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 && relationshipId != initialRelationship);
+    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 &&
+            GlobalData.instance.relationships[relationshipId].level <= 0 && relationshipId != initialRelationship);
     Initialize(GlobalData.instance.relationships[relationshipId]);
   }
 
@@ -75,7 +76,8 @@ public class CoupleStatusScreen : MonoBehaviour {
       if(relationshipId < 0) {
         relationshipId = GlobalData.instance.relationships.Length-1;
       }
-    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 && relationshipId != initialRelationship);
+    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 &&
+            GlobalData.instance.relationships[relationshipId].level <= 0 && relationshipId != initialRelationship);
     Initialize(GlobalData.instance.relationships[relationshipId]);
   }
 

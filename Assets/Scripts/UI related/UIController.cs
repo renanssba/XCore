@@ -54,8 +54,6 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
-  public ScreenTransitions cellphonePanel;
-
 
   public CoupleStatusScreen coupleStatusScreen;
 
@@ -356,15 +354,5 @@ public class UIController : MonoBehaviour {
       dateProgressPanel.HidePanel();
     }
     UpdateUI();
-  }
-
-  public void ClickCellphoneButton() {
-    VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    cellphonePanel.ShowPanel();
-  }
-
-  public void ClickCloseCellphoneButton() {
-    VsnAudioManager.instance.PlaySfx("ui_menu_close");
-    cellphonePanel.HidePanel();
   }
 }
