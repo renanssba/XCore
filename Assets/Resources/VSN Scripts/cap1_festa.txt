@@ -207,19 +207,15 @@ actor_face main "right"
 fade_in 1.0
 actor_move main "grid_2" 1.5
 wait 0.3
-say "" "Daniel chega mais perto de Beatrice, que está isolada."
-say "Daniel" "Oi, que bom que veio! Eu não sabia se você viria."
+say "" "Daniel chega mais perto de Beatrice."
+say "Daniel" "Oi, que bom que veio! Fiquei em dúvida se você viria."
+say "Beatrice" "Eu tive de vir. Essa é uma oportunidade única para estudar relacionamentos."
 if #currentRelationshipHeartLocksOpened < 2
 //DEBUG BELOW, COMMENT IT AND UNCOMMENT ABOVE LINE LATER:
 //if #currentRelationshipHeartLocksOpened < 0
   actor_face beatrice "left"
   wait 0.6
-  //say "" "A garota se vira para Daniel."
-  say "Beatrice" "...Eu não deveria ter vindo aqui."
-  say "Daniel" "Você está bem?"
-  say "Beatrice" "...Não."
-  say "Daniel" "Entendo. Quer conversar um pouco em outro lugar?"
-  say "Beatrice" "...Não."
+  say "Beatrice" "Eu gostaria de ficar sozinha observando as pessoas."
   actor_face beatrice "right"
   wait 0.3
   actor_move beatrice "grid_5" 2.0
@@ -227,65 +223,52 @@ if #currentRelationshipHeartLocksOpened < 2
   goto bad_end
 endif
 
-say "" "A garota não responde."
-say "Daniel" "Hum.. Beatrice?"
-wait 0.6
-actor_face beatrice "left"
-say "" "Beatrice levanta o rosto com uma certa dificuldade."
-say "Beatrice" "...Eu não deveria ter vindo aqui."
-say "" "Ele percebe que ela está respirando com dificuldade e com uma mão fechada sobre a outra, ambas apoiadas sobre o peito."
-say "Daniel" "Beatrice, o que está acontecendo?"
-actor_move beatrice -0.1 0.12 -0.4 2.0
-wait 2.0
-say "" "A garota parece estar passando mal. Ela se encosta na parede e escorrega até o chão, caindo sentada."
-say "Beatrice" "Não estou conseguindo... respirar..."
-actor_move main -0.55 0 -0.4 0.5
-say "Daniel" "Beatrice!"
-actor_move beatrice -0.1 0 -0.4 1.0
-wait 1.0
-actor_move beatrice -0.2 0 -0.4 1.0
-actor_move main -0.65 0 -0.4 1.0
-wait 1.0
-say "Daniel" "Por favor, abram espaço!"
-actor_face main "left"
-wait 0.2
-actor_move main "grid_1" 1.5
-actor_move beatrice "grid_1" 1.5
-wait 1.0
-fade_out 1.5
-wait 1.0
-theater_bg "claire house external"
-say "" "Daniel segura a mão da garota e a ajuda a sair da sala lotada e barulhenta."
-say "" "Os dois se sentam na escadinha que dá acesso à casa e Daniel tenta acalmar Beatrice."
-actor_move main "grid_2" 0
-actor_move beatrice "grid_3" 0
-actor_face main "right"
-fade_in 1.0
-say "Daniel" "Calma, eu tô aqui com você. Respira..."
-actor_move beatrice -1.05 0 -0.4 1.5
-say "" "A garota olha pra ele com dificuldade, ofegante. Ela o abraça com força e fecha os olhos."
-move_camera -1.2 1.16 -2.8 1.5
-say "" "Daniel consegue sentir os batimentos cardíacos fortes e muito acelerados de Beatrice, como se seu coração fosse sair pela boca."
-say "" "Suas mãos estavam tremendo e suadas."
-say "Beatrice" "Eu vou morrer, Daniel... eu vou morrer..."
-say "Daniel" "Calma, eu tô aqui com você. Vai ficar tudo bem."
-say "" "Daniel continua tranquilizando a garota."
+say "Daniel" "Como assim?"
+say "Beatrice" "Olhe ao seu redor. Há muitos casais."
+say "Daniel" "Hmmm...Você está certa."
+say "Beatrice" "Estou particularmente interessada neste ritual estranho de movimento corporal."
+say "Daniel" "Você quer dizer...dançar?"
+say "Beatrice" "Afinal, qual é o propósito? Nós somos seres racionais. Não precisamos disso para escolher parceiros."
+say "Daniel" "Acho que dançamos porque...é divertido?"
+say "Beatrice" "Hmmmm..."
+say "" "Beatrice observa as pessoas da festa por longos segundos."
+say "Beatrice" "Então me ensine."
+say "Daniel" "O quê?"
+say "Beatrice" "Me ensine... a dançar."
+say "Daniel" "E-eu não sou um dançarino particularmente bom."
+say "Beatrice" "Eu não saberia notar a diferença."
+say "Daniel" "Você vai notar quando eu pisar no seu pé!"
+say "" "Daniel, vacilante, toma a iniciativa e dá alguns passos, remexendo o corpo. Beatrice acompanha como pode."
+say "Daniel" "Nós dois somos terríveis."
+say "Beatrice" "Definitivamente há margem para melhora."
 fade_out 1.0
-say "A crise de ansiedade perdura por mais alguns angustiantes minutos que parecem não ter fim."
-say "Felizmente, Beatrice consegue retomar o controle de si e sentir-se um pouco melhor."
-actor_move beatrice "grid _3" 0
-actor_move main "grid_2" 0
+say "" "Os dois terminam a música, exaustos, mas felizes."
+say "" "Eles vão para a sacada da casa para pegar um pouco de ar fresco."
 fade_in 1.0
-wait 1.0
-say "Beatrice" "...Desculpe-me por ter feito você ver algo assim."
-say "Daniel" "Relaxa, não precisa se desculpar."
-say "Beatrice" "As pessoas...me encarando."
-say "Beatrice" "Todas elas acham que eu sou...algum tipo de monstro."
-say "Daniel" "Você não é um monstro, Beatrice."
-say "Daniel" "Me desculpa por ter te chamado. Não achei que vir à festa te faria tão mal..."
-say "Beatrice" "Tudo bem. Não tinha como você saber."
-say "Eu tenho tentado superar, porém creio que vir a um local tão lotado ainda seja demais para mim."
-say "Mas quando estamos juntos... eu me sinto mais segura."
+say "Daniel" "Foi divertido!"
+say "Beatrice" "Nota: Trazer calçados mais resistentes a pisões e tropeços."
+say "Daniel" "Ah, qualé, não foi tão ruim assim!"
+say "" "Os dois riem."
+say "Beatrice" "Acho que finalmente entendi... o que incentivava meu pai a trabalhar tão duro."
+say "Beatrice" "Ele amava a ciência... mas ele amava as pessoas ainda mais."
+say "Daniel" "Você sente falta dele?"
+say "Beatrice" "Isso é.... irrelevante."
+say "" "Daniel franze a sobrancelha, pensando no comentário de Beatrice."
+say "Daniel" "Minha mãe, ela...era uma cozinheira de mão cheia. Todos os dias, quando eu acordava, o café da manhã estava pronto, fresquinho, na mesa da cozinha."
+say "Beatrice" "..."
+say "Daniel" "Quando ela morreu, eu... não conseguia aguentar o cheiro de pão fresco. Eu começava a chorar."
+say "Beatrice" "P-porque você está me contando isso?"
+say "Daniel" "Eu só estou dizendo que... não tem problema, sabe? Chorar."
+say "Beatrice" "..."
+say "" "Da sacada, o casal escuta outra música começando a tocar na festa. A canção é lenta, romântica. Daniel estende a mão para Beatrice."
+say "Daniel" "Quer tentar de novo?"
+say "Beatrice" "Repetir o experimento pode ser esclarecedor."
+say "" "Daniel e Beatrice começam a dançar, sozinhos na sacada, iluminados pela luz da lua."
+say "Beatrice" "Obrigada por me convidar, Daniel."
+say "" "A garota chega mais perto."
+say "Beatrice" "Foi muito...educativo."
+say "" "Os dois dançam abraçados."
+
 
 unlock_skill 12
 add_exp false 150
