@@ -28,13 +28,13 @@ endif
 if #currentRelationshipLevel == 0
   say "Daniel" "(Será que ela vem mesmo?)"
   say "(Pode ser a única vez na vida que ela virá aqui em casa. Hoje é o dia que eu devo me declarar!)"
-  //TODO: play_sfx doorbell
+  play_sfx doorbell
   wait 1
   say "" "A campainha toca e Daniel tem um leve infarto."
   actor_move main "grid_2" 1.5
   wait 1.0
   say "Ele para, fecha os olhos e engole em seco. Em seguida abre a porta."
-  //TODO: play_sfx door_open
+  play_sfx door_open
   wait 0.5
   actor_move main "grid_3" 1.5
   //theater_animation "support_actor_enters"

@@ -14,7 +14,8 @@ public class TransformCopier : ScriptableObject
 
   [MenuItem("CONTEXT/Transform/Copy Position")]
   static void CopyPosition() {
-    EditorGUIUtility.systemCopyBuffer = Selection.activeTransform.localPosition.ToString();
+    Vector3 transformPos = Selection.activeTransform.localPosition;
+    EditorGUIUtility.systemCopyBuffer = transformPos.x + " " + transformPos.y + " " + transformPos.z;
   }
 
   /*
