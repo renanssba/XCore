@@ -28,22 +28,24 @@ if #day == 1
   fade_in 1
   say "" "Daniel passeia tranquilamente pelas estantes da biblioteca, repletas de obras de diversos autores."
   say "Daniel" "(Finalmente consegui devolver os livros que peguei emprestado da última vez.)"
-  actor_move main -1.2 0.22 -0.4 1.5
+  actor_move main -1.2 0 -0.4 1.5
   say "Daniel" "(Acho que vou alugar só um agora.)"
   actor_face main "left"
   wait 0.3
-  actor_move main -1.4 0.22 -0.4 1.0
+  actor_move main -1.4 0 -0.4 1.0
   wait 0.5
   say "Daniel" "Esse parece interessante...Ou talvez esse aqui!"
   actor_face main "right"
   wait 0.3
-  actor_move main -1.2 0.22 -0.4 1.0
+  actor_move main -1.2 0 -0.4 1.0
   wait 0.5
   say "Daniel" "Acho que vou alugar os dois..."
   fade_out 1.0
   wait 1.0
   actor_move main "grid_2" 0.0
-  actor_move support"grid_1" 0.0
+  actor_face main "left"
+  actor_move support "grid_1" 0.0
+  actor_face support "right"
   fade_in 1.0
   say "" "Alguns minutos depois, Daniel se arrasta vagarosamente para a saída da biblioteca, os braços entulhados com dezenas de livros."
   say "Daniel" "E-eu sempre...acabo...fazendo isso..."
@@ -119,10 +121,10 @@ say "Daniel" "O que biologia tem a ver com relacionamentos?"
 say "Beatrice" "Tudo. Qualquer sentimento humano pode ser explicado por processos biológicos."
 say "Beatrice" "Humanos não são exceção. Fêmeas da espécie se orientam por marcadores de aparência e status para medir a compatibilidade de um parceiro."
 
-actor_move support -0.61 0.22 -0.4 0.5
+actor_move support -0.61 0 -0.4 0.5
 say "Beatrice" "Por exemplo..."
 say "Daniel" "Ei, o que você-"
-actor_move support -0.81 0.22 -0.4 1.0
+actor_move support -0.81 0 -0.4 1.0
 fade_out 1.0
 wait 1.5
 //TODO: Adicionar um acessório ridículo em Daniel
