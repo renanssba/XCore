@@ -7,7 +7,7 @@
 set_var dia_festa_clara 0
 fade_music 0 0
 skip_button true end
-//choices "Intro" intro "Aula" aula "Dia 2" dia_2 "Dia 5" dia_5 "Dia 6" dia_6
+//choices "Intro" intro "Aula" aula "Dia 2" dia_2
 //goto aula
 
 
@@ -193,6 +193,7 @@ say "Daniel" "C-claro! Aqui está meu endereço..."
 say "Clara" "Tá bom então! A gente se vê mais tarde."
 
 wait 0.5
+actor_face support "left"
 actor_move support "out_left" 1
 wait 1
 
@@ -213,52 +214,22 @@ say "Ana" "Com certeza! Só faltou beijar o chão onde ela pisou."
 say "Daniel" "É, você tá certa. Vou tentar manter a calma quando estiver com ela."
 say "Ana" "Acho bom mesmo, senão você vai estragar suas chances com ela! Como você sempre faz..."
 
-say "Daniel" "Er.. Valeu pelo apoio."
+say "Daniel" "Er... Valeu pelo apoio."
 
 
-wait 1
 fade_out 0.5
-say "" "No início da próxima aula..."
-theater_setup main "person(daniel)" "main" enemy "professor" "enemy" support "person(beatrice)" "out_right_back" ana "person(anna)" "support"
-move_camera "main_and_enemy" 0
+say "" "No final da aula..."
 fade_in 0.5
-say "Professor" "Bom dia, classe!"
-say "Professor" "Gostaria de apresentar a vocês uma nova aluna!"
-say "" "O professor acena na direção da porta, chamando a menina para dentro."
 
-move_camera "battle_view" 0.5
-wait 0.5
-actor_move support 2.4 0 0.6 1
-wait 1.5
 
-say "" "Uma menina pálida de cabelos pretos e desarrumados entra na sala. A classe a observa."
-say "Professor" "Esta é Beatrice Hartley. Ela foi transferida recentemente e estudará conosco a partir deste semestre."
-say "" "A turma imediatamente começa a cochichar. Ana se volta para Daniel."
-say "Ana" "Beatrice, a Bruxa? Ela foi transferida pra cá?"
-wait 0.3
-actor_face main "left"
-wait 0.3
-say "Daniel" "Bruxa? Como assim?"
-say "Professor" "Quietos, quietos. Beatrice, pode se sentar."
-
-wait 0.5
-actor_move support "out_left_back" 3
-wait 3
-
-say "" "A garota caminha até a última fileira de carteiras, sob o olhar opressor da turma, e se senta, isolada."
-say "Ana" "Tenho visto as pessoas comentando sobre ela há um tempo. Dizem que ela fez pacto com demônios."
-say "Daniel" "É mesmo?"
-//Talvez Ana soe babaca nessa conversa. Diminuir o tom caso recebamos feedback negativo. (Ex: ana mencionar que não acredita nos boatos, ou remover esse diálogo completamente, movendo os boatos para a próxima cena (bullying)
-say "" "Daniel olha pra trás, espiando Beatrice. A menina está sentada, escondendo a face atrás de um livro."
-say "Professor" "Ok, agora que estamos devidamente sentados, vamos começar a aula?"
-set_var conhece_beatrice 1
-//fade_out 0.5
-//say "" "No final da aula..."
-//fade_in 0.5
-
-//Talvez possa ser uma boa ideia remover esse convite? Não parece haver muito propósito agora que a carta de Beatrice não existe mais.
 say "Ana" "Ei, venha lanchar comigo lá no telhado durante o intervalo! Eu trouxe um lanche muito gostoso."
-//say "" "Ana sai correndo pela porta antes que Daniel conseguisse responder."
+say "Daniel" "Beleza, mas eu preciso-"
+
+actor_face support "left"
+actor_move support "out_left" 0.5
+wait 1
+say "" "Ana sai correndo pela porta antes que Daniel conseguisse responder."
+say "Daniel" "-passar na biblioteca antes..."
 
 wait 1
 
@@ -272,7 +243,7 @@ play_music "intermission_intro" "intermission_loop"
 wait 0.5
 fade_in 1
 
-//say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
+say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
 end_script
 
 
@@ -280,41 +251,6 @@ end_script
 
 
 waypoint dia_2
-pass_time
-pass_time
-goto_script "pass_time"
-end_script
-
-
-waypoint dia_5
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-goto_script "pass_time"
-end_script
-
-
-waypoint dia_6
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
-pass_time
 pass_time
 pass_time
 goto_script "pass_time"
