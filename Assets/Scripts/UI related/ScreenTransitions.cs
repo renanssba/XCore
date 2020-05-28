@@ -16,7 +16,7 @@ public class ScreenTransitions : MonoBehaviour {
 
 
   public void ShowPanel() {
-    if(IsOpen() && !DOTween.IsTweening(canvasGroup)) {
+    if(IsInteractable()) {
       return;
     }
     DOTween.Kill(canvasGroup);
@@ -41,7 +41,7 @@ public class ScreenTransitions : MonoBehaviour {
   }
 
   public void OpenMenuScreen(){
-    if(IsOpen() && !DOTween.IsTweening(canvasGroup)) {
+    if(IsInteractable()) {
       return;
     }
     DOTween.Kill(canvasGroup);
@@ -54,6 +54,10 @@ public class ScreenTransitions : MonoBehaviour {
     canvasGroup.DOFade(1f, fadeTime).OnComplete(() => {
       canvasGroup.interactable = true;
     });
+  }
+
+  public bool IsInteractable() {
+    return IsOpen() && !DOTween.IsTweening(canvasGroup);
   }
 
   public void CloseMenuScreen(){

@@ -33,13 +33,22 @@ public class MenuController : MonoBehaviour {
     gameObject.SetActive(false);
   }
 
+  public void Update() {
+    if(myPanel.IsInteractable() && currentTab != GetSelectedId()) {
+      // change current tab
+      SfxManager.StaticPlayConfirmSfx();
+      currentTab = GetSelectedId();
+      UpdateMenu();
+    }
+  }
+
+
 
   public void OpenMenuOnInventory() {
     currentTab = MenuTabs.inventory;
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
-
   }
 
   public void OpenMenuOnStatus(int relationshipId) {
@@ -57,14 +66,6 @@ public class MenuController : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
   }
 
-  public void Update() {
-    if(currentTab != GetSelectedId()) {
-      // change current tab
-      currentTab = GetSelectedId();
-      UpdateMenu();
-    }
-  }
-
 
   public void CloseOtherMenus() {
     tabsToggleGroup.SetAllTogglesOff();
@@ -76,12 +77,10 @@ public class MenuController : MonoBehaviour {
   }
 
   public void UpdateMenu() {
-    MenuTabs selected = GetSelectedId();
     CloseOtherMenus();
+    tabToggles[(int)currentTab].isOn = true;
 
-    tabToggles[(int)selected].isOn = true;
-
-    switch(selected) {
+    switch(currentTab) {
       case MenuTabs.status:
         coupleStatusScreen.panel.ShowPanel();
         if(VsnSaveSystem.GetBoolVariable("tutorial_menu_attributes") == false) {

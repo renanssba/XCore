@@ -113,7 +113,7 @@ public class ItemSelectorScreen : MonoBehaviour {
         createdObjects.Add(current.GetComponent<Button>());
       }
     }
-    Debug.Log("child count: " + itemsHolder.transform.childCount);
+    //Debug.Log("child count: " + itemsHolder.transform.childCount);
 
     Utils.GenerateNavigation(createdObjects.ToArray());
 
