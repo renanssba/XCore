@@ -50,7 +50,7 @@ if conhece_beatrice == 1
   actor_face beatrice "right"
   actor_move claire "out_right" 0
   move_camera "main_and_enemy" 1.0
-  say "Ele percebe que Beatrice também está na sala, sozinha num canto, quase como se estivesse se escondendo. Algumas pessoas estão olhando para a menina e apontando."
+  say "Ele percebe que Beatrice também está na sala, sozinha num canto. A garota observa as pessoas na festa com curiosidade."
   actor_move main "main" 0
   actor_move anna "out_left" 0
   //move_camera "girl_interaction" 1.0
@@ -90,6 +90,7 @@ if #currentRelationshipHeartLocksOpened < 2
   say "Ana" "Sai! Para de me tratar como criança. Você não é o meu pai!"
   actor_move anna "grid_3" 0.3
   wait 0.1
+  play_sfx "pushing_person"
   actor_move anna "grid_2" 0.5
   say "" "A garota empurra Daniel pra longe e se volta novamente para o outro rapaz com quem estava conversando."
   wait 0.5
@@ -106,13 +107,15 @@ say "" "O rapaz parece estar resistindo aos avanços de Ana."
 say "Ela parece estar um pouco alterada. Será que ela exagerou no sorvete?"
 say "Ana" "Vem cá, só um beijinho."
 say "Rapaz" "Sai daqui, sua maluca!"
-actor_move guy -1.5 0 -0.4 0.3
+play_sfx "pushing_person"
+actor_move guy -1.5 0.22 -0.4 0.3
 wait 0.1
 actor_move guy -1.7 0 -0.4 0.5
 actor_move anna -0.7 0 -0.4 0.3
 //
 //say "" "O rapaz empurra Ana com força, livrando-se do abraço e derrubando a garota no chão, no meio da sala."
 say "" "O rapaz empurra Ana com força, livrando-se do abraço. A garota quase cai no chão, mas Daniel a segura."
+play_sfx "surprise_gasp"
 say "Todos se viram para eles dois neste momento. Ouve-se uma exclamação de surpresa do grupo, seguida de um silêncio desconfortante."
 say "Daniel" "Ana!"
 //say "" "Daniel corre até Ana e a ajuda a se levantar."
