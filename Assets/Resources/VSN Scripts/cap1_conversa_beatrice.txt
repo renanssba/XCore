@@ -81,11 +81,12 @@ if #day == 1
   say "Daniel" "Espera!"
   say "Daniel" "Tudo bem... Eu aceito."
   say "" "A garota esboça um sorriso."
+  say "Beatrice" "Excelente! Faremos uma bateria de testes e experimentos variados."
   if daytime == 0
-      say "Beatrice" "Excelente! Me encontre mais tarde aqui na biblioteca e poderemos começar."
+      say "Beatrice" "Me encontre mais tarde aqui na biblioteca e poderemos começar."
   endif
     if daytime == 1
-      say "Beatrice" "Excelente! Me encontre amanhã aqui na biblioteca e poderemos começar."
+      say "Beatrice" "Me encontre amanhã aqui na biblioteca e poderemos começar."
   endif
   say "" "Beatrice vai embora, visivelmente empolgada."
   goto_script "pass_time"
@@ -94,7 +95,7 @@ endif
 
 
 //DEBUG, DELETE THE LINE BELOW LATER
-waypoint debug
+//waypoint debug
 
 say "" "Chegando na biblioteca, Daniel encontra Beatrice lendo."
 fade_in 1
@@ -108,18 +109,19 @@ girl_interaction
 
 waypoint conversation
 //DEBUG, DELETE THE LINE BELOW LATER
-goto dialog_friends_2
-//select_dialog
+//goto dialog_friends_2
+
+select_dialog
 
 
 waypoint dialog_acquaintances_1
-
-say "Beatrice" "Obrigada por vir."
-say "" "Beatrice esperava Daniel sentada, lápis e caderno na mão. A segurança e seriedade da menina lhe dão um ar professoral."
-say "Beatrice" "Hoje iremos fazer um estudo prático sobre biologia. Seleção natural, para ser um pouco mais exata."
+say "" "Beatrice está parcialmente escondida atrás de muitos livros e equipamentos."
+say "Beatrice" "Obrigada por vir, Daniel."
+say "" "A segurança e seriedade da menina lhe dão um ar professoral. "
+say "Beatrice" "Faremos uma série de análises biológicas para determinar sua aptidão para relacionamentos."
 say "Daniel" "O que biologia tem a ver com relacionamentos?"
-say "Beatrice" "Tudo. Qualquer sentimento humano pode ser explicado por processos biológicos."
-say "Beatrice" "Humanos não são exceção. Fêmeas da espécie se orientam por marcadores de aparência e status para medir a compatibilidade de um parceiro."
+say "Beatrice" "Tudo. Qualquer sentimento pode ser explicado por processos biológicos."
+say "Beatrice" "Fêmeas se orientam por marcadores de aparência e status para medir a compatibilidade de um parceiro. Humanos não são diferentes."
 
 actor_move support -0.61 0 -0.4 0.5
 say "Beatrice" "Por exemplo..."
@@ -132,17 +134,17 @@ actor_move support "grid_3" 0.0
 fade_in 1.0
 say "Beatrice" "... Perfeito. De acordo com meus cálculos, este óculos deve deixá-lo 20% mais atraente para o sexo oposto."
 say "Daniel" "Não sei se isso combina com o meu estilo..."
-say "Beatrice" "Eu tenho outras opções."
+say "Beatrice" "Podemos testar outras opções."
 say "" "Beatrice e Daniel passam o tempo testando (e descartando) acessórios cada vez mais mirabolantes."
 goto end_dialog
 
 
 waypoint dialog_acquaintances_2
-say "Beatrice" "Qual é a matéria-prima mais preciosa para o ser humano?"
 say "" "Beatrice está sentada e cumprimenta Daniel sem erguer os olhos."
+say "Beatrice" "Antes de começarmos, uma pergunta: Qual é a matéria-prima mais preciosa para o ser humano?"
 say "Daniel" "Hmmm... Não sei, diamantes?"
 say "Beatrice" "Informação. Coleta de dados é um dos primeiros passos em qualquer pesquisa científica."
-say "Beatrice" "Se você quer conquistar uma garota, há muitas coisas que você precisa descobrir sobre ela."
+say "Beatrice" "Se você quer conquistar uma moça, há muitas coisas que você precisa descobrir sobre ela."
 say "" "O lápis nas mãos de Beatrice desliza, praticamente queimando o papel. A garota está finalizando alterações de última hora em uma extensa lista de itens."
 say "Com um movimento rápido, ela entrega o papel para Daniel."
 say "Beatrice" "Dê uma olhada." 
@@ -158,6 +160,7 @@ say "Beatrice" "Sim. Eu faço isso o tempo todo! Você pode descobrir muitas coi
 say "Daniel" "Hmmmm....Eu não me sentiria bem invadindo a privacidade alheia."
 say "" "Beatrice suspira, decepcionada."
 say "Beatrice" "As normais sociais limitam seu verdadeiro potencial, Daniel."
+say "" "Beatrice"
 goto end_dialog
 
 waypoint dialog_acquaintances_3
@@ -173,7 +176,7 @@ say "Beatrice" " Não se preocupe. Não é para beber."
 say "Daniel" "...Não é?"
 say "Beatrice" "É para a pele. Aplique uma pequena quantidade na epiderme."
 say "Daniel" "...Tipo um perfume?"
-say "" "Beatrice pensa um pouco antes de responder."
+//say "" "Beatrice pensa um pouco antes de responder."
 say "Beatrice" "...É. Um \qperfume\q."
 say "" "Daniel, desconfiado, coloca uma ínfima quantidade do líquido no pescoço, espalhando como uma colônia. O garoto cheira o frasco. O líquido é completamente inodoro."
 say "Daniel" "Mas o que exatamente isso faz?"
@@ -203,11 +206,11 @@ say "Beatrice" "Acho que eu estou trabalhando com algo acima da minha capacidade
 say "Beatrice" "Clorodendrum affectio é a obra-prima da pesquisa de meu pai. Talvez eu seja incapaz de entendê-la."
 say "Daniel" "Eu não acho! Você é a pessoa mais inteligente que eu conheço."
 say "Beatrice" "É mesmo? Lembra dos besouros? Aquilo não funcionou como eu esperava. Nada funciona."
-say "Daniel" "Você está se cobrando demais. Aposto que seu pai não gostaria de te ver assim."
+say "Daniel" "Você está se cobrando demais."
 say "Beatrice" "Meu pai gostaria de ver a obra dele concluída."
 say "Beatrice" "Preciso estudar mais! É a única forma de solucionar isso."
 say "" "A garota encara as anotações com uma determinação febril. Daniel fica preocupado."
-say "Daniel" "Então eu estudo com você."
+say "Daniel" "Então... eu estudo com você."
 say "" "A garota fica intrigada."
 say "Beatrice" "Você? Mas você não é um amante da ciência."
 say "Daniel" "Talvez não. Mas todo cientista precisa de um assistente, não é?"
@@ -221,35 +224,57 @@ goto end_dialog
 
 
 waypoint dialog_friends_2
-say "" "Beatrice está pensativa, amassando folhas de papel em pequenas bolinhas."
-say "Daniel" "O que você está fazendo?"
-say "Beatrice" "Um teste."
-say "Daniel" "Teste de quê?"
-say "" "Beatrice joga uma bolinha de papel no garoto."
-say "Daniel" "Ai! Porque você fez isso?"
-say "Beatrice" "Hmmm... Interessante, muito interessante."
-say "" "A garota faz anotações em seu caderninho."
-say "Daniel" "Isso foi um teste de reflexos? Porque você deveria ter avis-Ai!"
-say "" "A garota joga mais uma bolinha."
-say "Beatrice" "Fascinante, absolutamente fascinante."
-say "Daniel" "Você não precisa jogar com tanta força se o intuito é-"
-say "" "...e ela joga mais uma."
-say "Daniel" "Ai!"
-say "Beatrice" "Se você não reagir, eu não vou parar."
-say "" "A garota continua atirando mais bolinhas e Daniel continua reclamando, bloqueando como pode. A cena se repete por alguns minutos, até que a menina finalmente desiste."
-say "Beatrice" "Resultados admiravéis."
-say "Daniel" "Como assim?"
-say "Beatrice" "Eu não estava testando seus reflexos. Estava testando sua paciência."
-say "Daniel" "...Jogando bolinhas de papel em mim?"
-say "Beatrice" "Precisamente. A maioria das pessoas teria se levantado e ido embora. Você ficou aqui e aguentou. Isso é..."
-say "Daniel" "...Patético, eu sei."
-say "Beatrice" "Admirável."
-say "" "A garota ajeita os óculos e pigarreia."
-say "Beatrice" "Na natureza, fêmeas costumam selecionar seus parceiros pela força."
-say "Beatrice" "Meus testes determinaram que você é uma pessoa muito resiliente."
-say "Daniel" "Obrigado, eu acho...?"
-say "Beatrice" "...Mesmo que você deixe outros pisarem em você."
+//Beatrice cria uma máquina que apita toda vez que o usuário pede desculpas. NNa verdade ele só apita aleatoriamente.
+say "Beatrice" "Daniel! Você chegou na hora certa! Vista isso."
+say "" "A garota oferece para Daniel um capacete muito esquisito."
+say "Daniel" "Que negócio é esse?"
+say "Beatrice" "É um dispositivo de treinamento. Ele mede suas ondas cerebrais para moldar o comportamento desejado."
+say "" "Daniel coloca o capacete, desconfiado. Ele trava com um clique."
+say "Daniel" "Sei não, Beatrice, isso não parece segur-"
+say "Capacete" "BZZZZT! BZZZZT!"
+say "Daniel" "Ai, que é isso!?"
+say "Beatrice" "Eu o configurei para incentivar um comportamento corajoso. O capacete vai apitar e aplicar um pequeno choque toda vez que ele detectar medo ou hesitação."
+say "Daniel" "Tira ele! Como é que tira-BZZZZT!"
+say "Beatrice" "Uma vez colocado, não há como retirar até o comportamento desejado ser assimilado pelo usuário."
+say "Daniel" "Não tem como tirar??? Socorro- BZZZZT!"
+say "" "Quanto mais o capacete apita, mais desesperado Daniel fica. Beatrice observa as reações do garoto, muito interessada."
+say "Beatrice" "Que interessante, não esperava um loop de feedback..."
+say "Daniel" "Beatrice, ajuda- BZZZZT!"
+say "Beatrice" "Espere, estou checando o manual de instruções..."
+say "Daniel" "Não foi você quem fez - BZZZT - esse capacete?"
+say "Beatrice" "Eletrônica nunca foi meu ponto forte. Eu encomendei no experimentosperigosos.com..."
+say "Daniel" "AAAAAA- BZZZT!"
+say "Beatrice" "Pronto, achei o botão de emergência."
+say "" "O capacete destrava com um clique. Daniel respira aliviado."
+say "Daniel" "Ufa... Ainda bem que acabou. Não faz mais essas coisas não."
+say "Beatrice" "Para ser honesta, eu não achei que fosse funcionar."
+say "Daniel" "Porquê?"
+say "Beatrice" "Eu testei em mim mesma. Programei para a configuração \qinteligente\q e coloquei o capacete. Fiquei com ele o dia inteiro e ele não apitou uma única vez..."
+say "Daniel" "Affe..."
 
+// say "" "Beatrice está pensativa, amassando folhas de papel em pequenas bolinhas."
+// say "Daniel" "O que você está fazendo?"
+// say "Beatrice" "Um teste."
+// say "Daniel" "Teste de quê?"
+// say "" "Beatrice joga uma bolinha de papel no garoto."
+// say "Daniel" "Ai! Porque você fez isso?"
+// say "Beatrice" "Hmmm... Interessante, muito interessante."
+// say "" "A garota faz anotações em seu caderninho."
+// say "Daniel" "Isso foi um teste de reflexos? Porque você deveria ter avis-Ai!"
+// say "" "A garota joga mais uma bolinha."
+// say "Beatrice" "Fascinante, absolutamente fascinante."
+// say "Daniel" "Você não precisa jogar com tanta força se o intuito é-"
+// say "Daniel" "Ai!"
+// say "" "A garota continua atirando mais bolinhas e Daniel continua reclamando, bloqueando como pode. A cena se repete por alguns minutos, até que a menina finalmente desiste."
+// say "" "Beatrice assente, escrevendo no caderno, satisfeita."
+// say "Beatrice" "Resultados admiravéis."
+// say "Daniel" "Como assim?"
+// say "Beatrice" "Eu não estava testando seus reflexos. Estava testando sua paciência."
+// say "Daniel" "...Jogando bolinhas de papel em mim?"
+// say "Beatrice" "Precisamente. A maioria das pessoas teria se levantado e ido embora. Você ficou aqui e aguentou. Isso é..."
+// say "Daniel" "...Patético, eu sei."
+// say "Beatrice" "Admirável."
+// say "" "A garota ajeita os óculos e pigarreia."
  
 goto end_dialog
 
@@ -289,7 +314,7 @@ say "Beatrice" "Eu não posso tirar conclusões imparciais sobre o amor se... se
 say "Beatrice" "Digo, não é cientificamente correto, entende?"
 say "" "Os dois ficam encabulados, num silêncio curto e significativo, com vergonha de encararem um ao outro."
 say "Daniel" "Sabe aqueles documentários? Onde o cientista passa meses com uma tribo e participa dos rituais para entender a cultura?"
-say "Beatrice" "Sei. Não sabia que você se interessava por esse tipo de coisa."
+say "Beatrice" "Sei. Não sabia que você se interessava por esse tipo de estudo."
 say "Daniel" "(Passava antes do programa de culinária...)"
 say "Daniel" "Passar por uma experiência também é uma forma de ciência, né? ...Talvez você precise sentir alguma coisa pra poder entendê-la de verdade."
 say "Beatrice" "...F-faz sentido."
@@ -344,7 +369,7 @@ say "Daniel" "Se cuida, tá bem?"
 goto end_dialog
 
 waypoint dialog_fallback
-say "" "Os dois conversam sobre os livros que eles leram recentemente."
+say "" "Beatrice propõe mais um experimento com consequências duvidosas. O garoto recusa educadamente."
 say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
 goto end_dialog
 
