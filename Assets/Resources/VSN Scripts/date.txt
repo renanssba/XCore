@@ -100,20 +100,24 @@ for currentDateEvent #dateLength
     // first battle tutorials
     if tutorial_skills == false
       goto_script "tutorials" "using_skills"
-      if input_already_selected == true
-        continue
-      endif
     endif
     if tutorial_fertiliel == false
       if currentPlayerTurn == 2
         if currentBattleTurn == 1
-          continue
+          goto_script "tutorials" "fertiliel_skip_first_turn"
+        else
+          goto_script "tutorials" "fertiliel_actions"
         endif
-        goto_script "tutorials" "fertiliel_actions"
-        continue
       endif      
     endif
     
+    /// Skip action input if already selected
+    if input_already_selected == true
+      set_var input_already_selected false
+      continue
+    endif
+    
+    /// Ask for action input if not selected
     action_input currentPlayerTurn
   endfor
 

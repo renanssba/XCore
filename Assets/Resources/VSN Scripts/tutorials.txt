@@ -107,10 +107,13 @@ goto end
 
 
 
+waypoint fertiliel_skip_first_turn
+set_var input_already_selected true
+goto end
+
+
+
 waypoint fertiliel_actions
-if tutorial_fertiliel == true
-  goto end
-endif
 actor_animator_parameter angel "Choosing Action" true
 wait 1
 
@@ -134,6 +137,7 @@ say "(Outra opção é que eu tenho é apenas <color=yellow>Observar</color>, es
 say "(Observar não ajuda os humanos diretamente, mas fecha um dos Indicadores de Atenção.)"
 tutorial_icon "idle_button" false
 vsn_state "WAITINGCUSTOMINPUT"
+set_var input_already_selected true
 set_var tutorial_fertiliel true
 goto end
 
