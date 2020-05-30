@@ -143,7 +143,7 @@ public class GlobalData : MonoBehaviour {
     /// INITIAL INVENTORIES
     /// PLAYER
     //people[0].inventory.AddItem("sports_clothes", 5);
-    people[0].inventory.AddItem("chocolate_cake", 5);
+    //people[0].inventory.AddItem("chocolate_cake", 5);
     people[0].inventory.AddItem("sensor", 1);
     //people[0].inventory.AddItem("strawberry_cake", 5);
     //people[0].inventory.AddItem("pepper_cake", 5);

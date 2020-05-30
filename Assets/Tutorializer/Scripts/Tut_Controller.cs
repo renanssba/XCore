@@ -21,6 +21,7 @@ public class Tut_Controller : MonoBehaviour {
 
 
   public void StartAnimation(string animName){
+    Utils.UnselectButton();
     foreach(ListedAnimation anim in animations){
       if(anim.name == animName){
         anim.arrow.SetActive(true);

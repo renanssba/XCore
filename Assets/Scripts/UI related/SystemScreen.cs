@@ -49,6 +49,7 @@ public class SystemScreen : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     basePanel.HidePanel();
     savePanel.ShowPanel();
+    MenuController.instance.BlockTabsNavigation(true);
   }
 
   public void ClickOpenLoadPanel() {
@@ -61,6 +62,7 @@ public class SystemScreen : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     basePanel.HidePanel();
     savePanel.ShowPanel();
+    MenuController.instance.BlockTabsNavigation(true);
   }
 
   public void ClickBackToMenu() {
@@ -79,6 +81,7 @@ public class SystemScreen : MonoBehaviour {
     SfxManager.StaticPlayCancelSfx();
     savePanel.HidePanel();
     basePanel.ShowPanel();
+    MenuController.instance.BlockTabsNavigation(false);
   }
 
   public bool CurrentlyOnGirlInteractionScreen() {

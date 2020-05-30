@@ -13,7 +13,6 @@ namespace Command {
                                                           GlobalData.instance.people[(int)args[0].GetNumberValue()]};
       }
       UIController.instance.girlInteractionScreen.ShowGirlInteractionScreen();
-      //VsnController.instance.BlockExternalInput(false);
       VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;
     }
 

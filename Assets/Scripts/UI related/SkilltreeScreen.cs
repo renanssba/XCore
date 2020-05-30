@@ -6,7 +6,7 @@ using TMPro;
 
 public class SkilltreeScreen : MonoBehaviour {
 
-  public static SkilltreeScreen instance;
+  //public static SkilltreeScreen instance;
 
   public ScreenTransitions screenTransitions;
   public Relationship relationship;
@@ -30,12 +30,7 @@ public class SkilltreeScreen : MonoBehaviour {
   public Color unlockableIconColor;
 
 
-  public void Awake() {
-    instance = this;
-  }
-
   public void Initialize() {
-    instance = this;
     lockedPathColor = new Color(0.92f, 0.5f, 0.52f);
     unlockableSkillColor = new Color(0.6f, 0.42f, 0.42f);
     unlockableIconColor = new Color(0f, 0f, 0f, 0.3f);
@@ -107,11 +102,13 @@ public class SkilltreeScreen : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
     Initialize();
     screenTransitions.ShowPanel();
+    MenuController.instance.BlockTabsNavigation(true);
   }
 
   public void Close() {
     VsnAudioManager.instance.PlaySfx("ui_menu_close");
     screenTransitions.HidePanel();
+    MenuController.instance.BlockTabsNavigation(false);
   }
 
 

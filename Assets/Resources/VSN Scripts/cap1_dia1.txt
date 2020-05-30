@@ -4,6 +4,23 @@
 // pass_time
 // pass_time
 //goto dia_4
+
+say "Deseja visualizar os tutoriais? (Recomendado caso ainda não tenha jogado o jogo anteriormente)"
+choices "Sim, por favor." tutorials_yes "Não, já conheço o sistema." tutorials_no
+
+waypoint tutorials_yes
+set_var hide_tutorials false
+goto after_tutorials_choice
+
+waypoint tutorials_no
+set_var hide_tutorials true
+goto after_tutorials_choice
+
+
+waypoint after_tutorials_choice
+
+
+
 set_var dia_festa_clara 0
 fade_music 0 0
 skip_button true end
