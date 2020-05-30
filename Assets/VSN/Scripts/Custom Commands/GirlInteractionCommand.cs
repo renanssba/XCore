@@ -9,8 +9,7 @@ namespace Command {
 
     public override void Execute() {
       if(args.Length >= 1) {
-        GlobalData.instance.observedPeople = new Person[]{GlobalData.instance.people[0],
-                                                          GlobalData.instance.people[(int)args[0].GetNumberValue()]};
+        GlobalData.instance.currentRelationshipId = (int)args[0].GetNumberValue();
       }
       UIController.instance.girlInteractionScreen.ShowGirlInteractionScreen();
       VsnController.instance.state = ExecutionState.WAITINGCUSTOMINPUT;

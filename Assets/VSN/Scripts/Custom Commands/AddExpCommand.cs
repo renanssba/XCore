@@ -8,21 +8,17 @@ namespace Command {
   public class AddExpCommand : VsnCommand {
 
     public override void Execute() {
-      Relationship relation = GlobalData.instance.GetCurrentRelationship();
       bool useMultiplier = args[0].GetBooleanValue();
       int expToGet = (int)args[1].GetNumberValue();
 
       Debug.LogWarning("Add exp: "+expToGet);
 
       if(args.Length >= 3) {
-        relation = GlobalData.instance.relationships[(int)args[2].GetNumberValue()];
+        GlobalData.instance.currentRelationshipId = (int)args[2].GetNumberValue();
       }
-      GlobalData.instance.observedPeople = new Person[2];
-      GlobalData.instance.observedPeople[0] = relation.GetBoy();
-      GlobalData.instance.observedPeople[1] = relation.GetGirl();
 
       if(useMultiplier) {
-        switch(relation.heartLocksOpened) {
+        switch(GlobalData.instance.GetCurrentRelationship().heartLocksOpened) {
           case 0:
             break;
           case 1:
@@ -33,7 +29,7 @@ namespace Command {
             break;
         }
       }
-      GlobalData.instance.AddExpForRelationship(relation, expToGet);
+      GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet);
       VsnController.instance.WaitForCustomInput();
     }
 

@@ -1,7 +1,6 @@
 
 //DEBUG
 set_screen "girl_interaction_screen"
-//set_var conhece_beatrice 1
 //goto ir_beatrice
 //goto ir_anna
 //goto ir_clara
@@ -45,7 +44,7 @@ actor_move main "out_left" 0
 actor_move anna "grid_2" 0
 move_camera "girl_interaction" 1.0
 say "Ana está do outro lado da sala, conversando com um rapaz popular. Ela parece estar levemente alterada e abraçando-o contra a vontade dele."
-if conhece_beatrice == 1
+if conhece_beatrice == true
   actor_move beatrice "grid_5" 0
   actor_face beatrice "right"
   actor_move claire "out_right" 0
@@ -66,7 +65,7 @@ else
 endif
 
 waypoint ir_ana
-set_current_couple 1
+set_current_couple 0
 fade_out 1.0
 wait 1.0
 theater_setup main "person(daniel)" "grid_5" anna "person(anna)" "grid_2" guy "valentao" "out_left" guy1 "valentao" "out_left" guy2 "valentao" "out_left"
@@ -198,7 +197,7 @@ goto end
 
 
 waypoint ir_beatrice
-set_current_couple 2
+set_current_couple 1
 fade_out 1.0
 wait 1.0
 theater_setup main "person(daniel)" "out_left" beatrice "person(beatrice)" "grid_3"
@@ -278,7 +277,7 @@ goto end
 
 
 waypoint ir_clara
-set_current_couple 3
+set_current_couple 2
 fade_out 1.0
 wait 1.0
 theater_setup main "person(daniel)" "out_left" claire "person(claire)" "grid_3" guy1 "valentao" "grid_4" guy2 "valentao" "grid_4"

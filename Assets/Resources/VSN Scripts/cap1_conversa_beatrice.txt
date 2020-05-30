@@ -5,7 +5,6 @@ endif
 goto_script "enter_observation" "school morning"
 
 //DEBUG:
-//set_current_couple 2
 //fade_in 0
 //goto dia2
 //goto dialog_friends_1
@@ -21,7 +20,7 @@ if #day == 1
   actor_face bully1 "right"
   actor_move support "grid_6" 0
   actor_move bully1 "grid_5" 0
-  move_camera -1.6 1.5 -3.6 0
+  move_camera -1.6 1.28 -3.6 0
   actor_move main "grid_1" 2.0
   
   say "" "Na biblioteca..."
@@ -67,7 +66,7 @@ if #day == 1
   say "" "Ela confere o bloquinho de notas, lendo uma lista."
   say "???" "\qPasso 1: Se apresentar para a cobaia.\q \qPasso 2: Explicar o experimento.\q"
   say "Beatrice" "Saudações, Daniel. Sou Beatrice Hartley."
-  set_var conhece_beatrice 1
+  set_var conhece_beatrice true
   say "Daniel" "Como você sabe meu nome?"
   say "" "A garota dá um leve sorriso, ajeitando os óculos novamente."
   say "Beatrice" "Sou uma amante da ciência, entende. Estou no caminho de revolucionar o estudo dos relacionamentos humanos!"

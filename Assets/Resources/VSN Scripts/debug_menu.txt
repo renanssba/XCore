@@ -5,19 +5,19 @@ choices "Ana" ana "Beatrice" beatrice "Clara" clara "Cancelar" end
 
 
 waypoint ana
-set_current_couple 1
+set_current_couple 0
 set_var girl_script_name "cap1_conversa_ana"
 goto girl_menu
 
 waypoint beatrice
-set_current_couple 2
+set_current_couple 1
 set_var girl_script_name "cap1_conversa_beatrice"
-set_var conhece_beatrice 1
+set_var conhece_beatrice true
 // change_person_sprite 2 6
 goto girl_menu
 
 waypoint clara
-set_current_couple 3
+set_current_couple 2
 set_var girl_script_name "cap1_conversa_clara"
 goto girl_menu
 

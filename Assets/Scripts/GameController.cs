@@ -39,8 +39,8 @@ public class GameController : MonoBehaviour {
       UIController.instance.UpdateUI();
 
       VsnSaveSystem.SetVariable("hide_tutorials", hideTutorials);
-      //VsnController.instance.StartVSN("cap0_intro");
-      VsnController.instance.StartVSN("select_daytime_interaction");
+      VsnController.instance.StartVSN("cap0_intro");
+      //VsnController.instance.StartVSN("select_daytime_interaction");
     }
   }
 
@@ -66,21 +66,6 @@ public class GameController : MonoBehaviour {
     if(Input.GetKeyDown(KeyCode.F5)) {
       VsnSaveSystem.Load(1);
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    if(Input.GetKeyDown(KeyCode.Alpha1) && Input.GetKey(KeyCode.LeftShift)) {
-      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
-                                                         GlobalData.instance.people[1]};
-      VsnController.instance.StartVSNContent("add_exp 100", "custom");
-    }
-    if(Input.GetKeyDown(KeyCode.Alpha2) && Input.GetKey(KeyCode.LeftShift)) {
-      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
-                                                         GlobalData.instance.people[2]};
-      VsnController.instance.StartVSNContent("add_exp 100", "custom");
-    }
-    if(Input.GetKeyDown(KeyCode.Alpha3) && Input.GetKey(KeyCode.LeftShift)) {
-      GlobalData.instance.observedPeople = new Person[] {GlobalData.instance.people[0],
-                                                         GlobalData.instance.people[3]};
-      VsnController.instance.StartVSNContent("add_exp 100", "custom");
     }
     if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift)) {
       VsnController.instance.StartVSN("debug_menu");

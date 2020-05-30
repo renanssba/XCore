@@ -41,7 +41,7 @@ theater_setup support "person(daniel)" "main" main "person(anna)" "out_left" ene
 // theater_animation "setup_date"
 
 
-set_current_couple -1
+set_current_couple 1
 set_var dateId 0
 set_custom_battle 7
 setup_date
@@ -83,7 +83,7 @@ say "Daniel, fique atrás de mim."
 
 actor_face support "right"
 wait 0.3
-actor_move support -1.4 0 1 0.7
+actor_move support -1.2 0 1 0.7
 actor_move main "main" 0.7
 wait 1
 

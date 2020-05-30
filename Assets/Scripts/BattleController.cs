@@ -91,11 +91,9 @@ public class BattleController : MonoBehaviour {
     if(dateId != 0) {
       Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
       Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
-      GlobalData.instance.observedPeople = new Person[] { boy, girl };
-
       partyMembers = new Person[] { boy, girl, GlobalData.instance.people[4] };
     } else {
-      partyMembers = GlobalData.instance.observedPeople;
+      partyMembers = new Person[] { GlobalData.instance.people[1] };
       TheaterController.instance.mainActor.SetCharacter(partyMembers[0]);
       TheaterController.instance.enemyActor.SetEnemy(dateEnemies[0]);
     }

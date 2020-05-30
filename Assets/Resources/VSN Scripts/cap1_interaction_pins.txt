@@ -22,7 +22,7 @@ set_interaction_pin 0 true "cap1_conversa_ana" "Telhado"
 if #day == 1
   set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
-if conhece_beatrice == 1
+if conhece_beatrice == true
   set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 
@@ -40,16 +40,8 @@ waypoint tarde
 reset_pins_board "heartheroby"
 set_interaction_pin 0 true "cap1_conversa_ana" "Clube Esportivo"
 
-if #day > 2
-  if conhece_beatrice == 1
-    set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
-  endif
-endif
-if #day == 2
-  if convidou_beatrice == 1
-    set_interaction_pin_sprite 1 "love letter"
-    set_interaction_pin 1 true "cap1_conversa_beatrice" "Saída do Colégio"
-  endif
+if conhece_beatrice == true
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 
 set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
@@ -66,7 +58,7 @@ if #day == dia_festa_clara
   set_interaction_pin 2 true "cap1_festa" "Festa"
 else
   set_interaction_pin 0 true "cap1_investigar" "Investigar"
-  if conhece_beatrice == 1
+  if conhece_beatrice == true
     set_interaction_pin 1 true "cap1_investigar" "Investigar"
   endif
   set_interaction_pin 2 true "cap1_investigar" "Investigar"

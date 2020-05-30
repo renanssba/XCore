@@ -30,14 +30,6 @@ public class SpecialCodes {
       if(BattleController.instance.GetCurrentTarget() != null) {
         currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
       }
-      if(GlobalData.instance.ObservedPerson() != null) {
-        currentString = currentString.Replace("\\observedPerson", GlobalData.instance.ObservedPerson().GetName());
-        currentString = currentString.Replace("\\favoriteMatter1", GlobalData.instance.ObservedPerson().favoriteMatter);
-      }
-      if(GlobalData.instance.EncounterPerson() != null) {
-        currentString = currentString.Replace("\\encounterPerson", GlobalData.instance.EncounterPerson().GetName());
-        currentString = currentString.Replace("\\favoriteMatter2", GlobalData.instance.EncounterPerson().favoriteMatter);
-      }
       if(GlobalData.instance.CurrentBoy() != null) {
         currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().GetName());
         currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
@@ -176,8 +168,6 @@ public class SpecialCodes {
         return (int)BattleController.instance.currentDateLocation;
       case "#currentHp":
         return BattleController.instance.hp;
-      case "#isCurrentPersonMale":
-        return GlobalData.instance.ObservedPerson().isMale ? 1 : 0;
       case "#inventory_empty":
         return GlobalData.instance.people[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentGirlId":
