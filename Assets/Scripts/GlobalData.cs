@@ -7,7 +7,7 @@ public class GlobalData : MonoBehaviour {
   public List<Person> people;
   public Relationship[] relationships;
 
-  public Person[] observedPeople;
+  public int currentRelationshipId;
 
   public int boysToGenerate = 5;
   public int girlsToGenerate = 5;
@@ -29,8 +29,6 @@ public class GlobalData : MonoBehaviour {
       return;
     }
     DontDestroyOnLoad(gameObject);
-
-    observedPeople = new Person[1];
   }
 
   public void InitializeChapter() {
@@ -71,7 +69,7 @@ public class GlobalData : MonoBehaviour {
     // LOAD DATA FROM SAVE
     LoadPersistantGlobalData();
 
-    observedPeople[0] = people[0];
+    currentRelationshipId = 0;
   }
 
   public void InitializeChapterAlpha() {
@@ -143,7 +141,7 @@ public class GlobalData : MonoBehaviour {
     /// INITIAL INVENTORIES
     /// PLAYER
     //people[0].inventory.AddItem("sports_clothes", 5);
-    people[0].inventory.AddItem("chocolate_cake", 5);
+    //people[0].inventory.AddItem("chocolate_cake", 5);
     people[0].inventory.AddItem("sensor", 1);
     //people[0].inventory.AddItem("strawberry_cake", 5);
     //people[0].inventory.AddItem("pepper_cake", 5);
@@ -202,41 +200,26 @@ public class GlobalData : MonoBehaviour {
 
 
   public string CurrentCoupleName() {
-    if(observedPeople.Length < 2) {
+    if(GetCurrentRelationship() == null) {
       return "";
     }
     return Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple");
   }
 
   public Person CurrentBoy() {
-    if(observedPeople.Length < 1 || !observedPeople[0].isMale) {
+    if(GetCurrentRelationship() == null) {
       return null;
     }
-    return observedPeople[0];
+    return GetCurrentRelationship().GetBoy();
   }
 
   public Person CurrentGirl() {
-    if(observedPeople.Length >= 2) {
-      return observedPeople[1];
-    } else if(observedPeople.Length == 1 && !observedPeople[0].isMale) {
-      return observedPeople[0];
-    }
-    return null;
-  }
-
-  public Person ObservedPerson() {
-    if(observedPeople.Length < 1) {
+    if(GetCurrentRelationship() == null) {
       return null;
     }
-    return observedPeople[0];
+    return GetCurrentRelationship().GetGirl();
   }
 
-  public Person EncounterPerson() {
-    if(observedPeople.Length < 2) {
-      return null;
-    }
-    return observedPeople[1];
-  }
 
   public int CurrentCharacterAttribute(int attr) {
 
@@ -295,15 +278,10 @@ public class GlobalData : MonoBehaviour {
   }
 
   public Relationship GetCurrentRelationship() {
-    if(CurrentGirl() == null) {
+    if(currentRelationshipId < 0 || currentRelationshipId >= relationships.Length) {
       return null;
-    }
-    foreach(Relationship relationship in relationships) {
-      if(relationship.GetGirl() == CurrentGirl()) {
-        return relationship;
-      }
-    }
-    return null;
+    }    
+    return relationships[currentRelationshipId];
   }
 
 

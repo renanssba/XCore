@@ -333,8 +333,8 @@ public class TheaterController : MonoBehaviour {
 
     BattleController.instance.SetupDateLocation();
 
-    mainActor.SetCharacter(GlobalData.instance.observedPeople[0]);
-    supportActor.SetCharacter(GlobalData.instance.observedPeople[1]);
+    mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
+    supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
     angelActor.SetCharacter(GlobalData.instance.people[4]);
 
     mainActor.transform.localPosition = mainPosition - distance;

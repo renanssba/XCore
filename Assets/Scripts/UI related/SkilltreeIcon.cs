@@ -31,12 +31,12 @@ public class SkilltreeIcon : MonoBehaviour {
       lockedIcon.SetActive(false);
     } else {
       if(IsRequisiteUnlocked()) {
-        bg.color = SkilltreeScreen.instance.unlockableSkillColor;
+        bg.color = CoupleStatusScreen.instance.skilltreeScreen.unlockableSkillColor;
         skillIcon.gameObject.SetActive(true);
-        skillIcon.color = SkilltreeScreen.instance.unlockableIconColor;
+        skillIcon.color = CoupleStatusScreen.instance.skilltreeScreen.unlockableIconColor;
         lockedIcon.SetActive(true);
       } else {
-        bg.color = SkilltreeScreen.instance.lockedPathColor;
+        bg.color = CoupleStatusScreen.instance.skilltreeScreen.lockedPathColor;
         skillIcon.gameObject.SetActive(false);
         lockedIcon.SetActive(false);
       }
@@ -57,13 +57,13 @@ public class SkilltreeIcon : MonoBehaviour {
 
 
   public void SelectSkill(int selectedSkillId) {
-    SkilltreeScreen.instance.selectedSkillId = selectedSkillId;
+    CoupleStatusScreen.instance.skilltreeScreen.selectedSkillId = selectedSkillId;
     Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
 
     if(IsRequisiteUnlocked()) {
-      SkilltreeScreen.instance.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
+      CoupleStatusScreen.instance.skilltreeScreen.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
     } else {
-      SkilltreeScreen.instance.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);
+      CoupleStatusScreen.instance.skilltreeScreen.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);
     }
   }
 
@@ -74,7 +74,7 @@ public class SkilltreeIcon : MonoBehaviour {
       return;
     }
     if(relationship.skilltree.skills[skillId].isUnlocked == false) {
-      SkilltreeScreen.instance.OpenBuySkillConfirmationScreen(skillId);
+      CoupleStatusScreen.instance.skilltreeScreen.OpenBuySkillConfirmationScreen(skillId);
     }    
   }
 }

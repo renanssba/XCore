@@ -4,6 +4,23 @@
 // pass_time
 // pass_time
 //goto dia_4
+
+say "Deseja visualizar os tutoriais? (Recomendado caso ainda não tenha jogado o jogo anteriormente)"
+choices "Sim, por favor." tutorials_yes "Não, já conheço o sistema." tutorials_no
+
+waypoint tutorials_yes
+set_var hide_tutorials false
+goto after_tutorials_choice
+
+waypoint tutorials_no
+set_var hide_tutorials true
+goto after_tutorials_choice
+
+
+waypoint after_tutorials_choice
+
+
+
 set_var dia_festa_clara 0
 fade_music 0 0
 skip_button true end
@@ -24,7 +41,7 @@ theater_setup support "person(daniel)" "main" main "person(anna)" "out_left" ene
 // theater_animation "setup_date"
 
 
-set_current_couple -1
+set_current_couple 1
 set_var dateId 0
 set_custom_battle 7
 setup_date
@@ -66,7 +83,7 @@ say "Daniel, fique atrás de mim."
 
 actor_face support "right"
 wait 0.3
-actor_move support -1.4 0 1 0.7
+actor_move support -1.2 0 1 0.7
 actor_move main "main" 0.7
 wait 1
 

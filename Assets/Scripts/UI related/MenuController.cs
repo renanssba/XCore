@@ -49,6 +49,7 @@ public class MenuController : MonoBehaviour {
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    BlockTabsNavigation(false);
   }
 
   public void OpenMenuOnStatus(int relationshipId) {
@@ -57,6 +58,7 @@ public class MenuController : MonoBehaviour {
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    BlockTabsNavigation(false);
   }
 
   public void OpenMenuOnSystem() {
@@ -64,6 +66,7 @@ public class MenuController : MonoBehaviour {
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    BlockTabsNavigation(false);
   }
 
 
@@ -71,6 +74,7 @@ public class MenuController : MonoBehaviour {
     tabsToggleGroup.SetAllTogglesOff();
 
     coupleStatusScreen.panel.gameObject.SetActive(false);
+    coupleStatusScreen.skilltreeScreen.screenTransitions.gameObject.SetActive(false);
     inventoryScreen.screenTransition.gameObject.SetActive(false);
     systemScreen.basePanel.gameObject.SetActive(false);
     systemScreen.savePanel.gameObject.SetActive(false);
@@ -104,5 +108,9 @@ public class MenuController : MonoBehaviour {
       }
     }
     return MenuTabs.none;
+  }
+
+  public void BlockTabsNavigation(bool value) {
+    cancelTabsShade.SetActive(value);
   }
 }

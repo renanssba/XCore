@@ -24,6 +24,7 @@ public class GirlInteractionScreen : MonoBehaviour {
 
     //UIController.instance.SetScreenLayout("girl_interaction_screen");
     UIController.instance.relationshipUpAnimationCard.Initialize(currentRelationship);
+    VsnController.instance.BlockExternalInput(false);
 
     relationshipCard.Initialize(currentRelationship);
     SetButtonsGraphics();
@@ -88,6 +89,7 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickConversationButton() {
+    VsnController.instance.BlockExternalInput(true);
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
     Command.GotoCommand.StaticExecute("conversation");
@@ -100,6 +102,7 @@ public class GirlInteractionScreen : MonoBehaviour {
       return;
     }
 
+    VsnController.instance.BlockExternalInput(true);
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
     Command.GotoCommand.StaticExecute("give_gift");
@@ -122,6 +125,7 @@ public class GirlInteractionScreen : MonoBehaviour {
       return;
     }
 
+    VsnController.instance.BlockExternalInput(true);
     Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().GetName() + " and " + currentRelationship.GetGirl().GetName());
     SfxManager.StaticPlayBigConfirmSfx();
     VsnSaveSystem.SetVariable("dateId", dateId);

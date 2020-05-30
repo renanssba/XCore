@@ -12,6 +12,7 @@ public class CoupleStatusScreen : MonoBehaviour {
   public Relationship relationship;
   public RelationshipCard relationshipCard;
   public PersonCard[] personCards;
+  public SkilltreeScreen skilltreeScreen;
 
   public Button skilltreeButton;
   public GameObject unusedBondPointsIcon;
