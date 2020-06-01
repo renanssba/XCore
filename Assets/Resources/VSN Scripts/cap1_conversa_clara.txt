@@ -15,7 +15,7 @@ if daytime != 2
 endif
 
 
-// if #day == dia_festa_clara
+// if day == dia_festa_clara
   // say "" "Daniel passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
   // say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
   // say "Clara" "Oi Daniel, desculpa! :( Hoje o meu dia foi muito corrido organizando o aniversário e acabei me esquecendo de te avisar..."
@@ -253,7 +253,7 @@ goto end
 
 
 waypoint end
-if vespera_festa_clara == #day
+if vespera_festa_clara == day
   if clara_convidou_festa == 0
     say "" "Antes de ir embora, Clara convida Daniel para sua festa de aniversário que ocorrerá em sua casa amanhã de noite."
     say "Clara" "Eu adoraria que você viesse amanhã, é o meu aniversário."

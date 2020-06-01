@@ -25,22 +25,26 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
-    //VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
-
     if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
-      //datingPeopleCards[0].Initialize(GlobalData.instance.people[0]);
-      //datingPeopleCards[1].Initialize(GlobalData.instance.people[1]);
-
       VsnSaveSystem.SetVariable("minigame_ended", 0);
       UIController.instance.UpdateUI();
       VsnController.instance.StartVSN("back_from_minigame");
     } else {
-      GlobalData.instance.InitializeChapter();
-      UIController.instance.UpdateUI();
-
       VsnSaveSystem.SetVariable("hide_tutorials", hideTutorials);
-      VsnController.instance.StartVSN("cap0_intro");
-      //VsnController.instance.StartVSN("select_daytime_interaction");
+
+      GlobalData.instance.InitializeChapter();
+      GlobalData.instance.InitializeChapterAlpha();
+
+
+      if(GlobalData.instance.saveToLoad != -1) {
+        // LOAD DATA FROM SAVE
+        VsnSaveSystem.Load(GlobalData.instance.saveToLoad);
+        GlobalData.instance.LoadPersistantGlobalData();
+        GlobalData.instance.saveToLoad = -1;
+      }
+
+      UIController.instance.UpdateUI();
+      VsnController.instance.StartVSN("select_daytime_interaction");
     }
   }
 

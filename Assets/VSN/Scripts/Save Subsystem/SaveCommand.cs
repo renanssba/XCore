@@ -8,14 +8,15 @@ namespace Command {
   public class SaveCommand : VsnCommand {
 
     public override void Execute() {
-      int intSlot = 0;
+      int saveSlot = 0;
 
       if(args.Length > 0){
-        intSlot = (int)args[0].GetNumberValue();
+        saveSlot = (int)args[0].GetNumberValue();
       }
+      //Debug.LogError("SAVING!!!!!!!!!");
 
       GlobalData.instance.SavePersistantGlobalData();
-      VsnSaveSystem.Save(intSlot);
+      VsnSaveSystem.Save(saveSlot);
     }
 
 

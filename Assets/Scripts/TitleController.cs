@@ -13,6 +13,7 @@ public class TitleController : MonoBehaviour {
   }
 
   public void ClickNewGame(){
+    GlobalData.instance.saveToLoad = -1;
     VsnController.instance.StartVSN("start_game");
   }
 

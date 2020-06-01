@@ -40,7 +40,7 @@ public class SpecialCodes {
       if(GlobalData.instance.CurrentGirl() != null) {
         currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().GetName());
       }
-      currentString = currentString.Replace("\\day", GlobalData.instance.day.ToString());
+      currentString = currentString.Replace("\\day", VsnSaveSystem.GetIntVariable("day").ToString());
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
     } while(currentString != initialString);
@@ -154,8 +154,6 @@ public class SpecialCodes {
         return BattleController.instance.partyMembers.Length;
       case "#enemiesLength":
         return 1; // TODO: implement
-      case "#day":
-        return GlobalData.instance.day;
       case "#currentEnemyHp":
         return BattleController.instance.GetCurrentEnemy().hp;
       case "#currentEnemyExp":

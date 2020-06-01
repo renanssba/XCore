@@ -2,7 +2,7 @@ say "" "A aula seguiu normalmente, sem grandes ocorrências. Durante a tarde..."
 play_music "intermission_intro" "intermission_loop"
 fade_in 1
 
-if #day == 1
+if day == 1
   if passou_tempo_com_ana_hoje == 0
     say "Ana" "Ei Daniel, por que você furou de lanchar comigo?!"
     say "Daniel" "Ah, desculpa... Apareceu algo importante pra eu fazer."

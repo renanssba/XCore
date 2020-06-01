@@ -1,4 +1,4 @@
-if #day == dia_festa_clara
+if day == dia_festa_clara
   say "" "A noite cai e chega a hora da festa na casa da Clara."
   play_music "intermission_intro" "intermission_loop"
   fade_in 1
@@ -56,7 +56,7 @@ bg null
 play_music "intermission_intro" "intermission_loop"
 fade_in 1
 
-if #day == 1
+if day == 1
   say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
 endif
 

@@ -8,14 +8,13 @@ namespace Command {
   public class LoadCommand : VsnCommand {
 
     public override void Execute() {
-      int intSlot = 0;
+      int saveSlot = 0;
 
       if(args.Length > 0) {
-        intSlot = (int)args[0].GetNumberValue();
+        saveSlot = (int)args[0].GetNumberValue();
       }
 
-      VsnSaveSystem.Load(intSlot);
-      GlobalData.instance.LoadPersistantGlobalData();
+      GlobalData.instance.saveToLoad = saveSlot;
     }
 
 

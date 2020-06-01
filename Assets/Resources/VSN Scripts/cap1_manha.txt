@@ -6,15 +6,15 @@ set_var passou_tempo_com_clara_hoje 0
 play_music "intermission_intro" "intermission_loop"
 //set_screen "hide_all"
 
-if #day == 1
+if day == 1
   goto_script "cap1_dia1"
   end_script
 endif
-//if #day == 2
+//if day == 2
  // goto_script "cap1_dia2"
   //end_script
 //endif
-if #day == dia_festa_clara
+if day == dia_festa_clara
   goto_script "cap1_dia_festa"
   end_script
 endif

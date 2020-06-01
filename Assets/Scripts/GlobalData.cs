@@ -12,8 +12,9 @@ public class GlobalData : MonoBehaviour {
   public int boysToGenerate = 5;
   public int girlsToGenerate = 5;
 
-  public int day;
   public float playtime = 0f;
+
+  public int saveToLoad = -1;
 
   public bool hideTutorials = false;
 
@@ -38,11 +39,12 @@ public class GlobalData : MonoBehaviour {
 
     people = new List<Person>();
     relationships = new Relationship[boysToGenerate + girlsToGenerate - 1];
+    currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("observation_played", 0);
-    day = 1;
+    VsnSaveSystem.SetVariable("day", 0);
 
     for(int i = 0; i < boysToGenerate; i++) {
       auxName = GetNewName(usedNames, true);
@@ -63,13 +65,6 @@ public class GlobalData : MonoBehaviour {
       people.Add(newPerson);
     }
     usedNames.Clear();
-
-    InitializeChapterAlpha();
-
-    // LOAD DATA FROM SAVE
-    LoadPersistantGlobalData();
-
-    currentRelationshipId = 0;
   }
 
   public void InitializeChapterAlpha() {
@@ -241,7 +236,7 @@ public class GlobalData : MonoBehaviour {
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     if(daytime >= 2) {
       VsnSaveSystem.SetVariable("daytime", 0);
-      day++;
+      VsnSaveSystem.SetVariable("day", VsnSaveSystem.GetIntVariable("day") + 1);
     } else {
       VsnSaveSystem.SetVariable("daytime", daytime + 1);
     }
@@ -337,7 +332,6 @@ public class GlobalData : MonoBehaviour {
 
 
   public void SavePersistantGlobalData() {
-    VsnSaveSystem.SetVariable("day", day);
     VsnSaveSystem.SetVariable("playtime", playtime);
 
     SaveInventories();
@@ -371,12 +365,7 @@ public class GlobalData : MonoBehaviour {
 
 
   public void LoadPersistantGlobalData() {
-    if(VsnSaveSystem.GetIntVariable("day") == 0) {
-      return;
-    }
-    day = VsnSaveSystem.GetIntVariable("day");
     playtime = VsnSaveSystem.GetFloatVariable("playtime");
-
     LoadInventories();
     LoadRelationships();
   }

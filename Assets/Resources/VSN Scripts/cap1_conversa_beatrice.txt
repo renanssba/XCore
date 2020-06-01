@@ -11,7 +11,7 @@ goto_script "enter_observation" "school morning"
 //goto dialog_acquaintances_1
 //goto debug
 
-if #day == 1
+if day == 1
   set_var foi_na_biblioteca 1
   
   theater_setup main "person(daniel)" "out_left" support "person(beatrice)" "out_right" bully1 "valentao" "out_right" 

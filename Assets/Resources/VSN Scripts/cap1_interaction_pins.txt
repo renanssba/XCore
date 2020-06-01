@@ -19,7 +19,7 @@ endif
 // endif
 set_interaction_pin 0 true "cap1_conversa_ana" "Telhado"
 
-if #day == 1
+if day == 1
   set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
 endif
 if conhece_beatrice == true
@@ -27,7 +27,7 @@ if conhece_beatrice == true
 endif
 
 set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
-if #day == 1
+if day == 1
   if daytime == 0
     set_interaction_pin 2 false
   endif
@@ -52,7 +52,7 @@ goto end
 waypoint noite
 reset_pins_board "heartheroby-night"
 
-if #day == dia_festa_clara
+if day == dia_festa_clara
   set_interaction_pin 0 false
   set_interaction_pin 1 false
   set_interaction_pin 2 true "cap1_festa" "Festa"
