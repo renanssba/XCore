@@ -32,5 +32,19 @@ end_script
 
 
 
+
+waypoint heal_main
+actor_animator_parameter angel "Battle" true
+actor_animator_parameter angel "Choosing Action" true
+say "Fertiliel" "(Hm... ela parece estar sofrendo. Eu sei que é contra as regras, mas vou dar uma ajudinha aqui.)"
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+use_skill angel "partyMember1" 33
+actor_animator_parameter angel "Battle" false
+wait 0.5
+end_script
+
+
+
 waypoint defeated
 end_script

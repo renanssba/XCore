@@ -96,6 +96,7 @@ public class BattleController : MonoBehaviour {
       partyMembers = new Person[] { GlobalData.instance.people[1] };
       TheaterController.instance.mainActor.SetCharacter(partyMembers[0]);
       TheaterController.instance.enemyActor.SetEnemy(dateEnemies[0]);
+      TheaterController.instance.angelActor.SetCharacter(GlobalData.instance.people[4]);
     }
 
     selectedSkills = new Skill[partyMembers.Length];
@@ -165,6 +166,9 @@ public class BattleController : MonoBehaviour {
   public void ClearSkillsUsageRegistry() {
     foreach(Person p in partyMembers) {
       p.ClearAllSkillsUsage();
+    }
+    if(TheaterController.instance.angelActor.battler != null) {
+      TheaterController.instance.angelActor.battler.ClearAllSkillsUsage();
     }
   }
 
@@ -270,10 +274,12 @@ public class BattleController : MonoBehaviour {
   public SkillTarget GetPartyMemberPosition(Battler character) {
     if(partyMembers[0] == character) {
       return SkillTarget.partyMember1;
-    } else if(partyMembers[1] == character) {
+    } else if(partyMembers.Length > 1 && partyMembers[1] == character) {
       return SkillTarget.partyMember2;
     } else if(GetCurrentEnemy() == character) {
       return SkillTarget.enemy1;
+    } else if(TheaterController.instance.angelActor.battler == character) {
+      return SkillTarget.angel;
     }
     return SkillTarget.none;
   }
@@ -1194,7 +1200,11 @@ public class BattleController : MonoBehaviour {
       case SkillTarget.partyMember2:
         return partyMembers[1];
       case SkillTarget.angel:
-        return partyMembers[2];
+        if(partyMembers.Length >= 3) {
+          return partyMembers[2];
+        } else {
+          return TheaterController.instance.angelActor.battler;
+        }
       case SkillTarget.enemy1:
       default:
         return GetCurrentEnemy();

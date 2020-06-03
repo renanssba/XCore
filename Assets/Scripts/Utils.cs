@@ -411,6 +411,7 @@ public class Utils {
     string conditionArgument;
     int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
     Battler user = BattleController.instance.GetBattlerByTargetId(skillUserId);
+    Battler main = BattleController.instance.GetBattlerByTargetId(SkillTarget.partyMember1);
 
 
     foreach(string condition in allConditions) {
@@ -471,6 +472,14 @@ public class Utils {
 
       if(condition.StartsWith("hp_percent_is_less")) {
         float hpPercent = ((float)user.CurrentHP()) / (float)user.MaxHP();
+        //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
+        if(hpPercent > float.Parse(conditionArgument)) {
+          return false;
+        }
+      }
+
+      if(condition.StartsWith("main_hp_percent_is_less")) {
+        float hpPercent = ((float)main.CurrentHP()) / (float)main.MaxHP();
         //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
         if(hpPercent > float.Parse(conditionArgument)) {
           return false;

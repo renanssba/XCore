@@ -15,7 +15,6 @@ namespace Command {
       float newValue = oldValue - valueToAdd.GetNumberValue();
 
       VsnSaveSystem.SetVariable(variableName.GetReference(), newValue);
-      VsnSaveSystem.Save(0);
     }
 
 

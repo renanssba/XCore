@@ -18,7 +18,7 @@ if #currentGirlId == 1
 endif
 if #currentGirlId == 2
   say "Beatrice" "Eu acho uma pena... Tem gente que não tem cérebro e precisa recorrer à violência."
-  say "Valentão" "Uma Bruxa e um otário, vocês dois se merecem..."
+  say "Valentão" "Uma esquisitona e um otário, vocês dois se merecem..."
 endif
 if #currentGirlId == 3
   say "Clara" "Para com isso, Spike! Deixa o Daniel em paz."
@@ -31,7 +31,8 @@ wait 0.5
 actor_animator_parameter enemy "Battle" true
 actor_animator_parameter enemy "Intro"
 wait 2
-play_sfx "action_flatter"
+add_overlay enemy "valentao-oculos" true
+play_sfx "shine"
 wait 0.3
 
 say "Hahaha! Agora você vai ver, Biscoitinho!"
@@ -69,6 +70,10 @@ end_script
 
 waypoint defeated
 say "" "No meio da briga, os óculos escuros do valentão quebram."
+wait 0.3
+play_sfx "glass_break"
+add_overlay enemy "valentao-oculos" false
+wait 0.3
 say "Valentão" "Droga! Esses óculos são caros, onde será que eu arranjo conserto?"
 say "" "O valentão vai embora correndo!"
 actor_move enemy "out_right" 0.5
