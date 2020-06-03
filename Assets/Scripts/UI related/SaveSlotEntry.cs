@@ -18,6 +18,7 @@ public class SaveSlotEntry : MonoBehaviour {
   public TextMeshProUGUI moneyText;
 
   public Image[] humanFaceImages;
+  public Image[] heartIcons;
   public TextMeshProUGUI[] relationshipLevelTexts;
 
   public int slotId;
@@ -28,13 +29,18 @@ public class SaveSlotEntry : MonoBehaviour {
   }
 
   public void UpdateUI(int id) {
+    RelationshipSaveStruct relationshipStruct;
+    Relationship rel = new Relationship();
+
     shade.SetActive(false);
+
     if(slotId == 0) {
       titleText.text = "Auto-Save";
       shade.SetActive(SystemScreen.instance!=null && SystemScreen.instance.isInSaveMode);
     } else {
       titleText.text = "File " + slotId;
     }
+
     if(VsnSaveSystem.IsSaveSlotBusy(slotId)) {
       emptyIcon.SetActive(false);
       Dictionary<string, string> dic = VsnSaveSystem.GetSavedDictionary(slotId);
@@ -47,15 +53,25 @@ public class SaveSlotEntry : MonoBehaviour {
       
       dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + int.Parse(dic["VARNUMBER_day"]);
       moneyText.text = "<sprite=\"Attributes\" index=4>" + int.Parse(dic["VARNUMBER_money"]);
-      humanFaceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(0);
-      humanFaceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(0);
-      humanFaceImages[2].sprite = ResourcesManager.instance.GetFaceSprite(0);
+      //humanFaceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(0);
+      //humanFaceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(0);
+      //humanFaceImages[2].sprite = ResourcesManager.instance.GetFaceSprite(0);
 
-      humanFaceImages[3].sprite = ResourcesManager.instance.GetFaceSprite(5);
-      humanFaceImages[4].sprite = ResourcesManager.instance.GetFaceSprite(6);
-      humanFaceImages[5].sprite = ResourcesManager.instance.GetFaceSprite(7);
+      humanFaceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(5);
+      humanFaceImages[1].sprite = ResourcesManager.instance.GetFaceSprite(6);
+      humanFaceImages[2].sprite = ResourcesManager.instance.GetFaceSprite(7);
 
-      //relationshipLevelTexts[0].text = GlobalData.instance.
+
+      for(int i=0; i<3; i++) {
+        relationshipStruct = JsonUtility.FromJson<RelationshipSaveStruct>(dic["VARSTRING_relationship_" + i]);
+        relationshipLevelTexts[i].text = relationshipStruct.level.ToString();
+        heartIcons[i].sprite = ResourcesManager.instance.heartlockSprites[relationshipStruct.heartLocksOpened];
+        if(relationshipStruct.level > 0) {
+          humanFaceImages[i].gameObject.SetActive(true);
+        } else {
+          humanFaceImages[i].gameObject.SetActive(false);
+        }
+      }
 
       dataContent.SetActive(true);
     } else {
