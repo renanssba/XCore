@@ -11,8 +11,9 @@ namespace Command {
       int partyMemberId = (int)args[0].GetNumberValue();
 
       // if action is idle
-      if(BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.idle) {
-        Command.ContinueCommand.StaticExecute();
+      if(BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.idle &&
+         BattleController.instance.partyMembers[partyMemberId].id == (int)PersonId.fertiliel) {
+        ContinueCommand.StaticExecute();
         return;
       }
 
@@ -20,7 +21,7 @@ namespace Command {
       if(BattleController.instance.GetCurrentEnemy().hp <= 0 &&
          BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.useSkill &&
          BattleController.instance.selectedSkills[partyMemberId].type == SkillType.attack) {
-        Command.ContinueCommand.StaticExecute();
+        ContinueCommand.StaticExecute();
       }
     }
 

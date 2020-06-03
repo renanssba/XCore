@@ -16,8 +16,6 @@ public class GlobalData : MonoBehaviour {
 
   public int saveToLoad = -1;
 
-  public bool hideTutorials = false;
-
 
 
   public static GlobalData instance;
@@ -126,7 +124,7 @@ public class GlobalData : MonoBehaviour {
 
     /// RELATIONSHIP SKILLTREES
     relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 14, 23, 26, 26, 27, 26, 30 });
-    relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 17, 4, 16, 24, 27, 28, 27, 26, 30 });
+    relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 16, 29, 27, 28, 27, 26, 30 });
     relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 27, 27, 26, 30 });
 
 

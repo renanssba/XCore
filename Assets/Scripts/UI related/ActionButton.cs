@@ -69,7 +69,7 @@ public class ActionButton : MonoBehaviour {
     nameText.text = skill.GetPrintableName();
     if(skill.type == SkillType.attack) {
       string prefix = "";
-      string[] nameParts = skill.name.Split(' ');
+      string[] nameParts = skill.GetPrintableName().Split(' ');
       if(nameParts.Length > 1) {
         prefix = nameParts[0] + " ";
       }

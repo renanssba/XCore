@@ -1,53 +1,53 @@
-id	name	description	type	range	sp cost	special effect	effect power	damage attribute	damage power	heal hp	heal hp percent	heal sp	heals status conditions	gives status conditions	give status chance	duration	passive trigger	trigger conditions	trigger chance	sprite	animation	tags	debug
-0	Valentia	Causa dano baseado em Valentia	attack	one_enemy				guts	8											gutsy aura	attack		
-1	Inteligência	Causa dano baseado em Inteligência	attack	one_enemy				intelligence	8											gutsy aura	attack		
-2	Carisma	Causa dano baseado em Carisma	attack	one_enemy				charisma	8											gutsy aura	attack		
-3	SUPER Valentia	Causa muito dano baseado em Valentia	attack	one_enemy	3			guts	14											gutsy aura	charged_attack		
-4	SUPER Inteligência	Causa muito dano baseado em Inteligência	attack	one_enemy	3			intelligence	14											gutsy aura	charged_attack		
-5	SUPER Carisma	Causa muito dano baseado em Carisma	attack	one_enemy	3			charisma	14											gutsy aura	charged_attack		
-6	MEGA Valentia	Causa dano MASSIVO baseado em Valentia	attack	one_enemy	5			guts	18											gutsy aura	charged_attack		
-7	MEGA Inteligência	Causa dano MASSIVO baseado em Inteligência	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
-8	MEGA Carisma	Causa dano MASSIVO baseado em Carisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
-9	Sensor	Descobre a fraqueza de um oponente	active	one_enemy	2	sensor														magnifying glass	active_offensive		
-10	Lanche Reforçado	Cura fome e aumenta a defesa de um aliado por 3 turnos	active	one_ally	2								hunger	fortified	100	3				hamburger	throw_object(hamburger)	food	
-11	Aroma Delicioso	Causa fome em um oponente	active	one_enemy	2									hunger	100	3				fragrance	active_offensive		
-12	Cozinheiro	Aumenta em 50% os PC recuperados por itens de cura	passive	all_allies		healingItemBonus	0.5													cook	none		
-13	Encorajar	Aumenta a Valentia do parceiro temporariamente e cura Tristeza	active	other_ally	2		3						sad	encouraged	100	3				gutsy aura	active_support		
-14	Primeiros Socorros	Cura Machucado e Tonto de um aliado	active	one_ally	2								injured, dizzy							medical-pack	active_support		
-15	Guardiã	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
-16	História Triste	Deixa um inimigo Triste, causando dano baseado em Inteligência por 4 turnos	active	one_enemy	2									sad	100	4				dialog	active_offensive		
-17	Maldição	Diminui a defesa de um oponente por 3 turnos	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
-18	Elusiva	Aumenta a chance de escapar de conflitos para 95%	passive	all_allies		fleeChanceBonus	0.35													run	none		
-19	Beijo de Cura	Cura 16 PC do casal	active	other_ally	2					16										heart-plus	active_support		
-20	Abraço Mágico	Cura todas as condições negativas do aliado	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed							charmed	active_support		
-21	Saciedade	Recupera todas as condições negativas ao receber um item ou habilidade de comida	passive	self									hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed				after_action	cured_status(hunger)	100	eating	passive		
-22	Inseguro	Recebe 30% mais dano baseado em Carisma	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
-23	Impaciente	Fica irritada ao passar 3 turnos em um combate	passive	self										angry	100	3	turn_started	is_turn(4)	100	angry-eyes	passive		
-24	Medrosa	Chance de receber medo ao enfrentar humanos	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
-25	Esfomeada	Recebe fome ao passar 2 turnos em um combate	passive	self										hunger	100	-1	turn_started	is_turn(3)	100	eating	passive		
-26	Proximidade	Aumenta os PC do casal em 10	passive	all_allies		raiseMaxHp	10													heart-plus	none		
-27	Dedicação	Aumenta o SP do casal em 2	passive	all_allies		raiseMaxSp	2													skill-points	none		
-28	Guardião	Aumenta a própria defesa e protege o aliado do próximo ataque	active	self	1									guardian	100					shield	active_support		
-29	Memórias Felizes		passive	all_allies																charmed	none		
-30	Confissão	Recupera 50% dos PC do casal quando chegarem a 0 (uma vez por Encontro)	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
-31	Amigos por Correspondência		passive	all_allies																charmed	none		
-32	Companheiros de Leitura		passive	all_allies																charmed	none		
-33	Amantes de Omelete		passive	all_allies																charmed	none		
-34	Auto-Sensor	Revela as próprias fraquezas a cada 3 turnos	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		
-35	Atropelar	Causa dano baseado em Valentia e pode deixar o alvo Machucado	active	all_enemies				guts	6					injured	80	4				gutsy aura	run_over		
-36	Golpes Violentos	Causa dano baseado em Valentia e deixa o alvo Machucado	active	one_enemy				guts	8					injured	100	4				gutsy aura	attack		
-37	Rajada de Molho	Causa dano baseado em Carisma e deixa o alvo Melecado	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	throw_object(dirty)		
-38	Choro Melancólico	Deixa o alvo Triste	active	one_enemy				intelligence	4					sad	100	4				gutsy aura	attack		
-39	Fúria Reprimida	Fica irritado até o fim do Encontro	active	self	2									angry	100	-1				angry-eyes	active_support		
-40	Concentrar	Duplica o dano do próximo ataque	passive	self	2									charged	100	1	after_enemy_attack	hp_percent_is_less(0.5), turn_is_multiple(2)	60	angry-eyes	long_charge		
-41	Guardião (Antigo)	Defender dá 70% de chance de receber ataque no lugar da aliada	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
-42	Concentrar	Duplica o dano do próximo ataque	active	self	2									charged	100	1				angry-eyes	long_charge		
-43	Ectoplasma	Deixa todos os inimigos Melecados	active	all_enemies	2			charisma	4					dirty	100	4				dirty	multi_throw		
-44	Indigestão	Contra-ataca se for atacado quando estiver Digerindo	passive	all_enemies				charisma	4					dirty	100	4	after_action	was_attacked_for_damage, has_status_condition(digesting)	100	stomach-red	multi_throw		
-45	Comer Bolo	Recupera um pouco de vida e fica Digerindo	active	self	1					20			hunger	digesting	100	1				eating	throw_object(brown-cake)		
-46	Grande Maldição	Diminui a defesa de todos os oponentes por 3 turnos	active	all_enemies	2									cursed	100	3				cursed	active_offensive		
-47	Memórias Tristes	Deixa um inimigo severamente Triste	active	one_enemy	2									sad, sad	100	4				tears	active_offensive		
-48	Barreira Mágica	Reflete ataques recebidos em um oponente	active	self	2									reflection	100	1				magic-shield	active_support		
-49	Fogo Místico	Causa dano baseado em Inteligência	active	one_enemy				intelligence	8											flame	active_offensive		
-50	Dissipar	Cura todas as condições negativas de si mesmo	passive	self	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed				after_enemy_attack	turn_is_multiple(2), has_status_condition(hunger)	80	charmed	active_support		
-51	Refletir	Reflete um ataque recebido em um oponente	passive	self		reflectEnemyTarget											before_action	was_attacked, has_status_condition(reflection)	100	magic-shield	passive		
+id	name	type	range	sp cost	special effect	effect power	damage attribute	damage power	heal hp	heal hp percent	heal sp	heals status conditions	gives status conditions	give status chance	duration	passive trigger	trigger conditions	trigger chance	sprite	animation	tags	debug
+0	guts	attack	one_enemy				guts	8											gutsy aura	attack		
+1	intelligence	attack	one_enemy				intelligence	8											gutsy aura	attack		
+2	charisma	attack	one_enemy				charisma	8											gutsy aura	attack		
+3	super_guts	attack	one_enemy	3			guts	14											gutsy aura	charged_attack		
+4	super_intelligence	attack	one_enemy	3			intelligence	14											gutsy aura	charged_attack		
+5	super_charisma	attack	one_enemy	3			charisma	14											gutsy aura	charged_attack		
+6	super_guts	attack	one_enemy	5			guts	18											gutsy aura	charged_attack		
+7	super_intelligence	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
+8	super_charisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
+9	analysis	active	one_enemy	2	sensor														magnifying glass	throw_object(magnifying glass)		
+10	fortifying_snack	active	one_ally	2								hunger	fortified	100	3				hamburger	throw_object(hamburger)	food	
+11	delicious_aroma	active	one_enemy	2									hunger	100	3				fragrance	active_offensive		
+12	cook	passive	all_allies		healingItemBonus	0.5													cook	none		
+13	encourage	active	other_ally	2		3						sad	encouraged	100	3				gutsy aura	active_support		
+14	first_aid	active	one_ally	2								injured, dizzyness							medical-pack	active_support		
+15	guardian_0	active	self	1									guardian	100					shield	active_support		
+16	sad_story	active	one_enemy	2									sad	100	4				dialog	active_offensive		
+17	curse	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
+18	elusive	passive	all_allies		fleeChanceBonus	0.35													run	none		
+19	healing_kiss	active	other_ally	2					16										heart-plus	active_support		
+20	magic_hug	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed							charmed	active_support		
+21	satiety	passive	self									hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed				after_action	cured_status(hunger)	100	eating	passive		
+22	insecure	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none		
+23	impacient	passive	self										angry	100	3	turn_started	is_turn(4)	100	angry-eyes	passive		
+24	fearful	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive		
+25	full_appetite	passive	self										hunger	100	-1	turn_started	is_turn(3)	100	eating	passive		
+26	proximity	passive	all_allies		raiseMaxHp	10													heart-plus	none		
+27	dedication	passive	all_allies		raiseMaxSp	2													skill-points	none		
+28	guardian_1	active	self	1									guardian	100					shield	active_support		
+29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive		
+30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
+31	strange_experiment	active	one_enemy	2			intelligence	6					hunger, angry, dirty, dizzyness	30	3				experiment	throw_object(experiment)		
+32	blank_0	passive	all_allies																charmed	none		
+33	blank_1	passive	all_allies																charmed	none		
+34	auto_sensor	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		
+35	stampede	active	all_enemies				guts	6					injured	80	4				gutsy aura	run_over		
+36	rough_beating	active	one_enemy				guts	8					injured	100	4				gutsy aura	attack		
+37	sauce_squirt	attack	one_enemy				charisma	4					dirty	100	4				gutsy aura	throw_object(dirty)		
+38	sad_cry	active	one_enemy				intelligence	4					sad	100	4				gutsy aura	attack		
+39	repressed_anger	active	self	2									angry	100	-1				angry-eyes	active_support		
+40	focus_0	passive	self	2									charged	100	1	after_enemy_attack	hp_percent_is_less(0.5), turn_is_multiple(2)	60	angry-eyes	long_charge		
+41	guardian_2	passive	self		becomeEnemyTarget											before_enemy_attack	ally_targeted, defending	70	shield	passive		
+42	focus_1	active	self	2									charged	100	1				angry-eyes	long_charge		
+43	ectoplasm	active	all_enemies	2			charisma	4					dirty	100	4				dirty	multi_throw		
+44	indigestion	passive	all_enemies				charisma	4					dirty	100	4	after_action	was_attacked_for_damage, has_status_condition(digesting)	100	stomach-red	multi_throw		
+45	eating_cake	active	self	1					20			hunger	digesting	100	1				eating	throw_object(brown-cake)		
+46	big_curse	active	all_enemies	2									cursed	100	3				cursed	active_offensive		
+47	sad_memories	active	one_enemy	2									sad, sad	100	4				tears	active_offensive		
+48	magic_barrier	active	self	2									reflection	100	1				magic-shield	active_support		
+49	mystic_fire	active	one_enemy				intelligence	8											flame	active_offensive		
+50	dispell	passive	self	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed				after_enemy_attack	turn_is_multiple(2), has_status_condition(hunger)	80	charmed	active_support		
+51	reflect	passive	self		reflectEnemyTarget											before_action	was_attacked, has_status_condition(reflection)	100	magic-shield	passive		

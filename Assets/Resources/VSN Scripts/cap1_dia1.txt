@@ -141,7 +141,7 @@ fade_out 1
 wait 1
 say "" "Durante a aula..."
 
-theater_bg "classroom"
+theater_bg "school classroom"
 theater_setup main "person(daniel)" "main" support "person(anna)" "out_left" enemy "professor" "enemy"
 move_camera "main_and_enemy" 0
 
@@ -211,8 +211,8 @@ say "Clara" "Tá bom então! A gente se vê mais tarde."
 
 wait 0.5
 actor_face support "left"
-actor_move support "out_left" 1
-wait 1
+actor_move support "out_left" 1.5
+wait 1.5
 
 actor_face main "right"
 wait 1.5
@@ -243,8 +243,8 @@ say "Ana" "Ei, venha lanchar comigo lá no telhado durante o intervalo! Eu troux
 say "Daniel" "Beleza, mas eu preciso-"
 
 actor_face support "left"
-actor_move support "out_left" 1
-wait 1
+actor_move support "out_left" 1.5
+wait 1.5
 say "" "Ana sai correndo pela porta antes que Daniel conseguisse responder."
 say "Daniel" "-passar na biblioteca antes..."
 

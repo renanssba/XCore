@@ -246,8 +246,6 @@ public class CustomizationController : MonoBehaviour {
       webcam.Stop();
     }
 
-    GlobalData.instance.hideTutorials = !tutorialToggle.isOn;
-
     //VsnController.instance.StartVSN("got");
     //SceneManager.LoadScene(StageName.Park.ToString());
     //VsnController.instance.StartVSN("ask_for_email");

@@ -47,7 +47,7 @@ public class RelationshipCard : MonoBehaviour {
       expText.text = "MAX";
     }
 
-    coupleNameText.text = relationship.GetBoy().GetName() + " e " + relationship.GetGirl().GetName();
+    coupleNameText.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple"));
     levelText.text = relationship.level.ToString();
     unusedBondPointIcon.SetActive(relationship.bondPoints > 0);
   }

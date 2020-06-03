@@ -182,9 +182,9 @@ public abstract class Battler {
   /// STATUS CONDITIONS SEGMENT
   /// ///
 
-  public int FindStatusCondition(StatusCondition cond) {
+  public int FindStatusCondition(string conditionName) {
     for(int i=0; i< statusConditions.Count; i++) {
-      if(statusConditions[i].name == cond.name) {
+      if(statusConditions[i].name == conditionName) {
         return i;
       }
     }
@@ -192,25 +192,23 @@ public abstract class Battler {
   }
 
 
-  public void ReceiveStatusConditionBySkill(Skill usedSkill) {
+  public void ReceiveStatusConditionBySkill(Skill usedSkill, int giveStatusPos) {
     StatusCondition newCondition;
-    Debug.LogWarning("Used skill: " + usedSkill.name);
-    for(int i=0; i<usedSkill.givesConditionNames.Length; i++) {
-      newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[i]);
-      newCondition = newCondition.GenerateClone();
-      newCondition.duration = usedSkill.duration;
-      if(newCondition.duration > 0) {
-        newCondition.duration++;
-      }
-      newCondition.maxDurationShowable = usedSkill.duration;
-      //newCondition.name = usedSkill.GetPrintableName();
-      //newCondition.sprite = usedSkill.sprite;
-      ReceiveStatusCondition(newCondition);
+
+    //Debug.LogWarning("Received skill: " + usedSkill.name);
+    newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[giveStatusPos]);
+    newCondition = newCondition.GenerateClone();
+    newCondition.duration = usedSkill.duration;
+    if(newCondition.duration > 0) {
+      newCondition.duration++;
     }
+    newCondition.maxDurationShowable = usedSkill.duration;
+    ReceiveStatusCondition(newCondition);
   }
 
   public void ReceiveStatusConditionByItem(Item usedItem) {
     StatusCondition newCondition;
+
     foreach(string condName in usedItem.givesConditionNames) {
       newCondition = BattleController.instance.GetStatusConditionByName(condName);
       newCondition = newCondition.GenerateClone();
@@ -219,14 +217,12 @@ public abstract class Battler {
         newCondition.duration++;
       }
       newCondition.maxDurationShowable = usedItem.duration;
-      //newCondition.name = usedItem.GetPrintableName();
-      //newCondition.sprite = usedItem.sprite;
       ReceiveStatusCondition(newCondition);
     }
   }
 
   public bool ReceiveStatusCondition(StatusCondition newCondition) {
-    int i = FindStatusCondition(newCondition);
+    int i = FindStatusCondition(newCondition.name);
     bool receivedNewStatus = false;
     Actor2D actor = TheaterController.instance.GetActorByBattlingCharacter(this);
 

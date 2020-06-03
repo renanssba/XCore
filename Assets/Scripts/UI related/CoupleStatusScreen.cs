@@ -40,13 +40,10 @@ public class CoupleStatusScreen : MonoBehaviour {
     personCards[1].Initialize(relationship.GetGirl());
     coupleHpText.text = relationship.GetMaxHp().ToString();
 
-    if(BattleController.instance.IsBattleHappening())
-    {
+    if(BattleController.instance.IsBattleHappening()){
       Utils.SetButtonDisabledGraphics(skilltreeButton);
       unusedBondPointsIcon.SetActive(false);
-    }
-    else
-    {
+    } else {
       Utils.SetButtonEnabledGraphics(skilltreeButton);
       unusedBondPointsIcon.SetActive(relationship.bondPoints != 0);
     }    

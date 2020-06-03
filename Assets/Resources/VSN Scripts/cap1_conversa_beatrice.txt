@@ -11,7 +11,7 @@ goto_script "enter_observation" "school morning"
 //goto dialog_acquaintances_1
 //goto debug
 
-if day == 1
+if #currentRelationshipLevel == 0
   set_var foi_na_biblioteca 1
   
   theater_setup main "person(daniel)" "out_left" support "person(beatrice)" "out_right" bully1 "valentao" "out_right" 
@@ -81,6 +81,8 @@ if day == 1
   say "Daniel" "Tudo bem... Eu aceito."
   say "" "A garota esboça um sorriso."
   say "Beatrice" "Excelente! Faremos uma bateria de testes e experimentos variados."
+  add_exp false 20
+  
   if daytime == 0
       say "Beatrice" "Me encontre mais tarde aqui na biblioteca e poderemos começar."
   endif

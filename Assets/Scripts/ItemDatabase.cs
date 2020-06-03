@@ -34,7 +34,6 @@ public class ItemDatabase : MonoBehaviour {
       Item newItem = new Item();
       newItem.id = int.Parse(entry["id"]);
       newItem.nameKey = entry["name"];
-      newItem.descriptionKey = entry["description"];
       newItem.types = GetItemTypes(entry["types"]);
       newItem.range = BattleController.GetActionRangeByString(entry["range"]);
       newItem.duration = int.Parse(entry["duration"]);

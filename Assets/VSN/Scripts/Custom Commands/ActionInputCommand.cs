@@ -14,6 +14,13 @@ namespace Command {
       if(args.Length > 1) {
         waitForInput = args[1].GetBooleanValue();
       }
+
+      /// skip input if character cant act
+      if(BattleController.instance.partyMembers[currentPlayer].TotalStatusEffectPower(StatusConditionEffect.cantAct) > 0f) {
+        BattleController.instance.selectedActionType[currentPlayer] = TurnActionType.idle;
+        return;
+      }
+
       WaitForCharacterInput(currentPlayer, waitForInput);
     }
 

@@ -184,6 +184,12 @@ public class ActionsPanel : MonoBehaviour {
 
     int currentPlayer = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
     currentPlayer -= 1;
+
+    // TODO: consider all cases, considering which previous can input 
+    if(BattleController.instance.partyMembers[currentPlayer].TotalStatusEffectPower(StatusConditionEffect.cantAct) >= 1f) {
+      currentPlayer -= 1;
+    }
+
     VsnSaveSystem.SetVariable("currentPlayerTurn", currentPlayer);
     Command.ActionInputCommand.WaitForCharacterInput(currentPlayer);
   }

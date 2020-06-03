@@ -134,7 +134,6 @@ public class Skill {
   public string name;
   public int id;
 
-  public string description;
   public Sprite sprite;
   public SkillType type;
   public ActionRange range;
@@ -166,13 +165,13 @@ public class Skill {
 
 
   public string GetPrintableName() {
-    //return Lean.Localization.LeanLocalization.GetTranslationText("skill/name/" + nameKey);
-    return SpecialCodes.InterpretStrings(name);
+    return Lean.Localization.LeanLocalization.GetTranslationText("skill/name/" + name);
+    //return SpecialCodes.InterpretStrings(name);
   }
 
   public string GetPrintableDescription() {
-    //return Lean.Localization.LeanLocalization.GetTranslationText("skill/description/" + descriptionKey);
-    return SpecialCodes.InterpretStrings(description);
+    return Lean.Localization.LeanLocalization.GetTranslationText("skill/description/" + name);
+    //return SpecialCodes.InterpretStrings(description);
   }
 
   public bool HasTag(string tagToSearch) {

@@ -112,8 +112,6 @@ public class BattleController : MonoBehaviour {
     FullHealParty();
     FullHealEnemies();
 
-    TheaterController.instance.InitializeEnemyLevelAndHp();
-
     ClearSkillsUsageRegistry();
     //UIController.instance.ShowPartyPeopleCards();
     UIController.instance.UpdateDateUI();
@@ -121,6 +119,8 @@ public class BattleController : MonoBehaviour {
     VsnSaveSystem.SetVariable("battle_is_happening", true);
 
     SetDateEnemiesAndLocation();
+    VsnSaveSystem.SetVariable("currentDateEvent", 0);
+    TheaterController.instance.InitializeEnemyLevelAndHp();
   }
 
   public bool IsBattleHappening() {
@@ -150,7 +150,8 @@ public class BattleController : MonoBehaviour {
     for(int i=0; i < partyMembers.Length; i++) {
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) );
     }
-    RecoverStealth(maxStealth);
+    //RecoverStealth(maxStealth);
+    currentStealth = maxStealth;
   }
 
   public void FullHealEnemies() {
@@ -193,7 +194,8 @@ public class BattleController : MonoBehaviour {
     Debug.LogWarning("Recover stealth: "+value);
     float initValue = currentStealth;
 
-    if(TheaterController.instance.angelActor.battler.CurrentStatusConditionStacks("spotted") > 0) {
+    if(TheaterController.instance.angelActor == null || TheaterController.instance.angelActor.battler == null ||
+       TheaterController.instance.angelActor.battler.CurrentStatusConditionStacks("spotted") > 0) {
       return;
     }
 
@@ -395,6 +397,14 @@ public class BattleController : MonoBehaviour {
     if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoDefend)) {
       action = TurnActionType.defend;
     }
+    if(currentCharacter.TotalStatusEffectPower(StatusConditionEffect.cantAct) >= 1f) {
+      int distractedId = currentCharacter.FindStatusCondition("distracted");
+      if(distractedId != -1 && currentCharacter.statusConditions[distractedId].duration == 1) {
+        action = TurnActionType.useSkill;
+        selectedSkills[(int)partyMemberId] = GetSkillById(9);
+        selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
+      }
+    }
 
     switch(action) {
       case TurnActionType.useSkill:
@@ -408,6 +418,9 @@ public class BattleController : MonoBehaviour {
         break;
       case TurnActionType.flee:
         StartCoroutine(ExecuteTryToFlee());
+        break;
+      case TurnActionType.idle:
+        StartCoroutine(ExecuteIdle(partyMemberId));
         break;
     }
   }
@@ -529,6 +542,11 @@ public class BattleController : MonoBehaviour {
     yield return ShowBattleDescription(code);
   }
 
+  public IEnumerator ShowDistractedMessage() {
+    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/effect/distracted"));
+    yield return ShowBattleDescription(code);
+  }
+
   public IEnumerator ShowRecoverMessage() {
     string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/angel_can_act"));
     yield return ShowBattleDescription(code);
@@ -582,10 +600,7 @@ public class BattleController : MonoBehaviour {
     } else {
       targetActors = new Actor2D[] { TheaterController.instance.GetActorByIdInParty(targetId) };
     }
-    //targets = new Battler[targetActors.Length];
-    //for(int i=0; i<targetActors.Length; i++) {
-    //  targets[i] = targetActors[i].battler;
-    //}
+
 
 
     /// register skill usage
@@ -615,6 +630,7 @@ public class BattleController : MonoBehaviour {
       yield return ShowUsePassiveSkillMessage(skillUser.GetName(), usedSkill);
     }
 
+    // focus actors
     if(targetId != SkillTarget.allEnemies && targetId != SkillTarget.allHeroes) {
       TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActors[0] });
       yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -654,6 +670,8 @@ public class BattleController : MonoBehaviour {
         break;
     }
 
+
+    // skill effects for every target
     foreach(Actor2D targetActor in targetActors) {
       // skill receive animation
       if(usedSkill.animation != SkillAnimation.none &&
@@ -786,7 +804,7 @@ public class BattleController : MonoBehaviour {
         } else if(Random.Range(0, 100) < effectiveStatusConditionChance) {
           VsnAudioManager.instance.PlaySfx("skill_activate_bad");
 
-          targetActor.battler.ReceiveStatusConditionBySkill(usedSkill);
+          targetActor.battler.ReceiveStatusConditionBySkill(usedSkill, i);
           StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[i]);
           yield return ShowGetStatusConditionMessage(targetActor.battler.GetName(), statusCondition.GetPrintableName());
         } else {
@@ -924,6 +942,20 @@ public class BattleController : MonoBehaviour {
     } else {
       yield return new WaitForSeconds(1.5f);
     }
+
+    UIController.instance.CleanHelpMessagePanel();
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+
+  public IEnumerator ExecuteIdle(SkillTarget partyMemberId) {
+    Actor2D idleActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
+    Battler defender = idleActor.battler;
+
+    yield return ShowDistractedMessage();
+    idleActor.DistractedAnimation();
+
+    yield return new WaitForSeconds(0.5f);
 
     UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -1281,7 +1313,6 @@ public class BattleController : MonoBehaviour {
       newSkill.id = int.Parse(entry["id"]);
 
       newSkill.name = entry["name"];
-      newSkill.description = entry["description"];
       newSkill.type = GetSkillTypeByString(entry["type"]);
       newSkill.range = GetActionRangeByString(entry["range"]);
 

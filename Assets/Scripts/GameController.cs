@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
   public ParticleGenerator babiesParticleGenerator;
   public Image[] engagementScreenImages;
   public GameObject engagementScreen;
-  public bool hideTutorials;
+  public bool skipIntro;
 
 
 
@@ -30,11 +30,9 @@ public class GameController : MonoBehaviour {
       UIController.instance.UpdateUI();
       VsnController.instance.StartVSN("back_from_minigame");
     } else {
-      VsnSaveSystem.SetVariable("hide_tutorials", hideTutorials);
 
       GlobalData.instance.InitializeChapter();
       GlobalData.instance.InitializeChapterAlpha();
-
 
       if(GlobalData.instance.saveToLoad != -1) {
         // LOAD DATA FROM SAVE
@@ -44,6 +42,11 @@ public class GameController : MonoBehaviour {
       }
 
       UIController.instance.UpdateUI();
+
+      if(skipIntro) {
+        VsnSaveSystem.SetVariable("day", 2);
+        VsnSaveSystem.SetVariable("hide_tutorials", skipIntro);
+      }
       VsnController.instance.StartVSN("select_daytime_interaction");
     }
   }

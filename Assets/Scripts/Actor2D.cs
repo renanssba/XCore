@@ -87,7 +87,7 @@ public class Actor2D : MonoBehaviour {
   public void UpdateGraphics() {
     if(battler.GetType() == typeof(Person)) {
       UpdateCharacterGraphics();
-      if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
+      if(PersonShouldBeUsingUniform()) {
         Debug.LogWarning("Updating clothing: uniform");
         SetClothing("uniform");
       } else {
@@ -97,6 +97,10 @@ public class Actor2D : MonoBehaviour {
     } else if(battler.GetType() == typeof(Enemy)) {
       // do nothing
     }
+  }
+
+  public bool PersonShouldBeUsingUniform() {
+    return TheaterController.instance.bgRenderer.sprite.name.Contains("school"); //|| VsnSaveSystem.GetIntVariable("daytime") == 0;
   }
 
   public void UpdateCharacterGraphics() {
@@ -347,6 +351,10 @@ public class Actor2D : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("buff_default");
     GameObject newParticle = Instantiate(particlePrefab, transform);
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
+  }
+
+  public void DistractedAnimation() {
+
   }
 
 

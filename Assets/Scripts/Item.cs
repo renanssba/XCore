@@ -22,7 +22,6 @@ public class Item {
   
   public string nameKey;
   public int id;
-  public string descriptionKey;
 
   public List<ItemType> types;
   public ActionRange range;
@@ -53,11 +52,11 @@ public class Item {
   }
 
   public string GetPrintableName() {
-    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + GetItemById(id).nameKey);
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + nameKey);
   }
 
   public string GetPrintableDescription(){
-    return Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + descriptionKey);
+    return Lean.Localization.LeanLocalization.GetTranslationText("item/description/" + nameKey);
   }
 
   public string GetBattleDescription(bool useBattleMarker = false) {
@@ -65,20 +64,20 @@ public class Item {
     string healSpDesc = "";
     string removeStatusDesc = "";
     string givesStatusDesc = "";
-    string battleMarkerStart = "";
-    string battleMarkerEnd = "";
+    string highlightMarkerStart = "";
+    string highlightMarkerEnd = "";
 
     if(useBattleMarker) {
-      battleMarkerStart = "<color=yellow>";
-      battleMarkerEnd = "</color>";
+      highlightMarkerStart = "<color=yellow>";
+      highlightMarkerEnd = "</color>";
     }
 
     if(healHp > 0) {
-      healDesc += "Restaura "+battleMarkerStart + healHp + " PC"+ battleMarkerEnd+". ";
+      healDesc += "Restaura "+highlightMarkerStart + healHp + " PC"+ highlightMarkerEnd+". ";
     }
 
     if(healSp > 0) {
-      healSpDesc += "Recupera " + battleMarkerStart + healSp + " PH" + battleMarkerEnd+" de um aliado. ";
+      healSpDesc += "Recupera " + highlightMarkerStart + healSp + " PH" + highlightMarkerEnd+" de um aliado. ";
     }
 
     if(healsConditionNames.Length > 0) {
@@ -86,7 +85,7 @@ public class Item {
         removeStatusDesc += ", ";
       }
       for(int i = 0; i < healsConditionNames.Length; i++) {
-        removeStatusDesc += battleMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/"+healsConditionNames[i])+ battleMarkerEnd;
+        removeStatusDesc += highlightMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/"+healsConditionNames[i])+ highlightMarkerEnd;
         if(i == healsConditionNames.Length - 1) {
           continue;
         }else if(i == healsConditionNames.Length-2) {
@@ -99,7 +98,7 @@ public class Item {
 
     if(givesConditionNames.Length > 0) {
       for(int i = 0; i < givesConditionNames.Length; i++) {
-        givesStatusDesc += battleMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/" + givesConditionNames[i]) + battleMarkerEnd;
+        givesStatusDesc += highlightMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/" + givesConditionNames[i]) + highlightMarkerEnd;
         if(i == givesConditionNames.Length - 1) {
           continue;
         } else if(i == givesConditionNames.Length - 2) {

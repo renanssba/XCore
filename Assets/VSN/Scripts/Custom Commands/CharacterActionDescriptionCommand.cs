@@ -32,9 +32,12 @@ namespace Command {
           Item usedItem = BattleController.instance.selectedItems[partyMemberId];
           VsnSaveSystem.SetVariable("selected_action_name", usedItem.GetPrintableName());
           newArgs[0] = new VsnString("item");
-      break;
+          break;
         case TurnActionType.flee:
           newArgs[0] = new VsnString("flee");
+          break;
+        case TurnActionType.idle:
+          newArgs[0] = new VsnString("idle");
           break;
         case TurnActionType.defend:
           newArgs[0] = new VsnString("defend");

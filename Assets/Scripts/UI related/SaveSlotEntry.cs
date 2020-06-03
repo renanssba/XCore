@@ -39,7 +39,12 @@ public class SaveSlotEntry : MonoBehaviour {
       emptyIcon.SetActive(false);
       Dictionary<string, string> dic = VsnSaveSystem.GetSavedDictionary(slotId);
 
-      playtimeText.text = Utils.GetTimeFormattedAsString(float.Parse(dic["VARNUMBER_playtime"])/60);
+      if(dic.ContainsKey("VARNUMBER_playtime")) {
+        playtimeText.text = Utils.GetTimeFormattedAsString(float.Parse(dic["VARNUMBER_playtime"]) / 60);
+      } else {
+        playtimeText.text = "??:??";
+      }
+      
       dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + int.Parse(dic["VARNUMBER_day"]);
       moneyText.text = "<sprite=\"Attributes\" index=4>" + int.Parse(dic["VARNUMBER_money"]);
       humanFaceImages[0].sprite = ResourcesManager.instance.GetFaceSprite(0);
