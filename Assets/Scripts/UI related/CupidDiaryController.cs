@@ -10,6 +10,7 @@ public class CupidDiaryController : MonoBehaviour {
   public CupidDiaryEntry[] entries;
   public int currentPage = 0;
   public ScreenTransitions panel;
+  public GameObject continueButton;
 
 
   public void Awake() {
@@ -19,7 +20,19 @@ public class CupidDiaryController : MonoBehaviour {
 
 
   public void OnEnable() {
-    entries[0].Initialize(GlobalData.instance.relationships[0]);
-    entries[1].Initialize(GlobalData.instance.relationships[2]);
+    continueButton.SetActive(false);
+    entries[0].Initialize(GlobalData.instance.relationships[GlobalData.instance.currentRelationshipId]);
+    entries[1].Initialize(null);
+  }
+
+
+  public void ShowContinueButton() {
+    continueButton.SetActive(true);
+  }
+
+  public void ClickContinueButton() {
+    SfxManager.StaticPlayConfirmSfx();
+    panel.HidePanel();
+    VsnController.instance.GotCustomInput();
   }
 }

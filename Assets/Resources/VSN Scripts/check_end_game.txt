@@ -5,7 +5,7 @@ if #currentRelationshipHeartLocksOpened >= 3
   goto_script "fertiliel_enter"
     
   say "Fertiliel" "Olha só, eles estão próximos o bastante agora. É a minha chance!"
-  say "" "Fertiliel atira a Flecha do Amor Eterno!"
+  say "" "Fertiliel atira as Flechas do Amor Eterno!"
   
   // MARRYING ANIMATION
   fade_music 0 0.5
@@ -22,7 +22,7 @@ if #currentRelationshipHeartLocksOpened >= 3
   
   wait 1
   dialog_style "faded_screen_message"
-  say "" "Mais tarde, no escritório da Hardiel..."
+  say "" "Mais tarde, no escritório da Supervisora Hardiel..."
 
   dialog_style "normal"
   fade_out 0
@@ -43,8 +43,18 @@ if #currentRelationshipHeartLocksOpened >= 3
   
   say "Hardiel" "Muito bem, Fertiliel. Vejo que conseguiu cumprir sua primeira missão."
   say "Fertiliel" "Muito obrigada!"
-  say "Hardiel" "De acordo com nosso Diário do Futuro, seu casal inseparável se casará e produzirá 6 filhos."
-  say "Isso diminui um pouco a sua dívida. Ficam faltando 94 bebês para a conclusão."
+  say "Hardiel" "Deixe-me pegar o seu Diário de Cupido. Assim que você forma um casal inseparável, ele adiciona automaticamente um registro indicando o futuro dele."
+  say "Vejamos:"
+  
+  cupid_diary true
+  wait 0.5
+  
+  say "Fertiliel" "Olha, até que é legal esse diário."
+  
+  say "Hardiel" "De acordo com o seu Diário de Cupido, seu casal inseparável se casará e produzirá \vsn(babies) filhos."
+  set_var remaining 100
+  subtract_var remaining babies
+  say "Isso diminui um pouco a sua dívida. Ficam faltando \vsn(remaining) bebês para a conclusão."
   say "Fertiliel" "Yes! Muito obrigada, um dia eu chego lá!"
   say "Até lá eu vou continuar dando tudo de mim!"
   
