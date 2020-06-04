@@ -28,13 +28,14 @@ public class DiaryEntry {
         babiesIcons[i].SetActive(false);
       }
     }
-    //title.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple"));
-    //description.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("couple_epilogue/"+r.GetGirl().nameKey));
+    GlobalData.instance.currentRelationshipId = r.id;
+    title.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple"));
+    description.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("couple_epilogue/"+r.GetGirl().nameKey));
   }
 }
 
 
-public class CoupleDiaryController : MonoBehaviour {
+public class CupidDiaryController : MonoBehaviour {
 
   public DiaryEntry[] entries;
   public int currentPage = 0;
