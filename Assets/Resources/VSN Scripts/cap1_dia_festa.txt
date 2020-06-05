@@ -2,6 +2,9 @@ goto_script "enter_observation" "school morning"
 say "" "No dia seguinte, Daniel vai para o colégio."
 fade_in 1
 
+theater_animation "main_actor_enters"
+wait 1.8
+
 say "Ana" "Ei Daniel! Você ficou sabendo do aniversário da Clara na casa dela? Vai ser hoje à noite."
 if clara_convidou_festa == 1
   say "Daniel" "Fiquei sim, ela me convidou ontem depois do estudo."
@@ -24,7 +27,7 @@ endif
 
 fade_out 1
 wait 1
-say "" "A aula se passou sem muitos incidentes. Durante o intervalo..."
+say "" "Durante o intervalo do colégio..."
 //fade_in 1
 
 

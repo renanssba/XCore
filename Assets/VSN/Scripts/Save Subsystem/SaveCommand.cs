@@ -13,7 +13,7 @@ namespace Command {
       if(args.Length > 0){
         saveSlot = (int)args[0].GetNumberValue();
       }
-      Debug.LogError("SAVING!!!!!!!!!");
+      //Debug.LogError("SAVING!!!!!!!!!");
 
       GlobalData.instance.SavePersistantGlobalData();
       VsnSaveSystem.Save(saveSlot);
