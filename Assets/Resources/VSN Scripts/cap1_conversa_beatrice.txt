@@ -5,7 +5,7 @@ endif
 goto_script "enter_observation" "school morning"
 
 //DEBUG:
-goto debug
+//goto debug
 
 if #currentRelationshipLevel == 0
   set_var foi_na_biblioteca 1
@@ -19,7 +19,7 @@ if #currentRelationshipLevel == 0
   
   say "" "Na biblioteca..."
   fade_in 1
-  say "" "Daniel passeia tranquilamente pelas estantes da biblioteca, repletas de obras de diversos autores."
+  say "" "Daniel passeia tranquilamente pelas estantes da biblioteca."
   say "Daniel" "(Finalmente consegui devolver os livros que peguei emprestado da última vez.)"
   actor_move main -1.2 0 -0.4 1.5
   say "Daniel" "(Acho que vou alugar só um agora.)"
@@ -46,7 +46,6 @@ if #currentRelationshipLevel == 0
   actor_move main "grid_3" 1.5
   say "" "Alguns minutos depois, Daniel se arrasta vagarosamente para a saída da biblioteca, os braços entulhados com dezenas de livros."
   say "Daniel" "E-eu sempre...acabo...fazendo isso..."
-  //TODO: Beatrice aparecendo de baixo pra cima com actor_move
   actor_move support "grid_2" 0.4
   say "???" "Olá."
   actor_move main -0.34 0 -0.4 0.3
@@ -75,7 +74,7 @@ if #currentRelationshipLevel == 0
   say "" "A menina ajeita os óculos."
   say "???" "Hmmmm... Parece que pulei algumas instruções de novo."
   say "" "Ela confere o bloquinho de notas, lendo uma lista."
-  say "???" "\qPasso 1: Se apresentar para a cobaia.\q \qPasso 2: Explicar o experimento.\q"
+  say "???" "\qPasso 1: Se apresentar para a cobaia.\q \n \qPasso 2: Explicar o experimento.\q"
   say "Beatrice" "Saudações, Daniel. Sou Beatrice."
   set_var conhece_beatrice true
   say "Daniel" "Como você sabe meu nome?"
@@ -115,7 +114,7 @@ endif
 
 
 //DEBUG, DELETE THE LINE BELOW LATER
-waypoint debug
+//waypoint debug
 say "" "Chegando na biblioteca, Daniel encontra Beatrice lendo."
 fade_in 1
 
@@ -128,7 +127,7 @@ girl_interaction
 
 waypoint conversation
 //DEBUG, DELETE THE LINE BELOW LATER
-goto dialog_acquaintances_1
+//goto dialog_acquaintances_1
 
 select_dialog
 
@@ -139,8 +138,7 @@ say "Beatrice" "Faremos uma série de análises biológicas para determinar sua 
 say "" "Daniel encara a menina com curiosidade."
 say "Daniel" "Tá, mas... porque eu? Eu sou só um cara normal."
 say "Beatrice" "Precisamente. Por ser um espécime completamente mediano, você é o candidato ideal."
-say "Daniel" "Eu não sei se isso foi um elogio ou um xingamento..."
-say "Beatrice" "Só estava citando um fato."
+say "Daniel" "(Eu não sei se isso foi um elogio...)"
 say "Daniel" "Hmmm... Então você quer aprender sobre relacionamentos estudando biologia?"
 say "Beatrice" "Exatamente. Qualquer sentimento pode ser explicado por processos biológicos!"
 //say "Daniel" "Entendi. Mas a inconsistência é parte da graça também, né?"
@@ -164,6 +162,7 @@ fade_in 1.0
 say "Beatrice" "... Perfeito. De acordo com meus cálculos, este óculos deve deixá-lo 20% mais atraente para o sexo oposto."
 say "Daniel" "Isso não combina com o meu estilo!"
 say "Beatrice" "Hmmm...Podemos testar outras opções."
+add_overlay main "overlay_daniel_shades" false
 say "" "Beatrice e Daniel passam o tempo testando (e descartando) acessórios."
 goto end_dialog
 
@@ -304,7 +303,7 @@ say "Beatrice" "Ah, o-oi, Daniel."
 say "" "A garota desvia o olhar, encabulada, as bochechas avermelhando ao perceber a presença do garoto."
 say "Daniel" "Você parece...doente. Tá com febre?"
 say "" "O garoto põe a mão na testa de Beatrice, preocupado. A garota se afasta, tentando se recompor."
-say "Beatrice" "N-não, estou bem. Só estou um pouco... preocupada."
+say "Beatrice" "N-não, estou bem. Só estou um pouco... receosa."
 say "Daniel" "Sobre o quê?"
 say "Beatrice" "A garota ajeita os óculos, pigarreando."
 say "Beatrice" "...Minha imparcialidade. Como uma amante da ciência, é meu dever pesquisar um assunto da forma mais neutra possível!"
@@ -497,7 +496,8 @@ say "Beatrice" "EU PRECISO!"
 say "" "A garota pausa, olhos arregalados, surpresa com a própria reação."
 say "Beatrice" "Desculpe-me. Eu não sei de onde isso veio."
 say "Daniel" "Relaxa. Tudo bem."
-fade_music 1.0 2.0
+play_music"observacao2"
+fade_music 1.0 5.0
 say "Daniel" "Eu tenho uma ideia. E se...a gente for em outra livraria? Eu conheço algumas pelo bairro. Podemos encontrar o livro que você quer."
 say "Beatrice" "É uma boa ideia. Você vem comigo?"
 say "Daniel" "Claro."
