@@ -5,9 +5,9 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 3	super_guts	attack	one_enemy	3			guts	14											gutsy aura	charged_attack		
 4	super_intelligence	attack	one_enemy	3			intelligence	14											gutsy aura	charged_attack		
 5	super_charisma	attack	one_enemy	3			charisma	14											gutsy aura	charged_attack		
-6	super_guts	attack	one_enemy	5			guts	18											gutsy aura	charged_attack		
-7	super_intelligence	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
-8	super_charisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
+6	mega_guts	attack	one_enemy	5			guts	18											gutsy aura	charged_attack		
+7	mega_intelligence	attack	one_enemy	5			intelligence	18											gutsy aura	charged_attack		
+8	mega_charisma	attack	one_enemy	5			charisma	18											gutsy aura	charged_attack		
 9	analysis	active	one_enemy	2	sensor														magnifying glass	throw_object(magnifying glass)		
 10	fortifying_snack	active	one_ally	2								hunger	fortified	100	3				hamburger	throw_object(hamburger)	food	
 11	delicious_aroma	active	one_enemy	2									hunger	100	3				fragrance	active_offensive		
@@ -16,7 +16,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 14	first_aid	active	one_ally	2								injured, dizzyness							medical-pack	active_support		
 15	guardian_0	active	self	1									guardian	100					shield	active_support		
 16	sad_story	active	one_enemy	2									sad	100	4				dialog	active_offensive		
-17	curse	active	one_enemy	2									cursed	100	3				cursed	active_offensive		
+17	curse	active	one_enemy	2									weakened	100	3				cursed	active_offensive		
 18	elusive	passive	all_allies		fleeChanceBonus	0.35													run	none		
 19	healing_kiss	active	other_ally	2					16										heart-plus	active_support		
 20	magic_hug	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed							charmed	active_support		
@@ -30,8 +30,8 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 28	guardian_1	active	self	1									guardian	100					shield	active_support		
 29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive		
 30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
-31	strange_experiment	active	one_enemy	2			intelligence						hunger, angry, dirty, dizzyness	25	3				experiment	throw_object(experiment)		
-32	blank_0	passive	all_allies																charmed	none		
+31	strange_experiment	active	one_enemy	2									hunger, angry, dirty, dizzyness	25	3				random-experiment	throw_object(experiment)		
+32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	active_offensive		
 33	heal	active	one_ally							1									heart-plus	throw_object(brown-cake)		
 34	auto_sensor	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		
 35	stampede	active	all_enemies				guts	6					injured	80	4				gutsy aura	run_over		

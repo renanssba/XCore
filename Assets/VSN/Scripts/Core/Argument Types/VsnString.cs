@@ -23,5 +23,9 @@ public class VsnString : VsnArgument{
 
     return localizedString;
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnArgType.stringArg;
+  }
 }
 

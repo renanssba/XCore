@@ -26,4 +26,8 @@ public class VsnReference : VsnArgument{
   public override bool GetBooleanValue() {
     return VsnSaveSystem.GetBoolVariable(variableReferenceValue);
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnSaveSystem.GetVsnVariableType(variableReferenceValue);
+  }
 }

@@ -10,20 +10,21 @@ namespace Command {
     public override void Execute() {
       float fvalue = args[1].GetNumberValue();
       string svalue = args[1].GetStringValue();
-      Debug.Log("SET VAR FLOAT: "+fvalue+  ", STRING: " + svalue);
 
-      if(args[1].GetType() == typeof(VsnBoolean)) {
-        VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetBooleanValue());
-        return;
-      } else if(args[1].GetType() == typeof(VsnString) ||
-        (args[1].GetType() == typeof(VsnReference) && args[1].GetStringValue() != "")) {
-        VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetStringValue());
-        return;
-      } else if(args[1].GetType() == typeof(VsnNumber) ||
-        (args[1].GetType() == typeof(VsnReference) && args[1].GetReference()[0] == '#')) {
-        VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetNumberValue());
-        return;
+      //Debug.Log("SET VAR FLOAT: "+fvalue+  ", STRING: " + svalue);
+
+      switch(args[1].GetVsnValueType()) {
+        case VsnArgType.booleanArg:
+          VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetBooleanValue());
+          return;
+        case VsnArgType.stringArg:
+          VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetStringValue());
+          return;
+        case VsnArgType.numberArg:
+          VsnSaveSystem.SetVariable(args[0].GetReference(), args[1].GetNumberValue());
+          return;
       }
+
       Debug.LogWarning(args[0].GetReference() + " var value: " + args[1].GetPrintableValue());
     }
 

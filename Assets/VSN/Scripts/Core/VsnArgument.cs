@@ -34,5 +34,7 @@ public abstract class VsnArgument{
     }
     return "null";
   }
+
+  public abstract VsnArgType GetVsnValueType();
 }
 

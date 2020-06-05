@@ -11,4 +11,8 @@ public class VsnNumber : VsnArgument{
   public override float GetNumberValue(){
     return value;
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnArgType.numberArg;
+  }
 }

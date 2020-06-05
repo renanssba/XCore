@@ -7,7 +7,7 @@ public class VsnSaveSystem {
 
   public static Dictionary<string, string> savedDataDictionary;
 
-  static readonly string varFloatPrefix = "VARNUMBER";
+  static readonly string varNumberPrefix = "VARNUMBER";
   static readonly string varStringPrefix = "VARSTRING";
   static readonly string varBoolPrefix = "VARBOOL";
 
@@ -48,8 +48,8 @@ public class VsnSaveSystem {
 
   #region Prefixes
 
-  static string GetVariableFloatPrefix(string key) {
-    return varFloatPrefix + "_" + key;
+  static string GetVariableNumberPrefix(string key) {
+    return varNumberPrefix + "_" + key;
   }
 
   static string GetVariableBoolPrefix(string key) {
@@ -70,7 +70,7 @@ public class VsnSaveSystem {
 
   public static void SetVariable(string key, float value) {
     Debug.Log("[VAR] " + key + " = " + value);
-    string savedKey = GetVariableFloatPrefix(key);
+    string savedKey = GetVariableNumberPrefix(key);
 
     if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
       savedDataDictionary.Remove(GetVariableStringPrefix(key));
@@ -94,8 +94,8 @@ public class VsnSaveSystem {
     if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(key))) {
       savedDataDictionary.Remove(GetVariableStringPrefix(key));
     }
-    if(savedDataDictionary.ContainsKey(GetVariableFloatPrefix(key))) {
-      savedDataDictionary.Remove(GetVariableFloatPrefix(key));
+    if(savedDataDictionary.ContainsKey(GetVariableNumberPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableNumberPrefix(key));
     }
 
     if (savedDataDictionary.ContainsKey(savedKey)) {
@@ -110,8 +110,8 @@ public class VsnSaveSystem {
     Debug.Log("[VAR] " + key + " = " + value);
     string savedKey = GetVariableStringPrefix(key);
 
-    if(savedDataDictionary.ContainsKey(GetVariableFloatPrefix(key))) {
-      savedDataDictionary.Remove(GetVariableFloatPrefix(key));
+    if(savedDataDictionary.ContainsKey(GetVariableNumberPrefix(key))) {
+      savedDataDictionary.Remove(GetVariableNumberPrefix(key));
     }
     if(savedDataDictionary.ContainsKey(GetVariableBoolPrefix(key))) {
       savedDataDictionary.Remove(GetVariableBoolPrefix(key));
@@ -127,7 +127,7 @@ public class VsnSaveSystem {
 
 
   public static void AddVariable(string key, float amount) {
-    string savedKey = GetVariableFloatPrefix(key);
+    string savedKey = GetVariableNumberPrefix(key);
 
     if(savedDataDictionary.ContainsKey(savedKey)) {			
       float currentValue;
@@ -146,7 +146,7 @@ public class VsnSaveSystem {
   }
 
   public static float GetFloatVariable(string key, float defaultValue = 0f) {
-    string savedKey = GetVariableFloatPrefix(key);
+    string savedKey = GetVariableNumberPrefix(key);
 
     if(savedDataDictionary.ContainsKey(savedKey)) {
       float currentValue;
@@ -179,6 +179,17 @@ public class VsnSaveSystem {
     }
 
     return defaultValue;
+  }
+
+  public static VsnArgType GetVsnVariableType(string variablekey) {
+    if(savedDataDictionary.ContainsKey(GetVariableStringPrefix(variablekey))) {
+      return VsnArgType.stringArg;
+    } else if(savedDataDictionary.ContainsKey(GetVariableNumberPrefix(variablekey))) {
+      return VsnArgType.numberArg;
+    } else if(savedDataDictionary.ContainsKey(GetVariableBoolPrefix(variablekey))) {
+      return VsnArgType.booleanArg;
+    }
+    return VsnArgType.numberArg;
   }
 
   #endregion

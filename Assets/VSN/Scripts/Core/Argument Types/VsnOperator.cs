@@ -116,4 +116,8 @@ public class VsnOperator : VsnArgument{
 
     return CompareFloats(op1.GetNumberValue(), op2.GetNumberValue());
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnArgType.operatorArg;
+  }
 }

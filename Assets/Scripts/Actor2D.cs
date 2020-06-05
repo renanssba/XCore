@@ -313,6 +313,8 @@ public class Actor2D : MonoBehaviour {
         yield return TackleAnimation();
         break;
       case SkillAnimation.run_over:
+        VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
+        VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
         yield return RunOverAnimation();
         break;
     }

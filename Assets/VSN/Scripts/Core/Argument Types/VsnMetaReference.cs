@@ -14,5 +14,9 @@ public class VsnMetaReference : VsnArgument {
     //Debug.LogWarning("Return from meta-reference: " + VsnSaveSystem.GetStringVariable(metareferenceValue));
     return VsnSaveSystem.GetStringVariable(metareferenceValue);
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnArgType.referenceArg;
+  }
 }
 

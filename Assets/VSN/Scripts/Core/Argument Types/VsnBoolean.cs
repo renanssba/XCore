@@ -11,5 +11,9 @@ public class VsnBoolean : VsnArgument {
   public override bool GetBooleanValue() {
     return boolValue;
   }
+
+  public override VsnArgType GetVsnValueType() {
+    return VsnArgType.booleanArg;
+  }
 }
 
