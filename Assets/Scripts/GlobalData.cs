@@ -147,9 +147,9 @@ public class GlobalData : MonoBehaviour {
 
     /// BEATRICE
     people[2].inventory.AddItemWithOwnership("delicate_key", 1, 2);
-    people[2].inventory.AddItemWithOwnership("script_drafts", 1, 2);
-    people[2].inventory.AddItemWithOwnership("fancy_dagger", 1, 2);
-    people[2].inventory.AddItem("dark_dress", 1);
+    people[2].inventory.AddItemWithOwnership("experiment_drafts", 1, 2);
+    people[2].inventory.AddItemWithOwnership("tragic_newspaper", 1, 2);
+    people[2].inventory.AddItem("lab_coat", 1);
 
     /// CLARA
     people[3].inventory.AddItemWithOwnership("flower_dress", 2, 3);
