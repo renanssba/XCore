@@ -208,13 +208,13 @@ actor_move main "grid_2" 1.5
 wait 0.3
 say "" "Daniel chega mais perto de Beatrice."
 say "Daniel" "Oi, que bom que veio! Fiquei em dúvida se você viria."
-say "Beatrice" "Eu tive de vir. Essa é uma oportunidade única para estudar relacionamentos."
+actor_face beatrice "left"
+wait 0.6
+say "Beatrice" "Eu tive de vir! Essa é uma oportunidade única para estudar relacionamentos."
 if #currentRelationshipHeartLocksOpened < 2
 //DEBUG BELOW, COMMENT IT AND UNCOMMENT ABOVE LINE LATER:
 //if #currentRelationshipHeartLocksOpened < 0
-  actor_face beatrice "left"
-  wait 0.6
-  say "Beatrice" "Eu gostaria de ficar sozinha observando as pessoas."
+  say "Beatrice" "Com licença, eu gostaria de ficar sozinha observando as pessoas."
   actor_face beatrice "right"
   wait 0.3
   actor_move beatrice "grid_5" 2.0
@@ -244,7 +244,9 @@ fade_out 1.0
 say "" "Os dois terminam a música, exaustos, mas felizes."
 say "" "Eles vão para a sacada da casa para pegar um pouco de ar fresco."
 theater_bg "claire house external"
-fade_in 1.0
+fade_music 0.0 3.0
+play_ambience "ambience_night"
+fade_in 2.0
 say "Daniel" "Foi divertido!"
 say "Beatrice" "Nota: Trazer calçados mais resistentes a pisões e tropeços."
 say "Daniel" "Ah, qualé, não foi tão ruim assim!"
@@ -252,8 +254,7 @@ say "" "Os dois riem."
 say "Beatrice" "Acho que finalmente entendi... o que incentivava meu pai a trabalhar tão duro."
 say "Beatrice" "Ele amava a ciência... mas ele amava as pessoas ainda mais."
 say "Daniel" "Você sente falta dele?"
-say "Beatrice" "Isso é.... irrelevante."
-say "" "Daniel franze a sobrancelha, pensando no comentário de Beatrice."
+say "Beatrice" "..."
 say "Daniel" "Minha mãe, ela...era uma cozinheira de mão cheia. Todos os dias, quando eu acordava, o café da manhã estava pronto, fresquinho, na mesa da cozinha."
 say "Beatrice" "..."
 say "Daniel" "Quando ela morreu, eu... não conseguia aguentar o cheiro de pão fresco. Eu começava a chorar."
@@ -272,6 +273,7 @@ say "" "Os dois dançam abraçados."
 
 unlock_skill 12
 add_exp false 150
+stop_ambience "ambience_night"
 goto end
 
 
