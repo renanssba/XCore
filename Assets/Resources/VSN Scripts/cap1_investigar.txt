@@ -85,11 +85,11 @@ waypoint investigar_beatrice
 choices "Mesa" beatrice_mesa "Cama" beatrice_cama "Guarda-roupas" beatrice_roupas "Armário" beatrice_armario "Checar Beatrice" beatrice_checar "Ir Embora" exit
 
 waypoint beatrice_mesa
-say "(Sobre a mesa há vários rascunhos de história escritos à mão.)"
-if #char[2]item_count[script_drafts] >= 1
-  say "(Deveria pegar um desses rascunhos?)"
+say "(Sobre a mesa há vários bloquinhos e notas escritas à mão sobre experimentos.)"
+if #char[2]item_count[experiment_drafts] >= 1
+  say "(Deveria pegar uma dessas anotações?)"
   choices "Sim" null "Não" depois_investigar
-  take_item 2 "script_drafts" 1
+  take_item 2 "experiment_drafts" 1
 endif
 goto depois_investigar
 
@@ -98,22 +98,22 @@ say "(A cama está bem arrumada e com lençol dobrado. Sobre ele há um celular.
 say "(Devo abrir o celular para analisar?)"
 choices "Sim" null "Não" investigar_beatrice
 say "(Na tela inicial tem aplicativos de busca, de escrita e a galeria. Curiosamente, nenhum de troca de mensagens ou rede social.)"
-say "(Na galeria tem várias fotos do Daniel. Na biblioteca, na sala de aula, em outros lugares pelo colégio também.)"
+say "(Na galeria tem várias fotos de pessoas diversas, incluindo o Daniel. As fotos estão em ângulos estranhos, provavelmente indicando que Beatrice estava escondida ao tirá-las.)"
 goto depois_investigar
 
 waypoint beatrice_roupas
-say "(Abrindo o guarda-roupas encontro alguns vestidos escuros e bem adornados.)"
-say "(Este tipo de roupas segue uma temática gótica.)"
-if #char[2]item_count[dark_dress] >= 1
+say "(Abrindo o guarda-roupas encontro algumas roupas cinzas e bem simples.)"
+say "(Também há algumas luvas e jalecos de proteção.)"
+if #char[2]item_count[lab_coat] >= 1
   say_auto "(Eu deveria pegar um desses?)"
   choices "Sim" null "Não" not_take_clothing
-  take_item 2 "dark_dress" 1
+  take_item 2 "lab_coat" 1
   goto depois_investigar
 endif
 
 waypoint not_take_clothing
 if #char[2]item_count[delicate_key] >= 1
-  say_auto "(Procurando um pouco melhor, eu encontro uma chave delicada no bolso de um vestido. Deveria pegá-la?)"
+  say_auto "(Procurando um pouco melhor, eu encontro uma chave delicada no bolso de um jaleco. Deveria pegá-la?)"
   choices "Sim" null "Não" depois_investigar
   take_item 2 "delicate_key" 1
 endif
@@ -124,9 +124,9 @@ say "(Sobre o armário há alguns rascunhos escritos à mão. Nele há uma gavet
 choices "Sim" null "Não" depois_investigar
 if #char[0]item_count[delicate_key]from[2] >= 1
   say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
-  say "(Dentro da gaveta há vários objetos. Uma caveira, velas e um pano sujo de algo que parece sangue.)"
+  say "(Dentro da gaveta há vários livros de química, psicologia e sobre relacionamento humano. No meio destes, cadernos escritos à mão e anotações.)"
   if #char[2]item_count[fancy_dagger] >= 1
-    say "(Também há uma adaga adornada, muito bonita. Eu deveria pegá-la?)"
+    say "(Também há um recorte de jornal com uma foto de um homem que se parece com ela. Eu deveria pegá-lo?)"
     choices "Sim" null "Não" depois_investigar
     take_item 2 "fancy_dagger" 1
   endif
@@ -136,8 +136,8 @@ endif
 goto depois_investigar
 
 waypoint beatrice_checar
-say "(Vou devagarzinho até a porta do quarto observar Beatrice na sala. Ela está sentada na mesa, escrevendo.)"
-say "(A garota parece ser muito perfeccionista. Percebo que vez ou outra ela apaga o que está escrevendo com uma borracha, e reescreve novamente de forma mais caprichada.)"
+say "(Vou devagarzinho até a porta do quarto observar Beatrice na sala. Ela está sentada na mesa, escrevendo algum tipo de fórmula matemática.)"
+say "(Vez ou outra a garota folheia uns livros de ciências e consulta anotações de um caderno grande. Há uma pilha de pastas e papéis sobre a mesa.)"
 say "(Ela está muito concentrada e focada.)"
 goto depois_investigar
 
