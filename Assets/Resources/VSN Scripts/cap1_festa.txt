@@ -299,8 +299,8 @@ actor_move main -1.7 0.2 -0.4 1.5
 say "Ele tenta se colocar dentro do círculo de pessoas discretamente, mas ninguém percebe sua presença lá."
 say "Daniel" "(Droga...)"
 say "" "Ele tenta acenar para a garota por cima do grupo e chamar seu nome baixinho."
-if #currentRelationshipHeartLocksOpened < 0
-//if #currentRelationshipHeartLocksOpened < 2
+//if #currentRelationshipHeartLocksOpened < 0
+if #currentRelationshipHeartLocksOpened < 2
   say "" "...Mesmo assim ela não percebe a presença dele."
   goto bad_end
 endif
