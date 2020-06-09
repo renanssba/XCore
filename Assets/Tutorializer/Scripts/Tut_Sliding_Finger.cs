@@ -45,6 +45,12 @@ public class Tut_Sliding_Finger : MonoBehaviour {
   }
 
   void SetFingerSprite(int sprite){
-    fingerImage.sprite = fingerSprites[sprite];
+    Sprite s = fingerSprites[sprite];
+    if(s != null) {
+      fingerImage.sprite = s;
+      fingerImage.enabled = true;
+    } else {
+      fingerImage.enabled = false;
+    }
   }
 }

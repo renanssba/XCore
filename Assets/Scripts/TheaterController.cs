@@ -50,6 +50,7 @@ public class TheaterController : MonoBehaviour {
   public GameObject overlayPrefab;
 
   public SpriteRenderer bgRenderer;
+  public SpriteRenderer bgRendererFront;
   public GameObject bgEffect;
 
   public const float enterAnimationDuration = 1.5f;
@@ -584,6 +585,8 @@ public class TheaterController : MonoBehaviour {
 
   public void SetLocation(string place) {
     bgRenderer.sprite = Resources.Load<Sprite>("Bg/" + place);
+    Sprite front = Resources.Load<Sprite>("Bg/" + place+"_front");
+    bgRendererFront.sprite = front;
   }
 
   public void MoveCamera(Vector3 newPosition, float time) {

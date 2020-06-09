@@ -1085,6 +1085,7 @@ public class BattleController : MonoBehaviour {
       case 0:
         dateLength = 1;
         dateEnemies = new Enemy[] { GetEnemyByString("bully_0") };
+        currentDateLocation = DateLocation.school;
         break;
       case 1:
         dateLength = 2;

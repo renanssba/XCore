@@ -1,7 +1,7 @@
 /// DEBUG
 // fade_in 0
 // say "" "..."
-
+fade_music 0 0
 say "Deseja visualizar os tutoriais? (Recomendado caso ainda não tenha jogado o jogo anteriormente)"
 choices "Sim, por favor." tutorials_yes "Não, já conheço o sistema." tutorials_no
 
@@ -45,17 +45,28 @@ setup_date
 
 
 theater_bg "school morning"
-actor_move angel "angel" 0
+actor_move angel -2.8 0 1 0
+actor_animator_parameter angel "Battle" true
+actor_animator_parameter angel "Choosing Action" true
+
 actor_move support "main" 0
-move_camera "main_and_enemy" 0
+actor_move enemy "enemy" 0
+move_camera -1.26 1.3 -3.6 0
+
+say "No dia seguinte, já no Mundo dos Humanos, Fertiliel começa sua primeira missão."
 
 
-say "Fertiliel" "(Ok, então o nome do meu primeiro humano é Daniel. Tá dizendo aqui que ele não é particularmente forte, inteligente nem carismático. Seus hobbies incluem: ler livros e cozinhar.)"
-say "(Aparentemente ele também não tem muita sorte com as garotas...)"
 fade_in 1
+tutorial_icon "fertiliel_arrow" true
+say "Fertiliel" "(Ok, então este é o meu primeiro humano, Daniel. Tá dizendo aqui que ele não é particularmente forte, inteligente nem carismático. Seus hobbies incluem: ler livros e cozinhar.)"
+say "(Aparentemente ele também não tem muita sorte com as garotas...)"
+tutorial_icon "fertiliel_arrow" false
+//fade_in 1
+move_camera "main_and_enemy" 1
+wait 1.5
 
 // theater_animation "enemy_enters"
-actor_move enemy "enemy" 0.5
+// actor_move enemy "enemy" 0.5
 // wait 0.5
 
 say "Delinquente" "Passa agora o dinheiro do lanche, meu chapa!"

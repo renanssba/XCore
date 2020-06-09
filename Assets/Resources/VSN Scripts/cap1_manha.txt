@@ -10,10 +10,14 @@ if day == 1
   goto_script "cap1_dia1"
   end_script
 endif
-//if day == 2
- // goto_script "cap1_dia2"
+if day == 2
+  // say "" "Antes de dormir, Fertiliel se lembra das instruções passadas pela Supervisora Hardiel no dia anterior."
+  goto_script "cap1_intro"
   //end_script
-//endif
+  // say "Fertiliel" "Eu não posso botar tudo a perder. Preciso me esforçar nessa missão!"
+endif
+
+
 if day == dia_festa_clara
   goto_script "cap1_dia_festa"
   end_script

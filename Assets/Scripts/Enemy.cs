@@ -13,6 +13,7 @@ public enum RewardType{
 public enum DateLocation{
   park,
   shopping,
+  school,
   generic
 }
 
