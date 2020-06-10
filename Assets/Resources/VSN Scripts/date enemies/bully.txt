@@ -10,11 +10,13 @@ wait 0.5
 say "Valentão" "Dando um passeio pelo parque, Biscoitinho?"
 say "Daniel" "Qual é cara, me deixa em paz. Eu não quero briga contigo..."
 say "Valentão" "Ah, mas aqui fora do colégio o negócio é diferente."
-say "Dessa vez a sua namoradinha não vai te proteger."
 
 if #currentGirlId == 1
+  say "Dessa vez essa nanica não vai ser o suficiente pra te proteger."
   say "Ana" "Eu já te derrotei uma vez, você voltou pra apanhar mais?"
   say "Valentão" "Naquela hora eu tava despreparado, não contou."
+else
+  say "Dessa vez aquela nanica não vai te proteger."
 endif
 if #currentGirlId == 2
   say "Beatrice" "Eu acho uma pena... Tem gente que não tem cérebro e precisa recorrer à violência."

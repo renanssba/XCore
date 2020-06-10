@@ -98,7 +98,7 @@ say "(A cama está bem arrumada e com lençol dobrado. Sobre ele há um celular.
 say "(Devo abrir o celular para analisar?)"
 choices "Sim" null "Não" investigar_beatrice
 say "(Na tela inicial tem aplicativos de busca, de escrita e a galeria. Curiosamente, nenhum de troca de mensagens ou rede social.)"
-say "(Na galeria tem várias fotos de pessoas diversas, incluindo o Daniel. As fotos estão em ângulos estranhos, provavelmente indicando que Beatrice estava escondida ao tirá-las.)"
+say "(Na galeria tem várias fotos de pessoas diversas, incluindo Daniel. As fotos estão em ângulos estranhos, provavelmente indicando que Beatrice estava escondida ao tirá-las.)"
 goto depois_investigar
 
 waypoint beatrice_roupas
@@ -125,10 +125,10 @@ choices "Sim" null "Não" depois_investigar
 if #char[0]item_count[delicate_key]from[2] >= 1
   say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
   say "(Dentro da gaveta há vários livros de química, psicologia e sobre relacionamento humano. No meio destes, cadernos escritos à mão e anotações.)"
-  if #char[2]item_count[fancy_dagger] >= 1
+  if #char[2]item_count[tragic_newspaper] >= 1
     say "(Também há um recorte de jornal com uma foto de um homem que se parece com ela. Eu deveria pegá-lo?)"
     choices "Sim" null "Não" depois_investigar
-    take_item 2 "fancy_dagger" 1
+    take_item 2 "tragic_newspaper" 1
   endif
 else
   say "(Ela está trancada. Onde será que está a chave?)"

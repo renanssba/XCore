@@ -957,6 +957,7 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ExecuteIdle(SkillTarget partyMemberId) {
     Actor2D idleActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
     Battler defender = idleActor.battler;
+    VsnSaveSystem.SetVariable("target_name", idleActor.battler.GetName());
 
     yield return ShowDistractedMessage();
     idleActor.DistractedAnimation();

@@ -45,7 +45,10 @@ for currentDateEvent #dateLength
   actor_animator_parameter support "Battle" true
   actor_animator_parameter enemy "Battle" true
   
-  play_music "battle1_intro" "battle1_loop"
+  // play battle song
+  if "\currentMusic" != "boss1_loop"
+    play_music "battle1_intro" "battle1_loop"
+  endif
   wait 0.5
   
 

@@ -24,6 +24,9 @@ public class SpecialCodes {
 
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentEnemyName());
+      if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
+        currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
+      }      
       if(BattleController.instance.GetCurrentPlayer() != null) {
         currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().GetName());
       }
