@@ -4,9 +4,17 @@ waypoint event_statement
 say "" "Um estranho tornado começa a se aproximar do casal!"
 
 theater_animation "enemy_enters"
-say "\boy" "Ei, o que é aquilo?"
+say "\boy" "Ei, o que é aquilo se aproximando?"
 
-say "\girl" "Caramba, sei lá!"
+if #currentGirlId == 1
+  say "\girl" "Caramba, sei lá!"
+endif
+if #currentGirlId == 2
+  say "\girl" "Eu não conheço esse fenômeno meteorológico!"
+endif
+if #currentGirlId == 3
+  say "\girl" "Alguém comprou roupas demais e o vento as carregou?"
+endif
 
 actor_animator_parameter angel "Choosing Action" true
 wait 0.5

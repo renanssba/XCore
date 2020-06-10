@@ -1357,7 +1357,7 @@ public class BattleController : MonoBehaviour {
         newSkill.triggerChance = float.Parse(entry["trigger chance"]);
       }
 
-      if(newSkill.type == SkillType.attack) {
+      if(newSkill.id < 3) {
         newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.damageAttribute];
       } else {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
