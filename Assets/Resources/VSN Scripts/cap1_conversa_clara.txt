@@ -253,16 +253,6 @@ goto end
 
 
 waypoint end
-if vespera_festa_clara == day
-  if clara_convidou_festa == 0
-    say "" "Antes de ir embora, Clara convida Daniel para sua festa de aniversário que ocorrerá em sua casa amanhã de noite."
-    say "Clara" "Eu adoraria que você viesse amanhã, é o meu aniversário."
-    say "Daniel" "Claro, mal posso esperar."
-    say "Clara" "Que legal! Espero que se divirta."
-    set_var clara_convidou_festa 1
-  endif
-endif
-
 say "" "Clara diz que chegou seu horário de ir embora e eles marcam de continuar o trabalho no dia seguinte."
 goto_script "pass_time"
 end_script
