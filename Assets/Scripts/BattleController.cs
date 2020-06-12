@@ -1090,7 +1090,7 @@ public class BattleController : MonoBehaviour {
         break;
       case 1:
         dateLength = 2;
-        dateEnemies = new Enemy[] { GetEnemyByString("bunny"), GetEnemyByString("bully") };
+        dateEnemies = new Enemy[] { GetEnemyByString("bully_minor"), GetEnemyByString("bunny"), GetEnemyByString("bully") };
         currentDateLocation = DateLocation.park;
         break;
       case 2:

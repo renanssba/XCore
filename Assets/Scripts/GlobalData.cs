@@ -314,6 +314,9 @@ public class GlobalData : MonoBehaviour {
     if(name == "Criatura Sombria") {
       return ResourcesManager.instance.fixedCharactersFaceSprites[9];
     }
+    if(name == "Garoto") {
+      return ResourcesManager.instance.fixedCharactersFaceSprites[10];
+    }
     if(name == "Ana Sombria") {
       return ResourcesManager.instance.faceSprites[2];
     }

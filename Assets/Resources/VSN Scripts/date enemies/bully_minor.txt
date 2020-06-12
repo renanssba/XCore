@@ -1,0 +1,76 @@
+goto *arg1
+
+waypoint event_statement
+
+if #currentGirlId == 2
+  say "" "Andando pelo parque, eles encontram um colega do colégio."
+else
+  say "" "Andando pelo parque, eles encontram um colega da turma."
+endif
+
+wait 0.5
+theater_animation "enemy_enters"
+wait 0.5
+
+if daytime == 0
+  say "Garoto" "Ei, olha aí! Vocês tão matando aula?"
+else
+  say "Garoto" "Ei, olha aí! Passeando no parque, amigos?"
+endif
+
+
+if #currentGirlId == 1
+  say "Ana" "Oi Buster. Como vai?"
+  say "Garoto" "Que bom te encontrar, Daniel. Tava mesmo querendo falar com você."
+  say "Daniel" "O que foi?"
+  say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
+  say "\girl" "Não é legal copiar o trabalho dos outros, cara."
+  say "Garoto" "Qual é, você me deve uma Daniel! Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
+  say "Daniel" "Não foi isso que eu quis dizer com \qte ajudar\q."
+else  
+  say "Daniel" "Oi Buster. Como vai?"
+  say "Garoto" "Que bom te encontrar, \girl. Tava mesmo querendo falar com você."
+  say "\girl" "O que foi?"
+  say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
+  say "Daniel" "Não é legal copiar o trabalho dos outros, cara."
+  say "Garoto" "Qual é, você me deve uma \girl! Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
+  say "\girl" "Não foi isso que eu quis dizer com \qte ajudar\q."
+endif
+say "Garoto" "Ah, não! Não é justo! Me dá seu trabalho de história!"
+
+
+
+set_var guts_action_boy_name "shout"
+set_var guts_action_girl_name "shout"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "argue"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "O estudante folgado tenta convencer \boy a fazer o seu trabalho de história!"
+set_var enemy_attacks_girl "O estudante folgado tenta convencer \girl a fazer o seu trabalho de história!"
+end_script
+
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active diz para o estudante tomar vergonha na cara!"
+end_script
+
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+set_var pre_attack "\active diz que o estudante se sairá melhor fazendo o trabalho sozinho!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active diz que pode tentar ajudá-lo com o trabalho depois."
+end_script
+
+
+
+waypoint defeated
+say "Garoto" "Droga, vocês não vão me ajudar mesmo, né?"
+say "Tá bom, vou procurar outra pessoa pra colar."
+end_script
