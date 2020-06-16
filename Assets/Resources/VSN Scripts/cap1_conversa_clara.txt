@@ -258,7 +258,74 @@ goto_script "pass_time"
 end_script
 
 
-waypoint dialog_after_date_2
+
+
+
+waypoint give_gift
+say "" "Escolha qual item dar para Clara:"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "Daniel" "Ei Clara, eu tenho uma coisinha para te dar."
+give_item 3 item_id 1
+if item_owner == 3
+  say "Clara" "Hum... Isso se parece muito com algo que eu tenho..."
+  say "Daniel" "É.. sério?"
+  say "Clara" "Acho que estou imaginando coisas. De qualquer forma, obrigada."
+else
+  say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
+  say "Daniel" "Que bom que você gostou!"
+  add_exp true 40
+endif
+goto end
+
+
+waypoint date_intro_1
+say "Daniel" "Ei Clara, há um parque muito bonito aqui perto. Você gostaria de dar uma volta comigo?"
+say "Clara" "Claro, parece interessante. Podemos continuar o trabalho depois, né?"
+set_var date_objective "de destino"
+goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "" "Daniel percebe que Clara está olhando um panfleto com uma expressão triste. Ele pergunta do que se trata."
+say "Clara" "Ah, isso? É uma lojinha nova de tortas que abriu no shopping. Eu queria muito conhecer, mas os meus pais não me deixam comer doce."
+say "Daniel" "Não deixam? Que crueldade, eu sei que você adora. Vem comigo, eles não precisam saber!"
+say "Clara" "Tá bom, só dessa vez! Eu não vou contar pra eles."
+set_var date_objective "da loja de tortas"
+goto_script "date"
+end_script
+
+waypoint date_intro_3
+say "Daniel" "Oi Clara, gostaria de me acompanhar a um passeio no parque?"
+say "Clara" "Claro, tem um muito bonito aqui perto. Que tal fazermos um piquenique?"
+say "Daniel" "Ótimo, vou preparar uns sanduíches."
+set_var date_objective "do piquenique"
+goto_script "date"
+end_script
+
+
+
+waypoint date_end_1
+say "" "Depois de caminharem um pouco, os dois ficaram satisfeitos com o passeio."
+say "Clara" "Eu adorei, esse lugar é muito lindo. Obrigada pelo convite, Daniel!"
+say "Daniel" "De nada, fico feliz que tenha gostado."
+end_script
+
+
+
+waypoint date_end_2
+say "" "Depois de todos os imprevistos, o casal finalmente chega à loja de tortas."
+say "Clara" "Oba! Você consegue sentir esse cheirinho? Já tô com água na boca!"
+say "Daniel" "A comida daqui deve ser incrível... Eu quero cozinhar tão bem assim algum dia!"
+say "Clara" "Com certeza você vai conseguir!"
+fade_out 0.5
+full_heal_party
+say "" "Os dois se sentam e provam diversas tortas deliciosas. Saindo da lanchonete..."
+fade_in 0.5
+
 say "Daniel" "Essa comida aqui é uma delícia, né?"
 say "Clara" "Siiim, eu adorei!! Mas eu ainda prefiro a sua. Você cozinha muito bem, Daniel!"
 say "Eu tentei aprender a cozinhar uma vez, mas eu sou desastrada demais pra isso. Lembra que a gente teve aula de culinária no colégio?"
@@ -322,105 +389,33 @@ say "Clara" "Hahaha, obrigada!"
 say "Daniel" "(Onde quer que ela esteja agora, eu tenho certeza que a minha mãe ficará orgulhosa.)"
 end_script
 
-waypoint dialog_after_date_3 
-say "Clara" "Isso foi bem divertido!"
-say "Daniel" "Foi mesmo? Você não está falando só pra me agradar, né?"
-say "" "Clara ri."
-say "Clara" "Você é um cara legal, Daniel. Passar tempo com você é sempre divertido. E gostoso, também!"
-say "" "Daniel fica vermelho."
-say "Daniel" "Q-quê?"
-say "Clara" "D-digo, você sempre traz algo pra comer, o que é muito simpático."
-say "Clara" "Você é um ótimo cozinheiro! Espero que continue estudando para ficar cada vez melhor."
-fade_music 0 2.0
-say "Daniel" "..."
-say "Clara" "Você tá bem?"
-say "Daniel" "(...Vai, Daniel, fala alguma coisa!)"
-say "Daniel" "...Eu espero poder continuar cozinhando pra você!"
-say "Daniel" "Eu adoro  o quão feliz você fica quando prova minha comida. Me faz querer ser um cozinheiro melhor."
-say "Daniel" "Eu quero continuar te fazendo feliz. Para sempre."
-say "" "Clara fica surpresa."
-say "Clara" "..."
-say "Minha mãe vai ficar furiosa quando souber."
-say "Daniel" "...Souber o quê?"
-say "Clara" "Souber que estou namorando um cozinheiro."
-say "Daniel" "Você..."
-say "" "Clara imediatamente vira o rosto, encabulada."
-say "Clara" "S-se você quiser, é claro."
-say "Daniel" "Eu quero!"
-say "" "Daniel chega mais perto de Clara."
-say "Daniel" "Você sempre foi tão gentil. Eu...eu te amo."
-say "O coração de Daniel se abriu!"
-say "Clara" "...Eu te amo também."
-say "O coração de Clara se abriu!"
-end_script
 
-waypoint give_gift
-say "" "Escolha qual item dar para Clara:"
-item_choice
-if item_id == -1
-  goto action_choice
-endif
-
-say "Daniel" "Ei Clara, eu tenho uma coisinha para te dar."
-give_item 3 item_id 1
-if item_owner == 3
-  say "Clara" "Hum... Isso se parece muito com algo que eu tenho..."
-  say "Daniel" "É.. sério?"
-  say "Clara" "Acho que estou imaginando coisas. De qualquer forma, obrigada."
-else
-  say "Clara" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-  say "Daniel" "Que bom que você gostou!"
-  add_exp true 40
-endif
-goto end
-
-
-waypoint date_intro_1
-say "Daniel" "Ei Clara, há um parque muito bonito aqui perto. Você gostaria de dar uma volta comigo?"
-say "Clara" "Claro, parece interessante. Podemos continuar o trabalho depois, né?"
-set_var date_objective "de destino"
-goto_script "date"
-end_script
-
-waypoint date_intro_2
-say "" "Daniel percebe que Clara está olhando um panfleto com uma expressão triste. Ele pergunta do que se trata."
-say "Clara" "Ah, isso? É uma lojinha nova de tortas que abriu no shopping. Eu queria muito conhecer, mas os meus pais não me deixam comer doce."
-say "Daniel" "Não deixam? Que crueldade, eu sei que você adora. Vem comigo, eles não precisam saber!"
-say "Clara" "Tá bom, só dessa vez! Eu não vou contar pra eles."
-set_var date_objective "da loja de tortas"
-goto_script "date"
-end_script
-
-waypoint date_intro_3
-say "Daniel" "Oi Clara, gostaria de me acompanhar a um passeio no parque?"
-say "Clara" "Claro, tem um muito bonito aqui perto. Que tal fazermos um piquenique?"
-say "Daniel" "Ótimo, vou preparar uns sanduíches."
-set_var date_objective "do piquenique"
-goto_script "date"
-end_script
-
-
-
-waypoint date_end_1
-say "" "Depois de caminharem um pouco, os dois ficaram satisfeitos com o passeio."
-say "Clara" "Eu adorei, esse lugar é muito lindo. Obrigada pelo convite, Daniel!"
-say "Daniel" "De nada, fico feliz que tenha gostado."
-end_script
-
-waypoint date_end_2
-say "" "Depois de todos os imprevistos, o casal finalmente chega à loja de tortas."
-say "Clara" "Oba! Você consegue sentir esse cheirinho? Já tô com água na boca!"
-say "Daniel" "A comida daqui deve ser incrível... Eu quero cozinhar tão bem assim algum dia!"
-say "Clara" "Com certeza você vai conseguir!"
-fade_out 0.5
-full_heal_party
-say "" "Os dois se sentam e provam diversas tortas deliciosas. Saindo da lanchonete..."
-fade_in 0.5
-goto dialog_after_date_2
-end_script
 
 waypoint date_end_3
-say "Daniel" "Aqui, Clara. Esse é um bom local pra estender a toalha."
-say "Clara" "Eba!!! Piquenique! Piquenique!"
-say "" "Daniel abre a cestinha que trouxe e tira sanduíches, frutas e outras guloseimas. Os dois curtem um delicioso piquenique."
+// say "Daniel" "Aqui, Clara. Esse é um bom local pra estender a toalha."
+// say "Clara" "Eba!!! Piquenique! Piquenique!"
+// fade_out 0.5
+// say "" "Daniel abre a cestinha que trouxe e tira sanduíches, frutas e outras guloseimas. Os dois curtem um delicioso piquenique."
+// fade_in 0.5
+
+say "Clara" "Daniel..."
+say "O sonho que eu tive me fez pensar sobre algumas coisas."
+say "Nele, uma criatura parecia perdida e me perguntava quem eu era. E eu não soube responder."
+say "Mas eu estou um pouco confusa sobre tudo isso. O que será que esse sonho significa?"
+say "Daniel" "Infelizmente eu também não sei dizer, Clara. Acho que você precisa encontrar a sua própria resposta."
+say "Clara" "Eu sempre foquei muito no que os meus pais esperavam de mim. Tantos cursos, tantas obrigações, tanto estudo pra me tornar uma diplomata."
+say "Mas a verdade é que eu não sei se realmente é isso que eu quero pra mim. Eu acho que essa não é a resposta que eu busco."
+say "Daniel" "Você pode ser o que quiser, Clara. Não precisa deixar que os seus pais decidam por você."
+say "Clara" "Acho que... você tem razão. Obrigada."
+say "Você nunca me cobrou nada e eu sempre pude ser eu mesma quando estamos juntos."
+say "Passar tempo com você tem me ajudado a descobrir muitas coisas sobre mim que eu não sabia."
+say "Daniel" "Obrigado, Clara."
+say "Clara" "Você sempre foi muito gentil comigo e sempre me ouviu de verdade."
+say "Uma das poucas coisas que eu tenho certeza agora... é que eu quero ficar ao seu lado."
+say "" "Lágrimas escorrem do rosto do Daniel."
+say "Clara" "Você me ajuda a procurar o meu caminho?"
+say "Daniel" "Claro. Eu quero estar do seu lado enquanto eu viver!"
+say "Os dois se abraçam calorosamente."
+
+say "" "Os corações de Daniel e Clara se abriram!"
 end_script

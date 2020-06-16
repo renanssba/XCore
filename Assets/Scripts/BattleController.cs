@@ -407,7 +407,7 @@ public class BattleController : MonoBehaviour {
       int distractedId = currentCharacter.FindStatusCondition("distracted");
       if(distractedId != -1 && currentCharacter.statusConditions[distractedId].duration == 1) {
         action = TurnActionType.useSkill;
-        selectedSkills[(int)partyMemberId] = GetSkillById(9);
+        selectedSkills[(int)partyMemberId] = GetSkillByName("analysis");
         selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
       }
     }
@@ -1089,7 +1089,7 @@ public class BattleController : MonoBehaviour {
         currentDateLocation = DateLocation.school;
         break;
       case 1:
-        dateLength = 2;
+        dateLength = 3;
         dateEnemies = new Enemy[] { GetEnemyByString("bully_minor"), GetEnemyByString("bunny"), GetEnemyByString("bully") };
         currentDateLocation = DateLocation.park;
         break;

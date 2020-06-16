@@ -14312,6 +14312,11 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487977203}
+--- !u!4 &491983628 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4844638513068686, guid: e5834ae36114aa74d99b60f1e1cc830e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1777063771}
 --- !u!1 &492099119
 GameObject:
   m_ObjectHideFlags: 0
@@ -18067,7 +18072,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 0
-  m_inputSource: 3
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -31009,6 +31014,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 321782431}
   m_Script: {fileID: 11500000, guid: e4f07621447e18948a5873a7c5eb1307, type: 3}
+--- !u!4 &1020612759 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4122855775248148, guid: e5834ae36114aa74d99b60f1e1cc830e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1777063771}
 --- !u!1 &1028102940
 GameObject:
   m_ObjectHideFlags: 0
@@ -48681,6 +48691,56 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1623241764}
+--- !u!1 &1624575089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1624575090}
+  - component: {fileID: 1624575091}
+  m_Layer: 0
+  m_Name: bully_minor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624575090
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1624575089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 491983628}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1624575091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1624575089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Estudante Folgado
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!1 &1637129976
 GameObject:
   m_ObjectHideFlags: 0
@@ -60134,6 +60194,56 @@ MonoBehaviour:
   phrasePath: attribute/hp
   FallbackText: <missing>
   Args: []
+--- !u!1 &2127907613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2127907614}
+  - component: {fileID: 2127907615}
+  m_Layer: 0
+  m_Name: weakened
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2127907614
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127907613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1020612759}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2127907615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2127907613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: Enfraquecido
+    Object: {fileID: 0}
+  - Language: English
+    Text: Weakened
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!1001 &2136166239
 Prefab:
   m_ObjectHideFlags: 0

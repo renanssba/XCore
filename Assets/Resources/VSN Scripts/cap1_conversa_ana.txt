@@ -205,50 +205,7 @@ goto_script "pass_time"
 end_script
 
 
-waypoint dialog_after_date_3
-say "Ana" "Me sinto energizada! Vamos fazer mais exercícios!"
-say "Daniel" "Mais? Eu estou exausto!"
-say "Ana" "Qual é, Daniel! Vamos lá, só mais um tiro de 100 metros!"
-say "Daniel" "Nããão, eu tô cansado..."
-say "Ana" "Eu começo, então. 3...2...1...Já!"
-say "" "Ana começa a correr e logo toma distância de Daniel."
-say "" "Subitamente, a menina para e segura o tornozelo."
-fade_music 0 2.0
-say "Ana" "Ai! Não, de novo não..."
-say "" "A garota começa a correr novamente, visivelmente mancando. Ela se move bem devagar."
-say "Daniel" "Ana, espera! Pare!"
-say "" "O garoto corre na direção de Ana. A garota o empurra."
-say "Ana" "Não é nada, eu estou bem!"
-say "Daniel" "Deixa eu ver isso."
-say "" "Daniel nota um hematoma arroxeado no tornozelo de Ana."
-say "Ana" "..."
-say "Daniel" "Você se machucou assim agora...?"
-say "Ana" "...Não. Mas é só um machucado de rotina."
-say "" "Daniel franze a testa."
-say "Daniel" "Então quando foi?"
-say "Ana" "...No último teste para o time de basquete."
-say "Daniel" "Você deveria ter ido para um pronto-socorro na hora!"
-say "Ana" "Mas se o técnico notasse que eu me machuquei, eu não teria sido selecionada! Eu preciso me esforçar assim sempre!"
-say "Daniel" "Não dá pra jogar basquete assim, Ana!"
-say "Ana" "Você não sabe o que eu consigo ou não fazer, Daniel."
-say "Daniel" "..."
-say "Daniel" "...Você é muito egoísta."
-say "Ana" "...O quê?"
-say "Daniel" "Você sempre faz isso! Fica assumindo riscos, querendo se sacrificar!"
-say "Ana" "E por que isso é egoísmo?"
-say "Daniel" "As pessoas se preocupam com você! Eu me preocupo com você."
-say "Daniel" "Como eu vou ficar tranquilo sabendo que você ignora todas as dores e nunca pede ajuda?"
-say "Daniel" "...Um dia, você pode não ser forte o suficiente. Um dia, um obstáculo pode aparecer e você não vai conseguir aguentar sozinha."
-say "Eu estou cansado de ver você me proteger e sofrer!"
-say "Ana" "Você...se preocupa comigo?"
-say "Daniel" "...Muito. A ideia de ver você sofrer me machuca por dentro..."
-say "Daniel" "...Porque eu te amo."
-say "" "O coração de Daniel se abriu!"
-say "" "Os olhos de Ana se enchem de água."
-say "Ana" "Eu esperei tanto tempo pra ouvir você dizer isso."
-say "Ana" "Eu sempre te amei."
-say "" "O coração de Ana se abriu!"
-end_script
+
 
 
 waypoint give_gift
@@ -280,7 +237,7 @@ goto_script "date"
 end_script
 
 waypoint date_intro_2
-say "Ana" "Sabia que estreou o filme do Hopping James? Eu tô tão animada pra ver!"
+say "Ana" "Sabia que estreou o filme do James Hopper? Eu tô tão animada pra ver!"
 say "Daniel" "Sério? Que legal! Quer ir comigo assistir?"
 say "Ana" "Quero! Vamos no cinema do shopping? É o cinema que eu mais gosto aqui na cidade."
 say "Daniel" "Ótimo! Vou comprar um baldão de pipoca pra gente."
@@ -304,6 +261,8 @@ say "Ana" "Obrigada por ter vindo comigo, Daniel. A gente devia passear mais vez
 say "Daniel" "Vamos sim!"
 end_script
 
+
+
 waypoint date_end_2
 say "" "Depois de todos os imprevistos, o casal finalmente consegue chegar ao cinema."
 say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
@@ -316,39 +275,119 @@ full_heal_party
 if #currentRelationshipHeartLocksOpened < 2
   say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
   fade_in 0.5
-  say "Ana" "Valeu por ter vindo ao cinema comigo..."
-  say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
-  say "Ana" "..."
-  say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
-  say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
-  say "Daniel" "Por quê?"
-  say "Ana" "Você sabe... Toda essa coisa da Clara."
-  say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
-  say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
-  say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
-  say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
-  say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
-  say "Ana" "..."
-  say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
-  say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
-  say "Daniel" "Ei, aquilo doeu!"
-  say "Ana" "Pô, o Panqueca era um pug tão pequenininho..."
-  say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
-  say "Ana" "Só por uns dois dias."
-  say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
-  say "Ana" "..."
-  say "Ana" "Valeu. Você é um bobo, mesmo!"
+  say "Ana" "Valeu por ter vindo ao cinema comigo, Daniel."
+  
+  say "Daniel" "De nada, eu adorei. Não sabia que a história do Hopper era tão interessante."
+  say "Ana" "Ele é incrível, não é? Ele é tão corajoso que me inspira a ser melhor todos os dias."
+  say "Daniel" "Você fala como se eu não tivesse visto a quantidade de pôsteres dele que você tem no seu quarto, haha."
+  say "Ana" "É, você me pegou!"
+  say "Eu queria ser tão corajosa quanto ele."
+  say "Daniel" "Você já é, Ana. Tem que ter muita coragem pra perseguir o seu sonho com tanto afinco quanto você faz."
+  say "Ana" "Eu só faço o melhor que posso."
+  say "" "A garota dá um largo sorriso, visivelmente satisfeita com o elogio."
+  say "Daniel" "Eu é que deveria me inspirar na história dele. Eu sou um covarde, que precisa de você me defendendo toda hora..."
+  say "" "Daniel se vira para o lado, evitando contato visual com Ana."
+  say "Ana" "Não, não é verdade!"
+  say "Daniel" "Claro que é, Ana..."
+  say "" "Não é não! Você é muito corajoso, Daniel. Você fez uma das coisas mais corajosas que eu já vi na vida."
+  say "" "Daniel se vira para Ana."
+  say "Daniel" "Do que você tá falando?"
+
+  fade_music 0 1.5
+  wait 2
+  play_music "sad1_intro" "sad1_loop"
+
+  say "Ana" "Você lembra que a gente costumava passear com o Panqueca pelo parque, né?"
+  say "Daniel" "Lembro, claro. Ele adorava perseguir os esquilos, né? Eu tinha muita pena dos esquilinhos, sempre tinham que fugir dele."
+  say "Ele era um cachorro tão animado e brincalhão!"
+  say "Ana" "Sim, o Panqueca era o cãozinho mais lindo e animado que eu já vi na vida. E o mais querido..."
+  say "" "Uma lágrima surge nos olhos de Ana."
+  
+  say "Ana" "Eu não sei dizer bem o dia, mas foi uns sete ou oito anos atrás. A gente era apenas criança."
+  say "Daniel" "Nessa época o Panqueca já era imenso, né? Tinha quase metade do nosso tamanho."
+  say "Ana" "Sim. Era até meio difícil levá-lo na coleira, mas eu adorava passear com ele."
+  say "Mas teve uma vez que ele me assustou e se soltou da coleira, perseguindo um esquilo até dentro da mata fechada."
+  say "Daniel" "Eu me lembro..."
+  say "Era um dia que tava chovendo?"
+  say "Ana" "Sim. Eu fiquei desesperada e nós fomos procurá-lo."
+  say "A gente gritava pelo nome dele, gritava e gritava mas nada de encontrá-lo."
+  say "A chuva começou a engrossar e ele morria de medo de trovão. Eu fiquei tão preocupada que ele estivesse perdido dentro da mata, assustado, sem saber como voltar pra gente."
+  say "Daniel" "E a gente se dividiu pra procurá-lo, não foi?"
+  say "Ana" "Sim, você disse que a gente poderia encontrá-lo mais rápido assim. E depois saiu, gritando pelo nome dele na direção contrária à minha."
+  say "Daniel" "Eu tava com o coração na mão. Nunca me perdoaria se algo acontecesse a ele."
+  say "Ana" "Mas aí você se pôs em risco!"
+  say "Depois de alguns minutos, você não voltou e eu fui te procurar. Eu ouvi a sua voz gritando o meu nome, desesperado."
+  say "Daniel" "É..."
+  say "Ana" "Eu fui correndo atrás de você e te encontrei no meio de um lago com correnteza, abraçando o Panqueca e segurando um pedregulho."
+  say "Daniel" "Sim. Quando eu o encontrei, ele estava do outro lado do lago. Caiu um trovão e ele se assustou, caindo na água."
+  say "Quando eu vi a correnteza o levando, eu não pensei duas vezes antes de pular atrás dele."
+  say "Ana" "O que você fez foi muito arriscado e irresponsável! Você podia ter morrido, idiota!"
+  say "...Mas também foi de uma coragem inacreditável. Você foi um herói naquele dia."
+  say "Daniel" "Mas foi você quem nos tirou do meio do lago, com aquele galho."
+  say "Ana" "Se você não tivesse resgatado o Panqueca, a história teria sido muito diferente."
+  say "Você salvou a vida dele, Daniel. Você é muito corajoso para as coisas que realmente importam."
+  say "" "Daniel abre um sorriso modesto."
+  say "Daniel" "Eu tenho certeza que você teria feito a mesma coisa."
+  say "Ana" "Que nada. Até hoje eu tento ser tão corajosa quanto o James Hopper, ou quanto você foi naquele dia."
+  say "" "Daniel sorri, encabulado."
+  say "Ana" "Obrigada por me inspirar a ser melhor, Daniel."
+  // say "" "É por isso que você é meu... er, melhor amigo."
+  
+  
+  
+  // say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
+  // say "Ana" "..."
+  // say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+  // say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
+  // say "Daniel" "Por quê?"
+  // say "Ana" "Você sabe... Toda essa coisa da Clara."
+  // say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
+  // say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
+  // say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
+  // say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
+  // say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
+  // say "Ana" "..."
+  // say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+  // say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
+  // say "Daniel" "Ei, aquilo doeu!"
+  // say "Ana" "Pô, o Panqueca era um pug tão pequenininho..."
+  // say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
+  // say "Ana" "Só por uns dois dias."
+  // say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
+  // say "Ana" "..."
+  // say "Ana" "Valeu. Você é um bobo, mesmo!"
 else
   say "" "Os dois assistem o filme e se divertem bastante."
   fade_in 0.5
 endif
 end_script
 
+
+
 waypoint date_end_3
-say "Daniel" "Ufa! Chegamos. Que trabalheira, hein."
-say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
-fade_out 0.5
-say "" "Em seguida os dois jogam frisbee por vários minutos, até Daniel cansar."
-fade_in 0.5
-goto dialog_after_date_3
+// say "Daniel" "Ufa! Chegamos. Que trabalheira, hein."
+// say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+// fade_out 0.5
+// say "" "Em seguida os dois jogam frisbee por vários minutos, até Daniel cansar."
+// fade_in 0.5
+say "Ana" "Daniel..."
+say "No meu sonho... acho que falei algumas coisas que eu não queria que você soubesse."
+say "Mas eu quero te dizer agora."
+say "Daniel" "Pode falar, Ana. O que foi?"
+say "Ana" "Eu.. realmente me sinto daquela maneira às vezes. Insegura."
+say "Eu sempre gostei de você, desde pequeno. Mas nunca senti que poderíamos ficar juntos."
+say "Eu nunca me achei bonita ou feminina e você sempre gostou da Clara. Por isso eu só conseguia sentir raiva dela."
+say "Daniel" "Eu imagino. Me desculpa por isso."
+say "Eu sinto muito por não ter percebido os seus sentimentos, mas eu agora entendo como você pensa."
+say "Mas você tá errada. Eu sempre te achei linda, corajosa e radiante. E você sempre me inspirou a ser melhor."
+say "Daniel" "Não é por que você joga basquete ou qualquer outro motivo bobo que você seja menos feminina."
+say "" "Os olhos de Ana se enchem de lágrimas."
+say "Ana" "Você tá me fazendo chorar, seu idiota..."
+say "Daniel" "Você é a pessoa que eu mais admiro e hoje eu consigo perceber que eu te amo. Eu sempre te amei."
+say "Ana" "Eu esperei tanto tempo pra ouvir você dizer isso..."
+say "Eu também te amo!"
+say "" "A garota pula nos braços de Daniel."
+
+say "" "Os corações de Daniel e Ana se abriram!"
+//fade_music 0 2.0
 end_script

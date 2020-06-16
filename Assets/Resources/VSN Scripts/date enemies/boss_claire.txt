@@ -201,12 +201,12 @@ if midbattle == 0
   wait 0.3
   say "Daniel" "Não é verdade!"
   say "A Clara é a pessoa mais gentil que eu conheço."
-  say "Ela ajuda os outros porque ela se importa, não por egoísmo como você!"
+  say "Ela ajuda os outros porque ela se importa, não pra ter atenção como você!"
   say "Clara" "Daniel..."
   say "Daniel" "E é a pessoa mais especial do mundo pra mim. Pare de tentar confundí-la desse jeito!"
   say "Clara" "..."
-  say "Clara" "Não, Daniel. Ela tá certa. Eu não tenho todas as respostas."
-  say "Eu não sei exatamente o que eu quero, ainda preciso encontrar quem eu realmente sou..."
+  say "Clara" "Não, Daniel. Ela tá certa. Eu acho que faço algumas coisas para que gostem de mim."
+  say "E eu não sei exatamente o que eu quero, ainda preciso encontrar quem eu realmente sou..."
   say "Não vou mais viver fazendo apenas o que agrada os outros. E para começar, vou enfrentá-la!"
   set_var midbattle 1
 endif
@@ -216,7 +216,7 @@ end_script
 
 
 waypoint defeated
-say "Clara Sombria" "Agora eu entendi... Eu posso ser o que eu quiser..."
+say "Clara Sombria" "Eu não entendi... Quem sou eu, afinal?"
 fade_music 0 2
 wait 2
 theater_bg_effect "pulsingEffect" 0
@@ -242,16 +242,16 @@ say "" "Alguns minutos depois, os dois acordam."
 fade_in 1
 
 say "Daniel" "Ai, minha cabeça dói... Que pesadelo estranho foi esse?"
-say "Beatrice" "Pesadelo?"
+say "Clara" "Pesadelo?"
 
 wait 0.5
 actor_face main "left"
 wait 0.5
 
 say "Daniel" "Sim, eu tive um pesadelo com uma... versão deturpada de você."
-say "Beatrice" "Sério? Será que você teve o mesmo pesadelo que eu?"
+say "Clara" "Sério? Será que você teve o mesmo pesadelo que eu?"
 
 say "Daniel" "Que estranho, mas parece que sim. Você tá bem?"
-say "Beatrice" "Só um pouco cansada."
+say "Clara" "Só um pouco cansada."
 wait 1
 end_script
