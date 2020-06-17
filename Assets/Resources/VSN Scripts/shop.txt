@@ -1,8 +1,11 @@
-﻿fade_out 0.7
+﻿fade_music 0 0.7
+fade_out 0.7
 bg "heaven"
 wait 0.5
 fade_in 0.7
 //goto_script "tutorial_shop"
+
+play_music "date1_intro" "date1_loop"
 
 goto_script "fertiliel_enter" 0.25
 goto_script "char_right_enter" "graciel"
@@ -37,43 +40,44 @@ if shop_level == 0
   say "Graciel" "Claro, esses são os itens que eu tenho pra venda."
   set_var shop_level 1
   update_ui
-else
-  if shop_unlock_advance == 1
-    say "Graciel" "Oi Fertiliel! Tenho novos itens à venda!"
-    say "Fertiliel" "Interessante. O que você tem de novo?"
-    say "Graciel" "Tenho essas coisas aqui que os humanos usam pra acalmar a mente e o corpo. Humanos são bem frágeis, né?"
-    say "Fertiliel" "Legal! E... você tem alguma amostra grátis dessa vez?"
-    say "Graciel" "Tenho sim, vou te dar um de cada pra você testar. Mas compra mais depois, por favor."
-    play_sfx "relationship_up"
-    add_item "calming_tea" 1
-    play_sfx "relationship_up"
-    add_item "first_aid" 1
-    say "Fertiliel" "Valeu!"
-    say "Graciel" "Ah, e tem mais coisa! O caminho mais rápido para o coração de um humano é encher ele de presentes."
-    say "Leva uns presentinhos pro seu humano dar pras garotas. Aposto que elas vão se apaixonar rapidinho."
-    say "Fertiliel" "Certo, vou dar uma olhada."
-    set_var shop_level 2
-    set_var shop_unlock_advance 2
-    update_ui
-  endif
-  
-  if shop_unlock_final == 1
-    say "Graciel" "Ei, eu tenho novidades."
-    say "Fertiliel" "Oi! O que foi?"
-    say "Graciel" "A Supervisora Hardiel acabou descobrindo sobre a minha lojinha."
-    say "Fertiliel" "Eita! E ela brigou com você?"
-    say "Graciel" "Brigou sim, ela falou que algo assim era contra as regras."
-    say "Mas depois ela disse que podia \qaproveitar a situação\q e me deu alguns itens angelicais pra te vender também."
-    say "Fertiliel" "Ótimo, podem ser úteis! E você tem alguma amostra grátis?"
-    say "Graciel" "Desculpa, eles não são meus. Estou apenas revendendo."
-    say "Mas são bem úteis. Quer ver o que eu tenho pra vender agora?"
-    set_var shop_level 3
-    set_var shop_unlock_final 2
-    update_ui
-  endif
-  
-  say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
+  goto store_choices
 endif
+if shop_unlock_advance == 1
+  say "Graciel" "Oi Fertiliel! Consegui dois tipos de itens novos, e estão à venda!"
+  say "Fertiliel" "Interessante. Quais sãos eles?"
+  say "Graciel" "Primeiro, tenho essas coisas aqui que os humanos usam pra acalmar a mente e o corpo. Humanos são bem frágeis, né?"
+  say "Fertiliel" "Legal! Você tem alguma amostra grátis dessa vez?"
+  say "Graciel" "Tenho sim, vou te dar um de cada pra você testar. Mas compra mais depois, por favor."
+  play_sfx "relationship_up"
+  add_item "calming_tea" 1
+  play_sfx "relationship_up"
+  add_item "first_aid" 1
+  say "Fertiliel" "Valeu! E o outro tipo?"
+  say "Graciel" "Presentes! Eu fico muito feliz quando eu ganho alguma coisa, então talvez humanos funcionem da mesma forma."
+  say "Leva uns presentinhos pro seu humano dar pras garotas. Aposto que elas vão se apaixonar rapidinho."
+  say "Fertiliel" "Certo, vou dar uma olhada."
+  set_var shop_level 2
+  set_var shop_unlock_advance 2
+  update_ui
+  goto store_choices
+endif
+if shop_unlock_final == 1
+  say "Graciel" "Ei, eu tenho novidades."
+  say "Fertiliel" "Oi! O que foi?"
+  say "Graciel" "A Supervisora Hardiel acabou descobrindo sobre a minha lojinha."
+  say "Fertiliel" "Eita! E ela brigou com você?"
+  say "Graciel" "Brigou sim, ela falou que algo assim era contra as regras."
+  say "Mas depois ela disse que podia \qaproveitar a situação\q e me deu alguns itens angelicais pra te vender também."
+  say "Fertiliel" "Ótimo, podem ser úteis! E você tem alguma amostra grátis?"
+  say "Graciel" "Desculpa, eles não são meus. Estou apenas revendendo."
+  say "Mas são bem úteis. Quer ver o que eu tenho pra vender agora?"
+  set_var shop_level 3
+  set_var shop_unlock_final 2
+  update_ui
+  goto store_choices
+endif
+
+say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
 
 goto store_choices
 
@@ -139,8 +143,10 @@ goto store_loop
 waypoint end
 say "Graciel" "Obrigada e volte sempre! Boa sorte juntando os humanos!"
 
+fade_music 0 0.7
 fade_out 0.7
 char_reset_all
 bg null
 wait 0.5
 fade_in 0.7
+play_music "intermission_intro" "intermission_loop"

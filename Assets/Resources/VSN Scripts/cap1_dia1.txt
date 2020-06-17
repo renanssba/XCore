@@ -75,8 +75,8 @@ say "Fertiliel" "(...e com os colegas de classe também, aparentemente.)"
 say "Daniel" "M-Mas eu não tô com dinheiro nenhum. Eu sempre trago lanche de casa."
 say "Delinquente" "Que perdedor! Além de ser um otário, nem dinheiro tem!"
 say "Daniel" "Pois é... Então p-por favor, pode me deixar ir? Não quero me atrasar pra aula..."
-say "Delinquente" "Você é muito patético, nunca vai arranjar uma namorada desse jeito."
-say "Vou te ensinar uma lição, seu fracote!"
+say "Delinquente" "Você é muito patético, você acha que vai resolver alguma coisa <color=yellow>implorando</color>?"
+say "Vou te ensinar uma lição, seu <color=yellow>covarde</color>!"
 
 
 play_sfx "action_strike"
@@ -154,26 +154,45 @@ add_exp false 20 0
 
 say "Daniel" "Você tá bem? Ele te machucou?"
 say "Ana" "Nada, é só um fracote convencido. E você?"
-say "Daniel" "Não me machucou..."
-wait 0.5
-say "Mas algo que ele falou está me incomodando."
+say "Daniel" "Não me machucou, mas..."
+wait 1
+say "...Algo que ele falou está me incomodando."
 say "Ana" "O que é?"
-say "Daniel" "Ele falou que eu sou um fracassado e que nunca vou ter uma namorada..."
-say "Ana" "E isso te deixou triste?"
-say "Daniel" "É. Você sabe, já estamos terminando o terceiro ano e eu nunca beijei uma garota."
+say "Daniel" "Ele falou que eu sou um covarde que só sabe implorar..."
+
+say "Ana" "Você não é um covarde!"
+
+say "Daniel" "Claro que eu sou. Eu nem consigo me declarar para a menina que eu gosto."
+say "" "Ana engole em seco."
+say "Daniel" "...A Clara."
+say "Ana" "É aquela que se mudou para a nossa turma no começo do ano, né?"
+
+say "Daniel" "Ela mesma. Ela é incrível, a menina dos meus sonhos!"
+
+say "Ana" "Você gosta mesmo dela, hein? Tem quantos anos isso?"
+say "Daniel" "Faz... muito tempo. Sei lá, uns seis anos?"
+
+say "Ana" "Você poderia tentar falar com ela."
+
+say "Daniel" "Ela é muito popular, todo mundo gosta dela. Acho que eu não teria nenhuma chance."
+say "E, você sabe..."
+
+say "Daniel abaixa o rosto e continua a falar, de forma encabulada."
+
+say "Daniel" "Já estamos terminando o terceiro ano e eu nunca beijei uma garota."
 say "Se eu chegar na faculdade sem nunca ter beijado alguém vou ser motivo de piada pra sempre."
 say "E provavelmente vou morrer sozinho."
 say "Ana" "Calma, não é assim!"
-say "Você é legal, com certeza vai encontrar alguém. Não tem aquela garota aqui do colégio que você gosta?"
-say "Daniel" "Tem sim, a Clara! Ela é incrível, a menina dos meus sonhos!"
-say "Você viu que ela foi transferida pra nossa turma esse ano, né?"
 
-say "Ana" "Sim. Você gosta mesmo dela, hein? Tem quantos anos isso?"
-say "Daniel" "Faz... Muito tempo. Sei lá, uns seis anos?"
+// say "Você é legal, com certeza vai encontrar alguém. Não tem aquela garota aqui do colégio que você gosta?"
 
-say "Ana" "E você já falou com ela?"
-say "Daniel" "Não. Ela é muito popular, todo mundo gosta dela. Acho que eu não teria nenhuma chance."
-say "Ana" "Como você sabe se nunca tentou? Vamos, tenta falar com ela! Eu te dou todo apoio."
+// say "Daniel" "Tem sim, a Clara! Ela é incrível, a menina dos meus sonhos!"
+// say "Você viu que ela foi transferida pra nossa turma esse ano, né?"
+
+
+// say "Ana" "E você já falou com ela?"
+// say "Daniel" "Não. Ela é muito popular, todo mundo gosta dela. Acho que eu não teria nenhuma chance."
+say "Você é legal, com certeza vai encontrar alguém. Tenta falar com a Clara! Você não vai saber se tem chances se não tentar."
 say "" "Daniel leva a mão ao queixo, pensativo. Depois de ponderar por um minuto, ele concorda."
 say "Daniel" "Tudo bem. Tenho que aproveitar antes que o ano acabe."
 say "Ana" "Esse é o espírito!"

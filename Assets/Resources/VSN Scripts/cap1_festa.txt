@@ -336,10 +336,13 @@ actor_move main "grid_2" 0
 actor_move claire "out_right" 0
 move_camera "girl_interaction" 0
 fade_music 0 1.5
+
+say "Após perambular por alguns minutos, ele entra em um banheiro que encontra pelo caminho. Em seguida, se senta no chão, chorando."
+play_music "sad1_intro" "sad1_loop"
+
+theater_bg "claire house external"
 fade_in 1.0
 
-play_music "sad1_intro" "sad1_loop"
-say "Após perambular por alguns minutos, ele entra em um banheiro que encontra pelo caminho. Em seguida, se senta no chão, chorando."
 say "Daniel" "Estúpido! Estúpido! Como eu fui idiota de achar que eu teria alguma chance com a Clara..."
 say "Ela é tão bonita e tão popular... Ela nunca ficaria com alguém como eu..."
 say "" "Daniel escuta um barulho de batidas de leve na porta. Ele fica em silêncio."
@@ -365,7 +368,7 @@ wait 1.5
 say "Clara" "Mas... Eu fiquei muito feliz que você veio."
 actor_face main "right"
 wait 0.5
-move_camera -1.09 1.57 -2.92 0.5
+move_camera -1.09 1.35 -2.92 0.5
 wait 0.4
 say "Daniel" "Va-valeu."
 say "" "Clara percebe o pequeno embrulho de presente no chão, ao lado do garoto."

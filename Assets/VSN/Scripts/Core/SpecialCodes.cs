@@ -53,11 +53,19 @@ public class SpecialCodes {
 
   public static string InterpretVariableValue(string initial) {
     int start = initial.IndexOf("\\vsn(");
-    int end = initial.IndexOf(")");
-
-    if(start == -1 || end == -1) {
+    if(start == -1) {
       return initial;
     }
+
+    int end = initial.Substring(start, initial.Length-start).IndexOf(")") + start;
+
+    Debug.LogWarning("Initial string: " + initial);
+
+    if(end == -1) {
+      return initial;
+    }
+
+    Debug.LogWarning("Start pos is: " + start + ", end pos is: " + end);
 
     string varName = initial.Substring(start + 5, (end - start - 5));
     string varString = GetPrintableVariableValue(varName);

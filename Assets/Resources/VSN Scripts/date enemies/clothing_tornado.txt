@@ -16,6 +16,8 @@ if #currentGirlId == 3
   say "\girl" "Alguém comprou roupas demais e o vento as carregou?!"
 endif
 
+say "" "O tornado está carregando várias roupas que parecem caras."
+
 actor_animator_parameter angel "Choosing Action" true
 wait 0.5
 
@@ -49,17 +51,17 @@ end_script
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active joga uma pedra no tornado!"
+set_var pre_attack "\active joga lama nas roupas, sujando-as!"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active checa a previsão do tempo e confirma: sem furacões para hoje!"
+set_var pre_attack "\active diz que as suas roupas foram compradas num brechó!"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active elogia as roupas que o tornado está usando!"
+set_var pre_attack "\active elogia as roupas que o tornado está carregando!"
 end_script
 
 

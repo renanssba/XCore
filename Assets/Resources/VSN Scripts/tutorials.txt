@@ -163,7 +163,7 @@ say "<sprite=\qAttributes\q index=3>Resistência afeta a sua defesa. Quanto maio
 say "<sprite=\qhpANDsp\q index=1 tint>PH são os pontos consumidos para usar habilidades. Eles se recuperam no início de cada Encontro ou ao usar a ação Defender."
 tutorial_icon "attributes" false
 tutorial_icon "attributes_skills" true
-say "Aqui embaixo são as habilidades do humano, tanto ativas quanto passivas. As ativas têm cor roxa, enquanto as passivas têm cor cinza."
+say "Aqui embaixo são as habilidades do humano, tanto ativas quanto passivas. As ativas têm cor roxa, enquanto as passivas têm cor cinza ou vermelha."
 say "Ponha o mouse sobre elas para obter uma breve descrição de cada."
 tutorial_icon "attributes_skills" false
 set_var tutorial_menu_attributes true
@@ -178,6 +178,7 @@ endif
 wait 0.5
 say "" "Esta é a Árvore de Habilidades deste casal. Aqui você pode desbloquear novas habilidades e visualizar as já liberadas."
 say "Orbs brancas representam habilidades liberadas,\n<color=black>Orbs pretas</color> representam habilidades compráveis e\n<color=#EA7F84>Orbs vazias</color> representam habilidades bloqueadas."
+say "Esta <color=#C63232>Orb vermelha</color> é uma habilidade de Desvantagem que cada humano possui, associada à sua personalidade."
 say "Para tornar uma <color=#EA7F84>Orb vazia</color> comprável é necessário comprar sua habilidade pré-requisito."
 say "As <color=black>Orbs pretas</color> são compradas usando Chaves de Coração, que você consegue ao subir o nível de relacionamento do casal."
 tutorial_icon "skill_exception" true

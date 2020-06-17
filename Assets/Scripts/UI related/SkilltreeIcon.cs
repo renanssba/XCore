@@ -25,7 +25,11 @@ public class SkilltreeIcon : MonoBehaviour {
 
     skillIcon.sprite = skill.sprite;
     if(relationship.skilltree.skills[skillId].isUnlocked) {
-      bg.color = Color.white;
+      if(skillId == 3 || skillId == 7) {
+        bg.color = new Color(0.77f, 0.19f, 0.19f);
+      } else {
+        bg.color = Color.white;
+      }      
       skillIcon.gameObject.SetActive(true);
       skillIcon.color = Color.white;
       lockedIcon.SetActive(false);
@@ -60,7 +64,7 @@ public class SkilltreeIcon : MonoBehaviour {
     CoupleStatusScreen.instance.skilltreeScreen.selectedSkillId = selectedSkillId;
     Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
 
-    if(IsRequisiteUnlocked()) {
+    if(IsRequisiteUnlocked() || relationship.skilltree.skills[selectedSkillId].isUnlocked) {
       CoupleStatusScreen.instance.skilltreeScreen.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
     } else {
       CoupleStatusScreen.instance.skilltreeScreen.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);

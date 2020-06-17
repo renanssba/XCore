@@ -19,6 +19,7 @@ public class CoupleStatusScreen : MonoBehaviour {
 
   public Color activeSkillButtonColor;
   public Color passiveSkillButtonColor;
+  public Color debuffSkillButtonColor;
   public Color lockedSkillButtonColor;
 
   public TextMeshProUGUI coupleHpText;

@@ -30,7 +30,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 28	guardian_1	active	self	1									guardian	100					shield	active_support		
 29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive		
 30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
-31	strange_experiment	active	one_enemy	2									hunger, angry, dirty, dizzyness	25	3				random-experiment	throw_object(experiment)		
+31	strange_experiment	active	one_enemy	2									hunger, angry, dirty	25	3				random-experiment	throw_object(experiment)		
 32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	active_offensive		
 33	heal	active	one_ally							1									heart-plus	throw_object(brown-cake)		
 34	auto_sensor	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		

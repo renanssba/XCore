@@ -91,8 +91,8 @@ set_var intelligence_action_girl_name "think"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
 
-set_var enemy_attacks_boy "A sombra ofende a inteligência de \boy!"
-set_var enemy_attacks_girl "A sombra ofende a aparência de \girl!"
+set_var enemy_attacks_boy "A sombra diz que \boy está atrapalhando Beatrice!"
+set_var enemy_attacks_girl "A sombra chama \girl de preguiçosa!"
 end_script
 
 
@@ -102,8 +102,11 @@ set_var pre_attack "\active empurra a sombra!"
 end_script
 
 waypoint intelligence_action_boy
+set_var pre_attack "\active diz que a sombra está perdendo tempo de trabalho com eles!"
+end_script
+
 waypoint intelligence_action_girl
-set_var pre_attack "\active pergunta se a sombra se lembra de algo!"
+set_var pre_attack "\active se concentra em pensamentos felizes!"
 end_script
 
 waypoint charisma_action_boy

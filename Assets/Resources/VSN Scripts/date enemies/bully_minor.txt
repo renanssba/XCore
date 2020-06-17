@@ -25,7 +25,7 @@ if #currentGirlId == 1
   say "Daniel" "O que foi?"
   say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
   say "\girl" "Não é legal copiar o trabalho dos outros, cara."
-  say "Garoto" "Qual é, você me deve uma Daniel! Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
+  say "Garoto" "Qual é! Você me deve uma, Daniel. Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
   say "Daniel" "Não foi isso que eu quis dizer com \qte ajudar\q."
 else  
   say "Daniel" "Oi Buster. Como vai?"
@@ -33,17 +33,17 @@ else
   say "\girl" "O que foi?"
   say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
   say "Daniel" "Não é legal copiar o trabalho dos outros, cara."
-  say "Garoto" "Qual é, você me deve uma \girl! Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
+  say "Garoto" "Qual é! você me deve uma, \girl. Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
   say "\girl" "Não foi isso que eu quis dizer com \qte ajudar\q."
 endif
 say "Garoto" "Ah, não! Não é justo! Me dá seu trabalho de história!"
 
 
 
-set_var guts_action_boy_name "shout"
-set_var guts_action_girl_name "shout"
-set_var intelligence_action_boy_name "argue"
-set_var intelligence_action_girl_name "argue"
+set_var guts_action_boy_name "complain"
+set_var guts_action_girl_name "complain"
+set_var intelligence_action_boy_name "bluff"
+set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
 
