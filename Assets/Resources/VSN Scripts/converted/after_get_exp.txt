@@ -1,0 +1,76 @@
+﻿goto *arg1
+
+
+
+waypoint get_exp
+set_var level_up false
+
+if previousLevel < #currentRelationshipLevel
+  say "char_name/none" "after_get_exp/say_0"
+  set_var level_up true
+  if #currentRelationshipLevel > 2
+    say "char_name/none" "after_get_exp/say_1"
+  endif
+endif
+
+// if previousLevel < 1
+  // if #currentRelationshipLevel >= 1
+    // unlock_skill 8
+  // endif
+// endif
+
+if previousLevel < 2
+  if #currentRelationshipLevel >= 2
+    unlock_skill 0
+    unlock_skill 4
+    say "char_name/none" "after_get_exp/say_2"
+  endif
+endif
+
+if previousLevel < 4
+  if #currentRelationshipLevel >= 4
+    say "char_name/none" "after_get_exp/say_3"
+  endif
+endif
+
+if previousLevel < 7
+  if #currentRelationshipLevel >= 7
+    say "char_name/none" "after_get_exp/say_4"
+  endif
+endif
+if level_up == false
+  say "char_name/none" "after_get_exp/say_5"
+endif
+end_script
+
+
+
+waypoint open_heartlock
+if previousOpenedHeartlocks < 1
+  if #currentRelationshipHeartLocksOpened >= 1
+    say "char_name/none" "after_get_exp/say_6"
+    say "char_name/none" "after_get_exp/say_7"
+  endif
+endif
+
+if previousOpenedHeartlocks < 2
+  if #currentRelationshipHeartLocksOpened >= 2
+    say "char_name/none" "after_get_exp/say_8"
+  endif
+endif
+end_script
+
+
+
+waypoint unlocked_skill
+if arg2 == 0
+  say "char_name/none" "after_get_exp/say_9"
+endif
+if arg2 == 1
+  say "char_name/none" "after_get_exp/say_10"
+endif
+if arg2 == 2
+  say "char_name/none" "after_get_exp/say_11"
+endif
+end_script
+

@@ -1,0 +1,118 @@
+﻿set_var partes_investigadas 0
+fade_music 0 1fade_out 1bg "house night"
+wait 0.5play_music "investigation_intro" "investigation_loop"wait 0.5say "char_name/none" "cap1_investigar/say_0"
+fade_in 1
+//say "" "Há várias bandeiras de times penduradas pelas paredes."
+say "char_name/fertiliel" "cap1_investigar/say_1"
+say "cap1_investigar/say_2"
+
+
+waypoint escolher_garota_investigarsay_auto "char_name/fertiliel" "cap1_investigar/say_3"
+if #currentGirlId == 1  goto investigar_anaendifif #currentGirlId == 2  goto investigar_beatriceendifif #currentGirlId == 3  goto investigar_claraendif
+
+waypoint investigar_anachoices "cap1_investigar/choices_0_0" ana_mesa "cap1_investigar/choices_0_1" ana_cama "cap1_investigar/choices_0_2" ana_roupas "cap1_investigar/choices_0_3" ana_armario "cap1_investigar/choices_0_4" ana_checar "cap1_investigar/choices_0_5" exit
+
+waypoint ana_armariosay "cap1_investigar/say_4"
+say "cap1_investigar/say_5"
+if #char[1]item_count[delicate_key] >= 1  say "cap1_investigar/say_6"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "delicate_key" 1endifgoto depois_investigar
+waypoint ana_mesasay "cap1_investigar/say_7"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[1] >= 1  say "cap1_investigar/say_8"
+  say "cap1_investigar/say_9"
+  say "cap1_investigar/say_10"
+else  say "cap1_investigar/say_11"
+endifgoto depois_investigar
+waypoint ana_roupassay "cap1_investigar/say_12"
+say "cap1_investigar/say_13"
+if #char[1]item_count[sports_clothes] >= 1  say_auto "cap1_investigar/say_14"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "sports_clothes" 1endifgoto depois_investigar
+waypoint ana_camasay "cap1_investigar/say_15"
+if #char[1]item_count[old_teddy_bear] >= 1  say "cap1_investigar/say_16"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "old_teddy_bear" 1endifgoto depois_investigar
+waypoint ana_checarsay "cap1_investigar/say_17"
+say "cap1_investigar/say_18"
+say "cap1_investigar/say_19"
+goto depois_investigar
+
+
+
+waypoint investigar_beatricechoices "cap1_investigar/choices_5_0" beatrice_mesa "cap1_investigar/choices_5_1" beatrice_cama "cap1_investigar/choices_5_2" beatrice_roupas "cap1_investigar/choices_5_3" beatrice_armario "cap1_investigar/choices_5_4" beatrice_checar "cap1_investigar/choices_5_5" exit
+
+waypoint beatrice_mesasay "cap1_investigar/say_20"
+if #char[2]item_count[experiment_drafts] >= 1  say "cap1_investigar/say_21"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 2 "experiment_drafts" 1endifgoto depois_investigar
+waypoint beatrice_camasay "cap1_investigar/say_22"
+say "cap1_investigar/say_23"
+choices "choices/yes" null "choices/no" investigar_beatrice
+say "cap1_investigar/say_24"
+say "cap1_investigar/say_25"
+goto depois_investigar
+waypoint beatrice_roupassay "cap1_investigar/say_26"
+say "cap1_investigar/say_27"
+if #char[2]item_count[lab_coat] >= 1  say_auto "cap1_investigar/say_28"
+  choices "choices/yes" null "choices/no" not_take_clothing
+  take_item 2 "lab_coat" 1  goto depois_investigarendif
+waypoint not_take_clothingif #char[2]item_count[delicate_key] >= 1  say_auto "cap1_investigar/say_29"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 2 "delicate_key" 1endifgoto depois_investigar
+waypoint beatrice_armariosay "cap1_investigar/say_30"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[2] >= 1  say "cap1_investigar/say_31"
+  say "cap1_investigar/say_32"
+  if #char[2]item_count[tragic_newspaper] >= 1    say "cap1_investigar/say_33"
+    choices "choices/yes" null "choices/no" depois_investigar
+    take_item 2 "tragic_newspaper" 1  endifelse  say "cap1_investigar/say_34"
+endifgoto depois_investigar
+waypoint beatrice_checarsay "cap1_investigar/say_35"
+say "cap1_investigar/say_36"
+say "cap1_investigar/say_37"
+goto depois_investigar
+
+
+
+
+waypoint investigar_clarachoices "cap1_investigar/choices_12_0" clara_mesa "cap1_investigar/choices_12_1" clara_cama "cap1_investigar/choices_12_2" clara_roupas "cap1_investigar/choices_12_3" clara_armario "cap1_investigar/choices_12_4" clara_checar "cap1_investigar/choices_12_5" exit
+
+waypoint clara_armariosay "cap1_investigar/say_38"
+say "cap1_investigar/say_39"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[3] >= 1  say "cap1_investigar/say_40"
+  say "cap1_investigar/say_41"
+  if #char[3]item_count[chocolate_cake] >= 1    say "cap1_investigar/say_42"
+    choices "choices/yes" null "choices/no" depois_investigar
+    take_item 3 "chocolate_cake" 1  endifelse  say "cap1_investigar/say_43"
+endifgoto depois_investigar
+waypoint clara_mesasay "cap1_investigar/say_44"
+choices "choices/yes" null "choices/no" depois_investigar
+say "cap1_investigar/say_45"
+say "cap1_investigar/say_46"
+goto depois_investigar
+waypoint clara_roupassay "cap1_investigar/say_47"
+say "cap1_investigar/say_48"
+if #char[3]item_count[flower_dress] >= 1  say_auto "cap1_investigar/say_49"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 3 "flower_dress" 1endifgoto depois_investigar
+waypoint clara_camasay "cap1_investigar/say_50"
+if #char[3]item_count[delicate_key] >= 1  say "cap1_investigar/say_51"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 3 "delicate_key" 1endifgoto depois_investigar
+waypoint clara_checarsay "cap1_investigar/say_52"
+if passou_tempo_com_clara_hoje == 1  say "cap1_investigar/say_53"
+else  say "cap1_investigar/say_54"
+endifsay "cap1_investigar/say_55"
+goto depois_investigar
+
+
+
+
+waypoint depois_investigaradd_var partes_investigadas 1if partes_investigadas >= 3  goto exitendifgoto escolher_garota_investigar
+
+waypoint exitsay "char_name/fertiliel" "cap1_investigar/say_56"
+
+/// DEBUG
+goto_script "pass_time"

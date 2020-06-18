@@ -1,0 +1,44 @@
+﻿goto *arg1
+
+
+waypoint system_save
+say "char_name/none" "save_load_functions/say_0"
+choices "save_load_functions/choices_0_0" confirm_save "choices/cancel" cancel
+
+waypoint confirm_save
+play_sfx "ui_big_confirm"
+save save_file_selected
+say "save_load_functions/say_1"
+end_script
+
+
+
+waypoint system_load
+say "char_name/none" "save_load_functions/say_2"
+choices "save_load_functions/choices_1_0" confirm_load "choices/cancel" cancel
+
+waypoint confirm_load
+play_sfx "ui_big_confirm"
+fade_out 1
+load save_file_selected
+load_scene "Gameplay"
+end_script
+
+
+
+waypoint back_to_menu
+say "char_name/none" "save_load_functions/say_3"
+choices "save_load_functions/choices_2_0" confirm_quit "choices/cancel" cancel
+
+waypoint confirm_quit
+play_sfx "ui_big_confirm"
+fade_out 1
+load save_file_selected
+load_scene "TitleScreen"
+end_script
+
+
+waypoint cancel
+play_sfx "ui_locked"
+end_script
+

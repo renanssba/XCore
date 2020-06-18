@@ -18,7 +18,7 @@ namespace Command {
           VsnSaveSystem.SetVariable("selected_action_name", usedSkill.GetPrintableName());
           if(usedSkill.type == SkillType.attack) {
             if(usedSkill.damageAttribute != Attributes.endurance) {
-              scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentEnemyName();
+              scriptToLoadPath = "date_enemies/" + BattleController.instance.GetCurrentEnemyName();
               newArgs[0] = new VsnString(usedSkill.damageAttribute.ToString() + "_action"+(BattleController.instance.partyMembers[partyMemberId].isMale ? "_boy":"_girl") );
             } else {
               scriptToLoadPath = "action_descriptions";

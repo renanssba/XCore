@@ -1,0 +1,395 @@
+﻿if argsCount > 0
+  goto *arg1
+endif
+
+goto_script "enter_observation" "school morning"
+if daytime == 0
+  say "char_name/none" "cap1_conversa_ana/say_0"
+  say "cap1_conversa_ana/say_1"
+  fade_in 1
+endif
+if daytime == 1
+  say "char_name/none" "cap1_conversa_ana/say_2"
+  say "cap1_conversa_ana/say_3"
+  fade_in 1
+endif
+
+
+if daytime == 0
+  set_var passou_tempo_com_ana_hoje 1
+endif
+
+
+theater_animation "main_actor_enters"
+wait 1.8
+
+
+waypoint action_choice
+girl_interaction
+
+
+waypoint conversation
+select_dialog
+
+waypoint dialog_acquaintances_1
+say "char_name/daniel" "cap1_conversa_ana/say_4"
+say "char_name/anna" "cap1_conversa_ana/say_5"
+say "char_name/none" "cap1_conversa_ana/say_6"
+say "char_name/daniel" "cap1_conversa_ana/say_7"
+say "char_name/anna" "cap1_conversa_ana/say_8"
+say "char_name/daniel" "cap1_conversa_ana/say_9"
+say "char_name/anna" "cap1_conversa_ana/say_10"
+say "char_name/none" "cap1_conversa_ana/say_11"
+goto end_dialog
+
+waypoint dialog_acquaintances_2
+say "char_name/anna" "cap1_conversa_ana/say_12"
+say "char_name/daniel" "cap1_conversa_ana/say_13"
+say "char_name/anna" "cap1_conversa_ana/say_14"
+say "cap1_conversa_ana/say_15"
+say "char_name/daniel" "cap1_conversa_ana/say_16"
+say "char_name/anna" "cap1_conversa_ana/say_17"
+say "char_name/daniel" "cap1_conversa_ana/say_18"
+say "char_name/anna" "cap1_conversa_ana/say_19"
+say "char_name/daniel" "cap1_conversa_ana/say_20"
+goto end_dialog
+
+waypoint dialog_acquaintances_3
+say "char_name/anna" "cap1_conversa_ana/say_21"
+say "char_name/daniel" "cap1_conversa_ana/say_22"
+say "char_name/anna" "cap1_conversa_ana/say_23"
+say "cap1_conversa_ana/say_24"
+say "char_name/daniel" "cap1_conversa_ana/say_25"
+say "char_name/none" "cap1_conversa_ana/say_26"
+say "char_name/anna" "cap1_conversa_ana/say_27"
+say "char_name/daniel" "cap1_conversa_ana/say_28"
+say "char_name/none" "cap1_conversa_ana/say_29"
+goto end_dialog
+
+
+
+waypoint dialog_friends_1
+say "char_name/daniel" "cap1_conversa_ana/say_30"
+say "char_name/anna" "cap1_conversa_ana/say_31"
+say "cap1_conversa_ana/say_32"
+say "char_name/none" "cap1_conversa_ana/say_33"
+say "char_name/daniel" "cap1_conversa_ana/say_34"
+say "char_name/anna" "cap1_conversa_ana/say_35"
+say "char_name/daniel" "cap1_conversa_ana/say_36"
+say "char_name/anna" "cap1_conversa_ana/say_37"
+say "char_name/daniel" "cap1_conversa_ana/say_38"
+say "char_name/anna" "cap1_conversa_ana/say_39"
+say "char_name/daniel" "cap1_conversa_ana/say_40"
+say "char_name/anna" "cap1_conversa_ana/say_41"
+say "char_name/none" "cap1_conversa_ana/say_42"
+goto end_dialog
+
+waypoint dialog_friends_2
+// say "Daniel" "Parece que o seu super treino tá fazendo efeito, hein Ana! Olha só esses músculos!"
+// say "" "Daniel toca amigavelmente no braço de Ana, mas a garota se afasta em reflexo."
+say "char_name/daniel" "cap1_conversa_ana/say_43"
+say "char_name/none" "cap1_conversa_ana/say_44"
+say "char_name/daniel" "cap1_conversa_ana/say_45"
+say "char_name/none" "cap1_conversa_ana/say_46"
+say "char_name/daniel" "cap1_conversa_ana/say_47"
+say "char_name/anna" "cap1_conversa_ana/say_48"
+say "char_name/daniel" "cap1_conversa_ana/say_49"
+say "char_name/anna" "cap1_conversa_ana/say_50"
+say "char_name/daniel" "cap1_conversa_ana/say_51"
+say "char_name/none" "cap1_conversa_ana/say_52"
+say "char_name/anna" "cap1_conversa_ana/say_53"
+say "char_name/daniel" "cap1_conversa_ana/say_54"
+say "char_name/anna" "cap1_conversa_ana/say_55"
+goto end_dialog
+
+waypoint dialog_friends_3
+say "char_name/anna" "cap1_conversa_ana/say_56"
+say "char_name/daniel" "cap1_conversa_ana/say_57"
+say "char_name/none" "cap1_conversa_ana/say_58"
+say "char_name/anna" "cap1_conversa_ana/say_59"
+say "char_name/none" "cap1_conversa_ana/say_60"
+say "char_name/anna" "cap1_conversa_ana/say_61"
+say "char_name/none" "cap1_conversa_ana/say_62"
+say "char_name/daniel" "cap1_conversa_ana/say_63"
+say "char_name/anna" "cap1_conversa_ana/say_64"
+say "char_name/daniel" "cap1_conversa_ana/say_65"
+say "char_name/none" "cap1_conversa_ana/say_66"
+say "char_name/anna" "cap1_conversa_ana/say_67"
+say "cap1_conversa_ana/say_68"
+say "char_name/none" "cap1_conversa_ana/say_69"
+say "char_name/daniel" "cap1_conversa_ana/say_70"
+say "char_name/none" "cap1_conversa_ana/say_71"
+goto end_dialog
+
+
+
+waypoint dialog_lovers_1
+say "char_name/daniel" "cap1_conversa_ana/say_72"
+say "char_name/anna" "cap1_conversa_ana/say_73"
+say "char_name/daniel" "cap1_conversa_ana/say_74"
+say "char_name/anna" "cap1_conversa_ana/say_75"
+say "char_name/daniel" "cap1_conversa_ana/say_76"
+say "char_name/anna" "cap1_conversa_ana/say_77"
+say "char_name/daniel" "cap1_conversa_ana/say_78"
+say "char_name/none" "cap1_conversa_ana/say_79"
+say "char_name/anna" "cap1_conversa_ana/say_80"
+say "char_name/daniel" "cap1_conversa_ana/say_81"
+say "cap1_conversa_ana/say_82"
+say "char_name/anna" "cap1_conversa_ana/say_83"
+say "cap1_conversa_ana/say_84"
+say "char_name/daniel" "cap1_conversa_ana/say_85"
+goto end_dialog
+
+waypoint dialog_lovers_2
+say "char_name/anna" "cap1_conversa_ana/say_86"
+say "char_name/none" "cap1_conversa_ana/say_87"
+say "char_name/daniel" "cap1_conversa_ana/say_88"
+say "char_name/anna" "cap1_conversa_ana/say_89"
+say "char_name/daniel" "cap1_conversa_ana/say_90"
+say "char_name/anna" "cap1_conversa_ana/say_91"
+say "char_name/daniel" "cap1_conversa_ana/say_92"
+say "char_name/none" "cap1_conversa_ana/say_93"
+say "char_name/anna" "cap1_conversa_ana/say_94"
+say "char_name/daniel" "cap1_conversa_ana/say_95"
+say "char_name/anna" "cap1_conversa_ana/say_96"
+say "char_name/daniel" "cap1_conversa_ana/say_97"
+say "cap1_conversa_ana/say_98"
+say "char_name/anna" "cap1_conversa_ana/say_99"
+say "char_name/daniel" "cap1_conversa_ana/say_100"
+say "char_name/none" "cap1_conversa_ana/say_101"
+say "char_name/anna" "cap1_conversa_ana/say_102"
+say "char_name/daniel" "cap1_conversa_ana/say_103"
+goto end_dialog
+
+waypoint dialog_lovers_3
+say "char_name/anna" "cap1_conversa_ana/say_104"
+say "char_name/daniel" "cap1_conversa_ana/say_105"
+say "char_name/anna" "cap1_conversa_ana/say_106"
+say "char_name/none" "cap1_conversa_ana/say_107"
+say "char_name/daniel" "cap1_conversa_ana/say_108"
+say "char_name/anna" "cap1_conversa_ana/say_109"
+say "char_name/daniel" "cap1_conversa_ana/say_110"
+say "char_name/none" "cap1_conversa_ana/say_111"
+say "char_name/daniel" "cap1_conversa_ana/say_112"
+say "char_name/anna" "cap1_conversa_ana/say_113"
+say "cap1_conversa_ana/say_114"
+say "cap1_conversa_ana/say_115"
+say "char_name/daniel" "cap1_conversa_ana/say_116"
+say "char_name/anna" "cap1_conversa_ana/say_117"
+say "char_name/daniel" "cap1_conversa_ana/say_118"
+say "char_name/none" "cap1_conversa_ana/say_119"
+say "char_name/daniel" "cap1_conversa_ana/say_120"
+say "char_name/anna" "cap1_conversa_ana/say_121"
+goto end_dialog
+
+
+waypoint dialog_fallback
+say "char_name/none" "cap1_conversa_ana/say_122"
+say "cap1_conversa_ana/say_123"
+goto end_dialog
+
+
+waypoint end_dialog
+add_exp true 20
+goto end
+
+
+waypoint end
+if daytime == 0
+  say "char_name/none" "cap1_conversa_ana/say_124"
+endif
+if daytime == 1
+  say "char_name/none" "cap1_conversa_ana/say_125"
+endif
+goto_script "pass_time"
+end_script
+
+
+
+
+
+waypoint give_gift
+say "char_name/none" "cap1_conversa_ana/say_126"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "char_name/daniel" "cap1_conversa_ana/say_127"
+give_item 1 item_id 1
+if item_owner == 1
+  say "char_name/anna" "cap1_conversa_ana/say_128"
+  say "cap1_conversa_ana/char_name_0" "cap1_conversa_ana/say_129"
+  say "char_name/anna" "cap1_conversa_ana/say_130"
+else
+  say "char_name/anna" "cap1_conversa_ana/say_131"
+  say "cap1_conversa_ana/char_name_0" "cap1_conversa_ana/say_132"
+  add_exp true 40
+endif
+goto end
+
+
+waypoint date_intro_1
+say "char_name/anna" "cap1_conversa_ana/say_133"
+say "char_name/daniel" "cap1_conversa_ana/say_134"
+set_var date_objective "cap1_conversa_ana/set_var_0"
+goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "char_name/anna" "cap1_conversa_ana/say_135"
+say "char_name/daniel" "cap1_conversa_ana/say_136"
+say "char_name/anna" "cap1_conversa_ana/say_137"
+say "char_name/daniel" "cap1_conversa_ana/say_138"
+set_var date_objective "cap1_conversa_ana/set_var_1"
+goto_script "date"
+end_script
+
+waypoint date_intro_3
+say "char_name/daniel" "cap1_conversa_ana/say_139"
+say "char_name/anna" "cap1_conversa_ana/say_140"
+say "char_name/daniel" "cap1_conversa_ana/say_141"
+set_var date_objective "cap1_conversa_ana/set_var_2"
+goto_script "date"
+end_script
+
+
+
+waypoint date_end_1
+full_heal_party
+say "char_name/none" "cap1_conversa_ana/say_142"
+say "char_name/anna" "cap1_conversa_ana/say_143"
+say "char_name/daniel" "cap1_conversa_ana/say_144"
+end_script
+
+
+
+waypoint date_end_2
+say "char_name/none" "cap1_conversa_ana/say_145"
+say "char_name/anna" "cap1_conversa_ana/say_146"
+say "char_name/daniel" "cap1_conversa_ana/say_147"
+say "char_name/anna" "cap1_conversa_ana/say_148"
+fade_out 0.5
+full_heal_party
+
+/// become lovers dialog
+if #currentRelationshipHeartLocksOpened < 2
+  say "char_name/none" "cap1_conversa_ana/say_149"
+  fade_in 0.5
+  say "char_name/anna" "cap1_conversa_ana/say_150"
+
+  say "char_name/daniel" "cap1_conversa_ana/say_151"
+  say "char_name/anna" "cap1_conversa_ana/say_152"
+  say "char_name/daniel" "cap1_conversa_ana/say_153"
+  say "char_name/anna" "cap1_conversa_ana/say_154"
+  say "cap1_conversa_ana/say_155"
+  say "char_name/daniel" "cap1_conversa_ana/say_156"
+  say "char_name/anna" "cap1_conversa_ana/say_157"
+  say "char_name/none" "cap1_conversa_ana/say_158"
+  say "char_name/daniel" "cap1_conversa_ana/say_159"
+  say "char_name/none" "cap1_conversa_ana/say_160"
+  say "char_name/anna" "cap1_conversa_ana/say_161"
+  say "char_name/daniel" "cap1_conversa_ana/say_162"
+  say "char_name/none" "cap1_conversa_ana/say_163"
+  say "char_name/none" "cap1_conversa_ana/say_164"
+  say "char_name/daniel" "cap1_conversa_ana/say_165"
+
+  fade_music 0 1.5
+  wait 2
+  play_music "sad1_intro" "sad1_loop"
+
+  say "char_name/anna" "cap1_conversa_ana/say_166"
+  say "char_name/daniel" "cap1_conversa_ana/say_167"
+  say "cap1_conversa_ana/say_168"
+  say "char_name/anna" "cap1_conversa_ana/say_169"
+  say "char_name/none" "cap1_conversa_ana/say_170"
+
+  say "char_name/anna" "cap1_conversa_ana/say_171"
+  say "char_name/daniel" "cap1_conversa_ana/say_172"
+  say "char_name/anna" "cap1_conversa_ana/say_173"
+  say "cap1_conversa_ana/say_174"
+  say "char_name/daniel" "cap1_conversa_ana/say_175"
+  say "cap1_conversa_ana/say_176"
+  say "char_name/anna" "cap1_conversa_ana/say_177"
+  say "cap1_conversa_ana/say_178"
+  say "cap1_conversa_ana/say_179"
+  say "char_name/daniel" "cap1_conversa_ana/say_180"
+  say "char_name/anna" "cap1_conversa_ana/say_181"
+  say "char_name/daniel" "cap1_conversa_ana/say_182"
+  say "char_name/anna" "cap1_conversa_ana/say_183"
+  say "cap1_conversa_ana/say_184"
+  say "char_name/daniel" "cap1_conversa_ana/say_185"
+  say "char_name/anna" "cap1_conversa_ana/say_186"
+  say "char_name/daniel" "cap1_conversa_ana/say_187"
+  say "cap1_conversa_ana/say_188"
+  say "char_name/anna" "cap1_conversa_ana/say_189"
+  say "cap1_conversa_ana/say_190"
+  say "char_name/daniel" "cap1_conversa_ana/say_191"
+  say "char_name/anna" "cap1_conversa_ana/say_192"
+  say "cap1_conversa_ana/say_193"
+  say "char_name/none" "cap1_conversa_ana/say_194"
+  say "char_name/daniel" "cap1_conversa_ana/say_195"
+  say "char_name/anna" "cap1_conversa_ana/say_196"
+  say "char_name/none" "cap1_conversa_ana/say_197"
+  say "char_name/anna" "cap1_conversa_ana/say_198"
+  // say "" "É por isso que você é meu... er, melhor amigo."
+
+
+
+  // say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
+  // say "Ana" "..."
+  // say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
+  // say "Ana" "É. Mas eu fico com medo de que isso vá acabar."
+  // say "Daniel" "Por quê?"
+  // say "Ana" "Você sabe... Toda essa coisa da Clara."
+  // say "Ela vai na sua casa mais tarde, né? Eu imagino que vocês vão ficar mais próximos."
+  // say "Daniel" "É, sim. Eu espero que sim. É a minha grande chance."
+  // say "Ana" "Eu não.. Digo, eu torço por você. Espero que dê certo, de verdade."
+  // say "Mas... Eu só tenho medo que isso aqui acabe. Que você não queira mais passar tempo comigo."
+  // say "Daniel" "Eu vou sempre ter tempo pra você, sua boba!"
+  // say "Ana" "..."
+  // say "Daniel" "É sério. Lembra aquela vez quando a gente era pequeno e o seu cachorro me mordeu e eu disse que nunca mais ia falar contigo?"
+  // say "Ana" "Haha, lembro! Você chorou como se não houvesse amanhã!"
+  // say "Daniel" "Ei, aquilo doeu!"
+  // say "Ana" "Pô, o Panqueca era um pug tão pequenininho..."
+  // say "Daniel" "De qualquer forma. Eu não parei de falar contigo, parei?"
+  // say "Ana" "Só por uns dois dias."
+  // say "Daniel" "Pois é. Eu não parei naquele dia e não vou parar agora."
+  // say "Ana" "..."
+  // say "Ana" "Valeu. Você é um bobo, mesmo!"
+else
+  say "char_name/none" "cap1_conversa_ana/say_199"
+  fade_in 0.5
+endif
+end_script
+
+
+
+waypoint date_end_3
+// say "Daniel" "Ufa! Chegamos. Que trabalheira, hein."
+// say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
+// fade_out 0.5
+// say "" "Em seguida os dois jogam frisbee por vários minutos, até Daniel cansar."
+// fade_in 0.5
+say "char_name/anna" "cap1_conversa_ana/say_200"
+say "cap1_conversa_ana/say_201"
+say "cap1_conversa_ana/say_202"
+say "char_name/daniel" "cap1_conversa_ana/say_203"
+say "char_name/anna" "cap1_conversa_ana/say_204"
+say "cap1_conversa_ana/say_205"
+say "cap1_conversa_ana/say_206"
+say "char_name/daniel" "cap1_conversa_ana/say_207"
+say "cap1_conversa_ana/say_208"
+say "cap1_conversa_ana/say_209"
+say "char_name/daniel" "cap1_conversa_ana/say_210"
+say "char_name/none" "cap1_conversa_ana/say_211"
+say "char_name/anna" "cap1_conversa_ana/say_212"
+say "char_name/daniel" "cap1_conversa_ana/say_213"
+say "char_name/anna" "cap1_conversa_ana/say_214"
+say "cap1_conversa_ana/say_215"
+say "char_name/none" "cap1_conversa_ana/say_216"
+
+say "char_name/none" "cap1_conversa_ana/say_217"
+//fade_music 0 2.0
+end_script
+

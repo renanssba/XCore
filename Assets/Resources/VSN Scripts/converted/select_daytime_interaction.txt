@@ -1,0 +1,21 @@
+﻿fade_out 0
+bg null
+goto_script "cap1_interaction_pins"
+goto_script "show_people_screen"
+//fade_in 1
+
+if day == 0
+  goto_script "cap0_intro"
+  end_script
+endif
+
+if daytime == 0
+  goto_script "cap1_manha"
+endif
+if daytime == 1
+  goto_script "cap1_tarde"
+endif
+if daytime == 2
+  goto_script "cap1_noite"
+endif
+

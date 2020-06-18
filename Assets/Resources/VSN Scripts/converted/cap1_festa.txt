@@ -1,0 +1,435 @@
+﻿
+//DEBUG
+set_screen "girl_interaction_screen"
+//goto ir_beatrice
+//goto ir_anna
+//goto ir_clara
+
+fade_out 1
+wait 1
+say "char_name/none" "cap1_festa/say_0"
+fade_music 0 1
+wait 1.5
+theater_bg "house afternoon"
+theater_setup main "person(daniel)" "main"
+
+move_camera "main_and_enemy" 0
+
+play_music "date2_intro" "date2_loop"
+fade_in 1
+
+say "char_name/none" "cap1_festa/say_1"
+move_camera "close_focus_main" 0.5
+wait 1.0
+actor_face main "left"
+wait 0.8
+actor_face main "right"
+wait 0.8
+say "char_name/daniel" "cap1_festa/say_2"
+actor_move main "grid_5" 1.5
+
+fade_out 1.0
+say "char_name/none" "cap1_festa/say_3"
+wait 0.5
+theater_setup  main "person(daniel)" "out_left" claire "person(claire)" "grid_5" anna "person(anna)" "out_left" beatrice "person(beatrice)" "out_left"
+move_camera "girl_interaction" 0
+fade_in 1.0
+actor_move main "grid_2" 1.0
+actor_face claire "left"
+say "char_name/daniel" "cap1_festa/say_4"
+say "char_name/none" "cap1_festa/say_5"
+move_camera "main_and_enemy" 1.0
+say "char_name/none" "cap1_festa/say_6"
+actor_move main "out_left" 0
+actor_move anna "grid_2" 0
+move_camera "girl_interaction" 1.0
+say "cap1_festa/say_7"
+if conhece_beatrice == true
+  actor_move beatrice "grid_5" 0
+  actor_face beatrice "right"
+  actor_move claire "out_right" 0
+  move_camera "main_and_enemy" 1.0
+  say "cap1_festa/say_8"
+  actor_move main "main" 0
+  actor_move anna "out_left" 0
+  //move_camera "girl_interaction" 1.0
+  move_camera "close_focus_main" 1.0
+  say_auto "char_name/daniel" "cap1_festa/say_9"
+  choices "cap1_festa/choices_0_0" ir_ana "cap1_festa/choices_0_1" ir_beatrice "cap1_festa/choices_0_2" ir_clara
+else
+  actor_move main "enemy" 0
+  actor_move claire "out_right" 0
+  move_camera "close_focus_enemy" 1.0
+  say_auto "char_name/daniel" "cap1_festa/say_10"
+  choices "cap1_festa/choices_1_0" ir_ana "cap1_festa/choices_1_1" ir_clara
+endif
+
+waypoint ir_ana
+set_current_couple 0
+fade_out 1.0
+wait 1.0
+theater_setup main "person(daniel)" "grid_5" anna "person(anna)" "grid_2" guy "valentao" "out_left" guy1 "valentao" "out_left" guy2 "valentao" "out_left"
+move_camera "girl_interaction" 0
+actor_move guy -1.7 0 -0.4 0
+actor_face main "left"
+actor_face anna "left"
+fade_in 1.0
+actor_move main "grid_3" 1.0
+
+if #currentRelationshipHeartLocksOpened < 2
+  say "char_name/none" "cap1_festa/say_11"
+  say "char_name/daniel" "cap1_festa/say_12"
+  wait 0.2
+  actor_face anna "right"
+  wait 0.5
+  say "char_name/none" "cap1_festa/say_13"
+  say "char_name/anna" "cap1_festa/say_14"
+  say "char_name/none" "cap1_festa/say_15"
+  say "char_name/daniel" "cap1_festa/say_16"
+  say "char_name/anna" "cap1_festa/say_17"
+  actor_move anna "grid_3" 0.3
+  wait 0.1
+  play_sfx "pushing_person"
+  actor_move anna "grid_2" 0.5
+  say "char_name/none" "cap1_festa/say_18"
+  wait 0.5
+  actor_face anna "left"
+  wait 0.5
+  say "char_name/daniel" "cap1_festa/say_19"
+  goto bad_end
+endif
+
+say "char_name/none" "cap1_festa/say_20"
+say "char_name/anna" "cap1_festa/say_21"
+say "cap1_festa/char_name_0" "cap1_festa/say_22"
+say "char_name/none" "cap1_festa/say_23"
+say "cap1_festa/say_24"
+say "char_name/anna" "cap1_festa/say_25"
+say "cap1_festa/char_name_0" "cap1_festa/say_26"
+play_sfx "pushing_person"
+actor_move guy -1.5 0.22 -0.4 0.3
+wait 0.1
+actor_move guy -1.7 0 -0.4 0.5
+actor_move anna -0.7 0 -0.4 0.3
+//
+//say "" "O rapaz empurra Ana com força, livrando-se do abraço e derrubando a garota no chão, no meio da sala."
+say "char_name/none" "cap1_festa/say_27"
+play_sfx "surprise_gasp"
+say "cap1_festa/say_28"
+say "char_name/daniel" "cap1_festa/say_29"
+//say "" "Daniel corre até Ana e a ajuda a se levantar."
+say "char_name/daniel" "cap1_festa/say_30"
+say "char_name/none" "cap1_festa/say_31"
+say "char_name/daniel" "cap1_festa/say_32"
+say "cap1_festa/char_name_0" "cap1_festa/say_33"
+say "char_name/daniel" "cap1_festa/say_34"
+say "cap1_festa/char_name_0" "cap1_festa/say_35"
+actor_move guy1 -1.6 0 -0.3 0.5
+actor_move guy2 -1.9 0 -0.3 0.6
+say "char_name/none" "cap1_festa/say_36"
+say "char_name/none" "cap1_festa/say_37"
+say "cap1_festa/say_38"
+say "char_name/daniel" "cap1_festa/say_39"
+say "char_name/none" "cap1_festa/say_40"
+actor_face main "right"
+wait 0.1
+actor_face anna "right"
+wait 0.3
+actor_move main "grid_5" 1.2
+actor_move anna "grid_5" 1.2
+say "char_name/none" "cap1_festa/say_41"
+
+
+fade_out 1
+wait 1.2
+theater_bg "claire house external"
+theater_setup main "person(daniel)" "out_left" anna "person(anna)" "out_left"
+move_camera "girl_interaction" 0
+say "char_name/none" "cap1_festa/say_42"
+fade_in 1
+
+actor_move main "grid_3" 1.5
+actor_move anna "grid_2" 1.2
+wait 1.5
+actor_face main "left"
+wait 0.2
+say "cap1_festa/say_43"
+actor_move main -1.1 0 -0.4 1.0
+move_camera -1.2 1.3 -2.8 1.0
+wait 1.0
+say "char_name/anna" "cap1_festa/say_44"
+say "char_name/daniel" "cap1_festa/say_45"
+say "char_name/anna" "cap1_festa/say_46"
+say "char_name/none" "cap1_festa/say_47"
+say "char_name/daniel" "cap1_festa/say_48"
+say "char_name/anna" "cap1_festa/say_49"
+say "char_name/none" "cap1_festa/say_50"
+say "char_name/daniel" "cap1_festa/say_51"
+say "char_name/anna" "cap1_festa/say_52"
+wait 1
+say "char_name/daniel" "cap1_festa/say_53"
+say "char_name/anna" "cap1_festa/say_54"
+say "char_name/none" "cap1_festa/say_55"
+say "char_name/daniel" "cap1_festa/say_56"
+say "char_name/anna" "cap1_festa/say_57"
+say "char_name/daniel" "cap1_festa/say_58"
+wait 1
+say "char_name/daniel" "cap1_festa/say_59"
+say "char_name/anna" "cap1_festa/say_60"
+say "char_name/daniel" "cap1_festa/say_61"
+say "char_name/anna" "cap1_festa/say_62"
+say "char_name/daniel" "cap1_festa/say_63"
+say "char_name/anna" "cap1_festa/say_64"
+say "char_name/daniel" "cap1_festa/say_65"
+say "char_name/anna" "cap1_festa/say_66"
+say "char_name/daniel" "cap1_festa/say_67"
+say "char_name/anna" "cap1_festa/say_68"
+say "char_name/daniel" "cap1_festa/say_69"
+say "char_name/anna" "cap1_festa/say_70"
+say "char_name/daniel" "cap1_festa/say_71"
+say "char_name/anna" "cap1_festa/say_72"
+say "char_name/daniel" "cap1_festa/say_73"
+
+unlock_skill 12
+add_exp false 150
+goto end
+
+
+
+waypoint ir_beatrice
+set_current_couple 1
+fade_out 1.0
+wait 1.0
+theater_setup main "person(daniel)" "out_left" beatrice "person(beatrice)" "grid_3"
+move_camera "girl_interaction" 0
+actor_face main "right"
+fade_in 1.0
+actor_move main "grid_2" 1.5
+wait 0.3
+say "char_name/none" "cap1_festa/say_74"
+say "char_name/daniel" "cap1_festa/say_75"
+actor_face beatrice "left"
+wait 0.6
+say "char_name/beatrice" "cap1_festa/say_76"
+if #currentRelationshipHeartLocksOpened < 2
+//DEBUG BELOW, COMMENT IT AND UNCOMMENT ABOVE LINE LATER:
+//if #currentRelationshipHeartLocksOpened < 0
+  say "char_name/beatrice" "cap1_festa/say_77"
+  actor_face beatrice "right"
+  wait 0.3
+  actor_move beatrice "grid_5" 2.0
+  say "char_name/none" "cap1_festa/say_78"
+  goto bad_end
+endif
+
+say "char_name/daniel" "cap1_festa/say_79"
+say "char_name/beatrice" "cap1_festa/say_80"
+say "char_name/daniel" "cap1_festa/say_81"
+say "char_name/beatrice" "cap1_festa/say_82"
+say "char_name/daniel" "cap1_festa/say_83"
+say "char_name/beatrice" "cap1_festa/say_84"
+say "char_name/daniel" "cap1_festa/say_85"
+say "char_name/beatrice" "cap1_festa/say_86"
+say "char_name/none" "cap1_festa/say_87"
+say "char_name/beatrice" "cap1_festa/say_88"
+say "char_name/daniel" "cap1_festa/say_89"
+say "char_name/beatrice" "cap1_festa/say_90"
+say "char_name/daniel" "cap1_festa/say_91"
+say "char_name/beatrice" "cap1_festa/say_92"
+say "char_name/daniel" "cap1_festa/say_93"
+say "char_name/none" "cap1_festa/say_94"
+say "char_name/daniel" "cap1_festa/say_95"
+say "char_name/beatrice" "cap1_festa/say_96"
+fade_out 1.0
+say "char_name/none" "cap1_festa/say_97"
+say "char_name/none" "cap1_festa/say_98"
+theater_bg "claire house external"
+fade_music 0.0 3.0
+play_ambience "ambience_night"
+fade_in 2.0
+say "char_name/daniel" "cap1_festa/say_99"
+say "char_name/beatrice" "cap1_festa/say_100"
+say "char_name/daniel" "cap1_festa/say_101"
+say "char_name/none" "cap1_festa/say_102"
+say "char_name/beatrice" "cap1_festa/say_103"
+say "char_name/beatrice" "cap1_festa/say_104"
+say "char_name/daniel" "cap1_festa/say_105"
+say "char_name/beatrice" "cap1_festa/say_106"
+say "char_name/daniel" "cap1_festa/say_107"
+say "char_name/beatrice" "cap1_festa/say_108"
+say "char_name/daniel" "cap1_festa/say_109"
+say "char_name/beatrice" "cap1_festa/say_110"
+say "char_name/daniel" "cap1_festa/say_111"
+say "char_name/beatrice" "cap1_festa/say_112"
+say "char_name/none" "cap1_festa/say_113"
+say "char_name/daniel" "cap1_festa/say_114"
+say "char_name/beatrice" "cap1_festa/say_115"
+say "char_name/none" "cap1_festa/say_116"
+say "char_name/beatrice" "cap1_festa/say_117"
+say "char_name/none" "cap1_festa/say_118"
+say "char_name/beatrice" "cap1_festa/say_119"
+say "char_name/none" "cap1_festa/say_120"
+
+
+unlock_skill 12
+add_exp false 150
+stop_ambience "ambience_night"
+goto end
+
+
+
+
+waypoint ir_clara
+set_current_couple 2
+fade_out 1.0
+wait 1.0
+theater_setup main "person(daniel)" "out_left" claire "person(claire)" "grid_3" guy1 "valentao" "grid_4" guy2 "valentao" "grid_4"
+actor_move guy 0.07 0 -0.4 0
+actor_move guy2 -0.79 0 -0.34 0
+actor_face guy2 "right"
+move_camera -0.85 1.57 -4.5 0
+actor_face main "right"
+fade_in 1.0
+actor_move main "grid_1" 1.5
+wait 0.3
+
+say "char_name/none" "cap1_festa/say_121"
+say "cap1_festa/say_122"
+actor_move main -1.7 0.2 -0.4 1.5
+say "cap1_festa/say_123"
+say "char_name/daniel" "cap1_festa/say_124"
+say "char_name/none" "cap1_festa/say_125"
+//if #currentRelationshipHeartLocksOpened < 0
+if #currentRelationshipHeartLocksOpened < 2
+  say "char_name/none" "cap1_festa/say_126"
+  goto bad_end
+endif
+say "char_name/daniel" "cap1_festa/say_127"
+say "char_name/none" "cap1_festa/say_128"
+say "cap1_festa/char_name_0" "cap1_festa/say_129"
+//say "" "Clara se vira para Daniel. Um outro rapaz continua:""
+actor_face guy2 "left"
+wait 0.5
+say "cap1_festa/char_name_1" "cap1_festa/say_130"
+say "char_name/none" "cap1_festa/say_131"
+actor_face claire "left"
+wait 0.5
+say "char_name/claire" "cap1_festa/say_132"
+say "char_name/none" "cap1_festa/say_133"
+say "cap1_festa/char_name_0" "cap1_festa/say_134"
+say "char_name/claire" "cap1_festa/say_135"
+say "char_name/none" "cap1_festa/say_136"
+say "char_name/daniel" "cap1_festa/say_137"
+say "cap1_festa/char_name_0" "cap1_festa/say_138"
+say "char_name/none" "cap1_festa/say_139"
+actor_face main "left"
+wait 0.5
+actor_move main "out_left" 2.5
+say "char_name/claire" "cap1_festa/say_140"
+say "char_name/none" "cap1_festa/say_141"
+fade_out 1.0
+say "cap1_festa/say_142"
+wait 2.5
+actor_move guy1 "out_right" 0
+actor_move guy2 "out_right" 0
+actor_move main "grid_2" 0
+actor_move claire "out_right" 0
+move_camera "girl_interaction" 0
+fade_music 0 1.5
+
+say "cap1_festa/say_143"
+play_music "sad1_intro" "sad1_loop"
+
+theater_bg "claire house external"
+fade_in 1.0
+
+say "char_name/daniel" "cap1_festa/say_144"
+say "cap1_festa/say_145"
+say "char_name/none" "cap1_festa/say_146"
+//say "" "Em seguida, escuta o barulho da porta abrindo. Clara aparece de pé do lado de fora do banheiro."
+say "char_name/none" "cap1_festa/say_147"
+actor_move claire "grid_3" 2.5
+wait 2.5
+say "char_name/claire" "cap1_festa/say_148"
+actor_face main "right"
+wait 0.5
+say "char_name/daniel" "cap1_festa/say_149"
+say "char_name/claire" "cap1_festa/say_150"
+//say "" "O garoto se vira para o lado, escondendo o rosto."
+actor_face main "left"
+wait 0.5
+say "char_name/daniel" "cap1_festa/say_151"
+say "char_name/claire" "cap1_festa/say_152"
+say "cap1_festa/say_153"
+say "char_name/daniel" "cap1_festa/say_154"
+//say "" "Clara se abaixa e toca delicadamente o rosto de Daniel com uma mão, puxando-o para se virar para ela."
+actor_move claire -0.9 0 -0.4 1.8
+wait 1.5
+say "char_name/claire" "cap1_festa/say_155"
+actor_face main "right"
+wait 0.5
+move_camera -1.09 1.35 -2.92 0.5
+wait 0.4
+say "char_name/daniel" "cap1_festa/say_156"
+say "char_name/none" "cap1_festa/say_157"
+say "char_name/claire" "cap1_festa/say_158"
+say "char_name/none" "cap1_festa/say_159"
+say "char_name/daniel" "cap1_festa/say_160"
+say "char_name/claire" "cap1_festa/say_161"
+say "char_name/daniel" "cap1_festa/say_162"
+say "char_name/none" "cap1_festa/say_163"
+say "char_name/daniel" "cap1_festa/say_164"
+say "char_name/claire" "cap1_festa/say_165"
+say "char_name/daniel" "cap1_festa/say_166"
+say "char_name/claire" "cap1_festa/say_167"
+say "char_name/none" "cap1_festa/say_168"
+actor_move claire -1.1 0.2 -0.4 1.0
+wait 0.5
+say "char_name/none" "cap1_festa/say_169"
+say "char_name/claire" "cap1_festa/say_170"
+actor_move claire -0.9 0 -0.4 1.8
+say "char_name/none" "cap1_festa/say_171"
+say "cap1_festa/say_172"
+say "char_name/daniel" "cap1_festa/say_173"
+say "char_name/claire" "cap1_festa/say_174"
+wait 1
+say "char_name/daniel" "cap1_festa/say_175"
+say "char_name/claire" "cap1_festa/say_176"
+say "char_name/daniel" "cap1_festa/say_177"
+wait 1
+say "char_name/daniel" "cap1_festa/say_178"
+say "cap1_festa/say_179"
+say "cap1_festa/say_180"
+say "cap1_festa/say_181"
+say "char_name/none" "cap1_festa/say_182"
+wait 1
+say "char_name/claire" "cap1_festa/say_183"
+say "char_name/daniel" "cap1_festa/say_184"
+say "char_name/claire" "cap1_festa/say_185"
+say "cap1_festa/say_186"
+
+unlock_skill 12
+add_exp false 150
+
+say "char_name/claire" "cap1_festa/say_187"
+say "cap1_festa/say_188"
+actor_move main -1.2 0.2 -0.4 1.0
+actor_move claire -1.0 0.2 -0.4 1.0
+say "char_name/none" "cap1_festa/say_189"
+wait 1.0
+actor_move main -1.4 0.2 -0.4 1.0
+actor_move claire -0.9 0 -0.4 1.8
+goto end
+
+
+waypoint bad_end
+say "char_name/none" "cap1_festa/say_190"
+goto end
+
+
+
+waypoint end
+fade_music 0 2
+wait 3
+goto_script "pass_time"
+

@@ -1,0 +1,246 @@
+﻿goto *arg1
+
+waypoint event_statement
+
+set_var midbattle 0
+set_var first_dialog 0
+
+theater_bg_effect "pulsingEffect" 1
+fade_music 0 2
+wait 2
+say "char_name/daniel" "date_enemies/boss_anna/say_0"
+say "char_name/anna" "date_enemies/boss_anna/say_1"
+
+play_music "tension_intro" "tension_loop"
+
+wait 0.5
+theater_animation "enemy_enters"
+wait 1
+
+say "date_enemies/boss_anna/char_name_0" "date_enemies/boss_anna/say_2"
+actor_animator_parameter angel "Choosing Action" true
+say "char_name/fertiliel" "date_enemies/boss_anna/say_3"
+say "date_enemies/boss_anna/say_4"
+say "date_enemies/boss_anna/char_name_0" "date_enemies/boss_anna/say_5"
+say "date_enemies/boss_anna/say_6"
+say "char_name/anna" "date_enemies/boss_anna/say_7"
+
+
+flash "#BA2D21" 0.3
+wait 0.8
+flash "#BA2D21" 0.3
+wait 0.8
+say "char_name/anna" "date_enemies/boss_anna/say_8"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+say "char_name/daniel" "date_enemies/boss_anna/say_9"
+
+flash "#BA2D21" 0.5
+wait 0.8
+flash "#BA2D21" 0.5
+wait 0.8
+say "char_name/anna" "date_enemies/boss_anna/say_10"
+
+
+flash "#BA2D21" 0.7
+wait 0.8
+flash "#BA2D21" 0.7
+wait 0.8
+fade_out 1 "#BA2D21"
+
+wait 1
+say "char_name/none" "date_enemies/boss_anna/say_11"
+actor_become enemy "boss_anna"
+wait 0.5
+
+screenshake 2 1
+fade_in 0.7
+wait 1.5
+
+say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_12"
+
+//ANIMATION HERE
+wait 0.5
+actor_face main "right"
+wait 0.5
+say "char_name/daniel" "date_enemies/boss_anna/say_13"
+say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_14"
+
+say "char_name/anna" "date_enemies/boss_anna/say_15"
+say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_16"
+
+say "char_name/daniel" "date_enemies/boss_anna/say_17"
+say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_18"
+say "char_name/anna" "date_enemies/boss_anna/say_19"
+say "char_name/fertiliel" "date_enemies/boss_anna/say_20"
+
+
+wait 0.5
+play_music "boss1_intro" "boss1_loop"
+wait 0.5
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "think"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "date_enemies/boss_anna/set_var_0"
+set_var enemy_attacks_girl "date_enemies/boss_anna/set_var_1"
+end_script
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "date_enemies/boss_anna/set_var_2"
+end_script
+
+waypoint intelligence_action_boy
+set_var pre_attack "date_enemies/boss_anna/set_var_3"
+end_script
+
+waypoint intelligence_action_girl
+set_var pre_attack "date_enemies/boss_anna/set_var_4"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "date_enemies/boss_anna/set_var_5"
+end_script
+
+
+
+
+waypoint first_dialog
+if first_dialog == 0
+  say "char_name/daniel" "date_enemies/boss_anna/say_21"
+  say "char_name/anna" "date_enemies/boss_anna/say_22"
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_23"
+
+  say "char_name/anna" "date_enemies/boss_anna/say_24"
+  say "char_name/daniel" "date_enemies/boss_anna/say_25"
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_26"
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "char_name/daniel" "date_enemies/boss_anna/say_27"
+  say "char_name/anna" "date_enemies/boss_anna/say_28"
+
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_29"
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "char_name/anna" "date_enemies/boss_anna/say_30"
+
+  actor_animator_parameter angel "Choosing Action" true
+  say "char_name/fertiliel" "date_enemies/boss_anna/say_31"
+  say "date_enemies/boss_anna/say_32"
+  actor_animator_parameter angel "Choosing Action" false
+
+  wait 0.5
+  use_skill enemy "enemy1" 39
+  screenshake 1
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_33"
+  set_var first_dialog 1
+endif
+end_script
+
+
+
+
+waypoint midbattle_dialog
+if midbattle == 0
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_34"
+  say "date_enemies/boss_anna/say_35"
+
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "char_name/daniel" "date_enemies/boss_anna/say_36"
+  say "char_name/anna" "date_enemies/boss_anna/say_37"
+
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_38"
+  say "date_enemies/boss_anna/say_39"
+
+  say "char_name/daniel" "date_enemies/boss_anna/say_40"
+  say "date_enemies/boss_anna/say_41"
+  say "char_name/anna" "date_enemies/boss_anna/say_42"
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_43"
+  say "char_name/anna" "date_enemies/boss_anna/say_44"
+  say "date_enemies/boss_anna/say_45"
+
+  wait 0.5
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_46"
+  say "char_name/anna" "date_enemies/boss_anna/say_47"
+  wait 1
+  say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_48"
+  screenshake 2 2
+  theater_bg_effect "pulsingEffect" 2
+  wait 2
+
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "char_name/daniel" "date_enemies/boss_anna/say_49"
+  say "date_enemies/boss_anna/say_50"
+  say "date_enemies/boss_anna/say_51"
+  say "char_name/anna" "date_enemies/boss_anna/say_52"
+  say "char_name/daniel" "date_enemies/boss_anna/say_53"
+  say "char_name/anna" "date_enemies/boss_anna/say_54"
+  say "date_enemies/boss_anna/say_55"
+  say "date_enemies/boss_anna/say_56"
+  say "date_enemies/boss_anna/say_57"
+  set_var midbattle 1
+endif
+end_script
+
+
+
+
+waypoint defeated
+say "date_enemies/boss_anna/char_name_1" "date_enemies/boss_anna/say_58"
+fade_music 0 2
+wait 2
+theater_bg_effect "pulsingEffect" 0
+wait 2
+
+actor_animator_parameter enemy "Elimination"
+wait 5
+
+say "char_name/none" "date_enemies/boss_anna/say_59"
+
+actor_animator_parameter main "Battle" false
+actor_animator_parameter support "Battle" false
+wait 1
+
+say "char_name/none" "date_enemies/boss_anna/say_60"
+fade_out 1
+dialog_style "normal"
+say "char_name/fertiliel" "date_enemies/boss_anna/say_61"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "char_name/none" "date_enemies/boss_anna/say_62"
+fade_in 1
+
+say "char_name/daniel" "date_enemies/boss_anna/say_63"
+say "char_name/anna" "date_enemies/boss_anna/say_64"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "char_name/daniel" "date_enemies/boss_anna/say_65"
+say "char_name/anna" "date_enemies/boss_anna/say_66"
+
+say "char_name/daniel" "date_enemies/boss_anna/say_67"
+say "char_name/anna" "date_enemies/boss_anna/say_68"
+wait 1
+end_script
+

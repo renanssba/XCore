@@ -12,7 +12,7 @@ namespace Command {
       VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
 
       //VsnArgument[] newArgs = new VsnArgument[1];
-      //string scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentEnemyName();
+      //string scriptToLoadPath = "date_enemies/" + BattleController.instance.GetCurrentEnemyName();
 
       //switch(targetId) {
       //  case 0:

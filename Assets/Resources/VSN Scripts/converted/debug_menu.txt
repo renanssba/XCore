@@ -1,0 +1,178 @@
+﻿say_auto "debug_menu/say_0"
+set_var battle_is_happening false
+set_var currentDateEvent 0
+choices "debug_menu/choices_0_0" ana "debug_menu/choices_0_1" beatrice "debug_menu/choices_0_2" clara "choices/cancel" end
+
+
+waypoint ana
+set_current_couple 0
+set_var girl_script_name "debug_menu/set_var_0"
+goto girl_menu
+
+waypoint beatrice
+set_current_couple 1
+set_var girl_script_name "debug_menu/set_var_1"
+set_var conhece_beatrice true
+// change_person_sprite 2 6
+goto girl_menu
+
+waypoint clara
+set_current_couple 2
+set_var girl_script_name "debug_menu/set_var_2"
+goto girl_menu
+
+
+waypoint girl_menu
+choices "debug_menu/choices_1_0" add_level "debug_menu/choices_1_1" add_bond_points "debug_menu/choices_1_2" add_exp "debug_menu/choices_1_3" open_lock "debug_menu/choices_1_4" date "choices/cancel" end
+
+
+waypoint add_exp
+add_exp true 100
+goto girl_menu
+
+waypoint add_level
+add_level 1
+goto girl_menu
+
+waypoint add_bond_points
+play_sfx "ui_big_confirm"
+add_bond_points 10
+goto girl_menu
+
+waypoint open_lock
+choices "debug_menu/choices_2_0" lock_1 "debug_menu/choices_2_1" lock_2 "choices/cancel" end
+
+waypoint lock_1
+open_heart_lock 1
+actor_tint main 0 1 "white"
+actor_tint support 0 1 "white"
+goto girl_menu
+
+waypoint lock_2
+open_heart_lock 2
+actor_tint main 0 1 "white"
+actor_tint support 0 1 "white"
+goto girl_menu
+
+
+waypoint date
+choices "debug_menu/choices_3_0" date_1 "debug_menu/choices_3_1" date_2 "debug_menu/choices_3_2" date_3 "debug_menu/choices_3_3" date_options_1 "choices/cancel" end
+
+waypoint date_1
+set_var dateId 1
+setup_date
+play_music "observacao2_intro" "observacao2_loop"
+goto_script girl_script_name "date_intro_1"
+goto end
+
+waypoint date_2
+set_var dateId 2
+setup_date
+play_music "observacao2_intro" "observacao2_loop"
+goto_script girl_script_name "date_intro_2"
+goto end
+
+waypoint date_3
+set_var dateId 3
+setup_date
+play_music "observacao2_intro" "observacao2_loop"
+goto_script girl_script_name "date_intro_3"
+goto end
+
+
+waypoint date_options_1
+set_var dateId 3
+setup_date
+choices "debug_menu/choices_4_0" enemy_0 "debug_menu/choices_4_1" enemy_1 "debug_menu/choices_4_2" enemy_2 "debug_menu/choices_4_3" enemy_3 "debug_menu/choices_4_4" enemy_4 "debug_menu/choices_4_5" date_options_2
+
+waypoint date_options_2
+choices "debug_menu/choices_5_0" enemy_5 "debug_menu/choices_5_1" enemy_6 "debug_menu/choices_5_2" enemy_7 "debug_menu/choices_5_3" enemy_8 "debug_menu/choices_5_4" enemy_9 "debug_menu/choices_5_5" date_options_3
+
+waypoint date_options_3
+choices "debug_menu/choices_6_0" enemy_10 "debug_menu/choices_6_1" enemy_11 "debug_menu/choices_6_2" enemy_12 "debug_menu/choices_6_3" enemy_13 "debug_menu/choices_6_4" enemy_14 "debug_menu/choices_6_5" date_options_4
+
+waypoint date_options_4
+choices "debug_menu/choices_7_0" enemy_15 "choices/cancel" end
+
+
+waypoint enemy_0
+set_custom_battle 0
+goto custom_date
+
+waypoint enemy_1
+set_custom_battle 1
+goto custom_date
+
+waypoint enemy_2
+set_custom_battle 2
+goto custom_date
+
+waypoint enemy_3
+set_custom_battle 3
+goto custom_date
+
+waypoint enemy_4
+set_custom_battle 4
+goto custom_date
+
+waypoint enemy_5
+set_custom_battle 5
+goto custom_date
+
+waypoint enemy_6
+set_custom_battle 6
+goto custom_date
+
+waypoint enemy_7
+set_custom_battle 7
+goto custom_date
+
+waypoint enemy_8
+set_custom_battle 8
+goto custom_date
+
+waypoint enemy_9
+set_custom_battle 9
+goto custom_date
+
+waypoint enemy_10
+set_custom_battle 10
+goto custom_date
+
+waypoint enemy_11
+set_custom_battle 11
+goto custom_date
+
+waypoint enemy_12
+set_custom_battle 12
+goto custom_date
+
+waypoint enemy_13
+set_custom_battle 13
+goto custom_date
+
+waypoint enemy_14
+set_custom_battle 14
+goto custom_date
+
+waypoint enemy_15
+set_custom_battle 15
+goto custom_date
+
+waypoint enemy_16
+set_custom_battle 16
+goto custom_date
+
+
+
+waypoint custom_date
+play_music "observacao2_intro" "observacao2_loop"
+set_var date_objective "debug_menu/set_var_3"
+goto_script "date"
+goto end
+
+
+
+waypoint end
+end_script
+

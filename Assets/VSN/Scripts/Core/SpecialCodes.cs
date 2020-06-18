@@ -23,7 +23,7 @@ public class SpecialCodes {
       currentString = InterpretLeanText(currentString);
 
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date enemies/" + BattleController.instance.GetCurrentEnemyName());
+      currentString = currentString.Replace("\\currentEventName", "date_enemies/" + BattleController.instance.GetCurrentEnemyName());
       if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
         currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
       }      

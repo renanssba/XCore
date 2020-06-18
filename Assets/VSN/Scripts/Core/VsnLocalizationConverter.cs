@@ -9,6 +9,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
   Dictionary<string, string> commonCharNames;
   Dictionary<string, string> commonChoiceTexts;
+  List<string> buttonNameTexts;
 
   public void PrepareFilesForLocalization() {
     string metadataFilePath = Application.dataPath + "/Resources/VSN Scripts/converted/strings_table.csv";
@@ -16,19 +17,47 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
     commonCharNames = new Dictionary<string, string> {
       { "Fertiliel", "char_name/fertiliel" },
+      { "Graciel", "char_name/graciel" },
+      { "Hardiel", "char_name/hardiel" },
       { "\\boy", "char_name/boy" },
       { "\\girl", "char_name/girl" },
-      { "", "char_name/none" }
+      { "", "char_name/none" },
+      { "Daniel", "char_name/daniel" },
+      { "Ana", "char_name/anna" },
+      { "Beatrice", "char_name/beatrice" },
+      { "Clara", "char_name/claire" },
+      { "Valentão", "char_name/bully" }
     };
 
     commonChoiceTexts = new Dictionary<string, string> {
       { "Sim", "choices/yes" },
       { "Não", "choices/no" },
+      { "Confirmar", "choices/confirm" },
       { "Cancelar", "choices/cancel" }
     };
 
+    buttonNameTexts = new List<string>() { "dare",
+      "shout",
+      "strike",
+      "motivate",
+      "think",
+      "argue",
+      "hack",
+      "improvise",
+      "bluff",
+      "flatter",
+      "perform",
+      "soothe",
+      "pose",
+      "talk",
+      "insult",
+      "complain",
+      "beg" };
+
+
+
     metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
-    //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date");
+    metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date_enemies");
     //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
 
     Debug.LogWarning("METADATA PATH: " + metadataFilePath);
@@ -84,11 +113,13 @@ public class VsnLocalizationConverter : MonoBehaviour {
     string content = "";
     string metaContent = "";
     string metaContentNames = "";
+    string textKey;
 
     Debug.LogWarning("new path: " + newFilePath);
 
     int sayCommands = 0;
     int choiceCommands = 0;
+    int setVarToStringCommands = 0;
     List<string> charNamesList = new List<string>();
 
 
@@ -125,57 +156,86 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
       VsnCommand vsnCommand = VsnScriptReader.InstantiateVsnCommand(commandName, vsnArguments);
       if(vsnCommand != null) {
-        if(commandName == "say" || commandName == "say_auto") {
-          string textKey = metadataPath + "/say_" + sayCommands;
+        switch(commandName) {
+          case "say":
+          case "say_auto":
+            textKey = metadataPath + "/say_" + sayCommands;
 
-          content += lines[i].Replace(lines[i].TrimStart(), "");
-          content += commandName;
+            content += lines[i].Replace(lines[i].TrimStart(), "");
+            content += commandName;
 
-          if(vsnArguments.Count > 1) {
-            string charNameKey;
-            string charNameKeySaved = GetCharName(charNamesList, args[0].Substring(1, args[0].Length - 2), metadataPath);
-            if(charNameKeySaved != null) {
-              charNameKey = charNameKeySaved;
+            if(vsnArguments.Count > 1) {
+              string charNameKey;
+              string charNameKeySaved = GetCharName(charNamesList, args[0].Substring(1, args[0].Length - 2), metadataPath);
+              if(charNameKeySaved != null) {
+                charNameKey = charNameKeySaved;
+              } else {
+                charNameKey = metadataPath + "/char_name_" + charNamesList.Count;
+                charNamesList.Add(args[0].Substring(1, args[0].Length - 2));
+                metaContentNames += charNameKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"" + Environment.NewLine;
+              }
+
+              content += " \"" + charNameKey + "\" \"" + textKey + "\"";
+              metaContent += textKey + ", \"" + args[1].Substring(1, args[1].Length - 2) + "\"";
+
             } else {
-              charNameKey = metadataPath + "/char_name_" + charNamesList.Count;
-              charNamesList.Add(args[0].Substring(1, args[0].Length - 2));
-              metaContentNames += charNameKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"" + Environment.NewLine;
+              content += " \"" + textKey + "\"";
+              metaContent += textKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"";
+            }
+            content += Environment.NewLine;
+            metaContent += Environment.NewLine;
+
+            sayCommands++;
+            break;
+          case "choices":
+            textKey = metadataPath + "/choices_" + choiceCommands;
+
+            content += lines[i].Replace(lines[i].TrimStart(), "");
+            content += commandName;
+
+            for(int j = 0; j < args.Count; j += 2) {
+
+              string commonChoiceKey = GetCommonChoice(args[j].Substring(1, args[j].Length - 2));
+              if(commonChoiceKey != null) {
+                content += " \"" + commonChoiceKey + "\" " + args[j + 1];
+              } else {
+                content += " \"" + textKey + "_" + (j / 2) + "\" " + args[j + 1];
+                metaContent += textKey + "_" + (j / 2) + ", \"" + args[j].Substring(1, args[j].Length - 2) + "\"" + Environment.NewLine;
+              }
+            }
+            content += Environment.NewLine;
+
+            choiceCommands++;
+            break;
+          case "set_var":
+            // if not using set_var with a String arg
+            if(vsnArguments[1].GetType() != typeof(VsnString) ) {
+              content += lines[i];
+              break;
             }
 
-            content += " \"" + charNameKey + "\" \"" + textKey + "\"";
+            // if using set_var to a String for button name
+            if(buttonNameTexts.Contains(args[1].Substring(1, args[1].Length - 2))) {
+              content += lines[i];
+              break;
+            }
+
+            textKey = metadataPath + "/set_var_" + setVarToStringCommands;
+
+            content += lines[i].Replace(lines[i].TrimStart(), "");
+            content += commandName;
+
+            content += " " + args[0]+ " \"" + textKey + "\"";
             metaContent += textKey + ", \"" + args[1].Substring(1, args[1].Length - 2) + "\"";
 
-          } else {
-            content += " \"" + textKey + "\"";
-            metaContent += textKey + ", \"" + args[0].Substring(1, args[0].Length - 2) + "\"";
-          }
-          content += Environment.NewLine;
-          metaContent += Environment.NewLine;
+            content += Environment.NewLine;
+            metaContent += Environment.NewLine;
 
-          sayCommands++;
-        } else if(commandName == "choices") {
-          Debug.LogWarning("TODO: IMPLEMENT THIS");
-          string textKey = metadataPath + "/choices_" + choiceCommands;
-
-          content += lines[i].Replace(lines[i].TrimStart(), "");
-          content += commandName;
-
-          for(int j=0; j<args.Count; j+=2) {
-
-            string commonChoiceKey = GetCommonChoice(args[j].Substring(1, args[j].Length - 2));
-            if(commonChoiceKey != null) {
-              content += " \"" + commonChoiceKey + "\" " + args[j + 1];
-            } else {
-              content += " \"" + textKey + "_" + (j / 2) + "\" " + args[j + 1];
-              metaContent += textKey + "_" + (j / 2) + ", \"" + args[j].Substring(1, args[j].Length - 2) + "\"" + Environment.NewLine;
-            }
-          }
-          content += Environment.NewLine;
-
-          choiceCommands++;
-          //content += lines[i];
-        } else {
-          content += lines[i];
+            setVarToStringCommands++;
+            break;
+          default:
+            content += lines[i];
+            break;
         }
       } else {
         content += lines[i].TrimEnd() + Environment.NewLine;

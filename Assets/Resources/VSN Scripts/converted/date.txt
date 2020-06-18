@@ -1,0 +1,271 @@
+﻿fade_out 0.7
+bg null
+
+wait 0.5
+set_var currentDateEvent 0
+theater_animation "setup_date"
+
+move_camera "close_shot" 0
+
+set_screen "date"
+enable_input true
+set_current_character_turn -1
+
+set_var exp_accumulated 0
+set_var money_accumulated 0
+
+fade_in 0.7
+
+wait 0.5
+
+theater_animation "party_enters"
+say "char_name/none" "date/say_0"
+
+
+set_var last_enemy #dateLength
+add_var last_enemy -1
+
+
+for currentDateEvent #dateLength
+  waypoint new_enemy_appears
+  actor_face main "right"
+  move_camera "battle_view" 0.5
+  wait 0.5
+
+  set_var currentBattleTurn 0
+  goto_script "\currentEventName" event_statement
+
+  wait 0.3
+  actor_animator_parameter main "Battle" true
+  actor_animator_parameter support "Battle" true
+  actor_animator_parameter enemy "Battle" true
+
+  // play battle song
+  if "\currentMusic" != "boss1_loop"
+    play_music "battle1_intro" "battle1_loop"
+  endif
+  wait 0.5
+
+
+  // if currentDateEvent == 0
+    // say "\boy" "E agora, o que faremos?"
+    // say "\girl" "Eu vou te proteger!"
+  // else
+    // say "\girl" "Fica comigo!"
+    // say "\boy" "Vamos lutar juntos."
+  // endif
+
+  show_date_ui true
+  wait 0.5
+
+  goto_script "check_passive_triggers" "enemy_appears"
+
+
+  waypoint start_new_turn
+
+  add_var currentBattleTurn 1
+  goto_script "check_passive_triggers" "turn_started"
+
+  // PARTY MEMBERS receive effects from conditions (like take poison damage)
+  for currentPlayerTurn #partyLength
+    for currentStatusCondition #currentPlayerStatusConditionsCount
+      activate_status_condition_effect currentPlayerTurn currentStatusCondition
+    endfor
+  endfor
+
+  // ENEMY receives effects from conditions
+  for currentStatusCondition #currentEnemyStatusConditionsCount
+    activate_status_condition_effect 3 currentStatusCondition
+  endfor
+  // end turn (to pass time on status conditions)
+  end_turn
+
+  goto_script "check_passive_triggers" "before_death_checks"
+  if #currentHp <= 0
+    goto fail_date
+  endif
+
+
+  // if opponent is defeated, go to new event
+  if #currentEnemyHp <= 0
+    goto defeat_enemy
+  endif
+
+
+  // character action inputs
+  for currentPlayerTurn #partyLength
+
+    // first battle tutorials
+    if tutorial_skills == false
+      goto_script "tutorials" "using_skills"
+    endif
+    if tutorial_fertiliel == false
+      if currentPlayerTurn == 2
+        if currentBattleTurn == 1
+          goto_script "tutorials" "fertiliel_skip_first_turn"
+        else
+          goto_script "tutorials" "fertiliel_actions"
+        endif
+      endif      
+    endif
+
+    /// Skip action input if already selected
+    if input_already_selected == true
+      set_var input_already_selected false
+      continue
+    endif
+
+    /// Ask for action input if not selected
+    action_input currentPlayerTurn
+  endfor
+
+  set_current_character_turn -1
+  wait 0.5
+
+  // execute player actions
+  for currentPlayerTurn #partyLength
+    check_action_skip currentPlayerTurn
+    goto_script "check_passive_triggers" "before_action"
+    character_action_description currentPlayerTurn
+    character_action currentPlayerTurn
+    goto_script "check_passive_triggers" "after_action"
+    wait 0.5
+  endfor
+
+  // if enemy is defeated, go to new enemy
+  if #currentEnemyHp <= 0
+    goto defeat_enemy
+  endif
+
+
+  // enemy turn
+  set_var currentPlayerTurn 0
+  enemy_attack_target
+  goto_script "check_passive_triggers" "before_enemy_attack"
+  enemy_attack
+  goto_script "check_passive_triggers" "after_enemy_attack"
+
+
+  goto_script "check_passive_triggers" "before_death_checks"
+  if #currentHp <= 0
+    goto fail_date
+  endif
+
+  goto start_new_turn
+endfor
+
+
+
+
+waypoint defeat_enemy
+goto_script "\currentEventName" defeated
+add_var exp_accumulated #currentEnemyExp
+add_var money_accumulated #currentEnemyMoney
+theater_animation "enemy_leaves"
+challenge_result true
+update_ui
+play_sfx "ui_success"
+wait 2
+
+goto_script "check_passive_triggers" "enemy_defeated"
+
+show_date_ui false
+wait 0.5
+fade_music 0 1
+move_camera "close_shot" 1.5
+wait 2
+play_music "observacao2_intro" "observacao2_loop"
+wait 0.3
+actor_face main "left"
+wait 0.3
+if currentDateEvent == last_enemy
+  goto advance_battle
+endif
+if currentDateEvent == 0
+  say "char_name/none" "date/say_1"
+  //say "\boy" "Isso foi estranho, né?"
+  //say "\girl" "Sim, mas ainda bem que deu tudo certo."
+  //say "" "Subitamente, um novo desafio aparece..."
+endif
+if currentDateEvent == 1
+  say "char_name/none" "date/say_2"
+  //say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
+  //say "\girl" "É mesmo? O que é?"
+  //say "" "Antes que \boy pudesse continuar..."
+endif
+if currentDateEvent > 1
+  say "char_name/none" "date/say_3"
+endif
+goto advance_battle
+
+
+waypoint advance_battle
+add_var currentDateEvent 1
+if currentDateEvent >= #dateLength
+  goto win_date
+else
+  goto new_enemy_appears
+endif
+
+
+
+
+waypoint win_date
+enable_input false
+//say "" "Depois de muitos percalços..."
+goto_script "cap1_date_end"
+
+play_sfx "date_end"
+play_sfx "date_end"
+say "char_name/none" "date/say_4"
+// show_date_ui false
+
+add_exp false exp_accumulated
+play_sfx "ui_money"
+add_var money money_accumulated
+say "char_name/none" "date/say_5"
+
+if shop_unlock_advance == 0
+  set_var shop_unlock_advance 1
+endif
+if #currentDateId == 2
+  if shop_unlock_final == 0
+    set_var shop_unlock_final 1
+  endif
+endif
+open_heart_lock #currentDateId
+actor_tint main 0 1 "white"
+actor_tint support 0 1 "white"
+wait 1
+goto end
+
+
+waypoint fail_date
+challenge_result false
+update_ui
+play_sfx "ui_fail"
+wait 2
+enable_input false
+say "char_name/none" "date/say_6"
+say "char_name/boy" "date/say_7"
+say "char_name/girl" "date/say_8"
+say "char_name/none" "date/say_9"
+
+if exp_accumulated > 0
+  say "char_name/none" "date/say_10"
+  add_exp false exp_accumulated
+  add_var money money_accumulated
+  play_sfx "ui_money"
+  say "char_name/none" "date/say_11"
+  set_var exp_accumulated 0
+endif
+
+// show_date_ui false
+goto end
+
+
+
+waypoint end
+end_date
+goto_script "pass_time"
+

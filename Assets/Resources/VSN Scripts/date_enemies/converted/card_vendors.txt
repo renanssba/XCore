@@ -1,0 +1,69 @@
+﻿goto *arg1
+
+waypoint event_statement
+theater_animation "enemy_enters"
+say "char_name/none" "date_enemies/card_vendors/say_0"
+say "date_enemies/card_vendors/char_name_0" "date_enemies/card_vendors/say_1"
+say "char_name/daniel" "date_enemies/card_vendors/say_2"
+say "date_enemies/card_vendors/char_name_0" "date_enemies/card_vendors/say_3"
+
+if #currentGirlId == 1
+  say "char_name/anna" "date_enemies/card_vendors/say_4"
+endif
+if #currentGirlId == 2
+  say "char_name/beatrice" "date_enemies/card_vendors/say_5"
+endif
+if #currentGirlId == 3
+  say "char_name/claire" "date_enemies/card_vendors/say_6"
+endif
+
+say "date_enemies/card_vendors/char_name_1" "date_enemies/card_vendors/say_7"
+if #currentGirlId == 1
+  say "char_name/anna" "date_enemies/card_vendors/say_8"
+endif
+if #currentGirlId == 2
+  say "char_name/beatrice" "date_enemies/card_vendors/say_9"
+endif
+if #currentGirlId == 3
+  say "char_name/claire" "date_enemies/card_vendors/say_10"
+endif
+say "date_enemies/card_vendors/char_name_1" "date_enemies/card_vendors/say_11"
+
+
+
+set_var guts_action_boy_name "shout"
+set_var guts_action_girl_name "shout"
+set_var intelligence_action_boy_name "bluff"
+set_var intelligence_action_girl_name "bluff"
+set_var charisma_action_boy_name "talk"
+set_var charisma_action_girl_name "talk"
+
+set_var enemy_attacks_boy "date_enemies/card_vendors/set_var_0"
+set_var enemy_attacks_girl "date_enemies/card_vendors/set_var_1"
+end_script
+
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "date_enemies/card_vendors/set_var_2"
+end_script
+
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+set_var pre_attack "date_enemies/card_vendors/set_var_3"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "date_enemies/card_vendors/set_var_4"
+end_script
+
+
+
+waypoint defeated
+say "date_enemies/card_vendors/char_name_0" "date_enemies/card_vendors/say_12"
+say "date_enemies/card_vendors/char_name_1" "date_enemies/card_vendors/say_13"
+say "char_name/none" "date_enemies/card_vendors/say_14"
+end_script
+

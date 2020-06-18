@@ -27,7 +27,7 @@ namespace Command {
 
 
     public static void StartCustomEvent(string customEventWaypoint) {
-      string scriptToLoadPath = "date enemies/" + BattleController.instance.GetCurrentEnemyName();
+      string scriptToLoadPath = "date_enemies/" + BattleController.instance.GetCurrentEnemyName();
       VsnArgument[] newArgs = new VsnArgument[1];
       newArgs[0] = new VsnString(customEventWaypoint);
       GotoScriptCommand.StaticExecute(scriptToLoadPath, newArgs);

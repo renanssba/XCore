@@ -1,0 +1,422 @@
+﻿if argsCount > 0
+  goto *arg1
+endif
+
+goto_script "enter_observation" "house afternoon"
+say "char_name/none" "cap1_conversa_clara/say_0"
+theater_setup main "person(daniel)" "grid_3" support "person(claire)" "out_left"
+move_camera "girl_interaction" 0
+actor_face main "left"
+fade_in 1
+
+
+if daytime != 2
+  set_var passou_tempo_com_clara_hoje 1
+endif
+
+
+// if day == dia_festa_clara
+  // say "" "Daniel passa um bom tempo esperando Clara vir para continuarem o trabalho de história, mas a garota não aparece."
+  // say "Ele manda uma mensagem de texto perguntando porque ela não veio, e ela responde:"
+  // say "Clara" "Oi Daniel, desculpa! :( Hoje o meu dia foi muito corrido organizando o aniversário e acabei me esquecendo de te avisar..."
+  // say "Podemos continuar o trabalho amanhã? Espero que venha para a festa :)"
+  // goto_script "pass_time"
+  // end_script
+// endif
+
+
+if #currentRelationshipLevel == 0
+  say "char_name/daniel" "cap1_conversa_clara/say_1"
+  say "cap1_conversa_clara/say_2"
+  play_sfx "doorbell"
+  wait 1
+  say "char_name/none" "cap1_conversa_clara/say_3"
+  actor_move main "grid_2" 1.5
+  wait 1.0
+  say "cap1_conversa_clara/say_4"
+  play_sfx "door_open"
+  wait 0.5
+  actor_move main "grid_3" 1.5
+  //theater_animation "support_actor_enters"
+  actor_move support "grid_2" 1.5
+  wait 1.5
+
+  say "char_name/daniel" "cap1_conversa_clara/say_5"
+  say "char_name/claire" "cap1_conversa_clara/say_6"
+  say "char_name/none" "cap1_conversa_clara/say_7"
+  //say "Um pequeno silêncio se segue. A garota sorri e pergunta:"
+  //say "Clara" "Vamos entrar?"
+  //say "Daniel" "C-Claro!"
+  //say "" "A garota sorridente entra, dá uma olhada ao redor e senta-se à mesa da sala. Daniel a segue em silêncio e se senta de frente para ela."
+  say "char_name/none" "cap1_conversa_clara/say_8"
+  say "cap1_conversa_clara/say_9"
+  say "char_name/none" "cap1_conversa_clara/say_10"
+  wait 1.0
+  actor_face support "left"
+  wait 1.5
+  actor_face support "right"
+  say "char_name/claire" "cap1_conversa_clara/say_11"
+  say "char_name/daniel" "cap1_conversa_clara/say_12"
+  wait 2
+  say "char_name/none" "cap1_conversa_clara/say_13"
+  say "char_name/daniel" "cap1_conversa_clara/say_14"
+  say "char_name/claire" "cap1_conversa_clara/say_15"
+  say "char_name/daniel" "cap1_conversa_clara/say_16"
+  play_sfx "status_hungry"
+  wait 1.0
+  say "char_name/none" "cap1_conversa_clara/say_17"
+  wait 1
+  say "char_name/daniel" "cap1_conversa_clara/say_18"
+  say "cap1_conversa_clara/say_19"
+  say "char_name/claire" "cap1_conversa_clara/say_20"
+  say "char_name/none" "cap1_conversa_clara/say_21"
+  say "char_name/daniel" "cap1_conversa_clara/say_22"
+  say "char_name/claire" "cap1_conversa_clara/say_23"
+  say "char_name/none" "cap1_conversa_clara/say_24"
+  actor_face main "right"
+  actor_move main "out_right" 1.5
+  wait 1.5
+  play_sfx "cooking"
+  wait 3.5
+  actor_face main "left"
+  actor_move main "grid_3" 1.5
+  //say "" "Daniel sorri e se dirige até a cozinha para preparar a refeição."
+  say "cap1_conversa_clara/say_25"
+  say "char_name/daniel" "cap1_conversa_clara/say_26"
+  say "char_name/none" "cap1_conversa_clara/say_27"
+  say "char_name/claire" "cap1_conversa_clara/say_28"
+  say "char_name/daniel" "cap1_conversa_clara/say_29"
+  say "char_name/claire" "cap1_conversa_clara/say_30"
+  say "char_name/none" "cap1_conversa_clara/say_31"
+
+  add_exp false 20
+  goto end
+endif
+
+
+
+say "cap1_conversa_clara/say_32"
+
+//theater_animation "support_actor_enters"
+actor_move support "grid_2" 1.5
+wait 1.8
+
+waypoint action_choice
+girl_interaction
+
+
+waypoint conversation
+select_dialog
+
+waypoint dialog_acquaintances_1
+say "char_name/none" "cap1_conversa_clara/say_33"
+say "char_name/daniel" "cap1_conversa_clara/say_34"
+say "char_name/none" "cap1_conversa_clara/say_35"
+say "char_name/claire" "cap1_conversa_clara/say_36"
+say "char_name/daniel" "cap1_conversa_clara/say_37"
+say "char_name/claire" "cap1_conversa_clara/say_38"
+say "char_name/none" "cap1_conversa_clara/say_39"
+goto end_dialog
+
+waypoint dialog_acquaintances_2
+say "char_name/claire" "cap1_conversa_clara/say_40"
+say "char_name/daniel" "cap1_conversa_clara/say_41"
+say "char_name/claire" "cap1_conversa_clara/say_42"
+say "char_name/daniel" "cap1_conversa_clara/say_43"
+say "char_name/none" "cap1_conversa_clara/say_44"
+goto end_dialog
+
+waypoint dialog_acquaintances_3
+say "char_name/claire" "cap1_conversa_clara/say_45"
+say "char_name/daniel" "cap1_conversa_clara/say_46"
+say "char_name/claire" "cap1_conversa_clara/say_47"
+say "char_name/daniel" "cap1_conversa_clara/say_48"
+say "char_name/claire" "cap1_conversa_clara/say_49"
+say "cap1_conversa_clara/say_50"
+say "char_name/none" "cap1_conversa_clara/say_51"
+goto end_dialog
+
+
+
+waypoint dialog_friends_1
+say "char_name/none" "cap1_conversa_clara/say_52"
+say "char_name/daniel" "cap1_conversa_clara/say_53"
+say "char_name/claire" "cap1_conversa_clara/say_54"
+say "char_name/claire" "cap1_conversa_clara/say_55"
+say "char_name/daniel" "cap1_conversa_clara/say_56"
+say "char_name/claire" "cap1_conversa_clara/say_57"
+say "char_name/daniel" "cap1_conversa_clara/say_58"
+say "char_name/none" "cap1_conversa_clara/say_59"
+goto end_dialog
+
+waypoint dialog_friends_2
+say "char_name/none" "cap1_conversa_clara/say_60"
+say "char_name/daniel" "cap1_conversa_clara/say_61"
+say "char_name/claire" "cap1_conversa_clara/say_62"
+say "char_name/daniel" "cap1_conversa_clara/say_63"
+say "char_name/claire" "cap1_conversa_clara/say_64"
+say "char_name/none" "cap1_conversa_clara/say_65"
+say "char_name/daniel" "cap1_conversa_clara/say_66"
+say "char_name/claire" "cap1_conversa_clara/say_67"
+say "char_name/daniel" "cap1_conversa_clara/say_68"
+say "char_name/none" "cap1_conversa_clara/say_69"
+goto end_dialog
+
+waypoint dialog_friends_3
+say "char_name/claire" "cap1_conversa_clara/say_70"
+say "char_name/daniel" "cap1_conversa_clara/say_71"
+say "char_name/claire" "cap1_conversa_clara/say_72"
+say "char_name/none" "cap1_conversa_clara/say_73"
+say "char_name/claire" "cap1_conversa_clara/say_74"
+say "char_name/none" "cap1_conversa_clara/say_75"
+say "char_name/claire" "cap1_conversa_clara/say_76"
+say "char_name/none" "cap1_conversa_clara/say_77"
+say "char_name/daniel" "cap1_conversa_clara/say_78"
+say "char_name/claire" "cap1_conversa_clara/say_79"
+say "char_name/none" "cap1_conversa_clara/say_80"
+goto end_dialog
+
+
+
+waypoint dialog_lovers_1
+say "char_name/daniel" "cap1_conversa_clara/say_81"
+say "char_name/none" "cap1_conversa_clara/say_82"
+say "char_name/claire" "cap1_conversa_clara/say_83"
+say "char_name/daniel" "cap1_conversa_clara/say_84"
+say "char_name/claire" "cap1_conversa_clara/say_85"
+say "char_name/none" "cap1_conversa_clara/say_86"
+say "char_name/none" "cap1_conversa_clara/say_87"
+say "char_name/claire" "cap1_conversa_clara/say_88"
+say "char_name/none" "cap1_conversa_clara/say_89"
+say "char_name/daniel" "cap1_conversa_clara/say_90"
+say "char_name/claire" "cap1_conversa_clara/say_91"
+say "char_name/daniel" "cap1_conversa_clara/say_92"
+say "char_name/claire" "cap1_conversa_clara/say_93"
+say "char_name/claire" "cap1_conversa_clara/say_94"
+say "char_name/none" "cap1_conversa_clara/say_95"
+goto end_dialog
+
+waypoint dialog_lovers_2
+say "char_name/claire" "cap1_conversa_clara/say_96"
+say "char_name/daniel" "cap1_conversa_clara/say_97"
+say "char_name/none" "cap1_conversa_clara/say_98"
+say "char_name/daniel" "cap1_conversa_clara/say_99"
+say "char_name/claire" "cap1_conversa_clara/say_100"
+say "char_name/daniel" "cap1_conversa_clara/say_101"
+say "char_name/claire" "cap1_conversa_clara/say_102"
+say "char_name/none" "cap1_conversa_clara/say_103"
+say "char_name/claire" "cap1_conversa_clara/say_104"
+say "char_name/none" "cap1_conversa_clara/say_105"
+say "char_name/claire" "cap1_conversa_clara/say_106"
+say "char_name/daniel" "cap1_conversa_clara/say_107"
+say "char_name/none" "cap1_conversa_clara/say_108"
+goto end_dialog
+
+waypoint dialog_lovers_3
+say "char_name/none" "cap1_conversa_clara/say_109"
+say "char_name/daniel" "cap1_conversa_clara/say_110"
+say "char_name/claire" "cap1_conversa_clara/say_111"
+say "char_name/daniel" "cap1_conversa_clara/say_112"
+say "char_name/claire" "cap1_conversa_clara/say_113"
+say "char_name/none" "cap1_conversa_clara/say_114"
+say "char_name/daniel" "cap1_conversa_clara/say_115"
+say "char_name/claire" "cap1_conversa_clara/say_116"
+say "char_name/none" "cap1_conversa_clara/say_117"
+say "char_name/daniel" "cap1_conversa_clara/say_118"
+say "char_name/claire" "cap1_conversa_clara/say_119"
+say "char_name/daniel" "cap1_conversa_clara/say_120"
+say "cap1_conversa_clara/say_121"
+say "char_name/claire" "cap1_conversa_clara/say_122"
+say "char_name/daniel" "cap1_conversa_clara/say_123"
+say "cap1_conversa_clara/say_124"
+say "char_name/claire" "cap1_conversa_clara/say_125"
+say "char_name/daniel" "cap1_conversa_clara/say_126"
+say "char_name/claire" "cap1_conversa_clara/say_127"
+say "char_name/daniel" "cap1_conversa_clara/say_128"
+say "cap1_conversa_clara/say_129"
+say "char_name/none" "cap1_conversa_clara/say_130"
+say "char_name/claire" "cap1_conversa_clara/say_131"
+say "char_name/none" "cap1_conversa_clara/say_132"
+goto end_dialog
+
+
+waypoint dialog_fallback
+say "cap1_conversa_clara/say_133"
+goto end_dialog
+
+
+waypoint end_dialog
+add_exp true 20
+goto end
+
+
+
+waypoint end
+say "char_name/none" "cap1_conversa_clara/say_134"
+goto_script "pass_time"
+end_script
+
+
+
+
+
+waypoint give_gift
+say "char_name/none" "cap1_conversa_clara/say_135"
+item_choice
+if item_id == -1
+  goto action_choice
+endif
+
+say "char_name/daniel" "cap1_conversa_clara/say_136"
+give_item 3 item_id 1
+if item_owner == 3
+  say "char_name/claire" "cap1_conversa_clara/say_137"
+  say "char_name/daniel" "cap1_conversa_clara/say_138"
+  say "char_name/claire" "cap1_conversa_clara/say_139"
+else
+  say "char_name/claire" "cap1_conversa_clara/say_140"
+  say "char_name/daniel" "cap1_conversa_clara/say_141"
+  add_exp true 40
+endif
+goto end
+
+
+waypoint date_intro_1
+say "char_name/daniel" "cap1_conversa_clara/say_142"
+say "char_name/claire" "cap1_conversa_clara/say_143"
+set_var date_objective "cap1_conversa_clara/set_var_0"
+goto_script "date"
+end_script
+
+waypoint date_intro_2
+say "char_name/none" "cap1_conversa_clara/say_144"
+say "char_name/claire" "cap1_conversa_clara/say_145"
+say "char_name/daniel" "cap1_conversa_clara/say_146"
+say "char_name/claire" "cap1_conversa_clara/say_147"
+set_var date_objective "cap1_conversa_clara/set_var_1"
+goto_script "date"
+end_script
+
+waypoint date_intro_3
+say "char_name/daniel" "cap1_conversa_clara/say_148"
+say "char_name/claire" "cap1_conversa_clara/say_149"
+say "char_name/daniel" "cap1_conversa_clara/say_150"
+set_var date_objective "cap1_conversa_clara/set_var_2"
+goto_script "date"
+end_script
+
+
+
+waypoint date_end_1
+full_heal_party
+say "char_name/none" "cap1_conversa_clara/say_151"
+say "char_name/claire" "cap1_conversa_clara/say_152"
+say "char_name/daniel" "cap1_conversa_clara/say_153"
+end_script
+
+
+
+waypoint date_end_2
+say "char_name/none" "cap1_conversa_clara/say_154"
+say "char_name/claire" "cap1_conversa_clara/say_155"
+say "char_name/daniel" "cap1_conversa_clara/say_156"
+say "char_name/claire" "cap1_conversa_clara/say_157"
+fade_out 0.5
+full_heal_party
+say "char_name/none" "cap1_conversa_clara/say_158"
+fade_in 0.5
+
+say "char_name/daniel" "cap1_conversa_clara/say_159"
+say "char_name/claire" "cap1_conversa_clara/say_160"
+say "cap1_conversa_clara/say_161"
+say "char_name/daniel" "cap1_conversa_clara/say_162"
+say "char_name/claire" "cap1_conversa_clara/say_163"
+say "char_name/daniel" "cap1_conversa_clara/say_164"
+say "char_name/claire" "cap1_conversa_clara/say_165"
+
+fade_music 0 1.5
+wait 2
+play_music "sad1_intro" "sad1_loop"
+
+say "char_name/daniel" "cap1_conversa_clara/say_166"
+say "cap1_conversa_clara/say_167"
+say "char_name/claire" "cap1_conversa_clara/say_168"
+say "char_name/daniel" "cap1_conversa_clara/say_169"
+say "char_name/claire" "cap1_conversa_clara/say_170"
+say "char_name/daniel" "cap1_conversa_clara/say_171"
+say "char_name/claire" "cap1_conversa_clara/say_172"
+wait 1
+say "cap1_conversa_clara/say_173"
+say "cap1_conversa_clara/say_174"
+say "char_name/daniel" "cap1_conversa_clara/say_175"
+say "cap1_conversa_clara/say_176"
+say "char_name/claire" "cap1_conversa_clara/say_177"
+say "char_name/daniel" "cap1_conversa_clara/say_178"
+say "cap1_conversa_clara/say_179"
+say "char_name/claire" "cap1_conversa_clara/say_180"
+say "char_name/daniel" "cap1_conversa_clara/say_181"
+say "cap1_conversa_clara/say_182"
+say "cap1_conversa_clara/say_183"
+say "cap1_conversa_clara/say_184"
+say "char_name/none" "cap1_conversa_clara/say_185"
+say "char_name/claire" "cap1_conversa_clara/say_186"
+say "cap1_conversa_clara/say_187"
+say "cap1_conversa_clara/say_188"
+say "char_name/daniel" "cap1_conversa_clara/say_189"
+say "char_name/claire" "cap1_conversa_clara/say_190"
+say "cap1_conversa_clara/say_191"
+say "cap1_conversa_clara/say_192"
+say "char_name/daniel" "cap1_conversa_clara/say_193"
+say "cap1_conversa_clara/say_194"
+say "cap1_conversa_clara/say_195"
+say "char_name/claire" "cap1_conversa_clara/say_196"
+say "char_name/daniel" "cap1_conversa_clara/say_197"
+say "char_name/none" "cap1_conversa_clara/say_198"
+say "char_name/none" "cap1_conversa_clara/say_199"
+say "char_name/claire" "cap1_conversa_clara/say_200"
+say "char_name/daniel" "cap1_conversa_clara/say_201"
+say "char_name/claire" "cap1_conversa_clara/say_202"
+say "char_name/daniel" "cap1_conversa_clara/say_203"
+say "char_name/claire" "cap1_conversa_clara/say_204"
+say "char_name/daniel" "cap1_conversa_clara/say_205"
+say "char_name/claire" "cap1_conversa_clara/say_206"
+say "char_name/daniel" "cap1_conversa_clara/say_207"
+say "cap1_conversa_clara/say_208"
+say "char_name/claire" "cap1_conversa_clara/say_209"
+say "char_name/daniel" "cap1_conversa_clara/say_210"
+say "cap1_conversa_clara/say_211"
+say "char_name/claire" "cap1_conversa_clara/say_212"
+say "char_name/daniel" "cap1_conversa_clara/say_213"
+end_script
+
+
+
+waypoint date_end_3
+// say "Daniel" "Aqui, Clara. Esse é um bom local pra estender a toalha."
+// say "Clara" "Eba!!! Piquenique! Piquenique!"
+// fade_out 0.5
+// say "" "Daniel abre a cestinha que trouxe e tira sanduíches, frutas e outras guloseimas. Os dois curtem um delicioso piquenique."
+// fade_in 0.5
+
+say "char_name/claire" "cap1_conversa_clara/say_214"
+say "cap1_conversa_clara/say_215"
+say "cap1_conversa_clara/say_216"
+say "cap1_conversa_clara/say_217"
+say "char_name/daniel" "cap1_conversa_clara/say_218"
+say "char_name/claire" "cap1_conversa_clara/say_219"
+say "cap1_conversa_clara/say_220"
+say "char_name/daniel" "cap1_conversa_clara/say_221"
+say "char_name/claire" "cap1_conversa_clara/say_222"
+say "cap1_conversa_clara/say_223"
+say "cap1_conversa_clara/say_224"
+say "char_name/daniel" "cap1_conversa_clara/say_225"
+say "char_name/claire" "cap1_conversa_clara/say_226"
+say "cap1_conversa_clara/say_227"
+say "char_name/none" "cap1_conversa_clara/say_228"
+say "char_name/claire" "cap1_conversa_clara/say_229"
+say "char_name/daniel" "cap1_conversa_clara/say_230"
+say "cap1_conversa_clara/say_231"
+
+say "char_name/none" "cap1_conversa_clara/say_232"
+end_script
+
