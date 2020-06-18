@@ -1,4 +1,4 @@
-fade_out 0.7
+﻿fade_out 0.7
 bg null
 
 wait 0.5
@@ -17,7 +17,7 @@ wait 0.5
 
 theater_animation "party_enters"
 
-say "" "\couple estavam andando tranquilamente em direção ao local \vsn(date_objective), quando de repente..."
+say "char_name/none" "alternate_date_flow/say_0"
 
 
 set_var last_enemy #dateLength
@@ -78,24 +78,24 @@ for currentDateEvent #dateLength
   // execute player turn
   // for currentPlayerTurn #partyLength
     check_action_skip currentPlayerTurn
-    
+
     // do actions
     character_action_description currentPlayerTurn
     character_action currentPlayerTurn
-    
+
     // receive effects from conditions
     goto_script "check_passive_triggers" "after_action"
     for currentStatusCondition #currentPlayerStatusConditionsCount
       activate_status_condition_effect currentPlayerTurn currentStatusCondition
     endfor
     end_turn currentPlayerTurn
-    
+
     // check death
     goto_script "check_passive_triggers" "before_death_checks"
     if #currentHp <= 0
       goto fail_date
     endif
-    
+
     wait 0.5
     // if opponent is defeated, go to new event
     if #currentEnemyHp <= 0
@@ -116,20 +116,20 @@ for currentDateEvent #dateLength
   goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
   goto_script "check_passive_triggers" "after_enemy_attack"
-  
+
   // ENEMY receives effects from conditions
   for currentStatusCondition #currentEnemyStatusConditionsCount
     activate_status_condition_effect 3 currentStatusCondition
   endfor
   end_turn 3
-  
+
   // if enemy is defeated, go to new enemy
   if #currentEnemyHp <= 0
     goto defeat_enemy
   endif
-  
-  
-  
+
+
+
   goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
     goto fail_date
@@ -162,19 +162,19 @@ if currentDateEvent == last_enemy
   goto advance_battle
 endif
 if currentDateEvent == 0
-  say "" "O casal continua indo em direção ao seu objetivo."
-  say "\boy" "Isso foi estranho, né?"
-  say "\girl" "Sim, mas ainda bem que deu tudo certo."
-  say "" "Subitamente, um novo desafio aparece..."
+  say "char_name/none" "alternate_date_flow/say_1"
+  say "char_name/boy" "alternate_date_flow/say_2"
+  say "char_name/girl" "alternate_date_flow/say_3"
+  say "char_name/none" "alternate_date_flow/say_4"
 endif
 if currentDateEvent == 1
-  say "" "Após os ânimos se acalmarem, o casal continua conversando."
-  say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
-  say "\girl" "É mesmo? O que é?"
-  say "" "Antes que \boy pudesse continuar..."
+  say "char_name/none" "alternate_date_flow/say_5"
+  say "char_name/boy" "alternate_date_flow/say_6"
+  say "char_name/girl" "alternate_date_flow/say_7"
+  say "char_name/none" "alternate_date_flow/say_8"
 endif
 if currentDateEvent > 1
-  say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."
+  say "char_name/none" "alternate_date_flow/say_9"
 endif
 goto advance_battle
 
@@ -195,7 +195,7 @@ waypoint win_date
 enable_input false
 //say "" "Depois de muitos percalços..."
 goto_script "cap1_date_end"
-say "char_name/none" "date/say_4"
+say "alternate_date_flow/char_name_0" "alternate_date_flow/say_10"
 // show_date_ui false
 
 if #currentDateId == 1
@@ -218,10 +218,10 @@ update_ui
 play_sfx "ui_fail"
 wait 2
 enable_input false
-say "" "\couple decidem que o encontro não está dando certo."
-say "\boy" "Podemos continuar esse encontro outro dia..."
-say "\girl" "Sim, com certeza será melhor..."
-say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
+say "char_name/none" "alternate_date_flow/say_11"
+say "char_name/boy" "alternate_date_flow/say_12"
+say "char_name/girl" "alternate_date_flow/say_13"
+say "char_name/none" "alternate_date_flow/say_14"
 // show_date_ui false
 goto end
 
@@ -230,3 +230,4 @@ goto end
 waypoint end
 end_date
 goto_script "pass_time"
+

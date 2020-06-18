@@ -1,4 +1,4 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
 
@@ -9,25 +9,25 @@ set_var intelligence_action_girl_name "argue"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
 
-set_var enemy_attacks_boy "O valentão humilha \boy com apelidos!"
-set_var enemy_attacks_girl "O valentão empurra \girl para longe!"
+set_var enemy_attacks_boy "date_enemies/bully_0/set_var_0"
+set_var enemy_attacks_girl "date_enemies/bully_0/set_var_1"
 end_script
 
 
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active dá um soco no valentão!"
+set_var pre_attack "date_enemies/bully_0/set_var_2"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que o topete do valentão é idiota!"
+set_var pre_attack "date_enemies/bully_0/set_var_3"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active diz que o valentão não vai ganhar nada atacando-os."
+set_var pre_attack "date_enemies/bully_0/set_var_4"
 end_script
 
 
@@ -36,7 +36,7 @@ end_script
 waypoint heal_main
 actor_animator_parameter angel "Battle" true
 actor_animator_parameter angel "Choosing Action" true
-say "Fertiliel" "(Hm... ela parece estar sofrendo. Eu sei que é contra as regras, mas vou dar uma ajudinha aqui.)"
+say "char_name/fertiliel" "date_enemies/bully_0/say_0"
 actor_animator_parameter angel "Choosing Action" false
 wait 0.5
 use_skill angel "partyMember1" 33
@@ -48,3 +48,4 @@ end_script
 
 waypoint defeated
 end_script
+

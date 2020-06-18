@@ -1,9 +1,0 @@
-﻿
-if #currentDateId == 2  set_var dia_festa_clara day  add_var dia_festa_clara 1endif
-
-if #currentGirlId == 1  if #currentDateId == 1    goto_script "cap1_conversa_ana" "date_end_1"  endif  if #currentDateId == 2    goto_script "cap1_conversa_ana" "date_end_2"  endif  if #currentDateId == 3    goto_script "cap1_conversa_ana" "date_end_3"  endifendif
-
-if #currentGirlId == 2  if #currentDateId == 1    goto_script "cap1_conversa_beatrice" "date_end_1"  endif  if #currentDateId == 2    goto_script "cap1_conversa_beatrice" "date_end_2"  endif  if #currentDateId == 3    goto_script "cap1_conversa_beatrice" "date_end_3"  endifendif
-
-if #currentGirlId == 3  if #currentDateId == 1    goto_script "cap1_conversa_clara" "date_end_1"  endif  if #currentDateId == 2    goto_script "cap1_conversa_clara" "date_end_2"  endif  if #currentDateId == 3    goto_script "cap1_conversa_clara" "date_end_3"  endifendif
-

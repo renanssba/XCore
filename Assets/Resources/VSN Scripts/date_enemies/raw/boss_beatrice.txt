@@ -1,0 +1,255 @@
+goto *arg1
+
+waypoint event_statement
+
+set_var midbattle 0
+set_var first_dialog 0
+
+theater_bg_effect "flamingEffect" 1
+fade_music 0 2
+wait 2
+say "Daniel" "Você notou isso?"
+say "Beatrice" "Que estranho... Ficou escuro de repente?"
+
+play_music "tension_intro" "tension_loop"
+
+wait 0.5
+theater_animation "enemy_enters"
+wait 1
+
+say "Criatura Sombria" "Esta... sombra..."
+actor_animator_parameter angel "Choosing Action" true
+say "Fertiliel" "(Um Devorador de Sombras?!)"
+say "(Por que tem um desses por aqui?)"
+say "Criatura Sombria" "Tanta culpa, tanta negação..."
+say "A sombra desta garota... preciso devorá-la."
+say "Beatrice" "O que está acontecendo?"
+
+
+flash "#1A2B66" 0.3
+wait 0.8
+flash "#1A2B66" 0.3
+wait 0.8
+say "Beatrice" "Ai, minha cabeça dói..."
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+say "Daniel" "Você tá bem?"
+
+flash "#1A2B66" 0.5
+wait 0.8
+flash "#1A2B66" 0.5
+wait 0.8
+say "Beatrice" "Acho que vou desmaiar..."
+
+
+flash "#1A2B66" 0.7
+wait 0.8
+flash "#1A2B66" 0.7
+wait 0.8
+fade_out 1 "#1A2B66"
+
+wait 1
+say "" "<color=white>Aaaaargh!</color>"
+actor_become enemy "boss_beatrice"
+wait 0.5
+
+screenshake 2 1
+fade_in 0.7
+wait 1.5
+
+say "Beatrice Sombria" "Aí está você!"
+
+//ANIMATION HERE
+wait 0.5
+actor_face main "right"
+wait 0.5
+say "Daniel" "Quem é você?"
+say "Beatrice Sombria" "Que falta de poder dedutivo, não me surpreende. Não consegue reconhecer sua amiga <b>Beatrice</b>?"
+
+say "Beatrice" "Que fenômeno estranho. Ela realmente se parece um pouco comigo. Será que estou alucinando?"
+say "Beatrice Sombria" "Isto não é uma alucinação. Eu realmente sou <b>Beatrice</b>. Eu sou você!"
+
+say "Beatrice" "Essa conversa não tem lógica alguma. Acho que devemos nos afastar dessa garota, Daniel."
+say "Daniel" "De fato, ela parece perigosa..."
+say "Beatrice Sombria" "Eu não vou permitir. Você não pode fugir de mim, Beatrice!"
+say "Fertiliel" "(Esse demônio parece perigoso, tenho que proteger meus humanos!)"
+
+
+wait 0.5
+play_music "boss1_intro" "boss1_loop"
+wait 0.5
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "think"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "A sombra diz que \boy está atrapalhando Beatrice!"
+set_var enemy_attacks_girl "A sombra chama \girl de preguiçosa!"
+end_script
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active empurra a sombra!"
+end_script
+
+waypoint intelligence_action_boy
+set_var pre_attack "\active diz que a sombra está perdendo tempo de trabalho com eles!"
+end_script
+
+waypoint intelligence_action_girl
+set_var pre_attack "\active se concentra em pensamentos felizes!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active diz que eles não precisam lutar!"
+end_script
+
+
+
+
+waypoint first_dialog
+if first_dialog == 0
+  say "Daniel" "O que está havendo por aqui? Será que estamos sonhando?"
+  
+  say "Beatrice" "É a única explicação racional. Não acho que alguém como essa criatura possa existir."
+  say "Beatrice Sombria" "Eu não sou qualquer criatura. Eu sou você, <b>Beatrice</b>."
+  
+  say "Beatrice" "Certo, claro. E no que mais você quer que eu acredite?"
+  say "Daniel" "Porque você está nos atacando?"
+  say "Beatrice Sombria" "Eu estou furiosa com a <b>Beatrice</b>, porque ela está perdendo tempo aqui com você! Porque ela não está trabalhando?"
+  
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Daniel" "Beatrice, eu estou te atrapalhando...?"
+  say "Beatrice" "Não! Eu... eu posso ter um pouco de folga..."
+  
+  say "Beatrice Sombria" "Um pouco de folga? Você só mereceria isso se estivesse tendo progressos na pesquisa."
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Beatrice" "Para, eu estou me esforçando! Eu não preciso me justificar pra você, nem sei quem você é..."
+  say "Beatrice Sombria" "Você não pode fugir de si mesma! Eu vou fazer você pagar!"
+  
+  
+  actor_animator_parameter angel "Choosing Action" true
+  say "Fertiliel" "(Esse demônio se alimenta de sentimentos reprimidos e negativos dos humanos.)"
+  say "(Não posso deixar que o Daniel e a Beatrice percam o controle, ou o demônio ficará mais forte e pode machucar mais pessoas.)"
+  actor_animator_parameter angel "Choosing Action" false
+  
+  wait 0.5
+  use_skill enemy "allHeroes" 46
+  screenshake 1
+  say "Beatrice Sombria" "Eu vou te mostrar, sua preguiçosa!!!"
+  set_var first_dialog 1
+endif
+end_script
+
+
+
+
+waypoint midbattle_dialog
+if midbattle == 0
+  say "Beatrice Sombria" "Não importa o quanto eu tente, eu não consigo progredir na pesquisa do meu pai. Eu sou preguiçosa e incompetente."
+  say "Eu sei que ele estaria <b>muito decepcionado</b> se pudesse me ver agora, passeando ao invés de trabalhar."
+  
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Daniel" "Beatrice... Você se cobra tanto assim?"
+  say "Beatrice" "Eu... realmente não estou progredindo tanto quanto gostaria..."
+  
+  say "Beatrice Sombria" "Eu me achava inteligente, mas a coisa pela qual eu mais me esforço não dá certo. É uma pena que eu seja assim, mas a realidade é que eu não consigo fazer nada direito."
+  say "A única pessoa que se importava comigo era o meu pai, e eu nem consigo contribuir pra pesquisa dele. Eu sou uma inútil."
+  
+  say "Daniel" "..."
+  say "É assim que você se sente, Beatrice? Você... se sente responsável por terminar a pesquisa do seu pai?"
+  say "Beatrice" "Eu... não sou boa em muitas coisas..."
+  say "Beatrice Sombria" "E por isso você é uma decepção para o seu pai!"
+  say "Beatrice" "Não, para!"
+  say "Eu estou tentando o melhor que posso. E por mais que seja vergonhoso... Esses sentimentos são meus!"
+  
+  wait 0.5
+  say "Beatrice Sombria" "Finalmente você entendeu. Esses são os seus sentimentos, porque eu sou <b>você</b>. Você e eu somos uma só!!!"
+  say "Beatrice" "Eu não tenho ideia do que está acontecendo... Mas talvez você e eu sejamos a mesma pessoa."
+  wait 1
+  say "Beatrice Sombria" "Sim, <b>nós somos</b>!!!"
+  use_skill enemy "partyMember2" 47
+  screenshake 2 2
+  theater_bg_effect "flamingEffect" 2
+  wait 2
+  
+  say "Beatrice Sombria" "E você é uma perda de tempo, Daniel. Se afaste de nós e pare de ser uma distração!"
+  
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Daniel" "Eu não vou deixar a Beatrice sozinha!"
+  say "Eu sei o quanto ela se esforça, dia após dia, pra continuar a pesquisa do pai. E o quanto ela o ama."
+  say "Mas não posso vê-la es esforçando tanto a ponto de se machucar e se pôr em perigo. Por mais que ela pareça durona, eu sei o quanto a Beatrice é uma garota amável e está sofrendo por dentro."
+  say "Beatrice" "Daniel..."
+  say "Daniel" "E ela é a pessoa mais especial do mundo pra mim. Pare de projetar essa culpa nela!"
+  say "Beatrice" "Não, Daniel. Ela tá certa. Eu realmente me sinto culpada..."
+  say "Eu achei que isso não ia me afetar, e quis ser forte desde que o meu pai se foi. Mas eu não posso mais continuar fugindo..."
+  say "Se eu vou ter que lidar com esses sentimentos, que seja agora! Eu só não vou deixar que essa criatura me diga como fazer isso!"
+  
+  say "Beatrice Sombria" "Pois vocês irão sofrer!"
+  use_skill enemy "allHeroes" 46
+  
+  set_var midbattle 1
+endif
+end_script
+
+
+
+
+waypoint defeated
+say "Beatrice Sombria" "Meu trabalho... Ainda não terminei meu trabalho..."
+fade_music 0 2
+wait 2
+theater_bg_effect "pulsingEffect" 0
+wait 2
+
+actor_animator_parameter enemy "Elimination"
+wait 5
+
+say "" "A sombra se dissolve em névoa."
+
+actor_animator_parameter main "Battle" false
+actor_animator_parameter support "Battle" false
+wait 1
+
+say "" "Esgotados, Daniel e Beatrice caem no chão, desacordados."
+fade_out 1
+dialog_style "normal"
+say "Fertiliel" "(Parece que eu vou ter que cuidar deles até acordarem.)"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "" "Alguns minutos depois, os dois acordam."
+fade_in 1
+
+say "Daniel" "Ai, minha cabeça dói... Que pesadelo estranho foi esse?"
+say "Beatrice" "Pesadelo?"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "Daniel" "Sim, eu tive um pesadelo com uma... versão deturpada de você."
+say "Beatrice" "Sério? Será que você teve o mesmo pesadelo que eu?"
+
+say "Daniel" "Que estranho, mas parece que sim. Você tá bem?"
+say "Beatrice" "Só um pouco cansada."
+wait 1
+end_script

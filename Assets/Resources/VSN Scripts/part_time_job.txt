@@ -2,18 +2,18 @@
 update_ui
 
 set_var part_time_intro true
-say_auto "Você pode usar este turno para trabalhar e ganhar dinheiro. Deseja trabalhar?"
-choices "Trabalhar" work "Cancelar" end
+say_auto "part_time_job/say_0"
+choices "part_time_job/choices_0_0" work "choices/cancel" end
 
 waypoint work
 set_var minigame_score 200
 
 fade_out 0.7
-say "" "Fertiliel trabalhou por algumas horas em uma sorveteria do Céu."
+say "char_name/none" "part_time_job/say_1"
 update_ui
 play_sfx "ui_money"
 add_var money minigame_score
-say "" "Ao final do expediente ela faturou <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(minigame_score)</color>!"
+say "char_name/none" "part_time_job/say_2"
 goto_script "pass_time"
 
 
@@ -31,3 +31,4 @@ goto end
 waypoint end
 set_var hide_buttons 0
 update_ui
+

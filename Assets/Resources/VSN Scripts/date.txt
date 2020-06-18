@@ -1,4 +1,4 @@
-fade_out 0.7
+﻿fade_out 0.7
 bg null
 
 wait 0.5
@@ -19,7 +19,7 @@ fade_in 0.7
 wait 0.5
 
 theater_animation "party_enters"
-say "" "\couple estavam andando tranquilamente em direção ao local \vsn(date_objective), quando de repente..."
+say "char_name/none" "date/say_0"
 
 
 set_var last_enemy #dateLength
@@ -34,18 +34,18 @@ for currentDateEvent #dateLength
 
   set_var currentBattleTurn 0
   goto_script "\currentEventName" event_statement
-  
+
   wait 0.3
   actor_animator_parameter main "Battle" true
   actor_animator_parameter support "Battle" true
   actor_animator_parameter enemy "Battle" true
-  
+
   // play battle song
   if "\currentMusic" != "boss1_loop"
     play_music "battle1_intro" "battle1_loop"
   endif
   wait 0.5
-  
+
 
   // if currentDateEvent == 0
     // say "\boy" "E agora, o que faremos?"
@@ -79,13 +79,13 @@ for currentDateEvent #dateLength
   endfor
   // end turn (to pass time on status conditions)
   end_turn
-  
+
   goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
     goto fail_date
   endif
-  
-  
+
+
   // if opponent is defeated, go to new event
   if #currentEnemyHp <= 0
     goto defeat_enemy
@@ -94,7 +94,7 @@ for currentDateEvent #dateLength
 
   // character action inputs
   for currentPlayerTurn #partyLength
-    
+
     // first battle tutorials
     if tutorial_skills == false
       goto_script "tutorials" "using_skills"
@@ -108,13 +108,13 @@ for currentDateEvent #dateLength
         endif
       endif      
     endif
-    
+
     /// Skip action input if already selected
     if input_already_selected == true
       set_var input_already_selected false
       continue
     endif
-    
+
     /// Ask for action input if not selected
     action_input currentPlayerTurn
   endfor
@@ -131,7 +131,7 @@ for currentDateEvent #dateLength
     goto_script "check_passive_triggers" "after_action"
     wait 0.5
   endfor
-  
+
   // if enemy is defeated, go to new enemy
   if #currentEnemyHp <= 0
     goto defeat_enemy
@@ -144,8 +144,8 @@ for currentDateEvent #dateLength
   goto_script "check_passive_triggers" "before_enemy_attack"
   enemy_attack
   goto_script "check_passive_triggers" "after_enemy_attack"
-  
-  
+
+
   goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
     goto fail_date
@@ -182,19 +182,19 @@ if currentDateEvent == last_enemy
   goto advance_battle
 endif
 if currentDateEvent == 0
-  say "" "O casal continua indo em direção ao seu objetivo."
+  say "char_name/none" "date/say_1"
   //say "\boy" "Isso foi estranho, né?"
   //say "\girl" "Sim, mas ainda bem que deu tudo certo."
   //say "" "Subitamente, um novo desafio aparece..."
 endif
 if currentDateEvent == 1
-  say "" "Após os ânimos se acalmarem, o casal continua conversando."
+  say "char_name/none" "date/say_2"
   //say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
   //say "\girl" "É mesmo? O que é?"
   //say "" "Antes que \boy pudesse continuar..."
 endif
 if currentDateEvent > 1
-  say "" "O casal sente que está chegando mais perto do seu objetivo, mas dessa vez..."
+  say "char_name/none" "date/say_3"
 endif
 goto advance_battle
 
@@ -217,13 +217,13 @@ goto_script "cap1_date_end"
 
 play_sfx "date_end"
 play_sfx "date_end"
-say "" "O encontro acabou, e foi um <color=green>grande sucesso</color>!"
+say "char_name/none" "date/say_4"
 // show_date_ui false
 
 add_exp false exp_accumulated
 play_sfx "ui_money"
 add_var money money_accumulated
-say "" "Fertiliel adquiriu <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(money_accumulated)</color>!"
+say "char_name/none" "date/say_5"
 
 if shop_unlock_advance == 0
   set_var shop_unlock_advance 1
@@ -246,17 +246,17 @@ update_ui
 play_sfx "ui_fail"
 wait 2
 enable_input false
-say "" "\couple decidem que o encontro não está dando certo."
-say "\boy" "Podemos continuar esse encontro outro dia..."
-say "\girl" "Sim, com certeza será melhor..."
-say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
+say "char_name/none" "date/say_6"
+say "char_name/boy" "date/say_7"
+say "char_name/girl" "date/say_8"
+say "char_name/none" "date/say_9"
 
 if exp_accumulated > 0
-  say "" "Mesmo assim, os desafios que eles venceram os aproximou."
+  say "char_name/none" "date/say_10"
   add_exp false exp_accumulated
   add_var money money_accumulated
   play_sfx "ui_money"
-  say "" "Fertiliel adquiriu <sprite=\qAttributes\q index=4><color=#EFD95A>\vsn(money_accumulated)</color>!"
+  say "char_name/none" "date/say_11"
   set_var exp_accumulated 0
 endif
 
@@ -268,3 +268,4 @@ goto end
 waypoint end
 end_date
 goto_script "pass_time"
+

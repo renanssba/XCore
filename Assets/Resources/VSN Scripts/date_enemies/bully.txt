@@ -1,33 +1,33 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "Valentão" "Ora, ora. Olha só quem eu encontrei por aqui!"
-say "Daniel" "Ah, não..."
+say "char_name/bully" "date_enemies/bully/say_0"
+say "char_name/daniel" "date_enemies/bully/say_1"
 wait 0.5
 theater_animation "enemy_enters"
 wait 0.5
 
-say "Valentão" "Dando um passeio pelo parque, Biscoitinho?"
-say "Daniel" "Qual é cara, me deixa em paz. Eu não quero briga contigo..."
-say "Valentão" "Ah, mas aqui fora do colégio o negócio é diferente."
+say "char_name/bully" "date_enemies/bully/say_2"
+say "char_name/daniel" "date_enemies/bully/say_3"
+say "char_name/bully" "date_enemies/bully/say_4"
 
 if #currentGirlId == 1
-  say "Dessa vez essa nanica não vai ser o suficiente pra te proteger."
-  say "Ana" "Eu já te derrotei uma vez, você voltou pra apanhar mais?"
-  say "Valentão" "Naquela hora eu tava despreparado, não contou."
+  say "date_enemies/bully/say_5"
+  say "char_name/anna" "date_enemies/bully/say_6"
+  say "char_name/bully" "date_enemies/bully/say_7"
 else
-  say "Dessa vez aquela nanica não vai te proteger."
+  say "date_enemies/bully/say_8"
 endif
 if #currentGirlId == 2
-  say "Beatrice" "Eu acho uma pena... Tem gente que não tem cérebro e precisa recorrer à violência."
-  say "Valentão" "Uma esquisitona e um otário, vocês dois se merecem..."
+  say "char_name/beatrice" "date_enemies/bully/say_9"
+  say "char_name/bully" "date_enemies/bully/say_10"
 endif
 if #currentGirlId == 3
-  say "Clara" "Para com isso, Spike! Deixa o Daniel em paz."
-  say "Valentão" "Não se mete, Clarinha. Ele tá me devendo uma."
+  say "char_name/claire" "date_enemies/bully/say_11"
+  say "char_name/bully" "date_enemies/bully/say_12"
 endif
 
-say "Valentão" "Dessa vez eu tenho uma arma secreta."
+say "char_name/bully" "date_enemies/bully/say_13"
 
 wait 0.5
 actor_animator_parameter enemy "Battle" true
@@ -37,7 +37,7 @@ add_overlay enemy "valentao-oculos" true
 play_sfx "shine"
 wait 0.3
 
-say "Hahaha! Agora você vai ver, Biscoitinho!"
+say "date_enemies/bully/say_14"
 
 
 set_var guts_action_boy_name "strike"
@@ -47,39 +47,40 @@ set_var intelligence_action_girl_name "insult"
 set_var charisma_action_boy_name "soothe"
 set_var charisma_action_girl_name "soothe"
 
-set_var enemy_attacks_boy "O valentão humilha \boy com apelidos!"
-set_var enemy_attacks_girl "O valentão aplica uma cantada de mau-gosto em \girl!"
+set_var enemy_attacks_boy "date_enemies/bully/set_var_0"
+set_var enemy_attacks_girl "date_enemies/bully/set_var_1"
 end_script
 
 
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active dá um soco no valentão!"
+set_var pre_attack "date_enemies/bully/set_var_2"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que os óculos fazem ele parecer estúpido!"
+set_var pre_attack "date_enemies/bully/set_var_3"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active diz que o valentão não vai ganhar nada atacando-os."
+set_var pre_attack "date_enemies/bully/set_var_4"
 end_script
 
 
 
 waypoint defeated
-say "" "No meio da briga, os óculos escuros do valentão quebram."
+say "char_name/none" "date_enemies/bully/say_15"
 wait 0.3
 play_sfx "glass_break"
 add_overlay enemy "valentao-oculos" false
 wait 0.3
-say "Valentão" "Droga! Esses óculos são caros, onde será que eu arranjo conserto?"
-say "" "O valentão vai embora correndo!"
+say "char_name/bully" "date_enemies/bully/say_16"
+say "char_name/none" "date_enemies/bully/say_17"
 actor_move enemy "out_right" 0.5
 wait 1
 
-say "\couple riem bastante do ocorrido."
+say "date_enemies/bully/say_18"
 end_script
+

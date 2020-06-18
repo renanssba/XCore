@@ -1,9 +1,9 @@
-/// DEBUG
+﻿/// DEBUG
 // fade_in 0
 // say "" "..."
 fade_music 0 0
-say "Deseja visualizar os tutoriais? (Recomendado caso não tenha jogado o jogo anteriormente)"
-choices "Sim, por favor." tutorials_yes "Não, já conheço o sistema." tutorials_no
+say "cap1_dia1/say_0"
+choices "cap1_dia1/choices_0_0" tutorials_yes "cap1_dia1/choices_0_1" tutorials_no
 
 waypoint tutorials_yes
 set_var hide_tutorials false
@@ -53,13 +53,13 @@ actor_move support "main" 0
 actor_move enemy "enemy" 0
 move_camera -1.26 1.3 -3.6 0
 
-say "No dia seguinte, já no Mundo dos Humanos, Fertiliel começa sua primeira missão."
+say "cap1_dia1/say_1"
 
 
 fade_in 1
 tutorial_icon "fertiliel_arrow" true
-say "Fertiliel" "(Ok, então este é o meu primeiro humano, Daniel. Tá dizendo aqui que ele não é particularmente forte, inteligente nem carismático. Seus hobbies incluem: ler livros e cozinhar.)"
-say "(Aparentemente ele também não tem muita sorte com as garotas...)"
+say "char_name/fertiliel" "cap1_dia1/say_2"
+say "cap1_dia1/say_3"
 tutorial_icon "fertiliel_arrow" false
 //fade_in 1
 actor_animator_parameter angel "Choosing Action" false
@@ -70,13 +70,13 @@ wait 1.5
 // actor_move enemy "enemy" 0.5
 // wait 0.5
 
-say "Delinquente" "Passa agora o dinheiro do lanche, meu chapa!"
-say "Fertiliel" "(...e com os colegas de classe também, aparentemente.)"
-say "Daniel" "M-Mas eu não tô com dinheiro nenhum. Eu sempre trago lanche de casa."
-say "Delinquente" "Que perdedor! Além de ser um otário, nem dinheiro tem!"
-say "Daniel" "Pois é... Então p-por favor, pode me deixar ir? Não quero me atrasar pra aula..."
-say "Delinquente" "Você é muito patético, você acha que vai resolver alguma coisa <color=yellow>implorando</color>?"
-say "Vou te ensinar uma lição, seu <color=yellow>covarde</color>!"
+say "cap1_dia1/char_name_0" "cap1_dia1/say_4"
+say "char_name/fertiliel" "cap1_dia1/say_5"
+say "char_name/daniel" "cap1_dia1/say_6"
+say "cap1_dia1/char_name_0" "cap1_dia1/say_7"
+say "char_name/daniel" "cap1_dia1/say_8"
+say "cap1_dia1/char_name_0" "cap1_dia1/say_9"
+say "cap1_dia1/say_10"
 
 
 play_sfx "action_strike"
@@ -91,8 +91,8 @@ actor_move support -1.2 0 1 0.2
 wait 1
 // bully ataca daniel
 
-say "Daniel" "Para! Eu não quero brigar..."
-say "???" "Por que você não mexe com alguém do seu tamanho?"
+say "char_name/daniel" "cap1_dia1/say_11"
+say "cap1_dia1/char_name_1" "cap1_dia1/say_12"
 
 // Ana entra
 move_camera "battle_view" 0.5
@@ -103,11 +103,11 @@ wait 1
 wait 0.3
 actor_face support "left"
 wait 0.3
-say "Daniel" "Ana?!"
-say "Delinquente" "Qual é baixinha, vai encarar?"
-say "Ana" "Eu vou, não posso deixar que machuque o meu amigo assim!"
-say "Daniel" "Cuidado, Ana!"
-say "Ana" "Não se preocupe, eu sei me virar."
+say "char_name/daniel" "cap1_dia1/say_13"
+say "cap1_dia1/char_name_0" "cap1_dia1/say_14"
+say "char_name/anna" "cap1_dia1/say_15"
+say "char_name/daniel" "cap1_dia1/say_16"
+say "char_name/anna" "cap1_dia1/say_17"
 
 actor_face support "right"
 wait 0.3
@@ -129,7 +129,7 @@ actor_animator_parameter main "Battle" false
 actor_animator_parameter support "Battle" false
 actor_animator_parameter enemy "Battle" false
 
-say "Delinquente" "Você até que é forte... Mas isso não vai ficar assim!"
+say "cap1_dia1/char_name_0" "cap1_dia1/say_18"
 
 wait 0.5
 actor_face enemy "right"
@@ -138,51 +138,51 @@ actor_move enemy "out_right" 1.5
 wait 1.5
 
 //say "" "O delinquente sai andando todo ferido."
-say "Ana" "E não volte a incomodar!"
+say "char_name/anna" "cap1_dia1/say_19"
 
 actor_move support "support" 1
 move_camera "close_shot" 1
 wait 1.5
 actor_face main "left"
 wait 0.5
-say "Daniel" "Valeu Ana, esse cara me enche o saco toda hora."
-say "Ana" "Eu sei. O que seria de você sem mim, hein?"
-say "Daniel" "Haha, convencida você. Mas obrigado mesmo, vou dividir o lanche que eu fiz contigo."
-say "Ana" "Eba, eu adoro seus bolos!"
+say "char_name/daniel" "cap1_dia1/say_20"
+say "char_name/anna" "cap1_dia1/say_21"
+say "char_name/daniel" "cap1_dia1/say_22"
+say "char_name/anna" "cap1_dia1/say_23"
 
 add_exp false 20 0
 
-say "Daniel" "Você tá bem? Ele te machucou?"
-say "Ana" "Nada, é só um fracote convencido. E você?"
-say "Daniel" "Não me machucou, mas..."
+say "char_name/daniel" "cap1_dia1/say_24"
+say "char_name/anna" "cap1_dia1/say_25"
+say "char_name/daniel" "cap1_dia1/say_26"
 wait 1
-say "...Algo que ele falou está me incomodando."
-say "Ana" "O que é?"
-say "Daniel" "Ele falou que eu sou um covarde que só sabe implorar..."
+say "cap1_dia1/say_27"
+say "char_name/anna" "cap1_dia1/say_28"
+say "char_name/daniel" "cap1_dia1/say_29"
 
-say "Ana" "Você não é um covarde!"
+say "char_name/anna" "cap1_dia1/say_30"
 
-say "Daniel" "Claro que eu sou. Eu nem consigo me declarar para a menina que eu gosto."
-say "" "Ana engole em seco."
-say "Daniel" "...A Clara."
-say "Ana" "É aquela que se mudou para a nossa turma no começo do ano, né?"
+say "char_name/daniel" "cap1_dia1/say_31"
+say "char_name/none" "cap1_dia1/say_32"
+say "char_name/daniel" "cap1_dia1/say_33"
+say "char_name/anna" "cap1_dia1/say_34"
 
-say "Daniel" "Ela mesma. Ela é incrível, a menina dos meus sonhos!"
+say "char_name/daniel" "cap1_dia1/say_35"
 
-say "Ana" "Você gosta mesmo dela, hein? Tem quantos anos isso?"
-say "Daniel" "Faz... muito tempo. Sei lá, uns seis anos?"
+say "char_name/anna" "cap1_dia1/say_36"
+say "char_name/daniel" "cap1_dia1/say_37"
 
-say "Ana" "Você poderia tentar falar com ela."
+say "char_name/anna" "cap1_dia1/say_38"
 
-say "Daniel" "Ela é muito popular, todo mundo gosta dela. Acho que eu não teria nenhuma chance."
-say "E, você sabe..."
+say "char_name/daniel" "cap1_dia1/say_39"
+say "cap1_dia1/say_40"
 
-say "Daniel abaixa o rosto e continua a falar, de forma encabulada."
+say "cap1_dia1/say_41"
 
-say "Daniel" "Já estamos terminando o terceiro ano e eu nunca beijei uma garota."
-say "Se eu chegar na faculdade sem nunca ter beijado alguém vou ser motivo de piada pra sempre."
-say "E provavelmente vou morrer sozinho."
-say "Ana" "Calma, não é assim!"
+say "char_name/daniel" "cap1_dia1/say_42"
+say "cap1_dia1/say_43"
+say "cap1_dia1/say_44"
+say "char_name/anna" "cap1_dia1/say_45"
 
 // say "Você é legal, com certeza vai encontrar alguém. Não tem aquela garota aqui do colégio que você gosta?"
 
@@ -192,10 +192,10 @@ say "Ana" "Calma, não é assim!"
 
 // say "Ana" "E você já falou com ela?"
 // say "Daniel" "Não. Ela é muito popular, todo mundo gosta dela. Acho que eu não teria nenhuma chance."
-say "Você é legal, com certeza vai encontrar alguém. Tenta falar com a Clara! Você não vai saber se tem chances se não tentar."
-say "" "Daniel leva a mão ao queixo, pensativo. Depois de ponderar por um minuto, ele concorda."
-say "Daniel" "Tudo bem. Tenho que aproveitar antes que o ano acabe."
-say "Ana" "Esse é o espírito!"
+say "cap1_dia1/say_46"
+say "char_name/none" "cap1_dia1/say_47"
+say "char_name/daniel" "cap1_dia1/say_48"
+say "char_name/anna" "cap1_dia1/say_49"
 
 
 // say "Ana" "Ei, o professor ficou de passar aquele trabalho de história, né?"
@@ -212,7 +212,7 @@ waypoint aula
 
 fade_out 1
 wait 1
-say "" "Durante a aula..."
+say "char_name/none" "cap1_dia1/say_50"
 
 theater_bg "school classroom"
 theater_setup main "person(daniel)" "main" support "person(anna)" "out_left" enemy "professor" "enemy"
@@ -220,44 +220,44 @@ move_camera "main_and_enemy" 0
 
 fade_in 1
 
-say "Professor" "Então por hoje é só, pessoal. E pra completar a nota de vocês, eu vou passar aquele trabalho sobre a matéria de hoje."
-say "Eu escrevi os nomes de vocês nestes papéis e vou sortear duplas..."
+say "cap1_dia1/char_name_2" "cap1_dia1/say_51"
+say "cap1_dia1/say_52"
 
-say "Fertiliel" "(Eita, eu posso interferir no sorteio se eu quiser. Será que devo interferir agora?)"
-choices "Formar dupla Daniel e Clara" trabalho_sim "Não interferir" trabalho_nao
+say "char_name/fertiliel" "cap1_dia1/say_53"
+choices "cap1_dia1/choices_1_0" trabalho_sim "cap1_dia1/choices_1_1" trabalho_nao
 
 waypoint trabalho_sim
-say "(Vou alterar aqui o papel sorteado pelo professor...)"
+say "cap1_dia1/say_54"
 wait 1
 set_var fert_ajudou 1
-say "(Pronto!)"
+say "cap1_dia1/say_55"
 goto trabalho_resultado
 
 waypoint trabalho_nao
 set_var fert_ajudou 0
-say "(Acho melhor ainda não.)"
+say "cap1_dia1/say_56"
 
 waypoint trabalho_resultado
-say "Professor" "E a primeira dupla sorteada é: Daniel e..."
+say "cap1_dia1/char_name_2" "cap1_dia1/say_57"
 wait 1
-say "...Clara!"
+say "cap1_dia1/say_58"
 
-say "" "Neste momento pode-se ouvir um sonoro 'Aaaaaaah' de descontentamento de vários garotos pela sala."
-say "Eles parecem tristes por não terem sido a dupla da Clara."
+say "char_name/none" "cap1_dia1/say_59"
+say "cap1_dia1/say_60"
 
-say "Daniel" "(Caramba! Que sorte a minha! Vou fazer o trabalho de dupla com a Clara!)"
+say "char_name/daniel" "cap1_dia1/say_61"
 
 if fert_ajudou == 1
-  say "Fertiliel" "(De nada, viu..)"
+  say "char_name/fertiliel" "cap1_dia1/say_62"
 endif
 
 fade_out 0.5
-say "" "O sorteio continua por alguns minutos, e então chega a hora do intervalo."
+say "char_name/none" "cap1_dia1/say_63"
 theater_setup main "person(daniel)" "main" support "person(claire)" "out_left"
 move_camera "close_focus_main" 0
 fade_in 0.5
 
-say "" "Daniel está arrumando alguns livros na mochila quando Clara se levanta e vai andando até ele."
+say "char_name/none" "cap1_dia1/say_64"
 
 wait 0.5
 move_camera "close_shot" 0.5
@@ -265,22 +265,22 @@ actor_move support "support" 1
 wait 1
 
 //say "" "Clara se levanta e vai andando até Daniel. Ele começa a suar e fica visivelmente alterado."
-say "Clara" "Oi! Você é o Daniel, né?"
+say "char_name/claire" "cap1_dia1/say_65"
 
 wait 0.5
 actor_face main "left"
 wait 0.5
 
-say "Acho que vamos fazer esse trabalho juntos."
-say "" "A garota possui um belo sorriso."
-say "Daniel começa a suar e fica visivelmente alterado."
-say "Daniel" "Er.. S-sim, sou eu! Estou ansioso para t-trabalharmos juntos..."
-say "Clara" "Ah, que bom! Você pode vir lá em casa depois da aula, então?"
-say "Daniel" "Na sua... ca-casa?"
-say "" "Clara faz uma cara pensativa."
-say "Clara" "Pensando bem, tá tendo reforma por lá. Seria muito barulhento. Podemos fazer na sua casa, então?"
-say "Daniel" "C-claro! Aqui está meu endereço..."
-say "Clara" "Tá bom então! A gente se vê mais tarde."
+say "cap1_dia1/say_66"
+say "char_name/none" "cap1_dia1/say_67"
+say "cap1_dia1/say_68"
+say "char_name/daniel" "cap1_dia1/say_69"
+say "char_name/claire" "cap1_dia1/say_70"
+say "char_name/daniel" "cap1_dia1/say_71"
+say "char_name/none" "cap1_dia1/say_72"
+say "char_name/claire" "cap1_dia1/say_73"
+say "char_name/daniel" "cap1_dia1/say_74"
+say "char_name/claire" "cap1_dia1/say_75"
 
 wait 0.5
 actor_face support "left"
@@ -290,8 +290,8 @@ wait 1.5
 actor_face main "right"
 wait 1.5
 
-say "" "Daniel volta a arrumar seu material para a próxima aula."
-say "Ana" "Sutil você, hein..."
+say "char_name/none" "cap1_dia1/say_76"
+say "char_name/anna" "cap1_dia1/say_77"
 
 wait 0.5
 actor_face main "left"
@@ -299,22 +299,22 @@ wait 0.5
 actor_become support "person(anna)"
 actor_move support "support" 1
 wait 1
-say "Daniel" "Ah, o quê? Você acha que ficou muito óbvio que eu gosto da Clara?"
-say "Ana" "Com certeza! Só faltou beijar o chão onde ela pisou."
-say "Daniel" "É, você tá certa. Vou tentar manter a calma quando estiver com ela."
-say "Ana" "Acho bom mesmo, pra você não estragar suas chances com ela!"
+say "char_name/daniel" "cap1_dia1/say_78"
+say "char_name/anna" "cap1_dia1/say_79"
+say "char_name/daniel" "cap1_dia1/say_80"
+say "char_name/anna" "cap1_dia1/say_81"
 
-say "Daniel" "Er... Valeu pelo apoio."
+say "char_name/daniel" "cap1_dia1/say_82"
 wait 1
 
-say "Ana" "Ei, venha lanchar comigo lá no telhado durante o intervalo! Eu trouxe um lanche muito gostoso."
-say "Daniel" "Beleza, mas eu preciso-"
+say "char_name/anna" "cap1_dia1/say_83"
+say "char_name/daniel" "cap1_dia1/say_84"
 
 actor_face support "left"
 actor_move support "out_left" 1.5
 wait 1.5
-say "" "Ana sai correndo pela porta antes que Daniel conseguisse responder."
-say "Daniel" "-passar na biblioteca antes..."
+say "char_name/none" "cap1_dia1/say_85"
+say "char_name/daniel" "cap1_dia1/say_86"
 
 wait 1
 
@@ -328,7 +328,7 @@ play_music "intermission_intro" "intermission_loop"
 wait 0.5
 fade_in 1
 
-say "Fertiliel" "(O meu humano parece indeciso. Ele deveria ir para a biblioteca ou ir lanchar com a amiga agora?)"
+say "char_name/fertiliel" "cap1_dia1/say_87"
 end_script
 
 
@@ -340,3 +340,4 @@ pass_time
 pass_time
 goto_script "pass_time"
 end_script
+

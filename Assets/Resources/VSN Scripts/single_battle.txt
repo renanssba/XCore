@@ -1,4 +1,4 @@
-set_var last_enemy 0
+﻿set_var last_enemy 0
 enable_input true
 
 
@@ -140,10 +140,10 @@ update_ui
 play_sfx "ui_fail"
 wait 2
 enable_input false
-say "" "\couple decidem que o encontro não está dando certo."
-say "\boy" "Podemos continuar esse encontro outro dia..."
-say "\girl" "Sim, com certeza será melhor..."
-say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
+say "char_name/none" "single_battle/say_0"
+say "char_name/boy" "single_battle/say_1"
+say "char_name/girl" "single_battle/say_2"
+say "char_name/none" "single_battle/say_3"
 // show_date_ui false
 goto end
 
@@ -151,3 +151,4 @@ goto end
 
 waypoint end
 end_date
+

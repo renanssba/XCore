@@ -5,7 +5,7 @@ wait 1
 
 skip_button true end
 
-say "" "Antes de dormir, porém, Fertiliel se lembra da sua reunião no dia anterior com a Supervisora Hardiel..."
+say "char_name/none" "cap1_intro/say_0"
 
 // dialog_style "normal"
 fade_out 0
@@ -24,25 +24,25 @@ fade_in 1
 goto_script "fertiliel_enter" 0.25
 wait 1
 
-say "Fertiliel" "Bom dia Supervisora Hardiel, estou me apresentando para meu primeiro dia de trabalho."
-say "Hardiel" "Está atrasada 2 minutos, Fertiliel."
+say "char_name/fertiliel" "cap1_intro/say_1"
+say "char_name/hardiel" "cap1_intro/say_2"
 
 character char_left "fertiliel-tired"
 wait 0.5
-say "Fertiliel" "Desculpa..."
-say "Hardiel" "Antes de iniciar seus trabalhos, devo informá-la de suas atribuições como Cupido."
+say "char_name/fertiliel" "cap1_intro/say_3"
+say "char_name/hardiel" "cap1_intro/say_4"
 
 character char_left "fertiliel"
-say "Em cada missão na Terra, você terá um humano designado e deve encontrar um parceiro ou parceira para ele."
+say "cap1_intro/say_5"
 //say "Hardiel" "Devido a uma crise populacional grave que está ocorrendo na Terra, estamos focando atualmente em <b>fertilidade</b>."
 //say "Portanto seu foco deve ser formar casais que gerem muitos filhos."
 
 character char_left "fertiliel-suspicious"
-say "Fertiliel" "Certo. E como eu faço isso?"
+say "char_name/fertiliel" "cap1_intro/say_6"
 
-say "Hardiel" "Aqui está um par de Flechas do Amor Eterno, leve-as com você."
-say "Para formar um casal, voce precisa que os humanos se gostem, saiam algumas vezes e abram seus corações para namorarem."
-say "Quando os corações estiverem completamente abertos você deve atingí-los com as Flechas do Amor Eterno, e eles se tornarão um casal inseparável."
+say "char_name/hardiel" "cap1_intro/say_7"
+say "cap1_intro/say_8"
+say "cap1_intro/say_9"
 
 // say "Fertiliel" "E onde entram os bebês nessa história?"
 // say "Hardiel" "Quando um casal inseparável se torna adulto, ele se casa e tem filhos."
@@ -51,39 +51,39 @@ say "Quando os corações estiverem completamente abertos você deve atingí-los
 // say "Hardiel" "Precisamente."
 
 character char_left "fertiliel"
-say "Fertiliel" "Entendi. Humanos se gostam, saem juntos, flechas. Bingo!"
-say "Hardiel" "Por último, o protocolo exige que eu a informe das Regras de Conduta dos Anjos no Mundo Humano."
-say "Regra Nº1: Um anjo jamais deve ser visto por um humano, sob nenhuma circunstância."
-say "Regra Nº2: Foque apenas em realizar sua função, interferindo o mínimo possível no Mundo Humano."
-say "Regra Nº3: Limite-se a auxiliar somente o seu humano designado."
+say "char_name/fertiliel" "cap1_intro/say_10"
+say "char_name/hardiel" "cap1_intro/say_11"
+say "cap1_intro/say_12"
+say "cap1_intro/say_13"
+say "cap1_intro/say_14"
 
-say "Fertiliel" "Ok, eu conheço as regras."
-say "Hardiel" "Não custa nada repetir. Ainda mais pra alguém como você."
-say "Fertiliel" "..."
-say "Supervisora, vai ser um pouco difícil eu não ser vista por humanos e cumprir a missão com meus poderes limitados..."
-say   "Devido aos poderes limitados da minha Meia-Auréola, eu não estou conseguindo ficar invisível nem voar direito."
-say "Hardiel" "Infelizmente esta é uma limitação que cabe a você lidar. Não posso lhe conceder qualquer tratamento diferenciado por este motivo."
+say "char_name/fertiliel" "cap1_intro/say_15"
+say "char_name/hardiel" "cap1_intro/say_16"
+say "char_name/fertiliel" "cap1_intro/say_17"
+say "cap1_intro/say_18"
+say "cap1_intro/say_19"
+say "char_name/hardiel" "cap1_intro/say_20"
 
 character char_left "fertiliel-tired"
-say "Fertiliel" "(Droga...)"
-say "Tudo bem, eu vou dar algum jeito."
-say "Hardiel" "Seu primeiro humano designado se chama Daniel. Você irá encontrar mais informações sobre ele no seu briefing."
+say "char_name/fertiliel" "cap1_intro/say_21"
+say "cap1_intro/say_22"
+say "char_name/hardiel" "cap1_intro/say_23"
 // TODO: show character card when it exists
-say "Sua missão é encontrar uma parceira para ele dentro de 14 dias."
-say "Lembre-se de que essa é sua última chance."
+say "cap1_intro/say_24"
+say "cap1_intro/say_25"
 
 character char_left "fertiliel"
-say "Fertiliel" "Ok. Não vou lhe decepcionar!"
-say "Hardiel" "Isso é tudo. Pode se retirar agora."
-say "Fertiliel" "Espera, eu tenho mais uma dúvida..."
-say "Hardiel" "Está dispensada, Fertiliel."
-say "Fertiliel" "..."
+say "char_name/fertiliel" "cap1_intro/say_26"
+say "char_name/hardiel" "cap1_intro/say_27"
+say "char_name/fertiliel" "cap1_intro/say_28"
+say "char_name/hardiel" "cap1_intro/say_29"
+say "char_name/fertiliel" "cap1_intro/say_30"
 
 fade_out 1
 wait 1
 
-say "Fertiliel" "(Tudo bem, eu me viro...)"
-say "(Eu consigo fazer isso... Eu consigo fazer isso...)"
+say "char_name/fertiliel" "cap1_intro/say_31"
+say "cap1_intro/say_32"
 
 fade_music 0 1
 
@@ -98,3 +98,4 @@ bg null
 wait 1
 
 //goto_script "select_daytime_interaction"
+

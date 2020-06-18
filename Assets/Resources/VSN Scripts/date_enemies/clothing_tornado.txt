@@ -1,37 +1,37 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "Um estranho tornado começa a se aproximar do casal!"
+say "char_name/none" "date_enemies/clothing_tornado/say_0"
 
 theater_animation "enemy_enters"
-say "\boy" "Ei, o que é aquilo se aproximando?"
+say "char_name/boy" "date_enemies/clothing_tornado/say_1"
 
 if #currentGirlId == 1
-  say "\girl" "Caramba, sei lá!"
+  say "char_name/girl" "date_enemies/clothing_tornado/say_2"
 endif
 if #currentGirlId == 2
-  say "\girl" "Algum tipo de fenômeno meteorológico não documentado?"
+  say "char_name/girl" "date_enemies/clothing_tornado/say_3"
 endif
 if #currentGirlId == 3
-  say "\girl" "Alguém comprou roupas demais e o vento as carregou?!"
+  say "char_name/girl" "date_enemies/clothing_tornado/say_4"
 endif
 
-say "" "O tornado está carregando várias roupas que parecem caras."
+say "char_name/none" "date_enemies/clothing_tornado/say_5"
 
 actor_animator_parameter angel "Choosing Action" true
 wait 0.5
 
-say "Fertiliel" "(Deve ser um Imp pregando uma peça. Deixa eu usar minha Lente Angelical.)"
+say "char_name/fertiliel" "date_enemies/clothing_tornado/say_6"
 
 actor_tint enemy 1 1 "#3995CC"
 wait 1
 
-say "Fertiliel" "(Eu sabia! Ele deve estar roubando roupas de humanos.)"
+say "char_name/fertiliel" "date_enemies/clothing_tornado/say_7"
 
 actor_tint enemy 0 1 "#3995CC"
 wait 1
 
-say "" "O tornado persegue \couple. Será que ele quer roubar as roupas deles também?"
+say "char_name/none" "date_enemies/clothing_tornado/say_8"
 
 actor_animator_parameter angel "Choosing Action" false
 wait 0.5
@@ -43,29 +43,30 @@ set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "flatter"
 set_var charisma_action_girl_name "flatter"
 
-set_var enemy_attacks_boy "\boy é atingido por peças de vestimenta!"
-set_var enemy_attacks_girl "\girl é atingida por peças de vestimenta!"
+set_var enemy_attacks_boy "date_enemies/clothing_tornado/set_var_0"
+set_var enemy_attacks_girl "date_enemies/clothing_tornado/set_var_1"
 end_script
 
 
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active joga lama nas roupas, sujando-as!"
+set_var pre_attack "date_enemies/clothing_tornado/set_var_2"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que as suas roupas foram compradas num brechó!"
+set_var pre_attack "date_enemies/clothing_tornado/set_var_3"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active elogia as roupas que o tornado está carregando!"
+set_var pre_attack "date_enemies/clothing_tornado/set_var_4"
 end_script
 
 
 
 waypoint defeated
-say "" "O tornado se desfaz subitamente!"
+say "char_name/none" "date_enemies/clothing_tornado/say_9"
 end_script
+

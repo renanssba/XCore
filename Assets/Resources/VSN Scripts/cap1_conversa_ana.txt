@@ -1,16 +1,16 @@
-if argsCount > 0
+﻿if argsCount > 0
   goto *arg1
 endif
 
 goto_script "enter_observation" "school morning"
 if daytime == 0
-  say "" "Chegando no telhado..."
-  say "Ana e Daniel se sentam para lanchar."
+  say "char_name/none" "cap1_conversa_ana/say_0"
+  say "cap1_conversa_ana/say_1"
   fade_in 1
 endif
 if daytime == 1
-  say "" "Daniel e Ana encontram-se no clube esportivo."
-  say "Eles se sentam em um banquinho para conversar."
+  say "char_name/none" "cap1_conversa_ana/say_2"
+  say "cap1_conversa_ana/say_3"
   fade_in 1
 endif
 
@@ -32,160 +32,160 @@ waypoint conversation
 select_dialog
 
 waypoint dialog_acquaintances_1
-say "Daniel" "Como andam os treinos, Ana?"
-say "Ana" "Tão ótimos, tô progredindo bastante."
-say "" "Daniel percebe que o braço de Ana está com um grande hematoma."
-say "Daniel" "Tá tudo bem mesmo? Seu braço parece machucado."
-say "Ana" "Tá sim. É um machucado pequeno, acontece o tempo todo por lá."
-say "Daniel" "Tudo bem. Só tenta tomar mais cuidado, tá?"
-say "Ana" "Não se preocupa, é preciso muito mais que isso pra me parar."
-say "" "A garota sorri, confiante."
+say "char_name/daniel" "cap1_conversa_ana/say_4"
+say "char_name/anna" "cap1_conversa_ana/say_5"
+say "char_name/none" "cap1_conversa_ana/say_6"
+say "char_name/daniel" "cap1_conversa_ana/say_7"
+say "char_name/anna" "cap1_conversa_ana/say_8"
+say "char_name/daniel" "cap1_conversa_ana/say_9"
+say "char_name/anna" "cap1_conversa_ana/say_10"
+say "char_name/none" "cap1_conversa_ana/say_11"
 goto end_dialog
 
 waypoint dialog_acquaintances_2
-say "Ana" "Daniel, eu tava assistindo ao jogo dos Monsters ontem e eu decidi em qual posição eu quero jogar."
-say "Daniel" "Que legal, qual vai ser sua posição?"
-say "Ana" "Eu vou ser pivô, igual ao Hopping James!"
-say "É a posição mais legal do time, que fica perto da cesta e faz a maior quantidade de pontos!"
-say "Daniel" "Uou, parece bem incrível."
-say "Ana" "E eu vou ser a maior pivô de todos os tempos!"
-say "Daniel" "Não a maior em altura, com certeza..."
-say "Ana" "Vem cá, eu vou te dar um cascudo!"
-say "Daniel" "Hahaha."
+say "char_name/anna" "cap1_conversa_ana/say_12"
+say "char_name/daniel" "cap1_conversa_ana/say_13"
+say "char_name/anna" "cap1_conversa_ana/say_14"
+say "cap1_conversa_ana/say_15"
+say "char_name/daniel" "cap1_conversa_ana/say_16"
+say "char_name/anna" "cap1_conversa_ana/say_17"
+say "char_name/daniel" "cap1_conversa_ana/say_18"
+say "char_name/anna" "cap1_conversa_ana/say_19"
+say "char_name/daniel" "cap1_conversa_ana/say_20"
 goto end_dialog
 
 waypoint dialog_acquaintances_3
-say "Ana" "Ei Daniel, eu preparei uma rotina de treinos pra você!"
-say "Daniel" "Como assim?"
-say "Ana" "Você tá muito parado, precisa aumentar sua resistência física."
-say "É bem simples: vamos começar com 100 abdominais, 100 apoios de frente, 100 agachamentos e correr 10km..."
-say "Daniel" "Pera, quê?"
-say "" "Os olhos do garoto exibem um profundo medo por sua vida."
-say "Ana" "Isso todos os dias! E depois pode treinar basquete comigo, se quiser."
-say "Daniel" "Eu não vou ter resistência alguma se eu estiver morto, Ana!"
-say "" "A garota continua tentando convencê-lo, sem sucesso."
+say "char_name/anna" "cap1_conversa_ana/say_21"
+say "char_name/daniel" "cap1_conversa_ana/say_22"
+say "char_name/anna" "cap1_conversa_ana/say_23"
+say "cap1_conversa_ana/say_24"
+say "char_name/daniel" "cap1_conversa_ana/say_25"
+say "char_name/none" "cap1_conversa_ana/say_26"
+say "char_name/anna" "cap1_conversa_ana/say_27"
+say "char_name/daniel" "cap1_conversa_ana/say_28"
+say "char_name/none" "cap1_conversa_ana/say_29"
 goto end_dialog
 
 
 
 waypoint dialog_friends_1
-say "Daniel" "Oi Ana! Como foram os testes pra ser pivô na nossa seleção de basquete?"
-say "Ana" "Foi péssimo... Eu consegui acertar muitas cestas a distância, mas a marcação e disputa de bola foram muito difíceis..."
-say "Todo mundo era muito alto, eu não tinha como brigar pela bola..."
-say "" "A garota parece bem decepcionada."
-say "Daniel" "Que droga! Mas eles não te deixaram entrar no time?"
-say "Ana" "Não! Só ficaram me zoando e disseram que uma \qbaixinha\q como eu jamais poderia ser pivô."
-say "Daniel" "Poxa, que droga."
-say "Ana" "Mas quero é ver quem vai me chamar de baixinha com a boca inchada!"
-say "Daniel" "Hum... Por que você não tenta de novo?"
-say "Ana" "Eu já tentei três vezes, Daniel... Eles nunca me deixam."
-say "Daniel" "Então por que você... não tenta pra outra posição? Você disse que lança bem, não é? Poderia tentar ser armadora."
-say "Ana" "É, pensando bem... É uma ótima ideia! Vou tentar isso no próximo teste! Não vou desistir!"
-say "" "Ana agradece e Daniel fica feliz por poder ajudá-la."
+say "char_name/daniel" "cap1_conversa_ana/say_30"
+say "char_name/anna" "cap1_conversa_ana/say_31"
+say "cap1_conversa_ana/say_32"
+say "char_name/none" "cap1_conversa_ana/say_33"
+say "char_name/daniel" "cap1_conversa_ana/say_34"
+say "char_name/anna" "cap1_conversa_ana/say_35"
+say "char_name/daniel" "cap1_conversa_ana/say_36"
+say "char_name/anna" "cap1_conversa_ana/say_37"
+say "char_name/daniel" "cap1_conversa_ana/say_38"
+say "char_name/anna" "cap1_conversa_ana/say_39"
+say "char_name/daniel" "cap1_conversa_ana/say_40"
+say "char_name/anna" "cap1_conversa_ana/say_41"
+say "char_name/none" "cap1_conversa_ana/say_42"
 goto end_dialog
 
 waypoint dialog_friends_2
 // say "Daniel" "Parece que o seu super treino tá fazendo efeito, hein Ana! Olha só esses músculos!"
 // say "" "Daniel toca amigavelmente no braço de Ana, mas a garota se afasta em reflexo."
-say "Daniel" "...Aí eu tava lendo esse livro e percebi que a história dos Monsters é mesmo bem interessante."
-say "" "Ana, encostada em uma parede, balança a cabeça lentamente em confirmação."
-say "Daniel" "Eu não acredito como eles conseguiram virar o jogo e ganhar o último torneio no último minuto!"
-say "" "Daniel percebe que Ana está com os olhos fechados. E roncando."
-say "Daniel" "Ana?"
-say "Ana" "Hã, oi? Falou comigo?"
-say "Daniel" "Você tá dormindo em pé?"
-say "Ana" "Desculpa, os treinos pra entrar no clube de basquete têm consumido todas as minhas energias..."
-say "Daniel" "Você tem que cuidar melhor de si! Tenho te visto sempre muito cansada ultimamente, então eu preparei isso aqui pra você."
-say "" "Ele entrega um pequeno papel escrito a mão para a garota."
-say "Ana" "Hum, uma dieta alimentar?"
-say "Daniel" "Você precisa se alimentar bem se quiser ter energia pra ser a melhor jogadora de basquete do mundo!"
-say "Ana" "Obrigada! Com certeza vai me ajudar!"
+say "char_name/daniel" "cap1_conversa_ana/say_43"
+say "char_name/none" "cap1_conversa_ana/say_44"
+say "char_name/daniel" "cap1_conversa_ana/say_45"
+say "char_name/none" "cap1_conversa_ana/say_46"
+say "char_name/daniel" "cap1_conversa_ana/say_47"
+say "char_name/anna" "cap1_conversa_ana/say_48"
+say "char_name/daniel" "cap1_conversa_ana/say_49"
+say "char_name/anna" "cap1_conversa_ana/say_50"
+say "char_name/daniel" "cap1_conversa_ana/say_51"
+say "char_name/none" "cap1_conversa_ana/say_52"
+say "char_name/anna" "cap1_conversa_ana/say_53"
+say "char_name/daniel" "cap1_conversa_ana/say_54"
+say "char_name/anna" "cap1_conversa_ana/say_55"
 goto end_dialog
 
 waypoint dialog_friends_3
-say "Ana" "Hoje eu trouxe um bolo que eu fiz pra você, Daniel! Espero que goste!"
-say "Daniel" "Certo, deixa eu provar aqui."
-say "" "Daniel prova um pedaço do bolo dando uma grande mordida."
-say "Ana" "E aí, o que achou?"
-say "" "O garoto inicialmente fica vermelho, depois começa a suar, ficar verde e com os cabelos em pé. Ana parece preocupada."
-say "Ana" "Você... gostou?"
-say "" "Tremendo e com os olhos esbugalhados, Daniel engole o pedaço de bolo."
-say "Daniel" "T-tá... er... \qinteressante\q."
-say "Ana" "Você odiou, não é?"
-say "Daniel" "Na-não... Eu g-gostei."
-say "" "Ana faz uma cara de choro."
-say "Ana" "Me desculpa, eu sei que tá horrível. Eu passei a noite toda ontem tentando, mas esse foi o que ficou melhorzinho."
-say "Você sempre cozinha pra mim, então eu quis retribuir..."
-say "" "Daniel abre um sorriso."
-say "Daniel" "O que importa é a intenção. Obrigado por ter se esforçado por mim, Ana."
-say "" "A garota sorri. Em seguida o estômago de Daniel faz barulhos estranhos e ele corre para o banheiro."
+say "char_name/anna" "cap1_conversa_ana/say_56"
+say "char_name/daniel" "cap1_conversa_ana/say_57"
+say "char_name/none" "cap1_conversa_ana/say_58"
+say "char_name/anna" "cap1_conversa_ana/say_59"
+say "char_name/none" "cap1_conversa_ana/say_60"
+say "char_name/anna" "cap1_conversa_ana/say_61"
+say "char_name/none" "cap1_conversa_ana/say_62"
+say "char_name/daniel" "cap1_conversa_ana/say_63"
+say "char_name/anna" "cap1_conversa_ana/say_64"
+say "char_name/daniel" "cap1_conversa_ana/say_65"
+say "char_name/none" "cap1_conversa_ana/say_66"
+say "char_name/anna" "cap1_conversa_ana/say_67"
+say "cap1_conversa_ana/say_68"
+say "char_name/none" "cap1_conversa_ana/say_69"
+say "char_name/daniel" "cap1_conversa_ana/say_70"
+say "char_name/none" "cap1_conversa_ana/say_71"
 goto end_dialog
 
 
 
 waypoint dialog_lovers_1
-say "Daniel" "Ei Ana, você sabe alguma loja onde eu posso comprar uns shorts esportivos?"
-say "Ana" "Roupas esportivas? Ué, você vai pra alguma festa a fantasia?"
-say "Daniel" "Não, pô! Eu vou começar a treinar. Tô considerando começar aquele treinamento que você fez pra mim..."
-say "Ana" "Sério? Que legal!"
-say "Daniel" "É..."
-say "Ana" "Eu vou contigo! E te ajudar a comprar as roupas também. Se quiser eu te empresto umas camisetas minhas de basquete."
-say "Daniel" "Haha, obrigado. Mas eu passo, quero ter minhas próprias."
-say "" "Ana comemora animadamente e abraça Daniel."
-say "Ana" "Você quer ficar bem forte pra jogar basquete comigo?"
-say "Daniel" "Você sempre me protege... Eu tô cansado de depender sempre de você."
-say "Eu também quero ser forte e poder te proteger, quando for necessário!"
-say "Ana" "Isso é muito legal! Eu sei que você vai conseguir, Daniel."
-say "Aí nós vamos proteger os fracos, batendo em todo mundo que faz bullying no colégio!"
-say "Daniel" "Não foi bem isso que eu quis dizer com \qte proteger\q..."
+say "char_name/daniel" "cap1_conversa_ana/say_72"
+say "char_name/anna" "cap1_conversa_ana/say_73"
+say "char_name/daniel" "cap1_conversa_ana/say_74"
+say "char_name/anna" "cap1_conversa_ana/say_75"
+say "char_name/daniel" "cap1_conversa_ana/say_76"
+say "char_name/anna" "cap1_conversa_ana/say_77"
+say "char_name/daniel" "cap1_conversa_ana/say_78"
+say "char_name/none" "cap1_conversa_ana/say_79"
+say "char_name/anna" "cap1_conversa_ana/say_80"
+say "char_name/daniel" "cap1_conversa_ana/say_81"
+say "cap1_conversa_ana/say_82"
+say "char_name/anna" "cap1_conversa_ana/say_83"
+say "cap1_conversa_ana/say_84"
+say "char_name/daniel" "cap1_conversa_ana/say_85"
 goto end_dialog
 
 waypoint dialog_lovers_2
-say "Ana" "Daniel, Daniel! Eu preciso muito falar com você!"
-say "" "A garota está com um sorriso radiante."
-say "Daniel" "Oi, o que aconteceu de tão bom?"
-say "Ana" "Eu passei no teste pra seleção de basquete do colégio!"
-say "Daniel" "Caramba, que incrível, Ana! Finalmente eles perceberam o seu talento."
-say "Ana" "O único porém é que eu não vou ser pivô, entrei como armadora. Mas pelo menos eu tô dentro, e foi graças à sua sugestão."
-say "Daniel" "Que ótimo! Fico feliz em ajudar."
-say "" "A garota fica com olhar distante por um momento."
-say "Ana" "Mas é uma pena... Acho que eu nunca vou ser a maior pivô de todos os tempos, afinal..."
-say "Daniel" "Não, não desista! A Ana que eu conheço nunca desiste!"
-say "Ana" "Eles têm uma pivô tão alta, e vivem dizendo que alguém da minha altura não serviria."
-say "Daniel" "Mas não importa! Mostra pra eles que estão errados."
-say "Seja a melhor armadora que a nossa seleção já teve! E aí eles devem te deixar escolher jogar em outra posição."
-say "Ana" "Você acha, Daniel?"
-say "Daniel" "Claro! É assim que você me ensinou a resolver as coisas, nunca desistindo e dando o seu melhor!"
-say "" "A garota cerra o punho e abre um grande sorriso. Seus olhos demonstram grande determinação."
-say "Ana" "Você tá certo! Eles só não perceberam ainda o que tão perdendo. Eu vou treinar muito mais e vou mostrar pra todos que sou a melhor!"
-say "Daniel" "Essa é a Ana que eu conheço!"
+say "char_name/anna" "cap1_conversa_ana/say_86"
+say "char_name/none" "cap1_conversa_ana/say_87"
+say "char_name/daniel" "cap1_conversa_ana/say_88"
+say "char_name/anna" "cap1_conversa_ana/say_89"
+say "char_name/daniel" "cap1_conversa_ana/say_90"
+say "char_name/anna" "cap1_conversa_ana/say_91"
+say "char_name/daniel" "cap1_conversa_ana/say_92"
+say "char_name/none" "cap1_conversa_ana/say_93"
+say "char_name/anna" "cap1_conversa_ana/say_94"
+say "char_name/daniel" "cap1_conversa_ana/say_95"
+say "char_name/anna" "cap1_conversa_ana/say_96"
+say "char_name/daniel" "cap1_conversa_ana/say_97"
+say "cap1_conversa_ana/say_98"
+say "char_name/anna" "cap1_conversa_ana/say_99"
+say "char_name/daniel" "cap1_conversa_ana/say_100"
+say "char_name/none" "cap1_conversa_ana/say_101"
+say "char_name/anna" "cap1_conversa_ana/say_102"
+say "char_name/daniel" "cap1_conversa_ana/say_103"
 goto end_dialog
 
 waypoint dialog_lovers_3
-say "Ana" "Sabe, Daniel, eu vi uma moça passeando com seu cãozinho no caminho para o colégio hoje."
-say "Daniel" "Era um cãozinho fofo?"
-say "Ana" "Muito fofo. Me lembrou muito o Panqueca..."
-say "" "A garota abaixa o rosto, triste."
-say "Daniel" "Você sente muita falta dele, não é?"
-say "Ana" "Demais. Você sabe que dia é hoje?"
-say "Daniel" "Claro. Hoje faz quatro anos desde que ele se foi..."
-say "" "Ana mexe a cabeça em confirmação."
-say "Daniel" "Eu sinto muito... Queria poder fazer algo a mais por você."
-say "Ana" "Você sempre faz."
-say "Quando ele se foi, eu costumava chorar muito de noite e não conseguia dormir."
-say "Foi aí que você me deu o ursinho de pelúcia, e eu passei a dormir sempre abraçada com ele."
-say "Daniel" "É, você adorava aquele ursinho."
-say "Ana" "Ainda gosto. Obrigada por estar aqui pra mim sempre que eu preciso."
-say "Daniel" "E vou sempre estar."
-say "" "A garota esboça um leve sorriso."
-say "Daniel" "Vamos levar flores ao túmulo do Panqueca? Eu posso ir contigo mais tarde."
-say "Ana" "Vamos. Tenho certeza que ele vai gostar."
+say "char_name/anna" "cap1_conversa_ana/say_104"
+say "char_name/daniel" "cap1_conversa_ana/say_105"
+say "char_name/anna" "cap1_conversa_ana/say_106"
+say "char_name/none" "cap1_conversa_ana/say_107"
+say "char_name/daniel" "cap1_conversa_ana/say_108"
+say "char_name/anna" "cap1_conversa_ana/say_109"
+say "char_name/daniel" "cap1_conversa_ana/say_110"
+say "char_name/none" "cap1_conversa_ana/say_111"
+say "char_name/daniel" "cap1_conversa_ana/say_112"
+say "char_name/anna" "cap1_conversa_ana/say_113"
+say "cap1_conversa_ana/say_114"
+say "cap1_conversa_ana/say_115"
+say "char_name/daniel" "cap1_conversa_ana/say_116"
+say "char_name/anna" "cap1_conversa_ana/say_117"
+say "char_name/daniel" "cap1_conversa_ana/say_118"
+say "char_name/none" "cap1_conversa_ana/say_119"
+say "char_name/daniel" "cap1_conversa_ana/say_120"
+say "char_name/anna" "cap1_conversa_ana/say_121"
 goto end_dialog
 
 
 waypoint dialog_fallback
-say "" "Eles conversam sobre assuntos os livros que Daniel está lendo e o último jogo de basquete que Ana assistiu."
-say "Eles conversam e se divertem por um bom tempo e mal percebem o tempo passar."
+say "char_name/none" "cap1_conversa_ana/say_122"
+say "cap1_conversa_ana/say_123"
 goto end_dialog
 
 
@@ -196,10 +196,10 @@ goto end
 
 waypoint end
 if daytime == 0
-  say "" "Daniel e Ana voltam para a sala de aula para continuar as próximas lições."
+  say "char_name/none" "cap1_conversa_ana/say_124"
 endif
 if daytime == 1
-  say "" "Daniel e Ana voltam para suas casas."
+  say "char_name/none" "cap1_conversa_ana/say_125"
 endif
 goto_script "pass_time"
 end_script
@@ -209,47 +209,47 @@ end_script
 
 
 waypoint give_gift
-say "" "Escolha qual item dar para Ana:"
+say "char_name/none" "cap1_conversa_ana/say_126"
 item_choice
 if item_id == -1
   goto action_choice
 endif
 
-say "Daniel" "Ei Ana, eu trouxe uma coisinha para te dar."
+say "char_name/daniel" "cap1_conversa_ana/say_127"
 give_item 1 item_id 1
 if item_owner == 1
-  say "Ana" "Pera, o que você tá fazendo com isso? Como você conseguiu isso, Ricardo?"
-  say "Ricardo" "E-eu... não sei?!"
-  say "Ana" "Me devolve isso agora!"
+  say "char_name/anna" "cap1_conversa_ana/say_128"
+  say "cap1_conversa_ana/char_name_0" "cap1_conversa_ana/say_129"
+  say "char_name/anna" "cap1_conversa_ana/say_130"
 else
-  say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-  say "Ricardo" "Que bom que você gostou!"
+  say "char_name/anna" "cap1_conversa_ana/say_131"
+  say "cap1_conversa_ana/char_name_0" "cap1_conversa_ana/say_132"
   add_exp true 40
 endif
 goto end
 
 
 waypoint date_intro_1
-say "Ana" "Ei, você vem comigo ao parque? Estou a fim de respirar um ar fresco."
-say "Daniel" "Claro, vamos lá."
-set_var date_objective "de destino"
+say "char_name/anna" "cap1_conversa_ana/say_133"
+say "char_name/daniel" "cap1_conversa_ana/say_134"
+set_var date_objective "cap1_conversa_ana/set_var_0"
 goto_script "date"
 end_script
 
 waypoint date_intro_2
-say "Ana" "Sabia que estreou o filme do James Hopper? Eu tô tão animada pra ver!"
-say "Daniel" "Sério? Que legal! Quer ir comigo assistir?"
-say "Ana" "Quero! Vamos no cinema do shopping? É o cinema que eu mais gosto aqui na cidade."
-say "Daniel" "Ótimo! Vou comprar um baldão de pipoca pra gente."
-set_var date_objective "do cinema"
+say "char_name/anna" "cap1_conversa_ana/say_135"
+say "char_name/daniel" "cap1_conversa_ana/say_136"
+say "char_name/anna" "cap1_conversa_ana/say_137"
+say "char_name/daniel" "cap1_conversa_ana/say_138"
+set_var date_objective "cap1_conversa_ana/set_var_1"
 goto_script "date"
 end_script
 
 waypoint date_intro_3
-say "Daniel" "Ei Ana, está com vontade de ir ao parque?"
-say "Ana" "Oba, vamos sim! Tem um lugar ótimo pra gente jogar frisbee. Vou levar um, tá?"
-say "Daniel" "Certo, vai ser divertido."
-set_var date_objective "ideal para jogar frisbee"
+say "char_name/daniel" "cap1_conversa_ana/say_139"
+say "char_name/anna" "cap1_conversa_ana/say_140"
+say "char_name/daniel" "cap1_conversa_ana/say_141"
+set_var date_objective "cap1_conversa_ana/set_var_2"
 goto_script "date"
 end_script
 
@@ -257,85 +257,85 @@ end_script
 
 waypoint date_end_1
 full_heal_party
-say "" "Depois de caminharem um pouco, os dois ficam satisfeitos com o passeio."
-say "Ana" "Obrigada por ter vindo comigo, Daniel. A gente devia passear mais vezes."
-say "Daniel" "Vamos sim!"
+say "char_name/none" "cap1_conversa_ana/say_142"
+say "char_name/anna" "cap1_conversa_ana/say_143"
+say "char_name/daniel" "cap1_conversa_ana/say_144"
 end_script
 
 
 
 waypoint date_end_2
-say "" "Depois de todos os imprevistos, o casal finalmente consegue chegar ao cinema."
-say "Ana" "Aeeee, chegamos! Eu aposto que esse filme vai ser incrível!"
-say "Daniel" "Você tá mesmo empolgada, hein?"
-say "Ana" "Claro! Esse cara é o meu ídolo! Ele levou o time dele até a final praticamente sozinho!"
+say "char_name/none" "cap1_conversa_ana/say_145"
+say "char_name/anna" "cap1_conversa_ana/say_146"
+say "char_name/daniel" "cap1_conversa_ana/say_147"
+say "char_name/anna" "cap1_conversa_ana/say_148"
 fade_out 0.5
 full_heal_party
 
 /// become lovers dialog
 if #currentRelationshipHeartLocksOpened < 2
-  say "" "Os dois assistem o filme e se divertem bastante. Depois do filme..."
+  say "char_name/none" "cap1_conversa_ana/say_149"
   fade_in 0.5
-  say "Ana" "Valeu por ter vindo ao cinema comigo, Daniel."
-  
-  say "Daniel" "De nada, eu adorei. Não sabia que a história do Hopper era tão interessante."
-  say "Ana" "Ele é incrível, não é? Ele é tão corajoso que me inspira a ser melhor todos os dias."
-  say "Daniel" "Você fala como se eu não tivesse visto a quantidade de pôsteres dele que você tem no seu quarto, haha."
-  say "Ana" "É, você me pegou!"
-  say "Eu queria ser tão corajosa quanto ele."
-  say "Daniel" "Você já é, Ana. Tem que ter muita coragem pra perseguir o seu sonho com tanto afinco quanto você faz."
-  say "Ana" "Eu só faço o melhor que posso."
-  say "" "A garota dá um largo sorriso, visivelmente satisfeita com o elogio."
-  say "Daniel" "Eu é que deveria me inspirar na história dele. Eu sou um covarde, que precisa de você me defendendo toda hora..."
-  say "" "Daniel se vira para o lado, evitando contato visual com Ana."
-  say "Ana" "Não, não é verdade!"
-  say "Daniel" "Claro que é, Ana..."
-  say "" "Não é não! Você é muito corajoso, Daniel. Você fez uma das coisas mais corajosas que eu já vi na vida."
-  say "" "Daniel se vira para Ana."
-  say "Daniel" "Do que você tá falando?"
+  say "char_name/anna" "cap1_conversa_ana/say_150"
+
+  say "char_name/daniel" "cap1_conversa_ana/say_151"
+  say "char_name/anna" "cap1_conversa_ana/say_152"
+  say "char_name/daniel" "cap1_conversa_ana/say_153"
+  say "char_name/anna" "cap1_conversa_ana/say_154"
+  say "cap1_conversa_ana/say_155"
+  say "char_name/daniel" "cap1_conversa_ana/say_156"
+  say "char_name/anna" "cap1_conversa_ana/say_157"
+  say "char_name/none" "cap1_conversa_ana/say_158"
+  say "char_name/daniel" "cap1_conversa_ana/say_159"
+  say "char_name/none" "cap1_conversa_ana/say_160"
+  say "char_name/anna" "cap1_conversa_ana/say_161"
+  say "char_name/daniel" "cap1_conversa_ana/say_162"
+  say "char_name/none" "cap1_conversa_ana/say_163"
+  say "char_name/none" "cap1_conversa_ana/say_164"
+  say "char_name/daniel" "cap1_conversa_ana/say_165"
 
   fade_music 0 1.5
   wait 2
   play_music "sad1_intro" "sad1_loop"
 
-  say "Ana" "Você lembra que a gente costumava passear com o Panqueca pelo parque, né?"
-  say "Daniel" "Lembro, claro. Ele adorava perseguir os esquilos, né? Eu tinha muita pena dos esquilinhos, sempre tinham que fugir dele."
-  say "Ele era um cachorro tão animado e brincalhão!"
-  say "Ana" "Sim, o Panqueca era o cãozinho mais lindo e animado que eu já vi na vida. E o mais querido..."
-  say "" "Uma lágrima surge nos olhos de Ana."
-  
-  say "Ana" "Eu não sei dizer bem o dia, mas foi uns sete ou oito anos atrás. A gente era apenas criança."
-  say "Daniel" "Nessa época o Panqueca já era imenso, né? Tinha quase metade do nosso tamanho."
-  say "Ana" "Sim. Era até meio difícil levá-lo na coleira, mas eu adorava passear com ele."
-  say "Mas teve uma vez que ele me assustou e se soltou da coleira, perseguindo um esquilo até dentro da mata fechada."
-  say "Daniel" "Eu me lembro..."
-  say "Era um dia que tava chovendo?"
-  say "Ana" "Sim. Eu fiquei desesperada e nós fomos procurá-lo."
-  say "A gente gritava pelo nome dele, gritava e gritava mas nada de encontrá-lo."
-  say "A chuva começou a engrossar e ele morria de medo de trovão. Eu fiquei tão preocupada que ele estivesse perdido dentro da mata, assustado, sem saber como voltar pra gente."
-  say "Daniel" "E a gente se dividiu pra procurá-lo, não foi?"
-  say "Ana" "Sim, você disse que a gente poderia encontrá-lo mais rápido assim. E depois saiu, gritando pelo nome dele na direção contrária à minha."
-  say "Daniel" "Eu tava com o coração na mão. Nunca me perdoaria se algo acontecesse a ele."
-  say "Ana" "Mas aí você se pôs em risco!"
-  say "Depois de alguns minutos, você não voltou e eu fui te procurar. Eu ouvi a sua voz gritando o meu nome, desesperado."
-  say "Daniel" "É..."
-  say "Ana" "Eu fui correndo atrás de você e te encontrei no meio de um lago com correnteza, abraçando o Panqueca e segurando um pedregulho."
-  say "Daniel" "Sim. Quando eu o encontrei, ele estava do outro lado do lago. Caiu um trovão e ele se assustou, caindo na água."
-  say "Quando eu vi a correnteza o levando, eu não pensei duas vezes antes de pular atrás dele."
-  say "Ana" "O que você fez foi muito arriscado e irresponsável! Você podia ter morrido, idiota!"
-  say "...Mas também foi de uma coragem inacreditável. Você foi um herói naquele dia."
-  say "Daniel" "Mas foi você quem nos tirou do meio do lago, com aquele galho."
-  say "Ana" "Se você não tivesse resgatado o Panqueca, a história teria sido muito diferente."
-  say "Você salvou a vida dele, Daniel. Você é muito corajoso para as coisas que realmente importam."
-  say "" "Daniel abre um sorriso modesto."
-  say "Daniel" "Eu tenho certeza que você teria feito a mesma coisa."
-  say "Ana" "Que nada. Até hoje eu tento ser tão corajosa quanto o James Hopper, ou quanto você foi naquele dia."
-  say "" "Daniel sorri, encabulado."
-  say "Ana" "Obrigada por me inspirar a ser melhor, Daniel."
+  say "char_name/anna" "cap1_conversa_ana/say_166"
+  say "char_name/daniel" "cap1_conversa_ana/say_167"
+  say "cap1_conversa_ana/say_168"
+  say "char_name/anna" "cap1_conversa_ana/say_169"
+  say "char_name/none" "cap1_conversa_ana/say_170"
+
+  say "char_name/anna" "cap1_conversa_ana/say_171"
+  say "char_name/daniel" "cap1_conversa_ana/say_172"
+  say "char_name/anna" "cap1_conversa_ana/say_173"
+  say "cap1_conversa_ana/say_174"
+  say "char_name/daniel" "cap1_conversa_ana/say_175"
+  say "cap1_conversa_ana/say_176"
+  say "char_name/anna" "cap1_conversa_ana/say_177"
+  say "cap1_conversa_ana/say_178"
+  say "cap1_conversa_ana/say_179"
+  say "char_name/daniel" "cap1_conversa_ana/say_180"
+  say "char_name/anna" "cap1_conversa_ana/say_181"
+  say "char_name/daniel" "cap1_conversa_ana/say_182"
+  say "char_name/anna" "cap1_conversa_ana/say_183"
+  say "cap1_conversa_ana/say_184"
+  say "char_name/daniel" "cap1_conversa_ana/say_185"
+  say "char_name/anna" "cap1_conversa_ana/say_186"
+  say "char_name/daniel" "cap1_conversa_ana/say_187"
+  say "cap1_conversa_ana/say_188"
+  say "char_name/anna" "cap1_conversa_ana/say_189"
+  say "cap1_conversa_ana/say_190"
+  say "char_name/daniel" "cap1_conversa_ana/say_191"
+  say "char_name/anna" "cap1_conversa_ana/say_192"
+  say "cap1_conversa_ana/say_193"
+  say "char_name/none" "cap1_conversa_ana/say_194"
+  say "char_name/daniel" "cap1_conversa_ana/say_195"
+  say "char_name/anna" "cap1_conversa_ana/say_196"
+  say "char_name/none" "cap1_conversa_ana/say_197"
+  say "char_name/anna" "cap1_conversa_ana/say_198"
   // say "" "É por isso que você é meu... er, melhor amigo."
-  
-  
-  
+
+
+
   // say "Daniel" "Ah, eu não tinha nada melhor pra fazer, haha."
   // say "Ana" "..."
   // say "Daniel" "Desculpa, eu não quis ser grosseiro. Quer dizer, a gente sempre lancha junto, né? Desde pequeno. Porque eu não viria?"
@@ -358,7 +358,7 @@ if #currentRelationshipHeartLocksOpened < 2
   // say "Ana" "..."
   // say "Ana" "Valeu. Você é um bobo, mesmo!"
 else
-  say "" "Os dois assistem o filme e se divertem bastante."
+  say "char_name/none" "cap1_conversa_ana/say_199"
   fade_in 0.5
 endif
 end_script
@@ -371,24 +371,25 @@ waypoint date_end_3
 // fade_out 0.5
 // say "" "Em seguida os dois jogam frisbee por vários minutos, até Daniel cansar."
 // fade_in 0.5
-say "Ana" "Daniel..."
-say "No meu sonho... acho que falei algumas coisas que eu não queria que você soubesse."
-say "Mas eu quero te dizer agora."
-say "Daniel" "Pode falar, Ana. O que foi?"
-say "Ana" "Eu.. realmente me sinto daquela maneira às vezes. Insegura."
-say "Eu sempre gostei de você, desde pequeno. Mas nunca senti que poderíamos ficar juntos."
-say "Eu nunca me achei bonita ou feminina e você sempre gostou da Clara. Por isso eu só conseguia sentir raiva dela."
-say "Daniel" "Eu imagino. Me desculpa por isso."
-say "Eu sinto muito por não ter percebido os seus sentimentos, mas eu agora entendo como você pensa."
-say "Mas você tá errada. Eu sempre te achei linda, corajosa e radiante. E você sempre me inspirou a ser melhor."
-say "Daniel" "Não é por que você joga basquete ou qualquer outro motivo bobo que você seja menos feminina."
-say "" "Os olhos de Ana se enchem de lágrimas."
-say "Ana" "Você tá me fazendo chorar, seu idiota..."
-say "Daniel" "Você é a pessoa que eu mais admiro e hoje eu consigo perceber que eu te amo. Eu sempre te amei."
-say "Ana" "Eu esperei tanto tempo pra ouvir você dizer isso..."
-say "Eu também te amo!"
-say "" "A garota pula nos braços de Daniel."
+say "char_name/anna" "cap1_conversa_ana/say_200"
+say "cap1_conversa_ana/say_201"
+say "cap1_conversa_ana/say_202"
+say "char_name/daniel" "cap1_conversa_ana/say_203"
+say "char_name/anna" "cap1_conversa_ana/say_204"
+say "cap1_conversa_ana/say_205"
+say "cap1_conversa_ana/say_206"
+say "char_name/daniel" "cap1_conversa_ana/say_207"
+say "cap1_conversa_ana/say_208"
+say "cap1_conversa_ana/say_209"
+say "char_name/daniel" "cap1_conversa_ana/say_210"
+say "char_name/none" "cap1_conversa_ana/say_211"
+say "char_name/anna" "cap1_conversa_ana/say_212"
+say "char_name/daniel" "cap1_conversa_ana/say_213"
+say "char_name/anna" "cap1_conversa_ana/say_214"
+say "cap1_conversa_ana/say_215"
+say "char_name/none" "cap1_conversa_ana/say_216"
 
-say "" "Os corações de Daniel e Ana se abriram!"
+say "char_name/none" "cap1_conversa_ana/say_217"
 //fade_music 0 2.0
 end_script
+

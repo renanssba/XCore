@@ -1,0 +1,153 @@
+set_var last_enemy 0
+enable_input true
+
+
+waypoint new_enemy_appears
+move_camera "battle_view" 0.5
+play_music "battle1_intro" "battle1_loop"
+wait 0.8
+
+set_var currentBattleTurn 0
+goto_script "\currentEventName" event_statement
+
+show_date_ui true
+wait 0.5
+
+goto_script "check_passive_triggers" "enemy_appears"
+
+
+
+/// START BATTLE LOOP
+
+waypoint start_new_turn
+
+add_var currentBattleTurn 1
+goto_script "check_passive_triggers" "turn_started"
+
+// PARTY MEMBERS receive effects from conditions (like take poison damage)
+for currentPlayerTurn #partyLength
+  for currentStatusCondition #currentPlayerStatusConditionsCount
+    activate_status_condition_effect currentPlayerTurn currentStatusCondition
+  endfor
+endfor
+
+// ENEMY receives effects from conditions
+for currentStatusCondition #currentEnemyStatusConditionsCount
+  activate_status_condition_effect 3 currentStatusCondition
+endfor
+// end turn (to pass time on status conditions)
+end_turn
+
+goto_script "check_passive_triggers" "before_death_checks"
+if #currentHp <= 0
+  goto fail_date
+endif
+
+
+// if opponent is defeated, go to new event
+if #currentEnemyHp <= 0
+  goto defeat_enemy
+endif
+
+
+// character action inputs
+if currentBattleTurn == 1
+  goto_script "tutorials" "first_battle_1"
+endif
+if currentBattleTurn == 2
+  goto_script "tutorials" "first_battle_2"
+endif
+if currentBattleTurn == 3
+  goto_script "tutorials" "first_battle_3"
+endif
+
+if input_already_selected == true
+  set_var input_already_selected false
+else
+  for currentPlayerTurn #partyLength
+    action_input currentPlayerTurn
+  endfor
+endif
+
+set_current_character_turn -1
+wait 0.5
+
+// execute player actions
+for currentPlayerTurn #partyLength
+  check_action_skip currentPlayerTurn
+  goto_script "check_passive_triggers" "before_action"
+  character_action_description currentPlayerTurn
+  character_action currentPlayerTurn
+  goto_script "check_passive_triggers" "after_action"
+  wait 0.5
+endfor
+
+// if enemy is defeated, go to new enemy
+if #currentEnemyHp <= 0
+  goto defeat_enemy
+endif
+
+
+// enemy turn
+set_var currentPlayerTurn 0
+enemy_attack_target
+goto_script "check_passive_triggers" "before_enemy_attack"
+enemy_attack
+goto_script "check_passive_triggers" "after_enemy_attack"
+
+
+goto_script "check_passive_triggers" "before_death_checks"
+if #currentHp <= 0
+  goto fail_date
+endif
+
+goto start_new_turn
+
+/// END BATTLE LOOP
+
+
+
+waypoint defeat_enemy
+//goto_script "\currentEventName" defeated
+//theater_animation "enemy_leaves"
+challenge_result true
+update_ui
+play_sfx "ui_success"
+//wait 2
+
+goto_script "check_passive_triggers" "enemy_defeated"
+
+show_date_ui false
+wait 0.5
+fade_music 0 1
+// move_camera "close_shot" 1.5
+wait 2
+play_music "observacao2_intro" "observacao2_loop"
+wait 0.5
+goto win_date
+
+
+
+waypoint win_date
+enable_input false
+// say "char_name/none" "date/say_4"
+goto end
+
+
+waypoint fail_date
+challenge_result false
+update_ui
+play_sfx "ui_fail"
+wait 2
+enable_input false
+say "" "\couple decidem que o encontro não está dando certo."
+say "\boy" "Podemos continuar esse encontro outro dia..."
+say "\girl" "Sim, com certeza será melhor..."
+say "" "O encontro acabou de forma <color=red>insatisfatória</color>."
+// show_date_ui false
+goto end
+
+
+
+waypoint end
+end_date

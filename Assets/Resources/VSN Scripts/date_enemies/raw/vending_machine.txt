@@ -1,0 +1,64 @@
+goto *arg1
+
+waypoint event_statement
+say "" "O casal fica com fome e vai até uma máquina de venda de comida."
+theater_animation "enemy_enters"
+say "Quando \boy ia colocar uma moedinha para pedir um lanche..."
+actor_animator_parameter enemy "Battle" true
+wait 4.5
+say "...a máquina começa a pular e se debater, atacando o casal!"
+
+
+actor_animator_parameter angel "Choosing Action" true
+wait 0.5
+say "Fertiliel" "(Alguma coisa mágica deve estar afetando esta máquina. Vou ativar minha Lente Angelical.)"
+
+actor_tint enemy 1 1 "#3995CC"
+wait 1
+say "Fertiliel" "(É um Imp. Eles gostam de surpreender e pregar peças em humanos. )"
+
+actor_tint enemy 0 1 "#3995CC"
+wait 1
+say "Fertiliel" "Não é uma criatura muito perigosa, mas vou ficar atenta pra ele não machucar meus humanos."
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "improvise"
+set_var intelligence_action_girl_name "improvise"
+set_var charisma_action_boy_name "flatter"
+set_var charisma_action_girl_name "flatter"
+
+set_var enemy_attacks_boy "A máquina pula e se agita, acertando \boy!"
+set_var enemy_attacks_girl "A máquina pula e se agita, acertando \girl!"
+end_script
+
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active chuta a lateral da máquina com toda a força!"
+end_script
+
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+set_var pre_attack "\active aperta vários botões na máquina, sobrecarregando-a!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active elogia a vasta seleção de produtos da máquina!"
+end_script
+
+
+
+waypoint defeated
+actor_animator_parameter enemy "Battle" false
+wait 1
+say "" "A máquina de salgadinhos parece se acalmar e voltar ao normal."
+say "O casal consegue comprar um lanche e comer em paz."
+play_sfx "heal_default"
+heal_hp "main" 20
+end_script

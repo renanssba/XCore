@@ -1,0 +1,43 @@
+﻿goto *arg1
+
+
+waypoint system_save
+say "" "Este arquivo já possui dados salvos. Você deseja sobrescrever estes dados?"
+choices "Confirmar salvar" confirm_save "Cancelar" cancel
+
+waypoint confirm_save
+play_sfx "ui_big_confirm"
+save save_file_selected
+say "O jogo foi salvo com sucesso!"
+end_script
+
+
+
+waypoint system_load
+say "" "Você deseja continuar este arquivo? Todo o progresso não-salvo será perdido."
+choices "Continuar arquivo" confirm_load "Cancelar" cancel
+
+waypoint confirm_load
+play_sfx "ui_big_confirm"
+fade_out 1
+load save_file_selected
+load_scene "Gameplay"
+end_script
+
+
+
+waypoint back_to_menu
+say "" "Você deseja sair para a tela de título? Todo o progresso não-salvo será perdido."
+choices "Sair do jogo" confirm_quit "Cancelar" cancel
+
+waypoint confirm_quit
+play_sfx "ui_big_confirm"
+fade_out 1
+load save_file_selected
+load_scene "TitleScreen"
+end_script
+
+
+waypoint cancel
+play_sfx "ui_locked"
+end_script

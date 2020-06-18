@@ -1,13 +1,13 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
-say "" "O casal encontra um animal familiar."
+say "char_name/none" "date_enemies/photographer/say_0"
 
 theater_animation "enemy_enters"
 
-say "Daniel" "Olha \girl, aquele coelhinho que encontramos da outra vez."
-say "\girl" "É ele mesmo! Pera, ele tá machucado de novo?"
-say "Daniel" "Parece que sim. O que será que tá fazendo ele se machucar tanto aqui pelo parque?"
+say "char_name/daniel" "date_enemies/photographer/say_1"
+say "char_name/girl" "date_enemies/photographer/say_2"
+say "char_name/daniel" "date_enemies/photographer/say_3"
 
 play_sfx "enemy_attack_photographer"
 wait 0.4
@@ -20,21 +20,21 @@ actor_move enemy "out_left_back" 1
 wait 1
 
 
-say "" "O coelho foge, assustado. No caminho ele tropeça em uma raíz e cai, se machucando."
+say "char_name/none" "date_enemies/photographer/say_4"
 
 actor_become enemy "fotografo"
 actor_move enemy "out_right" 0
-say "Fotógrafo" "Espera! Coelhinho, volta aqui!"
+say "date_enemies/photographer/char_name_0" "date_enemies/photographer/say_5"
 
 actor_move enemy "enemy" 1
 wait 1.5
-say "Droga, ele fugiu denovo!"
+say "date_enemies/photographer/say_6"
 
-say "Daniel" "Ei, o que você tá fazendo? Você tá assustando aquele coelhinho."
-say "Fotógrafo" "Ele é um espécime tão lindo, estou apenas tirando algumas fotos."
-say "\girl" "Não faz isso, ele tá se machucando por sua causa!"
-say "Fotógrafo" "Alguns sacrifícios são necessários pela arte."
-say "Vocês também são um espécime de casal bem peculiar. Vou capturar vocês pra minha coleção!"
+say "char_name/daniel" "date_enemies/photographer/say_7"
+say "date_enemies/photographer/char_name_0" "date_enemies/photographer/say_8"
+say "char_name/girl" "date_enemies/photographer/say_9"
+say "date_enemies/photographer/char_name_0" "date_enemies/photographer/say_10"
+say "date_enemies/photographer/say_11"
 
 
 set_var guts_action_boy_name "complain"
@@ -44,29 +44,30 @@ set_var intelligence_action_girl_name "argue"
 set_var charisma_action_boy_name "pose"
 set_var charisma_action_girl_name "pose"
 
-set_var enemy_attacks_boy "FLASH! O fotógrafo bate uma foto de \boy, incomodando-o!"
-set_var enemy_attacks_girl "FLASH! O fotógrafo bate uma foto de \girl, incomodando-a!"
+set_var enemy_attacks_boy "date_enemies/photographer/set_var_0"
+set_var enemy_attacks_girl "date_enemies/photographer/set_var_1"
 end_script
 
 
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active enche o ouvido do fotógrafo de poucas e boas!"
+set_var pre_attack "date_enemies/photographer/set_var_2"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que vai denunciar o fotógrafo por maus-tratos a animais!"
+set_var pre_attack "date_enemies/photographer/set_var_3"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active faz careta para a câmera!"
+set_var pre_attack "date_enemies/photographer/set_var_4"
 end_script
 
 
 
 waypoint defeated
-say "" "O fotógrafo desiste de fotografar o casal e vai embora."
+say "char_name/none" "date_enemies/photographer/say_12"
 end_script
+

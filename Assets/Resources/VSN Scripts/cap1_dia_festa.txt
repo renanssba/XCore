@@ -1,87 +1,46 @@
-set_current_couple 0
-if #currentRelationshipHeartLocksOpened >= 2
-  set_var casal_festa 0
-endif
-set_current_couple 1
-if #currentRelationshipHeartLocksOpened >= 2
-  set_var casal_festa 1
-endif
-set_current_couple 2
-if #currentRelationshipHeartLocksOpened >= 2
-  set_var casal_festa 2
-endif
-
-set_current_couple casal_festa
-goto_script "enter_observation" "school morning"
-theater_animation "girl_waiting_for_boy"
-say "" "No dia seguinte, Daniel vai para o colégio."
+﻿set_current_couple 0if #currentRelationshipHeartLocksOpened >= 2  set_var casal_festa 0endifset_current_couple 1if #currentRelationshipHeartLocksOpened >= 2  set_var casal_festa 1endifset_current_couple 2if #currentRelationshipHeartLocksOpened >= 2  set_var casal_festa 2endif
+set_current_couple casal_festagoto_script "enter_observation" "school morning"theater_animation "girl_waiting_for_boy"say "char_name/none" "cap1_dia_festa/say_0"
 fade_in 1
+theater_animation "main_actor_enters"wait 1.8
 
-theater_animation "main_actor_enters"
-wait 1.8
+if casal_festa == 0  goto ana_convidaendifif casal_festa == 1  goto beatrice_convidaendifif casal_festa == 2  goto clara_convidaendif
 
-
-if casal_festa == 0
-  goto ana_convida
-endif
-if casal_festa == 1
-  goto beatrice_convida
-endif
-if casal_festa == 2
-  goto clara_convida
-endif
-
-
-waypoint ana_convida
-say "Ana" "Ei Daniel! Você ficou sabendo do aniversário da Clara na casa dela? Vai ser hoje à noite."
-say "Daniel" "Não, não fui convidado."
-say "Ana" "Vai ser muito legal! Os pais dela contrataram banda e vai ter sorvete liberado, além de uma porrada de comida também! Vamos?"
-say "Daniel" "Não sei... Eu não acho uma boa ir sem ter sido convidado..."
-say "Ana" "Eu também não, mas vamo! Comida de graça!"
-wait 1
-say "Daniel" "..."
-say "Daniel" "Tá bom, eu vou. Você sabe mesmo me convencer a fazer tudo que quiser."
-say "Ana" "Ah, é? Então faz minha tarefa de casa de história pra mim?"
-say "Daniel" "Não abusa..."
+waypoint ana_convidasay "char_name/anna" "cap1_dia_festa/say_1"
+say "char_name/daniel" "cap1_dia_festa/say_2"
+say "char_name/anna" "cap1_dia_festa/say_3"
+say "char_name/daniel" "cap1_dia_festa/say_4"
+say "char_name/anna" "cap1_dia_festa/say_5"
+wait 1say "char_name/daniel" "cap1_dia_festa/say_6"
+say "char_name/daniel" "cap1_dia_festa/say_7"
+say "char_name/anna" "cap1_dia_festa/say_8"
+say "char_name/daniel" "cap1_dia_festa/say_9"
 goto end
 
-
-waypoint beatrice_convida
-say "Daniel" "Oi Beatrice! Chegando cedo hoje?"
-say "Beatrice" "Sim, estou bem ansiosa para nossos experimentos do dia."
-say "Daniel" "Você ficou sabendo que hoje à noite é a festa da Clara? Ela chamou todo mundo da turma e disse que podíamos trazer convidados também."
-say "Beatrice" "Eu não sei. Esse tipo de festa me parece uma perda de tempo."
-say "Daniel" "Acho que pode ser bom pra você relaxar um pouco, não?"
-say "Beatrice" "Ambientes lotados e barulhentos não são exatamente a minha definição de \qrelaxamento\q."
-say "Daniel" "Entendo."
-say "Daniel" "Mas talvez seja uma oportunidade de... estudar relacionamentos?"
-say "Beatrice" "Quem sabe. Tá bem, vou pensar..."
+waypoint beatrice_convidasay "char_name/daniel" "cap1_dia_festa/say_10"
+say "char_name/beatrice" "cap1_dia_festa/say_11"
+say "char_name/daniel" "cap1_dia_festa/say_12"
+say "char_name/beatrice" "cap1_dia_festa/say_13"
+say "char_name/daniel" "cap1_dia_festa/say_14"
+say "char_name/beatrice" "cap1_dia_festa/say_15"
+say "char_name/daniel" "cap1_dia_festa/say_16"
+say "char_name/daniel" "cap1_dia_festa/say_17"
+say "char_name/beatrice" "cap1_dia_festa/say_18"
 goto end
 
-
-waypoint clara_convida
-say "Clara" "Oi Daniel, bom dia! Vai ter uma festinha lá em casa hoje à noite, e eu adoraria que você viesse. Você está disponível?"
-say "Daniel" "Claro, mal posso esperar. Qual o motivo da festa?"
-say "Clara" "É o meu aniversário."
-say "Daniel" "Eita, aniversário?! Nossa, desculpa. Eu não sabia que já tava tão perto. "
-say "Clara" "Eu não pretendia fazer uma festa esse ano, mas os meus pais insistiram. Eles adoram transformar tudo em um grande evento..."
-say "Daniel" "Droga, e eu nem preparei nenhum presente..."
-say "Clara" "Tudo bem, não se preocupa. Só sua presença já vai ser o suficiente pra me deixar feliz! Espero que se divirta."
-say "" "A garota sorri."
-say "Daniel" "Tá bom. Nos encontramos mais tarde, então!"
+waypoint clara_convidasay "char_name/claire" "cap1_dia_festa/say_19"
+say "char_name/daniel" "cap1_dia_festa/say_20"
+say "char_name/claire" "cap1_dia_festa/say_21"
+say "char_name/daniel" "cap1_dia_festa/say_22"
+say "char_name/claire" "cap1_dia_festa/say_23"
+say "char_name/daniel" "cap1_dia_festa/say_24"
+say "char_name/claire" "cap1_dia_festa/say_25"
+say "char_name/none" "cap1_dia_festa/say_26"
+say "char_name/daniel" "cap1_dia_festa/say_27"
 goto end
 
 
 
-
-waypoint end
-fade_out 1
-wait 1
-say "" "Durante o intervalo do colégio..."
+waypoint endfade_out 1wait 1say "char_name/none" "cap1_dia_festa/say_28"
 //fade_in 1
 
-bg null
-goto_script "show_people_screen"
-play_music "intermission_intro" "intermission_loop"
-fade_in 1
-end_script
+bg nullgoto_script "show_people_screen"play_music "intermission_intro" "intermission_loop"fade_in 1end_script

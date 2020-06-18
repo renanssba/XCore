@@ -1,0 +1,48 @@
+goto *arg1
+
+waypoint event_statement
+say "" "O casal fica com fome e decide comprar algo no caminho."
+say "\boy" "Você gosta de cachorro-quente? Tem uma lanchonete aqui perto."
+say "\girl" "Eu adoro! Vamos lá comprar uns pra gente."
+
+say "" "Chegando lá... eles encontram o mascote da loja revoltado!"
+theater_animation "enemy_enters"
+say "Cachorro-quente" "Eu odeio meu emprego! Vocês todos vão pagar!"
+
+set_var guts_action_boy_name "strike"
+set_var guts_action_girl_name "strike"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "argue"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "O cachorro-quente esguicha ketchup e mostarda em \boy!"
+set_var enemy_attacks_girl "O cachorro-quente esguicha ketchup e mostarda em \girl!"
+end_script
+
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active chuta o cachorro-quente gigante!"
+end_script
+
+waypoint intelligence_action_boy
+waypoint intelligence_action_girl
+set_var pre_attack "\active insiste que atacar pessoas não vai fazer o mascote se sentir melhor!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active promete ajudar o mascote a conseguir um emprego que ele goste!"
+end_script
+
+
+
+waypoint defeated
+say "" "O mascote foge prometendo conseguir um novo emprego!"
+say "Depois do incidente, \couple se sentam para comer um delicioso cachorro-quente."
+play_sfx "heal_default"
+heal_hp "main" 50
+
+end_script

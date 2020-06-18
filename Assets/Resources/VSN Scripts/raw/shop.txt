@@ -1,0 +1,150 @@
+﻿fade_music 0 0.7
+fade_out 0.7
+bg "heaven"
+wait 0.5
+fade_in 0.7
+
+play_music "date1_intro" "date1_loop"
+
+goto_script "fertiliel_enter" 0.25
+goto_script "char_right_enter" "graciel"
+
+// character char_right "graciel"
+// char_move_x char_right 1.5
+// char_move_x char_right 0.5 0.7
+// anim_alpha char_right 0 0
+// anim_alpha char_right 1 0.7
+//wait 0.7
+
+/// DEBUG: GET MUCH MONEY
+// add_var money 1000
+// update_ui
+
+if shop_level == 0
+  say "Graciel" "Oi Fertiliel, como tão indo as coisas?"
+  say "Fertiliel" "Tudo indo bem, na medida do possível. Já encontrei meu humano e algumas garotas com quem eu acho que ele tem chance."
+  say "Graciel" "Ai, que legal! Eu tô com taaanta inveja!"
+  say "Trabalhar diretamente com humanos deve ser a coisa mais legal do mundo!"
+  say "Fertiliel" "É... Eu não tenho tanta certeza assim. E contigo, como vão as coisas?"
+  say "Graciel" "Tô adorando, eu recebo todo tipo de itens humanos e posso ficar com eles. Tô até colecionando!"
+  say "Fertiliel" "Que legal! Será que tem algo que poderia me ajudar a juntar meu casal?"
+  say "Graciel" "Tenho, sim! Inclusive queria te entregar isso aqui."
+  play_sfx "relationship_up"
+  add_item "chocolate_cake" 3
+  say "Graciel" "Isso vai te ajudar com seus humanos. Eu li num mangá que bolo é a principal fonte de alimento deles."
+  say "Fertiliel" "Valeu! Vai ser útil com certeza."
+  say "Graciel" "Eu tenho mais coisas que podem te ajudar, mas não posso dar mais do que isso de graça."
+  say "Sabe como é, eu preciso de dinheiro pra comprar mais mangá."
+  say "Fertiliel" "Tudo bem. Me mostra o que você tem aí pra vender."
+  say "Graciel" "Claro, esses são os itens que eu tenho pra venda."
+  set_var shop_level 1
+  update_ui
+  goto store_choices
+endif
+if shop_unlock_advance == 1
+  say "Graciel" "Oi Fertiliel! Consegui dois tipos de itens novos, e estão à venda!"
+  say "Fertiliel" "Interessante. Quais sãos eles?"
+  say "Graciel" "Primeiro, tenho essas coisas aqui que os humanos usam pra acalmar a mente e o corpo. Humanos são bem frágeis, né?"
+  say "Fertiliel" "Legal! Você tem alguma amostra grátis dessa vez?"
+  say "Graciel" "Tenho sim, vou te dar um de cada pra você testar. Mas compra mais depois, por favor."
+  play_sfx "relationship_up"
+  add_item "calming_tea" 1
+  play_sfx "relationship_up"
+  add_item "first_aid" 1
+  say "Fertiliel" "Valeu! E o outro tipo?"
+  say "Graciel" "Presentes! Eu fico muito feliz quando eu ganho alguma coisa, então talvez humanos funcionem da mesma forma."
+  say "Leva uns presentinhos pro seu humano dar pras garotas. Aposto que elas vão se apaixonar rapidinho."
+  say "Fertiliel" "Certo, vou dar uma olhada."
+  set_var shop_level 2
+  set_var shop_unlock_advance 2
+  update_ui
+  goto store_choices
+endif
+if shop_unlock_final == 1
+  say "Graciel" "Ei, eu tenho novidades."
+  say "Fertiliel" "Oi! O que foi?"
+  say "Graciel" "A Supervisora Hardiel acabou descobrindo sobre a minha lojinha."
+  say "Fertiliel" "Eita! E ela brigou com você?"
+  say "Graciel" "Brigou sim, ela falou que algo assim era contra as regras."
+  say "Mas depois ela disse que podia \qaproveitar a situação\q e me deu alguns itens angelicais pra te vender também."
+  say "Fertiliel" "Ótimo, podem ser úteis! E você tem alguma amostra grátis?"
+  say "Graciel" "Desculpa, eles não são meus. Estou apenas revendendo."
+  say "Mas são bem úteis. Quer ver o que eu tenho pra vender agora?"
+  set_var shop_level 3
+  set_var shop_unlock_final 2
+  update_ui
+  goto store_choices
+endif
+
+say_auto "Graciel" "Oi Fertiliel! Seja bem-vinda à minha lojinha de itens humanos!"
+
+goto store_choices
+
+
+waypoint store_loop
+say_auto "Graciel" "Quer fazer mais algum negócio?"
+waypoint store_choices
+choices "Comprar" buy "Vender" sell "Sair" end
+
+
+waypoint buy
+show_shop true "buy"
+
+if item_id != -1
+  if item_price <= money
+    say_auto "Você quer comprar <color=yellow>\vsn(item_name)</color> por <sprite="Attributes" index=4><color=yellow>\vsn(item_price)</color>?"
+    choices "choices/yes" comprar_sim "choices/no" store_loop
+  else
+    say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
+  endif
+else
+  goto store_loop
+endif
+goto store_loop
+
+
+waypoint sell
+if #inventory_empty == 1
+  say "Você não tem nenhum item para vender."
+goto store_loop
+endif
+
+show_shop true "sell"
+if item_id != -1
+  say_auto "Você quer vender <color=yellow>\vsn(item_name)</color> por <sprite="Attributes" index=4><color=yellow>\vsn(item_price)</color>?"
+  choices "choices/yes" vender_sim "choices/no" store_loop
+else
+  goto store_loop
+endif
+goto store_loop
+
+
+
+waypoint comprar_sim
+subtract_var money item_price
+update_ui
+add_item item_id 1
+play_sfx "ui_money"
+goto store_loop
+
+
+waypoint vender_sim
+add_var money item_price
+update_ui
+play_sfx "ui_money"
+add_item item_id -1 false
+say "Graciel" "Muito obrigada! Isso vai ficar lindo na minha coleção."
+goto store_loop
+
+// waypoint
+
+waypoint end
+say "Graciel" "Obrigada e volte sempre! Boa sorte juntando os humanos!"
+
+fade_music 0 0.7
+fade_out 0.7
+char_reset_all
+bg null
+wait 0.5
+fade_in 0.7
+play_music "intermission_intro" "intermission_loop"

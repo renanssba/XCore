@@ -1,64 +1,25 @@
-if day == dia_festa_clara
-  say "" "A noite cai e chega a hora da festa na casa da Clara."
-  play_music "intermission_intro" "intermission_loop"
-  fade_in 1
-  goto end
-endif
-
-say "" "Cai a noite e Daniel fica em casa."
+﻿if day == dia_festa_clara  say "char_name/none" "cap1_noite/say_0"
+  play_music "intermission_intro" "intermission_loop"  fade_in 1  goto endendif
+say "char_name/none" "cap1_noite/say_1"
 
 /// DEBUG while item interaction mechanic is not complete
 goto after_item_interaction
+bg "house afternoon"fade_in 0.5
 
-bg "house afternoon"
-fade_in 0.5
-
-
-waypoint interact_with_item
-say "Fertiliel" "(Eu posso escolher algum item para o Daniel utilizar durante esse período! O que ele deve fazer?)"
-item_choice
-if item_id == -1
-  say "" "Daniel fica em casa vendo programas de culinária na tv."
-  goto after_item_interaction
-endif
-if item_key == "book_draft"
-  say "" "Daniel fica em casa lendo os rascunhos que recebeu da Beatrice."
-  set_var leu_rascunho_livro 1
-  goto after_item_interaction
-endif
-if item_key == "cake_batter"
-  add_item "cake_batter" -1 false
-  say "" "Daniel decide fazer um bolo com a massa que ele percebe que tem."
-  say "Que tipo de bolo ele deveria fazer?"
-  choices "Chocolate" cake_choco "Morango" cake_strawberry "Pimenta" cake_pepper
-  waypoint cake_choco
-  set_var cake_chosen 1
-  goto make_cake
-  
-  waypoint cake_strawberry
-  set_var cake_chosen 2
-  goto make_cake
-  
-  waypoint cake_pepper
-  set_var cake_chosen 3
-  goto make_cake
-endif
-say "" "Daniel fica em casa vendo programas de culinária na tv."
+waypoint interact_with_itemsay "char_name/fertiliel" "cap1_noite/say_2"
+item_choiceif item_id == -1  say "char_name/none" "cap1_noite/say_3"
+  goto after_item_interactionendifif item_key == "book_draft"  say "char_name/none" "cap1_noite/say_4"
+  set_var leu_rascunho_livro 1  goto after_item_interactionendifif item_key == "cake_batter"  add_item "cake_batter" -1 false  say "char_name/none" "cap1_noite/say_5"
+  say "cap1_noite/say_6"
+  choices "cap1_noite/choices_0_0" cake_choco "cap1_noite/choices_0_1" cake_strawberry "cap1_noite/choices_0_2" cake_pepper
+  waypoint cake_choco  set_var cake_chosen 1  goto make_cake
+  waypoint cake_strawberry  set_var cake_chosen 2  goto make_cake
+  waypoint cake_pepper  set_var cake_chosen 3  goto make_cakeendifsay "char_name/none" "cap1_noite/say_7"
 goto after_item_interaction
+waypoint make_cakesay "char_name/none" "cap1_noite/say_8"
 
-waypoint make_cake
-say "" "Daniel arregaça as mangas e põe a mão na massa."
-
-waypoint after_item_interaction
-set_var interacted_item_key item_key
-fade_out 0.5
-bg null
-play_music "intermission_intro" "intermission_loop"
-fade_in 1
-
-if day == 1
-  say "Fertiliel" "Vou aproveitar meu tempo da noite para dar uma investigada nas garotas."
+waypoint after_item_interactionset_var interacted_item_key item_keyfade_out 0.5bg nullplay_music "intermission_intro" "intermission_loop"fade_in 1
+if day == 1  say "char_name/fertiliel" "cap1_noite/say_9"
 endif
-
 
 waypoint end

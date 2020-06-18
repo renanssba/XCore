@@ -1,11 +1,11 @@
-goto *arg1
+﻿goto *arg1
 
 waypoint event_statement
 
 if #currentGirlId == 2
-  say "" "Andando pelo parque, eles encontram um colega do colégio."
+  say "char_name/none" "date_enemies/bully_minor/say_0"
 else
-  say "" "Andando pelo parque, eles encontram um colega da turma."
+  say "char_name/none" "date_enemies/bully_minor/say_1"
 endif
 
 wait 0.5
@@ -13,30 +13,30 @@ theater_animation "enemy_enters"
 wait 0.5
 
 if daytime == 0
-  say "Garoto" "Ei, olha aí! Vocês tão matando aula?"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_2"
 else
-  say "Garoto" "Ei, olha aí! Passeando no parque, amigos?"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_3"
 endif
 
 
 if #currentGirlId == 1
-  say "Ana" "Oi Buster. Como vai?"
-  say "Garoto" "Que bom te encontrar, Daniel. Tava mesmo querendo falar com você."
-  say "Daniel" "O que foi?"
-  say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
-  say "\girl" "Não é legal copiar o trabalho dos outros, cara."
-  say "Garoto" "Qual é! Você me deve uma, Daniel. Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
-  say "Daniel" "Não foi isso que eu quis dizer com \qte ajudar\q."
+  say "char_name/anna" "date_enemies/bully_minor/say_4"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_5"
+  say "char_name/daniel" "date_enemies/bully_minor/say_6"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_7"
+  say "char_name/girl" "date_enemies/bully_minor/say_8"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_9"
+  say "char_name/daniel" "date_enemies/bully_minor/say_10"
 else  
-  say "Daniel" "Oi Buster. Como vai?"
-  say "Garoto" "Que bom te encontrar, \girl. Tava mesmo querendo falar com você."
-  say "\girl" "O que foi?"
-  say "Garoto" "Sabe aquele trabalho de história? Pois é, eu não gosto de história. Então preciso que você me dê o seu pra copiar."
-  say "Daniel" "Não é legal copiar o trabalho dos outros, cara."
-  say "Garoto" "Qual é! você me deve uma, \girl. Lembra quando você esqueceu a caneta num dia de prova e eu te emprestei a minha? Você disse que ia me ajudar quando eu precisasse."
-  say "\girl" "Não foi isso que eu quis dizer com \qte ajudar\q."
+  say "char_name/daniel" "date_enemies/bully_minor/say_11"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_12"
+  say "char_name/girl" "date_enemies/bully_minor/say_13"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_14"
+  say "char_name/daniel" "date_enemies/bully_minor/say_15"
+  say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_16"
+  say "char_name/girl" "date_enemies/bully_minor/say_17"
 endif
-say "Garoto" "Ah, não! Não é justo! Me dá seu trabalho de história!"
+say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_18"
 
 
 
@@ -47,30 +47,31 @@ set_var intelligence_action_girl_name "bluff"
 set_var charisma_action_boy_name "talk"
 set_var charisma_action_girl_name "talk"
 
-set_var enemy_attacks_boy "O estudante folgado tenta convencer \boy a fazer o seu trabalho de história!"
-set_var enemy_attacks_girl "O estudante folgado tenta convencer \girl a fazer o seu trabalho de história!"
+set_var enemy_attacks_boy "date_enemies/bully_minor/set_var_0"
+set_var enemy_attacks_girl "date_enemies/bully_minor/set_var_1"
 end_script
 
 
 
 waypoint guts_action_boy
 waypoint guts_action_girl
-set_var pre_attack "\active diz para o estudante tomar vergonha na cara!"
+set_var pre_attack "date_enemies/bully_minor/set_var_2"
 end_script
 
 waypoint intelligence_action_boy
 waypoint intelligence_action_girl
-set_var pre_attack "\active diz que o estudante se sairá melhor fazendo o trabalho sozinho!"
+set_var pre_attack "date_enemies/bully_minor/set_var_3"
 end_script
 
 waypoint charisma_action_boy
 waypoint charisma_action_girl
-set_var pre_attack "\active diz que pode tentar ajudá-lo com o trabalho depois."
+set_var pre_attack "date_enemies/bully_minor/set_var_4"
 end_script
 
 
 
 waypoint defeated
-say "Garoto" "Droga, vocês não vão me ajudar mesmo, né?"
-say "Seus egoístas! Vou procurar outra pessoa pra colar."
+say "date_enemies/bully_minor/char_name_0" "date_enemies/bully_minor/say_19"
+say "date_enemies/bully_minor/say_20"
 end_script
+

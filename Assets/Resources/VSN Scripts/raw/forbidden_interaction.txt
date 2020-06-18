@@ -1,0 +1,25 @@
+﻿play_sfx "ui_locked"
+goto *arg1
+
+
+waypoint date_1
+say "" "\boy não pode convidar \girl para encontros ainda. O nível mínimo de relacionamento necessário é 2."
+end_script
+
+waypoint date_2
+say "" "\boy não pode convidar \girl para este encontro ainda. O nível mínimo de relacionamento necessário é 4."
+end_script
+
+waypoint date_3
+say "" "\boy não pode convidar \girl para este encontro ainda. O nível mínimo de relacionamento necessário é 7."
+end_script
+
+
+waypoint give_gift
+say "" "\boy não pode presentear \girl ainda. Para isto, é necessário que eles alcancem pelo menos o nível de proximidade <color=yellow>Amigos Próximos</color>."
+end_script
+
+
+waypoint buy_skill
+say "" "Você não tem Pontos de Vínculo suficientes para comprar esta habilidade."
+end_script

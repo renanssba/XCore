@@ -1,0 +1,214 @@
+﻿//DEBUG:
+//end_script
+
+//play_ambience "ambience_night"
+//wait 10.0
+//stop_ambience "ambience_night"
+//set_var conhece_beatrice true
+//goto_script "cap1_festa"
+fade_out 0
+play_music null null
+//play_music "date1_intro" "date1_loop"
+wait 1
+bg "heaven"
+fade_in 1
+
+
+skip_button true end
+
+goto_script "fertiliel_enter" 0.25
+
+//fertiliel entra na cena
+say "Fertiliel" "Ok, aqui estou. Espero não ter me atrasado..."
+say "Graciel" "EEEEEEI, FERTILIEL! Que bom te encontrar aqui!"
+
+play_music "date1_intro" "date1_loop"
+wait 1
+// graciel entra na cena
+goto_script "char_right_enter" "graciel"
+
+say "Fertiliel" "Oi, Graciel! Você parece bem animada para o resultado dos Exames Admissionais."
+say "Graciel" "Eu tô siiiim! Vai dar tudo certo, vou conseguir minha vaga em um emprego super super incrível!"
+say "E você?"
+say "Fertiliel" "Eu tô... receosa. Algo me diz que as coisas não vão ser bem como eu tô esperando..."
+say "Graciel" "Não fica assim! Você é tão inteligente, com certeza vai dar tudo certo!"
+say "Fertiliel" "Queira o Amor que você esteja certa."
+
+wait 0.5
+say "Atendente" "Srta. Fertiliel, por favor dirija-se à sala seguinte."
+
+say "Fertiliel" "Ok, agora é a minha hora."
+say "Graciel" "Boa sorte!"
+
+// fertiliel sai de cena
+goto_script "fertiliel_exit"
+wait 0.5
+
+fade_out 0.7
+wait 1
+
+char_reset_all
+character char_right "hardiel"
+char_move_x char_right 0.75
+
+fade_in 0.7
+
+// hardiel está na tela
+// fertiliel entra na cena
+goto_script "fertiliel_enter" 0.25
+wait 1
+
+say "Fertiliel" "Oi, boa tarde."
+say "Hardiel" "Presumo que seja a novata, Fertiliel."
+say "Meu nome é Hardiel, e estou encarregada de informar-lhe o resultado dos seus exames."
+say "Fertiliel" "Sim, sou eu. Prazer em conhecê-la!"
+say "Hardiel" "Não há prazer algum em exercer sua função. Nós anjos fazemos isso apenas para cumprir nosso dever, e nada mais."
+say "Fertiliel" "(...Nossa.)"
+say "Hardiel" "Nos seus Exames consta que você se inscreveu para a função de Anjo da Guarda."
+say "Fertiliel" "É, eu quero muito ser um Anjo da Guarda novamente!"
+say "Hardiel" "Correto. Infelizmente, suas vontades aqui são irrelevantes. A única coisa que importa são seus resultados."
+
+character char_left "fertiliel-suspicious"
+say "Fertiliel" "Hum... E como eu me saí nos exames?"
+say "Hardiel" "Como deve saber, há pouquíssimas vagas para Anjo da Guarda atualmente."
+
+say "Fertiliel" "(Será que eu falhei?)"
+say "Hardiel" "Mesmo assim, suas notas foram..."
+wait 0.5
+say "...Suficientes."
+
+character char_left "fertiliel"
+say "Fertiliel" "O quê? É sério?"
+say "Aeeee! Eu tô tão feliz!"
+say "Hardiel" "Permita-me continuar, por favor..."
+say "Fertiliel" "Desculpa."
+say "Hardiel" "O Conselho também levou seu histórico passado e outros fatores psicológicos em consideração..."
+say "Fertiliel" "(Droga!)"
+say "Hardiel" "E chegou à conclusão que Anjo da Guarda é uma atribuição muito além das suas capacidades."
+say "Fertiliel" "NÃO!"
+say "Hardiel" "Você foi considerada inapta a retomar qualquer atividade produtiva."
+// Portanto iremos alocá-la em uma outra função que esteja dentro dos seus limites.
+say "Fertiliel" "Qualquer atividade?"
+say "Fertiliel" "Não, por favor! Me deixa ser um Anjo da Guarda! Eu consigo melhorar!"
+//say "Hardiel" "Eu já falei que suas vontades aqui são irrelevantes."
+say "Hardiel" "Infelizmente, as decisões do Conselho são finais."
+say "Fertiliel" "Eu faço qualquer coisa pra provar que eu mudei! Por favor, não tem nada que eu possa fazer?!"
+say "Hardiel" "Creio que não."
+
+wait 0.5
+character char_left "fertiliel-sad"
+wait 1
+character char_left "fertiliel-tired"
+wait 1
+say "Fertiliel" "Tudo bem, eu entendo vocês."
+say "Eu sei que eu cometi um erro muito grande..."
+wait 0.5
+character char_left "fertiliel-sad"
+wait 0.5
+say "Mas eu realmente mudei, e queria muito provar isso."
+say "É uma pena, acho que nunca vou conseguir reparar o que eu fiz, afinal."
+say "Hardiel" "..."
+say "Fertiliel" "Me desculpe por ter-lhe feito perder seu tempo."
+
+wait 0.5
+char_flip char_left
+char_move_x char_left -0.3 0.8
+wait 1.8
+
+say "Hardiel" "..."
+say "Hardiel" "Fertiliel, espere!"
+wait 0.5
+char_flip char_left
+char_move_x char_left 0.1 0.4
+wait 0.4
+say "Fertiliel" "Pois não?"
+
+say "Hardiel" "Talvez... tenhamos uma vaga aberta que você possa preencher."
+
+wait 0.3
+character char_left "fertiliel"
+char_move_x char_left 0.25 0.5
+wait 0.5
+say "Fertiliel" "Uma vaga?"
+
+say "Hardiel" "Sim. Estamos com muita demanda em uma certa área. Você poderia atuar como Cupido."
+character char_left "fertiliel-suspicious"
+say "Fertiliel" "Cupido?"
+
+say "Hardiel" "Sim. É uma vaga temporária, mas caso tenha bons resultados em sua primeira missão podemos avaliar uma contratação permanente."
+say "Se você realmente mudou, essa é sua hora de provar."
+//say "Sei que você não tem experiência prévia, mas se demonstrar dedicação e eficiência posso considerar escrever uma carta ao Conselho."
+
+say "Fertiliel" "(Hum... Eu não tenho nenhuma experiência como cupido, e parece ser um trabalho bem difícil.)"
+say "(Mas...)"
+wait 0.5
+character char_left "fertiliel"
+wait 0.5
+say "Fertiliel" "Tudo bem, eu aceito!"
+
+// say "Hardiel" "Após analisarmos seu histórico, decidimos que uma atribuição mais \qapropriada\q para você seria de Cupido."
+// say "Fertiliel" "Cupido? Blergh!"
+// say "Hardiel" "E tem mais. Devido ao seu histórico, você possui uma dívida muito grande com a Sociedade dos Anjos."
+// say "Você deve pagar por seus erros ajudando a gerar bebês humanos. Um total de 100 bebês será o suficiente para quitar sua dívida."
+// say "Fertiliel" "Eca, bebês humanos? E logo cem deles?"
+// say "Hardiel" "Você sabe muito bem o que fez. Agradeça por te darmos esta oportunidade de pagar por seus erros."
+// say "Fertiliel" "..."
+// say "Hardiel" "Quando terminar de pagar sua dívida, podemos reavaliá-la. Quem sabe você poderá mudar de função, caso demonstre dedicação e eficiência."
+// say "Fertiliel" "(Certo, pelo menos isso...)"
+// say "Hardiel" "Alguma dúvida?"
+// say "Fertiliel" "..."
+// say "(Se eu pagar essa dívida, eu tenho pelo menos uma chance...)"
+// say "Não, acho que entendi tudo. Obrigada, Hardiel."
+say "Hardiel" "Não pense que será fácil. Esta é sua última oportunidade de provar que pode voltar à ativa."
+say "Fertiliel" "Obrigada pela chance. Eu não irei desapontá-la, Hardiel."
+say "Hardiel" "E por último, eu serei sua supervisora. Me chame de Supervisora Hardiel a partir de agora."
+say "Fertiliel" "Sim, Supervisora Hardiel!"
+
+
+fade_out 0.7
+wait 1
+char_reset_all
+character char_right "graciel"
+char_move_x char_right 0.75
+fade_in 0.7
+
+
+
+goto_script "fertiliel_enter" 0.25
+say "Fertiliel" "(Ai, eu tô muito ferrada...)"
+
+say "Graciel" "E aí, amiga? Como foi lá?"
+say "Fertiliel" "Não consegui a vaga de Anjo da Guarda. Mas pelo menos consegui uma vaga temporária de Cupido."
+//"Foi péssimo. Eu fui designada como Cupido. E ainda tenho que pagar uma dívida de 100 bebês humanos..."
+say "Graciel" "Cupido? Você vai ter que juntar casais humanos, né? Que fofura!"
+say "Fertiliel" "Me parece bem difícil, na real. Os relacionamentos humanos são a coisa mais confusa e difícil de lidar que existe! Não sei se vou dar conta."
+say "Graciel" "Ah, relaxa. Eu tenho certeza que você vai tirar de letra!"
+say "Fertiliel" "Espero que sim... Valeu pelo apoio de qualquer maneira."
+say "E o seu resultado, como foi? Conseguiu seu emprego super super incrível?"
+say "Graciel" "Siiiim!!! Consegui! Eu vou ser gari."
+
+character char_left "fertiliel-suspicious"
+say "Fertiliel" "Pera, \qgari\q? Tipo... cuidar do lixo?"
+say "Graciel" "Éeeeee! Vou ficar responsável por me livrar de todo o lixo que os anjos trouxerem do Mundo dos Humanos."
+say "Fertiliel" "Curioso... E você tá feliz?"
+say "Graciel" "Claro! Eu vou poder ficar com todo tipo de objeto que os humanos usam!"
+
+character char_left "fertiliel"
+say "Fertiliel" "Tá bom então. Vou trazer pra ti alguns objetos que eu coletar nas minhas missões."
+say "Graciel" "Valeu! É isso aí, vamos dar o nosso melhor!"
+
+fade_music 0 1
+fade_out 1
+
+waypoint end
+skip_button false
+fade_music 0 0
+fade_out 0
+char_reset_all
+bg null
+wait 1
+
+
+set_var day 1
+goto_script "select_daytime_interaction"
+//goto_script "cap1_intro"

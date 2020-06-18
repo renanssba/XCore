@@ -1,0 +1,257 @@
+goto *arg1
+
+waypoint event_statement
+
+set_var midbattle 0
+set_var first_dialog 0
+
+theater_bg_effect "distortingEffect" 1
+fade_music 0 2
+wait 2
+say "Daniel" "Você tá sentindo isso?"
+say "Clara" "O ar... está ficando quente e pesado."
+
+play_music "tension_intro" "tension_loop"
+
+wait 0.5
+theater_animation "enemy_enters"
+wait 1
+
+say "Criatura Sombria" "Esta... sombra..."
+actor_animator_parameter angel "Choosing Action" true
+say "Fertiliel" "(Um Devorador de Sombras?!)"
+say "(Por que tem um desses por aqui?)"
+say "Criatura Sombria" "Tanta incerteza, tanto ressentimento..."
+say "A sombra desta garota... preciso devorá-la."
+say "Clara" "Daniel, estou com um pressentimento ruim."
+
+
+flash "#9E54BC" 0.3
+wait 0.8
+flash "#9E54BC" 0.3
+wait 0.8
+say "Clara" "Ai, minha cabeça dói..."
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+say "Daniel" "Você tá bem?"
+
+flash "#9E54BC" 0.5
+wait 0.8
+flash "#9E54BC" 0.5
+wait 0.8
+say "Clara" "Acho que vou desmaiar..."
+
+
+flash "#9E54BC" 0.7
+wait 0.8
+flash "#9E54BC" 0.7
+wait 0.8
+fade_out 1 "#9E54BC"
+
+wait 1
+say "" "<color=white>Aaaaargh!</color>"
+actor_become enemy "boss_claire"
+wait 0.5
+
+screenshake 2 1
+fade_in 0.7
+wait 1.5
+
+say "Clara Sombria" "Vocês dois... sabem quem eu sou?"
+
+//ANIMATION HERE
+wait 0.5
+actor_face main "right"
+wait 0.5
+say "Daniel" "Quem é você?"
+say "Clara Sombria" "Quem sou eu? Eu... eu não sei..."
+
+say "Clara" "Você precisa de ajuda?"
+say "Clara Sombria" "Eu sou você! Eu sou a <b>Clara</b>."
+
+say "Clara" "Não, você não sou eu..."
+say "Daniel" "Essa garota me parece suspeita."
+say "Clara" "Ela só deve estar confusa. Vamos ajudá-la, Daniel."
+say "Clara Sombria" "Eu não sei quem eu sou... ME DIGAM!"
+say "Fertiliel" "(Esse demônio parece perigoso, tenho que proteger meus humanos!)"
+
+
+wait 0.5
+play_music "boss1_intro" "boss1_loop"
+wait 0.5
+
+actor_animator_parameter angel "Choosing Action" false
+wait 0.5
+
+set_var guts_action_boy_name "motivate"
+set_var guts_action_girl_name "motivate"
+set_var intelligence_action_boy_name "argue"
+set_var intelligence_action_girl_name "think"
+set_var charisma_action_boy_name "soothe"
+set_var charisma_action_girl_name "soothe"
+
+set_var enemy_attacks_boy "A sombra implora pela ajuda de \boy!"
+set_var enemy_attacks_girl "A sombra implora para \girl dizer quem ela é!"
+end_script
+
+
+waypoint guts_action_boy
+waypoint guts_action_girl
+set_var pre_attack "\active diz para a sombra não desistir de tentar lembrar quem é!"
+end_script
+
+waypoint intelligence_action_boy
+set_var pre_attack "\active pergunta o que a sombra gostaria de ser!"
+end_script
+
+waypoint intelligence_action_girl
+set_var pre_attack "\active se concentra em pensamentos felizes!"
+end_script
+
+waypoint charisma_action_boy
+waypoint charisma_action_girl
+set_var pre_attack "\active pede educadamente para a sombra se acalmar e pensar."
+end_script
+
+
+
+
+waypoint first_dialog
+if first_dialog == 0
+  say "Daniel" "O que está havendo por aqui? Será que estamos sonhando?"
+  
+  say "Clara" "Eu não sei, mas algo dentro de mim quer muito ajudá-la."
+  say "Clara Sombria" "Eu sou a <b>Clara</b>. Mas eu não sei quem eu sou."
+  
+  say "Clara" "Você não sou eu. Deve estar confusa..."
+
+  say "Daniel" "Você perdeu a memória?"
+  
+  say "Clara Sombria" "Não, eu sei que meu nome é <b>Clara</b>... Ela sabe quem eu sou, mas não quer me dizer!"
+  
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Daniel" "Clara, você conhece essa garota...?"
+  say "Clara" "Não, eu acho que não..."
+  
+  say "Clara Sombria" "Você sabe sim! Me diga!"
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Clara" "Desculpa, eu vou te ajudar a descobrir... Eu vou te ajudar..."
+  
+  
+  actor_animator_parameter angel "Choosing Action" true
+  say "Fertiliel" "(Esse demônio se alimenta de sentimentos reprimidos e negativos dos humanos.)"
+  say "(Não posso deixar que o Daniel e a Clara percam o controle, ou o demônio ficará mais forte e pode machucar mais pessoas.)"
+  actor_animator_parameter angel "Choosing Action" false
+  
+  wait 0.5
+  use_skill enemy "enemy1" 45
+  screenshake 1
+  say "Clara Sombria" "Me digam quem eu sou!!!"
+  set_var first_dialog 1
+endif
+end_script
+
+
+
+
+waypoint midbattle_dialog
+if midbattle == 0
+  say "Clara Sombria" "Eu me esforço muito, faço de tudo pros outros gostarem de mim..."
+  say "Mas mesmo assim, é como se eu não existisse. Porque ninguém presta atenção no que <b>eu</b> quero?!"
+  
+  wait 0.3
+  actor_face main "left"
+  wait 0.3
+  say "Daniel" "Clara, você também se sente assim?"
+  say "Clara" "N-não... Eu gosto de ajudar os outros..."
+  
+  say "Clara Sombria" "É claro que eu gosto de ajudar os outros, senão por que alguém gostaria de mim?"
+  say "Eu faço tudo o que os meus pais mandam, faço tudo que as pessoas querem. Mas não consigo achar o que eu mesma quero alcançar."
+  say "Eu não sei nem <b>o que eu quero</b>, como eu vou saber <b>quem</b> eu sou?!"
+  
+  say "Daniel" "..."
+  say "É assim que você se sente, Clara? Você tá se sentindo tão sobrecarregada assim?"
+  say "Clara" "..."
+  say "Clara Sombria" "Porque você não me ajuda? ME DIZ QUEM EU SOU!"
+  say "Clara" "Não..."
+  say "Não é assim que eu <b>me sinto</b>!"
+  
+  wait 0.5
+  say "Clara Sombria" "Você não sabe me dizer <b>quem eu sou</b> porque eu sou <b>você</b>! Você e eu somos uma só!!!"
+  say "Clara" "Eu acho que não..."
+  say "Nós somos?"
+  wait 1
+  say "Clara Sombria" "Siiim!!!"
+  use_skill enemy "enemy1" 45
+  use_skill enemy "allHeroes" 43
+  screenshake 2 2
+  theater_bg_effect "pulsingEffect" 2
+  wait 2
+  
+  say "Clara Sombria" "E você é como todos os outros, Daniel. Você não gosta de <b>quem</b> eu sou por dentro. Você só gosta de mim porque eu sou bonita!"
+  
+  wait 0.3
+  actor_face main "right"
+  wait 0.3
+  say "Daniel" "Não é verdade!"
+  say "A Clara é a pessoa mais gentil que eu conheço."
+  say "Ela ajuda os outros porque ela se importa, não pra ter atenção como você!"
+  say "Clara" "Daniel..."
+  say "Daniel" "E é a pessoa mais especial do mundo pra mim. Pare de tentar confundí-la desse jeito!"
+  say "Clara" "..."
+  say "Clara" "Não, Daniel. Ela tá certa. Eu acho que faço algumas coisas para que gostem de mim."
+  say "E eu não sei exatamente o que eu quero, ainda preciso encontrar quem eu realmente sou..."
+  say "Não vou mais viver fazendo apenas o que agrada os outros. E para começar, vou enfrentá-la!"
+  set_var midbattle 1
+endif
+end_script
+
+
+
+
+waypoint defeated
+say "Clara Sombria" "Eu não entendi... Quem sou eu, afinal?"
+fade_music 0 2
+wait 2
+theater_bg_effect "pulsingEffect" 0
+wait 2
+
+actor_animator_parameter enemy "Elimination"
+wait 5
+
+say "" "A sombra se dissolve em névoa."
+
+actor_animator_parameter main "Battle" false
+actor_animator_parameter support "Battle" false
+wait 1
+
+say "" "Esgotados, Daniel e Clara caem no chão, desacordados."
+fade_out 1
+dialog_style "normal"
+say "Fertiliel" "(Parece que eu vou ter que cuidar deles até acordarem.)"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "" "Alguns minutos depois, os dois acordam."
+fade_in 1
+
+say "Daniel" "Ai, minha cabeça dói... Que pesadelo estranho foi esse?"
+say "Clara" "Pesadelo?"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "Daniel" "Sim, eu tive um pesadelo com uma... versão deturpada de você."
+say "Clara" "Sério? Será que você teve o mesmo pesadelo que eu?"
+
+say "Daniel" "Que estranho, mas parece que sim. Você tá bem?"
+say "Clara" "Só um pouco cansada."
+wait 1
+end_script

@@ -2,20 +2,20 @@
 
 
 waypoint system_save
-say "" "Este arquivo já possui dados salvos. Você deseja sobrescrever estes dados?"
-choices "Confirmar salvar" confirm_save "Cancelar" cancel
+say "char_name/none" "save_load_functions/say_0"
+choices "save_load_functions/choices_0_0" confirm_save "choices/cancel" cancel
 
 waypoint confirm_save
 play_sfx "ui_big_confirm"
 save save_file_selected
-say "O jogo foi salvo com sucesso!"
+say "save_load_functions/say_1"
 end_script
 
 
 
 waypoint system_load
-say "" "Você deseja continuar este arquivo? Todo o progresso não-salvo será perdido."
-choices "Continuar arquivo" confirm_load "Cancelar" cancel
+say "char_name/none" "save_load_functions/say_2"
+choices "save_load_functions/choices_1_0" confirm_load "choices/cancel" cancel
 
 waypoint confirm_load
 play_sfx "ui_big_confirm"
@@ -27,8 +27,8 @@ end_script
 
 
 waypoint back_to_menu
-say "" "Você deseja sair para a tela de título? Todo o progresso não-salvo será perdido."
-choices "Sair do jogo" confirm_quit "Cancelar" cancel
+say "char_name/none" "save_load_functions/say_3"
+choices "save_load_functions/choices_2_0" confirm_quit "choices/cancel" cancel
 
 waypoint confirm_quit
 play_sfx "ui_big_confirm"
@@ -41,3 +41,4 @@ end_script
 waypoint cancel
 play_sfx "ui_locked"
 end_script
+

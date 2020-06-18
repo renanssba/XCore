@@ -1,220 +1,118 @@
-set_var partes_investigadas 0
-
-fade_music 0 1
-fade_out 1
-bg "house night"
-
-wait 0.5
-play_music "investigation_intro" "investigation_loop"
-wait 0.5
-say "" "Vou até a casa da \girl e entro em seu quarto pela janela, sem ser percebida."
+﻿set_var partes_investigadas 0
+fade_music 0 1fade_out 1bg "house night"
+wait 0.5play_music "investigation_intro" "investigation_loop"wait 0.5say "char_name/none" "cap1_investigar/say_0"
 fade_in 1
-
 //say "" "Há várias bandeiras de times penduradas pelas paredes."
-say "Fertiliel" "(Ela não está no quarto. Eu escuto um barulho vindo da sala, ela deve estar por lá.)"
-say "(Vou aproveitar enquanto ela não volta para dar uma investigada em suas coisas.)"
+say "char_name/fertiliel" "cap1_investigar/say_1"
+say "cap1_investigar/say_2"
 
 
-waypoint escolher_garota_investigar
-say_auto "Fertiliel" "(O que eu deveria investigar?)"
-if #currentGirlId == 1
-  goto investigar_ana
-endif
-if #currentGirlId == 2
-  goto investigar_beatrice
-endif
-if #currentGirlId == 3
-  goto investigar_clara
-endif
+waypoint escolher_garota_investigarsay_auto "char_name/fertiliel" "cap1_investigar/say_3"
+if #currentGirlId == 1  goto investigar_anaendifif #currentGirlId == 2  goto investigar_beatriceendifif #currentGirlId == 3  goto investigar_claraendif
 
+waypoint investigar_anachoices "cap1_investigar/choices_0_0" ana_mesa "cap1_investigar/choices_0_1" ana_cama "cap1_investigar/choices_0_2" ana_roupas "cap1_investigar/choices_0_3" ana_armario "cap1_investigar/choices_0_4" ana_checar "cap1_investigar/choices_0_5" exit
 
-waypoint investigar_ana
-choices "Mesa" ana_mesa "Cama" ana_cama "Guarda-roupas" ana_roupas "Armário" ana_armario "Checar Ana" ana_checar "Ir Embora" exit
-
-waypoint ana_armario
-say "(No armário eu encontro vários materiais do colégio, além de um porta-retrato.)"
-say "(Na foto há Ana e Daniel crianças. Ambos estão abraçando um pequeno cachorrinho pug.)"
-if #char[1]item_count[delicate_key] >= 1
-  say "(Também encontro uma chave. Eu deveria pegá-la?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 1 "delicate_key" 1
-endif
-goto depois_investigar
-
-waypoint ana_mesa
-say "(Em cima da mesa eu encontro um pequeno livro escrito\qDiário\q. Devo abrí-lo para ler?)"
-choices "Sim" null "Não" depois_investigar
-if #char[0]item_count[delicate_key]from[1] >= 1
-  say "(Ele está trancado, mas eu consigo destrancá-lo usando a Chave Delicada.)"
-  say "(A maioria dos registros fala sobre como a Ana treinou duro no basquete ou se ela viu o Daniel e ele a irritou nesse dia.)"
-  say "(Tem um interessante aqui: \qPassei na frente de uma padaria e vi um bolo de pimenta, me deu água na boca. Faz tanto tempo que o Daniel não faz um desses pra mim...\q)"
-else
-  say "(Ele está trancado. A chave deve estar por aqui em algum lugar...)"
-endif
-goto depois_investigar
-
-waypoint ana_roupas
-say "(Abrindo o guarda-roupas encontro muitas roupas coloridas.)"
-say "(Este tipo de roupas parece ser bom para fazer esportes.)"
-if #char[1]item_count[sports_clothes] >= 1
-  say_auto "(Eu deveria pegar uma dessas?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 1 "sports_clothes" 1
-endif
-goto depois_investigar
-
-waypoint ana_cama
-say "(A cama está bagunçada, tem algumas roupas jogadas por cima dela.)"
-if #char[1]item_count[old_teddy_bear] >= 1
-  say "(Também tem um ursinho de pelúcia antigo. Eu deveria pegá-lo?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 1 "old_teddy_bear" 1
-endif
-goto depois_investigar
-
-waypoint ana_checar
-say "(Vou devagarzinho até a porta do quarto observar Ana na sala. Ela está assistindo tv.)"
-say "(Está passando um jogo de basquete muito disputado.)"
-say "(A garota está muito animada, torcendo para um dos times.)"
+waypoint ana_armariosay "cap1_investigar/say_4"
+say "cap1_investigar/say_5"
+if #char[1]item_count[delicate_key] >= 1  say "cap1_investigar/say_6"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "delicate_key" 1endifgoto depois_investigar
+waypoint ana_mesasay "cap1_investigar/say_7"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[1] >= 1  say "cap1_investigar/say_8"
+  say "cap1_investigar/say_9"
+  say "cap1_investigar/say_10"
+else  say "cap1_investigar/say_11"
+endifgoto depois_investigar
+waypoint ana_roupassay "cap1_investigar/say_12"
+say "cap1_investigar/say_13"
+if #char[1]item_count[sports_clothes] >= 1  say_auto "cap1_investigar/say_14"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "sports_clothes" 1endifgoto depois_investigar
+waypoint ana_camasay "cap1_investigar/say_15"
+if #char[1]item_count[old_teddy_bear] >= 1  say "cap1_investigar/say_16"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 1 "old_teddy_bear" 1endifgoto depois_investigar
+waypoint ana_checarsay "cap1_investigar/say_17"
+say "cap1_investigar/say_18"
+say "cap1_investigar/say_19"
 goto depois_investigar
 
 
 
+waypoint investigar_beatricechoices "cap1_investigar/choices_5_0" beatrice_mesa "cap1_investigar/choices_5_1" beatrice_cama "cap1_investigar/choices_5_2" beatrice_roupas "cap1_investigar/choices_5_3" beatrice_armario "cap1_investigar/choices_5_4" beatrice_checar "cap1_investigar/choices_5_5" exit
 
-waypoint investigar_beatrice
-choices "Mesa" beatrice_mesa "Cama" beatrice_cama "Guarda-roupas" beatrice_roupas "Armário" beatrice_armario "Checar Beatrice" beatrice_checar "Ir Embora" exit
-
-waypoint beatrice_mesa
-say "(Sobre a mesa há vários bloquinhos e notas escritas à mão sobre experimentos.)"
-if #char[2]item_count[experiment_drafts] >= 1
-  say "(Deveria pegar uma dessas anotações?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 2 "experiment_drafts" 1
-endif
+waypoint beatrice_mesasay "cap1_investigar/say_20"
+if #char[2]item_count[experiment_drafts] >= 1  say "cap1_investigar/say_21"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 2 "experiment_drafts" 1endifgoto depois_investigar
+waypoint beatrice_camasay "cap1_investigar/say_22"
+say "cap1_investigar/say_23"
+choices "choices/yes" null "choices/no" investigar_beatrice
+say "cap1_investigar/say_24"
+say "cap1_investigar/say_25"
 goto depois_investigar
-
-waypoint beatrice_cama
-say "(A cama está bem arrumada e com lençol dobrado. Sobre ele há um celular.)"
-say "(Devo abrir o celular para analisar?)"
-choices "Sim" null "Não" investigar_beatrice
-say "(Na tela inicial tem aplicativos de busca, de escrita e a galeria. Curiosamente, nenhum de troca de mensagens ou rede social.)"
-say "(Na galeria tem várias fotos de pessoas diversas, incluindo Daniel. As fotos estão em ângulos estranhos, provavelmente indicando que Beatrice estava escondida ao tirá-las.)"
-goto depois_investigar
-
-waypoint beatrice_roupas
-say "(Abrindo o guarda-roupas encontro algumas roupas cinzas e bem simples.)"
-say "(Também há algumas luvas e jalecos de proteção.)"
-if #char[2]item_count[lab_coat] >= 1
-  say_auto "(Eu deveria pegar um desses?)"
-  choices "Sim" null "Não" not_take_clothing
-  take_item 2 "lab_coat" 1
-  goto depois_investigar
-endif
-
-waypoint not_take_clothing
-if #char[2]item_count[delicate_key] >= 1
-  say_auto "(Procurando um pouco melhor, eu encontro uma chave delicada no bolso de um jaleco. Deveria pegá-la?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 2 "delicate_key" 1
-endif
-goto depois_investigar
-
-waypoint beatrice_armario
-say "(Sobre o armário há alguns rascunhos escritos à mão. Nele há uma gavetinha. Deveria tentar abrí-la?)"
-choices "Sim" null "Não" depois_investigar
-if #char[0]item_count[delicate_key]from[2] >= 1
-  say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
-  say "(Dentro da gaveta há vários livros de química, psicologia e sobre relacionamento humano. No meio destes, cadernos escritos à mão e anotações.)"
-  if #char[2]item_count[tragic_newspaper] >= 1
-    say "(Também há um recorte de jornal com uma foto de um homem que se parece com ela. Eu deveria pegá-lo?)"
-    choices "Sim" null "Não" depois_investigar
-    take_item 2 "tragic_newspaper" 1
-  endif
-else
-  say "(Ela está trancada. Onde será que está a chave?)"
-endif
-goto depois_investigar
-
-waypoint beatrice_checar
-say "(Vou devagarzinho até a porta do quarto observar Beatrice na sala. Ela está sentada na mesa, escrevendo algum tipo de fórmula matemática.)"
-say "(Vez ou outra a garota folheia uns livros de ciências e consulta anotações de um caderno grande. Há uma pilha de pastas e papéis sobre a mesa.)"
-say "(Ela está muito concentrada e focada.)"
+waypoint beatrice_roupassay "cap1_investigar/say_26"
+say "cap1_investigar/say_27"
+if #char[2]item_count[lab_coat] >= 1  say_auto "cap1_investigar/say_28"
+  choices "choices/yes" null "choices/no" not_take_clothing
+  take_item 2 "lab_coat" 1  goto depois_investigarendif
+waypoint not_take_clothingif #char[2]item_count[delicate_key] >= 1  say_auto "cap1_investigar/say_29"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 2 "delicate_key" 1endifgoto depois_investigar
+waypoint beatrice_armariosay "cap1_investigar/say_30"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[2] >= 1  say "cap1_investigar/say_31"
+  say "cap1_investigar/say_32"
+  if #char[2]item_count[tragic_newspaper] >= 1    say "cap1_investigar/say_33"
+    choices "choices/yes" null "choices/no" depois_investigar
+    take_item 2 "tragic_newspaper" 1  endifelse  say "cap1_investigar/say_34"
+endifgoto depois_investigar
+waypoint beatrice_checarsay "cap1_investigar/say_35"
+say "cap1_investigar/say_36"
+say "cap1_investigar/say_37"
 goto depois_investigar
 
 
 
 
+waypoint investigar_clarachoices "cap1_investigar/choices_12_0" clara_mesa "cap1_investigar/choices_12_1" clara_cama "cap1_investigar/choices_12_2" clara_roupas "cap1_investigar/choices_12_3" clara_armario "cap1_investigar/choices_12_4" clara_checar "cap1_investigar/choices_12_5" exit
 
-waypoint investigar_clara
-choices "Mesa" clara_mesa "Cama" clara_cama "Guarda-roupas" clara_roupas "Armário" clara_armario "Checar Clara" clara_checar "Ir Embora" exit
-
-waypoint clara_armario
-say "(Dentro do armário há um antigo par de sapatilhas de balé e alguns materiais do colégio.)"
-say "(Uma das gavetas possui uma fechadura delicada. Devo tentar abrí-la?)"
-choices "Sim" null "Não" depois_investigar
-if #char[0]item_count[delicate_key]from[3] >= 1
-  say "(Ela está trancada, mas eu consigo destrancá-la usando a Chave Delicada.)"
-  say "(Dentro da gaveta há alguns doces e papéis de bala variados.)"
-  if #char[3]item_count[chocolate_cake] >= 1
-    say "(Também há um bolo de chocolate que parece bem gostoso. Eu deveria pegá-lo?)"
-    choices "Sim" null "Não" depois_investigar
-    take_item 3 "chocolate_cake" 1
-  endif
-else
-  say "(Ela está trancada. Onde será que está a chave?)"
-endif
+waypoint clara_armariosay "cap1_investigar/say_38"
+say "cap1_investigar/say_39"
+choices "choices/yes" null "choices/no" depois_investigar
+if #char[0]item_count[delicate_key]from[3] >= 1  say "cap1_investigar/say_40"
+  say "cap1_investigar/say_41"
+  if #char[3]item_count[chocolate_cake] >= 1    say "cap1_investigar/say_42"
+    choices "choices/yes" null "choices/no" depois_investigar
+    take_item 3 "chocolate_cake" 1  endifelse  say "cap1_investigar/say_43"
+endifgoto depois_investigar
+waypoint clara_mesasay "cap1_investigar/say_44"
+choices "choices/yes" null "choices/no" depois_investigar
+say "cap1_investigar/say_45"
+say "cap1_investigar/say_46"
 goto depois_investigar
-
-waypoint clara_mesa
-say "(Em cima da mesa eu encontro um pequeno livro escrito\qAgenda\q. Devo abrí-lo para ler?)"
-choices "Sim" null "Não" depois_investigar
-say "(Na agenda está a programação semanal para atividades da Clara. Há várias atividades fora o colégio, como aulas de piano, inglês, até de etiqueta.)"
-say "(Os dias estão totalmente preenchidos, desde a hora de acordar até a de dormir.)"
-goto depois_investigar
-
-waypoint clara_roupas
-say "(Abrindo o guarda-roupas encontro muitas roupas delicadas e bonitas.)"
-say "(Em particular há muitos vestidos floridos.)"
-if #char[3]item_count[flower_dress] >= 1
-  say_auto "(Eu deveria pegar um desses?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 3 "flower_dress" 1
-endif
-goto depois_investigar
-
-waypoint clara_cama
-say "(A cama está muito bem arrumada, com uma bonita colcha de cama e lençóis bem dobrados.)"
-if #char[3]item_count[delicate_key] >= 1
-  say "(Eu encontro uma chave debaixo de um dos travesseiros. Eu deveria pegá-la?)"
-  choices "Sim" null "Não" depois_investigar
-  take_item 3 "delicate_key" 1
-endif
-goto depois_investigar
-
-waypoint clara_checar
-say "(Vou devagarzinho até a porta do quarto observar Clara na sala. Ela está conversando com uma mulher mais velha, que deve ser sua mãe.)"
-if passou_tempo_com_clara_hoje == 1
-  say "(A mulher está reclamando sobre como a Clara demorou para voltar da casa de Daniel hoje.)"
-else
-  say "(A mulher está reclamando sobre como a Clara se atrasou para uma das atividades da agenda de hoje.)"  
-endif
-say "(A garota está cabisbaixa, concordando silenciosamente com o sermão da mãe.)"
+waypoint clara_roupassay "cap1_investigar/say_47"
+say "cap1_investigar/say_48"
+if #char[3]item_count[flower_dress] >= 1  say_auto "cap1_investigar/say_49"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 3 "flower_dress" 1endifgoto depois_investigar
+waypoint clara_camasay "cap1_investigar/say_50"
+if #char[3]item_count[delicate_key] >= 1  say "cap1_investigar/say_51"
+  choices "choices/yes" null "choices/no" depois_investigar
+  take_item 3 "delicate_key" 1endifgoto depois_investigar
+waypoint clara_checarsay "cap1_investigar/say_52"
+if passou_tempo_com_clara_hoje == 1  say "cap1_investigar/say_53"
+else  say "cap1_investigar/say_54"
+endifsay "cap1_investigar/say_55"
 goto depois_investigar
 
 
 
 
+waypoint depois_investigaradd_var partes_investigadas 1if partes_investigadas >= 3  goto exitendifgoto escolher_garota_investigar
 
-waypoint depois_investigar
-add_var partes_investigadas 1
-if partes_investigadas >= 3
-  goto exit
-endif
-goto escolher_garota_investigar
-
-
-waypoint exit
-say "Fertiliel" "(Eu escuto barulhos de passos, acho que ela está voltando para seu quarto. Vou dar o fora antes que ela me veja.)"
+waypoint exitsay "char_name/fertiliel" "cap1_investigar/say_56"
 
 /// DEBUG
 goto_script "pass_time"
