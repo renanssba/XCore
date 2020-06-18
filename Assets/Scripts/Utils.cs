@@ -119,16 +119,14 @@ public class Utils {
   }
 
   public static string GetRandomBoyName() {
-    int selected = Random.Range(0, 10);
-    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/npc_boy_"+selected);
+    return "boy";
   }
 
   public static string GetRandomGirlName() {
-    int selected = Random.Range(0, 10);
-    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/npc_girl_" + selected);
+    return "girl";
   }
-  
-  
+
+
   public static int GetRandomAge() {
     return Random.Range(15, 18);
   }
@@ -140,9 +138,9 @@ public class Utils {
 
   public static void SetButtonDisabledGraphics(Button but) {
     SpriteState st = new SpriteState();
-    st.disabledSprite     = ResourcesManager.instance.buttonSprites[3];
-    st.highlightedSprite  = ResourcesManager.instance.buttonSprites[4];
-    st.pressedSprite      = ResourcesManager.instance.buttonSprites[5];
+    st.disabledSprite = ResourcesManager.instance.buttonSprites[3];
+    st.highlightedSprite = ResourcesManager.instance.buttonSprites[4];
+    st.pressedSprite = ResourcesManager.instance.buttonSprites[5];
     but.spriteState = st;
     but.GetComponent<Image>().sprite = ResourcesManager.instance.buttonSprites[3];
     Debug.LogWarning("Setting ");
@@ -150,9 +148,9 @@ public class Utils {
 
   public static void SetButtonEnabledGraphics(Button but) {
     SpriteState st = new SpriteState();
-    st.disabledSprite     = ResourcesManager.instance.buttonSprites[0];
-    st.highlightedSprite  = ResourcesManager.instance.buttonSprites[1];
-    st.pressedSprite      = ResourcesManager.instance.buttonSprites[2];
+    st.disabledSprite = ResourcesManager.instance.buttonSprites[0];
+    st.highlightedSprite = ResourcesManager.instance.buttonSprites[1];
+    st.pressedSprite = ResourcesManager.instance.buttonSprites[2];
     but.spriteState = st;
     but.GetComponent<Image>().sprite = ResourcesManager.instance.buttonSprites[0];
   }
@@ -160,7 +158,7 @@ public class Utils {
 
 
   public static string GetWeekdayName(int day) {
-    switch (day % 5) {
+    switch(day % 5) {
       case 1:
         return "Seg";
       case 2:
@@ -178,8 +176,8 @@ public class Utils {
 
   public static int CountBoys(List<Person> people) {
     int count = 0;
-    foreach (Person p in people) {
-      if (p.isMale)
+    foreach(Person p in people) {
+      if(p.isMale)
         count++;
     }
     return count;
@@ -187,8 +185,8 @@ public class Utils {
 
   public static int CountGirls(List<Person> people) {
     int count = 0;
-    foreach (Person p in people) {
-      if (!p.isMale)
+    foreach(Person p in people) {
+      if(!p.isMale)
         count++;
     }
     return count;
@@ -197,13 +195,13 @@ public class Utils {
   public static string GetPrintableString(string name, bool capitalLetters) {
     char initialLetter = name[0];
 
-    for (int i = 1; i < name.Length; i++) {
-      if (System.Char.IsUpper(name[i])) {
+    for(int i = 1; i < name.Length; i++) {
+      if(System.Char.IsUpper(name[i])) {
         name = name.Substring(0, i) + " " + System.Char.ToLower(name[i]) + name.Substring(i + 1, name.Length - i - 1);
       }
     }
 
-    if (capitalLetters)
+    if(capitalLetters)
       return initialLetter.ToString().ToUpper() + name.Substring(1, name.Length - 1);
     else
       return name;
@@ -211,7 +209,7 @@ public class Utils {
 
   public void ShuffleList(List<int> list) {
     int n = list.Count;
-    while (n > 1) {
+    while(n > 1) {
       n--;
       int k = Random.Range(0, n + 1);
       int value = list[k];
@@ -234,7 +232,7 @@ public class Utils {
 
   public static string GetRandomFamilyMember() {
     int selected = Random.Range(0, 4);
-    switch (selected) {
+    switch(selected) {
       case 0:
         return "Minha tia ";
       case 1:
@@ -249,7 +247,7 @@ public class Utils {
 
   public static string GetRandomDisaster() {
     int selected = Random.Range(0, 6);
-    switch (selected) {
+    switch(selected) {
       case 0:
         return "perdeu o emprego";
       case 1:
@@ -364,7 +362,7 @@ public class Utils {
     }
 
     string[] loadedTags = raw.Split(',');
-    for(int i=0; i<loadedTags.Length; i++) {
+    for(int i = 0; i < loadedTags.Length; i++) {
       loadedTags[i] = loadedTags[i].Trim();
     }
     return loadedTags;
@@ -377,7 +375,7 @@ public class Utils {
 
     string[] loadedTags = raw.Split(',');
     int[] ints = new int[loadedTags.Length];
-    for(int i=0; i<loadedTags.Length; i++) {
+    for(int i = 0; i < loadedTags.Length; i++) {
       ints[i] = int.Parse(loadedTags[i].Trim());
     }
     return ints;
@@ -387,12 +385,12 @@ public class Utils {
     int start = clause.IndexOf("(");
     int end = clause.IndexOf(")");
 
-    if(start == -1 || end == -1){
+    if(start == -1 || end == -1) {
       return null;
     }
 
-    string argumentName = clause.Substring(start+1, (end-start-1));
-    Debug.Log("GET ARGUMENT: '"+argumentName+"'  ");
+    string argumentName = clause.Substring(start + 1, (end - start - 1));
+    Debug.Log("GET ARGUMENT: '" + argumentName + "'  ");
     return argumentName;
   }
 
