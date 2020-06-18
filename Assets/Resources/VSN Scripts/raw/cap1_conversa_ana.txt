@@ -218,12 +218,12 @@ endif
 say "Daniel" "Ei Ana, eu trouxe uma coisinha para te dar."
 give_item 1 item_id 1
 if item_owner == 1
-  say "Ana" "Pera, o que você tá fazendo com isso? Como você conseguiu isso, Ricardo?"
-  say "Ricardo" "E-eu... não sei?!"
+  say "Ana" "Pera, o que você tá fazendo com isso? Como você conseguiu isso, Daniel?"
+  say "Daniel" "E-eu... não sei?!"
   say "Ana" "Me devolve isso agora!"
 else
   say "Ana" "Ei, muito obrigada! Como você sabia que eu gostava disso?"
-  say "Ricardo" "Que bom que você gostou!"
+  say "Daniel" "Que bom que você gostou!"
   add_exp true 40
 endif
 goto end
