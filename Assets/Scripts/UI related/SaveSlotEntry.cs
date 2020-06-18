@@ -35,10 +35,10 @@ public class SaveSlotEntry : MonoBehaviour {
     shade.SetActive(false);
 
     if(slotId == 0) {
-      titleText.text = "Auto-Save";
+      titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/auto_save");
       shade.SetActive(SystemScreen.instance!=null && SystemScreen.instance.isInSaveMode);
     } else {
-      titleText.text = "File " + slotId;
+      titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/file") + " " + slotId;
     }
 
     if(VsnSaveSystem.IsSaveSlotBusy(slotId)) {
