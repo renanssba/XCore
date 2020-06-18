@@ -210,13 +210,13 @@ public class VsnLocalizationConverter : MonoBehaviour {
           case "set_var":
             // if not using set_var with a String arg
             if(vsnArguments[1].GetType() != typeof(VsnString) ) {
-              content += lines[i];
+              content += lines[i].TrimEnd() + Environment.NewLine;
               break;
             }
 
             // if using set_var to a String for button name
             if(buttonNameTexts.Contains(args[1].Substring(1, args[1].Length - 2))) {
-              content += lines[i];
+              content += lines[i].TrimEnd() + Environment.NewLine;
               break;
             }
 
@@ -234,7 +234,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
             setVarToStringCommands++;
             break;
           default:
-            content += lines[i];
+            content += lines[i].TrimEnd() + Environment.NewLine;
             break;
         }
       } else {
