@@ -10,7 +10,7 @@ goto_script "enter_observation" "school morning"
 if #currentRelationshipLevel == 0
   set_var foi_na_biblioteca 1
 
-  theater_setup main "person(daniel)" "out_left" support "person(beatrice)" "out_right" 
+  theater_setup main "person(daniel)" "out_left" support "person(beatrice)" "out_right"
   actor_face support ""
   actor_face main "right"
   actor_move support "grid_6" 0

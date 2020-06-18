@@ -1,4 +1,14 @@
-﻿for currentSkillChecked #currentCoupleSkillsCount  check_skill_activation "players" currentSkillChecked arg1endfor
-for currentSkillChecked #enemySkillsCount  check_skill_activation "enemy" currentSkillChecked arg1endfor
-for currentEventChecked #enemyCustomEventsCount  check_custom_event currentEventChecked arg1endfor
+﻿for currentSkillChecked #currentCoupleSkillsCount
+  check_skill_activation "players" currentSkillChecked arg1
+endfor
+
+for currentSkillChecked #enemySkillsCount
+  check_skill_activation "enemy" currentSkillChecked arg1
+endfor
+
+for currentEventChecked #enemyCustomEventsCount
+  check_custom_event currentEventChecked arg1
+endfor
+
 end_script
+

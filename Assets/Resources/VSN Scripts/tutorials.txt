@@ -67,7 +67,7 @@ tutorial_icon "defend_button" false
 say "tutorials/say_11"
 vsn_state "WAITINGCUSTOMINPUT"
 if currentPlayerTurn != -1
-  set_var input_already_selected true  
+  set_var input_already_selected true
 endif
 goto end
 
@@ -99,7 +99,7 @@ say "tutorials/say_18"
 tutorial_icon "skill_points" false
 vsn_state "WAITINGCUSTOMINPUT"
 if currentPlayerTurn != -1
-  set_var input_already_selected true  
+  set_var input_already_selected true
 endif
 
 set_var tutorial_skills true

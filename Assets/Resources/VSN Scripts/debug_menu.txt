@@ -1,29 +1,29 @@
-﻿say_auto "DEBUG MENU"
+﻿say_auto "debug_menu/say_0"
 set_var battle_is_happening false
 set_var currentDateEvent 0
-choices "Ana" ana "Beatrice" beatrice "Clara" clara "Cancelar" end
+choices "debug_menu/choices_0_0" ana "debug_menu/choices_0_1" beatrice "debug_menu/choices_0_2" clara "choices/cancel" end
 
 
 waypoint ana
 set_current_couple 0
-set_var girl_script_name "cap1_conversa_ana"
+set_var girl_script_name "debug_menu/set_var_0"
 goto girl_menu
 
 waypoint beatrice
 set_current_couple 1
-set_var girl_script_name "cap1_conversa_beatrice"
+set_var girl_script_name "debug_menu/set_var_1"
 set_var conhece_beatrice true
 // change_person_sprite 2 6
 goto girl_menu
 
 waypoint clara
 set_current_couple 2
-set_var girl_script_name "cap1_conversa_clara"
+set_var girl_script_name "debug_menu/set_var_2"
 goto girl_menu
 
 
 waypoint girl_menu
-choices "Adicionar Nível" add_level "Adicionar Chaves de Coração" add_bond_points "Adicionar Exp" add_exp "Aumentar Nível de Proximidade" open_lock "Iniciar Date" date "Cancelar" end
+choices "debug_menu/choices_1_0" add_level "debug_menu/choices_1_1" add_bond_points "debug_menu/choices_1_2" add_exp "debug_menu/choices_1_3" open_lock "debug_menu/choices_1_4" date "choices/cancel" end
 
 
 waypoint add_exp
@@ -40,7 +40,7 @@ add_bond_points 10
 goto girl_menu
 
 waypoint open_lock
-choices "Amigos Próximos" lock_1 "Apaixonados" lock_2 "Cancelar" end
+choices "debug_menu/choices_2_0" lock_1 "debug_menu/choices_2_1" lock_2 "choices/cancel" end
 
 waypoint lock_1
 open_heart_lock 1
@@ -56,7 +56,7 @@ goto girl_menu
 
 
 waypoint date
-choices "Date 1 (Parque)" date_1 "Date 2 (Shopping)" date_2 "Date 3 (Parque)" date_3 "Date Customizado" date_options_1 "Cancelar" end
+choices "debug_menu/choices_3_0" date_1 "debug_menu/choices_3_1" date_2 "debug_menu/choices_3_2" date_3 "debug_menu/choices_3_3" date_options_1 "choices/cancel" end
 
 waypoint date_1
 set_var dateId 1
@@ -83,16 +83,16 @@ goto end
 waypoint date_options_1
 set_var dateId 3
 setup_date
-choices "\enemy_name(0)" enemy_0 "\enemy_name(1)" enemy_1 "\enemy_name(2)" enemy_2 "\enemy_name(3)" enemy_3 "\enemy_name(4)" enemy_4 ">>>" date_options_2
+choices "debug_menu/choices_4_0" enemy_0 "debug_menu/choices_4_1" enemy_1 "debug_menu/choices_4_2" enemy_2 "debug_menu/choices_4_3" enemy_3 "debug_menu/choices_4_4" enemy_4 "debug_menu/choices_4_5" date_options_2
 
 waypoint date_options_2
-choices "\enemy_name(5)" enemy_5 "\enemy_name(6)" enemy_6 "\enemy_name(7)" enemy_7 "\enemy_name(8)" enemy_8 "\enemy_name(9)" enemy_9 ">>>" date_options_3
+choices "debug_menu/choices_5_0" enemy_5 "debug_menu/choices_5_1" enemy_6 "debug_menu/choices_5_2" enemy_7 "debug_menu/choices_5_3" enemy_8 "debug_menu/choices_5_4" enemy_9 "debug_menu/choices_5_5" date_options_3
 
 waypoint date_options_3
-choices "\enemy_name(10)" enemy_10 "\enemy_name(11)" enemy_11 "\enemy_name(12)" enemy_12 "\enemy_name(13)" enemy_13 "\enemy_name(14)" enemy_14 ">>>" date_options_4
+choices "debug_menu/choices_6_0" enemy_10 "debug_menu/choices_6_1" enemy_11 "debug_menu/choices_6_2" enemy_12 "debug_menu/choices_6_3" enemy_13 "debug_menu/choices_6_4" enemy_14 "debug_menu/choices_6_5" date_options_4
 
 waypoint date_options_4
-choices "\enemy_name(15)" enemy_15 "Cancelar" end
+choices "debug_menu/choices_7_0" enemy_15 "choices/cancel" end
 
 
 waypoint enemy_0
@@ -167,7 +167,7 @@ goto custom_date
 
 waypoint custom_date
 play_music "observacao2_intro" "observacao2_loop"
-set_var date_objective "TESTE"
+set_var date_objective "debug_menu/set_var_3"
 goto_script "date"
 goto end
 
@@ -175,3 +175,4 @@ goto end
 
 waypoint end
 end_script
+
