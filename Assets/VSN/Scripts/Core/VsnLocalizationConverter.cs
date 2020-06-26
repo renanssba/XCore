@@ -58,6 +58,7 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
     metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
     metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date_enemies");
+    //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/shop");
     //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/observation");
 
     Debug.LogWarning("METADATA PATH: " + metadataFilePath);

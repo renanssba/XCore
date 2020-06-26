@@ -73,11 +73,13 @@ public class Item {
     }
 
     if(healHp > 0) {
-      healDesc += "Restaura "+highlightMarkerStart + healHp + " PC"+ highlightMarkerEnd+". ";
+      VsnSaveSystem.SetVariable("heal_hp_value", healHp);
+      healDesc += SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("item/description/heal_hp")) + " ";
     }
 
     if(healSp > 0) {
-      healSpDesc += "Recupera " + highlightMarkerStart + healSp + " PH" + highlightMarkerEnd+" de um aliado. ";
+      VsnSaveSystem.SetVariable("heal_sp_value", healSp);
+      healSpDesc += SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("item/description/heal_sp")) + " ";
     }
 
     if(healsConditionNames.Length > 0) {
@@ -88,9 +90,11 @@ public class Item {
         removeStatusDesc += highlightMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/"+healsConditionNames[i])+ highlightMarkerEnd;
         if(i == healsConditionNames.Length - 1) {
           continue;
-        }else if(i == healsConditionNames.Length-2) {
-          removeStatusDesc += " e ";
-        } else {
+        }
+        //else if(i == healsConditionNames.Length-2) {
+        //  removeStatusDesc += " e ";
+        //}
+        else {
           removeStatusDesc += ", ";
         }
       }
@@ -101,19 +105,21 @@ public class Item {
         givesStatusDesc += highlightMarkerStart + Lean.Localization.LeanLocalization.GetTranslationText("status_condition/name/" + givesConditionNames[i]) + highlightMarkerEnd;
         if(i == givesConditionNames.Length - 1) {
           continue;
-        } else if(i == givesConditionNames.Length - 2) {
-          givesStatusDesc += " e ";
-        } else {
+        }
+        //else if(i == givesConditionNames.Length - 2) {
+        //  givesStatusDesc += " e ";
+        //}
+        else {
           givesStatusDesc += ", ";
         }
       }
     }
 
     if(removeStatusDesc != "") {
-      removeStatusDesc = "Cura um aliado de: " + removeStatusDesc + ". ";
+      removeStatusDesc = Lean.Localization.LeanLocalization.GetTranslationText("item/description/heals_status") + " " + removeStatusDesc + ". ";
     }
     if(givesStatusDesc != "") {
-      givesStatusDesc = "Torna um aliado: " + givesStatusDesc + ". ";
+      givesStatusDesc = Lean.Localization.LeanLocalization.GetTranslationText("item/description/gives_status") + " " + givesStatusDesc + ". ";
     }
 
     return (healDesc + healSpDesc + removeStatusDesc + givesStatusDesc).TrimEnd();

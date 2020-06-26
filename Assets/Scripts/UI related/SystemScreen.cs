@@ -10,6 +10,7 @@ public class SystemScreen : MonoBehaviour {
   public ScreenTransitions savePanel;
   public bool isInSaveMode = true;
 
+  public TextMeshProUGUI saveLoadTitleText;
   public TextMeshProUGUI playtimeText;
 
   public Button[] systemButtons;
@@ -35,7 +36,7 @@ public class SystemScreen : MonoBehaviour {
   }
 
   public void Update() {
-    playtimeText.text = "Tempo de jogo\n" + Utils.GetTimeFormattedAsString(GlobalData.instance.playtime / 60); ;
+    playtimeText.text = Lean.Localization.LeanLocalization.GetTranslationText("system_screen/playtime") + "\n" + Utils.GetTimeFormattedAsString(GlobalData.instance.playtime / 60);
   }
 
 
@@ -45,6 +46,7 @@ public class SystemScreen : MonoBehaviour {
       return;
     }
 
+    saveLoadTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/title_save");
     isInSaveMode = true;
     SfxManager.StaticPlayConfirmSfx();
     basePanel.HidePanel();
@@ -58,6 +60,7 @@ public class SystemScreen : MonoBehaviour {
       return;
     }
 
+    saveLoadTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/title_load");
     isInSaveMode = false;
     SfxManager.StaticPlayConfirmSfx();
     basePanel.HidePanel();

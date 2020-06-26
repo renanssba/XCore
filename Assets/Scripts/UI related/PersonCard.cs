@@ -141,9 +141,9 @@ public class PersonCard : MonoBehaviour {
     string text = "";
 
     if(skill.type == SkillType.active || skill.type == SkillType.attack) {
-      text += "[Ativa] ";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/active") + " ";
     } else {
-      text += "[Passiva] ";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/passive") + " ";
     }
     text = text + skill.GetPrintableDescription();
 

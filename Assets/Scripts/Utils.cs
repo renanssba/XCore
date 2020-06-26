@@ -222,11 +222,11 @@ public class Utils {
     switch(heartlocksOpened) {
       case 0:
       default:
-        return "Conhecidos";
+        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/acquaintances");
       case 1:
-        return "Amigos Próximos";
+        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/close_friends");
       case 2:
-        return "Apaixonados";
+        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/lovers");
     }
   }
 

@@ -75,7 +75,7 @@ public class Person : Battler {
 
 
   public override string GetName() {
-    return Lean.Localization.LeanLocalization.GetTranslationText("person/" + nameKey);
+    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/" + nameKey);
   }
 
   public bool CanExecuteSkill(Skill skillToUse) {
@@ -354,7 +354,7 @@ public class Relationship {
 
   public string GetRelationshipLevelDescription() {
     if(GetGirl().nameKey == "anna" && heartLocksOpened == 0) {
-      return "Amigos";
+      return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/friends");
     }
     return Utils.RelationshipNameByHeartLocksOpened(heartLocksOpened);
   }

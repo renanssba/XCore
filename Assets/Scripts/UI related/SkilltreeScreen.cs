@@ -139,20 +139,20 @@ public class SkilltreeScreen : MonoBehaviour {
     string text = "";
 
     if(skill.type == SkillType.active || skill.type == SkillType.attack) {
-      text += "[Ativa] ";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/active") + " ";
     } else {
-      text += "[Passiva] ";
+      text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/passive") + " ";
     }
 
     switch(relationship.skilltree.skills[selectedSkillId].affectsPerson) {
       case SkillAffectsCharacter.boy:
-        text += "para " + relationship.GetBoy().GetName() + "\n";
+        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetBoy().GetName() + "\n";
         break;
       case SkillAffectsCharacter.girl:
-        text += "para " + relationship.GetGirl().GetName() + "\n";
+        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetGirl().GetName() + "\n";
         break;
       case SkillAffectsCharacter.couple:
-        text += "para o casal\n";
+        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects_couple") + "\n";
         break;
     }
     text = text + skill.GetPrintableDescription();
@@ -168,8 +168,8 @@ public class SkilltreeScreen : MonoBehaviour {
 
     SfxManager.StaticPlayConfirmSfx();
     selectedSkillId = id;
-    confirmPanelText.text = "Você gostaria de comprar a habilidade <color=yellow>"+
-      BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id).GetPrintableName() + "</color>?";
+    VsnSaveSystem.SetVariable("selected_skill", BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id).GetPrintableName());
+    confirmPanelText.text = Lean.Localization.LeanLocalization.GetTranslationText("skilltree/confirmMessage");
     buySkillConfirmationPanel.ShowPanel();
   }
 

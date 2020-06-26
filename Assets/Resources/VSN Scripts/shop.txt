@@ -92,7 +92,7 @@ show_shop true "buy"
 
 if item_id != -1
   if item_price <= money
-    say_auto "shop/char_name_0" "shop/say_34"
+    say_auto "char_name/graciel" "shop/say_34"
     choices "shop/choices_1_0" comprar_sim "shop/choices_1_1" store_loop
   else
     say "shop/say_35"
@@ -111,7 +111,7 @@ endif
 
 show_shop true "sell"
 if item_id != -1
-  say_auto "shop/char_name_1" "shop/say_37"
+  say_auto "char_name/graciel" "shop/say_37"
   choices "shop/choices_2_0" vender_sim "shop/choices_2_1" store_loop
 else
   goto store_loop

@@ -17,16 +17,16 @@ endif
 // if daytime == 1
   // reset_pins_board "city map"
 // endif
-set_interaction_pin 0 true "cap1_conversa_ana" "Telhado"
+set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_0"
 
 if day == 1
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
 endif
 if conhece_beatrice == true
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
 endif
 
-set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
+set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_2"
 if day == 1
   if daytime == 0
     set_interaction_pin 2 false
@@ -38,13 +38,13 @@ goto end
 
 waypoint tarde
 reset_pins_board "heartheroby"
-set_interaction_pin 0 true "cap1_conversa_ana" "Clube Esportivo"
+set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_3"
 
 if conhece_beatrice == true
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "Biblioteca"
+  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_4"
 endif
 
-set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
+set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_2"
 goto end
 
 
@@ -55,13 +55,13 @@ reset_pins_board "heartheroby-night"
 if day == dia_festa_clara
   set_interaction_pin 0 false
   set_interaction_pin 1 false
-  set_interaction_pin 2 true "cap1_festa" "Festa"
+  set_interaction_pin 2 true "cap1_festa" "cap1_interaction_pins/set_pin_location_5"
 else
-  set_interaction_pin 0 true "cap1_investigar" "Investigar"
+  set_interaction_pin 0 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
   if conhece_beatrice == true
-    set_interaction_pin 1 true "cap1_investigar" "Investigar"
+    set_interaction_pin 1 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
   endif
-  set_interaction_pin 2 true "cap1_investigar" "Investigar"
+  set_interaction_pin 2 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
 endif
 goto end
 
@@ -70,4 +70,3 @@ waypoint end
 
 /// BATTLE DEBUG
 //set_interaction_pin 2 true "cap1_conversa_clara" "Casa"
-
