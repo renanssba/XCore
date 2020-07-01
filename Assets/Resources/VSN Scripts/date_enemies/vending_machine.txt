@@ -5,7 +5,8 @@ say "char_name/none" "date_enemies/vending_machine/say_0"
 theater_animation "enemy_enters"
 say "date_enemies/vending_machine/say_1"
 actor_animator_parameter enemy "Battle" true
-wait 4.5
+wait 1.5
+wait 3.0
 say "date_enemies/vending_machine/say_2"
 
 
@@ -15,6 +16,7 @@ say "char_name/fertiliel" "date_enemies/vending_machine/say_3"
 
 actor_tint enemy 1 1 "#3995CC"
 wait 1
+play_sfx "demon_giggle"
 say "char_name/fertiliel" "date_enemies/vending_machine/say_4"
 
 actor_tint enemy 0 1 "#3995CC"
