@@ -169,7 +169,7 @@ public class SkilltreeScreen : MonoBehaviour {
     SfxManager.StaticPlayConfirmSfx();
     selectedSkillId = id;
     VsnSaveSystem.SetVariable("selected_skill", BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id).GetPrintableName());
-    confirmPanelText.text = Lean.Localization.LeanLocalization.GetTranslationText("skilltree/confirmMessage");
+    confirmPanelText.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("skilltree/confirmMessage"));
     buySkillConfirmationPanel.ShowPanel();
   }
 

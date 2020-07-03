@@ -16,7 +16,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 14	first_aid	active	one_ally	2								injured, dizzyness							medical-pack	active_support		
 15	guardian_0	active	self	1									guardian	100					shield	active_support		
 16	sad_story	active	one_enemy	2									sad	100	4				dialog	active_offensive		
-17	curse	active	one_enemy	2									weakened	100	3				cursed	active_offensive		
+17	curse	active	one_enemy	2									weakened	100	3				weakened	active_offensive		
 18	elusive	passive	all_allies		fleeChanceBonus	0.35													run	none		
 19	healing_kiss	active	other_ally	2					16										heart-plus	active_support		
 20	magic_hug	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, weakened							charmed	active_support		
@@ -31,7 +31,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive		
 30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none		
 31	strange_experiment	active	one_enemy	2									hunger, angry, dirty	25	3				random-experiment	throw_object(experiment)		
-32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	active_offensive		
+32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	throw_object(experiment)		
 33	heal	active	one_ally							1									heart-plus	throw_object(brown-cake)		
 34	auto_sensor	passive	self		sensor											turn_started	is_turn(1)	100	magnifying glass	none		
 35	stampede	active	all_enemies				guts	6					injured	80	4				gutsy aura	run_over		
@@ -45,9 +45,9 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 43	ectoplasm	active	all_enemies	2			charisma	4					dirty	100	4				dirty	multi_throw		
 44	indigestion	passive	all_enemies				charisma	4					dirty	100	4	after_action	was_attacked_for_damage, has_status_condition(digesting)	100	stomach-red	multi_throw		
 45	eating_cake	active	self	1					20			hunger	digesting	100	1				eating	throw_object(brown-cake)		
-46	big_curse	active	all_enemies	2									weakened	100	3				cursed	active_offensive		
+46	big_curse	active	all_enemies	2									weakened	100	3				weakened	throw_object(experiment)		
 47	sad_memories	active	one_enemy	2									sad, sad	100	4				tears	active_offensive		
-48	magic_barrier	active	self	2									reflection	100	1				magic-shield	active_support		
+48	reflective_mirror	active	self	2									reflection	100	1				mirror-mirror	active_support		
 49	mystic_fire	active	one_enemy				intelligence	8											flame	active_offensive		
-50	dispell	passive	self	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, cursed				after_enemy_attack	turn_is_multiple(2), has_status_condition(hunger)	80	charmed	active_support		
-51	reflect	passive	self		reflectEnemyTarget											before_action	was_attacked, has_status_condition(reflection)	100	magic-shield	passive		
+50	health_tonic	passive	self	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, weakened				after_enemy_attack	turn_is_multiple(2), has_status_condition(hunger)	80	charmed	active_support		
+51	reflect	passive	self		reflectEnemyTarget											before_action	was_attacked, has_status_condition(reflection)	100	mirror-mirror	passive		
