@@ -38,7 +38,7 @@ public class SfxManager : MonoBehaviour {
   }
 
   public static void StaticPlayCancelSfx() {
-    VsnAudioManager.instance.PlaySfx("ui_locked");
+    VsnAudioManager.instance.PlaySfx("ui_back");
   }
 
   public static void StaticPlayForbbidenSfx() {
