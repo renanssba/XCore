@@ -1,0 +1,145 @@
+fade_out 0
+play_music null null
+play_music "heaven_intro" "heaven_loop"
+wait 3
+bg "heaven"
+
+say "Aaaah, a Cidadela dos Anjos! Capital do Céu e morada da maior parte dos anjos."
+say "Uma cidade ordenada onde todos os anjos têm alimentação, moradia e infra-estrutura a um preço justo."
+//say "Também é aqui onde fica a Central do Sistema Angelical, onde são determinadas as atribuições de cada Anjo, e distribuídas suas missões cotidianas."
+say "Um verdadeiro paraíso da organização, onde tudo funciona dentro dos conformes e como um reloginho: com horários marcados para acordar, dormir e realizar suas tarefas."
+//say "Todos realizam seus trabalhos e vivem em harmonia, criando uma sociedade perfeita e equilibrada."
+say "" "E, acima de tudo..."
+
+character char_left "fertiliel"
+char_flip char_left
+char_move_x char_left 0.5 0
+fade_in 1
+
+//goto_script "fertiliel_enter" 0.25
+
+wait 0.5
+character char_left "fertiliel-tired"
+wait 0.5
+
+say "Fertiliel" "(MUITO CHATA!)"
+say "(Cadê a diversão nisso tudo?)"
+say "(Eu não quero ficar fazendo trabalho burocrático e tendo que seguir um monte de regras!)"
+wait 0.3
+character char_left "fertiliel"
+wait 0.3
+say "(Eu só quero sair e me aventurar um pouco. O mundo dos humanos é muito mais interessante!)"
+say "(Por sorte, hoje eu devo receber uma nova missão como Cupido.)"
+say "(Vou visitar minha supervisora.)"
+
+
+// fertiliel sai de cena
+wait 0.3
+char_move_x char_left 1.5 0.5
+wait 0.5
+
+fade_out 0.7
+wait 1
+
+char_reset_all
+character char_right "hardiel"
+char_move_x char_right 0.75
+
+fade_in 0.7
+
+// hardiel está na tela
+// fertiliel entra na cena
+goto_script "fertiliel_enter" 0.25
+wait 1
+
+say "Fertiliel" "Bom dia Supervisora Hardiel!"
+say "Hardiel" "Está atrasada 2 minutos, Fertiliel."
+
+
+character char_left "fertiliel-tired"
+wait 0.5
+say "Fertiliel" "Desculpa..."
+say "Hardiel" "Como deve imaginar, hoje tenho uma nova missão para você."
+
+character char_left "fertiliel"
+say "Mas antes de iniciar seus trabalhos, vou relembrá-la de suas atribuições como Cupido."
+say "Não quero que ignore os os protocolos e seja \qcriativa\q demais com o processo, como da última vez."
+
+say "Em cada missão na Terra, você será designada para ajudar um humano em específico e deve encontrar um parceiro ou parceira para ele."
+
+
+character char_left "fertiliel-suspicious"
+say "Fertiliel" "Certo. E como eu faço isso mesmo?"
+
+say "Hardiel" "Aqui está o seu par de Flechas do Amor Eterno, leve-as com você."
+say "Para formar um casal, voce precisa que os humanos se gostem, saiam algumas vezes e abram seus corações para namorarem."
+say "Quando os corações estiverem completamente abertos você deve atingí-los com as Flechas do Amor Eterno, e eles ficarão juntos pra sempre."
+
+
+
+character char_left "fertiliel"
+say "Fertiliel" "Entendi. Humanos se gostam, saem juntos, flechada. Bingo!"
+
+say "Hardiel" "Por último, devido ao seu comportamento caótico na última missão, eu sou obrigada a informá-la novamente as Regras de Conduta no Mundo Humano."
+say "<color=yellow>Regra Nº1: Um anjo jamais deve ser visto por um humano.</color> Se um humano descobrir a influência dos anjos no seu mundo, isso pode gerar grandes complicações para nós."
+say "<color=yellow>Regra Nº2: Não é permitido invadir a privacidade dos humanos.</color> Assuntos pessoais, exceto a vida amorosa deles, estão fora da sua zona de atuação e você não deve interferir."
+say "<color=yellow>Regra Nº3: Não é permitido trazer nenhum objeto do Mundo Humano para o Céu.</color>"
+say "Fertiliel" "Hum... Entendi."
+
+say "Hardiel" "Cumpra as regras dessa vez, ou eu terei que lhe dar mais uma advertência!"
+
+say "Fertiliel" "Claro, claro. Pode deixar!"
+
+wait 0.5
+character char_left "fertiliel-suspicious"
+wait 0.5
+
+say "(Qual era a primeira regra mesmo?)"
+
+
+// say "Fertiliel" "Ok, eu conheço as regras."
+// say "Hardiel" "Não custa nada repetir. Ainda mais pra alguém como você."
+// say "Fertiliel" "..."
+// say "Supervisora, vai ser um pouco difícil eu não ser vista por humanos e cumprir a missão com meus poderes limitados..."
+// say   "Devido aos poderes limitados da minha Meia-Auréola, eu não estou conseguindo ficar invisível nem voar direito."
+// say "Hardiel" "Infelizmente esta é uma limitação que cabe a você lidar. Não posso lhe conceder qualquer tratamento diferenciado por este motivo."
+
+
+// character char_left "fertiliel-tired"
+// say "Fertiliel" "(Droga...)"
+// say "Tudo bem, eu vou dar algum jeito."
+say "Hardiel" "Seu primeiro humano designado se chama Daniel. Você irá encontrar mais informações sobre ele no seu briefing."
+character char_left "fertiliel"
+// TODO: show character card when it exists
+say "Sua missão é encontrar uma namorada para ele dentro de 14 dias."
+//say "Lembre-se de que essa é sua última chance."
+
+character char_left "fertiliel"
+say "Fertiliel" "Ok. Parece fácil!"
+say "Hardiel" "Isso é tudo. Pode se retirar agora."
+say "Fertiliel" "Muito obrigada, Hardiel. Vou trazer uma lembrancinha para você!"
+say "Hardiel" "Nada de trazer objetos do Mundo Humano para o Céu!"
+say "Fertiliel" "Calma, calma. É bricadeira!"
+
+fade_out 1
+wait 1
+
+
+
+hardiel mencionar as regras (pra fertiliel poder quebrar)
+
+
+fade_music 0 1
+fade_out 1
+
+waypoint end
+skip_button false
+fade_music 0 0
+fade_out 0
+char_reset_all
+bg null
+wait 1
+
+
+set_var day 1
+goto_script "select_daytime_interaction"
