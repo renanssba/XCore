@@ -12,8 +12,8 @@ goto_script "char_right_enter" "graciel"
 // character char_right "graciel"
 // char_move_x char_right 1.5
 // char_move_x char_right 0.5 0.7
-// anim_alpha char_right 0 0
-// anim_alpha char_right 1 0.7
+// char_alpha char_right 0 0
+// char_alpha char_right 1 0.7
 //wait 0.7
 
 /// DEBUG: GET MUCH MONEY
@@ -88,12 +88,14 @@ choices "shop/choices_0_0" buy "shop/choices_0_1" sell "shop/choices_0_2" end
 
 
 waypoint buy
+goto_script "shop_movement" "open_buy_screen"
 show_shop true "buy"
+goto_script "shop_movement" "close_buy_screen"
 
 if item_id != -1
   if item_price <= money
     say_auto "char_name/graciel" "shop/say_34"
-    choices "shop/choices_1_0" comprar_sim "shop/choices_1_1" store_loop
+    choices "choices/yes" comprar_sim "choices/no" store_loop
   else
     say "shop/say_35"
   endif
@@ -109,10 +111,12 @@ if #inventory_empty == 1
 goto store_loop
 endif
 
+goto_script "shop_movement" "open_buy_screen"
 show_shop true "sell"
+goto_script "shop_movement" "close_buy_screen"
 if item_id != -1
   say_auto "char_name/graciel" "shop/say_37"
-  choices "shop/choices_2_0" vender_sim "shop/choices_2_1" store_loop
+  choices "choices/yes" vender_sim "choices/no" store_loop
 else
   goto store_loop
 endif

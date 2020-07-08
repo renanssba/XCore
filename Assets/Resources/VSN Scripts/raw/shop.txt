@@ -12,8 +12,8 @@ goto_script "char_right_enter" "graciel"
 // character char_right "graciel"
 // char_move_x char_right 1.5
 // char_move_x char_right 0.5 0.7
-// anim_alpha char_right 0 0
-// anim_alpha char_right 1 0.7
+// char_alpha char_right 0 0
+// char_alpha char_right 1 0.7
 //wait 0.7
 
 /// DEBUG: GET MUCH MONEY
@@ -93,7 +93,7 @@ show_shop true "buy"
 if item_id != -1
   if item_price <= money
     say_auto "Graciel" "Você quer comprar <color=yellow>\vsn(item_name)</color> por <sprite=\qAttributes\q index=4><color=yellow>\vsn(item_price)</color>?"
-    choices "choices/yes" comprar_sim "choices/no" store_loop
+    choices "Sim" comprar_sim "Não" store_loop
   else
     say "Me desculpe, parece que você não tem dinheiro o suficiente para comprar este item."
   endif
@@ -112,7 +112,7 @@ endif
 show_shop true "sell"
 if item_id != -1
   say_auto "Graciel" "Você quer vender <color=yellow>\vsn(item_name)</color> por <sprite=\qAttributes\q index=4><color=yellow>\vsn(item_price)</color>?"
-  choices "choices/yes" vender_sim "choices/no" store_loop
+  choices "Sim" vender_sim "Não" store_loop
 else
   goto store_loop
 endif

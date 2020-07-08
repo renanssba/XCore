@@ -1,0 +1,13 @@
+﻿goto *arg1
+
+waypoint open_buy_screen
+//goto_script "char_right_enter" "graciel" 0.82
+char_move_x char_right 0.82 0.5
+char_alpha char_left 0 0.5
+end_script
+
+
+waypoint close_buy_screen
+char_move_x char_right 0.75 0.5
+char_alpha char_left 1 0.5
+end_script
