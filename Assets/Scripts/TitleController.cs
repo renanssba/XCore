@@ -6,11 +6,25 @@ public class TitleController : MonoBehaviour {
 
   //public GameObject[] buttons;
   public ScreenTransitions loadPanel;
+  public ScreenTransitions languageSelectPanel;
 
 
   void Start(){
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
+    //if(PlayerPrefs.GetInt("initialized_language", 0) == 1) {
+    //  // then language is already initialized
+    //  languageSelectPanel.gameObject.SetActive(false);
+    //} else {
+    //  // then language is not initialized, show language select panel
+    //  languageSelectPanel.gameObject.SetActive(true);
+    //}
+    languageSelectPanel.gameObject.SetActive(true); //DEBUG, while there's no Options screen to select language
   }
+
+  public void CloseLanguageSelectPanel() {
+    languageSelectPanel.HidePanel();
+  }
+
 
   public void ClickNewGame(){
     GlobalData.instance.saveToLoad = -1;
@@ -35,16 +49,20 @@ public class TitleController : MonoBehaviour {
     }
   }
 
-  public void ClickPortugueseButton(){
-    VsnAudioManager.instance.PlaySfx("ui_confirm");
+  public void ClickPortugueseButton() {
+    SfxManager.StaticPlayBigConfirmSfx();
     Lean.Localization.LeanLocalization.CurrentLanguage = "Portuguese";
     JoystickController.instance.SelectStartingObject();
+    PlayerPrefs.SetInt("initialized_language", 1);
+    CloseLanguageSelectPanel();
   }
 
   public void ClickEnglishButton() {
-    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    SfxManager.StaticPlayBigConfirmSfx();
     Lean.Localization.LeanLocalization.CurrentLanguage = "English";
     JoystickController.instance.SelectStartingObject();
+    PlayerPrefs.SetInt("initialized_language", 1);
+    CloseLanguageSelectPanel();
   }
 
   public void ClickExit(){
