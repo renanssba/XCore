@@ -36,9 +36,9 @@ namespace Command {
         VsnArgument[] sayargs = new VsnArgument[2];
         sayargs[0] = new VsnString("char_name/none");
         if(amount == 1) {
-          sayargs[1] = new VsnString("shop/say_5");
+          sayargs[1] = new VsnString("inventory/acquire_single_item");
         } else {
-          sayargs[1] = new VsnString("shop/say_7");
+          sayargs[1] = new VsnString("inventory/acquire_multiple_items");
         }        
         SayCommand.StaticExecute(sayargs);
       }

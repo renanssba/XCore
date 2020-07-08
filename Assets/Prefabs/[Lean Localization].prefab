@@ -4244,6 +4244,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1114097604953690
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4617405792719332}
+  - component: {fileID: 114058585571284016}
+  m_Layer: 0
+  m_Name: acquire_multiple_items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1114972186786372
 GameObject:
   m_ObjectHideFlags: 1
@@ -9641,6 +9657,22 @@ GameObject:
   - component: {fileID: 114350196909444472}
   m_Layer: 0
   m_Name: say_10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1285572929691372
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4894093899576818}
+  - component: {fileID: 114094743686542930}
+  m_Layer: 0
+  m_Name: acquire_single_item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49964,6 +49996,8 @@ Transform:
   - {fileID: 4674927734976644}
   - {fileID: 4319152288219950}
   - {fileID: 4427350408095338}
+  - {fileID: 4894093899576818}
+  - {fileID: 4617405792719332}
   m_Father: {fileID: 4630248921178718}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54709,6 +54743,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4780639702377724}
   m_RootOrder: 245
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4617405792719332
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114097604953690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4470267053916286}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4617468767100390
 Transform:
@@ -63637,6 +63684,19 @@ Transform:
   m_Father: {fileID: 4213528680501008}
   m_RootOrder: 176
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4894093899576818
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285572929691372}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4470267053916286}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4895760578794636
 Transform:
   m_ObjectHideFlags: 1
@@ -68666,6 +68726,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114058585571284016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114097604953690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "Voc\xEA adquiriu <color=yellow>\\vsn(item_name) x\\vsn(item_amount)</color>!"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114058610135416180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70424,6 +70505,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: xxx
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114094743686542930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285572929691372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: "Voc\xEA adquiriu <color=yellow>\\vsn(item_name)</color>!"
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
