@@ -116,8 +116,10 @@ public class VsnUIManager : MonoBehaviour {
     if(GlobalData.instance.GetFaceByName(messageTitle) != null) {
       vsnFaceIcon.transform.parent.gameObject.SetActive(true);
       vsnFaceIcon.sprite = GlobalData.instance.GetFaceByName(messageTitle);
+      VsnAudioManager.instance.SetDialogSfxPitch(GlobalData.instance.GetPitchByName(messageTitle));
     } else {
       vsnFaceIcon.transform.parent.gameObject.SetActive(false);
+      VsnAudioManager.instance.SetDialogSfxPitch(1f);
     }
   }
 
@@ -126,7 +128,7 @@ public class VsnUIManager : MonoBehaviour {
       isTextAppearing = false;
       consoleSimulator.FinishShowingCharacters();
     } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH) {
-      VsnAudioManager.instance.PlaySfx("ui_dialogue_advance");
+      VsnAudioManager.instance.PlayDialogAdvanceSfx();
 
       /// Log text
       logWindow.AddToLog(vsnMessageTitle.text, vsnMessageText.text);
@@ -354,9 +356,9 @@ public class VsnUIManager : MonoBehaviour {
   public void ShowTextInput(bool show){
     textInputPanel.SetActive(show);
     if(show == true){
-      VsnUIManager.SelectUiElement(null);
+      SelectUiElement(null);
       textInputField.text = "";
-      VsnUIManager.SelectUiElement(textInputField.gameObject);
+      SelectUiElement(textInputField.gameObject);
     }
   }
 

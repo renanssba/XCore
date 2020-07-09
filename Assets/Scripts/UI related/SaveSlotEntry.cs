@@ -83,6 +83,7 @@ public class SaveSlotEntry : MonoBehaviour {
 
   public void Clicked() {
     Debug.LogWarning("Clicked entry " + slotId);
+    
 
     VsnSaveSystem.SetVariable("save_file_selected", slotId);
     if(SystemScreen.instance != null && SystemScreen.instance.isInSaveMode) {
@@ -98,6 +99,11 @@ public class SaveSlotEntry : MonoBehaviour {
       }
     } else {
       /// LOAD GAME
+      if(!HasData()) {
+        SfxManager.StaticPlayForbbidenSfx();
+        return;
+      }
+
       if(!ExecutingInTitleScreen()) {
         // this is used during 
         VsnController.instance.StartVSN("save_load_functions", new VsnArgument[] { new VsnString("system_load") });

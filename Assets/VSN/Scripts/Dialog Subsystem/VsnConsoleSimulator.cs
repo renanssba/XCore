@@ -53,7 +53,9 @@ public class VsnConsoleSimulator : MonoBehaviour {
     VsnUIManager.instance.isTextAppearing = true;
     elapsedTime = 0;
     numberOfCharsToShow = 0;
-    lastPlayedSfx = 0f;
+    lastPlayedSfx = -VsnAudioManager.instance.dialogSfxTime;
+    // this value being 0, the dialog advance sfx plays at every time a dialog window ends
+    // with this value, it plays only when a dialog window doesn't appear right after
 
     UpdateText();
     while(numberOfCharsToShow < totalCharacters) {
@@ -74,7 +76,7 @@ public class VsnConsoleSimulator : MonoBehaviour {
     VsnUIManager.instance.isTextAppearing = true;
     elapsedTime = 0;
     numberOfCharsToShow = minCharsToShow;
-    lastPlayedSfx = 0f;
+    lastPlayedSfx = -VsnAudioManager.instance.dialogSfxTime;
 
     UpdateText();
     //Debug.LogWarning("number of chars to show: " + numberOfCharsToShow + ", new length (totalCharacters): " + totalCharacters);

@@ -7,9 +7,11 @@ public class VsnAudioManager : MonoBehaviour {
 	public static VsnAudioManager instance;
 
 	private AudioSource audioSource;
+  public AudioSource dialogSfxSource;
   public PartialLoopPlayer musicPlayer;
   public AudioSource[] ambienceSources;
   public AudioClip dialogSfx = null;
+  public AudioClip dialogAdvanceSfx = null;
   public float dialogSfxTime = 0.08f;
 
   public string songPlaying;
@@ -183,15 +185,25 @@ public class VsnAudioManager : MonoBehaviour {
   }
 
   public void PlaySfx(AudioClip audioClip, float panValue){
-    /// TODO: add support to sfx panning
-    audioSource.panStereo = 0f;
     audioSource.PlayOneShot(audioClip);
 	}
 
+  public void SetDialogSfxPitch(float pitch) {
+    dialogSfxSource.pitch = pitch;
+  }
 
   public void PlayDialogSfx(){
     if(dialogSfx != null){
-      audioSource.PlayOneShot(dialogSfx);
+      dialogSfxSource.clip = dialogSfx;
+      dialogSfxSource.Play();
+    }
+  }
+
+  public void PlayDialogAdvanceSfx() {
+    if(dialogAdvanceSfx != null) {
+      dialogSfxSource.Stop();
+      dialogSfxSource.clip = dialogAdvanceSfx;
+      dialogSfxSource.Play();
     }
   }
 

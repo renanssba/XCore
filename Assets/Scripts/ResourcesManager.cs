@@ -27,6 +27,15 @@ public enum CharacterSpritePart {
 }
 
 
+[System.Serializable]
+public class VsnCharacterData {
+  public string nameKey;
+  public Sprite faceSprite;
+  public float pitch;
+}
+
+
+
 public class ResourcesManager : MonoBehaviour {
   public Sprite[] faceSprites;
   public Sprite[] fixedCharactersFaceSprites;
@@ -41,6 +50,7 @@ public class ResourcesManager : MonoBehaviour {
   public Sprite[] heartlockSprites;
   public Sprite[] stealthEyeSprites;
   public Vector2[] heartPositionInActors;
+  public VsnCharacterData[] vsnCharacterData;
   public List<CharacterSpriteCollection> characterSpritesCollections;
 
 

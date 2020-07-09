@@ -2,7 +2,7 @@ if argsCount > 0
   goto *arg1
 endif
 
-goto_script "enter_observation" "house afternoon"
+goto_script "enter_observation" "house night"
 say "" "Daniel vai para casa e espera a chegada de Clara para estudarem."
 theater_setup main "person(daniel)" "grid_3" support "person(claire)" "out_left"
 move_camera "girl_interaction" 0

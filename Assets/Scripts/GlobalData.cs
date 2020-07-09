@@ -285,53 +285,19 @@ public class GlobalData : MonoBehaviour {
     UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
   }
 
+  public float GetPitchByName(string name) {
+    foreach(VsnCharacterData chara in ResourcesManager.instance.vsnCharacterData) {
+      if(name == Lean.Localization.LeanLocalization.GetTranslationText(chara.nameKey)) {
+        return chara.pitch;
+      }
+    }
+    return 1f;
+  }
+
   public Sprite GetFaceByName(string name) {
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("char_name/fertiliel")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[0];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("char_name/graciel")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[1];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("char_name/hardiel")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[2];
-    }
-    //if(name == "Carta") {
-    //  return ResourcesManager.instance.fixedCharactersFaceSprites[3];
-    //}
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("char_name/bully") ||
-       name == Lean.Localization.LeanLocalization.GetTranslationText("cap1_dia1/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[4];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/card_vendors/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[5];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/card_vendors/char_name_1")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[6];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/photographer/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[7];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/jones_hotdog/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[8];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/boss_anna/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[9];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/bully_minor/char_name_0")) {
-      return ResourcesManager.instance.fixedCharactersFaceSprites[10];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/boss_anna/char_name_1")) {
-      return ResourcesManager.instance.faceSprites[2];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/boss_beatrice/char_name_1")) {
-      return ResourcesManager.instance.faceSprites[3];
-    }
-    if(name == Lean.Localization.LeanLocalization.GetTranslationText("date_enemies/boss_claire/char_name_1")) {
-      return ResourcesManager.instance.faceSprites[4];
-    }
-    foreach(Person p in people) {
-      if(p.GetName() == name) {
-        return ResourcesManager.instance.faceSprites[p.faceId];
+    foreach(VsnCharacterData chara in ResourcesManager.instance.vsnCharacterData) {
+      if(name == Lean.Localization.LeanLocalization.GetTranslationText(chara.nameKey)) {
+        return chara.faceSprite;
       }
     }
     return null;
