@@ -89,7 +89,7 @@ if #currentRelationshipLevel == 0
   say "char_name/claire" "cap1_conversa_clara/say_30"
   say "char_name/none" "cap1_conversa_clara/say_31"
 
-  add_exp false 20
+  add_exp false 2
   goto end
 endif
 
@@ -246,7 +246,7 @@ goto end_dialog
 
 
 waypoint end_dialog
-add_exp true 20
+add_exp true 2
 goto end
 
 
@@ -276,7 +276,7 @@ if item_owner == 3
 else
   say "char_name/claire" "cap1_conversa_clara/say_140"
   say "char_name/daniel" "cap1_conversa_clara/say_141"
-  add_exp true 40
+  add_exp true 4
 endif
 goto end
 

@@ -97,7 +97,7 @@ if #currentRelationshipLevel == 0
   actor_face support "left"
   wait 0.5
   say "Beatrice" "Excelente! Faremos uma bateria de testes e experimentos variados."
-  add_exp false 20
+  add_exp false 2
   if daytime == 0
       say "Beatrice" "Me encontre mais tarde aqui na biblioteca e poderemos começar."
   endif
@@ -381,7 +381,7 @@ goto end_dialog
 
 
 waypoint end_dialog
-add_exp true 20
+add_exp true 2
 goto end
 
 
@@ -415,7 +415,7 @@ if item_owner == 2
 else
   say "Beatrice" "Muito obrigada, isso é muito útil."
   say "Daniel" "Que bom que você gostou!"
-  add_exp true 40
+  add_exp true 4
 endif
 goto end
 

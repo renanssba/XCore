@@ -8,10 +8,10 @@ namespace Command{
   public class SkipButtonCommand : VsnCommand {
 
     public override void Execute (){
-      VsnUIManager.instance.ShowSkipButton(args[0].GetBooleanValue());
-      if(args.Length > 1) {
-        VsnUIManager.instance.SetSkipButtonWaypoint(args[1].GetReference());
-      }
+      //VsnUIManager.instance.ShowSkipButton(args[0].GetBooleanValue());
+      //if(args.Length > 1) {
+      //  VsnUIManager.instance.SetSkipButtonWaypoint(args[1].GetReference());
+      //}
     }
 
     public override void AddSupportedSignatures() {

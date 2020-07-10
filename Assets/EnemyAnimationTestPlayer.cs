@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
+
 public class EnemyAnimationTestPlayer : MonoBehaviour {
 
+#if UNITY_EDITOR
   public Actor2D[] enemies;
   public UnityEngine.UI.Dropdown enemyList;
   public UnityEngine.UI.Dropdown stateList;
@@ -41,7 +45,6 @@ public class EnemyAnimationTestPlayer : MonoBehaviour {
     enemyDisplay = Instantiate(enemies[id].gameObject);
     enemyDisplay.transform.parent = this.transform;
     LoadAnimationStateList(enemyDisplay);
-
   }
 
   void LoadAnimationStateList(GameObject enemy) {
@@ -106,4 +109,5 @@ public class EnemyAnimationTestPlayer : MonoBehaviour {
     enemyList.onValueChanged.RemoveListener(LoadEnemy);
     stateList.onValueChanged.RemoveListener(PlayState);
   }
+#endif
 }
