@@ -21,10 +21,19 @@ say "date_enemies/boss_beatrice/char_name_0" "date_enemies/boss_beatrice/say_2"
 actor_animator_parameter angel "Choosing Action" true
 say "char_name/fertiliel" "date_enemies/boss_beatrice/say_3"
 say "date_enemies/boss_beatrice/say_4"
-say "date_enemies/boss_beatrice/char_name_0" "date_enemies/boss_beatrice/say_5"
-say "date_enemies/boss_beatrice/say_6"
 say "char_name/beatrice" "date_enemies/boss_beatrice/say_7"
 
+say "date_enemies/boss_beatrice/char_name_0" "date_enemies/boss_beatrice/say_5"
+wait 0.3
+actor_move enemy "grid_4_back" 1.2
+wait 1.4
+say "date_enemies/boss_beatrice/say_6"
+
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+say "char_name/daniel" "date_enemies/boss_beatrice/say_9"
 
 flash "#1A2B66" 0.3
 wait 0.8
@@ -32,25 +41,22 @@ flash "#1A2B66" 0.3
 wait 0.8
 say "char_name/beatrice" "date_enemies/boss_beatrice/say_8"
 
+
+actor_animator_parameter enemy "Battle" true
+actor_animator_parameter enemy "Intro"
 wait 0.5
-actor_face main "left"
+screenshake 1.5 2
+
+wait 2.5
+
+
+actor_move enemy "grid_2" 5
+fade_out 4 "#BA2D21"
+
+//wait 3
+
 wait 0.5
-say "char_name/daniel" "date_enemies/boss_beatrice/say_9"
 
-flash "#1A2B66" 0.5
-wait 0.8
-flash "#1A2B66" 0.5
-wait 0.8
-say "char_name/beatrice" "date_enemies/boss_beatrice/say_10"
-
-
-flash "#1A2B66" 0.7
-wait 0.8
-flash "#1A2B66" 0.7
-wait 0.8
-fade_out 1 "#1A2B66"
-
-wait 1
 say "char_name/none" "date_enemies/boss_beatrice/say_11"
 actor_become enemy "boss_beatrice"
 wait 0.5
