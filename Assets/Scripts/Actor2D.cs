@@ -309,20 +309,55 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public IEnumerator CharacterAttackAnim(SkillAnimation animation) {
-    switch(animation) {
-      case SkillAnimation.active_offensive:
-      case SkillAnimation.active_support:
-      case SkillAnimation.long_charge:
-      default:
-        yield return TackleAnimation();
+  public IEnumerator CharacterAttackAnim(ActionSkin actionSkin, Actor2D[] targetActors = null) {
+    switch(actionSkin.animation) {
+      case SkillAnimation.throw_object:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        yield return ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/" + actionSkin.animationArgument), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
         break;
+
+      case SkillAnimation.multi_throw:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        foreach(Actor2D targetActor in targetActors) {
+          StartCoroutine(ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/splash-yellow"), targetActor, Vector3.one));
+        }
+        yield return new WaitForSeconds(1.5f);
+        break;
+
       case SkillAnimation.run_over:
         VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
         VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
         yield return RunOverAnimation();
         break;
+
+      case SkillAnimation.projectile:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        yield return ProjectileAnimation(actionSkin);
+        break;
+
+
+      case SkillAnimation.attack:
+      case SkillAnimation.active_offensive:
+      case SkillAnimation.active_support:
+      case SkillAnimation.long_charge:
+      default:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        yield return TackleAnimation();
+        break;
     }
+  }
+
+  public IEnumerator ProjectileAnimation(ActionSkin actionSkin) {
+    GameObject projectileUsed = Resources.Load<GameObject>("Projectiles/" + actionSkin.animationArgument);
+    Vector3 particlePrefabPos = projectileUsed.transform.localPosition;
+    GameObject newParticle = Instantiate(projectileUsed, transform);
+
+    float waitTime = attackAnimTime * 2f + 0.5f;
+    if(newParticle.GetComponent<DieAfterTime>() != null) {
+      waitTime = newParticle.GetComponent<DieAfterTime>().timeToWait;
+    }    
+
+    yield return new WaitForSeconds(waitTime);
   }
 
   public IEnumerator TackleAnimation() {

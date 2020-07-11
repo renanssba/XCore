@@ -75,6 +75,8 @@ public enum SkillAnimation {
   long_charge,
   throw_object,
   multi_throw,
+  projectile,
+  skinnable,
   none
 }
 
@@ -121,10 +123,13 @@ public class Skilltree {
 
 
 [System.Serializable]
-public class ActionSkin{
+public class ActionSkin {
   public string name;
-  public string id;
   public string sfxName;
+  public SkillAnimation animation;
+  public string animationArgument;
+
+  public GameObject projectilePrefab;
 }
 
 
@@ -158,8 +163,9 @@ public class Skill {
   public string[] triggerConditions;
   public float triggerChance;
 
-  public SkillAnimation animation;
-  public string skillAnimationArgument;
+  public ActionSkin animationSkin;
+  //public SkillAnimation animation;
+  //public string skillAnimationArgument;
 
   public string[] tags;
 

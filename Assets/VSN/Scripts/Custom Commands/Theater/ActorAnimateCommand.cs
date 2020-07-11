@@ -10,15 +10,19 @@ namespace Command {
     public override void Execute() {
       Actor2D actor = TheaterController.instance.GetActorByString(args[0].GetReference());
 
+      ActionSkin skin = new ActionSkin();
+
       switch(args[1].GetStringValue()) {
         case "attack":
-          actor.StartCoroutine(actor.CharacterAttackAnim(SkillAnimation.attack));
+          skin.animation = SkillAnimation.attack;
+          actor.StartCoroutine(actor.CharacterAttackAnim(skin));
           break;
         case "defend":
           actor.DefendActionAnimation();
           break;
         case "run over":
-          actor.StartCoroutine(actor.CharacterAttackAnim(SkillAnimation.run_over));
+          skin.animation = SkillAnimation.run_over;
+          actor.StartCoroutine(actor.CharacterAttackAnim(skin));
           break;
         case "shine red":
           actor.ShineRed();

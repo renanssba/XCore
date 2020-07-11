@@ -251,9 +251,9 @@ public class UIController : MonoBehaviour {
     actionsPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f*currentPartyMember, 0f, 0f);
 
     // turn characters UI
-    for(int i = 0; i < 3; i++) {
-      partyPeopleCards[i].ShowShade(true);
-    }
+    //for(int i = 0; i < 3; i++) {
+    //  partyPeopleCards[i].ShowShade(true);
+    //}
     partyPeopleCards[currentPartyMember].ShowShade(false);
   }
 

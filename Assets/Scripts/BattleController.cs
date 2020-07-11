@@ -20,7 +20,7 @@ public class BattleController : MonoBehaviour {
 
   public List<Skill> allSkills;
   public TextAsset skillsFile;
-  public List<ActionSkin> allActionSkins;
+  public List<ActionSkin> playerActionSkins;
   public TextAsset actionSkinsFile;
 
   public List<StatusCondition> allStatusConditions;
@@ -597,7 +597,6 @@ public class BattleController : MonoBehaviour {
     Actor2D skillUserActor = TheaterController.instance.GetActorByIdInParty(skillUserId);
     Battler skillUser = skillUserActor.battler;
     Actor2D[] targetActors;
-    //Battler[] targets;
 
     if(targetId == SkillTarget.allEnemies) {
       targetActors = TheaterController.instance.GetAllEnemiesActors();
@@ -644,30 +643,19 @@ public class BattleController : MonoBehaviour {
 
 
     // skill cast animation
-    switch(usedSkill.animation) {
-      case SkillAnimation.attack:
-        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
-        yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
-        break;
-
-      case SkillAnimation.active_offensive:
-      case SkillAnimation.active_support:
-      case SkillAnimation.long_charge:
-      case SkillAnimation.run_over:
-        VsnAudioManager.instance.PlaySfx("skill_cast");
-        yield return skillUserActor.CharacterAttackAnim(usedSkill.animation);
-        break;
-
-      case SkillAnimation.throw_object:
-        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
-        yield return skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/" + usedSkill.skillAnimationArgument), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
-        break;
-      case SkillAnimation.multi_throw:
-        PlayBasicAttackSFX(skillUserId, skillUserActor, usedSkill);
-        foreach(Actor2D targetActor in targetActors) {
-          skillUserActor.StartCoroutine( skillUserActor.ShowThrowItemAnimation(Resources.Load<Sprite>("Characters/splash-yellow"), targetActor, Vector3.one) );
+    switch(usedSkill.animationSkin.animation) {
+      case SkillAnimation.skinnable:
+        ActionSkin actionSkin;
+        if(skillUserId == SkillTarget.partyMember1 || skillUserId == SkillTarget.partyMember2) {
+          actionSkin = GetActionSkin(partyMembers[(int)skillUserId], usedSkill);
+        } else {
+          actionSkin = skillUserActor.enemy.baseAttackSkin;
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return skillUserActor.CharacterAttackAnim(actionSkin, targetActors);
+        break;
+
+      default:
+        yield return skillUserActor.CharacterAttackAnim(usedSkill.animationSkin, targetActors);
         break;
 
       case SkillAnimation.none:
@@ -680,13 +668,13 @@ public class BattleController : MonoBehaviour {
     // skill effects for every target
     foreach(Actor2D targetActor in targetActors) {
       // skill receive animation
-      if(usedSkill.animation != SkillAnimation.none &&
-         usedSkill.animation != SkillAnimation.passive) {
+      if(usedSkill.animationSkin.animation != SkillAnimation.none &&
+         usedSkill.animationSkin.animation != SkillAnimation.passive) {
         if(targetActor.enemy != null && targetActor.enemy.HasTag("ally")) {
           // special animation for hitting allies
           targetActor.ShineGreen();
         } else {
-          switch(usedSkill.animation) {
+          switch(usedSkill.animationSkin.animation) {
             case SkillAnimation.active_support:
             case SkillAnimation.long_charge:
               targetActor.ShineGreen();
@@ -840,16 +828,6 @@ public class BattleController : MonoBehaviour {
         return SkillTarget.partyMember1;
     }
     return SkillTarget.partyMember1;
-  }
-
-
-  public void PlayBasicAttackSFX(SkillTarget skillUserId, Actor2D skillUserActor, Skill usedSkill) {
-    if(skillUserId == SkillTarget.partyMember1 || skillUserId == SkillTarget.partyMember2) {
-      ActionSkin skin = GetActionSkin(partyMembers[(int)skillUserId], usedSkill);
-      VsnAudioManager.instance.PlaySfx(skin.sfxName);
-    } else {
-      VsnAudioManager.instance.PlaySfx(skillUserActor.enemy.attackSfxName);
-    }
   }
 
 
@@ -1261,6 +1239,7 @@ public class BattleController : MonoBehaviour {
 
     float guts, intelligence, charisma;
     string[] loadedTags, loadedImmunities;
+    ActionSkin actionSkin;
 
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
@@ -1275,6 +1254,11 @@ public class BattleController : MonoBehaviour {
       loadedImmunities = Utils.SeparateTags(dic["status immunities"]);
 
 
+      actionSkin = new ActionSkin();
+      actionSkin.sfxName = dic["base attack sfx"];
+      actionSkin.animation = GetSkillAnimationByString(dic["base attack animation"]);
+      actionSkin.animationArgument = Utils.GetStringArgument(dic["base attack animation"]);
+
       allEnemies.Add(new Enemy {
         id = int.Parse(dic["id"]),
         nameKey = dic["name key"],
@@ -1283,7 +1267,7 @@ public class BattleController : MonoBehaviour {
         maxHp = int.Parse(dic["max hp"]),
         attributeEffectivity = new float[] { guts, intelligence, charisma },
         spriteName = dic["sprite name"],
-        attackSfxName = dic["attack sfx"],
+        baseAttackSkin = actionSkin,
         appearSfxName = dic["appear sfx"],
         stage = int.Parse(dic["stage"]),
         location = dic["location"],
@@ -1362,8 +1346,9 @@ public class BattleController : MonoBehaviour {
       } else {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }
-      newSkill.animation = GetSkillAnimationByString(entry["animation"]);
-      newSkill.skillAnimationArgument = Utils.GetStringArgument(entry["animation"]);
+      newSkill.animationSkin = new ActionSkin();
+      newSkill.animationSkin.animation = GetSkillAnimationByString(entry["animation"]);
+      newSkill.animationSkin.animationArgument = Utils.GetStringArgument(entry["animation"]);
 
       newSkill.tags = Utils.SeparateTags(entry["tags"]);
 
@@ -1467,20 +1452,21 @@ public class BattleController : MonoBehaviour {
   public void LoadAllActionSkins() {
     SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(actionSkinsFile, 1);
 
-    allActionSkins = new List<ActionSkin>();
+    playerActionSkins = new List<ActionSkin>();
     foreach(Dictionary<string, string> entry in data.data) {
       ActionSkin newSkin = new ActionSkin() {
-        id = entry["id"],
         name = entry["name"],
-        sfxName = entry["sfx"]
-      };
+        sfxName = entry["sfx"],
+        animation = GetSkillAnimationByString(entry["animation"]),
+        animationArgument = Utils.GetStringArgument(entry["animation"])
+    };
 
-      allActionSkins.Add(newSkin);
+      playerActionSkins.Add(newSkin);
     }
   }
 
   public ActionSkin GetActionSkinByName(string name) {
-    foreach(ActionSkin currentActionSkin in allActionSkins) {
+    foreach(ActionSkin currentActionSkin in playerActionSkins) {
       if(currentActionSkin.name == name) {
         return currentActionSkin;
       }

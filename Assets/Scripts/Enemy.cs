@@ -46,7 +46,7 @@ public class Enemy : Battler {
   public int maxHp;
   public int hp;
 
-  public string attackSfxName;
+  public ActionSkin baseAttackSkin;
 
   public ActiveSkillLogic[] activeSkillLogics;
   public CustomEventLogic[] customEvents;
