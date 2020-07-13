@@ -35,7 +35,7 @@ public class Item {
   public int sells_in_store;
 
   public int price;
-  public Sprite sprite;
+  public string spriteName;
 
   public string[] tags;
 
@@ -53,6 +53,10 @@ public class Item {
 
   public string GetPrintableName() {
     return Lean.Localization.LeanLocalization.GetTranslationText("item/name/" + nameKey);
+  }
+
+  public Sprite GetSprite() {
+    return Resources.Load<Sprite>("Icons/" + spriteName);
   }
 
   public string GetPrintableDescription(){

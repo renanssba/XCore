@@ -470,7 +470,7 @@ public class BattleController : MonoBehaviour {
     damage *= defender.DamageTakenMultiplier(usedSkill.damageAttribute);
 
     // level damage scaling
-    damage *= LevelModifier(attacker.Level(), defender.Level());
+    //damage *= LevelModifier(attacker.Level(), defender.Level());
 
     Debug.LogWarning("LEVEL MODIFIER: " + LevelModifier(attacker.Level(), defender.Level()));
 
@@ -842,8 +842,8 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     Enemy currentEvent = GetCurrentEnemy();
-    VsnAudioManager.instance.PlaySfx("challenge_default");
 
+    VsnAudioManager.instance.PlaySfx("challenge_default");
     yield return userActor.UseItemAnimation(targetActor, usedItem);
 
     // spend item

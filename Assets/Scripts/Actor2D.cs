@@ -313,13 +313,13 @@ public class Actor2D : MonoBehaviour {
     switch(actionSkin.animation) {
       case SkillAnimation.throw_object:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
-        yield return ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/" + actionSkin.animationArgument), targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
+        yield return ShowThrowItemAnimation(actionSkin.animationArgument, targetActors[0], new Vector3(0.08f, 0.08f, 0.08f));
         break;
 
       case SkillAnimation.multi_throw:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         foreach(Actor2D targetActor in targetActors) {
-          StartCoroutine(ShowThrowItemAnimation(Resources.Load<Sprite>("Icons/splash-yellow"), targetActor, Vector3.one));
+          StartCoroutine(ShowThrowItemAnimation("splash-yellow", targetActor, Vector3.one));
         }
         yield return new WaitForSeconds(1.5f);
         break;
@@ -384,12 +384,13 @@ public class Actor2D : MonoBehaviour {
   }
 
   public IEnumerator UseItemAnimation(Actor2D destiny, Item item) {
-    yield return ShowThrowItemAnimation(item.sprite, destiny, new Vector3(0.08f, 0.08f, 0.08f));
+    yield return ShowThrowItemAnimation(item.spriteName, destiny, new Vector3(0.08f, 0.08f, 0.08f));
   }
 
   public void DefendActionAnimation() {
     GameObject particlePrefab = BattleController.instance.defenseActionParticlePrefab;
     Vector3 particlePrefabPos = particlePrefab.transform.localPosition;
+
     VsnAudioManager.instance.PlaySfx("buff_default");
     GameObject newParticle = Instantiate(particlePrefab, transform);
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
@@ -639,14 +640,24 @@ public class Actor2D : MonoBehaviour {
     newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
   }
 
-  public IEnumerator ShowThrowItemAnimation(Sprite itemSprite, Actor2D targetPerson, Vector3 scale) {
-    GameObject particlePrefab = BattleController.instance.itemParticlePrefab;
-    GameObject newParticle = Instantiate(particlePrefab, transform);
-    newParticle.transform.SetParent(newParticle.transform.parent.parent);
+  public IEnumerator ShowThrowItemAnimation(string itemName, Actor2D targetPerson, Vector3 scale) {
+    GameObject particlePrefab = Resources.Load<GameObject>("Projectiles/" + itemName);
+    GameObject newParticle;
 
-    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.renderers[0].transform.position.x, particlePrefab.transform.position.y, particlePrefab.transform.position.z);
-    newParticle.GetComponent<SpriteRenderer>().sprite = itemSprite;
-    newParticle.transform.localScale = scale;
+    if(particlePrefab != null) {
+      newParticle = Instantiate(particlePrefab, transform);
+      newParticle.transform.SetParent(newParticle.transform.parent.parent);
+    } else {
+      particlePrefab = BattleController.instance.itemParticlePrefab;
+      newParticle = Instantiate(particlePrefab, transform);
+      Sprite itemSprite = Resources.Load<Sprite>("Icons/" + itemName);
+      newParticle.GetComponent<SpriteRenderer>().sprite = itemSprite;
+      newParticle.transform.SetParent(newParticle.transform.parent.parent);
+      newParticle.transform.localScale = scale;
+    }
+    //newParticle.transform.SetParent(newParticle.transform.parent.parent);
+
+    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.renderers[0].transform.position.x, particlePrefab.transform.position.y, targetPerson.renderers[0].transform.position.z);
 
     yield return new WaitForSeconds(1.5f);
   }

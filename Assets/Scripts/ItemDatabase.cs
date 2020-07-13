@@ -43,8 +43,7 @@ public class ItemDatabase : MonoBehaviour {
       newItem.healSp = int.Parse(entry["heal sp"]);
 
       newItem.price = int.Parse(entry["price"]);
-      //newItem.sprite = ResourcesManager.instance.itemSprites[int.Parse(entry["sprite_id"])];
-      newItem.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
+      newItem.spriteName = entry["sprite"];
       newItem.sells_in_store = int.Parse(entry["sells_in_store"]);
       newItem.tags = Utils.SeparateTags(entry["tags"]);
       database.Add(newItem);

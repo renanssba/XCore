@@ -46,7 +46,7 @@ public class ItemUI : MonoBehaviour {
 
     nameText.text = item.GetPrintableName() + name_suffix;
     descriptionText.text = item.GetPrintableDescription() +" "+ item.GetBattleDescription() + description_suffix;
-    typeImage.sprite = item.sprite;
+    typeImage.sprite = item.GetSprite();
 
     if(interactionType == ItemInteractionType.store_buy) {
       costText.text = "<sprite=\"Attributes\" index=4>" + item.price.ToString();

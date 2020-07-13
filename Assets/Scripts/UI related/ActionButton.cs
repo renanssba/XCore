@@ -112,7 +112,7 @@ public class ActionButton : MonoBehaviour {
     nameText.text = item.GetPrintableName();
 
     /// icon
-    iconImage.sprite = item.sprite;
+    iconImage.sprite = item.GetSprite();
     iconImage.color = Color.white;
 
     /// quantity
