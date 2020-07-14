@@ -46,14 +46,13 @@ actor_animator_parameter enemy "Battle" true
 actor_animator_parameter enemy "Intro"
 wait 0.5
 screenshake 1.5 2
-
 wait 2.5
 
 
 actor_move enemy "grid_2" 5
+screenshake 0.5 2
+move_camera -1.2 1.1 -4 3
 fade_out 4 "#1A2B66"
-
-//wait 3
 
 wait 0.5
 
@@ -72,6 +71,10 @@ wait 0.5
 actor_face main "right"
 wait 0.5
 say "char_name/daniel" "date_enemies/boss_beatrice/say_13"
+
+move_camera "battle_view" 1
+wait 1.3
+
 say "date_enemies/boss_beatrice/char_name_1" "date_enemies/boss_beatrice/say_14"
 
 say "char_name/beatrice" "date_enemies/boss_beatrice/say_15"
