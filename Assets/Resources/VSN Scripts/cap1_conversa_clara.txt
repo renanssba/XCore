@@ -392,6 +392,33 @@ end_script
 
 
 waypoint date_end_3
+
+say "char_name/none" "date_enemies/boss_claire/say_64"
+fade_out 1
+dialog_style "normal"
+say "char_name/fertiliel" "date_enemies/boss_claire/say_65"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "char_name/none" "date_enemies/boss_claire/say_66"
+fade_in 1
+
+say "char_name/daniel" "date_enemies/boss_claire/say_67"
+say "char_name/claire" "date_enemies/boss_claire/say_68"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "char_name/daniel" "date_enemies/boss_claire/say_69"
+say "char_name/claire" "date_enemies/boss_claire/say_70"
+
+say "char_name/daniel" "date_enemies/boss_claire/say_71"
+say "char_name/claire" "date_enemies/boss_claire/say_72"
+wait 1
+play_music "romance_intro" "romance_loop"
+wait 1
+
 // say "Daniel" "Aqui, Clara. Esse é um bom local pra estender a toalha."
 // say "Clara" "Eba!!! Piquenique! Piquenique!"
 // fade_out 0.5
@@ -415,7 +442,7 @@ say "cap1_conversa_clara/say_227"
 say "char_name/none" "cap1_conversa_clara/say_228"
 say "char_name/claire" "cap1_conversa_clara/say_229"
 say "char_name/daniel" "cap1_conversa_clara/say_230"
-say "cap1_conversa_clara/say_231"
+say "char_name/none" "cap1_conversa_clara/say_231"
 
 say "char_name/none" "cap1_conversa_clara/say_232"
 end_script

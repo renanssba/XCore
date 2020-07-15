@@ -237,29 +237,4 @@ say "char_name/none" "date_enemies/boss_beatrice/say_61"
 actor_animator_parameter main "Battle" false
 actor_animator_parameter support "Battle" false
 wait 1
-
-say "char_name/none" "date_enemies/boss_beatrice/say_62"
-fade_out 1
-dialog_style "normal"
-say "char_name/fertiliel" "date_enemies/boss_beatrice/say_63"
-wait 1
-full_heal_party
-dialog_style "faded_screen_message"
-say "char_name/none" "date_enemies/boss_beatrice/say_64"
-fade_in 1
-
-say "char_name/daniel" "date_enemies/boss_beatrice/say_65"
-say "char_name/beatrice" "date_enemies/boss_beatrice/say_66"
-
-wait 0.5
-actor_face main "left"
-wait 0.5
-
-say "char_name/daniel" "date_enemies/boss_beatrice/say_67"
-say "char_name/beatrice" "date_enemies/boss_beatrice/say_68"
-
-say "char_name/daniel" "date_enemies/boss_beatrice/say_69"
-say "char_name/beatrice" "date_enemies/boss_beatrice/say_70"
-wait 1
 end_script
-

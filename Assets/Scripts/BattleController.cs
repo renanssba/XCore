@@ -1080,7 +1080,7 @@ public class BattleController : MonoBehaviour {
       case 3:
         dateLength = 4;
         currentDateLocation = DateLocation.park;
-        dateEnemies = new Enemy[] { GetEnemyByString("photographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[12 + GlobalData.instance.CurrentGirl().id] };
+        dateEnemies = new Enemy[] { GetEnemyByString("photographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[9 + GlobalData.instance.CurrentGirl().id] };
         //GenerateDateEnemies();
         break;
       default:

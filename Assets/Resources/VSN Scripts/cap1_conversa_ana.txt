@@ -366,6 +366,33 @@ end_script
 
 
 waypoint date_end_3
+
+say "char_name/none" "date_enemies/boss_anna/say_60"
+fade_out 1
+dialog_style "normal"
+say "char_name/fertiliel" "date_enemies/boss_anna/say_61"
+wait 1
+full_heal_party
+dialog_style "faded_screen_message"
+say "char_name/none" "date_enemies/boss_anna/say_62"
+fade_in 1
+
+say "char_name/daniel" "date_enemies/boss_anna/say_63"
+say "char_name/anna" "date_enemies/boss_anna/say_64"
+
+wait 0.5
+actor_face main "left"
+wait 0.5
+
+say "char_name/daniel" "date_enemies/boss_anna/say_65"
+say "char_name/anna" "date_enemies/boss_anna/say_66"
+
+say "char_name/daniel" "date_enemies/boss_anna/say_67"
+say "char_name/anna" "date_enemies/boss_anna/say_68"
+wait 1
+play_music "romance_intro" "romance_loop"
+wait 1
+
 // say "Daniel" "Ufa! Chegamos. Que trabalheira, hein."
 // say "Ana" "Hahaha, foi divertido. Agora se prepare pra jogar comigo!"
 // fade_out 0.5
