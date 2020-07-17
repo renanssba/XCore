@@ -491,12 +491,12 @@ public class Actor2D : MonoBehaviour {
       float currentTintPower = materialProperties.GetFloat("_FlashAmount");
       Color currentColor = materialProperties.GetColor("_FlashColor");
 
-      Debug.Log("Initial tint values. Color: " + currentColor+", amount: "+ currentTintPower);
+      //Debug.Log("Initial tint values. Color: " + currentColor+", amount: "+ currentTintPower);
 
       DOTween.To(() => currentColor, y => currentColor = y, finalColor, animTime);
 
       DOTween.To(() => currentTintPower, x => currentTintPower = x, finalTint, animTime).OnUpdate(() => {
-        Debug.Log("New tint values. Color: " + currentColor + ", amount: " + currentTintPower);
+        //Debug.Log("New tint values. Color: " + currentColor + ", amount: " + currentTintPower);
         currentRenderer.GetPropertyBlock(materialProperties);
         materialProperties.SetFloat("_FlashAmount", currentTintPower);
         materialProperties.SetColor("_FlashColor", currentColor);

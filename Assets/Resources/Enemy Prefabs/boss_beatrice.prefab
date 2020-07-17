@@ -46,7 +46,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &1085662033868168
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 198156395074197172}
   - component: {fileID: 199987565599594424}
   m_Layer: 0
-  m_Name: Dark Fire Aura
+  m_Name: Black Smoke Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,6 @@ Transform:
   m_Children:
   - {fileID: 4269119412868268}
   - {fileID: 4518594763575644}
-  - {fileID: 4089898826866290}
   - {fileID: 4296427697960288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -269,8 +268,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4080751957273680}
-  m_RootOrder: 2
+  m_Father: {fileID: 4518594763575644}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4105177016414354
 Transform:
@@ -338,7 +337,7 @@ Transform:
   - {fileID: 224144107962110868}
   - {fileID: 4228495213121040}
   m_Father: {fileID: 4080751957273680}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4518594763575644
 Transform:
@@ -353,6 +352,7 @@ Transform:
   - {fileID: 4082326708162826}
   - {fileID: 4088692586513666}
   - {fileID: 4105177016414354}
+  - {fileID: 4089898826866290}
   m_Father: {fileID: 4080751957273680}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -680,7 +680,12 @@ MonoBehaviour:
     appearSfxName: 
     maxHp: 0
     hp: 0
-    attackSfxName: 
+    baseAttackSkin:
+      name: 
+      sfxName: 
+      animation: 0
+      animationArgument: 
+      projectilePrefab: {fileID: 0}
     activeSkillLogics: []
     customEvents: []
     passiveSkills: 

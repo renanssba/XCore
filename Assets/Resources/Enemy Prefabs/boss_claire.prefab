@@ -13,7 +13,7 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1077015936656600
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198897969054837322}
   - component: {fileID: 199697032340756728}
   m_Layer: 0
-  m_Name: Dark Fire Aura
+  m_Name: Black Smoke Aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,6 @@ Transform:
   m_Children:
   - {fileID: 4977704897951964}
   - {fileID: 4839471025536082}
-  - {fileID: 4805335542917664}
   - {fileID: 4493533510090570}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -285,7 +284,7 @@ Transform:
   - {fileID: 224266715279730142}
   - {fileID: 4011601540268864}
   m_Father: {fileID: 4209459339884280}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4668081598445854
 Transform:
@@ -334,11 +333,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1077015936656600}
   m_LocalRotation: {x: -3.3819326e-19, y: 6.501858e-10, z: -5.2014865e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.12346206, z: 0}
+  m_LocalScale: {x: 1.0168896, y: 0.98769647, z: 1}
   m_Children: []
-  m_Father: {fileID: 4209459339884280}
-  m_RootOrder: 2
+  m_Father: {fileID: 4839471025536082}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4839471025536082
 Transform:
@@ -353,6 +352,7 @@ Transform:
   - {fileID: 4759810932749824}
   - {fileID: 4228419028748970}
   - {fileID: 4668081598445854}
+  - {fileID: 4805335542917664}
   m_Father: {fileID: 4209459339884280}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -670,7 +670,12 @@ MonoBehaviour:
     appearSfxName: challenge_default
     maxHp: 70
     hp: 70
-    attackSfxName: hit_default
+    baseAttackSkin:
+      name: 
+      sfxName: 
+      animation: 0
+      animationArgument: 
+      projectilePrefab: {fileID: 0}
     activeSkillLogics: []
     customEvents: []
     passiveSkills: 

@@ -2,7 +2,14 @@
 if #currentRelationshipHeartLocksOpened >= 3
   set_var game_has_ended 1
   set_screen "hide_all"
-  goto_script "fertiliel_enter"
+  //goto_script "fertiliel_enter"
+  
+  wait 0.5
+  actor_animator_parameter angel "Battle" true
+  actor_animator_parameter angel "Attacking" true
+  wait 0.5
+  move_camera -2.83 1.18 -0.71 2
+  wait 2
 
   say "char_name/fertiliel" "check_end_game/say_0"
   say "char_name/none" "check_end_game/say_1"
