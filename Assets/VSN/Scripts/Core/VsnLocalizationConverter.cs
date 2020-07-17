@@ -40,9 +40,10 @@ public class VsnLocalizationConverter : MonoBehaviour {
       "shout",
       "strike",
       "motivate",
+      "complain",
       "think",
       "argue",
-      "hack",
+      "insult",
       "improvise",
       "bluff",
       "flatter",
@@ -50,8 +51,6 @@ public class VsnLocalizationConverter : MonoBehaviour {
       "soothe",
       "pose",
       "talk",
-      "insult",
-      "complain",
       "beg" };
 
 
