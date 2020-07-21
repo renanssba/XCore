@@ -82,7 +82,11 @@ say "char_name/none" "cap1_dia_festa/say_28"
 
 bg null
 goto_script "show_people_screen"
-play_music "intermission_intro" "intermission_loop"
+if daytime == 2
+	play_music "intermission_night_intro" "intermission_night_loop"
+else
+	play_music "intermission_intro" "intermission_loop"
+endif
 fade_in 1
 end_script
 

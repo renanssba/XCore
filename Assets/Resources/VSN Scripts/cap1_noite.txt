@@ -1,6 +1,6 @@
 ﻿if day == dia_festa_clara
   say "char_name/none" "cap1_noite/say_0"
-  play_music "intermission_intro" "intermission_loop"
+  play_music "intermission_night_intro" "intermission_night_loop"
   fade_in 1
   goto end
 endif
@@ -53,7 +53,7 @@ waypoint after_item_interaction
 set_var interacted_item_key item_key
 fade_out 0.5
 bg null
-play_music "intermission_intro" "intermission_loop"
+play_music "intermission_night_intro" "intermission_night_loop"
 fade_in 1
 
 if day == 1

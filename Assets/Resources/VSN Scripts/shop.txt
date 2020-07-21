@@ -151,5 +151,9 @@ char_reset_all
 bg null
 wait 0.5
 fade_in 0.7
-play_music "intermission_intro" "intermission_loop"
+if daytime == 2
+	play_music "intermission_night_intro" "intermission_night_loop"
+else
+	play_music "intermission_intro" "intermission_loop"
+endif
 

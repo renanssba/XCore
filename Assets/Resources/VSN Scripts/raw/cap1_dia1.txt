@@ -324,7 +324,11 @@ set_var battle_is_happening false
 fade_out 1
 bg null
 goto_script "show_people_screen"
-play_music "intermission_intro" "intermission_loop"
+if daytime == 2
+	play_music "intermission_night_intro" "intermission_night_loop"
+else
+	play_music "intermission_intro" "intermission_loop"
+endif
 wait 0.5
 fade_in 1
 
