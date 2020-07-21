@@ -285,6 +285,15 @@ public class GlobalData : MonoBehaviour {
     UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
   }
 
+  public AudioClip GetDialogSfxByName(string name) {
+    foreach(VsnCharacterData chara in ResourcesManager.instance.vsnCharacterData) {
+      if(name == Lean.Localization.LeanLocalization.GetTranslationText(chara.nameKey)) {
+        return chara.dialogSfx;
+      }
+    }
+    return null;
+  }
+
   public float GetPitchByName(string name) {
     foreach(VsnCharacterData chara in ResourcesManager.instance.vsnCharacterData) {
       if(name == Lean.Localization.LeanLocalization.GetTranslationText(chara.nameKey)) {

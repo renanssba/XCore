@@ -117,9 +117,11 @@ public class VsnUIManager : MonoBehaviour {
       vsnFaceIcon.transform.parent.gameObject.SetActive(true);
       vsnFaceIcon.sprite = GlobalData.instance.GetFaceByName(messageTitle);
       VsnAudioManager.instance.SetDialogSfxPitch(GlobalData.instance.GetPitchByName(messageTitle));
+      VsnAudioManager.instance.SetDialogSfx(GlobalData.instance.GetDialogSfxByName(messageTitle));
     } else {
       vsnFaceIcon.transform.parent.gameObject.SetActive(false);
       VsnAudioManager.instance.SetDialogSfxPitch(1f);
+      VsnAudioManager.instance.SetDialogSfx(null);
     }
   }
 

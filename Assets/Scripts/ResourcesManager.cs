@@ -31,6 +31,7 @@ public enum CharacterSpritePart {
 public class VsnCharacterData {
   public string nameKey;
   public Sprite faceSprite;
+  public AudioClip dialogSfx;
   public float pitch;
 }
 

@@ -10,7 +10,8 @@ public class VsnAudioManager : MonoBehaviour {
   public AudioSource dialogSfxSource;
   public PartialLoopPlayer musicPlayer;
   public AudioSource[] ambienceSources;
-  public AudioClip dialogSfx = null;
+  public AudioClip defaultDialogSfx = null;
+  public AudioClip currentDialogSfx = null;
   public AudioClip dialogAdvanceSfx = null;
   public float dialogSfxTime = 0.08f;
 
@@ -192,9 +193,19 @@ public class VsnAudioManager : MonoBehaviour {
     dialogSfxSource.pitch = pitch;
   }
 
+  public void SetDialogSfx(AudioClip clip) {
+    if(clip != null) {
+      Debug.LogWarning("Clip name: " + clip.name);
+      dialogSfxSource.Stop();
+      currentDialogSfx = clip;
+    } else {
+      currentDialogSfx = defaultDialogSfx;
+    }    
+  }
+
   public void PlayDialogSfx(){
-    if(dialogSfx != null){
-      dialogSfxSource.clip = dialogSfx;
+    if(defaultDialogSfx != null){
+      dialogSfxSource.clip = currentDialogSfx;
       dialogSfxSource.Play();
     }
   }
