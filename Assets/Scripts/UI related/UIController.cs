@@ -338,6 +338,10 @@ public class UIController : MonoBehaviour {
     }
   }
 
+  public void SetInteractionPinLocationName(int id, string locationName) {
+    interactionPins[id].SetLocation(locationName);
+  }
+
 
 
 

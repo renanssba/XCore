@@ -2,8 +2,15 @@
   goto *arg1
 endif
 
-goto_script "enter_observation" "living room"
-say "char_name/none" "cap1_conversa_clara/say_0"
+if daytime == 0
+  goto_script "enter_observation" "school classroom"
+  say "char_name/none" "cap1_conversa_clara/say_233"
+else
+  goto_script "enter_observation" "living room"
+  say "char_name/none" "cap1_conversa_clara/say_0"
+endif
+
+
 theater_setup main "person(daniel)" "grid_3" support "person(claire)" "out_left"
 move_camera "girl_interaction" 0
 actor_face main "left"
@@ -81,6 +88,7 @@ if #currentRelationshipLevel == 0
   actor_face main "left"
   actor_move main "grid_3" 1.5
   //say "" "Daniel sorri e se dirige até a cozinha para preparar a refeição."
+  set_var conhece_clara true
   say "cap1_conversa_clara/say_25"
   say "char_name/daniel" "cap1_conversa_clara/say_26"
   say "char_name/none" "cap1_conversa_clara/say_27"
@@ -323,70 +331,77 @@ say "char_name/daniel" "cap1_conversa_clara/say_156"
 say "char_name/claire" "cap1_conversa_clara/say_157"
 fade_out 0.5
 full_heal_party
-say "char_name/none" "cap1_conversa_clara/say_158"
-fade_in 0.5
 
-say "char_name/daniel" "cap1_conversa_clara/say_159"
-say "char_name/claire" "cap1_conversa_clara/say_160"
-say "cap1_conversa_clara/say_161"
-say "char_name/daniel" "cap1_conversa_clara/say_162"
-say "char_name/claire" "cap1_conversa_clara/say_163"
-say "char_name/daniel" "cap1_conversa_clara/say_164"
-say "char_name/claire" "cap1_conversa_clara/say_165"
+/// become lovers dialog
+if #currentRelationshipHeartLocksOpened < 2
+  say "char_name/none" "cap1_conversa_clara/say_158"
+  fade_in 0.5
 
-fade_music 0 1.5
-wait 2
-play_music "sad1_intro" "sad1_loop"
+  say "char_name/daniel" "cap1_conversa_clara/say_159"
+  say "char_name/claire" "cap1_conversa_clara/say_160"
+  say "cap1_conversa_clara/say_161"
+  say "char_name/daniel" "cap1_conversa_clara/say_162"
+  say "char_name/claire" "cap1_conversa_clara/say_163"
+  say "char_name/daniel" "cap1_conversa_clara/say_164"
+  say "char_name/claire" "cap1_conversa_clara/say_165"
 
-say "char_name/daniel" "cap1_conversa_clara/say_166"
-say "cap1_conversa_clara/say_167"
-say "char_name/claire" "cap1_conversa_clara/say_168"
-say "char_name/daniel" "cap1_conversa_clara/say_169"
-say "char_name/claire" "cap1_conversa_clara/say_170"
-say "char_name/daniel" "cap1_conversa_clara/say_171"
-say "char_name/claire" "cap1_conversa_clara/say_172"
-wait 1
-say "cap1_conversa_clara/say_173"
-say "cap1_conversa_clara/say_174"
-say "char_name/daniel" "cap1_conversa_clara/say_175"
-say "cap1_conversa_clara/say_176"
-say "char_name/claire" "cap1_conversa_clara/say_177"
-say "char_name/daniel" "cap1_conversa_clara/say_178"
-say "cap1_conversa_clara/say_179"
-say "char_name/claire" "cap1_conversa_clara/say_180"
-say "char_name/daniel" "cap1_conversa_clara/say_181"
-say "cap1_conversa_clara/say_182"
-say "cap1_conversa_clara/say_183"
-say "cap1_conversa_clara/say_184"
-say "char_name/none" "cap1_conversa_clara/say_185"
-say "char_name/claire" "cap1_conversa_clara/say_186"
-say "cap1_conversa_clara/say_187"
-say "cap1_conversa_clara/say_188"
-say "char_name/daniel" "cap1_conversa_clara/say_189"
-say "char_name/claire" "cap1_conversa_clara/say_190"
-say "cap1_conversa_clara/say_191"
-say "cap1_conversa_clara/say_192"
-say "char_name/daniel" "cap1_conversa_clara/say_193"
-say "cap1_conversa_clara/say_194"
-say "cap1_conversa_clara/say_195"
-say "char_name/claire" "cap1_conversa_clara/say_196"
-say "char_name/daniel" "cap1_conversa_clara/say_197"
-say "char_name/none" "cap1_conversa_clara/say_198"
-say "char_name/none" "cap1_conversa_clara/say_199"
-say "char_name/claire" "cap1_conversa_clara/say_200"
-say "char_name/daniel" "cap1_conversa_clara/say_201"
-say "char_name/claire" "cap1_conversa_clara/say_202"
-say "char_name/daniel" "cap1_conversa_clara/say_203"
-say "char_name/claire" "cap1_conversa_clara/say_204"
-say "char_name/daniel" "cap1_conversa_clara/say_205"
-say "char_name/claire" "cap1_conversa_clara/say_206"
-say "char_name/daniel" "cap1_conversa_clara/say_207"
-say "cap1_conversa_clara/say_208"
-say "char_name/claire" "cap1_conversa_clara/say_209"
-say "char_name/daniel" "cap1_conversa_clara/say_210"
-say "cap1_conversa_clara/say_211"
-say "char_name/claire" "cap1_conversa_clara/say_212"
-say "char_name/daniel" "cap1_conversa_clara/say_213"
+  fade_music 0 1.5
+  wait 2
+  play_music "sad1_intro" "sad1_loop"
+
+  say "char_name/daniel" "cap1_conversa_clara/say_166"
+  say "cap1_conversa_clara/say_167"
+  say "char_name/claire" "cap1_conversa_clara/say_168"
+  say "char_name/daniel" "cap1_conversa_clara/say_169"
+  say "char_name/claire" "cap1_conversa_clara/say_170"
+  say "char_name/daniel" "cap1_conversa_clara/say_171"
+  say "char_name/claire" "cap1_conversa_clara/say_172"
+  wait 1
+  say "cap1_conversa_clara/say_173"
+  say "cap1_conversa_clara/say_174"
+  say "char_name/daniel" "cap1_conversa_clara/say_175"
+  say "cap1_conversa_clara/say_176"
+  say "char_name/claire" "cap1_conversa_clara/say_177"
+  say "char_name/daniel" "cap1_conversa_clara/say_178"
+  say "cap1_conversa_clara/say_179"
+  say "char_name/claire" "cap1_conversa_clara/say_180"
+  say "char_name/daniel" "cap1_conversa_clara/say_181"
+  say "cap1_conversa_clara/say_182"
+  say "cap1_conversa_clara/say_183"
+  say "cap1_conversa_clara/say_184"
+  say "char_name/none" "cap1_conversa_clara/say_185"
+  say "char_name/claire" "cap1_conversa_clara/say_186"
+  say "cap1_conversa_clara/say_187"
+  say "cap1_conversa_clara/say_188"
+  say "char_name/daniel" "cap1_conversa_clara/say_189"
+  say "char_name/claire" "cap1_conversa_clara/say_190"
+  say "cap1_conversa_clara/say_191"
+  say "cap1_conversa_clara/say_192"
+  say "char_name/daniel" "cap1_conversa_clara/say_193"
+  say "cap1_conversa_clara/say_194"
+  say "cap1_conversa_clara/say_195"
+  say "char_name/claire" "cap1_conversa_clara/say_196"
+  say "char_name/daniel" "cap1_conversa_clara/say_197"
+  say "char_name/none" "cap1_conversa_clara/say_198"
+  say "char_name/none" "cap1_conversa_clara/say_199"
+  say "char_name/claire" "cap1_conversa_clara/say_200"
+  say "char_name/daniel" "cap1_conversa_clara/say_201"
+  say "char_name/claire" "cap1_conversa_clara/say_202"
+  say "char_name/daniel" "cap1_conversa_clara/say_203"
+  say "char_name/claire" "cap1_conversa_clara/say_204"
+  say "char_name/daniel" "cap1_conversa_clara/say_205"
+  say "char_name/claire" "cap1_conversa_clara/say_206"
+  say "char_name/daniel" "cap1_conversa_clara/say_207"
+  say "cap1_conversa_clara/say_208"
+  say "char_name/claire" "cap1_conversa_clara/say_209"
+  say "char_name/daniel" "cap1_conversa_clara/say_210"
+  say "cap1_conversa_clara/say_211"
+  say "char_name/claire" "cap1_conversa_clara/say_212"
+  say "char_name/daniel" "cap1_conversa_clara/say_213"
+else
+  say "char_name/none" "cap1_conversa_clara/say_234"
+  fade_in 0.5  
+endif
 end_script
 
 

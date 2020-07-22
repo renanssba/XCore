@@ -16,18 +16,13 @@ if daytime == 0
 endif
 set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_0"
 
-if day == 1
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
-endif
-if conhece_beatrice == true
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
+set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
+if conhece_beatrice == false
+  set_interaction_pin_sprite 1 "unknown" "cap1_interaction_pins/set_pin_location_1"
 endif
 
-set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_2"
-if day == 1
-  if daytime == 0
-    set_interaction_pin 2 false
-  endif
+if conhece_clara == true
+  set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_7"
 endif
 goto end
 

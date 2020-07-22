@@ -33,6 +33,10 @@ public class InteractionPin : MonoBehaviour {
     characterIcon.sprite = s;
   }
 
+  public void SetLocation(string locationName) {
+    descriptionText.text = locationName;
+  }
+
   public Person GetPerson() {
     if(charId <0 || charId > GlobalData.instance.people.Count-1) {
       return null;

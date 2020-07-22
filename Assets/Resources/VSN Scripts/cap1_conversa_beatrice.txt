@@ -99,10 +99,9 @@ if #currentRelationshipLevel == 0
   say "char_name/beatrice" "cap1_conversa_beatrice/say_36"
   add_exp false 2
   if daytime == 0
-      say "char_name/beatrice" "cap1_conversa_beatrice/say_37"
-  endif
-    if daytime == 1
-      say "char_name/beatrice" "cap1_conversa_beatrice/say_38"
+    say "char_name/beatrice" "cap1_conversa_beatrice/say_37"
+  else
+    say "char_name/beatrice" "cap1_conversa_beatrice/say_38"
   endif
   actor_face support "right"
   actor_move support "out_right" 2.5
@@ -480,35 +479,48 @@ end_script
 
 
 waypoint date_end_2
-say "char_name/none" "cap1_conversa_beatrice/say_273"
-say "char_name/none" "cap1_conversa_beatrice/say_274"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_275"
-say "char_name/daniel" "cap1_conversa_beatrice/say_276"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_277"
-fade_music 0 2.0
-say "char_name/daniel" "cap1_conversa_beatrice/say_278"
-say "char_name/none" "cap1_conversa_beatrice/say_279"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_280"
-say "char_name/daniel" "cap1_conversa_beatrice/say_281"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_282"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_283"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_284"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_285"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_286"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_287"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_288"
-say "char_name/daniel" "cap1_conversa_beatrice/say_289"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_290"
-say "char_name/daniel" "cap1_conversa_beatrice/say_291"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_292"
-say "char_name/none" "cap1_conversa_beatrice/say_293"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_294"
-say "char_name/none" "cap1_conversa_beatrice/say_295"
-say "char_name/daniel" "cap1_conversa_beatrice/say_296"
-play_music "observacao2"
-fade_music 1.0 5.0
-say "char_name/daniel" "cap1_conversa_beatrice/say_297"
-say "char_name/beatrice" "cap1_conversa_beatrice/say_298"
+fade_out 0.5
+full_heal_party
+
+/// become lovers dialog
+if #currentRelationshipHeartLocksOpened < 2
+  say "char_name/none" "cap1_conversa_beatrice/say_273"
+  say "char_name/none" "cap1_conversa_beatrice/say_274"
+  fade_in 0.5
+  
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_275"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_276"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_277"
+  fade_music 0 1.5
+  wait 2
+  
+  say "char_name/daniel" "cap1_conversa_beatrice/say_278"
+  
+  play_music "sad1_intro" "sad1_loop"  
+  say "char_name/none" "cap1_conversa_beatrice/say_279"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_280"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_281"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_282"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_283"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_284"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_285"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_286"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_287"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_288"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_289"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_290"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_291"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_292"
+  say "char_name/none" "cap1_conversa_beatrice/say_293"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_294"
+  say "char_name/none" "cap1_conversa_beatrice/say_295"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_296"
+  say "char_name/daniel" "cap1_conversa_beatrice/say_297"
+  say "char_name/beatrice" "cap1_conversa_beatrice/say_298"
+else
+  say "char_name/none" "cap1_conversa_beatrice/say_273"
+  fade_in 0.5
+endif
 end_script
 
 
