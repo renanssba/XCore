@@ -27,9 +27,9 @@ public class UIController : MonoBehaviour {
   public GameObject[] menuButtonAlertIcons;
 
   public ScreenTransitions datingPeoplePanel;
-  public Slider partyHpSlider;
+  public HpSlider partyHpSlider;
   public TextMeshProUGUI partyHpText;
-  public Slider enemyHpSlider;
+  public HpSlider enemyHpSlider;
   public TextMeshProUGUI enemyHpText;
   public Image[] stealthEyeIcons;
   public TextMeshProUGUI difficultyText;
@@ -104,8 +104,8 @@ public class UIController : MonoBehaviour {
       return;
     }
 
-    partyHpSlider.maxValue = BattleController.instance.maxHp;
-    partyHpSlider.value = BattleController.instance.hp;
+    partyHpSlider.SetMaxValue(BattleController.instance.maxHp);
+    partyHpSlider.SetSliderValueWithoutAnimation(BattleController.instance.hp);
     partyHpText.text = BattleController.instance.hp.ToString();
 
     for(int i=0; i<3; i++) {
@@ -130,19 +130,25 @@ public class UIController : MonoBehaviour {
 
 
   public void AnimatePartyHpChange(int initialHp, int finalHp) {
-    float currentShownHp = initialHp;
-    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
-      partyHpSlider.value = currentShownHp;
-      partyHpText.text = ((int)currentShownHp).ToString();
-    } );
+    partyHpSlider.SetSliderValue(finalHp);
+    partyHpText.text = finalHp.ToString();
+
+    //float currentShownHp = initialHp;
+    //DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
+    //  //partyHpSlider.value = currentShownHp;
+    //  partyHpText.text = ((int)currentShownHp).ToString();
+    //} );
   }
 
   public void AnimateEnemyHpChange(int initialHp, int finalHp) {
-    float currentShownHp = initialHp;
-    DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
-      enemyHpSlider.value = currentShownHp;
-      enemyHpText.text = ((int)currentShownHp).ToString();
-    } );
+    enemyHpSlider.SetSliderValue(finalHp);
+    enemyHpText.text = finalHp.ToString();
+
+    //float currentShownHp = initialHp;
+    //DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
+    //  //enemyHpSlider.value = currentShownHp;
+    //  enemyHpText.text = ((int)currentShownHp).ToString();
+    //} );
   }
 
   public void AnimateStealthValueChange(int previousValue, int currentValue) {

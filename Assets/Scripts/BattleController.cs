@@ -724,7 +724,7 @@ public class BattleController : MonoBehaviour {
         } else {
           targetActor.ShowDamageParticle(effectiveAttackDamage, -1f);
         }
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         targetActor.battler.TakeDamage(effectiveAttackDamage);
         yield return new WaitForSeconds(1f);

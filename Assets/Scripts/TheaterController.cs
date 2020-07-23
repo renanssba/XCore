@@ -518,7 +518,8 @@ public class TheaterController : MonoBehaviour {
   public void InitializeEnemyLevelAndHp() {
     Debug.LogWarning("Called InitializeChallengeLevelAndHp");
     Enemy enemy = BattleController.instance.GetCurrentEnemy();
-    UIController.instance.enemyHpSlider.maxValue = enemy.maxHp;
+    UIController.instance.enemyHpSlider.SetMaxValue(enemy.maxHp);
+    UIController.instance.enemyHpSlider.SetSliderValueWithoutAnimation(enemy.maxHp);
     UIController.instance.AnimateEnemyHpChange(enemy.maxHp, enemy.maxHp);
     UIController.instance.difficultyText.text = "<size=68>"+Lean.Localization.LeanLocalization.GetTranslationText("attribute/lvl") +" </size>" + enemy.level;
   }

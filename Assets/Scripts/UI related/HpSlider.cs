@@ -8,8 +8,8 @@ public class HpSlider : MonoBehaviour {
   public Slider backSlider;
   public Slider fillSlider;
 
-  public static Color healColor = Color.green;
-  public static Color damageColor = Color.red;
+  public static Color healColor = new Color(0f, 0.85f, 0f);
+  public static Color damageColor = new Color(0.8f, 0f, 0f);
 
   public float impactTime = 0.5f;
   public float currentTime;
@@ -24,6 +24,17 @@ public class HpSlider : MonoBehaviour {
     SetSliderValue(1f);
   }
 
+
+  public void SetMaxValue(float maxValue) {
+    fillSlider.maxValue = maxValue;
+    backSlider.maxValue = maxValue;
+  }
+
+  public void SetSliderValueWithoutAnimation(float value) {
+    fillSlider.value = value;
+    backSlider.value = value;
+    currentTime = 0f;
+  }
 
   public void SetSliderValue(float value) {
     initialValue = fillSlider.value;
