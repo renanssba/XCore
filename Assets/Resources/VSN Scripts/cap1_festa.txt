@@ -10,7 +10,7 @@ wait 1
 say "char_name/none" "cap1_festa/say_0"
 fade_music 0 1
 wait 1.5
-theater_bg "house afternoon"
+theater_bg "living room"
 theater_setup main "person(daniel)" "main"
 
 move_camera "main_and_enemy" 0
@@ -68,7 +68,7 @@ waypoint ir_ana
 set_current_couple 0
 fade_out 1.0
 wait 1.0
-theater_setup main "person(daniel)" "grid_5" anna "person(anna)" "grid_2" guy "valentao" "out_left" guy1 "valentao" "out_left" guy2 "valentao" "out_left"
+theater_setup main "person(daniel)" "grid_5" anna "person(anna)" "grid_2" guy "valentao_casual" "out_left" guy1 "valentao_casual" "out_left" guy2 "valentao_casual" "out_left"
 move_camera "girl_interaction" 0
 actor_move guy -1.7 0 -0.4 0
 actor_face main "left"
@@ -140,8 +140,13 @@ actor_move anna "grid_5" 1.2
 say "char_name/none" "cap1_festa/say_41"
 
 
-fade_out 1
-wait 1.2
+fade_music 0 2
+fade_out 2
+wait 2
+
+play_music "intermission_night_intro" "intermission_night_loop"
+wait 0.5
+
 theater_bg "claire house external"
 theater_setup main "person(daniel)" "out_left" anna "person(anna)" "out_left"
 move_camera "girl_interaction" 0
@@ -244,9 +249,11 @@ fade_out 1.0
 say "char_name/none" "cap1_festa/say_97"
 say "char_name/none" "cap1_festa/say_98"
 theater_bg "claire house external"
+
 fade_music 0.0 3.0
 play_ambience "ambience_night"
 fade_in 2.0
+
 say "char_name/daniel" "cap1_festa/say_99"
 say "char_name/beatrice" "cap1_festa/say_100"
 say "char_name/daniel" "cap1_festa/say_101"
@@ -283,11 +290,11 @@ waypoint ir_clara
 set_current_couple 2
 fade_out 1.0
 wait 1.0
-theater_setup main "person(daniel)" "out_left" claire "person(claire)" "grid_3" guy1 "valentao" "grid_4" guy2 "valentao" "grid_4"
+theater_setup main "person(daniel)" "out_left" claire "person(claire)" "grid_3" guy1 "valentao_casual" "grid_4" guy2 "valentao_casual" "grid_4"
 actor_move guy 0.07 0 -0.4 0
 actor_move guy2 -0.79 0 -0.34 0
 actor_face guy2 "right"
-move_camera -0.85 1.57 -4.5 0
+move_camera -0.85 1.1 -4.5 0
 actor_face main "right"
 fade_in 1.0
 actor_move main "grid_1" 1.5
@@ -295,7 +302,7 @@ wait 0.3
 
 say "char_name/none" "cap1_festa/say_121"
 say "cap1_festa/say_122"
-actor_move main -1.7 0.2 -0.4 1.5
+actor_move main -1.7 0 -0.4 1.5
 say "cap1_festa/say_123"
 say "char_name/daniel" "cap1_festa/say_124"
 say "char_name/none" "cap1_festa/say_125"
@@ -327,9 +334,11 @@ wait 0.5
 actor_move main "out_left" 2.5
 say "char_name/claire" "cap1_festa/say_140"
 say "char_name/none" "cap1_festa/say_141"
-fade_out 1.0
+
+fade_music 0 2
+fade_out 2
 say "cap1_festa/say_142"
-wait 2.5
+wait 1
 actor_move guy1 "out_right" 0
 actor_move guy2 "out_right" 0
 actor_move main "grid_2" 0
@@ -340,7 +349,7 @@ fade_music 0 1.5
 say "cap1_festa/say_143"
 play_music "sad1_intro" "sad1_loop"
 
-theater_bg "claire house external"
+theater_bg "bathroom-night"
 fade_in 1.0
 
 say "char_name/daniel" "cap1_festa/say_144"
@@ -383,7 +392,7 @@ say "char_name/claire" "cap1_festa/say_165"
 say "char_name/daniel" "cap1_festa/say_166"
 say "char_name/claire" "cap1_festa/say_167"
 say "char_name/none" "cap1_festa/say_168"
-actor_move claire -1.1 0.2 -0.4 1.0
+actor_move claire -1.1 0 -0.4 1.0
 wait 0.5
 say "char_name/none" "cap1_festa/say_169"
 say "char_name/claire" "cap1_festa/say_170"
@@ -413,12 +422,9 @@ add_exp false 15
 
 say "char_name/claire" "cap1_festa/say_187"
 say "cap1_festa/say_188"
-actor_move main -1.2 0.2 -0.4 1.0
-actor_move claire -1.0 0.2 -0.4 1.0
+actor_move main -1.2 0 -0.4 1.0
+actor_move claire -1.0 0 -0.4 1.0
 say "char_name/none" "cap1_festa/say_189"
-wait 1.0
-actor_move main -1.4 0.2 -0.4 1.0
-actor_move claire -0.9 0 -0.4 1.8
 goto end
 
 

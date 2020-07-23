@@ -193,7 +193,7 @@ goto depois_investigar
 
 waypoint clara_checar
 say "cap1_investigar/say_52"
-if passou_tempo_com_clara_hoje == 1
+if viu_clara_a_tarde_hoje == true
   say "cap1_investigar/say_53"
 else
   say "cap1_investigar/say_54"

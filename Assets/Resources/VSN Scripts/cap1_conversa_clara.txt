@@ -17,8 +17,8 @@ actor_face main "left"
 fade_in 1
 
 
-if daytime != 2
-  set_var passou_tempo_com_clara_hoje 1
+if daytime == 1
+  set_var viu_clara_a_tarde_hoje true
 endif
 
 

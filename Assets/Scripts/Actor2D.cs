@@ -100,7 +100,10 @@ public class Actor2D : MonoBehaviour {
   }
 
   public bool PersonShouldBeUsingUniform() {
-    return TheaterController.instance.bgRenderer.sprite.name.Contains("school"); //|| VsnSaveSystem.GetIntVariable("daytime") == 0;
+    if(TheaterController.instance.bgRenderer.sprite != null) {
+      return TheaterController.instance.bgRenderer.sprite.name.Contains("school");
+    }
+    return false; //|| VsnSaveSystem.GetIntVariable("daytime") == 0;
   }
 
   public void UpdateCharacterGraphics() {
