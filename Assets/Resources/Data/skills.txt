@@ -21,14 +21,14 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 19	healing_kiss	active	other_ally	2					16										heart-plus	projectile(talk heart)	skill_cast		
 20	magic_hug	active	other_ally	2								hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, weakened							charmed	active_support	skill_cast		
 21	satiety	passive	self									hunger, dirty, injured, dizzyness, confusion, sad, fear, angry, weakened				after_action	cured_status(hunger)	100	eating	passive	skill_cast		
-22	insecure	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none	skill_cast		
-23	impacient	passive	self										angry	100	3	turn_started	is_turn(4)	100	angry-eyes	passive	skill_cast		
-24	fearful	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive	skill_cast		
-25	full_appetite	passive	self										hunger	100	-1	turn_started	is_turn(3)	100	eating	passive	skill_cast		
+22	insecure	passive	self		damageTakenBonus	0.3	charisma												heart-minus	none	skill_cast	disadvantage	
+23	impacient	passive	self										angry	100	3	turn_started	is_turn(4)	100	angry-eyes	passive	skill_cast	disadvantage	
+24	fearful	passive	self										fear	100	3	enemy_appears	enemy_has_tag(human)	60	tears	passive	skill_cast	disadvantage	
+25	full_appetite	passive	self										hunger	100	-1	turn_started	is_turn(3)	100	eating	passive	skill_cast	disadvantage	
 26	proximity	passive	all_allies		raiseMaxHp	10													heart-plus	none	skill_cast		
 27	dedication	passive	all_allies		raiseMaxSp	2													skill-points	none	skill_cast		
 28	guardian_1	active	self	1									guardian	100					shield	active_support	skill_cast		
-29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive	skill_cast		
+29	analytical	passive	self										distracted	100	2	enemy_appears	enemy_has_tag(human)	60	magnifying glass	passive	skill_cast	disadvantage	
 30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none	skill_cast		
 31	strange_experiment	active	one_enemy	2									hunger, angry, dirty	25	3				random-experiment	throw_object(experiment)	skill_cast		
 32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	throw_object(experiment)	skill_cast		

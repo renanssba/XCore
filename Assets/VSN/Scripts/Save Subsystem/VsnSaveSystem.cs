@@ -221,6 +221,10 @@ public class VsnSaveSystem {
     return SaveHandler.GetSavedDictionary(saveSlot);
   }
 
+  public static void CleanAllData() {
+    savedDataDictionary = new Dictionary<string, string>();
+  }
+
   #endregion
 
   }

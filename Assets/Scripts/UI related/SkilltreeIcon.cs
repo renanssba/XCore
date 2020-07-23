@@ -25,11 +25,11 @@ public class SkilltreeIcon : MonoBehaviour {
 
     skillIcon.sprite = skill.sprite;
     if(relationship.skilltree.skills[skillId].isUnlocked) {
-      if(skillId == 3 || skillId == 7) {
-        bg.color = new Color(0.77f, 0.19f, 0.19f);
+      if(skill.HasTag("disadvantage")) {
+        bg.color = CoupleStatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
       } else {
         bg.color = Color.white;
-      }      
+      }
       skillIcon.gameObject.SetActive(true);
       skillIcon.color = Color.white;
       lockedIcon.SetActive(false);

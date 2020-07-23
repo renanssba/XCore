@@ -24,7 +24,9 @@ public class SkillButton : MonoBehaviour {
 
   public void UpdateUI() {
     if(skill != null) {
-      if(skill.type == SkillType.active || skill.type == SkillType.attack) {
+      if(skill.HasTag("disadvantage")) {
+        bg.color = CoupleStatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
+      } else if(skill.type == SkillType.active || skill.type == SkillType.attack) {
         bg.color = CoupleStatusScreen.instance.activeSkillButtonColor;
       } else {
         bg.color = CoupleStatusScreen.instance.passiveSkillButtonColor;

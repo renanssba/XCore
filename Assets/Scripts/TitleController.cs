@@ -10,6 +10,7 @@ public class TitleController : MonoBehaviour {
 
 
   void Start(){
+    VsnSaveSystem.CleanAllData();
     VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
     //if(PlayerPrefs.GetInt("initialized_language", 0) == 1) {
     //  // then language is already initialized
