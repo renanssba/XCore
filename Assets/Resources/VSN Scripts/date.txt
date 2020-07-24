@@ -181,7 +181,11 @@ if #currentDateId == 3
     goto skip_playing_song
   endif
 endif
-play_music "observacao2_intro" "observacao2_loop"
+if daytime == 0
+	play_music "observation_morning_intro" "observation_morning_loop"
+else
+	play_music "observation_afternoon_intro" "observation_afternoon_loop"
+endif
 
 waypoint skip_playing_song
 

@@ -37,7 +37,11 @@ if #currentRelationshipHeartLocksOpened >= 3
   //play_music "graciel_intro" "graciel_loop"
   wait 1
   bg "heaven"
-  play_music "observacao2_intro" "observacao2_loop"
+  if daytime == 0
+	play_music "observation_morning_intro" "observation_morning_loop"
+  else
+	play_music "observation_afternoon_intro" "observation_afternoon_loop"
+  endif
 
   char_reset_all
   character char_right "hardiel"

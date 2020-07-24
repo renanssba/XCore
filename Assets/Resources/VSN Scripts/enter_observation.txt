@@ -1,7 +1,11 @@
 ﻿fade_music 0 1
 fade_out 1
 wait 0.5
-play_music "observacao2_intro" "observacao2_loop"
+if daytime == 0
+	play_music "observation_morning_intro" "observation_morning_loop"
+else
+	play_music "observation_afternoon_intro" "observation_afternoon_loop"
+endif
 wait 0.5
 bg null
 theater_bg arg1

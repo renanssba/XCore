@@ -156,7 +156,11 @@ wait 0.5
 fade_music 0 1
 move_camera "close_shot" 1.5
 wait 2
-play_music "observacao2_intro" "observacao2_loop"
+if daytime == 0
+	play_music "observation_morning_intro" "observation_morning_loop"
+else
+	play_music "observation_afternoon_intro" "observation_afternoon_loop"
+endif
 wait 0.5
 if currentDateEvent == last_enemy
   goto advance_battle
