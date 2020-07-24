@@ -9,6 +9,7 @@ using TMPro;
 public class Actor2D : MonoBehaviour {
   public string actorReference;
   public SpriteRenderer[] renderers;
+  public SpriteRenderer[] dirtySplashRenderers;
   public SpriteRenderer[] buffAuraRenderers;
   public List<SpriteRenderer> overlays;
   public new ParticleSystem particleSystem;
@@ -95,7 +96,7 @@ public class Actor2D : MonoBehaviour {
         Debug.LogWarning("Updating clothing: casual");
       }
     } else if(battler.GetType() == typeof(Enemy)) {
-      // do nothing
+      UpdateDirtyStatusGraphics();
     }
   }
 
@@ -132,32 +133,36 @@ public class Actor2D : MonoBehaviour {
       } else {
         renderers[2].gameObject.SetActive(false);
       }
-      switch(battler.CurrentStatusConditionStacks("dirty")) {
-        case 0:
-          renderers[3].gameObject.SetActive(false);
-          renderers[4].gameObject.SetActive(false);
-          break;
-        case 1:
-          renderers[3].gameObject.SetActive(true);
-          renderers[4].gameObject.SetActive(false);
-          break;
-        case 2:
-          renderers[3].gameObject.SetActive(true);
-          renderers[4].gameObject.SetActive(true);
-          break;
-      }
+      UpdateDirtyStatusGraphics();
 
       /// position internal heart
       Vector2 pos = ResourcesManager.instance.heartPositionInActors[battler.id];
       renderers[renderers.Length - 1].transform.localPosition = new Vector3(pos.x, pos.y, 0f);
 
       if(GlobalData.instance.GetCurrentRelationship() != null) {
-        renderers[5].sprite = ResourcesManager.instance.heartlockSprites[GlobalData.instance.GetCurrentRelationship().heartLocksOpened];
+        renderers[renderers.Length - 1].sprite = ResourcesManager.instance.heartlockSprites[GlobalData.instance.GetCurrentRelationship().heartLocksOpened];
       }      
 
       SetAuraVisibility();
     } else {
       gameObject.SetActive(false);
+    }
+  }
+
+  public void UpdateDirtyStatusGraphics() {
+    switch(battler.CurrentStatusConditionStacks("dirty")) {
+      case 0:
+        dirtySplashRenderers[0].gameObject.SetActive(false);
+        dirtySplashRenderers[1].gameObject.SetActive(false);
+        break;
+      case 1:
+        dirtySplashRenderers[0].gameObject.SetActive(true);
+        dirtySplashRenderers[1].gameObject.SetActive(false);
+        break;
+      case 2:
+        dirtySplashRenderers[0].gameObject.SetActive(true);
+        dirtySplashRenderers[1].gameObject.SetActive(true);
+        break;
     }
   }
 
@@ -273,6 +278,9 @@ public class Actor2D : MonoBehaviour {
       //shadowRenderer.transform.localScale = Vector3.one;
     } else {
       renderers[0].sprite = LoadSprite("Enemies/" + spriteName);
+      if(renderers[0].GetComponent<SpriteMask>() != null) {
+        renderers[0].GetComponent<SpriteMask>().sprite = LoadSprite("Enemies/" + spriteName);
+      }
       renderers[0].flipX = false;
       renderers[1].gameObject.SetActive(false);
       shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);

@@ -192,11 +192,11 @@ public abstract class Battler {
   }
 
 
-  public void ReceiveStatusConditionBySkill(Skill usedSkill, int giveStatusPos) {
+  public void ReceiveStatusConditionBySkill(Skill usedSkill, string currentEffectStatusCondition) {
     StatusCondition newCondition;
 
     //Debug.LogWarning("Received skill: " + usedSkill.name);
-    newCondition = BattleController.instance.GetStatusConditionByName(usedSkill.givesConditionNames[giveStatusPos]);
+    newCondition = BattleController.instance.GetStatusConditionByName(currentEffectStatusCondition);
     newCondition = newCondition.GenerateClone();
     newCondition.duration = usedSkill.duration;
     if(newCondition.duration > 0) {

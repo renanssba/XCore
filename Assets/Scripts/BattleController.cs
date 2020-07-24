@@ -785,26 +785,29 @@ public class BattleController : MonoBehaviour {
       // chance to give status condition
       for(int i = 0; i < usedSkill.givesConditionNames.Length; i++) {
         int effectiveStatusConditionChance = usedSkill.giveStatusChance;
+        string[] statusConditionOptions = usedSkill.givesConditionNames[i].Split('|');
+        string selectedStatusCondition = statusConditionOptions[Random.Range(0, statusConditionOptions.Length)];
 
         if(targetActor.battler.IsDefending() && targetActor.battler.FightingSide() != skillUser.FightingSide()) {
           effectiveStatusConditionChance -= Mathf.Min(effectiveStatusConditionChance / 2, 30);
         }
-        effectiveStatusConditionChance -= targetActor.battler.StatusResistance(usedSkill.givesConditionNames[i]);
+        effectiveStatusConditionChance -= targetActor.battler.StatusResistance(selectedStatusCondition);
 
         Debug.LogWarning("effective Status Condition Chance: " + effectiveStatusConditionChance);
 
         if(effectiveStatusConditionChance <= 0) {
           targetActor.ShowImmuneConditionParticle();
+          yield return new WaitForSeconds(1f);
         } else if(Random.Range(0, 100) < effectiveStatusConditionChance) {
           VsnAudioManager.instance.PlaySfx("skill_activate_bad");
 
-          targetActor.battler.ReceiveStatusConditionBySkill(usedSkill, i);
-          StatusCondition statusCondition = GetStatusConditionByName(usedSkill.givesConditionNames[i]);
+          targetActor.battler.ReceiveStatusConditionBySkill(usedSkill, selectedStatusCondition);
+          StatusCondition statusCondition = GetStatusConditionByName(selectedStatusCondition);
           yield return ShowGetStatusConditionMessage(targetActor.battler.GetName(), statusCondition.GetPrintableName());
         } else {
           targetActor.ShowResistConditionParticle();
+          yield return new WaitForSeconds(1f);
         }
-        yield return new WaitForSeconds(1f);
       }
     }
 
@@ -915,11 +918,11 @@ public class BattleController : MonoBehaviour {
     Actor2D defendingActor = TheaterController.instance.GetActorByIdInParty(partyMemberId);
     Battler defender = defendingActor.battler;
 
-    yield return ShowDefendMessage();
     defendingActor.DefendActionAnimation();
+    yield return ShowDefendMessage();
 
     if(defender.CurrentSP() < defender.MaxSP()) {
-      yield return new WaitForSeconds(1f);
+      yield return new WaitForSeconds(0.2f);
       defender.HealSp(1);
       defendingActor.ShowHealSpParticle(1);
       yield return new WaitForSeconds(0.5f);
@@ -1349,6 +1352,7 @@ public class BattleController : MonoBehaviour {
       newSkill.animationSkin = new ActionSkin();
       newSkill.animationSkin.animation = GetSkillAnimationByString(entry["animation"]);
       newSkill.animationSkin.animationArgument = Utils.GetStringArgument(entry["animation"]);
+      newSkill.animationSkin.sfxName = entry["animation sfx"];
 
       newSkill.tags = Utils.SeparateTags(entry["tags"]);
 
