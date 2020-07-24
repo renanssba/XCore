@@ -1,52 +1,48 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 
-class DiskSaveHandler : IVsnSaveHandler {
+public class FileSaveHandler : IVsnSaveHandler {
 
-  private static readonly string savePrefix = "VSNSAVE";
+  private static readonly string savePrefix = "file_";
 
-  public static string GetSaveSlotPrefix(int saveSlot) {
-    return saveSlot + "_" + savePrefix;
+  public static string GetSaveFilesDirectoryPath() {
+    return Application.dataPath + "/../Save Files";
+  }
+
+  public static string GetSaveFileName(int saveSlot) {
+    return savePrefix + saveSlot + ".sav";
+  }
+
+  public static string GetFullSaveFilePath(int saveSlot) {
+    return GetSaveFilesDirectoryPath() + "/" + GetSaveFileName(saveSlot);
   }
 
   void IVsnSaveHandler.Save(Dictionary<string, string> dictionary, int saveSlot, Action<bool> callback) {
     bool success;
-    string saveString = GetSaveSlotPrefix(saveSlot);
 
     Dictionary<string, string> savedDictionary = dictionary;
     string savedVariables = GenerateSavedVariables(savedDictionary);
-    //savedDictionary = PrefixDictionary(dictionary, saveSlot);
     //Debug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
-    PlayerPrefs.SetString(GetSaveSlotPrefix(saveSlot), savedVariables);
-
-
-    /*
-		Debug.Log("JSON count: " + dictionary.Count);
-		finalJson = JsonUtility.ToJson(dictionary);
-		Debug.Log("Saved JSON: " + finalJson);
-		PlayerPrefs.SetString(saveString, finalJson);
-		*/
+    File.WriteAllText(GetFullSaveFilePath(saveSlot), savedVariables);
 
     success = true;
     callback(success);
   }
 
   void IVsnSaveHandler.Load(Dictionary<string, string> dictionary, int saveSlot, Action<Dictionary<string, string>> callback) {
-    string saveString = GetSaveSlotPrefix(saveSlot);
-    Dictionary<string, string> loadedDictionary = LoadSavedVariables(saveString);
+    Dictionary<string, string> loadedDictionary = LoadSavedVariables(saveSlot);
     callback(loadedDictionary);
   }
 
   bool IVsnSaveHandler.IsSaveSlotBusy(int saveSlot) {
-    string saveSlotName = GetSaveSlotPrefix(saveSlot);
-    return PlayerPrefs.HasKey(saveSlotName);
+    return File.Exists(GetFullSaveFilePath(saveSlot));
   }
 
   Dictionary<string, string> IVsnSaveHandler.GetSavedDictionary(int saveSlot) {
-    string saveString = GetSaveSlotPrefix(saveSlot);
-    return LoadSavedVariables(saveString);
+    return LoadSavedVariables(saveSlot);
   }
 
   /// <summary>
@@ -65,10 +61,10 @@ class DiskSaveHandler : IVsnSaveHandler {
     return savedVariables;
   }
 
-  Dictionary<string, string> LoadSavedVariables(string saveString) {
+  Dictionary<string, string> LoadSavedVariables(int saveSlot) {
     Dictionary<string, string> returnedDictionary = new Dictionary<string, string>();
 
-    string loadedVariables = PlayerPrefs.GetString(saveString, "");
+    string loadedVariables = File.ReadAllText(GetFullSaveFilePath(saveSlot));
 
     string[] separatedVariablePairs = loadedVariables.Split('@');
     foreach(string variablePair in separatedVariablePairs) {
@@ -100,4 +96,3 @@ class DiskSaveHandler : IVsnSaveHandler {
   }
 
 }
-

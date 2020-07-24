@@ -101,6 +101,7 @@ public class PostProcessBuild {
     }
     Directory.Move(builtExecutablePath.Substring(0, builtExecutablePath.Length-4)+"_Data", destinationPath+"/"+PlayerSettings.productName+"_Data");
     Directory.Move(builtDirectoryPath + "/Mono", destinationPath + "/Mono");
+    Directory.CreateDirectory(destinationPath + "/Save Files");
     Debug.Log("Renamed the build directory successfully!");
   }
 

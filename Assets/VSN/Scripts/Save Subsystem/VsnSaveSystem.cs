@@ -41,7 +41,7 @@ public class VsnSaveSystem {
 
   static VsnSaveSystem() {
     SaveSlot = 1;
-    SaveHandler = new DiskSaveHandler();
+    SaveHandler = new FileSaveHandler();
 
     savedDataDictionary = new Dictionary<string, string>();
   }
