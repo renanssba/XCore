@@ -20,7 +20,7 @@ public class RotateAroundTornado : MonoBehaviour {
       float toRotate = AngleToRotate(transform.localEulerAngles.y);
       child.localEulerAngles = new Vector3(0f, toRotate, 0f);
 
-      Debug.Log("rotation: "+ (PositiveAngle(transform.localEulerAngles.y) % 360f));
+      //Debug.Log("rotation: "+ (PositiveAngle(transform.localEulerAngles.y) % 360f));
 
       if(child.transform.position.z > transform.parent.position.z) {
         renderer.sortingOrder = -1;

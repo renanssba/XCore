@@ -150,6 +150,9 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void UpdateDirtyStatusGraphics() {
+    if(dirtySplashRenderers == null || dirtySplashRenderers.Length == 0) {
+      return;
+    }
     switch(battler.CurrentStatusConditionStacks("dirty")) {
       case 0:
         dirtySplashRenderers[0].gameObject.SetActive(false);
@@ -330,7 +333,7 @@ public class Actor2D : MonoBehaviour {
       case SkillAnimation.multi_throw:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         foreach(Actor2D targetActor in targetActors) {
-          StartCoroutine(ShowThrowItemAnimation("splash-yellow", targetActor, Vector3.one));
+          StartCoroutine(ShowThrowItemAnimation(actionSkin.animationArgument, targetActor, Vector3.one));
         }
         yield return new WaitForSeconds(1.5f);
         break;

@@ -47,7 +47,10 @@ public class RelationshipCard : MonoBehaviour {
       expText.text = "MAX";
     }
 
+    int currentCoupleId = GlobalData.instance.currentRelationshipId;
+    GlobalData.instance.currentRelationshipId = relationship.id;
     coupleNameText.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple"));
+    GlobalData.instance.currentRelationshipId = currentCoupleId;
     levelText.text = relationship.level.ToString();
     unusedBondPointIcon.SetActive(relationship.bondPoints > 0);
   }
