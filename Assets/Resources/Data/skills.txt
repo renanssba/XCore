@@ -45,7 +45,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 43	ectoplasm	active	all_enemies	2			charisma	4					dirty	100	4				dirty	multi_throw(splash-yellow)	skill_cast		
 44	indigestion	passive	all_enemies				charisma	4					dirty	100	4	after_action	was_attacked_for_damage, has_status_condition(digesting)	100	stomach-red	multi_throw(splash-yellow)	skill_cast		
 45	eating_cake	active	self	1					20			hunger	digesting	100	1				eating	throw_object(brown-cake)	skill_cast		
-46	big_curse	active	all_enemies	2									weakened	100	3				weakened	throw_object(experiment)	skill_cast		
+46	big_curse	active	all_enemies	2									weakened	100	3				weakened	multi_throw(experiment)	skill_cast		
 47	sad_memories	active	one_enemy	2									sad, sad	100	4				tears	active_offensive	skill_cast		
 48	reflective_mirror	active	self	2									reflection	100	1				mirror-mirror	active_support	skill_cast		
 49	mystic_fire	active	one_enemy				intelligence	8											flame	active_offensive	skill_cast		

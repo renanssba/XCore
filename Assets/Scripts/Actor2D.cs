@@ -333,7 +333,7 @@ public class Actor2D : MonoBehaviour {
       case SkillAnimation.multi_throw:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         foreach(Actor2D targetActor in targetActors) {
-          StartCoroutine(ShowThrowItemAnimation(actionSkin.animationArgument, targetActor, Vector3.one));
+          StartCoroutine(ShowThrowItemAnimation(actionSkin.animationArgument, targetActor, new Vector3(0.08f, 0.08f, 0.08f)));
         }
         yield return new WaitForSeconds(1.5f);
         break;
