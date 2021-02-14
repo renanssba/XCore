@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using UnityEngine.EventSystems;
 using Command;
 using TMPro;
@@ -53,8 +54,8 @@ public class VsnUIManager : MonoBehaviour {
 
   public List<VsnCharacter> characters;
 
-  void Awake() {
-    if(instance == null) {
+  void Awake(){
+    if(instance == null){
       instance = this;
     }
 
@@ -63,20 +64,20 @@ public class VsnUIManager : MonoBehaviour {
   }
 
 
-  public static void SelectUiElement(GameObject toSelect) {
+  public static void SelectUiElement(GameObject toSelect){
     EventSystem.current.SetSelectedGameObject(toSelect);
   }
 
 
-  public void ShowDialogPanel(bool value) {
+  public void ShowDialogPanel(bool value){
     vsnMessagePanel.SetActive(value);
   }
 
-  public void ShowText(string msg) {
+  public void ShowText(string msg){
     ShowClickMessageIcon(false);
     Utils.SelectUiElement(screenButton.gameObject);
-    //if(!string.IsNullOrEmpty(vsnMessageTitle.text)) {
-    //  if(msg[0] == '(') {
+    //if(!string.IsNullOrEmpty(vsnMessageTitle.text)){
+    //  if(msg[0] == '('){
     //    vsnMessageText.text = "(" + msg.Substring(1, msg.Length - 2) + ")";
     //  } else {
     //    vsnMessageText.text = "\"" + msg + "\"";
@@ -92,13 +93,13 @@ public class VsnUIManager : MonoBehaviour {
   public void FinishShowingCharacters(){
     ShowClickMessageIcon(true);
     isTextAppearing = false;
-    if(consoleSimulator.autopass) {
+    if(consoleSimulator.autopass){
       AdvanceTextInput();
       consoleSimulator.autopass = false;
     }
   }
 
-  public void SetTextAuto() {
+  public void SetTextAuto(){
     consoleSimulator.SetAutoPassText();
   }
 
@@ -106,14 +107,14 @@ public class VsnUIManager : MonoBehaviour {
     clickMessageIcon.SetActive(value);
   }
 
-  public void SetTextTitle(string messageTitle) {
+  public void SetTextTitle(string messageTitle){
     vsnMessageTitle.text = messageTitle;
-    if(string.IsNullOrEmpty(messageTitle)) {
+    if(string.IsNullOrEmpty(messageTitle)){
       vsnMessageTitlePanel.gameObject.SetActive(false);
     } else {
       vsnMessageTitlePanel.gameObject.SetActive(true);
     }
-    if(GlobalData.instance.GetFaceByName(messageTitle) != null) {
+    if(GlobalData.instance.GetFaceByName(messageTitle) != null){
       vsnFaceIcon.transform.parent.gameObject.SetActive(true);
       vsnFaceIcon.sprite = GlobalData.instance.GetFaceByName(messageTitle);
       VsnAudioManager.instance.SetDialogSfxPitch(GlobalData.instance.GetPitchByName(messageTitle));
@@ -125,11 +126,11 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void AdvanceTextInput() {
-    if(isTextAppearing) {
+  public void AdvanceTextInput(){
+    if(isTextAppearing){
       isTextAppearing = false;
       consoleSimulator.FinishShowingCharacters();
-    } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH) {
+    } else if(VsnController.instance.state == ExecutionState.WAITINGTOUCH){
       VsnAudioManager.instance.PlayDialogAdvanceSfx();
 
       /// Log text
@@ -141,25 +142,40 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  private void AddChoiceButtonListener(Button button, string label) {
+  private void AddChoiceButtonListener(Button button, string label){
     button.onClick.RemoveAllListeners();
     button.onClick.AddListener(() => {
       string myLabel = label;
-      if(!string.IsNullOrEmpty(myLabel)) {
+      if(!string.IsNullOrEmpty(myLabel)){
         GotoCommand.StaticExecute(myLabel);
       }
       VsnAudioManager.instance.PlaySfx("ui_confirm");
       ShowChoicesPanel(false, 0);
       ShowDialogPanel(false);
+      AnalyticsEvent.Custom("choice_clicked", new Dictionary<string, object>
+      { { "choice", label} });
       VsnController.instance.state = ExecutionState.PLAYING;
     });
   }
 
-  public void ShowChoicesPanel(bool enable, int numberOfChoices) {
+  public void ClickedButton(string label){
+    string myLabel = label;
+    if(!string.IsNullOrEmpty(myLabel)){
+      GotoCommand.StaticExecute(myLabel);
+    }
+    VsnAudioManager.instance.PlaySfx("ui_confirm");
+    ShowChoicesPanel(false, 0);
+    ShowDialogPanel(false);
+    AnalyticsEvent.Custom("choice_clicked", new Dictionary<string, object>
+          { { "choice", label} });
+    VsnController.instance.state = ExecutionState.PLAYING;
+  }
+
+  public void ShowChoicesPanel(bool enable, int numberOfChoices){
     choicesPanel.SetActive(enable);
 
-    if(enable) {
-      for(int i = 0; i < choicesButtons.Length; i++) {
+    if(enable){
+      for(int i = 0; i < choicesButtons.Length; i++){
         bool willSetActive = (i < numberOfChoices);
         choicesButtons[i].gameObject.SetActive(willSetActive);
       }
@@ -169,14 +185,14 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void SetChoicesTexts(string[] choices) {
-    for(int i = 0; i < choices.Length; i++) {
+  public void SetChoicesTexts(string[] choices){
+    for(int i = 0; i < choices.Length; i++){
       choicesTexts[i].text = choices[i];
     }
   }
 
-  public void SetChoicesLabels(string[] labels) {
-    for(int i = 0; i < labels.Length; i++) {
+  public void SetChoicesLabels(string[] labels){
+    for(int i = 0; i < labels.Length; i++){
       AddChoiceButtonListener(choicesButtons[i], labels[i]);
     }
   }
@@ -197,15 +213,15 @@ public class VsnUIManager : MonoBehaviour {
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
-  public void SetCharacterSprite(string characterFilename, string characterLabel) {
+  public void SetCharacterSprite(string characterFilename, string characterLabel){
     Sprite characterSprite = Resources.Load<Sprite>("Characters/" + characterFilename);
-    if(characterSprite == null) {
+    if(characterSprite == null){
       Debug.LogError("Error loading " + characterFilename + " character sprite. Please check its path");
       return;
     }
 
-    foreach(VsnCharacter character in characters) {
-      if(character.label == characterLabel) {
+    foreach(VsnCharacter character in characters){
+      if(character.label == characterLabel){
         character.SetData(characterSprite, characterLabel);
         return;
       }
@@ -213,7 +229,7 @@ public class VsnUIManager : MonoBehaviour {
     CreateNewCharacter(characterSprite, characterFilename, characterLabel);
   }
 
-  public void CreateNewCharacter(Sprite characterSprite, string characterFilename, string characterLabel) {
+  public void CreateNewCharacter(Sprite characterSprite, string characterFilename, string characterLabel){
     GameObject vsnCharacterObject = Instantiate(vsnCharacterPrefab, charactersPanel.transform) as GameObject;
     vsnCharacterObject.transform.localScale = Vector3.one;
     VsnCharacter vsnCharacter = vsnCharacterObject.GetComponent<VsnCharacter>();
@@ -225,15 +241,15 @@ public class VsnUIManager : MonoBehaviour {
     characters.Add(vsnCharacter);
   }
 
-  public void MoveCharacterX(string characterLabel, float position, float duration) {
+  public void MoveCharacterX(string characterLabel, float position, float duration){
     float screenPosition = GetCharacterScreenPositionX(position);
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
     //Debug.LogWarning("Original pos: "+position+", final pos: " + screenPosition);
 
-    if(character != null) {
+    if(character != null){
       Vector2 newPosition = new Vector2(screenPosition, character.GetComponent<RectTransform>().anchoredPosition.y);
-      if(duration != 0) {
+      if(duration != 0){
         character.GetComponent<RectTransform>().DOAnchorPos(newPosition, duration);
       } else {
         character.GetComponent<RectTransform>().anchoredPosition = newPosition;
@@ -241,13 +257,13 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void MoveCharacterY(string characterLabel, float position, float duration) {
+  public void MoveCharacterY(string characterLabel, float position, float duration){
     float screenPosition = GetCharacterScreenPositionY(position);
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
-    if(character != null) {
+    if(character != null){
       Vector2 newPosition = new Vector2(character.GetComponent<RectTransform>().anchoredPosition.x, screenPosition);
-      if(duration != 0) {
+      if(duration != 0){
         character.GetComponent<RectTransform>().DOAnchorPos(newPosition, duration);
       } else {
         character.GetComponent<RectTransform>().anchoredPosition = newPosition;
@@ -256,12 +272,12 @@ public class VsnUIManager : MonoBehaviour {
 
   }
 
-  public void SetCharacterAlpha(string characterLabel, float alphaValue, float duration) {
+  public void SetCharacterAlpha(string characterLabel, float alphaValue, float duration){
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
-    if(character != null) {
+    if(character != null){
       Image characterImage = character.GetComponent<Image>();
-      if(duration != 0) {
+      if(duration != 0){
         characterImage.DOFade(alphaValue, duration);
       } else {
         characterImage.color = new Color(characterImage.color.r,
@@ -271,7 +287,7 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  private float GetCharacterScreenPositionX(float normalizedPositionX) {
+  private float GetCharacterScreenPositionX(float normalizedPositionX){
     float zeroPoint = -charactersPanel.rect.width/2f;
     float onePoint = charactersPanel.rect.width/2f;
     float totalSize = onePoint - zeroPoint;
@@ -280,7 +296,7 @@ public class VsnUIManager : MonoBehaviour {
     return finalPositionX;
   }
 
-  private float GetCharacterScreenPositionY(float normalizedPositionY) {
+  private float GetCharacterScreenPositionY(float normalizedPositionY){
     int maxPoint = 500;
     int minPoint = 200;
     int totalPoints = Mathf.Abs(maxPoint) + Mathf.Abs(minPoint);
@@ -295,16 +311,16 @@ public class VsnUIManager : MonoBehaviour {
     return finalPositionY;
   }
 
-  private VsnCharacter FindCharacterByLabel(string characterLabel) {
-    foreach(VsnCharacter character in characters) {
-      if(character.label == characterLabel) {
+  private VsnCharacter FindCharacterByLabel(string characterLabel){
+    foreach(VsnCharacter character in characters){
+      if(character.label == characterLabel){
         return character;
       }
     }
     return null;
   }
 
-  public void FlipCharacterSprite(string characterLabel) {
+  public void FlipCharacterSprite(string characterLabel){
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
     if(character == null){
@@ -316,16 +332,28 @@ public class VsnUIManager : MonoBehaviour {
     character.transform.localScale = new Vector3(localScale.x * -1f, localScale.y, localScale.z);
   }
 
+  public void ScaleCharacterSprite(string characterLabel, float scale){
+    VsnCharacter character = FindCharacterByLabel(characterLabel);
 
-  public void ResetAllCharacters() {
-    foreach(VsnCharacter character in characters) {
+    if(character == null){
+      Debug.LogError("Error scaling character " + characterLabel + ". Character not found with this label.");
+      return;
+    }
+
+    Vector3 multipliedScale = scale * character.transform.localScale;
+    character.transform.localScale = multipliedScale;
+  }
+
+
+  public void ResetAllCharacters(){
+    foreach(VsnCharacter character in characters){
       Destroy(character.gameObject);
     }
     characters.Clear();
   }
 
-  public void SetBackground(Sprite backgroundSprite) {
-    if(backgroundSprite != null) {
+  public void SetBackground(Sprite backgroundSprite){
+    if(backgroundSprite != null){
       backgroundImage.sprite = backgroundSprite;
       backgroundImage.gameObject.SetActive(true);
     } else {
@@ -333,7 +361,7 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void ResetBackground() {
+  public void ResetBackground(){
     backgroundImage.gameObject.SetActive(false);
   }
 
@@ -364,7 +392,7 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void OnTextInputConfirm() {
+  public void OnTextInputConfirm(){
     if(string.IsNullOrEmpty(textInputField.text)){
 //      SoundManager.PlayForbiddenSound();
       return;
@@ -377,10 +405,10 @@ public class VsnUIManager : MonoBehaviour {
     ShowTextInput(false);
   }
 
-  public void SetDialogBoxPosition(string position) {
+  public void SetDialogBoxPosition(string position){
     RectTransform rect = vsnMessageText.transform.parent.GetComponent<RectTransform>();
 
-    switch(position) {
+    switch(position){
       case "center":
         rect.anchoredPosition = Vector2.zero;
         break;
@@ -393,17 +421,17 @@ public class VsnUIManager : MonoBehaviour {
     }
   }
 
-  public void SetTextBaseColor(Color color) {
+  public void SetTextBaseColor(Color color){
     vsnMessageText.color = color;
   }
 
-  public void SetDialogBoxInvisible(bool isInvisible) {
-    foreach(Image img in dialogBoxImages) {
-      if(isInvisible) {
+  public void SetDialogBoxInvisible(bool isInvisible){
+    foreach(Image img in dialogBoxImages){
+      if(isInvisible){
         img.enabled = false;
       } else {
         img.enabled = true;
-      }      
+      }
     }
   }
 }

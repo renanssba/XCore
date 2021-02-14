@@ -98,23 +98,24 @@ if #currentRelationshipHeartLocksOpened >= 3
 
   say "char_name/none" "check_end_game/say_29"
   say "check_end_game/say_30"
-  say "check_end_game/say_31"
+  //say "check_end_game/say_31"
 
 
   waypoint social_media_links
-  choices "check_end_game/choices_0_0" link_discord "check_end_game/choices_0_1" link_twitter "check_end_game/choices_0_2" link_instagram "check_end_game/choices_0_3" end
+  // choices "check_end_game/choices_0_0" link_discord "check_end_game/choices_0_1" link_twitter "check_end_game/choices_0_2" link_instagram "check_end_game/choices_0_3" end
+  choices "check_end_game/choices_0_0" link_discord "check_end_game/choices_0_3" end
 
   waypoint link_discord
-  open_url "http://discord.link/fertiliel"
+  open_url "http://discord.gg/kJwM4UzVms"
   goto social_media_links
 
-  waypoint link_twitter
-  open_url "https://twitter.com/fertiliel"
-  goto social_media_links
+  // waypoint link_twitter
+  // open_url "https://twitter.com/fertiliel"
+  // goto social_media_links
 
-  waypoint link_instagram
-  open_url "https://www.instagram.com/fertiliel/"
-  goto social_media_links
+  // waypoint link_instagram
+  // open_url "https://www.instagram.com/fertiliel/"
+  // goto social_media_links
 
 
   waypoint end

@@ -41,12 +41,15 @@ public class VsnSaveSystem {
 
   static VsnSaveSystem() {
     SaveSlot = 1;
+  #if UNITY_WEBGL
+    SaveHandler = new WebGlSaveHandler();
+  #else
     SaveHandler = new FileSaveHandler();
-
+  #endif
     savedDataDictionary = new Dictionary<string, string>();
   }
 
-  #region Prefixes
+#region Prefixes
 
   static string GetVariableNumberPrefix(string key) {
     return varNumberPrefix + "_" + key;
@@ -60,9 +63,9 @@ public class VsnSaveSystem {
     return varStringPrefix + "_" + key;
   }
 
-  #endregion
+#endregion
 
-  #region Variables (sets, adds, gets)
+#region Variables (sets, adds, gets)
 
   public static void SetVariable(string key, int value) {
     SetVariable(key, (float)value);
@@ -192,9 +195,9 @@ public class VsnSaveSystem {
     return VsnArgType.numberArg;
   }
 
-  #endregion
+#endregion
 
-  #region save/load
+#region save/load
 
   public static void Save(int saveSlot) {		
     SaveHandler.Save(savedDataDictionary, saveSlot, (bool success) => {
@@ -225,6 +228,6 @@ public class VsnSaveSystem {
     savedDataDictionary = new Dictionary<string, string>();
   }
 
-  #endregion
+#endregion
 
   }

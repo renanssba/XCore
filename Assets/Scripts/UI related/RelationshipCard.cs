@@ -73,27 +73,30 @@ public class RelationshipCard : MonoBehaviour {
     VsnSaveSystem.SetVariable("previousLevel", relationship.level);
 
     if(relationship.level == 10) {
-      yield break;
-    }
+      //yield break;
+      // dont raise exp if level is at max
+    } else {
+      VsnAudioManager.instance.PlayAmbience("experience_up");
+      for(int i = 0; i <= totalParts; i++) {
+        float part = ((float)i) / totalParts;
+        int currentExp = initiValue + (int)(part * actualRaise);
 
-    VsnAudioManager.instance.PlayAmbience("experience_up");
-    for(int i=0; i<=totalParts; i++) {
-      float part = ((float)i) / totalParts;
-      int currentExp = initiValue + (int)(part*actualRaise);
-
-      bool didLevelUp = relationship.GetExp(currentExp-relationship.exp);
-      UpdateUI();
-      if(didLevelUp) {
-        VsnAudioManager.instance.StopAmbience("experience_up");
-        VsnAudioManager.instance.PlaySfx("level_up");
-        HeartPulseAnimation();
-        yield return new WaitForSeconds(1.2f);
-        VsnAudioManager.instance.PlayAmbience("experience_up");
-      } else {
-        yield return new WaitForSeconds(0.01f);
+        bool didLevelUp = relationship.GetExp(currentExp - relationship.exp);
+        UpdateUI();
+        if(didLevelUp) {
+          VsnAudioManager.instance.StopAmbience("experience_up");
+          VsnAudioManager.instance.PlaySfx("level_up");
+          HeartPulseAnimation();
+          yield return new WaitForSeconds(1.2f);
+          VsnAudioManager.instance.PlayAmbience("experience_up");
+        } else {
+          yield return new WaitForSeconds(0.01f);
+        }
       }
+      VsnAudioManager.instance.StopAmbience("experience_up");
     }
-    VsnAudioManager.instance.StopAmbience("experience_up");
+
+    
     yield return new WaitForSeconds(1.3f);
 
     VsnController.instance.GotCustomInput();

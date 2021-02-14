@@ -7,6 +7,7 @@ public enum MenuTabs {
   status,
   inventory,
   system,
+  extras,
   none
 }
 
@@ -16,6 +17,7 @@ public class MenuController : MonoBehaviour {
   public CoupleStatusScreen coupleStatusScreen;
   public ItemSelectorScreen inventoryScreen;
   public SystemScreen systemScreen;
+  public ScreenTransitions extrasPanel;
 
   public ScreenTransitions myPanel;
 
@@ -69,6 +71,14 @@ public class MenuController : MonoBehaviour {
     BlockTabsNavigation(false);
   }
 
+  public void OpenMenuOnExtras() {
+    currentTab = MenuTabs.extras;
+    extrasPanel.OpenMenuScreen();
+    UpdateMenu();
+    VsnAudioManager.instance.PlaySfx("ui_menu_open");
+    BlockTabsNavigation(false);
+  }
+
 
   public void CloseOtherMenus() {
     tabsToggleGroup.SetAllTogglesOff();
@@ -78,6 +88,7 @@ public class MenuController : MonoBehaviour {
     inventoryScreen.screenTransition.gameObject.SetActive(false);
     systemScreen.basePanel.gameObject.SetActive(false);
     systemScreen.savePanel.gameObject.SetActive(false);
+    extrasPanel.gameObject.SetActive(false);
   }
 
   public void UpdateMenu() {
@@ -97,6 +108,9 @@ public class MenuController : MonoBehaviour {
       case MenuTabs.system:
         systemScreen.Initialize();
         systemScreen.basePanel.ShowPanel();
+        break;
+      case MenuTabs.extras:
+        extrasPanel.ShowPanel();
         break;
     }
   }
