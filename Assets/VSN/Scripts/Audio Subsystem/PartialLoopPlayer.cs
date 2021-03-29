@@ -16,6 +16,16 @@ public class PartialLoopPlayer : MonoBehaviour {
       StartPlaying();
   }
 
+#if UNITY_WEBGL
+  void Update() {
+    //    Debug.Log("Test. Loop is " + (loopSource.loop ? "true":"false") );
+    if (loopSource.clip != null && !loopSource.isPlaying && !introSource.isPlaying) {
+      Debug.Log("Loop is " + (loopSource.loop ? "true" : "false"));
+      loopSource.Play();
+    }
+  }
+#endif
+
 
   public void SetMusic(AudioClip intro, AudioClip loop) {
     StopPlaying();
