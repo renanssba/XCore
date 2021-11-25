@@ -1,0 +1,149 @@
+﻿fade_out 0
+play_music null null
+play_music "heaven_intro" "heaven_loop"
+wait 3
+bg "heaven"
+
+skip_button true end
+
+
+say "" "Cupid story introduction!"
+
+say "alpha_intro/say_0"
+say "alpha_intro/say_1"
+say "alpha_intro/say_2"
+say "char_name/none" "alpha_intro/say_3"
+
+character char_left "fertiliel"
+char_flip char_left
+char_move_x char_left 0.5 0
+fade_in 1
+
+//goto_script "fertiliel_enter" 0.25
+
+wait 0.5
+character char_left "fertiliel-tired"
+wait 0.5
+
+say "char_name/fertiliel" "alpha_intro/say_4"
+say "alpha_intro/say_5"
+say "alpha_intro/say_6"
+wait 0.3
+character char_left "fertiliel"
+wait 0.3
+say "alpha_intro/say_7"
+say "alpha_intro/say_8"
+say "alpha_intro/say_9"
+
+
+// fertiliel sai de cena
+wait 0.3
+char_move_x char_left 1.5 0.5
+wait 0.5
+
+fade_out 0.7
+wait 1
+
+char_reset_all
+character char_right "hardiel"
+char_move_x char_right 0.75
+
+fade_in 0.7
+
+// hardiel está na tela
+// fertiliel entra na cena
+goto_script "fertiliel_enter" 0.25
+wait 1
+
+say "char_name/fertiliel" "alpha_intro/say_10"
+say "char_name/hardiel" "alpha_intro/say_11"
+
+
+character char_left "fertiliel-tired"
+wait 0.5
+say "char_name/fertiliel" "alpha_intro/say_12"
+say "char_name/hardiel" "alpha_intro/say_13"
+
+character char_left "fertiliel"
+say "alpha_intro/say_14"
+say "alpha_intro/say_15"
+
+say "alpha_intro/say_16"
+
+
+character char_left "fertiliel-suspicious"
+say "char_name/fertiliel" "alpha_intro/say_17"
+
+say "char_name/hardiel" "alpha_intro/say_18"
+say "alpha_intro/say_19"
+say "alpha_intro/say_20"
+
+
+
+character char_left "fertiliel"
+say "char_name/fertiliel" "alpha_intro/say_21"
+
+say "char_name/hardiel" "alpha_intro/say_22"
+say "alpha_intro/say_23"
+say "alpha_intro/say_24"
+say "alpha_intro/say_25"
+say "char_name/fertiliel" "alpha_intro/say_26"
+
+say "char_name/hardiel" "alpha_intro/say_27"
+
+say "char_name/fertiliel" "alpha_intro/say_28"
+
+wait 0.5
+character char_left "fertiliel-suspicious"
+wait 0.5
+
+say "alpha_intro/say_29"
+
+
+// say "Fertiliel" "Ok, eu conheço as regras."
+// say "Hardiel" "Não custa nada repetir. Ainda mais pra alguém como você."
+// say "Fertiliel" "..."
+// say "Supervisora, vai ser um pouco difícil eu não ser vista por humanos e cumprir a missão com meus poderes limitados..."
+// say   "Devido aos poderes limitados da minha Meia-Auréola, eu não estou conseguindo ficar invisível nem voar direito."
+// say "Hardiel" "Infelizmente esta é uma limitação que cabe a você lidar. Não posso lhe conceder qualquer tratamento diferenciado por este motivo."
+
+
+// character char_left "fertiliel-tired"
+// say "Fertiliel" "(Droga...)"
+// say "Tudo bem, eu vou dar algum jeito."
+say "char_name/hardiel" "alpha_intro/say_30"
+character char_left "fertiliel"
+// TODO: show character card when it exists
+say "alpha_intro/say_31"
+//say "Lembre-se de que essa é sua última chance."
+
+character char_left "fertiliel"
+say "char_name/fertiliel" "alpha_intro/say_32"
+say "char_name/hardiel" "alpha_intro/say_33"
+say "char_name/fertiliel" "alpha_intro/say_34"
+say "char_name/hardiel" "alpha_intro/say_35"
+say "char_name/fertiliel" "alpha_intro/say_36"
+
+fade_out 1
+wait 1
+
+
+
+//hardiel mencionar as regras (pra fertiliel poder quebrar)
+
+
+fade_music 0 1
+fade_out 1
+
+waypoint end
+skip_button false
+fade_music 0 0
+fade_out 0
+char_reset_all
+bg null
+wait 1
+
+
+set_var day 1
+goto_script "select_daytime_interaction"
+
