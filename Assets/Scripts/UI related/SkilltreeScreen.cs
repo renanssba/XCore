@@ -32,10 +32,10 @@ public class SkilltreeScreen : MonoBehaviour {
 
 
   public void Initialize() {
-    lockedPathColor = new Color(0.92f, 0.5f, 0.52f);
-    unlockableSkillColor = new Color(0.6f, 0.42f, 0.42f);
-    unlockableIconColor = new Color(0f, 0f, 0f, 0.3f);
-    disadvantageSkillColor = new Color(0.77f, 0.19f, 0.19f);
+    //lockedPathColor = new Color(0.92f, 0.5f, 0.52f);
+    //unlockableSkillColor = new Color(0.6f, 0.42f, 0.42f);
+    //unlockableIconColor = new Color(0f, 0f, 0f, 0.3f);
+    //disadvantageSkillColor = new Color(0.77f, 0.19f, 0.19f);
     relationship = CoupleStatusScreen.instance.relationship;
     UpdateUI();
   }

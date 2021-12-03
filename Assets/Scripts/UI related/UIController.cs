@@ -95,7 +95,7 @@ public class UIController : MonoBehaviour {
     relationshipCardsPanel.sizeDelta = new Vector2(relationshipCardsPanel.sizeDelta.x, 18f+126f*relationshipCardsVisible);
 
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + VsnSaveSystem.GetIntVariable("day") +
-      " <size=50%>/" + VsnSaveSystem.GetIntVariable("max_days") + "</size>";
+      "<size=50%>/" + VsnSaveSystem.GetIntVariable("max_days") + "</size>";
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     daytimeIcon.sprite = ResourcesManager.instance.daytimeSprites[daytime];
     moneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
