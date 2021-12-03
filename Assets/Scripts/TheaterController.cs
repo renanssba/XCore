@@ -521,7 +521,7 @@ public class TheaterController : MonoBehaviour {
     UIController.instance.enemyHpSlider.SetMaxValue(enemy.maxHp);
     UIController.instance.enemyHpSlider.SetSliderValueWithoutAnimation(enemy.maxHp);
     UIController.instance.AnimateEnemyHpChange(enemy.maxHp, enemy.maxHp);
-    UIController.instance.difficultyText.text = "<size=68>"+Lean.Localization.LeanLocalization.GetTranslationText("attribute/lvl") +" </size>" + enemy.level;
+    UIController.instance.difficultyText.text = "<size=60>"+Lean.Localization.LeanLocalization.GetTranslationText("attribute/lvl") +" </size>" + enemy.level;
   }
 
   public void EnemyLeavesScene() {

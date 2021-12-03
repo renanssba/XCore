@@ -14,6 +14,9 @@ public class CharacterSpriteCollection {
   public Sprite casualClothes;
   public Sprite incompleteCasualClothes;
   public Sprite bruises;
+
+  [Header("Poses")]
+  public Sprite pose_punch;
 }
 
 public enum CharacterSpritePart {
@@ -23,7 +26,8 @@ public enum CharacterSpritePart {
   school,
   unclothed,
   casual,
-  bruises
+  bruises,
+  pose_punch
 }
 
 
@@ -84,6 +88,8 @@ public class ResourcesManager : MonoBehaviour {
         return col.schoolClothes;
       case CharacterSpritePart.bruises:
         return col.bruises;
+      case CharacterSpritePart.pose_punch:
+        return col.pose_punch;
       case CharacterSpritePart.casual:
       default:
         return col.casualClothes;
@@ -120,6 +126,9 @@ public class ResourcesManager : MonoBehaviour {
 
     spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
     spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
+
+    /// BATTLE POSES
+    spriteCollection.pose_punch = Resources.Load<Sprite>(characterSpritesPath + charName + "-soco");
 
     characterSpritesCollections.Add(spriteCollection);
     return;

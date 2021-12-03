@@ -13,7 +13,8 @@ namespace Command {
     }
 
     public static void StaticExecute(string styleName) {
-      VsnUIManager.instance.SetTextBaseColor(Color.white);
+      //VsnUIManager.instance.SetTextBaseColor(Color.white);
+      VsnUIManager.instance.SetTextBaseColor(new Color(0.22f, 0.38f, 0.65f));
       VsnUIManager.instance.SetDialogBoxInvisible(false);
 
       switch(styleName) {

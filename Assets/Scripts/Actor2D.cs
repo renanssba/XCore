@@ -100,6 +100,24 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
+  public void UpdateToSpecificPose(SkillAnimation animationPose) {
+    Debug.LogError("UpdateToSpecificPose. Person: " + actorReference+". to pose: "+animationPose.ToString());
+
+    if(actorReference == "enemy" || actorReference == "angel") {
+      return;
+    }
+
+    renderers[0].gameObject.SetActive(true);
+    renderers[1].gameObject.SetActive(false);
+
+    switch(animationPose) {
+      case SkillAnimation.attack:
+      case SkillAnimation.charged_attack:
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_punch);
+        break;
+    }
+  }
+
   public bool PersonShouldBeUsingUniform() {
     if(TheaterController.instance.bgRenderer.sprite != null) {
       return TheaterController.instance.bgRenderer.sprite.name.Contains("school");
@@ -120,6 +138,9 @@ public class Actor2D : MonoBehaviour {
     }
 
     if(!string.IsNullOrEmpty(battler.GetName())) {
+      renderers[0].gameObject.SetActive(true);
+      renderers[1].gameObject.SetActive(true);
+
       if(battler.CurrentStatusConditionStacks("sad") == 0) {
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.body);
       } else {
@@ -355,8 +376,10 @@ public class Actor2D : MonoBehaviour {
       case SkillAnimation.active_support:
       case SkillAnimation.long_charge:
       default:
+        UpdateToSpecificPose(SkillAnimation.attack);
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         yield return TackleAnimation();
+        UpdateGraphics();
         break;
     }
   }

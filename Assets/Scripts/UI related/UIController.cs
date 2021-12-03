@@ -10,10 +10,12 @@ public class UIController : MonoBehaviour {
 
   public TextMeshProUGUI titleText;
 
+  [Header("- UI and Daytime -")]
   public ScreenTransitions uiControllerPanel;
   public TextMeshProUGUI dayText;
   public Image daytimeIcon;
 
+  [Header("- Relationship Panels -")]
   public RectTransform relationshipCardsPanel;
   public RelationshipCard[] relationshipCards;
 
@@ -26,6 +28,7 @@ public class UIController : MonoBehaviour {
   public Button[] menuButtons;
   public GameObject[] menuButtonAlertIcons;
 
+  [Header("- Dating Panel -")]
   public ScreenTransitions datingPeoplePanel;
   public HpSlider partyHpSlider;
   public TextMeshProUGUI partyHpText;
@@ -44,13 +47,16 @@ public class UIController : MonoBehaviour {
   public ScreenTransitions datingPeopleInfoPanel;
   public PersonCard[] partyPeopleCards;
 
+  [Header("- Actions Panel -")]
   public ActionsPanel actionsPanel;
   public GameObject selectTargetPanel;
   public GameObject[] selectTargets;
 
+  [Header("- Help Panel -")]
   public ScreenTransitions helpMessagePanel;
   public TextMeshProUGUI helpMessageText;
 
+  [Header("- Map Panel -")]
   public ScreenTransitions interactionPinsBoard;
   public InteractionPin[] interactionPins;
 
@@ -118,7 +124,9 @@ public class UIController : MonoBehaviour {
     }
 
     // set HP slider width
-    partyHpSlider.transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().rect.width, 32f);
+    // TODO: update HP slider
+    //partyHpSlider.transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().rect.width, 32f);
+    
     //partyHpSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x, 32f);
     //partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x;
     //ShowDateProgressUI();

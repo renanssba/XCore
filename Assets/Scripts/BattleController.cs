@@ -81,7 +81,7 @@ public class BattleController : MonoBehaviour {
     //int currentTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
     //if(currentTurn == 2 && ActionsPanel.instance.skillsPanel.gameObject.activeSelf == true) {
     //  RemoveStealth(Time.deltaTime * stealthLostBySecond);
-    //}  
+    //}
   }
 
 
