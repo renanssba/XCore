@@ -14,7 +14,9 @@ public class CoupleStatusScreen : MonoBehaviour {
   public PersonCard[] personCards;
   public SkilltreeScreen skilltreeScreen;
 
+  [Header("- Skilltree Button -")]
   public Button skilltreeButton;
+  public Image skilltreeButtonShade;
   public GameObject unusedBondPointsIcon;
 
   public Color activeSkillButtonColor;
@@ -42,13 +44,15 @@ public class CoupleStatusScreen : MonoBehaviour {
     coupleHpText.text = relationship.GetMaxHp().ToString();
 
     if(BattleController.instance.IsBattleHappening()){
-      Utils.SetButtonDisabledGraphics(skilltreeButton);
+      skilltreeButtonShade.gameObject.SetActive(true);
       unusedBondPointsIcon.SetActive(false);
     } else {
-      Utils.SetButtonEnabledGraphics(skilltreeButton);
+      skilltreeButtonShade.gameObject.SetActive(false);
       unusedBondPointsIcon.SetActive(relationship.bondPoints != 0);
     }    
   }
+
+
 
   public void ClickRightCoupleButton() {
     int initialRelationship = relationship.id;

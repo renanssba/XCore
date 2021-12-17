@@ -143,7 +143,7 @@ public class Utils {
     st.pressedSprite = ResourcesManager.instance.buttonSprites[5];
     but.spriteState = st;
     but.GetComponent<Image>().sprite = ResourcesManager.instance.buttonSprites[3];
-    Debug.LogWarning("Setting ");
+    //Debug.LogWarning("Setting ");
   }
 
   public static void SetButtonEnabledGraphics(Button but) {
