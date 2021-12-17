@@ -31740,6 +31740,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1888074775840550
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4647490086392384}
+  - component: {fileID: 114419812373732700}
+  m_Layer: 0
+  m_Name: extras
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1888918976867466
 GameObject:
   m_ObjectHideFlags: 1
@@ -52670,6 +52686,7 @@ Transform:
   - {fileID: 4274687952346264}
   - {fileID: 4781486094528028}
   - {fileID: 4692775765012910}
+  - {fileID: 4647490086392384}
   m_Father: {fileID: 4630248921178718}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56512,6 +56529,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4985729325704876}
   m_RootOrder: 120
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4647490086392384
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1888074775840550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4518799374865116}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4647737517027204
 Transform:
@@ -81423,10 +81453,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: Sistema
+    Text: SISTEMA
     Object: {fileID: 0}
   - Language: English
-    Text: System
+    Text: SYSTEM
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -86517,10 +86547,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: Humanos
+    Text: HUMANOS
     Object: {fileID: 0}
   - Language: English
-    Text: Humans
+    Text: HUMANS
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -87077,6 +87107,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: Stop it, Spike! Leave Daniel alone.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114419812373732700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1888074775840550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: EXTRAS
+    Object: {fileID: 0}
+  - Language: English
+    Text: EXTRAS
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -110565,10 +110616,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "Invent\xE1rio"
+    Text: "INVENT\xC1RIO"
     Object: {fileID: 0}
   - Language: English
-    Text: Inventory
+    Text: INVENTORY
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
