@@ -17,6 +17,8 @@ public class CharacterSpriteCollection {
 
   [Header("Poses")]
   public Sprite pose_punch;
+  public Sprite pose_shout;
+  public Sprite pose_interact;
 }
 
 public enum CharacterSpritePart {
@@ -27,7 +29,9 @@ public enum CharacterSpritePart {
   unclothed,
   casual,
   bruises,
-  pose_punch
+  pose_punch,
+  pose_shout,
+  pose_interact
 }
 
 
@@ -90,6 +94,10 @@ public class ResourcesManager : MonoBehaviour {
         return col.bruises;
       case CharacterSpritePart.pose_punch:
         return col.pose_punch;
+      case CharacterSpritePart.pose_shout:
+        return col.pose_shout;
+      case CharacterSpritePart.pose_interact:
+        return col.pose_interact;
       case CharacterSpritePart.casual:
       default:
         return col.casualClothes;
