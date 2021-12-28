@@ -21,7 +21,7 @@ public class HpSlider : MonoBehaviour {
 
 
   public void Start() {
-    SetSliderValue(1f);
+    //SetSliderValue(1f);
   }
 
 
@@ -33,6 +33,7 @@ public class HpSlider : MonoBehaviour {
   public void SetSliderValueWithoutAnimation(float value) {
     fillSlider.value = value;
     backSlider.value = value;
+    //Debug.LogError("setting slider values to: " + value);
     currentTime = 0f;
   }
 

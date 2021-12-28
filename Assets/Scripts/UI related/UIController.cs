@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour {
   public HpSlider enemyHpSlider;
   public TextMeshProUGUI enemyHpText;
   public Image[] stealthEyeIcons;
-  public TextMeshProUGUI difficultyText;
+  public TextMeshProUGUI enemyLevelText;
 
   public ScreenTransitions dateProgressPanel;
   public TextMeshProUGUI dateTitleText;
