@@ -60,7 +60,7 @@ public class ActionsPanel : MonoBehaviour {
     }
 
     if (currentPartyMember == 0) {
-      baseActionButtons[4].SetActive(true);
+      baseActionButtons[4].SetActive(false);
       availableButtons.Add(baseActionButtons[4]);
       baseActionButtons[5].SetActive(false);
     } else {
