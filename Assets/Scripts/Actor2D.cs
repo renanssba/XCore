@@ -119,6 +119,10 @@ public class Actor2D : MonoBehaviour {
   }
 
   public bool PersonShouldBeUsingUniform() {
+    if(actorReference == "main" && battler != null && battler.nameKey == "anna") {
+      //Debug.LogError("MAIN BATTLER NAME: "+ battler.nameKey);
+      return false;
+    }
     if(TheaterController.instance.bgRenderer.sprite != null) {
       return TheaterController.instance.bgRenderer.sprite.name.Contains("school");
     }

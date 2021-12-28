@@ -36,15 +36,21 @@ public class ItemUI : MonoBehaviour {
 
   public void UpdateUI() {
     Item item = Item.GetItemById(itemListing.id);
+    string name_prefix = "";
     string name_suffix = "";
     string description_suffix = "";
     if(itemListing.ownerId != -1) {
       Person owner = GlobalData.instance.people[itemListing.ownerId];
-      name_suffix = " d" + (owner.isMale ? "o" : "a") + " " + owner.GetName();
-      description_suffix = " Pertence a " + owner.GetName() + ".";
+      name_prefix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_prefix").
+                            Replace("XXXXX", owner.GetName());
+      name_suffix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_suffix").
+                            Replace("XXXXX", owner.GetName());
+
+      description_suffix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/belongs_to").
+                            Replace("XXXXX", owner.GetName());
     }
 
-    nameText.text = item.GetPrintableName() + name_suffix;
+    nameText.text = name_prefix + item.GetPrintableName() + name_suffix;
     descriptionText.text = item.GetPrintableDescription() +" "+ item.GetBattleDescription() + description_suffix;
     typeImage.sprite = item.GetSprite();
 
