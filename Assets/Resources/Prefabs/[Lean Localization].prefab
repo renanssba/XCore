@@ -10154,6 +10154,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1292084567645974
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4988670798897676}
+  - component: {fileID: 114251053951418508}
+  m_Layer: 0
+  m_Name: belongs_to
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1294854319495770
 GameObject:
   m_ObjectHideFlags: 1
@@ -19942,6 +19958,22 @@ GameObject:
   - component: {fileID: 114055595622108592}
   m_Layer: 0
   m_Name: say_19
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1557077875950366
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4350811975982320}
+  - component: {fileID: 114334837523472738}
+  m_Layer: 0
+  m_Name: name_prefix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33735,6 +33767,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1950732056453478
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4145483979032274}
+  - component: {fileID: 114378147240019886}
+  m_Layer: 0
+  m_Name: name_suffix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1950783053799582
 GameObject:
   m_ObjectHideFlags: 1
@@ -40277,6 +40325,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4362017954388894}
   m_RootOrder: 59
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4145483979032274
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950732056453478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4689850354131656}
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4146467986627758
 Transform:
@@ -47117,6 +47178,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4330928014527098}
   m_RootOrder: 160
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4350811975982320
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557077875950366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4689850354131656}
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4350822836320172
 Transform:
@@ -57972,6 +58046,9 @@ Transform:
   - {fileID: 4089840494421580}
   - {fileID: 4337436963551938}
   - {fileID: 4236240772850146}
+  - {fileID: 4350811975982320}
+  - {fileID: 4145483979032274}
+  - {fileID: 4988670798897676}
   m_Father: {fileID: 4749322632731410}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66667,6 +66744,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4330928014527098}
   m_RootOrder: 199
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4988670798897676
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292084567645974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4689850354131656}
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4989916836646318
 Transform:
@@ -76488,7 +76578,7 @@ MonoBehaviour:
     Text: "A tristeza de \\vsn(target_name) machuca seu cora\xE7\xE3o."
     Object: {fileID: 0}
   - Language: English
-    Text: \vsn(target_name)'s sadness hurts your heart.
+    Text: \vsn(target_name)'s sadness hurts his/her heart.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -78683,6 +78773,27 @@ MonoBehaviour:
   - Language: English
     Text: The girl hands Daniel a box. He opens it carefully, expecting yet another
       insane experiment.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114251053951418508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292084567645974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: " Pertence \xE0 XXXXX."
+    Object: {fileID: 0}
+  - Language: English
+    Text: ' Belongs to XXXXX.'
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -82698,6 +82809,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114334837523472738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557077875950366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: 
+    Object: {fileID: 0}
+  - Language: English
+    Text: 'XXXXX''s '
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114335180637652354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85042,6 +85174,27 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: English
     Text: The salespeople leave frustrated.
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
+--- !u!114 &114378147240019886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950732056453478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: ' da XXXXX'
+    Object: {fileID: 0}
+  - Language: English
+    Text: 
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -102171,7 +102324,7 @@ MonoBehaviour:
     Text: \vsn(target_name) sente a dor do seu machucado.
     Object: {fileID: 0}
   - Language: English
-    Text: \vsn(target_name) feels the pain of your injury.
+    Text: \vsn(target_name) feels the pain of his/her injury.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -103767,7 +103920,7 @@ MonoBehaviour:
     Text: "Chegando no gin\xE1sio..."
     Object: {fileID: 0}
   - Language: English
-    Text: Arriving on the rooftop...
+    Text: Arriving on the gym...
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -106219,8 +106372,8 @@ MonoBehaviour:
       um lanche muito gostoso."
     Object: {fileID: 0}
   - Language: English
-    Text: Hey! Come and get something to eat with me on the rooftop during recess!
-      I brought a really tasty snack.
+    Text: Hey! Come and get something to eat with me on the gym during recess! I brought
+      a really tasty snack.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -111937,10 +112090,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: Siga a gente
+    Text: Siga a gente!
     Object: {fileID: 0}
   - Language: English
-    Text: Follow us
+    Text: Follow us!
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 

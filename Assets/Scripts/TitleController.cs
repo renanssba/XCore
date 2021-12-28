@@ -66,6 +66,14 @@ public class TitleController : MonoBehaviour {
     CloseLanguageSelectPanel();
   }
 
+  public void ClickLinkButton(GameObject newObj) {
+    string urlToLoad = newObj.GetComponent<Link>().url;
+    if(Application.platform == RuntimePlatform.WebGLPlayer) {
+      return;
+    }
+    Application.OpenURL(urlToLoad);
+  }
+
   public void ClickExit(){
     VsnAudioManager.instance.PlaySfx("ui_confirm");
     Application.Quit();
