@@ -4022,6 +4022,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1119476791027836
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4521391149491304}
+  - component: {fileID: 114482406705814268}
+  m_Layer: 0
+  m_Name: turns
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1119608296795322
 GameObject:
   m_ObjectHideFlags: 1
@@ -42917,6 +42933,7 @@ Transform:
   - {fileID: 4926892768255406}
   - {fileID: 4683755383235724}
   - {fileID: 4193498654612414}
+  - {fileID: 4521391149491304}
   m_Father: {fileID: 4630248921178718}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52880,6 +52897,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4208694400750592}
   m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4521391149491304
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119476791027836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4222227676718846}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4522176150961456
 Transform:
@@ -76792,14 +76822,14 @@ MonoBehaviour:
     Text: "    Depois do passeio no parque, Daniel e Ana come\xE7aram a namorar. Daniel
       fez faculdade de gastronomia e se tornou um grande padeiro. Ana tornou-se uma
       jogadora profissional de basquete, e entrou para o recorde como a jogadora mais
-      baixa da liga. Eles se casaram e tiveram 5 filhos, e adotaram um cachorro chamado
+      baixa da liga. Eles se casaram, tiveram 2 filhos e adotaram um cachorro chamado
       Torrada."
     Object: {fileID: 0}
   - Language: English
-    Text: After the walk in the park, Daniel and Anna started dating. Daniel attended
-      a cooking school and became a great baker. Anna became a professional basketball
-      player, currently holding the record for being the shortest player in the league.
-      They married, had 5 children, and adopted a dog called Toast.
+    Text: '    After the walk in the park, Daniel and Anna started dating. Daniel
+      attended a cooking school and became a great baker. Anna became a professional
+      basketball player, currently holding the record for being the shortest player
+      in the league. They married, had 2 children and adopted a dog called Toast.'
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -80625,12 +80655,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "(No entanto, quando eu uso um item, os humanos ficam desconfiados de que
-      h\xE1 algo estranho ocorrendo.)"
+    Text: "(Se eu intereferisse mais que isso, eles poderiam me perceber e eu falharia
+      na minha miss\xE3o.)"
     Object: {fileID: 0}
   - Language: English
-    Text: (However, whenever I use an item, humans will become suspicious that something
-      strange is happening.)
+    Text: (If I did interfere more than this, the humans could notice me and I'd fail
+      my mission.)
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -81631,12 +81661,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "(Observar n\xE3o ajuda os humanos diretamente, mas fecha um dos Indicadores
-      de Aten\xE7\xE3o.)"
+    Text: "(Observar n\xE3o ajuda os humanos diretamente, mas poupa os itens para
+      serem usados mais tarde.)"
     Object: {fileID: 0}
   - Language: English
-    Text: (Observing doesn't help the humans directly, but it will close one of the
-      Attention Indicators.)
+    Text: (Observing doesn't help the humans directly, but lets me save the items
+      for later.)
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -83491,13 +83521,13 @@ MonoBehaviour:
     Text: "    Depois do passeio no parque, Daniel e Beatrice come\xE7aram a namorar.
       Beatrice se tornou uma cientista e realizou grandes pesquisas na \xE1rea de
       bot\xE2nica. Daniel se tornou um grande cozinheiro e continuou sendo cobaia
-      dos experimentos malucos dela. Eles se casaram e tiveram 4 filhos."
+      dos experimentos malucos dela."
     Object: {fileID: 0}
   - Language: English
-    Text: After the walk in the park, Daniel and Beatrice started dating. Beatrice
+    Text: '    After the walk in the park, Daniel and Beatrice started dating. Beatrice
       became a scientist, carrying out important research in the field of botany.
-      Daniel became a great cook and continued to act as a guinea pig in his girlfriend's
-      insane experiments. They got married and had 4 children.
+      Daniel became a great cook and continued to act as a guinea pig in his girlfriend''s
+      insane experiments.'
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -84306,14 +84336,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\\qAttributes\\q index=0>Valentia, <sprite=\\qAttributes\\q index=1>Intelig\xEAncia
-      e <sprite=\\qAttributes\\q index=2>Carisma afetam o dano que o humano causa
-      com ataques baseados nestes atributos."
+    Text: "<sprite=\\qAttributes\\q index=0  tint=1>Valentia, <sprite=\\qAttributes\\q
+      index=1 tint=1>Intelig\xEAncia e <sprite=\\qAttributes\\q index=2 tint=1>Carisma
+      afetam o dano que o humano causa com ataques baseados nestes atributos."
     Object: {fileID: 0}
   - Language: English
-    Text: <sprite=\qAttributes\q index=0>Guts, <sprite=\qAttributes\q index=1>Intelligence,
-      and <sprite=\qAttributes\q index=2>Charisma affect the damage dealt by the human
-      with attacks based on these attributes.
+    Text: <sprite=\qAttributes\q index=0 tint=1>Guts, <sprite=\qAttributes\q index=1
+      tint=1>Intelligence, and <sprite=\qAttributes\q index=2 tint=1>Charisma affect
+      the damage dealt by the human with attacks based on these attributes.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -85957,8 +85987,8 @@ MonoBehaviour:
       n\xE3o precisam saber!"
     Object: {fileID: 0}
   - Language: English
-    Text: They won't let you? How cruel, I know much you love sweets. Come with me,
-      they don't need to know!
+    Text: They won't let you? How cruel, I know how much you love sweets. Come with
+      me, they don't need to know!
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -90018,6 +90048,27 @@ MonoBehaviour:
   - Language: Context / Notes
     Text: 
     Object: {fileID: 0}
+--- !u!114 &114482406705814268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1119476791027836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translations:
+  - Language: Portuguese
+    Text: turnos
+    Object: {fileID: 0}
+  - Language: English
+    Text: turns
+    Object: {fileID: 0}
+  - Language: Context / Notes
+    Text: 
+    Object: {fileID: 0}
 --- !u!114 &114483657120251772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92865,12 +92916,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "<sprite=\\qAttributes\\q index=3>Resist\xEAncia afeta a sua defesa. Quanto
-      maior ela for, menos dano o humano recebe de ataques."
+    Text: "<sprite=\\qAttributes\\q index=3 tint=1>Resist\xEAncia afeta a sua defesa.
+      Quanto maior ela for, menos dano o humano recebe de ataques."
     Object: {fileID: 0}
   - Language: English
-    Text: <sprite=\qAttributes\q index=3>Endurance affects their defense. The higher
-      it is, the less damage the human takes from attacks.
+    Text: <sprite=\qAttributes\q index=3 tint=1>Endurance affects their defense. The
+      higher it is, the less damage the human takes from attacks.
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 
@@ -96585,8 +96636,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translations:
   - Language: Portuguese
-    Text: "(Eu posso usar diferentes <color=#D73022>Itens</color> para a recuperar
-      os <color=#D73022><sprite=\\qhpANDsp\\q index=0 tint>PC</color>, <color=#D73022><sprite=\\qhpANDsp\\q
+    Text: "(Eu posso usar diferentes <color=#D73022>Itens</color> para recuperar os
+      <color=#D73022><sprite=\\qhpANDsp\\q index=0 tint>PC</color>, <color=#D73022><sprite=\\qhpANDsp\\q
       index=1 tint>PH</color> ou condi\xE7\xF5es dos humanos.)"
     Object: {fileID: 0}
   - Language: English
@@ -106530,14 +106581,13 @@ MonoBehaviour:
     Text: "    Depois do passeio no parque, Daniel e Clara come\xE7aram a namorar.
       Contrariando a vontade da sua fam\xEDlia, Clara n\xE3o se tornou uma diplomata.
       Ela ajudou Daniel a abrir um restaurante e tornou-se a administradora do neg\xF3cio.
-      Daniel se tornou um chef renomado. Eles se casaram e tornaram-se pais amorosos
-      de 6 filhos."
+      Daniel se tornou um chef renomado. Eles se casaram e foram muito felizes."
     Object: {fileID: 0}
   - Language: English
-    Text: After the walk in the park, Daniel and Claire started dating. Going against
-      her family's wishes, Claire did not become a diplomat. She helped Daniel open
-      a restaurant and became the restaurant's manager. Daniel became a famous chef.
-      They got married and became the loving parents of 6 children.
+    Text: '    After the walk in the park, Daniel and Claire started dating. Going
+      against her family''s wishes, Claire did not become a diplomat. She helped Daniel
+      open a restaurant and became the restaurant''s manager. Daniel became a famous
+      chef. They got married and lived very happily.'
     Object: {fileID: 0}
   - Language: Context / Notes
     Text: 

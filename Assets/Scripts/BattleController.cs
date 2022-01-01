@@ -306,7 +306,7 @@ public class BattleController : MonoBehaviour {
         }
         break;
       case TurnActionType.idle:
-        RecoverStealth(stealthRecoveredWhenIdle);
+        //RecoverStealth(stealthRecoveredWhenIdle);
         break;
     }
 
@@ -910,7 +910,8 @@ public class BattleController : MonoBehaviour {
     }
 
     // spend stealth bar
-    RemoveStealth(stealthLostWhenUsedItem);
+    //RemoveStealth(stealthLostWhenUsedItem);
+    VsnController.instance.state = ExecutionState.PLAYING;
   }
 
 
@@ -955,7 +956,7 @@ public class BattleController : MonoBehaviour {
 
     Actor2D angelActor = TheaterController.instance.angelActor;
 
-    RecoverStealth(maxStealth);
+    //RecoverStealth(maxStealth);
     angelActor.SetAttackMode(true);
     yield return new WaitForSeconds(0.5f);
 

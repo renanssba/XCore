@@ -29,7 +29,7 @@ namespace Command {
             break;
         }
       }
-      GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet);
+      GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet*10);
       VsnController.instance.WaitForCustomInput();
     }
 

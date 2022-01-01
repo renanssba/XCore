@@ -24,6 +24,7 @@ public class ActionButton : MonoBehaviour {
   public ItemListing itemListing;
 
   public TextMeshProUGUI nameText;
+  public Image spCostPanel;
   public TextMeshProUGUI spCostText;
   public Image iconImage;
   public Image improvementIconImage;
@@ -90,9 +91,11 @@ public class ActionButton : MonoBehaviour {
     /// SP cost
     if(skill.spCost > 0) {
       spCostText.text = Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp")+ ": " + skill.spCost;
-      spCostText.gameObject.SetActive(true);
+      //spCostText.gameObject.SetActive(true);
+      spCostPanel.gameObject.SetActive(true);
     } else {
-      spCostText.gameObject.SetActive(false);
+      //spCostText.gameObject.SetActive(false);
+      spCostPanel.gameObject.SetActive(false);
     }
 
     /// shade
@@ -117,7 +120,8 @@ public class ActionButton : MonoBehaviour {
 
     /// quantity
     spCostText.text = "x" + itemListing.amount;
-    spCostText.gameObject.SetActive(true);
+    //spCostText.gameObject.SetActive(true);
+    spCostPanel.gameObject.SetActive(true);
 
     /// shade
     shade.gameObject.SetActive(false);

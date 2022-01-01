@@ -70,7 +70,8 @@ public class StatusCondition {
       }
     }
     if(duration > 0) {
-      desc += "\n<color=#AAAA>(" + Mathf.Min(duration, maxDurationShowable) + " turnos)</color>";
+      desc += "\n<color=#AAAA>(" + Mathf.Min(duration, maxDurationShowable) + " "+
+        Lean.Localization.LeanLocalization.GetTranslationText("status_condition/turns") +")</color>";
     }
 
     return desc;

@@ -65,7 +65,7 @@ public class RelationshipCard : MonoBehaviour {
 
     Debug.Log("final Exp to add: " + expToAdd);
 
-    int finalValue = Mathf.Min(relationship.exp + expToAdd, 7220);
+    int finalValue = Mathf.Min(relationship.exp + expToAdd, 2880);
     int initiValue = relationship.exp;
     int actualRaise = finalValue - relationship.exp;
     const int totalParts = 100;
