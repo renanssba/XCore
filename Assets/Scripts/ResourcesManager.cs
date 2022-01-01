@@ -137,6 +137,8 @@ public class ResourcesManager : MonoBehaviour {
 
     /// BATTLE POSES
     spriteCollection.pose_punch = Resources.Load<Sprite>(characterSpritesPath + charName + "-soco");
+    spriteCollection.pose_shout = Resources.Load<Sprite>(characterSpritesPath + charName + "-gritando");
+    spriteCollection.pose_interact = Resources.Load<Sprite>(characterSpritesPath + charName + "-pegando_objeto");
 
     characterSpritesCollections.Add(spriteCollection);
     return;

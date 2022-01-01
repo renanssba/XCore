@@ -115,6 +115,12 @@ public class Actor2D : MonoBehaviour {
       case SkillAnimation.charged_attack:
         renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_punch);
         break;
+      case SkillAnimation.shout:
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_shout);
+        break;
+      case SkillAnimation.interact:
+        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_interact);
+        break;
     }
   }
 
@@ -371,19 +377,39 @@ public class Actor2D : MonoBehaviour {
 
       case SkillAnimation.projectile:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        if(actionSkin.animationArgument == "shout" ||
+           actionSkin.animationArgument == "talk insult") {
+          UpdateToSpecificPose(SkillAnimation.shout);
+        }
         yield return ProjectileAnimation(actionSkin);
+        UpdateGraphics();
+        break;
+
+
+      case SkillAnimation.interact:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        UpdateToSpecificPose(SkillAnimation.interact);
+        yield return TackleAnimation();
+        UpdateGraphics();
         break;
 
 
       case SkillAnimation.attack:
+      case SkillAnimation.charged_attack:
+        VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
+        UpdateToSpecificPose(SkillAnimation.attack);
+        yield return TackleAnimation();
+        UpdateGraphics();
+        break;
+
+
       case SkillAnimation.active_offensive:
       case SkillAnimation.active_support:
       case SkillAnimation.long_charge:
       default:
-        UpdateToSpecificPose(SkillAnimation.attack);
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         yield return TackleAnimation();
-        UpdateGraphics();
+        //UpdateGraphics();
         break;
     }
   }
