@@ -18,6 +18,18 @@ if #currentRelationshipHeartLocksOpened >= 3
   fade_music 0 0.5
   show_engagement
   fade_music 1 1
+  
+  if #currentGirlId == 1
+    get_achievement "GIRLFRIEND_ANNA"
+  endif
+  if #currentGirlId == 2
+    get_achievement "GIRLFRIEND_BEATRICE"
+  endif
+  if #currentGirlId == 3
+    get_achievement "GIRLFRIEND_CLAIRE"
+  endif
+  
+  
   say "char_name/none" "check_end_game/say_2"
 
   say "char_name/fertiliel" "check_end_game/say_3"

@@ -84,6 +84,10 @@ public class RelationshipCard : MonoBehaviour {
         bool didLevelUp = relationship.GetExp(currentExp - relationship.exp);
         UpdateUI();
         if(didLevelUp) {
+          if(relationship.level == 10) {
+            AchievementsController.ReceiveAchievement("MAX_LEVEL");
+          }
+
           VsnAudioManager.instance.StopAmbience("experience_up");
           VsnAudioManager.instance.PlaySfx("level_up");
           HeartPulseAnimation();

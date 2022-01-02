@@ -15,6 +15,10 @@ namespace Command {
         relation.skilltree.skills[skillToUnlock].isUnlocked = true;
         SfxManager.StaticPlayBigConfirmSfx();
 
+        if(skillToUnlock == 12) {
+          AchievementsController.ReceiveAchievement("SECRET_SKILL");
+        }
+
         VsnSaveSystem.SetVariable("skill_got", BattleController.instance.GetSkillById(relation.skilltree.skills[skillToUnlock].id).GetPrintableName() );
 
         VsnArgument[] sayArgs = new VsnArgument[2];
