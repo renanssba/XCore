@@ -76,6 +76,9 @@ public class GameController : MonoBehaviour {
       VsnSaveSystem.Load(1);
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    if(Input.GetKeyDown(KeyCode.F6) && Application.isEditor) {
+      AchievementsController.ResetAllAchievements();
+    }
     if(Input.GetKeyDown(KeyCode.D) && Input.GetKey(KeyCode.LeftShift)) {
       VsnController.instance.StartVSN("debug_menu");
     }

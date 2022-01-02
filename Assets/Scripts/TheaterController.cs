@@ -576,6 +576,13 @@ public class TheaterController : MonoBehaviour {
     mainActor.UpdateGraphics();
     supportActor.UpdateGraphics();
 
+    /// Check to receive achievement "womanizer"
+    if(GlobalData.instance.relationships[0].heartLocksOpened >= 2 &&
+       GlobalData.instance.relationships[1].heartLocksOpened >= 2 &&
+       GlobalData.instance.relationships[2].heartLocksOpened >= 2) {
+      AchievementsController.ReceiveAchievement("DATE_ALL_GIRLS");
+    }
+
     yield return new WaitForSeconds(1.5f);
 
     VsnArgument[] sayArgs = new VsnArgument[1];

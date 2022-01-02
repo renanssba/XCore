@@ -17,13 +17,6 @@ namespace Command {
         VsnController.instance.state = ExecutionState.WAITING;
         TheaterController.instance.StartCoroutine(TheaterController.instance.OpenHeartlockAnimation(levelToRaise));
       }
-
-      /// Check to receive achievement "womanizer"
-      if(GlobalData.instance.relationships[0].heartLocksOpened >= 2 &&
-         GlobalData.instance.relationships[1].heartLocksOpened >= 2 &&
-         GlobalData.instance.relationships[2].heartLocksOpened >= 2) {
-        AchievementsController.ReceiveAchievement("DATE_ALL_GIRLS");
-      }
     }
 
 

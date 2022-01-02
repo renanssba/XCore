@@ -137,6 +137,7 @@ waypoint vender_sim
 add_var money item_price
 update_ui
 play_sfx "ui_money"
+check_sell_wrong_item
 add_item item_id -1 false
 say "char_name/graciel" "shop/say_38"
 goto store_loop
