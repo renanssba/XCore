@@ -101,8 +101,6 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void UpdateToSpecificPose(SkillAnimation animationPose) {
-    Debug.LogError("UpdateToSpecificPose. Person: " + actorReference+". to pose: "+animationPose.ToString());
-
     if(actorReference == "enemy" || actorReference == "angel") {
       return;
     }

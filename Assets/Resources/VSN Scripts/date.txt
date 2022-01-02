@@ -227,6 +227,12 @@ endif
 waypoint win_date
 enable_input false
 //say "" "Depois de muitos percalços..."
+
+/// Check to unlock achievement
+if #currentDamageTaken == 0
+  get_achievement "PERFECT_DATE"
+endif
+
 goto_script "cap1_date_end"
 
 play_sfx "date_end"

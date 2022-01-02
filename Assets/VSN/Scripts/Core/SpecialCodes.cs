@@ -177,6 +177,8 @@ public class SpecialCodes {
         return (int)BattleController.instance.currentDateLocation;
       case "#currentHp":
         return BattleController.instance.hp;
+      case "#currentDamageTaken":
+        return BattleController.instance.maxHp - BattleController.instance.hp;
       case "#inventory_empty":
         return GlobalData.instance.people[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentGirlId":

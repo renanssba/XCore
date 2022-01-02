@@ -29,9 +29,13 @@ if #currentRelationshipHeartLocksOpened >= 3
     get_achievement "GIRLFRIEND_CLAIRE"
   endif
   
+  /// ACHIEVEMENTS
+  if shop_level == 0
+    get_achievement "NO_SHOPPING"
+  endif
+  
   
   say "char_name/none" "check_end_game/say_2"
-
   say "char_name/fertiliel" "check_end_game/say_3"
 
 

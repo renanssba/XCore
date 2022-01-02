@@ -39,7 +39,12 @@ namespace Command {
         goto end;
       }
 
+      if(relationship.heartLocksOpened >= 2 && selectedDialog == "fallback") {
+        AchievementsController.ReceiveAchievement("END_DIALOGUE");
+      }
+
       end:
+
       GotoCommand.StaticExecute("dialog_" + selectedDialog);
       return;
 
