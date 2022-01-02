@@ -10,6 +10,11 @@ endif
 
 if daytime == 2
   goto_script "cap1_late_night"
+  /// CHECK TO SEE IF ACHIEVEMENT SLEEP ALL DAY
+  if times_slept_today >= 3
+    get_achievement "SLEEP_ALL_DAY"
+  endif
+  set_var times_slept_today 0
 endif
 
 pass_time

@@ -22,6 +22,7 @@ public class AchievementsController : MonoBehaviour {
     SteamUserStats.RequestCurrentStats();
   }
 
+
   public static void ReceiveAchievement(string achievementName) {
     if(!SteamManager.Initialized) {
       Debug.LogError("SteamManager is not initialized");
@@ -41,6 +42,19 @@ public class AchievementsController : MonoBehaviour {
     SteamUserStats.SetAchievement("STAGE_"+stage);
     SteamUserStats.StoreStats();
   }
+
+  public static void StatProgress(string statName, int value) {
+    if(!SteamManager.Initialized) {
+      Debug.LogError("SteamManager is not initialized");
+      return;
+    }
+    Debug.LogWarning("Updating stat: " + statName + " in value: " + value);
+    SteamUserStats.SetStat(statName, value);
+    SteamUserStats.StoreStats();
+  }
+
+
+
 
   public static void ResetAchievement(int stage) {
     if(!SteamManager.Initialized) {
