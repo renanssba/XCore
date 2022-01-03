@@ -16,9 +16,9 @@ public class VsnLocalizationConverter : MonoBehaviour {
     string metaContent = "";
 
     commonCharNames = new Dictionary<string, string> {
-      { "Fertiliel", "char_name/fertiliel" },
+      { "Noelia", "char_name/fertiliel" },
       { "Graciel", "char_name/graciel" },
-      { "Hardiel", "char_name/hardiel" },
+      { "Sup. Hardwell", "char_name/hardiel" },
       { "\\boy", "char_name/boy" },
       { "\\girl", "char_name/girl" },
       { "", "char_name/none" },
