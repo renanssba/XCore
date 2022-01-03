@@ -243,6 +243,7 @@ say "char_name/none" "date/say_4"
 add_exp false exp_accumulated
 play_sfx "ui_money"
 add_var money money_accumulated
+stat_progress "MONEY_ACQUIRED" money_accumulated
 say "char_name/none" "date/say_5"
 
 if shop_unlock_advance == 0
@@ -275,6 +276,7 @@ if exp_accumulated > 0
   say "char_name/none" "date/say_10"
   add_exp false exp_accumulated
   add_var money money_accumulated
+  stat_progress "MONEY_ACQUIRED" money_accumulated
   play_sfx "ui_money"
   say "char_name/none" "date/say_11"
   set_var exp_accumulated 0

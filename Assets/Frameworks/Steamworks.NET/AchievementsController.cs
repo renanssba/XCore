@@ -48,8 +48,10 @@ public class AchievementsController : MonoBehaviour {
       Debug.LogError("SteamManager is not initialized");
       return;
     }
-    Debug.LogWarning("Updating stat: " + statName + " in value: " + value);
-    SteamUserStats.SetStat(statName, value);
+    Debug.LogWarning("Updating stat: " + statName + ". ading value: " + value);
+    int currentValue;
+    SteamUserStats.GetStat(statName, out currentValue);
+    SteamUserStats.SetStat(statName, currentValue + value);
     SteamUserStats.StoreStats();
   }
 

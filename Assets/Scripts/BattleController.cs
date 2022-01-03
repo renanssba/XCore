@@ -418,6 +418,7 @@ public class BattleController : MonoBehaviour {
         break;
       case TurnActionType.useItem:
         StartCoroutine(ExecuteUseItem(partyMemberId, selectedTargetPartyId[(int)partyMemberId], selectedItems[(int)partyMemberId]));
+        AchievementsController.StatProgress("ITEMS_USED", 1);
         break;
       case TurnActionType.defend:
         StartCoroutine(ExecuteDefend(partyMemberId));

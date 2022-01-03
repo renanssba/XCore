@@ -13,6 +13,7 @@ say "char_name/none" "part_time_job/say_1"
 update_ui
 play_sfx "ui_money"
 add_var money minigame_score
+stat_progress "MONEY_ACQUIRED" minigame_score
 say "char_name/none" "part_time_job/say_2"
 goto_script "pass_time"
 
