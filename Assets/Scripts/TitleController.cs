@@ -7,6 +7,7 @@ public class TitleController : MonoBehaviour {
   //public GameObject[] buttons;
   public ScreenTransitions loadPanel;
   public ScreenTransitions languageSelectPanel;
+  public Panel optionsPanel;
 
 
   void Start(){
@@ -40,6 +41,10 @@ public class TitleController : MonoBehaviour {
   public void ClickCloseContinueScreen() {
     SfxManager.StaticPlayCancelSfx();
     loadPanel.HidePanel();
+  }
+
+  public void ClickOptionsButton() {
+    optionsPanel.ShowPanel();
   }
 
   public void ClickToggleLanguageButton() {
