@@ -59,9 +59,9 @@ public class GameController : MonoBehaviour {
     GlobalData.instance.playtime += Time.deltaTime;
 
     /// CHEAT INPUTS
-    //if(!Application.isEditor) {
-    //  return;
-    //}
+    if(!Application.isEditor) {
+      return;
+    }
 
     if(Input.GetKeyDown(KeyCode.S)) {
       if(VsnUIManager.instance.skipButton.gameObject.activeSelf) {

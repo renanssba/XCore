@@ -1,7 +1,9 @@
 ﻿
 if #currentDateId == 2
-  set_var dia_festa_clara day
-  add_var dia_festa_clara 1
+  if dia_festa_clara == 0
+    set_var dia_festa_clara day
+    add_var dia_festa_clara 1
+  endif
 endif
 
 
