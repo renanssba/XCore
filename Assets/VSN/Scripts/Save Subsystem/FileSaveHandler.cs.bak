@@ -26,10 +26,6 @@ public class FileSaveHandler : IVsnSaveHandler {
     Dictionary<string, string> savedDictionary = dictionary;
     string savedVariables = GenerateSavedVariables(savedDictionary);
     //Debug.Log("Setting to playerprefs, string: " + GetSaveSlotPrefix(saveSlot) + ", value: " + savedVariables);
-    if(!Directory.Exists(GetSaveFilesDirectoryPath())) {
-      Directory.CreateDirectory(GetSaveFilesDirectoryPath());
-    }
-
     File.WriteAllText(GetFullSaveFilePath(saveSlot), savedVariables);
 
     success = true;

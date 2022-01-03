@@ -6,7 +6,7 @@ using TMPro;
 
 public class SystemScreen : MonoBehaviour {
 
-  public ScreenTransitions basePanel;
+  public Panel optionsPanel;
   public ScreenTransitions savePanel;
   public bool isInSaveMode = true;
 
@@ -36,7 +36,7 @@ public class SystemScreen : MonoBehaviour {
   }
 
   public void Update() {
-    playtimeText.text = Lean.Localization.LeanLocalization.GetTranslationText("system_screen/playtime") + "\n" + Utils.GetTimeFormattedAsString(GlobalData.instance.playtime / 60);
+    playtimeText.text = Lean.Localization.LeanLocalization.GetTranslationText("system_screen/playtime") + "    " + Utils.GetTimeFormattedAsString(GlobalData.instance.playtime / 60);
   }
 
 
@@ -49,7 +49,7 @@ public class SystemScreen : MonoBehaviour {
     saveLoadTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/title_save");
     isInSaveMode = true;
     SfxManager.StaticPlayConfirmSfx();
-    basePanel.HidePanel();
+    optionsPanel.HidePanel();
     savePanel.ShowPanel();
     MenuController.instance.BlockTabsNavigation(true);
   }
@@ -63,7 +63,7 @@ public class SystemScreen : MonoBehaviour {
     saveLoadTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("save_load_panel/title_load");
     isInSaveMode = false;
     SfxManager.StaticPlayConfirmSfx();
-    basePanel.HidePanel();
+    optionsPanel.HidePanel();
     savePanel.ShowPanel();
     MenuController.instance.BlockTabsNavigation(true);
   }
@@ -83,7 +83,7 @@ public class SystemScreen : MonoBehaviour {
   public void ClickCloseSavePanel() {
     SfxManager.StaticPlayCancelSfx();
     savePanel.HidePanel();
-    basePanel.ShowPanel();
+    optionsPanel.ShowPanel();
     MenuController.instance.BlockTabsNavigation(false);
   }
 

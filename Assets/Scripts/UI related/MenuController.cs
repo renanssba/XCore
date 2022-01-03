@@ -86,7 +86,7 @@ public class MenuController : MonoBehaviour {
     coupleStatusScreen.panel.gameObject.SetActive(false);
     coupleStatusScreen.skilltreeScreen.screenTransitions.gameObject.SetActive(false);
     inventoryScreen.screenTransition.gameObject.SetActive(false);
-    systemScreen.basePanel.gameObject.SetActive(false);
+    systemScreen.optionsPanel.gameObject.SetActive(false);
     systemScreen.savePanel.gameObject.SetActive(false);
     extrasPanel.gameObject.SetActive(false);
   }
@@ -107,7 +107,7 @@ public class MenuController : MonoBehaviour {
         break;
       case MenuTabs.system:
         systemScreen.Initialize();
-        systemScreen.basePanel.ShowPanel();
+        systemScreen.optionsPanel.ShowPanel();
         break;
       case MenuTabs.extras:
         extrasPanel.ShowPanel();
