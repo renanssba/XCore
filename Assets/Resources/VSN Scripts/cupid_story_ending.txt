@@ -1,4 +1,4 @@
-set_var game_has_ended 1
+﻿set_var game_has_ended 1
 set_screen "hide_all"
 //goto_script "fertiliel_enter"
 
@@ -9,7 +9,7 @@ wait 0.5
 move_camera -2.83 1.18 -0.71 2
 wait 2
 
-say "Noelia" "Deu certo! Acho que agora eles ficarão juntos!"
+say "char_name/fertiliel" "cupid_story_ending/say_0"
 // say "" "Noelia atira as Flechas do Amor Eterno!"
 
 // MARRYING ANIMATION
@@ -33,9 +33,9 @@ if shop_level == 0
 endif
 
 
-say "" "\couple se tornaram namorados e você sabe que eles serão felizes para sempre!"
-say "" "Noelia recebe uma mensagem em seu AngelPhone."
-say "Noelia" "É da Supervisora Hardwell. Vou reportar o desfecho da missão a ela."
+say "char_name/none" "cupid_story_ending/say_1"
+say "char_name/none" "cupid_story_ending/say_2"
+say "char_name/fertiliel" "cupid_story_ending/say_3"
 
 
 fade_music 0 1
@@ -44,7 +44,7 @@ char_reset_all
 
 wait 1
 dialog_style "faded_screen_message"
-say "" "Mais tarde, no escritório da Supervisora Hardwell..."
+say "char_name/none" "cupid_story_ending/say_4"
 
 dialog_style "normal"
 fade_out 0
@@ -67,60 +67,64 @@ fade_in 1
 goto_script "fertiliel_enter" 0.25
 wait 1
 
-say "Sup. Hardwell" "Muito bem, Noelia. Vejo que conseguiu cumprir sua primeira missão."
-say "Noelia" "Eu disse que não iria decepcioná-la, senhora!"
-say "Sup. Hardwell" "Deixe-me pegar o seu Diário de Cupido. Assim que você forma um casal inseparável, ele adiciona automaticamente um registro indicando o futuro dele."
-say "Vejamos:"
+say "char_name/hardiel" "cupid_story_ending/say_5"
+say "char_name/fertiliel" "cupid_story_ending/say_6"
+say "char_name/hardiel" "cupid_story_ending/say_7"
+say "cupid_story_ending/say_8"
 
 cupid_diary true
 wait 0.5
 
-say "Noelia" "Uau, isso é bem legal!"
+say "char_name/fertiliel" "cupid_story_ending/say_9"
 
 // say "Sup. Hardwell" "De acordo com o seu Diário de Cupido, seu casal inseparável se casará e produzirá \vsn(babies) filhos."
 // say "Noelia" "check_end_game/say_11"
 // say "Sup. Hardwell" "check_end_game/say_12"
 
-say "Noelia" "E sobre o meu desempenho nessa missão, como eu me saí?"
-say "Sup. Hardwell" "Foi um desempenho... satisfatório. Tenho que admitir."
-say "Noelia" "E então, eu vou ser contratada de fato como cupido?"
-say "Sup. Hardwell" "Sim. Não imaginei que um anjo sem poderes como você seria capaz, mas você me provou o contrário. Estou impressionada. Meus parabéns!"
+say "char_name/fertiliel" "cupid_story_ending/say_10"
+say "char_name/hardiel" "cupid_story_ending/say_11"
+
+character char_left "fertiliel-suspicious"
+say "char_name/fertiliel" "cupid_story_ending/say_12"
+say "char_name/hardiel" "cupid_story_ending/say_13"
 // say "check_end_game/say_17"
-say "Noelia" "Yes! Vou poder ter um emprego novamente!"
-say "Sup. Hardwell" "...Mas não é tão simples assim."
-say "Suas próximas missões serão muito mais complexas que essa, você terá grandes desafios pela frente."
-say "Imagina que está preparada?"
+
+character char_left "fertiliel"
+say "char_name/fertiliel" "cupid_story_ending/say_14"
+say "char_name/hardiel" "cupid_story_ending/say_15"
+say "cupid_story_ending/say_16"
+say "cupid_story_ending/say_17"
 // say "check_end_game/say_22"
 
-say "Noelia" "(Agora que eu acredito em mim mesma, não vou deixar nenhum desafio me parar!)"
-say "Eu estou pronta. Vou ser a cupido mais dedicada de todas, e um dia..."
+say "char_name/fertiliel" "cupid_story_ending/say_18"
+say "cupid_story_ending/say_19"
 
 wait 0.8
 
-say "...Um dia irei conhecer a grande cupido Aelia!"
+say "cupid_story_ending/say_20"
 
-say "Sup. Hardwell" "Haha, gosto da sua forma de pensar."
-say "Embora possa ser difícil ter contato com Aelia, ela está encarregada de um projeto de alto escalão, a Ilha Cupido."
+say "char_name/hardiel" "cupid_story_ending/say_21"
+say "cupid_story_ending/say_22"
 
-character char_left "fertiliel-suspicious"
-say "Noelia" "Tudo bem. Algum dia eu irei encontrá-la!"
-wait 1.5
+// character char_left "fertiliel-suspicious"
+say "char_name/fertiliel" "cupid_story_ending/say_23"
+// wait 1.5
 
-character char_left "fertiliel"
+// character char_left "fertiliel"
 // say "check_end_game/say_27"
-say "Até lá eu vou continuar dando tudo de mim!"
+say "cupid_story_ending/say_24"
 
-fade_out 1
+fade_out 2
 dialog_style "faded_screen_message"
 
-say "" "Muito obrigado por jogar Cupid Story: First Date."
-say "Muitas funcionalidades e conteúdos novos estão sendo produzidos nesse momento!"
-say "Que tal conhecer nossos outros jogos lançados e que serão lançados em breve?"
+say "char_name/none" "cupid_story_ending/say_25"
+say "cupid_story_ending/say_26"
+say "cupid_story_ending/say_27"
 
 
 waypoint social_media_links
 // choices "check_end_game/choices_0_0" link_discord "check_end_game/choices_0_1" link_twitter "check_end_game/choices_0_2" link_instagram "check_end_game/choices_0_3" end
-choices "Jogos Steam" link_steam "Cupid Island" link_cupid_island "Discord" link_discord "Agora não" end
+choices "cupid_story_ending/choices_0_0" link_steam "cupid_story_ending/choices_0_1" link_cupid_island "cupid_story_ending/choices_0_2" link_discord "cupid_story_ending/choices_0_3" end
 
 waypoint link_steam
 open_url "https://bit.ly/3c7Hr8x"
@@ -144,9 +148,10 @@ goto social_media_links
 
 
 waypoint end
-say "Obrigado por jogar o jogo e por favor divulgue o jogo para amigos e amigas que gostariam de jogá-lo!"
-say "Um grande abraço de todos na Supernova Games!"
+say "cupid_story_ending/say_28"
+say "cupid_story_ending/say_29"
 set_screen "hide_all"
 fade_music 0 2
 fade_out 2
 load_scene "TitleScreen"
+

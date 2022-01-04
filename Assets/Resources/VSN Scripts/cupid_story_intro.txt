@@ -7,72 +7,72 @@ bg "heaven"
 skip_button true end
 
 
-say "Meu nome é Noelia e eu sou um anjo."
-say "Eu moro na capital da sociedade dos anjos. Um lugar rígido e bem ordenado, onde tudo é planejado e muito bem executado pelos funcionários."
+say "cupid_story_intro/say_0"
+say "cupid_story_intro/say_1"
 
 character char_left "fertiliel-sad"
 char_flip char_left
 char_move_x char_left 0.5 0
 fade_in 1
 
-say "Noelia" "...Um mundo onde eu não vejo como me encaixar, já que eu não consigo fazer nada direito."
+say "char_name/fertiliel" "cupid_story_intro/say_2"
 
 // wait 0.5
 // character char_left "fertiliel-tired"
 // wait 0.5
 
-say "Hoje eu fui demitida do meu emprego de fritar hambúrgueres em uma lanchonete. De novo."
+say "cupid_story_intro/say_3"
 
 character char_left "fertiliel-sad2"
 
-say "Se eu não tivesse derrubado a minha auréola no banho aquele dia... ela não teria quebrado e eu ainda teria meus poderes mágicos."
-say "Droga, eu sou mesmo uma porcaria de anjo! Um fracasso total..."
+say "cupid_story_intro/say_4"
+say "cupid_story_intro/say_5"
 
 character char_left "fertiliel-sad3"
 
-say "Mas lá no fundo eu sei que eu poderia dar certo. Se tivesse algo que eu soubesse fazer."
+say "cupid_story_intro/say_6"
 
 wait 0.5
 character char_left "fertiliel-tired"
 wait 0.5
 
-say "Mas agora não tem jeito. Vou pelo menos tentar distrair a cabeça."
+say "cupid_story_intro/say_7"
 
-say "" "Noelia liga a TV para ver o que está passando."
+say "char_name/none" "cupid_story_intro/say_8"
 
-say "Apresentador" "Voltamos agora com a cobertura do mais novo projeto da AngelCorp: a Ilha Cupido."
-say "Esta é a ilha mágica onde casais de humanos irão viver e desenvolver seu amor, para o bem da nossa sociedade."
+say "cupid_story_intro/char_name_0" "cupid_story_intro/say_9"
+say "cupid_story_intro/say_10"
 
 wait 0.3
 character char_left "fertiliel-suspicious"
 wait 0.3
 
-say "Noelia" "Uau, esse projeto parece ser grande."
+say "char_name/fertiliel" "cupid_story_intro/say_11"
 
-say "Apresentador" "A escolhida pelas autoridades da AngelCorp para coordenar e gerenciar essa ilha foi Aelia, a cupido mais famosa e premiada."
+say "cupid_story_intro/char_name_0" "cupid_story_intro/say_12"
 
 
 wait 0.3
 character char_left "fertiliel"
 wait 0.3
 
-say "Noelia" "Nossa, ela é tão legal!"
+say "char_name/fertiliel" "cupid_story_intro/say_13"
 
 
 
-say "Apresentador" "Em declaração, ela afirmou que é uma grande honra ser escolhida para tal feito."
+say "cupid_story_intro/char_name_0" "cupid_story_intro/say_14"
 
-say "Aelia" "Eu nem sempre confiei em mim mesma. Antes de começar a minha carreira eu me achava um fracasso total, achava que não era boa em nada."
-say "Mas depois que eu me tornei uma cupido e me dediquei ao máximo, encontrei meu lugar. E sei que você de casa também pode, caso se dedique bastante."
+say "cupid_story_intro/char_name_1" "cupid_story_intro/say_15"
+say "cupid_story_intro/say_16"
 
 
 fade_out 1
 fade_music 0 1
 wait 1
 
-say "Eu fiquei com aquilo martelando na minha cabeça. A Aelia é a cupido mais famosa e eficiente de todas, mas eu não sabia que ela também duvidava de si mesma no início da carreira."
+say "cupid_story_intro/say_17"
 
-say "Será que eu deveria seguir o conselho dela? Tentar me dedicar em algo?"
+say "cupid_story_intro/say_18"
 
 
 
@@ -99,7 +99,7 @@ wait 1
 play_music "heaven_intro" "heaven_loop"
 wait 1
 
-say "" "No dia seguinte, no escritório de Hardwell, supervisora da divisão de cupidos."
+say "char_name/none" "cupid_story_intro/say_19"
 
 char_reset_all
 character char_right "hardiel"
@@ -109,39 +109,39 @@ fade_in 0.7
 
 // hardiel está na tela
 // fertiliel entra na cena
-say "" "Ouve-se batidas na porta."
+say "char_name/none" "cupid_story_intro/say_20"
 
-say "Sup. Hardwell" "Pode entrar!"
+say "char_name/hardiel" "cupid_story_intro/say_21"
 
 goto_script "fertiliel_enter" 0.25
 wait 1
 
 
 
-say "Sup. Hardwell" "Quem é você?"
-say "Noelia" "O meu nome é Noelia, senhora."
-say "Sup. Hardwell" "Ah, sim. A menina da auréola defeituosa. O que deseja?"
-say "Noelia" "Gostaria de me alistar para ser uma cupido, senhora!"
-say "Sup. Hardwell" "Uma cupido? Temos vagas abertas no momento, mas não acredito que você tenha as qualificações necessárias para esta vaga."
+say "char_name/hardiel" "cupid_story_intro/say_22"
+say "char_name/fertiliel" "cupid_story_intro/say_23"
+say "char_name/hardiel" "cupid_story_intro/say_24"
+say "char_name/fertiliel" "cupid_story_intro/say_25"
+say "char_name/hardiel" "cupid_story_intro/say_26"
 
 wait 0.5
 character char_left "fertiliel-sad"
 wait 0.5
 
-say "Noelia" "Por favor, senhora! Eu tirei boas notas no exame admissional, eu sinto que posso dar conta."
-say "Sup. Hardwell" "Cupido é uma vaga importante, não é apenas uma prova que mede o seu potencial. Avaliamos também suas habilidades comportamentais."
+say "char_name/fertiliel" "cupid_story_intro/say_27"
+say "char_name/hardiel" "cupid_story_intro/say_28"
 "E pelo que me lembro, a sua avaliação não foi boa."
 
-say "Noelia" "Eu, eu..."
+say "char_name/fertiliel" "cupid_story_intro/say_29"
 
 wait 0.5
 character char_left "fertiliel-tired"
 wait 1
 
-say "Sup. Hardwell" "E tem também a questão da sua auréola quebrada. Sem ela, você não consegue usar magia, certo? Nem mesmo ficar invisível?"
-say "Uma cupido precisa de muita habilidade e estar perto de humanos constantemente sem ser vista para poder formar um casal."
-say "Também não posso te fornecer Flechas de Amor, por não ser uma cupido oficialmente."
-say "Você teria que formar um casal de mãos abanando. É basicamente impossível."
+say "char_name/hardiel" "cupid_story_intro/say_30"
+say "cupid_story_intro/say_31"
+say "cupid_story_intro/say_32"
+say "cupid_story_intro/say_33"
 
 
 fade_out 1
@@ -150,10 +150,10 @@ wait 1
 
 *flashback rápido da Aelia falando que não confiava em si mesma*
 
-say "Naquele momento eu pensei em desistir. Achei que não seria capaz."
-say "Mas eu estava cansada de desistir. "
-say "Eu estava determinada a ser como a Aelia, e me tornar uma grande cupido!"
-say "Mesmo sem poderes mágicos!"
+say "cupid_story_intro/say_34"
+say "cupid_story_intro/say_35"
+say "cupid_story_intro/say_36"
+say "cupid_story_intro/say_37"
 character char_left "fertiliel-sad3"
 
 wait 1
@@ -162,30 +162,30 @@ fade_in 1
 
 
 
-say "Noelia" "Eu sinto que posso dar conta..."
+say "char_name/fertiliel" "cupid_story_intro/say_38"
 wait 1
 
-say "Sup. Hardwell" "Hm, o que disse?"
+say "char_name/hardiel" "cupid_story_intro/say_39"
 
 wait 0.3
 character char_left "fertiliel"
 wait 0.3
 
-say "Noelia" "E-eu SEI que posso conseguir!"
-say "Me dê uma chance e irei te provar!"
+say "char_name/fertiliel" "cupid_story_intro/say_40"
+say "cupid_story_intro/say_41"
 
-say "Sup. Hardwell" "Hum, uma mudança de atitude."
-say "Você consegue ser uma cupido mesmo sem flechas de amor e sem poderes mágicos?"
+say "char_name/hardiel" "cupid_story_intro/say_42"
+say "cupid_story_intro/say_43"
 
-say "Noelia" "Sim, eu vou dar um jeito."
-say "Alguém que eu admiro muito confiou em mim. Então eu também vou confiar. Eu sou capaz!"
+say "char_name/fertiliel" "cupid_story_intro/say_44"
+say "cupid_story_intro/say_45"
 
-say "Sup. Hardwell" "Intrigante. Pois bem, te darei uma chance."
-say "Tem um certo humano que estamos tendo dificuldade em formar um casal. Você terá a missão de arranjar uma namorada para ele dentro de 14 dias."
-say "Se conseguir, eu te admitirei como uma cupido oficialmente."
+say "char_name/hardiel" "cupid_story_intro/say_46"
+say "cupid_story_intro/say_47"
+say "cupid_story_intro/say_48"
 
-say "Noelia" "Certo! Não vou te decepcionar."
-say "(E nem a mim mesma.)"
+say "char_name/fertiliel" "cupid_story_intro/say_49"
+say "cupid_story_intro/say_50"
 
 
 
@@ -278,4 +278,5 @@ wait 1
 
 set_var day 1
 goto_script "select_daytime_interaction"
+
 

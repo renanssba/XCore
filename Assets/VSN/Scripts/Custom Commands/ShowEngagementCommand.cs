@@ -8,10 +8,10 @@ namespace Command {
   public class ShowEngagementCommand : VsnCommand {
 
     public override void Execute() {
-      int babies = Relationship.childrenNumber[GlobalData.instance.currentRelationshipId];
+      //int babies = Relationship.childrenNumber[GlobalData.instance.currentRelationshipId];
       //int babies = Random.Range(4, 9);
       //babies = 6;
-      GameController.instance.ShowEngagementScreen(babies);
+      GameController.instance.ShowEngagementScreen(6);
     }
 
 

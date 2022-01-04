@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour {
     babiesParticleGenerator.particlesToGenerate = babies;
     engagementScreen.SetActive(true);
     babiesParticleGenerator.DeleteSons();
-    StartCoroutine(ShowEngagementScreenAnimation(5f+babies));
+    StartCoroutine(ShowEngagementScreenAnimation(10f));
   }
 
   public IEnumerator ShowEngagementScreenAnimation(float waitTime){
