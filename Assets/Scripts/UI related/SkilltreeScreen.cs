@@ -48,10 +48,7 @@ public class SkilltreeScreen : MonoBehaviour {
     bondPointsText.text = relationship.bondPoints.ToString();
 
     /// character sprites
-    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.body);
-    characterImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.school);
-    characterImages[2].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetGirl().id, CharacterSpritePart.body);
-    characterImages[3].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetGirl().id, CharacterSpritePart.school);
+    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.character);
 
 
     /// show requisite paths

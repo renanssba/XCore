@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
       VsnController.instance.StartVSN("back_from_minigame");
     } else {
 
-      GlobalData.instance.InitializeChapter();
+      //GlobalData.instance.InitializeChapter();
       GlobalData.instance.InitializeChapterAlpha();
 
       if(GlobalData.instance.saveToLoad != -1) {
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour {
     }
     if(Input.GetKeyDown(KeyCode.F5)) {
       VsnSaveSystem.CleanAllData();
-      VsnSaveSystem.Load(1);
+      //VsnSaveSystem.Load(1);
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     if(Input.GetKeyDown(KeyCode.F6) && Application.isEditor) {

@@ -292,23 +292,14 @@ public abstract class Battler {
   }
 
   public void EndTurn() {
-    bool shouldRecoverStealth = false;
-
     for(int i = statusConditions.Count-1; i>=0; i--) {
       /// pass status conditions turn
       if(statusConditions[i].duration > 0) {
         statusConditions[i].duration--;
       }      
       if(statusConditions[i].duration == 0) {
-        if(statusConditions[i].name == "spotted") {
-          shouldRecoverStealth = true;
-        }
         statusConditions.RemoveAt(i);
       }
-    }
-    if(shouldRecoverStealth) {
-      Debug.LogWarning("RESETING STEALTH");
-      BattleController.instance.StartCoroutine(BattleController.instance.ShowRecoverStealth());
     }
     UIController.instance.UpdateDateUI();
     UpdateActorGraphics();

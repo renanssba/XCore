@@ -47,36 +47,6 @@ public class Actor2D : MonoBehaviour {
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
     overlays = new List<SpriteRenderer>();
-    //initialRendererFlashPowers = new float[renderers.Length];
-    //initialrendererColors = new Color[renderers.Length];
-
-    //for(int i=0; i<renderers.Length; i++) {
-    //  renderers[i].GetPropertyBlock(materialProperties);
-
-    //  Debug.Log("Flash MATERIAL "+i+" Color:" + renderers[i].material.GetColor("_FlashColor"));
-    //  Debug.Log("Flash MATERIAL " + i + " Amount:" + renderers[i].material.GetFloat("_FlashAmount"));
-
-    //  if(renderers[i].HasPropertyBlock()) {
-    //    Debug.Log("renderer "+i+" has property!");
-    //  } else {
-    //    Debug.Log("renderer " + i + " doesn't have property...");
-    //  }
-
-    //  if(!materialProperties.isEmpty) {
-    //    Debug.Log("property " + i + " has properties!");
-    //  } else {
-    //    Debug.Log("property " + i + " is empty...");
-    //  }
-
-    //  Debug.LogWarning("mat properties to string: "+ materialProperties.ToString());
-
-
-    //  Debug.Log("Flash Color:" + materialProperties.GetColor("_FlashColor"));
-    //  Debug.Log("Flash Amount:" + materialProperties.GetFloat("_FlashAmount"));
-
-    //  initialrendererColors[i] = renderers[i].material.GetColor("_FlashColor");
-    //  initialRendererFlashPowers[i] = renderers[i].material.GetFloat("_FlashAmount");
-    //}
   }
 
 
@@ -88,15 +58,6 @@ public class Actor2D : MonoBehaviour {
   public void UpdateGraphics() {
     if(battler.GetType() == typeof(Person)) {
       UpdateCharacterGraphics();
-      if(PersonShouldBeUsingUniform()) {
-        Debug.LogWarning("Updating clothing: uniform");
-        SetClothing("uniform");
-      } else {
-        SetClothing("casual");
-        Debug.LogWarning("Updating clothing: casual");
-      }
-    } else if(battler.GetType() == typeof(Enemy)) {
-      UpdateDirtyStatusGraphics();
     }
   }
 
@@ -122,17 +83,6 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public bool PersonShouldBeUsingUniform() {
-    if(actorReference == "main" && battler != null && battler.nameKey == "anna") {
-      //Debug.LogError("MAIN BATTLER NAME: "+ battler.nameKey);
-      return false;
-    }
-    if(TheaterController.instance.bgRenderer.sprite != null) {
-      return TheaterController.instance.bgRenderer.sprite.name.Contains("school");
-    }
-    return false; //|| VsnSaveSystem.GetIntVariable("daytime") == 0;
-  }
-
   public void UpdateCharacterGraphics() {
     if(battler.id == (int)PersonId.fertiliel) {
       Sprite hidingSpotSprite = Resources.Load<Sprite>("Characters/hiding-spot-" + BattleController.instance.currentDateLocation.ToString());
@@ -147,22 +97,16 @@ public class Actor2D : MonoBehaviour {
 
     if(!string.IsNullOrEmpty(battler.GetName())) {
       renderers[0].gameObject.SetActive(true);
-      renderers[1].gameObject.SetActive(true);
+      renderers[1].gameObject.SetActive(false);
 
-      if(battler.CurrentStatusConditionStacks("sad") == 0) {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.body);
-      } else {
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.sad);
-      }
-      renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
-      renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
-      renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
-      if(battler.CurrentStatusConditionStacks("injured") > 0) {
-        renderers[2].gameObject.SetActive(true);
-      } else {
-        renderers[2].gameObject.SetActive(false);
-      }
-      UpdateDirtyStatusGraphics();
+      renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.character);
+      //renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
+      //renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
+      //if(battler.CurrentStatusConditionStacks("injured") > 0) {
+      //  renderers[2].gameObject.SetActive(true);
+      //} else {
+      //  renderers[2].gameObject.SetActive(false);
+      //}
 
       /// position internal heart
       Vector2 pos = ResourcesManager.instance.heartPositionInActors[battler.id];
@@ -175,41 +119,6 @@ public class Actor2D : MonoBehaviour {
       SetAuraVisibility();
     } else {
       gameObject.SetActive(false);
-    }
-  }
-
-  public void UpdateDirtyStatusGraphics() {
-    if(dirtySplashRenderers == null || dirtySplashRenderers.Length == 0) {
-      return;
-    }
-    switch(battler.CurrentStatusConditionStacks("dirty")) {
-      case 0:
-        dirtySplashRenderers[0].gameObject.SetActive(false);
-        dirtySplashRenderers[1].gameObject.SetActive(false);
-        break;
-      case 1:
-        dirtySplashRenderers[0].gameObject.SetActive(true);
-        dirtySplashRenderers[1].gameObject.SetActive(false);
-        break;
-      case 2:
-        dirtySplashRenderers[0].gameObject.SetActive(true);
-        dirtySplashRenderers[1].gameObject.SetActive(true);
-        break;
-    }
-  }
-
-  public void SetClothing(string clothingType) {
-    if(battler.GetType() != typeof(Person)) {
-      return;
-    }
-    switch(clothingType) {
-      case "uniform":
-        renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.school);
-        break;
-      case "casual":
-      default:
-        renderers[1].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.casual);
-        break;
     }
   }
 

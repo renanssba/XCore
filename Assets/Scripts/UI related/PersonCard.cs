@@ -69,8 +69,8 @@ public class PersonCard : MonoBehaviour {
 
     int relationshipId = CoupleStatusScreen.instance.relationship.id;
 
-    bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.body);
-    bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
+    bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.character);
+    //bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
 
 
     /// ATTRIBUTES

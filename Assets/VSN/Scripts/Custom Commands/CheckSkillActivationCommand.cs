@@ -139,7 +139,7 @@ namespace Command {
           break;
         case SkillTarget.partyMember1:
         case SkillTarget.partyMember2:
-        case SkillTarget.angel:
+        case SkillTarget.partyMember3:
           if(skillToActivate.range == ActionRange.all_allies) {
             return SkillTarget.allHeroes;
           } else if(skillToActivate.range == ActionRange.all_enemies) {

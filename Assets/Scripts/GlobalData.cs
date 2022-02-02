@@ -30,13 +30,7 @@ public class GlobalData : MonoBehaviour {
     DontDestroyOnLoad(gameObject);
   }
 
-  public void InitializeChapter() {
-    Person newPerson;
-    List<string> usedNames = new List<string>();
-    string auxName;
-
-    people = new List<Person>();
-    relationships = new Relationship[boysToGenerate + girlsToGenerate - 1];
+  public void InitializeChapterAlpha() {
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
@@ -44,34 +38,12 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("observation_played", 0);
     VsnSaveSystem.SetVariable("day", 0);
 
-    for(int i = 0; i < boysToGenerate; i++) {
-      auxName = GetNewName(usedNames, true);
-      if(ModsManager.instance.GetName(i) != null) {
-        auxName = ModsManager.instance.GetName(2 * i);
-      }
-      newPerson = new Person { isMale = true };
-      newPerson.Initialize(i);
-      people.Add(newPerson);
-    }
-    for(int i = 0; i < girlsToGenerate; i++) {
-      auxName = GetNewName(usedNames, false);
-      if(ModsManager.instance.GetName(5 + i) != null) {
-        auxName = ModsManager.instance.GetName(5 + i);
-      }
-      newPerson = new Person { isMale = false };
-      newPerson.Initialize(5 + i);
-      people.Add(newPerson);
-    }
-    usedNames.Clear();
-  }
-
-  public void InitializeChapterAlpha() {
     boysToGenerate = 1;
-    girlsToGenerate = 3;
+    girlsToGenerate = 2;
 
     people = new List<Person>();
     Person p = new Person() {
-      nameKey = "daniel",
+      nameKey = "marcus",
       isMale = true,
       id = 0,
       faceId = 0,
@@ -79,7 +51,7 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      nameKey = "anna",
+      nameKey = "agnes",
       isMale = false,
       id = 1,
       faceId = 5,
@@ -87,34 +59,18 @@ public class GlobalData : MonoBehaviour {
     };
     people.Add(p);
     p = new Person() {
-      nameKey = "beatrice",
+      nameKey = "maya",
       isMale = false,
       id = 2,
       faceId = 6,
       attributes = new int[] { 4, 7, 4, 3 }
     };
     people.Add(p);
-    p = new Person() {
-      nameKey = "claire",
-      isMale = false,
-      id = 3,
-      faceId = 7,
-      attributes = new int[] { 4, 4, 6, 4 }
-    };
-    people.Add(p);
 
-    p = new Person() {
-      nameKey = "fertiliel",
-      isMale = false,
-      id = 10,
-      faceId = 11
-    };
-    people.Add(p);
-
-    ResourcesManager.instance.GenerateCharacterSprites(new string[] { "daniel", "anna", "beatrice", "claire", "fertiliel" });
+    ResourcesManager.instance.GenerateCharacterSprites(new string[] {"marcus", "agnes", "maya"});
 
 
-    relationships = new Relationship[3];
+    relationships = new Relationship[2];
     for(int i = 0; i < girlsToGenerate; i++) {
       relationships[i] = new Relationship {
         id = i,
@@ -125,58 +81,9 @@ public class GlobalData : MonoBehaviour {
     /// RELATIONSHIP SKILLTREES
     relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 14, 23, 26, 26, 27, 26, 30 });
     relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 32, 29, 27, 28, 27, 26, 30 });
-    relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 19, 20, 21, 25, 26, 27, 27, 26, 30 });
-
 
     relationships[1].skilltree.skills[9].affectsPerson = SkillAffectsCharacter.boy;
-    
-
-    /// INITIAL INVENTORIES
-    /// PLAYER
-    //people[0].inventory.AddItem("sports_clothes", 5);
-    people[0].inventory.AddItem("sensor", 1);
-    //people[0].inventory.AddItem("chocolate_cake", 5);
-    //people[0].inventory.AddItem("strawberry_cake", 5);
-    //people[0].inventory.AddItem("pepper_cake", 5);
-
-    /// ANA
-    people[1].inventory.AddItemWithOwnership("old_teddy_bear", 1, 1);
-    people[1].inventory.AddItemWithOwnership("delicate_key", 1, 1);
-    people[1].inventory.AddItem("sports_clothes", 1);
-    //people[1].inventory.AddItemWithOwnership("sports_clothes", 1, 1);
-
-    /// BEATRICE
-    people[2].inventory.AddItemWithOwnership("delicate_key", 1, 2);
-    people[2].inventory.AddItemWithOwnership("experiment_drafts", 1, 2);
-    people[2].inventory.AddItemWithOwnership("tragic_newspaper", 1, 2);
-    people[2].inventory.AddItem("lab_coat", 1);
-
-    /// CLARA
-    people[3].inventory.AddItemWithOwnership("flower_dress", 2, 3);
-    people[3].inventory.AddItemWithOwnership("delicate_key", 1, 3);
-    people[3].inventory.AddItem("chocolate_cake", 1);
-
-
-    VsnSaveSystem.SetVariable("money", 200);
-
-
-    // DEBUG CONFESSION SKILL
-    //relationships[0].skilltree.skills[12].isUnlocked = true;
-    //relationships[1].skilltree.skills[12].isUnlocked = true;
-    //relationships[2].skilltree.skills[12].isUnlocked = true;
-
-    //// DEBUG: TESTING SKILLS IN BATTLE
-    //relationships[0].exp = 100;
-    //relationships[0].level = 7;
-    //relationships[0].bondPoints = 10;
-
-    //relationships[1].exp = 100;
-    //relationships[1].level = 7;
-    //relationships[1].bondPoints = 10;
-
-    //relationships[2].exp = 100;
-    //relationships[2].level = 7;
-    //relationships[2].bondPoints = 10;
+    //VsnSaveSystem.SetVariable("money", 200);
   }
 
 

@@ -7,13 +7,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CharacterSpriteCollection {
   public string name;
-  public Sprite baseBody;
-  public Sprite sadBody;
-  public Sprite underwear;
-  public Sprite schoolClothes;
-  public Sprite casualClothes;
-  public Sprite incompleteCasualClothes;
-  public Sprite bruises;
+  public Sprite characterBody;
+  public Sprite mechaBody;
 
   [Header("Poses")]
   public Sprite pose_punch;
@@ -22,13 +17,8 @@ public class CharacterSpriteCollection {
 }
 
 public enum CharacterSpritePart {
-  body,
-  sad,
-  underwear,
-  school,
-  unclothed,
-  casual,
-  bruises,
+  character,
+  mecha,
   pose_punch,
   pose_shout,
   pose_interact
@@ -71,10 +61,6 @@ public class ResourcesManager : MonoBehaviour {
   }
 
   public Sprite GetFaceSprite(int index){
-    if(ModsManager.instance.GetFaceSprite(index) != null) {
-      Debug.LogWarning("USING MODDED FACES");
-      return ModsManager.instance.GetFaceSprite(index);
-    }
     return faceSprites[index];
   }
 
@@ -84,23 +70,15 @@ public class ResourcesManager : MonoBehaviour {
     }
     CharacterSpriteCollection col = characterSpritesCollections[id];
     switch(spritePart) {
-      case CharacterSpritePart.body:
-        return col.baseBody;
-      case CharacterSpritePart.sad:
-        return col.sadBody;
-      case CharacterSpritePart.school:
-        return col.schoolClothes;
-      case CharacterSpritePart.bruises:
-        return col.bruises;
       case CharacterSpritePart.pose_punch:
         return col.pose_punch;
       case CharacterSpritePart.pose_shout:
         return col.pose_shout;
       case CharacterSpritePart.pose_interact:
         return col.pose_interact;
-      case CharacterSpritePart.casual:
       default:
-        return col.casualClothes;
+      case CharacterSpritePart.character:
+        return col.characterBody;
     }
   }
 
@@ -124,21 +102,22 @@ public class ResourcesManager : MonoBehaviour {
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
 
     spriteCollection.name = charName;
-    spriteCollection.baseBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
-    spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-sad");
+    spriteCollection.characterBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
+    spriteCollection.mechaBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-mecha");
+    //spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-sad");
 
-    spriteCollection.underwear = Resources.Load<Sprite>(characterSpritesPath + charName + "-underwear");
+    //spriteCollection.underwear = Resources.Load<Sprite>(characterSpritesPath + charName + "-underwear");
 
-    spriteCollection.schoolClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-uniform");
-    spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
+    //spriteCollection.schoolClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-uniform");
+    //spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
 
-    spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
-    spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
+    //spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
+    //spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
 
-    /// BATTLE POSES
-    spriteCollection.pose_punch = Resources.Load<Sprite>(characterSpritesPath + charName + "-soco");
-    spriteCollection.pose_shout = Resources.Load<Sprite>(characterSpritesPath + charName + "-gritando");
-    spriteCollection.pose_interact = Resources.Load<Sprite>(characterSpritesPath + charName + "-pegando_objeto");
+    ///// BATTLE POSES
+    //spriteCollection.pose_punch = Resources.Load<Sprite>(characterSpritesPath + charName + "-soco");
+    //spriteCollection.pose_shout = Resources.Load<Sprite>(characterSpritesPath + charName + "-gritando");
+    //spriteCollection.pose_interact = Resources.Load<Sprite>(characterSpritesPath + charName + "-pegando_objeto");
 
     characterSpritesCollections.Add(spriteCollection);
     return;

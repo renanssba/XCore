@@ -8,16 +8,10 @@ using DG.Tweening;
 public class UIController : MonoBehaviour {
   public static UIController instance;
 
-  public TextMeshProUGUI titleText;
-
   [Header("- UI and Daytime -")]
   public ScreenTransitions uiControllerPanel;
   public TextMeshProUGUI dayText;
   public Image daytimeIcon;
-
-  [Header("- Relationship Panels -")]
-  public RectTransform relationshipCardsPanel;
-  public RelationshipCard[] relationshipCards;
 
   public RelationshipCard relationshipUpAnimationCard;
 
@@ -25,6 +19,7 @@ public class UIController : MonoBehaviour {
 
   public TextMeshProUGUI moneyText;
 
+  [Header("- Menu Buttons -")]
   public Button[] menuButtons;
   public GameObject[] menuButtonAlertIcons;
 
@@ -38,7 +33,6 @@ public class UIController : MonoBehaviour {
   public TextMeshProUGUI enemyLevelText;
 
   public ScreenTransitions dateProgressPanel;
-  public TextMeshProUGUI dateTitleText;
   public Toggle[] dateEventToggles;
   public Image[] successIcons;
   public Image[] failIcons;
@@ -81,18 +75,6 @@ public class UIController : MonoBehaviour {
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
-    int relationshipCardsVisible = 0;
-
-    for(int i = 0; i < relationshipCards.Length; i++) {
-      if(i < GlobalData.instance.relationships.Length && (GlobalData.instance.relationships[i].exp>0 || GlobalData.instance.relationships[i].level > 0)) {
-        relationshipCards[i].gameObject.SetActive(true);
-        relationshipCards[i].Initialize(GlobalData.instance.relationships[i]);
-        relationshipCardsVisible++;
-      } else {
-        relationshipCards[i].gameObject.SetActive(false);
-      }
-    }
-    relationshipCardsPanel.sizeDelta = new Vector2(relationshipCardsPanel.sizeDelta.x, 18f+126f*relationshipCardsVisible);
 
     dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + VsnSaveSystem.GetIntVariable("day") +
       "<size=50%>/" + VsnSaveSystem.GetIntVariable("max_days") + "</size>";
@@ -206,12 +188,8 @@ public class UIController : MonoBehaviour {
   public void SetScreenLayout(string state) {
     TheaterController theater = TheaterController.instance;
     Button firstButton = null;
-    foreach(RelationshipCard p in relationshipCards) {
-      p.gameObject.SetActive(true);
-    }
 
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
-
     switch(state) {
       case "hide_all":
         interactionPinsBoard.HidePanel();
@@ -219,7 +197,6 @@ public class UIController : MonoBehaviour {
         datingPeoplePanel.HidePanel();
         break;
       case "interact_with_board":
-        SetTitleText();
         interactionPinsBoard.ShowPanel();
         uiControllerPanel.ShowPanel();
         datingPeoplePanel.HidePanel();
@@ -290,44 +267,33 @@ public class UIController : MonoBehaviour {
   }
 
 
-  public void HidePeople() {
-    foreach(RelationshipCard p in relationshipCards) {
-      p.gameObject.SetActive(false);
-    }
-  }
-
-  public void SetTitleText() {
-    int id = VsnSaveSystem.GetIntVariable("daytime") + 1;
-    titleText.text = Lean.Localization.LeanLocalization.GetTranslationText("gameplay/title_" + id);
-    Debug.LogWarning("SET TITLE TEXT TO: " + titleText.text);
-  }
-
   public void SetBoardMenuButtons() {
-    bool partTimeUnlocked = false;
-    bool shopButton = false;
+    //bool partTimeUnlocked = false;
+    //bool shopButton = false;
 
     for(int i=0; i<menuButtonAlertIcons.Length; i++) {
       menuButtonAlertIcons[i].SetActive(false);
+      menuButtons[i].gameObject.SetActive(true); // activate all menu buttons
     }
 
-    if(VsnSaveSystem.GetIntVariable("day") >= 2) {
-      shopButton = true;
-      if(VsnSaveSystem.GetIntVariable("shop_level") == 0 ||
-         VsnSaveSystem.GetIntVariable("shop_unlock_advance") == 1 ||
-         VsnSaveSystem.GetIntVariable("shop_unlock_final") == 1) {
-        menuButtonAlertIcons[1].SetActive(true);
-      }
-    }
+    //if(VsnSaveSystem.GetIntVariable("day") >= 2) {
+    //  shopButton = true;
+    //  if(VsnSaveSystem.GetIntVariable("shop_level") == 0 ||
+    //     VsnSaveSystem.GetIntVariable("shop_unlock_advance") == 1 ||
+    //     VsnSaveSystem.GetIntVariable("shop_unlock_final") == 1) {
+    //    menuButtonAlertIcons[1].SetActive(true);
+    //  }
+    //}
 
-    if(VsnSaveSystem.GetIntVariable("day") >= 3) {
-      partTimeUnlocked = true;
-      if(VsnSaveSystem.GetBoolVariable("part_time_intro") == false) {
-        menuButtonAlertIcons[0].SetActive(true);
-      }
-    }
+    //if(VsnSaveSystem.GetIntVariable("day") >= 3) {
+    //  partTimeUnlocked = true;
+    //  if(VsnSaveSystem.GetBoolVariable("part_time_intro") == false) {
+    //    menuButtonAlertIcons[0].SetActive(true);
+    //  }
+    //}
 
-    menuButtons[0].gameObject.SetActive(partTimeUnlocked);
-    menuButtons[1].gameObject.SetActive(shopButton);
+    //menuButtons[0].gameObject.SetActive(partTimeUnlocked);
+    //menuButtons[1].gameObject.SetActive(shopButton);
   }
 
   public void ResetPinsBoard(string bgName) {

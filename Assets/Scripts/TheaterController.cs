@@ -39,9 +39,11 @@ public class TheaterController : MonoBehaviour {
   public SpriteRenderer focusShade;
   public Actor2D[] focusedCharacters;
 
-  public Actor2D mainActor;
-  public Actor2D supportActor;
-  public Actor2D angelActor;
+  public Actor2D[] partyActors;
+
+  //public Actor2D mainActor;
+  //public Actor2D supportActor;
+  //public Actor2D angelActor;
   public Actor2D enemyActor;
   public List<Actor2D> extraActors;
 
@@ -64,9 +66,9 @@ public class TheaterController : MonoBehaviour {
 
 
   public void ClearTheater() {
-    mainActor.MoveToPosition(outPositionLeft, 0f);
-    supportActor.MoveToPosition(outPositionLeft, 0f);
-    angelActor.MoveToPosition(outPositionLeft, 0f);
+    for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].MoveToPosition(outPositionLeft, 0f);
+    }
     for(int i = 0; i < extraActors.Count; i++) {
       Destroy(extraActors[i].gameObject);
     }
@@ -98,13 +100,13 @@ public class TheaterController : MonoBehaviour {
 
     switch(actorReference) {
       case "main":
-        actor = mainActor;
+        actor = partyActors[0];
         break;
       case "support":
-        actor = supportActor;
+        actor = partyActors[1];
         break;
       case "angel":
-        actor = angelActor;
+        actor = partyActors[2];
         break;
       case "enemy":
         actor = enemyActor;
@@ -195,19 +197,19 @@ public class TheaterController : MonoBehaviour {
     }
     switch(actorReference) {
       case "main":
-        mainActor.SetCharacter(person);
-        mainActor.FaceRight();
-        mainActor.gameObject.SetActive(true);
+        partyActors[0].SetCharacter(person);
+        partyActors[0].FaceRight();
+        partyActors[0].gameObject.SetActive(true);
         break;
       case "support":
-        supportActor.SetCharacter(person);
-        supportActor.FaceRight();
-        supportActor.gameObject.SetActive(true);
+        partyActors[1].SetCharacter(person);
+        partyActors[1].FaceRight();
+        partyActors[1].gameObject.SetActive(true);
         break;
       case "angel":
-        angelActor.SetCharacter(person);
-        angelActor.FaceRight();
-        angelActor.gameObject.SetActive(true);
+        partyActors[2].SetCharacter(person);
+        partyActors[2].FaceRight();
+        partyActors[2].gameObject.SetActive(true);
         break;
       default:
         targetActor = null;
@@ -236,11 +238,11 @@ public class TheaterController : MonoBehaviour {
   public Actor2D GetActorByIdInParty(SkillTarget actorId) {
     switch(actorId) {
       case SkillTarget.partyMember1:
-        return mainActor;
+        return partyActors[0];
       case SkillTarget.partyMember2:
-        return supportActor;
-      case SkillTarget.angel:
-        return angelActor;
+        return partyActors[1];
+      case SkillTarget.partyMember3:
+        return partyActors[2];
       case SkillTarget.enemy1:
         return enemyActor;
     }
@@ -248,7 +250,8 @@ public class TheaterController : MonoBehaviour {
   }
 
   public Actor2D[] GetAllHeroesActors() {
-    return new Actor2D[] { mainActor, supportActor };
+    return partyActors;
+    //return new Actor2D[] { mainActor, supportActor };
   }
 
   public Actor2D[] GetAllEnemiesActors() {
@@ -256,15 +259,21 @@ public class TheaterController : MonoBehaviour {
   }
 
   public Actor2D GetActorByBattlingCharacter(Battler character) {
-    if(mainActor.battler == character) {
-      return mainActor;
+    for(int i=0; i<partyActors.Length; i++) {
+      if(partyActors[i].battler == character) {
+        return partyActors[i];
+      }
     }
-    if(supportActor.battler == character) {
-      return supportActor;
-    }
-    if(angelActor.battler == character) {
-      return angelActor;
-    }
+
+    //if(mainActor.battler == character) {
+    //  return mainActor;
+    //}
+    //if(supportActor.battler == character) {
+    //  return supportActor;
+    //}
+    //if(angelActor.battler == character) {
+    //  return angelActor;
+    //}
     if(enemyActor != null && enemyActor.battler == character) {
       return enemyActor;
     }
@@ -278,24 +287,24 @@ public class TheaterController : MonoBehaviour {
     ClearTheater();
     ClearBattle();
 
-    mainActor.transform.localPosition = supportPosition - distance;
-    supportActor.transform.localPosition = mainPosition;
-    angelActor.transform.localPosition = angelPosition - distance;
+    partyActors[0].transform.localPosition = supportPosition - distance;
+    partyActors[1].transform.localPosition = mainPosition;
+    partyActors[2].transform.localPosition = angelPosition - distance;
 
     if(GlobalData.instance.CurrentBoy() != null) {
-      mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
-      mainActor.FaceRight();
+      partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
+      partyActors[0].FaceRight();
     }
     if(GlobalData.instance.CurrentGirl() != null) {
-      supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
-      supportActor.FaceLeft();
-      supportActor.gameObject.SetActive(true);
+      partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
+      partyActors[1].FaceLeft();
+      partyActors[1].gameObject.SetActive(true);
     } else {
-      supportActor.gameObject.SetActive(false);
+      partyActors[1].gameObject.SetActive(false);
     }
 
-    angelActor.SetCharacter(GlobalData.instance.people[4]);
-    angelActor.FaceRight();
+    //angelActor.SetCharacter(GlobalData.instance.people[3]);
+    partyActors[2].FaceRight();
   }
 
   public void SetupBoyWaitingForGirl() {
@@ -304,24 +313,24 @@ public class TheaterController : MonoBehaviour {
     ClearTheater();
     ClearBattle();
 
-    mainActor.transform.localPosition = mainPosition;
-    supportActor.transform.localPosition = supportPosition - distance;
-    angelActor.transform.localPosition = angelPosition - distance;
+    partyActors[0].transform.localPosition = mainPosition;
+    partyActors[1].transform.localPosition = supportPosition - distance;
+    partyActors[2].transform.localPosition = angelPosition - distance;
 
     if(GlobalData.instance.CurrentBoy() != null) {
-      mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
-      mainActor.FaceLeft();
+      partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
+      partyActors[0].FaceLeft();
     }
     if(GlobalData.instance.CurrentGirl() != null) {
-      supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
-      supportActor.FaceRight();
-      supportActor.gameObject.SetActive(true);
+      partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
+      partyActors[1].FaceRight();
+      partyActors[1].gameObject.SetActive(true);
     } else {
-      supportActor.gameObject.SetActive(false);
+      partyActors[1].gameObject.SetActive(false);
     }
 
-    angelActor.SetCharacter(GlobalData.instance.people[4]);
-    angelActor.FaceRight();
+    //partyActors[2].SetCharacter(GlobalData.instance.people[3]);
+    partyActors[2].FaceRight();
   }
 
 
@@ -334,42 +343,58 @@ public class TheaterController : MonoBehaviour {
 
     BattleController.instance.SetupDateLocation();
 
-    mainActor.SetCharacter(GlobalData.instance.CurrentBoy());
-    supportActor.SetCharacter(GlobalData.instance.CurrentGirl());
-    angelActor.SetCharacter(GlobalData.instance.people[4]);
 
-    mainActor.transform.localPosition = mainPosition - distance;
-    supportActor.transform.localPosition = supportPosition - distance;
-    angelActor.transform.localPosition = angelPosition - distance;
+    for(int i=0; i< partyActors.Length; i++) {
+      if(i < BattleController.instance.partyMembers.Length) {
+        partyActors[i].SetCharacter(BattleController.instance.partyMembers[0]);
+        partyActors[i].transform.localPosition = mainPosition - distance;
+        partyActors[i].gameObject.SetActive(true);
+        partyActors[i].FaceRight();
+      } else {
+        partyActors[i].gameObject.SetActive(false);
+      }
+    }
 
-    mainActor.gameObject.SetActive(true);
-    supportActor.gameObject.SetActive(true);
+    //mainActor.SetCharacter(BattleController.instance.partyMembers[0]);
+    //supportActor.SetCharacter(BattleController.instance.partyMembers[1]);
+    //angelActor.SetCharacter(BattleController.instance.partyMembers[2]);
 
-    mainActor.FaceRight();
-    supportActor.FaceRight();
-    angelActor.FaceRight();
+    //mainActor.transform.localPosition = mainPosition - distance;
+    //supportActor.transform.localPosition = supportPosition - distance;
+    //angelActor.transform.localPosition = angelPosition - distance;
+
+    //mainActor.gameObject.SetActive(true);
+    //supportActor.gameObject.SetActive(true);
+    //angelActor.gameObject.SetActive(true);
+
+    //mainActor.FaceRight();
+    //supportActor.FaceRight();
+    //angelActor.FaceRight();
   }
 
   public void ClearBattle() {
-    mainActor.SetBattleMode(false);
-    supportActor.SetBattleMode(false);
-    angelActor.SetBattleMode(false);
+    for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].SetBattleMode(false);
+    }
+    //mainActor.SetBattleMode(false);
+    //supportActor.SetBattleMode(false);
+    //angelActor.SetBattleMode(false);
 
     DestroyEnemyActor();
   }
 
   public void PartyEntersScene() {
-    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
-    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
-    angelActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+    for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
+    }
   }
 
   public void MainActorEntersScene() {
-    mainActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    partyActors[0].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
   }
 
   public void SupportActorEntersScene() {
-    supportActor.transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
+    partyActors[1].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
   }
 
   public void EnemyEntersScene() {
@@ -471,16 +496,16 @@ public class TheaterController : MonoBehaviour {
 
   public void PositionActorsBack() {
     foreach(Actor2D actorToPositionBack in focusedCharacters) {
-      if(actorToPositionBack == mainActor) {
-        mainActor.transform.DOLocalMove(mainPosition, focusAnimationDuration);
+      if(actorToPositionBack == partyActors[0]) {
+        partyActors[0].transform.DOLocalMove(mainPosition, focusAnimationDuration);
         continue;
       }
-      if(actorToPositionBack == supportActor) {
-        supportActor.transform.DOLocalMove(supportPosition, focusAnimationDuration);
+      if(actorToPositionBack == partyActors[1]) {
+        partyActors[1].transform.DOLocalMove(supportPosition, focusAnimationDuration);
         continue;
       }
-      if(actorToPositionBack == angelActor) {
-        angelActor.transform.DOLocalMove(angelPosition, focusAnimationDuration);
+      if(actorToPositionBack == partyActors[2]) {
+        partyActors[2].transform.DOLocalMove(angelPosition, focusAnimationDuration);
         continue;
       }
       if(actorToPositionBack == enemyActor) {
@@ -503,15 +528,15 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void PartyEntersBattleMode() {
-    mainActor.SetBattleMode(true);
-    supportActor.SetBattleMode(true);
-    angelActor.SetBattleMode(true);
+    for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].SetBattleMode(true);
+    }
   }
 
   public void PartyLeavesBattleMode() {
-    mainActor.SetBattleMode(false);
-    supportActor.SetBattleMode(false);
-    angelActor.SetBattleMode(false);
+    for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].SetBattleMode(false);
+    }
   }
 
 
@@ -533,61 +558,6 @@ public class TheaterController : MonoBehaviour {
       PartyLeavesBattleMode();
       DestroyEnemyActor();
     });
-  }
-
-  public IEnumerator DetectAngelAnimation() {
-    yield return new WaitForSeconds(0.5f);
-
-    mainActor.FaceLeft();
-    supportActor.FaceLeft();
-    yield return new WaitForSeconds(0.5f);
-
-    VsnAudioManager.instance.PlaySfx("skill_cast");
-    mainActor.DetectAnimation();
-    supportActor.DetectAnimation();
-    yield return new WaitForSeconds(0.5f);
-    
-    StatusCondition status = BattleController.instance.GetStatusConditionByName("spotted");
-    status.duration = 3;
-    status.maxDurationShowable = 2;
-    angelActor.battler.ReceiveStatusCondition(status);
-    yield return new WaitForSeconds(1f);
-
-    angelActor.SetChooseActionMode(false);
-    angelActor.SetAttackMode(false);
-
-    yield return new WaitForSeconds(1f);
-    mainActor.FaceRight();
-    supportActor.FaceRight();
-
-    yield return new WaitForSeconds(0.5f);
-  }
-
-  public IEnumerator OpenHeartlockAnimation(int levelToRaise) {
-    Relationship relation = GlobalData.instance.GetCurrentRelationship();
-
-    mainActor.TintActorToPink();
-    supportActor.TintActorToPink();
-
-    yield return new WaitForSeconds(1.5f);
-
-    VsnAudioManager.instance.PlaySfx("ui_attribute_up");
-    relation.OpenHeartLock(levelToRaise);
-    mainActor.UpdateGraphics();
-    supportActor.UpdateGraphics();
-
-    /// Check to receive achievement "womanizer"
-    if(GlobalData.instance.relationships[0].heartLocksOpened >= 2 &&
-       GlobalData.instance.relationships[1].heartLocksOpened >= 2 &&
-       GlobalData.instance.relationships[2].heartLocksOpened >= 2) {
-      AchievementsController.ReceiveAchievement("DATE_ALL_GIRLS");
-    }
-
-    yield return new WaitForSeconds(1.5f);
-
-    VsnArgument[] sayArgs = new VsnArgument[1];
-    sayArgs[0] = new VsnString("open_heartlock");
-    Command.GotoScriptCommand.StaticExecute("after_get_exp", sayArgs);
   }
 
 

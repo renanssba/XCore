@@ -9,7 +9,6 @@ if game_has_ended == 1
 endif
 
 if daytime == 2
-  goto_script "cap1_late_night"
   /// CHECK TO SEE IF ACHIEVEMENT SLEEP ALL DAY
   if times_slept_today >= 3
     get_achievement "SLEEP_ALL_DAY"

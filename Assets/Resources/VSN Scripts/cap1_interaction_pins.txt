@@ -11,19 +11,9 @@ endif
 
 
 waypoint manha
-if daytime == 0
-  reset_pins_board "school map"
-endif
+reset_pins_board "school map"
 set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_3"
-
 set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
-if conhece_beatrice == false
-  set_interaction_pin_sprite 1 "unknown" "cap1_interaction_pins/set_pin_location_1"
-endif
-
-if conhece_clara == true
-  set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_7"
-endif
 goto end
 
 
@@ -31,34 +21,16 @@ goto end
 waypoint tarde
 reset_pins_board "city-afternoon"
 set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_3"
-
-if conhece_beatrice == true
-  set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_4"
-endif
-
-set_interaction_pin 2 true "cap1_conversa_clara" "cap1_interaction_pins/set_pin_location_2"
+set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
 goto end
 
 
 
 waypoint noite
 reset_pins_board "city-night"
-
-if day == dia_festa_clara
-  set_interaction_pin 0 false
-  set_interaction_pin 1 false
-  set_interaction_pin 2 true "cap1_festa" "cap1_interaction_pins/set_pin_location_5"
-else
-  set_interaction_pin 0 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
-  if conhece_beatrice == true
-    set_interaction_pin 1 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
-  endif
-  set_interaction_pin 2 true "cap1_investigar" "cap1_interaction_pins/set_pin_location_6"
-endif
+set_interaction_pin 0 true "cap1_conversa_ana" "cap1_interaction_pins/set_pin_location_3"
+set_interaction_pin 1 true "cap1_conversa_beatrice" "cap1_interaction_pins/set_pin_location_1"
 goto end
 
 
 waypoint end
-
-/// BATTLE DEBUG
-//set_interaction_pin 2 true "cap1_conversa_clara" "Casa"

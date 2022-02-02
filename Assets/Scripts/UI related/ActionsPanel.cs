@@ -43,21 +43,12 @@ public class ActionsPanel : MonoBehaviour {
     baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
     baseActionButtons[4].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
 
-    if(BattleController.instance.partyMembers[currentPartyMember].id == 10) {
-      baseActionButtons[0].SetActive(true);
-      availableButtons.Add(baseActionButtons[0]);
-      baseActionButtons[1].SetActive(true);
-      availableButtons.Add(baseActionButtons[1]);
-      baseActionButtons[2].SetActive(false);
-      baseActionButtons[3].SetActive(false);
-    } else {
-      baseActionButtons[0].SetActive(false);
-      baseActionButtons[1].SetActive(false);
-      baseActionButtons[2].SetActive(true);
-      availableButtons.Add(baseActionButtons[2]);
-      baseActionButtons[3].SetActive(true);
-      availableButtons.Add(baseActionButtons[3]);
-    }
+    baseActionButtons[0].SetActive(false);
+    baseActionButtons[1].SetActive(false);
+    baseActionButtons[2].SetActive(true);
+    availableButtons.Add(baseActionButtons[2]);
+    baseActionButtons[3].SetActive(true);
+    availableButtons.Add(baseActionButtons[3]);
 
     if (currentPartyMember == 0) {
       baseActionButtons[4].SetActive(false);

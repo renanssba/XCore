@@ -11,7 +11,7 @@ public class CoupleStatusScreen : MonoBehaviour {
   public ScreenTransitions panel;
   public Relationship relationship;
   public RelationshipCard relationshipCard;
-  public PersonCard[] personCards;
+  public PersonCard personCard;
   public SkilltreeScreen skilltreeScreen;
 
   [Header("- Skilltree Button -")]
@@ -33,14 +33,14 @@ public class CoupleStatusScreen : MonoBehaviour {
 
   public void Initialize(Relationship newRelationship) {
     instance = this;
+
     relationship = newRelationship;
     UpdateUI();
   }
 
   public void UpdateUI() {
     relationshipCard.Initialize(relationship);
-    personCards[0].Initialize(relationship.GetBoy());
-    personCards[1].Initialize(relationship.GetGirl());
+    personCard.Initialize(relationship.GetBoy());
     coupleHpText.text = relationship.GetMaxHp().ToString();
 
     if(BattleController.instance.IsBattleHappening()){
@@ -59,13 +59,10 @@ public class CoupleStatusScreen : MonoBehaviour {
     int relationshipId = initialRelationship;
 
     SfxManager.StaticPlaySelectSfx();
-    do {
-      relationshipId++;
-      if(relationshipId >= GlobalData.instance.relationships.Length) {
-        relationshipId = 0;
-      }
-    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 &&
-            GlobalData.instance.relationships[relationshipId].level <= 0 && relationshipId != initialRelationship);
+    relationshipId++;
+    if(relationshipId >= GlobalData.instance.relationships.Length) {
+      relationshipId = 0;
+    }
     Initialize(GlobalData.instance.relationships[relationshipId]);
   }
 
@@ -74,13 +71,10 @@ public class CoupleStatusScreen : MonoBehaviour {
     int relationshipId = initialRelationship;
 
     SfxManager.StaticPlaySelectSfx();
-    do {
-      relationshipId--;
-      if(relationshipId < 0) {
-        relationshipId = GlobalData.instance.relationships.Length-1;
-      }
-    } while(GlobalData.instance.relationships[relationshipId].exp <= 0 &&
-            GlobalData.instance.relationships[relationshipId].level <= 0 && relationshipId != initialRelationship);
+    relationshipId--;
+    if(relationshipId < 0) {
+      relationshipId = GlobalData.instance.relationships.Length - 1;
+    }
     Initialize(GlobalData.instance.relationships[relationshipId]);
   }
 

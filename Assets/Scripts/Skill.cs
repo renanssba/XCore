@@ -23,7 +23,7 @@ public enum ActionRange {
 public enum SkillTarget {
   partyMember1 = 0,
   partyMember2 = 1,
-  angel = 2,
+  partyMember3 = 2,
   enemy1 = 3,
   enemy2 = 4,
   enemy3 = 5,
