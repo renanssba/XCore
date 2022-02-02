@@ -966,35 +966,35 @@ public class BattleController : MonoBehaviour {
       case 0:
         dateLength = 1;
         dateEnemies = new Enemy[] { GetEnemyByString("bully_0") };
-        currentDateLocation = DateLocation.school;
+        currentDateLocation = DateLocation.desert;
         break;
       case 1:
         dateLength = 3;
         dateEnemies = new Enemy[] { GetEnemyByString("bully_minor"), GetEnemyByString("bunny"), GetEnemyByString("bully") };
-        currentDateLocation = DateLocation.park;
+        currentDateLocation = DateLocation.desert;
         break;
       case 2:
         dateLength = 3;
-        currentDateLocation = DateLocation.shopping;
+        currentDateLocation = DateLocation.desert;
         dateEnemies = new Enemy[] { GetEnemyByString("card_vendors"), GetEnemyByString("vending_machine"), GetEnemyByString("sale_crowd") };
         //GenerateDateEnemies();
         break;
       case 3:
         dateLength = 4;
-        currentDateLocation = DateLocation.park;
+        currentDateLocation = DateLocation.desert;
         dateEnemies = new Enemy[] { GetEnemyByString("photographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[9 + GlobalData.instance.CurrentGirl().id] };
         //GenerateDateEnemies();
         break;
       default:
         dateLength = 1;
-        currentDateLocation = DateLocation.park;
+        currentDateLocation = DateLocation.desert;
         GenerateDateEnemies();
         break;
     }
   }
 
   public void SetCustomBattle(int enemyId) {
-    currentDateLocation = DateLocation.park;
+    currentDateLocation = DateLocation.desert;
     dateLength = 1;
     dateEnemies = new Enemy[] {allEnemies[enemyId]};
     FullHealParty();

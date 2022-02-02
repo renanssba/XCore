@@ -6,8 +6,6 @@ using TMPro;
 
 public class SkilltreeScreen : MonoBehaviour {
 
-  //public static SkilltreeScreen instance;
-
   public ScreenTransitions screenTransitions;
   public Relationship relationship;
 
@@ -32,10 +30,6 @@ public class SkilltreeScreen : MonoBehaviour {
 
 
   public void Initialize() {
-    //lockedPathColor = new Color(0.92f, 0.5f, 0.52f);
-    //unlockableSkillColor = new Color(0.6f, 0.42f, 0.42f);
-    //unlockableIconColor = new Color(0f, 0f, 0f, 0.3f);
-    //disadvantageSkillColor = new Color(0.77f, 0.19f, 0.19f);
     relationship = CoupleStatusScreen.instance.relationship;
     UpdateUI();
   }
@@ -49,6 +43,7 @@ public class SkilltreeScreen : MonoBehaviour {
 
     /// character sprites
     characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.character);
+    //characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.mecha);
 
 
     /// show requisite paths

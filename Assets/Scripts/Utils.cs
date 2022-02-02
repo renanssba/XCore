@@ -5,133 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public enum StageName {
-  TitleScreen,
-  Park,
-  CustomizeScreen
+  TitleScreen
 };
-
-public enum SongNames {
-  conceito_loop,
-  sewers_loop,
-  night_loop,
-  conceito_full
-};
-
-public enum LocationBg {
-  Park,
-  Shopping,
-  City
-}
-
-
-public enum CharacterTraits {
-  estudioso,
-  correTerEQui,
-  shoppingSegEQua,
-  delinquente,
-  menteResistente,
-  teimoso, // needs more AP to be persuaded
-  //  menteVulneravel,
-  seApaixonaFacil,
-  timido
-};
-
-
-public enum RandomTastes {
-  comerMuitoFeijao,
-  //  bdsm,
-  //navegarNaDeepweb,
-  dinossauros,
-  praticarOcultismo,
-  fazerAcrobacias,
-  assistirTokusatsu,
-  dancarSamba,
-  //roguelikes,
-  //datingSims,
-  //cupidSimulators,
-  //arroz,
-  //batatas,
-  acampar,
-  oSentidoDaVida,
-  hackear,
-  imitarTartarugas,
-  arquitetura,
-  artesanato,
-  andarACavalo,
-  rezar,
-  meditacao,
-  memes,
-  esgrima,
-  //rpg,
-  mercadoDeAcoes,
-  robos,
-  praticarNinjutsu,
-  enfrentarNinjas,
-  piratear,
-  origami,
-  //churros,
-  //  minhaVida,
-  aVidaDosOutros,
-  //pudim,
-  //tortas,
-  //agua,
-  natacao,
-  tomarBanho,
-  usarAppsDeNamoro,
-  yaoi,
-  waifus,
-  //barbas,
-  relacionamentos,
-  cuidarDeBebes,
-  //ratos,
-  //  morte,
-  //namorarPelado,
-  fazerArranjoDeFlores,
-  //calcinhas,
-  caridade,
-  fazerDinheiro,
-  //criancas,
-  empreendedorismo,
-  tristeza,
-  //usarLingerie,
-  //  naoUsarRoupasDeBaixo,
-  usarOculos,
-  brincarDeBonecas,
-  lutar,
-  fazerPoses,
-  count
-}
 
 
 public class Utils {
-  public static string GetRandomTasteName() {
-    int selected = Random.Range(0, System.Enum.GetNames(typeof(RandomTastes)).Length);
-
-    return System.Enum.GetName(typeof(RandomTastes), selected);
-  }
-
-  public static CharacterTraits GetRandomTrait() {
-    int selected = Random.Range(0, System.Enum.GetNames(typeof(CharacterTraits)).Length);
-
-    Debug.LogWarning("selected: " + selected + ", possible values: " + System.Enum.GetNames(typeof(CharacterTraits)).Length);
-
-    return (CharacterTraits)selected;
-  }
-
-  public static string GetRandomBoyName() {
-    return "boy";
-  }
-
-  public static string GetRandomGirlName() {
-    return "girl";
-  }
-
-
-  public static int GetRandomAge() {
-    return Random.Range(15, 18);
-  }
-
-
   public static void UnselectButton() {
     EventSystem.current.SetSelectedGameObject(null);
   }
@@ -156,41 +34,6 @@ public class Utils {
   }
 
 
-
-  public static string GetWeekdayName(int day) {
-    switch(day % 5) {
-      case 1:
-        return "Seg";
-      case 2:
-        return "Ter";
-      case 3:
-        return "Qua";
-      case 4:
-        return "Qui";
-      case 0:
-        return "Sex";
-    }
-    return "???";
-  }
-
-
-  public static int CountBoys(List<Person> people) {
-    int count = 0;
-    foreach(Person p in people) {
-      if(p.isMale)
-        count++;
-    }
-    return count;
-  }
-
-  public static int CountGirls(List<Person> people) {
-    int count = 0;
-    foreach(Person p in people) {
-      if(!p.isMale)
-        count++;
-    }
-    return count;
-  }
 
   public static string GetPrintableString(string name, bool capitalLetters) {
     char initialLetter = name[0];

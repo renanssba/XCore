@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum RewardType{
+public enum RewardType {
   none,
   item,
   money
 }
 
 
-public enum DateLocation{
-  park,
-  shopping,
-  school,
+public enum DateLocation {
+  desert,
   generic
 }
 
@@ -58,8 +56,6 @@ public class Enemy : Battler {
   public string[] statusImmunities;
   public string[] tags;
 
-  public RewardType rewardType;
-  public int rewardId;
 
 
   public override string GetName() {

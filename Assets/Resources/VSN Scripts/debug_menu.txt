@@ -19,7 +19,7 @@ goto girl_menu
 
 
 waypoint girl_menu
-choices "Adicionar Nível" add_level "Adicionar Chaves de Coração" add_bond_points "Adicionar Exp" add_exp "Aumentar Nível de Proximidade" open_lock "Combates" date_options_1 "Cancelar" end
+choices "Adicionar Nível" add_level "Adicionar Pontos de Habilidade" add_bond_points "Adicionar Exp" add_exp "Combates" date_options_1 "Cancelar" end
 
 
 waypoint add_exp
@@ -35,25 +35,9 @@ play_sfx "ui_big_confirm"
 add_bond_points 10
 goto girl_menu
 
-waypoint open_lock
-choices "Amigos Próximos" lock_1 "Apaixonados" lock_2 "Cancelar" end
-
-waypoint lock_1
-open_heart_lock 1
-actor_tint main 0 1 "white"
-actor_tint support 0 1 "white"
-goto girl_menu
-
-waypoint lock_2
-open_heart_lock 2
-actor_tint main 0 1 "white"
-actor_tint support 0 1 "white"
-goto girl_menu
-
 
 waypoint date_options_1
-set_var dateId 1
-setup_date
+setup_date 1
 choices "\enemy_name(1)" enemy_1 "\enemy_name(2)" enemy_2 "\enemy_name(3)" enemy_3 "\enemy_name(4)" enemy_4 ">>>" date_options_2
 
 waypoint date_options_2

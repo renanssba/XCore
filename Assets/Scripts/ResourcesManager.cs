@@ -70,6 +70,8 @@ public class ResourcesManager : MonoBehaviour {
     }
     CharacterSpriteCollection col = characterSpritesCollections[id];
     switch(spritePart) {
+      case CharacterSpritePart.mecha:
+        return col.mechaBody;
       case CharacterSpritePart.pose_punch:
         return col.pose_punch;
       case CharacterSpritePart.pose_shout:

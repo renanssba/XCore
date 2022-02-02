@@ -37,6 +37,7 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupBaseActionButtons(int currentPartyMember) {
     List<GameObject> availableButtons = new List<GameObject>();
+    Debug.LogWarning("currentPartyMember: "+ currentPartyMember);
     Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
 
     baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(currentPerson);

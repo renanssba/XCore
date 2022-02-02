@@ -39,11 +39,8 @@ public class TheaterController : MonoBehaviour {
   public SpriteRenderer focusShade;
   public Actor2D[] focusedCharacters;
 
+  [Header("- Actors -")]
   public Actor2D[] partyActors;
-
-  //public Actor2D mainActor;
-  //public Actor2D supportActor;
-  //public Actor2D angelActor;
   public Actor2D enemyActor;
   public List<Actor2D> extraActors;
 
@@ -251,7 +248,6 @@ public class TheaterController : MonoBehaviour {
 
   public Actor2D[] GetAllHeroesActors() {
     return partyActors;
-    //return new Actor2D[] { mainActor, supportActor };
   }
 
   public Actor2D[] GetAllEnemiesActors() {
@@ -265,15 +261,6 @@ public class TheaterController : MonoBehaviour {
       }
     }
 
-    //if(mainActor.battler == character) {
-    //  return mainActor;
-    //}
-    //if(supportActor.battler == character) {
-    //  return supportActor;
-    //}
-    //if(angelActor.battler == character) {
-    //  return angelActor;
-    //}
     if(enemyActor != null && enemyActor.battler == character) {
       return enemyActor;
     }
@@ -346,8 +333,7 @@ public class TheaterController : MonoBehaviour {
 
     for(int i=0; i< partyActors.Length; i++) {
       if(i < BattleController.instance.partyMembers.Length) {
-        partyActors[i].SetCharacter(BattleController.instance.partyMembers[0]);
-        partyActors[i].transform.localPosition = mainPosition - distance;
+        partyActors[i].SetCharacter(BattleController.instance.partyMembers[i]);
         partyActors[i].gameObject.SetActive(true);
         partyActors[i].FaceRight();
       } else {
@@ -355,30 +341,15 @@ public class TheaterController : MonoBehaviour {
       }
     }
 
-    //mainActor.SetCharacter(BattleController.instance.partyMembers[0]);
-    //supportActor.SetCharacter(BattleController.instance.partyMembers[1]);
-    //angelActor.SetCharacter(BattleController.instance.partyMembers[2]);
-
-    //mainActor.transform.localPosition = mainPosition - distance;
-    //supportActor.transform.localPosition = supportPosition - distance;
-    //angelActor.transform.localPosition = angelPosition - distance;
-
-    //mainActor.gameObject.SetActive(true);
-    //supportActor.gameObject.SetActive(true);
-    //angelActor.gameObject.SetActive(true);
-
-    //mainActor.FaceRight();
-    //supportActor.FaceRight();
-    //angelActor.FaceRight();
+    partyActors[0].transform.localPosition = mainPosition - distance;
+    partyActors[1].transform.localPosition = supportPosition - distance;
+    partyActors[2].transform.localPosition = angelPosition - distance;
   }
 
   public void ClearBattle() {
     for(int i = 0; i < partyActors.Length; i++) {
       partyActors[i].SetBattleMode(false);
     }
-    //mainActor.SetBattleMode(false);
-    //supportActor.SetBattleMode(false);
-    //angelActor.SetBattleMode(false);
 
     DestroyEnemyActor();
   }

@@ -87,20 +87,6 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public string GetNewName(List<string> usedNames, bool isBoy) {
-    string newName;
-
-    return "placeholder name";
-
-    do {
-      newName = (isBoy) ? Utils.GetRandomBoyName() : Utils.GetRandomGirlName();
-    } while(usedNames.Contains(newName));
-
-    usedNames.Add(newName);
-    return newName;
-  }
-
-
   public string CurrentCoupleName() {
     if(GetCurrentRelationship() == null) {
       return "";

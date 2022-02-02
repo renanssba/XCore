@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 using DG.Tweening;
 using TMPro;
 
+
 public class Actor2D : MonoBehaviour {
   public string actorReference;
   public SpriteRenderer[] renderers;
@@ -62,7 +63,10 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void UpdateToSpecificPose(SkillAnimation animationPose) {
-    if(actorReference == "enemy" || actorReference == "angel") {
+    /// DEBUG
+    return;
+
+    if(actorReference == "enemy") {
       return;
     }
 
@@ -99,7 +103,8 @@ public class Actor2D : MonoBehaviour {
       renderers[0].gameObject.SetActive(true);
       renderers[1].gameObject.SetActive(false);
 
-      renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.character);
+      //renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.character);
+      renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.mecha);
       //renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
       //renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
       //if(battler.CurrentStatusConditionStacks("injured") > 0) {

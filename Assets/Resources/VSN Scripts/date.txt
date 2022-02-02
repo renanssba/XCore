@@ -19,7 +19,7 @@ fade_in 0.7
 wait 0.5
 
 theater_animation "party_enters"
-say "char_name/none" "date/say_0"
+// say "char_name/none" "date/say_0"
 
 
 set_var last_enemy #dateLength
@@ -32,8 +32,9 @@ for currentDateEvent #dateLength
   move_camera "battle_view" 0.5
   wait 0.5
 
-  set_var currentBattleTurn 0
+  // set_var currentBattleTurn 0
   goto_script "\currentEventName" event_statement
+  theater_animation "enemy_enters"
 
   wait 0.3
   actor_animator_parameter main "Battle" true
@@ -254,7 +255,6 @@ if #currentDateId == 2
     set_var shop_unlock_final 1
   endif
 endif
-open_heart_lock #currentDateId
 actor_tint main 0 1 "white"
 actor_tint support 0 1 "white"
 wait 1

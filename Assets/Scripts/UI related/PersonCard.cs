@@ -19,7 +19,7 @@ public class PersonCard : MonoBehaviour {
   public Image bgImage;
   public TextMeshProUGUI nameText;
   public Image faceImage;
-  public Image[] bodyImages;
+  public Image bodyImage;
   public TextMeshProUGUI[] attributeNamesTexts;
   public TextMeshProUGUI attributeValuesText;
   public GameObject shade;
@@ -68,9 +68,7 @@ public class PersonCard : MonoBehaviour {
 
 
     int relationshipId = CoupleStatusScreen.instance.relationship.id;
-
-    bodyImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.character);
-    //bodyImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.school);
+    bodyImage.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.character);
 
 
     /// ATTRIBUTES
