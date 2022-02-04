@@ -26,9 +26,9 @@ public class TheaterController : MonoBehaviour {
 
   public Camera mainCamera;
 
-  public Vector3 mainPosition;
-  public Vector3 supportPosition;
-  public Vector3 angelPosition;
+  public Vector3 firstPosition;
+  public Vector3 secondPosition;
+  public Vector3 thirdPosition;
   public Vector3 enemyPosition;
 
   public Vector3 outPositionRight;
@@ -125,22 +125,22 @@ public class TheaterController : MonoBehaviour {
 
     switch(positionName.Replace("_back", "").Replace("_front", "")) {
       case "angel":
-        position = angelPosition;
+        position = thirdPosition;
         break;
       case "out_left":
       case "grid_0":
         position = outPositionLeft;
         break;
       case "grid_1":
-        position = supportPosition + new Vector3(-1f, 0f, 0f);
+        position = secondPosition + new Vector3(-1f, 0f, 0f);
         break;
       case "support":
       case "grid_2":
-        position = supportPosition;
+        position = secondPosition;
         break;
       case "main":
       case "grid_3":
-        position = mainPosition;
+        position = firstPosition;
         break;
       case "enemy_0":
       case "grid_4":
@@ -274,9 +274,9 @@ public class TheaterController : MonoBehaviour {
     ClearTheater();
     ClearBattle();
 
-    partyActors[0].transform.localPosition = supportPosition - distance;
-    partyActors[1].transform.localPosition = mainPosition;
-    partyActors[2].transform.localPosition = angelPosition - distance;
+    partyActors[0].transform.localPosition = secondPosition - distance;
+    partyActors[1].transform.localPosition = firstPosition;
+    partyActors[2].transform.localPosition = thirdPosition - distance;
 
     if(GlobalData.instance.CurrentBoy() != null) {
       partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
@@ -300,9 +300,9 @@ public class TheaterController : MonoBehaviour {
     ClearTheater();
     ClearBattle();
 
-    partyActors[0].transform.localPosition = mainPosition;
-    partyActors[1].transform.localPosition = supportPosition - distance;
-    partyActors[2].transform.localPosition = angelPosition - distance;
+    partyActors[0].transform.localPosition = firstPosition;
+    partyActors[1].transform.localPosition = secondPosition - distance;
+    partyActors[2].transform.localPosition = thirdPosition - distance;
 
     if(GlobalData.instance.CurrentBoy() != null) {
       partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
@@ -341,9 +341,9 @@ public class TheaterController : MonoBehaviour {
       }
     }
 
-    partyActors[0].transform.localPosition = mainPosition - distance;
-    partyActors[1].transform.localPosition = supportPosition - distance;
-    partyActors[2].transform.localPosition = angelPosition - distance;
+    partyActors[0].transform.localPosition = firstPosition - distance;
+    partyActors[1].transform.localPosition = secondPosition - distance;
+    partyActors[2].transform.localPosition = thirdPosition - distance;
   }
 
   public void ClearBattle() {
@@ -468,15 +468,15 @@ public class TheaterController : MonoBehaviour {
   public void PositionActorsBack() {
     foreach(Actor2D actorToPositionBack in focusedCharacters) {
       if(actorToPositionBack == partyActors[0]) {
-        partyActors[0].transform.DOLocalMove(mainPosition, focusAnimationDuration);
+        partyActors[0].transform.DOLocalMove(firstPosition, focusAnimationDuration);
         continue;
       }
       if(actorToPositionBack == partyActors[1]) {
-        partyActors[1].transform.DOLocalMove(supportPosition, focusAnimationDuration);
+        partyActors[1].transform.DOLocalMove(secondPosition, focusAnimationDuration);
         continue;
       }
       if(actorToPositionBack == partyActors[2]) {
-        partyActors[2].transform.DOLocalMove(angelPosition, focusAnimationDuration);
+        partyActors[2].transform.DOLocalMove(thirdPosition, focusAnimationDuration);
         continue;
       }
       if(actorToPositionBack == enemyActor) {

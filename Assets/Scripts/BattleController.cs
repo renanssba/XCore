@@ -85,7 +85,9 @@ public class BattleController : MonoBehaviour {
 
     Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
     Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
-    partyMembers = new Person[] { boy, girl };
+    partyMembers = new Person[] { GlobalData.instance.people[0],
+                                  GlobalData.instance.people[1],
+                                  GlobalData.instance.people[2]};
 
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
