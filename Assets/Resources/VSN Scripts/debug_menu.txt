@@ -1,6 +1,7 @@
 ﻿say_auto "DEBUG MENU"
 set_var battle_is_happening false
 set_var currentDateEvent 0
+setup_date 1
 choices "Agnes" agnes "Maya" maya "Cancelar" end
 
 
@@ -19,7 +20,7 @@ goto girl_menu
 
 
 waypoint girl_menu
-choices "Adicionar Nível" add_level "Adicionar Pontos de Habilidade" add_bond_points "Adicionar Exp" add_exp "Combates" date_options_1 "Cancelar" end
+choices "Adicionar Nível" add_level "Adicionar Pontos de Habilidade" add_bond_points "Adicionar Exp" add_exp "Combater" enemy_3 "Cancelar" end
 
 
 waypoint add_exp
@@ -37,7 +38,6 @@ goto girl_menu
 
 
 waypoint date_options_1
-setup_date 1
 choices "\enemy_name(1)" enemy_1 "\enemy_name(2)" enemy_2 "\enemy_name(3)" enemy_3 "\enemy_name(4)" enemy_4 ">>>" date_options_2
 
 waypoint date_options_2

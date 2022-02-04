@@ -67,7 +67,7 @@ public class PersonCard : MonoBehaviour {
     }
 
 
-    int relationshipId = CoupleStatusScreen.instance.relationship.id;
+    int relationshipId = CoupleStatusScreen.instance.statusPerson.id;
     bodyImage.sprite = ResourcesManager.instance.GetCharacterSprite(person.id, CharacterSpritePart.character);
 
 
@@ -176,7 +176,7 @@ public class PersonCard : MonoBehaviour {
     }
 
     //VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    MenuController.instance.OpenMenuOnStatus(GlobalData.instance.GetCurrentRelationship().id);
+    MenuController.instance.OpenMenuOnStatus(person.id);
 
     //UIController.instance.coupleStatusScreen.Initialize(GlobalData.instance.GetCurrentRelationship());
     //UIController.instance.coupleStatusScreen.panel.ShowPanel();

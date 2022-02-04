@@ -13,9 +13,6 @@ public class GameController : MonoBehaviour {
 
   public ItemSelectorScreen itemSelectorScreen;
 
-  public ParticleGenerator babiesParticleGenerator;
-  public Image[] engagementScreenImages;
-  public GameObject engagementScreen;
   public bool skipIntro;
 
 
@@ -25,31 +22,23 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
-    if (VsnSaveSystem.GetIntVariable("minigame_ended") == 1) {
-      VsnSaveSystem.SetVariable("minigame_ended", 0);
-      UIController.instance.UpdateUI();
-      VsnController.instance.StartVSN("back_from_minigame");
-    } else {
+    GlobalData.instance.InitializeChapter();
 
-      //GlobalData.instance.InitializeChapter();
-      GlobalData.instance.InitializeChapterAlpha();
-
-      if(GlobalData.instance.saveToLoad != -1) {
-        // LOAD DATA FROM SAVE
-        VsnSaveSystem.Load(GlobalData.instance.saveToLoad);
-        GlobalData.instance.LoadPersistantGlobalData();
-        GlobalData.instance.saveToLoad = -1;
-      }
-
-      UIController.instance.UpdateUI();
-
-      if(skipIntro) {
-        VsnSaveSystem.SetVariable("day", 2);
-        VsnSaveSystem.SetVariable("hide_tutorials", skipIntro);
-        //VsnController.instance.StartVSN("cap1_dia1");
-      }
-      VsnController.instance.StartVSN("select_daytime_interaction");
+    if(GlobalData.instance.saveToLoad != -1) {
+      // LOAD DATA FROM SAVE
+      VsnSaveSystem.Load(GlobalData.instance.saveToLoad);
+      GlobalData.instance.LoadPersistantGlobalData();
+      GlobalData.instance.saveToLoad = -1;
     }
+
+    UIController.instance.UpdateUI();
+
+    if(skipIntro) {
+      VsnSaveSystem.SetVariable("day", 2);
+      VsnSaveSystem.SetVariable("hide_tutorials", skipIntro);
+      //VsnController.instance.StartVSN("cap1_dia1");
+    }
+    VsnController.instance.StartVSN("select_daytime_interaction");
   }
 
 
@@ -113,29 +102,4 @@ public class GameController : MonoBehaviour {
     }
   }
 
-
-  
-
-  public void ShowEngagementScreen(int babies) {
-    VsnAudioManager.instance.PlaySfx("date_success");
-
-    engagementScreenImages[0].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentBoy().faceId);
-    engagementScreenImages[1].sprite = ResourcesManager.instance.GetFaceSprite(GlobalData.instance.CurrentGirl().faceId);
-    babiesParticleGenerator.particlesToGenerate = babies;
-    engagementScreen.SetActive(true);
-    babiesParticleGenerator.DeleteSons();
-    StartCoroutine(ShowEngagementScreenAnimation(10f));
-  }
-
-  public IEnumerator ShowEngagementScreenAnimation(float waitTime){
-    VsnController.instance.state = ExecutionState.WAITING;
-    yield return new WaitForSeconds(waitTime);
-    VsnController.instance.state = ExecutionState.PLAYING;
-    HideEngagementScreen();
-  }
-
-  public void HideEngagementScreen() {
-    engagementScreen.SetActive(false);
-    babiesParticleGenerator.DeleteSons();
-  }
 }

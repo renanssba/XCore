@@ -4,23 +4,36 @@ using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour {
 
-  //public GameObject[] buttons;
-  public ScreenTransitions loadPanel;
-  public ScreenTransitions languageSelectPanel;
+  [Header("- Panels -")]
+  public Panel loadPanel;
+  public Panel languageSelectPanel;
+  public Panel buttonsPanel;
   public Panel optionsPanel;
+
+  [Header("- Elements -")]
+  public GameObject[] languageButtons;
+  public Transform logoImage;
 
 
   void Start(){
     VsnSaveSystem.CleanAllData();
-    VsnAudioManager.instance.PlayMusic("observacao_intro", "observacao_loop");
+    VsnAudioManager.instance.PlayMusic("", "XCore1 Opening");
     if(PlayerPrefs.GetInt("initialized_language", 0) == 1) {
-      // if language is already initialized
       languageSelectPanel.gameObject.SetActive(false);
+      Time.timeScale = 1f;
+      StartCoroutine(LogoAnimation());
     } else {
       // if language is not initialized, show language select panel
       languageSelectPanel.gameObject.SetActive(true);
     }
-    //languageSelectPanel.gameObject.SetActive(true); //DEBUG, while there's no Options screen to select language
+  }
+
+  public IEnumerator LogoAnimation() {
+    yield return new WaitForSeconds(0.1f);
+    logoImage.transform.AnimTweenPopAppear();
+
+    yield return new WaitForSeconds(1f);
+    buttonsPanel.ShowPanel();
   }
 
   public void CloseLanguageSelectPanel() {

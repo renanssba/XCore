@@ -29,6 +29,7 @@ public class Person : Battler {
 
   protected int initialMaxSp;
   public int sp;
+  public int skillPoints;
 
   public string favoriteMatter;
   public string mostHatedMatter;
@@ -219,6 +220,17 @@ public class Person : Battler {
 
   public override void TakeDamage(int value) {
     BattleController.instance.DamagePartyHp(value);
+  }
+
+  public Relationship[] GetRelationships() {
+    /// TODO: Implement
+    List<Relationship> myRelationships = new List<Relationship>();
+    foreach(Relationship rel in GlobalData.instance.relationships) {
+      if(rel.people[0] == this || rel.people[1] == this) {
+        myRelationships.Add(rel);
+      }
+    }
+    return myRelationships.ToArray();
   }
 }
 

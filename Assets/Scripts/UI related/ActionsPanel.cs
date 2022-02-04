@@ -112,6 +112,8 @@ public class ActionsPanel : MonoBehaviour {
         skillButtons[i].gameObject.SetActive(false);
       }
     }
+    skillButtons[1].gameObject.SetActive(false);
+    skillButtons[2].gameObject.SetActive(false);
   }
 
   public void SetupItemButtons() {

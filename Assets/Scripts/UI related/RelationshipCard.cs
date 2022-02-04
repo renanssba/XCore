@@ -119,7 +119,7 @@ public class RelationshipCard : MonoBehaviour {
   }
 
 
-  public void ClickRelationshipCard() {
-    MenuController.instance.OpenMenuOnStatus(relationship.id);
-  }
+  //public void ClickRelationshipCard() {
+  //  MenuController.instance.OpenMenuOnStatus(relationship.id);
+  //}
 }

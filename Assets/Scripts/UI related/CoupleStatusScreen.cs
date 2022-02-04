@@ -8,17 +8,25 @@ public class CoupleStatusScreen : MonoBehaviour {
 
   public static CoupleStatusScreen instance;
 
+  [Header("- Data -")]
+  public Person statusPerson;
+
+  [Header("- Panels -")]
   public ScreenTransitions panel;
-  public Relationship relationship;
-  public RelationshipCard relationshipCard;
   public PersonCard personCard;
   public SkilltreeScreen skilltreeScreen;
+
+  [Header("- Relationship Cards -")]
+  //public RelationshipCard relationshipCard;
+  public GameObject relationshipCardPrefab;
+  public Transform relationshipsContent;
 
   [Header("- Skilltree Button -")]
   public Button skilltreeButton;
   public Image skilltreeButtonShade;
   public GameObject unusedBondPointsIcon;
 
+  [Header("- Skill Colors -")]
   public Color activeSkillButtonColor;
   public Color passiveSkillButtonColor;
   public Color debuffSkillButtonColor;
@@ -31,51 +39,58 @@ public class CoupleStatusScreen : MonoBehaviour {
     instance = this;
   }
 
-  public void Initialize(Relationship newRelationship) {
+  public void Initialize(Person personToAnalyze) {
     instance = this;
 
-    relationship = newRelationship;
+    statusPerson = personToAnalyze;
     UpdateUI();
   }
 
   public void UpdateUI() {
-    relationshipCard.Initialize(relationship);
-    personCard.Initialize(relationship.GetBoy());
-    coupleHpText.text = relationship.GetMaxHp().ToString();
+    personCard.Initialize(statusPerson);
+    coupleHpText.text = statusPerson.MaxHP().ToString();
 
     if(BattleController.instance.IsBattleHappening()){
       skilltreeButtonShade.gameObject.SetActive(true);
       unusedBondPointsIcon.SetActive(false);
     } else {
       skilltreeButtonShade.gameObject.SetActive(false);
-      unusedBondPointsIcon.SetActive(relationship.bondPoints != 0);
-    }    
+      unusedBondPointsIcon.SetActive(statusPerson.skillPoints != 0);
+    }
+
+    /// relationship cards
+    relationshipsContent.ClearChildren();
+    foreach(Relationship rel in statusPerson.GetRelationships()) {
+      GameObject newobj = Instantiate(relationshipCardPrefab, relationshipsContent);
+      newobj.GetComponentInChildren<RelationshipCard>().Initialize(rel);
+    }
+    //relationshipCard.Initialize(statusPerson);
   }
 
 
 
   public void ClickRightCoupleButton() {
-    int initialRelationship = relationship.id;
-    int relationshipId = initialRelationship;
+    int initialPerson = statusPerson.id;
+    int personId = initialPerson;
 
     SfxManager.StaticPlaySelectSfx();
-    relationshipId++;
-    if(relationshipId >= GlobalData.instance.relationships.Length) {
-      relationshipId = 0;
+    personId++;
+    if(personId >= GlobalData.instance.people.Count) {
+      personId = 0;
     }
-    Initialize(GlobalData.instance.relationships[relationshipId]);
+    Initialize(GlobalData.instance.people[personId]);
   }
 
   public void ClickLeftCoupleButton() {
-    int initialRelationship = relationship.id;
-    int relationshipId = initialRelationship;
+    int initialPerson = statusPerson.id;
+    int personId = initialPerson;
 
     SfxManager.StaticPlaySelectSfx();
-    relationshipId--;
-    if(relationshipId < 0) {
-      relationshipId = GlobalData.instance.relationships.Length - 1;
+    personId--;
+    if(personId < 0) {
+      personId = GlobalData.instance.people.Count - 1;
     }
-    Initialize(GlobalData.instance.relationships[relationshipId]);
+    Initialize(GlobalData.instance.people[personId]);
   }
 
   public void ClickExitButton() {

@@ -1,34 +1,36 @@
-﻿if daytime == 0
-  goto manha
-endif
-if daytime == 1
-  goto tarde
-endif
-if daytime == 2
-  goto noite
-endif
+﻿// if daytime == 0
+  // goto manha
+// endif
+// if daytime == 1
+  // goto tarde
+// endif
+// if daytime == 2
+  // goto noite
+// endif
 
 
 waypoint manha
 reset_pins_board "base"
-set_interaction_pin 0 true "cap1_conversa_agnes" "cap1_interaction_pins/set_pin_location_3"
-set_interaction_pin 1 true "cap1_conversa_maya" "cap1_interaction_pins/set_pin_location_1"
+set_interaction_pin 0 true "academia" "Academia"
+set_interaction_pin 1 true "refeitorio" "Refeitório"
+set_interaction_pin 2 true "shop" "Escritório da Lara"
+set_interaction_pin 3 true "rest_action" "Quarto"
 goto end
 
 
-waypoint tarde
-reset_pins_board "base"
-/// change bg to afternoon
-set_interaction_pin 0 true "cap1_conversa_agnes" "cap1_interaction_pins/set_pin_location_3"
-set_interaction_pin 1 true "cap1_conversa_maya" "cap1_interaction_pins/set_pin_location_1"
-goto end
+// waypoint tarde
+// reset_pins_board "base"
+// /// change bg to afternoon
+// set_interaction_pin 0 true "cap1_conversa_agnes" "cap1_interaction_pins/set_pin_location_3"
+// set_interaction_pin 1 true "cap1_conversa_maya" "cap1_interaction_pins/set_pin_location_1"
+// goto end
 
 
-waypoint noite
-reset_pins_board "base"
-/// change bg to night
-set_interaction_pin 0 true "cap1_conversa_agnes" "cap1_interaction_pins/set_pin_location_3"
-set_interaction_pin 1 true "cap1_conversa_maya" "cap1_interaction_pins/set_pin_location_1"
-goto end
+// waypoint noite
+// reset_pins_board "base"
+// /// change bg to night
+// set_interaction_pin 0 true "cap1_conversa_agnes" "cap1_interaction_pins/set_pin_location_3"
+// set_interaction_pin 1 true "cap1_conversa_maya" "cap1_interaction_pins/set_pin_location_1"
+// goto end
 
 waypoint end

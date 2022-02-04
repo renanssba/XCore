@@ -29,7 +29,6 @@ public class InteractionPin : MonoBehaviour {
   }
 
   public void SetSprite(Sprite s) {
-    Person p = GlobalData.instance.people[charId];
     characterIcon.sprite = s;
   }
 
@@ -48,7 +47,7 @@ public class InteractionPin : MonoBehaviour {
   public void ClickInteractionPin() {
     SfxManager.StaticPlayConfirmSfx();
     GlobalData.instance.currentRelationshipId = charId-1;
-    UIController.instance.relationshipUpAnimationCard.Initialize(GlobalData.instance.GetCurrentRelationship());
+    //UIController.instance.relationshipUpAnimationCard.Initialize(GlobalData.instance.GetCurrentRelationship());
     vsnEntryPoint.LoadScript();
   }
 }

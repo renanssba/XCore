@@ -54,9 +54,9 @@ public class MenuController : MonoBehaviour {
     BlockTabsNavigation(false);
   }
 
-  public void OpenMenuOnStatus(int relationshipId) {
+  public void OpenMenuOnStatus(int personId) {
     currentTab = MenuTabs.status;
-    coupleStatusScreen.Initialize(GlobalData.instance.relationships[relationshipId]);
+    coupleStatusScreen.Initialize(GlobalData.instance.people[personId]);
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");

@@ -1,90 +1,22 @@
 ﻿fade_music 0 0.7
 fade_out 0.7
-bg "heaven"
+bg "office"
 wait 0.5
 fade_in 0.7
 
-play_music "graciel_intro" "graciel_loop"
+set_var shop_level 1
 
-goto_script "fertiliel_enter" 0.25
-goto_script "char_right_enter" "graciel"
+//play_music "graciel_intro" "graciel_loop"
 
-// character char_right "graciel"
-// char_move_x char_right 1.5
-// char_move_x char_right 0.5 0.7
-// char_alpha char_right 0 0
-// char_alpha char_right 1 0.7
-//wait 0.7
-
-/// DEBUG: GET MUCH MONEY
-// add_var money 1000
-// update_ui
-
-if shop_level == 0
-  say "char_name/graciel" "shop/say_0"
-  say "char_name/fertiliel" "shop/say_1"
-  say "char_name/graciel" "shop/say_2"
-  say "shop/say_3"
-  say "char_name/fertiliel" "shop/say_4"
-  say "char_name/graciel" "shop/say_5"
-  say "char_name/fertiliel" "shop/say_6"
-  say "char_name/graciel" "shop/say_7"
-  play_sfx "relationship_up"
-  add_item "chocolate_cake" 3
-  say "char_name/graciel" "shop/say_8"
-  say "char_name/fertiliel" "shop/say_9"
-  say "char_name/graciel" "shop/say_10"
-  say "shop/say_11"
-  say "char_name/fertiliel" "shop/say_12"
-  say "char_name/graciel" "shop/say_13"
-  set_var shop_level 1
-  update_ui
-  goto store_choices
-endif
-if shop_unlock_advance == 1
-  say "char_name/graciel" "shop/say_14"
-  say "char_name/fertiliel" "shop/say_15"
-  say "char_name/graciel" "shop/say_16"
-  say "char_name/fertiliel" "shop/say_17"
-  say "char_name/graciel" "shop/say_18"
-  play_sfx "relationship_up"
-  add_item "calming_tea" 1
-  play_sfx "relationship_up"
-  add_item "first_aid" 1
-  say "char_name/fertiliel" "shop/say_19"
-  say "char_name/graciel" "shop/say_20"
-  say "shop/say_21"
-  say "char_name/fertiliel" "shop/say_22"
-  set_var shop_level 2
-  set_var shop_unlock_advance 2
-  update_ui
-  goto store_choices
-endif
-if shop_unlock_final == 1
-  say "char_name/graciel" "shop/say_23"
-  say "char_name/fertiliel" "shop/say_24"
-  say "char_name/graciel" "shop/say_25"
-  say "char_name/fertiliel" "shop/say_26"
-  say "char_name/graciel" "shop/say_27"
-  say "shop/say_28"
-  say "char_name/fertiliel" "shop/say_29"
-  say "char_name/graciel" "shop/say_30"
-  say "shop/say_31"
-  set_var shop_level 3
-  set_var shop_unlock_final 2
-  update_ui
-  goto store_choices
-endif
-
-say_auto "char_name/graciel" "shop/say_32"
-
+goto_script "char_right_enter" "Lara face"
+say_auto "Lara" "Olá, cadete. Como posso ajudá-lo?"
 goto store_choices
 
 
 waypoint store_loop
-say_auto "char_name/graciel" "shop/say_33"
+say_auto "Lara" "Quer fazer mais algum negócio?"
 waypoint store_choices
-choices "shop/choices_0_0" buy "shop/choices_0_1" sell "shop/choices_0_2" end
+choices "Comprar" buy "Vender" sell "Sair" end
 
 
 waypoint buy
@@ -94,10 +26,10 @@ goto_script "shop_movement" "close_buy_screen"
 
 if item_id != -1
   if item_price <= money
-    say_auto "char_name/graciel" "shop/say_34"
-    choices "choices/yes" comprar_sim "choices/no" store_loop
+    say_auto "Lara" "Você quer comprar <color=#D73022>\vsn(item_name)</color> por <sprite=\qAttributes\q index=4><color=#D73022>\vsn(item_price)</color>?"
+    choices "Sim" comprar_sim "Não" store_loop
   else
-    say "shop/say_35"
+    say "Me desculpe, parece que você não tem o suficiente para comprar este item."
   endif
 else
   goto store_loop
@@ -107,7 +39,7 @@ goto store_loop
 
 waypoint sell
 if #inventory_empty == 1
-  say "shop/say_36"
+  say "Você não tem nenhum item para vender."
 goto store_loop
 endif
 
@@ -115,8 +47,8 @@ goto_script "shop_movement" "open_buy_screen"
 show_shop true "sell"
 goto_script "shop_movement" "close_buy_screen"
 if item_id != -1
-  say_auto "char_name/graciel" "shop/say_37"
-  choices "choices/yes" vender_sim "choices/no" store_loop
+  say_auto "Lara" "Você quer vender <color=#D73022>\vsn(item_name)</color> por <sprite=\qAttributes\q index=4><color=#D73022>\vsn(item_price)</color>?"
+  choices "Sim" vender_sim "Não" store_loop
 else
   goto store_loop
 endif
@@ -139,13 +71,13 @@ update_ui
 play_sfx "ui_money"
 check_sell_wrong_item
 add_item item_id -1 false
-say "char_name/graciel" "shop/say_38"
+say "Lara" "Obrigada, iremos encontrar outro uso para esse recurso."
 goto store_loop
 
 // waypoint
 
 waypoint end
-say "char_name/graciel" "shop/say_39"
+say "Lara" "Estarei à disposição sempre que precisar."
 
 fade_music 0 0.7
 fade_out 0.7

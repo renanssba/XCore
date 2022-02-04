@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public enum StageName {
   TitleScreen
@@ -54,7 +58,7 @@ public class Utils {
     int n = list.Count;
     while(n > 1) {
       n--;
-      int k = Random.Range(0, n + 1);
+      int k = UnityEngine.Random.Range(0, n + 1);
       int value = list[k];
       list[k] = list[n];
       list[n] = value;
@@ -73,39 +77,6 @@ public class Utils {
     }
   }
 
-  public static string GetRandomFamilyMember() {
-    int selected = Random.Range(0, 4);
-    switch(selected) {
-      case 0:
-        return "Minha tia ";
-      case 1:
-        return "Minha mãe ";
-      case 2:
-        return "Meu pai ";
-      case 3:
-        return "Meu avô ";
-    }
-    return "";
-  }
-
-  public static string GetRandomDisaster() {
-    int selected = Random.Range(0, 6);
-    switch(selected) {
-      case 0:
-        return "perdeu o emprego";
-      case 1:
-        return "sofreu graves ferimentos";
-      case 2:
-        return "entrou em depressão";
-      case 3:
-        return "virou alcoólatra";
-      case 4:
-        return "perdeu sua casa";
-      case 5:
-        return "se afogou em dívidas";
-    }
-    return "";
-  }
 
   public static string AddSuggestedTextMark(string text) {
     return AddSuggestedTextMark(text, true);
@@ -428,6 +399,19 @@ public class Utils {
 }
 
 public static class MyExtensions {
+  private static System.Random rng = new System.Random();
+
+  public static void Shuffle<T>(this IList<T> list) {
+    int n = list.Count;
+    while(n > 1) {
+      n--;
+      int k = rng.Next(n + 1);
+      T value = list[k];
+      list[k] = list[n];
+      list[n] = value;
+    }
+  }
+
   public static void SetAlpha(this Image img, float alpha) {
     Color c = img.color;
     c.a = alpha;
@@ -438,6 +422,32 @@ public static class MyExtensions {
     Color c = renderer.color;
     c.a = alpha;
     renderer.color = c;
+  }
+
+  public static Vector2 Rotate(this Vector2 v, float degrees) {
+    float radians = degrees * Mathf.Deg2Rad;
+    float sin = Mathf.Sin(radians);
+    float cos = Mathf.Cos(radians);
+
+    float tx = v.x;
+    float ty = v.y;
+
+    return new Vector2(cos * tx - sin * ty, sin * tx + cos * ty);
+  }
+
+  public static Vector3 Rotate(this Vector3 v, float degrees) {
+    float radians = degrees * Mathf.Deg2Rad;
+    float sin = Mathf.Sin(radians);
+    float cos = Mathf.Cos(radians);
+
+    float tx = v.x;
+    float ty = v.y;
+
+    return new Vector3(cos * tx - sin * ty, sin * tx + cos * ty, 0f);
+  }
+
+  public static Vector2 ReflectFromNormal(this Vector2 v, Vector2 normal) {
+    return v - 2 * Vector2.Dot(v, normal) * normal;
   }
 
   public static Toggle GetSelected(this ToggleGroup group) {
@@ -458,5 +468,162 @@ public static class MyExtensions {
       count++;
     }
     return -1;
+  }
+
+
+  public static Vector3 SnapToGrid(this Vector3 position) {
+    return new Vector3(Mathf.FloorToInt(position.x + 0.5f), Mathf.FloorToInt(position.y + 0.5f), 0f);
+  }
+
+  public static Vector3Int SnapToGridInt(this Vector3 position) {
+    return new Vector3Int(Mathf.FloorToInt(position.x + 0.5f), Mathf.FloorToInt(position.y + 0.5f), 0);
+  }
+
+  public static Vector2 SnapToGrid(this Vector2 position) {
+    return new Vector2(Mathf.FloorToInt(position.x + 0.5f), Mathf.FloorToInt(position.y + 0.5f));
+  }
+
+  public static Vector2Int SnapToGridInt(this Vector2 position) {
+    return new Vector2Int(Mathf.FloorToInt(position.x + 0.5f), Mathf.FloorToInt(position.y + 0.5f));
+  }
+
+  public static Vector3 GridToWorldPosition(this Vector3Int tilePosition) {
+    return new Vector3((float)tilePosition.x - 0.5f, (float)tilePosition.y - 0.5f, 0f);
+  }
+
+  public static Vector2 GridToWorldPosition(this Vector2Int tilePosition) {
+    return new Vector2((float)tilePosition.x - 0.5f, (float)tilePosition.y - 0.5f);
+  }
+
+  // return the angle in a float format: from 0 to 360
+  public static float GetAngleRotationZeroToThreeSixty(this Vector2 dist) {
+    float angle = Vector2.Angle(dist, Vector2.right);
+    if(dist.y < 0f) {
+      return 360f - angle;
+    }
+    return angle;
+  }
+
+  public static Vector3Int ToVector3Int(this Vector2Int value) {
+    return new Vector3Int(value.x, value.y, 0);
+  }
+
+  public static string CleanObjectName(this string value) {
+    int index = value.IndexOf("(");
+    if(index < 0) {
+      return value;
+    }
+    return value.Substring(0, index).Trim();
+  }
+
+
+  public static int CountNonNull(this GameObject[] array) {
+    int count = 0;
+    for(int i = 0; i < array.Length; i++) {
+      if(array[i] != null) count++;
+    }
+    return 1;
+  }
+
+  public static int CountNull(this GameObject[] array) {
+    int count = 0;
+    for(int i = 0; i < array.Length; i++) {
+      if(array[i] == null) count++;
+    }
+    return 1;
+  }
+
+  public static GameObject FindObject(this GameObject parent, string name) {
+    Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
+    foreach(Transform t in trs) {
+      if(t.name == name) {
+        return t.gameObject;
+      }
+    }
+    return null;
+  }
+
+  public static bool Contains(this List<Vector3> list, Vector3 pos) {
+    foreach(Vector3 v in list) {
+      if(Vector3.SqrMagnitude(v - pos) < 0.001f) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static bool Contains(this string[] array, string text) {
+    foreach(string s in array) {
+      if(s == text) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static int FindId(this Material[] array, Material mat) {
+    for(int i = 0; i < array.Length; i++) {
+      if(array[i] == mat) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static int FindId(this Sprite[] array, Sprite sprite) {
+    for(int i = 0; i < array.Length; i++) {
+      if(array[i] == sprite) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+
+  public static void ClearChildren(this Transform content) {
+    int childCount = content.childCount;
+
+    for(int i = 0; i < childCount; i++) {
+      GameObject.Destroy(content.GetChild(i).gameObject);
+    }
+  }
+
+  public static string ToTitleCase(this string name) {
+    return name[0].ToString().ToUpper() + name.ToString().Substring(1, name.Length - 1).ToLower();
+  }
+
+  public static TileBase GetTile(this Tilemap tilemap, Vector2Int pos) {
+    return tilemap.GetTile(new Vector3Int(pos.x, pos.y, 0));
+  }
+
+  public static Vector3 CellToWorld(this Tilemap tilemap, Vector2Int cellPosition) {
+    return tilemap.CellToWorld(cellPosition.ToVector3Int());
+  }
+
+  public static Vector3 CellToWorld(this Grid grid, Vector2Int cellPosition) {
+    return grid.CellToWorld(cellPosition.ToVector3Int());
+  }
+
+  public static void SetTile(this Tilemap tilemap, Vector2Int position, TileBase tile) {
+    tilemap.SetTile(position.ToVector3Int(), tile);
+  }
+}
+
+public static class TweenAnimations {
+  public static void AnimTweenPopAppear(this Transform t) {
+    t.gameObject.transform.localScale = Vector3.zero;
+    t.transform.DOScale(1.1f, 0.5f).SetUpdate(true)
+      .OnComplete(() => {
+        t.transform.DOScale(1f, 0.2f).SetUpdate(true);
+      });
+  }
+
+  public static void SubtlePulseAnimation(this Transform t) {
+    DOTween.Kill(t.gameObject.transform);
+    t.gameObject.transform.localScale = Vector3.one;
+    t.transform.DOScale(1.03f, 0.12f).SetUpdate(true)
+      .OnComplete(() => {
+        t.transform.DOScale(1f, 0.12f).SetUpdate(true);
+      });
   }
 }

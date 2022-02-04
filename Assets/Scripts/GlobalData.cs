@@ -30,7 +30,7 @@ public class GlobalData : MonoBehaviour {
     DontDestroyOnLoad(gameObject);
   }
 
-  public void InitializeChapterAlpha() {
+  public void InitializeChapter() {
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
@@ -70,17 +70,22 @@ public class GlobalData : MonoBehaviour {
     ResourcesManager.instance.GenerateCharacterSprites(new string[] {"marcus", "agnes", "maya"});
 
 
-    relationships = new Relationship[2];
+    relationships = new Relationship[3];
     for(int i = 0; i < girlsToGenerate; i++) {
       relationships[i] = new Relationship {
         id = i,
         people = new Person[] { people[0], people[i + 1] }
       };
     }
+    relationships[2] = new Relationship {
+      id = 2,
+      people = new Person[] { people[1], people[2] }
+    };
 
     /// RELATIONSHIP SKILLTREES
     relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 14, 23, 26, 26, 27, 26, 30 });
     relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 32, 29, 27, 28, 27, 26, 30 });
+    relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 32, 29, 27, 28, 27, 26, 30 });
 
     relationships[1].skilltree.skills[9].affectsPerson = SkillAffectsCharacter.boy;
     //VsnSaveSystem.SetVariable("money", 200);

@@ -307,14 +307,7 @@ public class UIController : MonoBehaviour {
     interactionPins[id].gameObject.SetActive(active);
     if(active) {
       interactionPins[id].SetPinContent(scriptToLoad, location);
-      interactionPins[id].ResetSprite();
-    }
-  }
-
-  public void SetInteractionPinSprite(int id, string spriteName) {
-    Sprite s = Resources.Load<Sprite>("Characters/" + spriteName);
-    if(s != null) {
-      interactionPins[id].SetSprite(s);
+      //interactionPins[id].ResetSprite();
     }
   }
 

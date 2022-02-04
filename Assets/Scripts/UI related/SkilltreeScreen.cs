@@ -30,7 +30,8 @@ public class SkilltreeScreen : MonoBehaviour {
 
 
   public void Initialize() {
-    relationship = CoupleStatusScreen.instance.relationship;
+    // TODO: fix this
+    //relationship = CoupleStatusScreen.instance.statusPerson;
     UpdateUI();
   }
 
