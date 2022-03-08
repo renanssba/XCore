@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 
-public class GameController : MonoBehaviour {
+public class RoutineController : MonoBehaviour {
 
-  public static GameController instance;
+  public static RoutineController instance;
 
   public ItemSelectorScreen itemSelectorScreen;
 
