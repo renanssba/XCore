@@ -29,6 +29,7 @@ public class TitleController : MonoBehaviour {
   }
 
   public IEnumerator LogoAnimation() {
+    logoImage.transform.localScale = Vector3.zero;
     yield return new WaitForSeconds(0.1f);
     logoImage.transform.AnimTweenPopAppear();
 

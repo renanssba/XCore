@@ -1,0 +1,133 @@
+fade_out 1
+say "" "Academia de pilotos de Mark1 da Duratron"
+bg "externa academia provisorio"
+fade_in 1
+wait 1
+say "CADETE" "Depois de árduos 4 anos de treinamento finalmente hoje é o dia da verdade."
+//Cena alistamento
+
+fade_out 1
+bg "alistamento"
+fade_in 1
+wait 1
+say "CADETE" "(Olhando esse cartaz eu lembro do motivo por que vim parar aqui.)"
+say "CADETE" "(Eu até que me convenci, por um tempo, dessa propaganda toda da Coretex sobre se alistar e ajudar a levar a paz e a ordem às terras sem lei das colônias.)"
+say "CADETE" "(Mas a verdade mesmo é que eu não tinha dinheiro e nem podia contar com ninguém nesse mundo para me ajudar.)"
+say "CADETE" "(E calhou que ganhei do governo a bolsa de estudo. E como eu não tinha um plano B para minha vida cá estou.)"
+say "CADETE" "(Eu fiquei me perguntando se essa era a carreira que eu queria durante todos esses quatro anos. Por que eu decidi continuar com isso?)"
+
+//ESCOLHA 01:
+choices "Pelo ideal de lutar pela paz nas colônias" motivacao_idealismo "Por que não tinha outras expectativas na vida" motivacao_grana
+
+// Script específico da escolha
+waypoint motivacao_idealismo
+set_var motivacao true
+goto motivacao_segue
+
+waypoint motivacao_grana
+set_var motivacao false
+goto motivacao_segue
+
+waypoint motivacao_segue
+say "CADETE" "(Bom, de qualquer forma a minha indecisão se refletiu em meu rendimento.)"
+say "CADETE" "(Resultado: Sou apenas mediano, longe do ideal esperado pela Coretex. Somente se eu passar neste teste poderei ser um piloto de Mark1 e continuar meu treinamento lá na própria base da Coretex.)"
+say "CADETE" "(Igualzinho o Buffon, que conseguiu ser aprovado antes de mim. Se eu quiser rever meu amigo preciso seguir o exemplo dele.)"
+
+//Cena dentro da sala de teste
+fade_out 1
+say "" "O teste ocorrerá na sala dos simuladores e todos os alunos candidatos permanecem enfileirados ao seu lado e atrás de você."
+bg "a bordo heavy-duty nitido"
+fade_in 1
+wait 1
+say "CADETE" "(Foco! Foco!)"
+say "CADETE" "(Essa é a minha última chance aqui. É melhor eu conseguir, porque... Bom, eu não tenho dinheiro para bancar essa academia de pilotos e não há bolsas para os que fracassam no teste final.)"
+goto_script "char_right_enter" "instrutora"
+wait 0.5
+say "INSTRUTORA" "Atenção cadetes, finalmente, após esses quatro anos de árduo treinamento, vamos ver quem dentre vocês estará apto a pilotar um Mark1 daqui em diante. "
+say "INSTRUTORA" "Eu sei que muitos de vocês se dedicaram e estão prontos para o desafio a seguir. A vocês desejo boa sorte."
+//expressão de desdém, como se olhasse para o jogador.
+say "INSTRUTORA" "Por outro lado, eu sei que alguns estão muito aquém do mínimo exigido pela nossa academia. Lamento pelo tempo que estes desperdiçaram aqui."
+say "INSTRUTORA" "Mas a vida é assim. Devemos sempre separar o joio do trigo."
+say "" "A Instrutora olha fixamente para você"
+say "INSTRUTORA" "É isso mesmo que você ouviu."
+say "CADETE" "Eu?"
+say "INSTRUTORA" "É, estou falando com você. É você mesmo!"
+say "" "Você engole em seco e começa a se tremer."
+say "INSTRUTORA" "Sim, você! Como é mesmo seu nome cadete?"
+wait 0.5
+fade_out 1
+show_text_input true "Escolha o nome do seu cadete:"
+set_var charName text_input
+// say "" "O nome esolhido foi: \vsn(charName)"
+//bg "a bordo heavy-duty nitido"
+fade_in 1
+wait 1
+
+say "\vsn(charName)" "\vsn(charName)... senhora"
+say "INSTRUTORA" "Pois é, nunca me dei ao trabalho de me lembrar de seu nome mesmo, tanto faz. "
+say "INSTRUTORA" "Todos vocês prestem atenção, não sejam como o cadete \vsn(charName) aqui. Pelo histórico dele é claro que ele não está preparado, mas a seleção natural hoje vai fazer seu trabalho."
+
+say "\vsn(charName)" "Bruxa maldita"
+say "INSTRUTORA" "Disse alguma coisa cadete?"
+say "\vsn(charName)" "Não... não senhora."
+say "INSTRUTORA" "Sei..."
+goto_script "chars_exit" "instrutora"
+wait 0.5
+fade_out 1
+bg "a bordo da heavy duty ponte de comando nitido"
+fade_in 1
+wait 1
+goto_script "char_right_enter" "instrutora"
+wait 0.5
+goto_script "char_left_enter" "Sprite Lara"
+wait 0.5
+say "INSTRUTORA" "Cadetes, quero lhes apresentar Lara Weber, representando a Coretex, ela pessoalmente irá avaliar seus resultados. "
+say "INSTRUTORA" "Acredito eu que, ciente da nossa excelência e da qualidade de pilotos que formamos, ela veio ver \qin loco\q nossos prodígios."
+//Lara pisca para \vsn(charName).
+say "\vsn(charName)" "(Espera um pouco... impressão minha ou a garota da Coretex sorriu para mim?)"
+say "INSTRUTORA" "A Coretex é ávida por novos talentos, quem sabe hoje a sorte irá sorrir para vocês."
+say "\vsn(charName)" "(Deixa de ser bobo \vsn(charName), é óbvio que ela só está sendo gentil. Ela está sorrindo para todos.)"
+say "\vsn(charName)" "(Ei! Ela piscou? Pra quem? Para mim?)"
+say "INSTRUTORA" "Acelerado, andem, para os simuladores."
+goto_script "chars_exit" "instrutora"
+goto_script "chars_exit" "Sprite Lara"
+fade_out 1
+
+bg "cockpit teste provisorio"
+
+fade_in 1
+wait 1
+say "INSTRUTORA" "Atenção cadetes, vocês já conhecem a interface do simulador, mas vocês receberão as instruções uma vez mais antes do teste final."
+say "INSTRUTORA" "Ah, mas não pensem que estou facilitando. Estou fazendo isso apenas porque vocês usarão neste teste o mais novo modelo de simulador desenvolvido pelo Duratron."
+say "INSTRUTORA" "E que foi generosamente doado pela própria Coretex para a nossa ilustre academia."
+say "INSTRUTORA" "Começar!"
+fade_out 1
+
+bg "a bordo da heavy duty ponte de comando nitido"
+
+say "" "CENA DE COMBATE COM TUTORIAL DO JOGO"
+say "APÓS O JOGADOR VENCER O TUTORIAL, O JOGO RETOMA A VISÃO VN"
+say "" "Após terminar seu teste, todos os cadetes foram chamados individualmente à sala da instrutora para receberem seus resultados. Você foi o último a ser requisitado."
+
+fade_in 1
+wait 1
+
+goto_script "char_right_enter" "instrutora"
+say "INSTRUTORA" "Eu não acredito... como foi possível?"
+say "INSTRUTORA" "\vsn(charName)... você... você passou. Como você fez isso?"
+say "\vsn(charName)" "Eu... eu... passei?"
+say "\vsn(charName)" "UHUUUUUU"
+wait 0.5
+goto_script "chars_exit" "instrutora"
+goto_script "char_left_enter" "Sprite Lara"
+say "LARA" "Senhor \vsn(charName), será que podemos conversar um pouco sobre seu futuro?"
+say "\vsn(charName)" "Eu?"
+say "LARA" "O que acha de ser um piloto da Coretex?"
+say "\vsn(charName)" "Como é que é? Eu, um piloto da Coretex?"
+say "\vsn(charName)" "Mas é claro!"
+say "LARA" "Ótimo, me acompanhe. Nós temos muito o que conversar."
+wait 0.5
+
+fade_out 1
+char_reset_all
+goto_script "select_daytime_interaction"

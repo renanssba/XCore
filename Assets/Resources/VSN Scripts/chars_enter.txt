@@ -1,0 +1,13 @@
+﻿if argsCount > 0
+  goto_script "char_right_enter" "hardwell"
+  wait 0.5
+  goto_script "aelia_enter"
+  wait 0.5
+else
+  character char_right "hardwell"
+  char_move_x char_right 0.75
+  
+  character char_left "aelia"
+  char_flip char_left
+  char_move_x char_left 0.25
+endif

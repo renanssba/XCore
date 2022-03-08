@@ -34,11 +34,13 @@ public class GameController : MonoBehaviour {
     UIController.instance.UpdateUI();
 
     if(skipIntro) {
-      VsnSaveSystem.SetVariable("day", 2);
-      VsnSaveSystem.SetVariable("hide_tutorials", skipIntro);
+      //VsnSaveSystem.SetVariable("day", 2);
+      //VsnSaveSystem.SetVariable("hide_tutorials", skipIntro);
       //VsnController.instance.StartVSN("cap1_dia1");
-    }
-    VsnController.instance.StartVSN("select_daytime_interaction");
+      VsnController.instance.StartVSN("select_daytime_interaction");
+    } else {
+      VsnController.instance.StartVSN("cap0");
+    }    
   }
 
 
