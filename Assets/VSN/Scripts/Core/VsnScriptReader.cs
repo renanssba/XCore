@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using Command;
@@ -399,7 +400,7 @@ public class VsnScriptReader {
     }
 
     if(StringIsNumber(arg)) {
-      float value = float.Parse(arg);
+      float value = float.Parse(arg, CultureInfo.InvariantCulture.NumberFormat);
       return new VsnNumber(value);
     }
 

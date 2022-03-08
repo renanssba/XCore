@@ -48,6 +48,7 @@ public class VsnEffectManager : MonoBehaviour {
   }
 
   public void Fade(float alphaValue, float duration){
+    Debug.LogError("Fade duration: "+duration);
     if(duration != 0) {
       fadeImage.GetComponent<CanvasGroup>().DOFade(alphaValue, duration).SetUpdate(true);
     } else {
