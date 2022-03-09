@@ -8,6 +8,7 @@ using DG.Tweening;
 public enum GameState {
   choosingMovement,
   choosingEngage,
+  battlePhase,
   noInput
 }
 

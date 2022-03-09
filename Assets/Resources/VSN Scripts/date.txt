@@ -227,7 +227,6 @@ endif
 
 waypoint win_date
 enable_input false
-//say "" "Depois de muitos percalços..."
 
 /// Check to unlock achievement
 if #currentDamageTaken == 0
@@ -267,10 +266,6 @@ update_ui
 play_sfx "ui_fail"
 wait 2
 enable_input false
-say "char_name/none" "date/say_6"
-say "char_name/boy" "date/say_7"
-say "char_name/girl" "date/say_8"
-say "char_name/none" "date/say_9"
 
 if exp_accumulated > 0
   say "char_name/none" "date/say_10"

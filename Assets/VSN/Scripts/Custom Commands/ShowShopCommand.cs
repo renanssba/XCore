@@ -8,7 +8,7 @@ namespace Command {
   public class ShowShopCommand : VsnCommand {
 
     public override void Execute() {
-      ItemSelectorScreen itemScreen = RoutineController.instance.itemSelectorScreen;
+      ItemSelectorScreen itemScreen = UIController.instance.itemSelectorScreen;
 
       if(args[0].GetBooleanValue()) {
         switch (args[1].GetStringValue()) {

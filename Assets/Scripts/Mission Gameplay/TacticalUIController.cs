@@ -16,6 +16,7 @@ public class TacticalUIController : MonoBehaviour {
 
   [Header("- Skip Turn Button -")]
   public GameObject skipTurnButton;
+  public GameObject clickMapButton;
 
 
   public void Awake() {
@@ -23,7 +24,16 @@ public class TacticalUIController : MonoBehaviour {
   }
 
   public void Update() {
-    skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput);
+    skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
+                             GameController.instance.gameState != GameState.battlePhase);
+  }
+
+  public void EnterBattlePhase() {
+    clickMapButton.SetActive(false);
+  }
+
+  public void EndBattlePhase() {
+    clickMapButton.SetActive(true);
   }
 
   public void Select(Character character) {
@@ -35,7 +45,7 @@ public class TacticalUIController : MonoBehaviour {
     detailPanel.alpha = 1f;
 
     // face and name
-    characterImage.sprite = TacticalResources.instance.faceSprites[(int)character.id];
+    characterImage.sprite = ResourcesManager.instance.tacticalFaceSprites[(int)character.id];
     characterName.text = character.id.ToString().ToTitleCase();
 
     // hp bar

@@ -30,13 +30,24 @@ public class GlobalData : MonoBehaviour {
     DontDestroyOnLoad(gameObject);
   }
 
+
+  public void Start() {
+    InitializeChapter();
+  }
+
   public void InitializeChapter() {
+    if(VsnSaveSystem.GetBoolVariable("global_data_initialized") == true) {
+      return;
+    }
+    VsnSaveSystem.SetVariable("global_data_initialized", true);
+
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("observation_played", 0);
     VsnSaveSystem.SetVariable("day", 0);
+    
 
     boysToGenerate = 1;
     girlsToGenerate = 2;

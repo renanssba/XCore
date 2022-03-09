@@ -75,8 +75,8 @@ public class ActionButton : MonoBehaviour {
         prefix = nameParts[0] + " ";
       }
 
-      ActionSkin actionSkin = GetActionSkin();
-      nameText.text = prefix + Lean.Localization.LeanLocalization.GetTranslationText("action/button/" + actionSkin.name);
+      /// TODO: Implement correct skill names
+      nameText.text = prefix + Lean.Localization.LeanLocalization.GetTranslationText("action/button/strike");
       iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.damageAttribute];
       iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.damageAttribute];
 
@@ -100,12 +100,6 @@ public class ActionButton : MonoBehaviour {
 
     /// shade
     shade.gameObject.SetActive(!ActionCanBeUsed());
-  }
-
-  public ActionSkin GetActionSkin() {
-    string sexModifier = (person.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + skill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
-    return BattleController.instance.GetActionSkinByName(actionSkinName);
   }
 
   public void UpdateUIAsItem() {

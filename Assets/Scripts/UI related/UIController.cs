@@ -19,6 +19,9 @@ public class UIController : MonoBehaviour {
 
   public TextMeshProUGUI moneyText;
 
+  [Header("- Item Selector Screen -")]
+  public ItemSelectorScreen itemSelectorScreen;
+
   [Header("- Menu Buttons -")]
   public Button[] menuButtons;
   public GameObject[] menuButtonAlertIcons;
@@ -139,19 +142,6 @@ public class UIController : MonoBehaviour {
     //  //enemyHpSlider.value = currentShownHp;
     //  enemyHpText.text = ((int)currentShownHp).ToString();
     //} );
-  }
-
-  public void AnimateStealthValueChange(int previousValue, int currentValue) {
-    for(int i=0; i<stealthEyeIcons.Length; i++) {
-      if(i < 3-currentValue) {
-        stealthEyeIcons[i].sprite = ResourcesManager.instance.stealthEyeSprites[1];
-        if(i >= 3-previousValue) {
-          stealthEyeIcons[i].transform.DOScale(1.3f, 0.5f).SetLoops(2, LoopType.Yoyo);
-        }
-      } else {
-        stealthEyeIcons[i].sprite = ResourcesManager.instance.stealthEyeSprites[0];
-      }
-    }
   }
 
   public void ShowDateProgressUI() {

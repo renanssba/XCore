@@ -280,9 +280,7 @@ public class VsnUIManager : MonoBehaviour {
       if(duration != 0){
         characterImage.DOFade(alphaValue, duration);
       } else {
-        characterImage.color = new Color(characterImage.color.r,
-                                         characterImage.color.g,
-                                         characterImage.color.b, alphaValue);
+        characterImage.SetAlpha(alphaValue);
       }
     }
   }
@@ -332,17 +330,23 @@ public class VsnUIManager : MonoBehaviour {
     character.transform.localScale = new Vector3(localScale.x * -1f, localScale.y, localScale.z);
   }
 
-  public void ScaleCharacterSprite(string characterLabel, float scale){
+  public void ScaleCharacter(string characterLabel, float scaleValue, float duration) {
     VsnCharacter character = FindCharacterByLabel(characterLabel);
 
-    if(character == null){
-      Debug.LogError("Error scaling character " + characterLabel + ". Character not found with this label.");
-      return;
-    }
+    Vector3 currentScale = character.transform.localScale;
+    Vector3 endScale = scaleValue * new Vector3(currentScale.x / Mathf.Abs(currentScale.x),
+                                                currentScale.y / Mathf.Abs(currentScale.y),
+                                                currentScale.z / Mathf.Abs(currentScale.z));
 
-    Vector3 multipliedScale = scale * character.transform.localScale;
-    character.transform.localScale = multipliedScale;
+    if(character != null) {
+      if(duration != 0) {
+        character.GetComponent<RectTransform>().DOScale(endScale, duration).SetUpdate(true);
+      } else {
+        character.GetComponent<RectTransform>().localScale = endScale;
+      }
+    }
   }
+
 
 
   public void ResetAllCharacters(){

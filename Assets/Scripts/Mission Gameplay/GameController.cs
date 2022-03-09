@@ -98,6 +98,10 @@ public class GameController : MonoBehaviour {
   [Header("- Camera -")]
   public CameraController cameraController;
 
+  [Header("- Battle Setup -")]
+  public Camera[] cameras;
+  public BattleController battleController;
+
 
   public Character CurrentCharacter {
     get { return allCharacters[currentCharacterId]; }
@@ -138,15 +142,13 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickedMap() {
+    if(gameState == GameState.noInput || gameState == GameState.battlePhase) {
+      return;
+    }
     Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
     Vector3 pos = BoardController.instance.floorBoard.layoutGrid.CellToWorld(clickedGridPos);
 
     ClickDamageCharacter();
-
-    if(gameState == GameState.noInput) {
-      return;
-    }
-
 
     if(BoardController.instance.selectionBoard.GetTile(new Vector2Int(clickedGridPos.x, clickedGridPos.y)) == null) {
       Debug.LogWarning("Error SFX");
@@ -341,4 +343,20 @@ public class GameController : MonoBehaviour {
     return true;
   }
 
+
+  public void StartBattle() {
+    cameras[0].gameObject.SetActive(false);
+    cameras[1].gameObject.SetActive(true);
+    gameState = GameState.battlePhase;
+    TacticalUIController.instance.Select(null);
+    TacticalUIController.instance.EnterBattlePhase();
+    BoardController.instance.gameObject.SetActive(false);
+  }
+
+  public void EndBattle() {
+    cameras[0].gameObject.SetActive(true);
+    cameras[1].gameObject.SetActive(false);
+    TacticalUIController.instance.EndBattlePhase();
+    BoardController.instance.gameObject.SetActive(true);
+  }
 }

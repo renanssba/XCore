@@ -74,10 +74,12 @@ public class JoystickController : MonoBehaviour {
   }
 
   public void SelectStartingObject() {
+    return; /// TODO: Implement
     Utils.SelectUiElement(CurrentContext().startingSelectedObject);
   }
 
   public void SelectLastSelectedObject() {
+    return; /// TODO: Implement
     Utils.SelectUiElement(CurrentContext().lastSelectedObject);
   }
 

@@ -36,21 +36,25 @@ public class VsnCharacterData {
 
 
 public class ResourcesManager : MonoBehaviour {
+  [Header("- Character Sprites -")]
   public Sprite[] faceSprites;
   public Sprite[] fixedCharactersFaceSprites;
+  public Sprite[] tacticalFaceSprites;
+  public List<CharacterSpriteCollection> characterSpritesCollections;
+
+  [Header("- UI Sprites -")]
   public Sprite[] cardSprites;
   public Sprite[] itemSprites;
   public Sprite[] attributeSprites;
   public Sprite[] daytimeSprites;
-  public GameObject[] baseActorPrefab;
   public Sprite unknownSprite;
   public Color[] attributeColor;
   public Sprite[] buttonSprites;
+
+  [Header("- Misc. -")]
+  public GameObject[] baseActorPrefab;
   public Sprite[] heartlockSprites;
-  public Sprite[] stealthEyeSprites;
-  public Vector2[] heartPositionInActors;
   public VsnCharacterData[] vsnCharacterData;
-  public List<CharacterSpriteCollection> characterSpritesCollections;
 
 
   public static ResourcesManager instance;
@@ -68,19 +72,19 @@ public class ResourcesManager : MonoBehaviour {
     if(id >= characterSpritesCollections.Count) {
       return null;
     }
-    CharacterSpriteCollection col = characterSpritesCollections[id];
+    CharacterSpriteCollection collection = characterSpritesCollections[id];
     switch(spritePart) {
       case CharacterSpritePart.mecha:
-        return col.mechaBody;
+        return collection.mechaBody;
       case CharacterSpritePart.pose_punch:
-        return col.pose_punch;
+        return collection.pose_punch;
       case CharacterSpritePart.pose_shout:
-        return col.pose_shout;
+        return collection.pose_shout;
       case CharacterSpritePart.pose_interact:
-        return col.pose_interact;
+        return collection.pose_interact;
       default:
       case CharacterSpritePart.character:
-        return col.characterBody;
+        return collection.characterBody;
     }
   }
 
@@ -106,20 +110,6 @@ public class ResourcesManager : MonoBehaviour {
     spriteCollection.name = charName;
     spriteCollection.characterBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
     spriteCollection.mechaBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-mecha");
-    //spriteCollection.sadBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-sad");
-
-    //spriteCollection.underwear = Resources.Load<Sprite>(characterSpritesPath + charName + "-underwear");
-
-    //spriteCollection.schoolClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-uniform");
-    //spriteCollection.casualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-casual");
-
-    //spriteCollection.bruises = Resources.Load<Sprite>(characterSpritesPath + charName + "-hurt");
-    //spriteCollection.incompleteCasualClothes = Resources.Load<Sprite>(characterSpritesPath + charName + "-unclothed");
-
-    ///// BATTLE POSES
-    //spriteCollection.pose_punch = Resources.Load<Sprite>(characterSpritesPath + charName + "-soco");
-    //spriteCollection.pose_shout = Resources.Load<Sprite>(characterSpritesPath + charName + "-gritando");
-    //spriteCollection.pose_interact = Resources.Load<Sprite>(characterSpritesPath + charName + "-pegando_objeto");
 
     characterSpritesCollections.Add(spriteCollection);
     return;

@@ -1,4 +1,20 @@
-﻿say_auto "DEBUG MENU"
+﻿set_var battle_is_happening false
+set_var currentDateEvent 0
+setup_date 1
+set_custom_battle 3
+// if daytime == 0
+	// play_music "observation_morning_intro" "observation_morning_loop"
+// else
+	// play_music "observation_afternoon_intro" "observation_afternoon_loop"
+// endif
+set_var date_objective "TESTE"
+goto_script "date"
+goto end
+/// DEBUG AUTO-BATTLE
+
+
+
+say_auto "DEBUG MENU"
 set_var battle_is_happening false
 set_var currentDateEvent 0
 setup_date 1

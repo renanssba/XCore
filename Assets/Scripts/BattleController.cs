@@ -15,21 +15,30 @@ public class SkillsUsedEntry {
 public class BattleController : MonoBehaviour {
   public static BattleController instance;
 
+  [Header("- Enemies -")]
   public List<Enemy> allEnemies;
   public TextAsset enemiesFile;
 
+  [Header("- Skills -")]
   public List<Skill> allSkills;
   public TextAsset skillsFile;
+
   public List<ActionSkin> playerActionSkins;
   public TextAsset actionSkinsFile;
 
+  [Header("- Status Conditions -")]
   public List<StatusCondition> allStatusConditions;
   public TextAsset statusConditionsFile;
 
+  [Header("- HP -")]
   public int maxHp = 10;
   public int hp = 10;
 
+  [Header("- Party Members -")]
   public Person[] partyMembers;
+
+  
+  [Header("- Player Actions -")]
   public TurnActionType[] selectedActionType;
   public Skill[] selectedSkills;
   public Item[] selectedItems;
@@ -47,8 +56,6 @@ public class BattleController : MonoBehaviour {
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
   public GameObject detectParticlePrefab;
-
-  public VsnConsoleSimulator consoleSimulator;
 
   const float attackAnimationTime = 0.15f;
 
@@ -83,8 +90,6 @@ public class BattleController : MonoBehaviour {
   public void SetupBattleStart(int dateId) {
     currentDateId = dateId;
 
-    Person boy = GlobalData.instance.GetCurrentRelationship().GetBoy();
-    Person girl = GlobalData.instance.GetCurrentRelationship().GetGirl();
     partyMembers = new Person[] { GlobalData.instance.people[0],
                                   GlobalData.instance.people[1],
                                   GlobalData.instance.people[2]};
@@ -422,76 +427,12 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public IEnumerator ShowBattleDescription(string text) {
-    //UIController.instance.helpMessagePanel.ShowPanel();
-    UIController.instance.helpMessageText.text = text;
-    yield return consoleSimulator.ShowCharactersFromTheStart();
-  }
-
-  public IEnumerator AddtoBattleDescription(string textAdded) {
-    //UIController.instance.helpMessagePanel.ShowPanel();
-    int oldLength = UIController.instance.helpMessageText.text.Length;
-    string oldText = UIController.instance.helpMessageText.text;
-
-    if(!string.IsNullOrEmpty(consoleSimulator.consoleText.text)) {
-      consoleSimulator.consoleText.text = oldText + "\n" + textAdded;
-    } else {
-      consoleSimulator.consoleText.text = oldText + textAdded;
-    }
-
-    Debug.LogWarning("AddtoBattleDescription: " + textAdded + ". old length: " + oldLength+". old text: " + consoleSimulator.consoleText.text);
-    yield return consoleSimulator.ShowCharactersFromPoint(oldLength);
-  }
-
-
-
-  public IEnumerator ShowUseActiveSkillMessage(string userName, Skill skill) {
-    VsnSaveSystem.SetVariable("active", userName);
-    VsnSaveSystem.SetVariable("selected_action_name", skill.GetPrintableName());
-
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_active_skill"));
-    yield return ShowBattleDescription(code);
-  }
-
-  public IEnumerator ShowUsePassiveSkillMessage(string userName, Skill skill) {
-    VsnSaveSystem.SetVariable("active", userName);
-    VsnSaveSystem.SetVariable("selected_action_name", skill.GetPrintableName());
-
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_passive_skill"));
-    yield return ShowBattleDescription(code);
-  }
-
-  public IEnumerator ShowUseItemMessage(string userName, string actionName) {
-    VsnSaveSystem.SetVariable("active", userName);
-    VsnSaveSystem.SetVariable("selected_action_name", actionName);
-
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/use_item"));
-    yield return ShowBattleDescription(code);
-  }
-
-  public IEnumerator ShowDefendMessage() {
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/defend"));
-    yield return ShowBattleDescription(code);
-  }
-
-  public IEnumerator ShowDistractedMessage() {
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/effect/distracted"));
-    yield return ShowBattleDescription(code);
-  }
-
-  public IEnumerator ShowRecoverMessage() {
-    string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("action/angel_can_act"));
-    yield return ShowBattleDescription(code);
-  }
-
   public IEnumerator ShowGetStatusConditionMessage(string targetName, string statusConditionName) {
     VsnSaveSystem.SetVariable("target_name", targetName);
     VsnSaveSystem.SetVariable("status_condition", statusConditionName);
 
     string code = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("status_condition/receive"));
     yield return new WaitForSeconds(0.5f);
-    yield return AddtoBattleDescription(code);
-    yield return new WaitForSeconds(0.8f);
   }
 
   public void ShowTakeStatusConditionDescription(string targetName, StatusConditionEffect statusEffect) {    
@@ -503,8 +444,7 @@ public class BattleController : MonoBehaviour {
   public IEnumerator ShowStatusConditionDamage(string code) {
     VsnController.instance.state = ExecutionState.WAITING;
 
-    yield return ShowBattleDescription(code);
-    yield return new WaitForSeconds(1.5f);
+    yield return new WaitForSeconds(1f);
 
     UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -553,12 +493,6 @@ public class BattleController : MonoBehaviour {
         case SkillTarget.partyMember1:
           break;
       }
-
-      yield return ShowBattleDescription(VsnSaveSystem.GetStringVariable(attackName));
-    } else if(usedSkill.type == SkillType.active) {
-      yield return ShowUseActiveSkillMessage(skillUser.GetName(), usedSkill);
-    } else if(usedSkill.type == SkillType.passive) {
-      yield return ShowUsePassiveSkillMessage(skillUser.GetName(), usedSkill);
     }
 
     // focus actors
@@ -765,7 +699,7 @@ public class BattleController : MonoBehaviour {
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     Battler target = targetActor.battler;
 
-    yield return ShowUseItemMessage(userActor.battler.GetName(), usedItem.GetPrintableName());
+    //yield return ShowUseItemMessage(userActor.battler.GetName(), usedItem.GetPrintableName());
 
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
@@ -841,7 +775,7 @@ public class BattleController : MonoBehaviour {
     Battler defender = defendingActor.battler;
 
     defendingActor.DefendActionAnimation();
-    yield return ShowDefendMessage();
+    //yield return ShowDefendMessage();
 
     if(defender.CurrentSP() < defender.MaxSP()) {
       yield return new WaitForSeconds(0.2f);
@@ -862,7 +796,7 @@ public class BattleController : MonoBehaviour {
     Battler defender = idleActor.battler;
     VsnSaveSystem.SetVariable("target_name", idleActor.battler.GetName());
 
-    yield return ShowDistractedMessage();
+    //yield return ShowDistractedMessage();
     idleActor.DistractedAnimation();
 
     yield return new WaitForSeconds(0.5f);
@@ -1241,7 +1175,7 @@ public class BattleController : MonoBehaviour {
       }
 
       if(newSkill.id < 3) {
-        newSkill.sprite = ResourcesManager.instance.attributeSprites[(int)newSkill.damageAttribute];
+        newSkill.sprite = null;
       } else {
         newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       }

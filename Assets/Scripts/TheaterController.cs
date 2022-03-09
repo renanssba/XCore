@@ -328,6 +328,7 @@ public class TheaterController : MonoBehaviour {
     ClearTheater();
     ClearBattle();
 
+    GameController.instance.StartBattle();
     BattleController.instance.SetupDateLocation();
 
 

@@ -1,4 +1,19 @@
-fade_out 1
+// wait 1
+// char_reset_all
+// character char_right "Instructor Sprite Idle "
+// char_alpha char_right 0 0
+// char_alpha char_right 1 5
+// wait 5
+// goto_script "char_right_enter" "Instructor Sprite Idle "
+// character char_right "Instructor Sprite Idle "
+// char_scale char_right 1.3 0.3
+// // char_move_y 0 0.3
+// char_move_y -0.3 0.3
+// wait 0.3
+// wait 10
+
+fade_out 0
+wait 1
 say "" "Academia de pilotos de Mark1 da Duratron"
 bg "externa academia provisorio"
 fade_in 1
@@ -36,12 +51,12 @@ say "CADETE" "(Igualzinho o Buffon, que conseguiu ser aprovado antes de mim. Se 
 //Cena dentro da sala de teste
 fade_out 1
 say "" "O teste ocorrerá na sala dos simuladores e todos os alunos candidatos permanecem enfileirados ao seu lado e atrás de você."
-bg "a bordo heavy-duty nitido"
+bg "Simulator Entrance BG b"
 fade_in 1
 wait 1
 say "CADETE" "(Foco! Foco!)"
 say "CADETE" "(Essa é a minha última chance aqui. É melhor eu conseguir, porque... Bom, eu não tenho dinheiro para bancar essa academia de pilotos e não há bolsas para os que fracassam no teste final.)"
-goto_script "char_right_enter" "instrutora"
+goto_script "char_right_enter" "Instructor Sprite Idle "
 wait 0.5
 say "INSTRUTORA" "Atenção cadetes, finalmente, após esses quatro anos de árduo treinamento, vamos ver quem dentre vocês estará apto a pilotar um Mark1 daqui em diante. "
 say "INSTRUTORA" "Eu sei que muitos de vocês se dedicaram e estão prontos para o desafio a seguir. A vocês desejo boa sorte."
@@ -49,6 +64,11 @@ say "INSTRUTORA" "Eu sei que muitos de vocês se dedicaram e estão prontos para
 say "INSTRUTORA" "Por outro lado, eu sei que alguns estão muito aquém do mínimo exigido pela nossa academia. Lamento pelo tempo que estes desperdiçaram aqui."
 say "INSTRUTORA" "Mas a vida é assim. Devemos sempre separar o joio do trigo."
 say "" "A Instrutora olha fixamente para você"
+
+//char_scale char_right 1.1 0.3
+//char_move_y -0.1 0.3
+//wait 0.3
+
 say "INSTRUTORA" "É isso mesmo que você ouviu."
 say "CADETE" "Eu?"
 say "INSTRUTORA" "É, estou falando com você. É você mesmo!"
@@ -58,8 +78,7 @@ wait 0.5
 fade_out 1
 show_text_input true "Escolha o nome do seu cadete:"
 set_var charName text_input
-// say "" "O nome esolhido foi: \vsn(charName)"
-//bg "a bordo heavy-duty nitido"
+
 fade_in 1
 wait 1
 
@@ -71,15 +90,15 @@ say "\vsn(charName)" "Bruxa maldita"
 say "INSTRUTORA" "Disse alguma coisa cadete?"
 say "\vsn(charName)" "Não... não senhora."
 say "INSTRUTORA" "Sei..."
-goto_script "chars_exit" "instrutora"
+goto_script "chars_exit"
 wait 0.5
 fade_out 1
-bg "a bordo da heavy duty ponte de comando nitido"
+bg "Simulator Entrance BG b"
 fade_in 1
 wait 1
-goto_script "char_right_enter" "instrutora"
+goto_script "char_right_enter" "Instructor Sprite Idle " 0.7
 wait 0.5
-goto_script "char_left_enter" "Sprite Lara"
+goto_script "char_left_enter" "Lara Sprite Idle " 0.3
 wait 0.5
 say "INSTRUTORA" "Cadetes, quero lhes apresentar Lara Weber, representando a Coretex, ela pessoalmente irá avaliar seus resultados. "
 say "INSTRUTORA" "Acredito eu que, ciente da nossa excelência e da qualidade de pilotos que formamos, ela veio ver \qin loco\q nossos prodígios."
@@ -89,21 +108,21 @@ say "INSTRUTORA" "A Coretex é ávida por novos talentos, quem sabe hoje a sorte
 say "\vsn(charName)" "(Deixa de ser bobo \vsn(charName), é óbvio que ela só está sendo gentil. Ela está sorrindo para todos.)"
 say "\vsn(charName)" "(Ei! Ela piscou? Pra quem? Para mim?)"
 say "INSTRUTORA" "Acelerado, andem, para os simuladores."
-goto_script "chars_exit" "instrutora"
-goto_script "chars_exit" "Sprite Lara"
+goto_script "chars_exit"
 fade_out 1
 
-bg "cockpit teste provisorio"
 
-fade_in 1
-wait 1
-say "INSTRUTORA" "Atenção cadetes, vocês já conhecem a interface do simulador, mas vocês receberão as instruções uma vez mais antes do teste final."
-say "INSTRUTORA" "Ah, mas não pensem que estou facilitando. Estou fazendo isso apenas porque vocês usarão neste teste o mais novo modelo de simulador desenvolvido pelo Duratron."
-say "INSTRUTORA" "E que foi generosamente doado pela própria Coretex para a nossa ilustre academia."
-say "INSTRUTORA" "Começar!"
-fade_out 1
+// bg "cockpit teste provisorio"
 
-bg "a bordo da heavy duty ponte de comando nitido"
+// fade_in 1
+// wait 1
+// say "INSTRUTORA" "Atenção cadetes, vocês já conhecem a interface do simulador, mas vocês receberão as instruções uma vez mais antes do teste final."
+// say "INSTRUTORA" "Ah, mas não pensem que estou facilitando. Estou fazendo isso apenas porque vocês usarão neste teste o mais novo modelo de simulador desenvolvido pelo Duratron."
+// say "INSTRUTORA" "E que foi generosamente doado pela própria Coretex para a nossa ilustre academia."
+// say "INSTRUTORA" "Começar!"
+// fade_out 1
+
+//bg "a bordo da heavy duty ponte de comando nitido"
 
 say "" "CENA DE COMBATE COM TUTORIAL DO JOGO"
 say "APÓS O JOGADOR VENCER O TUTORIAL, O JOGO RETOMA A VISÃO VN"
@@ -112,14 +131,14 @@ say "" "Após terminar seu teste, todos os cadetes foram chamados individualment
 fade_in 1
 wait 1
 
-goto_script "char_right_enter" "instrutora"
+goto_script "char_right_enter" "Instructor Sprite Idle "
 say "INSTRUTORA" "Eu não acredito... como foi possível?"
 say "INSTRUTORA" "\vsn(charName)... você... você passou. Como você fez isso?"
 say "\vsn(charName)" "Eu... eu... passei?"
 say "\vsn(charName)" "UHUUUUUU"
 wait 0.5
-goto_script "chars_exit" "instrutora"
-goto_script "char_left_enter" "Sprite Lara"
+goto_script "chars_exit"
+goto_script "char_left_enter" "Lara Sprite Idle "
 say "LARA" "Senhor \vsn(charName), será que podemos conversar um pouco sobre seu futuro?"
 say "\vsn(charName)" "Eu?"
 say "LARA" "O que acha de ser um piloto da Coretex?"

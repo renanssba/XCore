@@ -11,8 +11,6 @@ public class RoutineController : MonoBehaviour {
 
   public static RoutineController instance;
 
-  public ItemSelectorScreen itemSelectorScreen;
-
   public bool skipIntro;
 
 

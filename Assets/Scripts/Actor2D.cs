@@ -111,15 +111,7 @@ public class Actor2D : MonoBehaviour {
       //  renderers[2].gameObject.SetActive(true);
       //} else {
       //  renderers[2].gameObject.SetActive(false);
-      //}
-
-      /// position internal heart
-      Vector2 pos = ResourcesManager.instance.heartPositionInActors[battler.id];
-      renderers[renderers.Length - 1].transform.localPosition = new Vector3(pos.x, pos.y, 0f);
-
-      if(GlobalData.instance.GetCurrentRelationship() != null) {
-        renderers[renderers.Length - 1].sprite = ResourcesManager.instance.heartlockSprites[GlobalData.instance.GetCurrentRelationship().heartLocksOpened];
-      }      
+      //}   
 
       SetAuraVisibility();
     } else {

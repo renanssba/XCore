@@ -129,7 +129,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void PositionPanels(int currentPartyMember) {
-    transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f * currentPartyMember, 0f, 0f);
+    transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(-320f + 160f * currentPartyMember, 0f, 0f);
   }
 
 
