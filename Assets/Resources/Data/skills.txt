@@ -1,13 +1,13 @@
 id	name	type	range	sp cost	special effect	effect power	damage attribute	damage power	heal hp	heal hp percent	heal sp	heals status conditions	gives status conditions	give status chance	duration	passive trigger	trigger conditions	trigger chance	sprite	animation	animation sfx	tags	debug
-0	guts	attack	one_enemy				guts	8											gutsy aura	skinnable	skill_cast		
-1	intelligence	attack	one_enemy				intelligence	8											gutsy aura	skinnable	skill_cast		
-2	charisma	attack	one_enemy				charisma	8											gutsy aura	skinnable	skill_cast		
-3	super_guts	attack	one_enemy	3			guts	14											brain	skinnable	skill_cast		
-4	super_intelligence	attack	one_enemy	3			intelligence	14											brain	skinnable	skill_cast		
-5	super_charisma	attack	one_enemy	3			charisma	14											brain	skinnable	skill_cast		
-6	mega_guts	attack	one_enemy	5			guts	18											brain	skinnable	skill_cast		
-7	mega_intelligence	attack	one_enemy	5			intelligence	18											brain	skinnable	skill_cast		
-8	mega_charisma	attack	one_enemy	5			charisma	18											brain	skinnable	skill_cast		
+0	guts	attack	one_enemy				guts	8											gutsy aura	active_offensive	skill_cast		
+1	intelligence	attack	one_enemy				intelligence	8											gutsy aura	active_offensive	skill_cast		
+2	charisma	attack	one_enemy				charisma	8											gutsy aura	active_offensive	skill_cast		
+3	super_guts	attack	one_enemy	3			guts	14											brain	active_offensive	skill_cast		
+4	super_intelligence	attack	one_enemy	3			intelligence	14											brain	active_offensive	skill_cast		
+5	super_charisma	attack	one_enemy	3			charisma	14											brain	active_offensive	skill_cast		
+6	mega_guts	attack	one_enemy	5			guts	18											brain	active_offensive	skill_cast		
+7	mega_intelligence	attack	one_enemy	5			intelligence	18											brain	active_offensive	skill_cast		
+8	mega_charisma	attack	one_enemy	5			charisma	18											brain	active_offensive	skill_cast		
 9	analysis	active	one_enemy	0	sensor														magnifying glass	throw_object(magnifying glass)	skill_cast		
 10	fortifying_snack	active	one_ally	2								hunger	fortified	100	3				hamburger	throw_object(hamburger)	skill_cast	food	
 11	delicious_aroma	active	one_enemy	2									hunger	100	3				fragrance	active_offensive	skill_cast		
@@ -28,7 +28,7 @@ id	name	type	range	sp cost	special effect	effect power	damage attribute	damage p
 26	proximity	passive	all_allies		raiseMaxHp	10													heart-plus	none	skill_cast		
 27	dedication	passive	all_allies		raiseMaxSp	2													skill-points	none	skill_cast		
 28	guardian_1	active	self	1									guardian	100					shield	projectile(shout)	skill_cast		
-29	analytical	passive	self										distracted	100	1	enemy_appears	enemy_has_tag(human)	0	magnifying glass	passive	skill_cast	disadvantage	
+29	analytical	passive	self										distracted	100	1	enemy_appears	enemy_has_tag(human)	50	magnifying glass	passive	skill_cast	disadvantage	
 30	confession	passive	all_allies							0.25						before_death_checks	limit_uses_in_date(1), hp_percent_is_less(0)	100	heart-plus	none	skill_cast		
 31	strange_experiment	active	one_enemy	2									hunger|angry|dirty	100	3				random-experiment	throw_object(experiment)	skill_cast		
 32	weakening_experiment	active	one_enemy	2									weakened	100	3				experiment	throw_object(experiment)	skill_cast		

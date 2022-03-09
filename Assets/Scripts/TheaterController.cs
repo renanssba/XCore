@@ -373,9 +373,10 @@ public class TheaterController : MonoBehaviour {
     Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
-    
-    BattleController.instance.partyMembers[0].ClearSkillUsesInBattle();
-    BattleController.instance.partyMembers[1].ClearSkillUsesInBattle();
+
+    foreach(Person partyMember in BattleController.instance.partyMembers) {
+      partyMember.ClearSkillUsesInBattle();
+    }
     BattleController.instance.FullHealEnemies();
 
     enemyActor.gameObject.SetActive(true);

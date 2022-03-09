@@ -9,14 +9,12 @@ namespace Command
   public class SetupDateCommand : VsnCommand {
 
     public override void Execute() {
-      BattleController.instance.SetupBattleStart((int)args[0].GetNumberValue());
+      BattleController.instance.SetupBattleStart();
     }
 
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg
-      });
+      signatures.Add(new VsnArgType[0]);
     }
   }
 }

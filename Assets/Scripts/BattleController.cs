@@ -34,10 +34,10 @@ public class BattleController : MonoBehaviour {
   public int maxHp = 10;
   public int hp = 10;
 
-  [Header("- Party Members -")]
+  [Header("- Battle Members -")]
   public Person[] partyMembers;
+  public Enemy[] enemyMembers;
 
-  
   [Header("- Player Actions -")]
   public TurnActionType[] selectedActionType;
   public Skill[] selectedSkills;
@@ -45,9 +45,7 @@ public class BattleController : MonoBehaviour {
   public SkillTarget[] selectedTargetPartyId;
   public int dateLength;
 
-  public Enemy[] dateEnemies;
   public DateLocation currentDateLocation;
-  public int currentDateId;
 
   public GameObject defaultEnemyPrefab;
 
@@ -79,20 +77,20 @@ public class BattleController : MonoBehaviour {
     dateLength = 3;
   }
 
-  public void Update() {
-    //int currentTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
-    //if(currentTurn == 2 && ActionsPanel.instance.skillsPanel.gameObject.activeSelf == true) {
-    //  RemoveStealth(Time.deltaTime * stealthLostBySecond);
-    //}
-  }
 
+  public void SetupBattleStart() {
+    Combat combat = GameController.instance.combatHappening;
+    List<Person> people = new List<Person>();
+    string enemyName = "fly";
 
-  public void SetupBattleStart(int dateId) {
-    currentDateId = dateId;
-
-    partyMembers = new Person[] { GlobalData.instance.people[0],
-                                  GlobalData.instance.people[1],
-                                  GlobalData.instance.people[2]};
+    foreach(Character c in combat.characters) {
+      if(c.id <= CharacterId.maya) {
+        people.Add(GlobalData.instance.people[(int)c.id]);
+      } else {
+        enemyName = c.id.ToString();
+      }
+    }
+    partyMembers = people.ToArray();
 
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
@@ -114,7 +112,7 @@ public class BattleController : MonoBehaviour {
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
 
-    SetDateEnemiesAndLocation();
+    SetDateEnemiesAndLocation(enemyName);
     VsnSaveSystem.SetVariable("currentDateEvent", 0);
     TheaterController.instance.InitializeEnemyLevelAndHp();
   }
@@ -149,7 +147,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public void FullHealEnemies() {
-    foreach(Enemy currentEnemy in dateEnemies) {
+    foreach(Enemy currentEnemy in enemyMembers) {
       currentEnemy.hp = currentEnemy.maxHp;
       currentEnemy.RemoveAllStatusConditions();
       currentEnemy.ClearAllSkillsUsage();
@@ -188,17 +186,10 @@ public class BattleController : MonoBehaviour {
 
   public Enemy GetCurrentEnemy() {
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if(dateEnemies.Length <= currentDateEvent) {
+    if(enemyMembers.Length <= currentDateEvent) {
       return null;
     }
-    return dateEnemies[currentDateEvent];
-  }
-
-  public string GetCurrentEnemyName() {
-    if(GetCurrentEnemy() == null) {
-      return "";
-    }
-    return dateEnemies[VsnSaveSystem.GetIntVariable("currentDateEvent")].scriptName;
+    return enemyMembers[currentDateEvent];
   }
 
   public SkillTarget GetPartyMemberPosition(Battler character) {
@@ -897,55 +888,29 @@ public class BattleController : MonoBehaviour {
     GetCurrentEnemy().EndTurn();
   }
 
-  public void SetDateEnemiesAndLocation() {
-    switch(currentDateId) {
-      case 0:
-        dateLength = 1;
-        dateEnemies = new Enemy[] { GetEnemyByString("bully_0") };
-        currentDateLocation = DateLocation.desert;
-        break;
-      case 1:
-        dateLength = 3;
-        dateEnemies = new Enemy[] { GetEnemyByString("bully_minor"), GetEnemyByString("bunny"), GetEnemyByString("bully") };
-        currentDateLocation = DateLocation.desert;
-        break;
-      case 2:
-        dateLength = 3;
-        currentDateLocation = DateLocation.desert;
-        dateEnemies = new Enemy[] { GetEnemyByString("card_vendors"), GetEnemyByString("vending_machine"), GetEnemyByString("sale_crowd") };
-        //GenerateDateEnemies();
-        break;
-      case 3:
-        dateLength = 4;
-        currentDateLocation = DateLocation.desert;
-        dateEnemies = new Enemy[] { GetEnemyByString("photographer"), GetEnemyByString("clothing_tornado"), GetEnemyByString("jones_hotdog"), allEnemies[9 + GlobalData.instance.CurrentGirl().id] };
-        //GenerateDateEnemies();
-        break;
-      default:
-        dateLength = 1;
-        currentDateLocation = DateLocation.desert;
-        GenerateDateEnemies();
-        break;
-    }
+  public void SetDateEnemiesAndLocation(string enemyName) {
+    currentDateLocation = DateLocation.desert;
+    dateLength = 1;
+    enemyMembers = new Enemy[] { GetEnemyByString(enemyName) };
   }
 
   public void SetCustomBattle(int enemyId) {
     currentDateLocation = DateLocation.desert;
     dateLength = 1;
-    dateEnemies = new Enemy[] {allEnemies[enemyId]};
+    enemyMembers = new Enemy[] {allEnemies[enemyId]};
     FullHealParty();
   }
 
   public void GenerateDateEnemies() {
     List<int> selectedEnemies = new List<int>();
 
-    dateEnemies = new Enemy[dateLength];
+    enemyMembers = new Enemy[dateLength];
     for(int i = 0; i < dateLength; i++) {
       int selectedId = GetNewEnemy(selectedEnemies);
-      dateEnemies[i] = allEnemies[selectedId];
+      enemyMembers[i] = allEnemies[selectedId];
       selectedEnemies.Add(selectedId);
     }
-    System.Array.Sort(dateEnemies, new System.Comparison<Enemy>(
+    System.Array.Sort(enemyMembers, new System.Comparison<Enemy>(
                       (event1, event2) => event1.stage.CompareTo(event2.stage)));
     RecoverEnemiesHp();
   }
@@ -1042,7 +1007,7 @@ public class BattleController : MonoBehaviour {
 
   public void RecoverEnemiesHp() {
     for(int i = 0; i < dateLength; i++) {
-      dateEnemies[i].hp = dateEnemies[i].maxHp;
+      enemyMembers[i].hp = enemyMembers[i].maxHp;
     }
   }
 
@@ -1095,7 +1060,6 @@ public class BattleController : MonoBehaviour {
       allEnemies.Add(new Enemy {
         id = int.Parse(dic["id"]),
         nameKey = dic["name key"],
-        scriptName = dic["script name"],
         level = int.Parse(dic["level"]),
         maxHp = int.Parse(dic["max hp"]),
         attributeEffectivity = new float[] { guts, intelligence, charisma },

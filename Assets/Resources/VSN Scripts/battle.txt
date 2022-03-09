@@ -1,4 +1,8 @@
-﻿fade_out 0.7
+﻿set_var battle_is_happening false
+set_var currentDateEvent 0
+setup_date
+
+fade_out 0.7
 bg null
 
 wait 0.5
@@ -19,8 +23,6 @@ fade_in 0.7
 wait 0.5
 
 theater_animation "party_enters"
-// say "char_name/none" "date/say_0"
-
 
 set_var last_enemy #dateLength
 add_var last_enemy -1
@@ -33,7 +35,6 @@ for currentDateEvent #dateLength
   wait 0.5
 
   // set_var currentBattleTurn 0
-  goto_script "\currentEventName" event_statement
   theater_animation "enemy_enters"
 
   wait 0.3
@@ -43,18 +44,11 @@ for currentDateEvent #dateLength
 
   // play battle song
   if "\currentMusic" != "boss1_loop"
-    play_music "battle1_intro" "battle1_loop"
+    // play_music "battle1_intro" "battle1_loop"
+    play_music "" "XCore1 Boss Theme"
   endif
   wait 0.5
 
-
-  // if currentDateEvent == 0
-    // say "\boy" "E agora, o que faremos?"
-    // say "\girl" "Eu vou te proteger!"
-  // else
-    // say "\girl" "Fica comigo!"
-    // say "\boy" "Vamos lutar juntos."
-  // endif
 
   show_date_ui true
   wait 0.5
@@ -127,7 +121,7 @@ for currentDateEvent #dateLength
   for currentPlayerTurn #partyLength
     check_action_skip currentPlayerTurn
     goto_script "check_passive_triggers" "before_action"
-    character_action_description currentPlayerTurn
+    // character_action_description currentPlayerTurn
     character_action currentPlayerTurn
     goto_script "check_passive_triggers" "after_action"
     wait 0.5
@@ -159,7 +153,6 @@ endfor
 
 
 waypoint defeat_enemy
-goto_script "\currentEventName" defeated
 add_var exp_accumulated #currentEnemyExp
 add_var money_accumulated #currentEnemyMoney
 theater_animation "enemy_leaves"
@@ -196,21 +189,6 @@ wait 0.3
 if currentDateEvent == last_enemy
   goto advance_battle
 endif
-if currentDateEvent == 0
-  say "char_name/none" "date/say_1"
-  //say "\boy" "Isso foi estranho, né?"
-  //say "\girl" "Sim, mas ainda bem que deu tudo certo."
-  //say "" "Subitamente, um novo desafio aparece..."
-endif
-if currentDateEvent == 1
-  say "char_name/none" "date/say_2"
-  //say "\boy" "Então \girl, estamos quase chegando. Eu queria conversar com você sobre uma coisa..."
-  //say "\girl" "É mesmo? O que é?"
-  //say "" "Antes que \boy pudesse continuar..."
-endif
-if currentDateEvent > 1
-  say "char_name/none" "date/say_3"
-endif
 goto advance_battle
 
 
@@ -236,15 +214,12 @@ endif
 goto_script "cap1_date_end"
 
 play_sfx "date_end"
-play_sfx "date_end"
-say "char_name/none" "date/say_4"
 // show_date_ui false
 
 add_exp false exp_accumulated
 play_sfx "ui_money"
 add_var money money_accumulated
 stat_progress "MONEY_ACQUIRED" money_accumulated
-say "char_name/none" "date/say_5"
 
 if shop_unlock_advance == 0
   set_var shop_unlock_advance 1
@@ -267,22 +242,18 @@ play_sfx "ui_fail"
 wait 2
 enable_input false
 
-if exp_accumulated > 0
-  say "char_name/none" "date/say_10"
-  add_exp false exp_accumulated
-  add_var money money_accumulated
-  stat_progress "MONEY_ACQUIRED" money_accumulated
-  play_sfx "ui_money"
-  say "char_name/none" "date/say_11"
-  set_var exp_accumulated 0
-endif
+// if exp_accumulated > 0
+  // add_exp false exp_accumulated
+  // add_var money money_accumulated
+  // stat_progress "MONEY_ACQUIRED" money_accumulated
+  // play_sfx "ui_money"
+  // set_var exp_accumulated 0
+// endif
 
 // show_date_ui false
 goto end
 
 
-
 waypoint end
 end_date
 goto_script "pass_time"
-

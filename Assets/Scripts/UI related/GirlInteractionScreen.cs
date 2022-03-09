@@ -130,7 +130,7 @@ public class GirlInteractionScreen : MonoBehaviour {
     SfxManager.StaticPlayBigConfirmSfx();
     VsnSaveSystem.SetVariable("dateId", dateId);
 
-    BattleController.instance.SetupBattleStart(dateId);
+    BattleController.instance.SetupBattleStart();
 
     HideGirlInteractionScreen();
     Command.EndScriptCommand.StaticExecute(new VsnArgument[0]);

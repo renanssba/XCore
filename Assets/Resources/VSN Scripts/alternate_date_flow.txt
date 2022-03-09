@@ -31,7 +31,6 @@ for currentDateEvent #dateLength
   wait 0.8
 
   set_var currentBattleTurn -1
-  goto_script "\currentEventName" event_statement
 
   // if currentDateEvent == 0
     // say "\boy" "E agora, o que faremos?"
@@ -80,7 +79,7 @@ for currentDateEvent #dateLength
     check_action_skip currentPlayerTurn
 
     // do actions
-    character_action_description currentPlayerTurn
+    //character_action_description currentPlayerTurn
     character_action currentPlayerTurn
 
     // receive effects from conditions
@@ -142,7 +141,6 @@ endfor
 
 
 waypoint defeat_enemy
-goto_script "\currentEventName" defeated
 theater_animation "enemy_leaves"
 challenge_result true
 update_ui

@@ -33,7 +33,6 @@ public class CustomEventLogic {
 [System.Serializable]
 public class Enemy : Battler {
 
-  public string scriptName;
   public float[] attributeEffectivity;
   public int level;
   public int stage;

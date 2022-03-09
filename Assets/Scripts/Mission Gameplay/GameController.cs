@@ -94,6 +94,8 @@ public class GameController : MonoBehaviour {
   public List<Combat> currentCombats;
   public GameObject engageIconPrefab;
 
+  public Combat combatHappening;
+
 
   [Header("- Camera -")]
   public CameraController cameraController;
@@ -211,13 +213,8 @@ public class GameController : MonoBehaviour {
 
 
   public IEnumerator CombatsAnimation() {
-    //VsnController.instance.StartVSN("combat");
-    //while(VsnController.instance.state != ExecutionState.STOPPED) {
-    //  yield return null;
-    //}
-
     foreach(Combat c in currentCombats) {
-      yield return CombatAnimation(c);
+      yield return FightBattle(c);
       c.DestroyIcons();
     }
     currentCombats.Clear();
@@ -236,8 +233,12 @@ public class GameController : MonoBehaviour {
     }    
   }
 
-  public IEnumerator CombatAnimation(Combat combat) {
-    //Debug.LogWarning("Start CombatAnimation!");
+  public IEnumerator FightBattle(Combat combat) {
+    combatHappening = combat;
+    VsnController.instance.StartVSN("battle");
+    yield break;
+
+
     List<Character> turns = combat.TurnsOrder();
 
     yield return cameraController.FocusOnCombat(combat);

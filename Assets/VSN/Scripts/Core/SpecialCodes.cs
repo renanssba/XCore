@@ -23,7 +23,6 @@ public class SpecialCodes {
       currentString = InterpretLeanText(currentString);
 
       currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
-      currentString = currentString.Replace("\\currentEventName", "date_enemies/" + BattleController.instance.GetCurrentEnemyName());
       if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
         currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
       }      
@@ -171,8 +170,6 @@ public class SpecialCodes {
         return BattleController.instance.GetCurrentEnemy().expReward;
       case "#currentEnemyMoney":
         return BattleController.instance.GetCurrentEnemy().moneyReward;
-      case "#currentDateId":
-        return BattleController.instance.currentDateId;
       case "#currentDateLocation":
         return (int)BattleController.instance.currentDateLocation;
       case "#currentHp":

@@ -1,13 +1,7 @@
 ﻿set_var battle_is_happening false
 set_var currentDateEvent 0
-setup_date 1
+setup_date
 set_custom_battle 3
-// if daytime == 0
-	// play_music "observation_morning_intro" "observation_morning_loop"
-// else
-	// play_music "observation_afternoon_intro" "observation_afternoon_loop"
-// endif
-set_var date_objective "TESTE"
 goto_script "date"
 goto end
 /// DEBUG AUTO-BATTLE
@@ -17,7 +11,7 @@ goto end
 say_auto "DEBUG MENU"
 set_var battle_is_happening false
 set_var currentDateEvent 0
-setup_date 1
+setup_date
 choices "Agnes" agnes "Maya" maya "Cancelar" end
 
 
@@ -69,82 +63,81 @@ choices "\enemy_name(15)" enemy_15 "Cancelar" end
 
 waypoint enemy_0
 set_custom_battle 0
-goto custom_date
+goto custom_battle
 
 waypoint enemy_1
 set_custom_battle 1
-goto custom_date
+goto custom_battle
 
 waypoint enemy_2
 set_custom_battle 2
-goto custom_date
+goto custom_battle
 
 waypoint enemy_3
 set_custom_battle 3
-goto custom_date
+goto custom_battle
 
 waypoint enemy_4
 set_custom_battle 4
-goto custom_date
+goto custom_battle
 
 waypoint enemy_5
 set_custom_battle 5
-goto custom_date
+goto custom_battle
 
 waypoint enemy_6
 set_custom_battle 6
-goto custom_date
+goto custom_battle
 
 waypoint enemy_7
 set_custom_battle 7
-goto custom_date
+goto custom_battle
 
 waypoint enemy_8
 set_custom_battle 8
-goto custom_date
+goto custom_battle
 
 waypoint enemy_9
 set_custom_battle 9
-goto custom_date
+goto custom_battle
 
 waypoint enemy_10
 set_custom_battle 10
-goto custom_date
+goto custom_battle
 
 waypoint enemy_11
 set_custom_battle 11
-goto custom_date
+goto custom_battle
 
 waypoint enemy_12
 set_custom_battle 12
-goto custom_date
+goto custom_battle
 
 waypoint enemy_13
 set_custom_battle 13
-goto custom_date
+goto custom_battle
 
 waypoint enemy_14
 set_custom_battle 14
-goto custom_date
+goto custom_battle
 
 waypoint enemy_15
 set_custom_battle 15
-goto custom_date
+goto custom_battle
 
 waypoint enemy_16
 set_custom_battle 16
-goto custom_date
+goto custom_battle
 
 
 
-waypoint custom_date
+waypoint custom_battle
 if daytime == 0
 	play_music "observation_morning_intro" "observation_morning_loop"
 else
 	play_music "observation_afternoon_intro" "observation_afternoon_loop"
 endif
-set_var date_objective "TESTE"
-goto_script "date"
+goto_script "battle"
 // goto_script "single_battle"
 goto end
 
