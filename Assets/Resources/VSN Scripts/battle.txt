@@ -211,24 +211,25 @@ if #currentDamageTaken == 0
   get_achievement "PERFECT_DATE"
 endif
 
-goto_script "cap1_date_end"
+//goto_script "cap1_date_end"
 
 play_sfx "date_end"
 // show_date_ui false
 
-add_exp false exp_accumulated
-play_sfx "ui_money"
-add_var money money_accumulated
-stat_progress "MONEY_ACQUIRED" money_accumulated
+// add_exp false exp_accumulated
+// play_sfx "ui_money"
+// add_var money money_accumulated
+// stat_progress "MONEY_ACQUIRED" money_accumulated
 
-if shop_unlock_advance == 0
-  set_var shop_unlock_advance 1
-endif
-if #currentDateId == 2
-  if shop_unlock_final == 0
-    set_var shop_unlock_final 1
-  endif
-endif
+// if shop_unlock_advance == 0
+  // set_var shop_unlock_advance 1
+// endif
+// if #currentDateId == 2
+  // if shop_unlock_final == 0
+    // set_var shop_unlock_final 1
+  // endif
+// endif
+
 actor_tint main 0 1 "white"
 actor_tint support 0 1 "white"
 wait 1

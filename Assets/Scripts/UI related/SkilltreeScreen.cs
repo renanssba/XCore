@@ -185,7 +185,7 @@ public class SkilltreeScreen : MonoBehaviour {
     HealCharactersSP();
 
     UpdateUI();
-    CoupleStatusScreen.instance.UpdateUI();
+    StatusScreen.instance.UpdateUI();
     UIController.instance.UpdateUI();
     UIController.instance.girlInteractionScreen.relationshipCard.Initialize(GlobalData.instance.GetCurrentRelationship());
     UIController.instance.girlInteractionScreen.relationshipCard.UpdateUI();

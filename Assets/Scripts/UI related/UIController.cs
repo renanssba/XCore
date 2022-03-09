@@ -35,12 +35,6 @@ public class UIController : MonoBehaviour {
   public Image[] stealthEyeIcons;
   public TextMeshProUGUI enemyLevelText;
 
-  public ScreenTransitions dateProgressPanel;
-  public Toggle[] dateEventToggles;
-  public Image[] successIcons;
-  public Image[] failIcons;
-  public Image[] unresolvedIcons;
-
   public ScreenTransitions datingPeopleInfoPanel;
   public PersonCard[] partyPeopleCards;
 
@@ -58,7 +52,7 @@ public class UIController : MonoBehaviour {
   public InteractionPin[] interactionPins;
 
 
-  public CoupleStatusScreen coupleStatusScreen;
+  public StatusScreen coupleStatusScreen;
 
 
   public Transform enemyStatusConditionsContent;
@@ -87,10 +81,10 @@ public class UIController : MonoBehaviour {
 
     SetBoardMenuButtons();
 
-    UpdateDateUI();
+    UpdateBattleUI();
   }
 
-  public void UpdateDateUI() {
+  public void UpdateBattleUI() {
     if(BattleController.instance.partyMembers.Length == 0) {
       return;
     }
@@ -107,14 +101,6 @@ public class UIController : MonoBehaviour {
         partyPeopleCards[i].gameObject.SetActive(false);
       }
     }
-
-    // set HP slider width
-    // TODO: update HP slider
-    //partyHpSlider.transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().rect.width, 32f);
-    
-    //partyHpSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x, 32f);
-    //partyPeopleCards[0].transform.parent.GetComponent<RectTransform>().sizeDelta.x;
-    //ShowDateProgressUI();
 
     if(BattleController.instance.GetCurrentEnemy() != null) {
       BattleController.instance.GetCurrentEnemy().UpdateStatusConditions();
@@ -142,36 +128,6 @@ public class UIController : MonoBehaviour {
     //  //enemyHpSlider.value = currentShownHp;
     //  enemyHpText.text = ((int)currentShownHp).ToString();
     //} );
-  }
-
-  public void ShowDateProgressUI() {
-    int currentEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if(currentEvent < dateEventToggles.Length) {
-      dateEventToggles[currentEvent].isOn = true;
-    } else {
-      foreach(Toggle t in dateEventToggles) {
-        t.isOn = false;
-      }
-    }
-    for(int i = 0; i < dateEventToggles.Length; i++) {
-      switch(VsnSaveSystem.GetIntVariable("date_event_result_" + i)) {
-        case 0:
-          successIcons[i].gameObject.SetActive(false);
-          failIcons[i].gameObject.SetActive(false);
-          unresolvedIcons[i].gameObject.SetActive(true);
-          break;
-        case 1:
-          successIcons[i].gameObject.SetActive(true);
-          failIcons[i].gameObject.SetActive(false);
-          unresolvedIcons[i].gameObject.SetActive(false);
-          break;
-        case 2:
-          successIcons[i].gameObject.SetActive(false);
-          failIcons[i].gameObject.SetActive(true);
-          unresolvedIcons[i].gameObject.SetActive(false);
-          break;
-      }
-    }
   }
 
 
@@ -240,7 +196,7 @@ public class UIController : MonoBehaviour {
 
   public void ShowDateUI(bool value) {
     if(value == true) {
-      UpdateDateUI();
+      UpdateBattleUI();
       datingPeoplePanel.OpenMenuScreen();
     } else {
       datingPeoplePanel.CloseMenuScreen();
@@ -313,14 +269,5 @@ public class UIController : MonoBehaviour {
       partyPeopleCards[i].Initialize( BattleController.instance.partyMembers[i]);
     }
 
-  }
-
-  public void ShowDateProgressPanel(bool value) {
-    if(value) {
-      dateProgressPanel.ShowPanel();
-    } else {
-      dateProgressPanel.HidePanel();
-    }
-    UpdateUI();
   }
 }

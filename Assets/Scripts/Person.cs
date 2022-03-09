@@ -144,7 +144,7 @@ public class Person : Battler {
     sp += value;
     sp = Mathf.Min(sp, GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
     sp = Mathf.Max(sp, 0);
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
   }
 
   public override bool IsDefending() {
@@ -164,7 +164,7 @@ public class Person : Battler {
     sp -= value;
     //sp = Mathf.Min(sp, maxSp);
     sp = Mathf.Max(sp, 0);
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
   }
 
   public Skill[] GetActiveSkills(int relationshipId) {

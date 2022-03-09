@@ -14,7 +14,7 @@ public enum MenuTabs {
 
 public class MenuController : MonoBehaviour {
 
-  public CoupleStatusScreen coupleStatusScreen;
+  public StatusScreen coupleStatusScreen;
   public ItemSelectorScreen inventoryScreen;
   public SystemScreen systemScreen;
   public ScreenTransitions extrasPanel;

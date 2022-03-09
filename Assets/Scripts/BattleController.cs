@@ -108,7 +108,7 @@ public class BattleController : MonoBehaviour {
 
     ClearSkillsUsageRegistry();
     //UIController.instance.ShowPartyPeopleCards();
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
 

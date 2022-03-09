@@ -26,7 +26,7 @@ public class SkilltreeIcon : MonoBehaviour {
     skillIcon.sprite = skill.sprite;
     if(relationship.skilltree.skills[skillId].isUnlocked) {
       if(skill.HasTag("disadvantage")) {
-        bg.color = CoupleStatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
+        bg.color = StatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
       } else {
         bg.color = Color.white;
       }
@@ -35,12 +35,12 @@ public class SkilltreeIcon : MonoBehaviour {
       lockedIcon.SetActive(false);
     } else {
       if(IsRequisiteUnlocked()) {
-        bg.color = CoupleStatusScreen.instance.skilltreeScreen.unlockableSkillColor;
+        bg.color = StatusScreen.instance.skilltreeScreen.unlockableSkillColor;
         skillIcon.gameObject.SetActive(true);
-        skillIcon.color = CoupleStatusScreen.instance.skilltreeScreen.unlockableIconColor;
+        skillIcon.color = StatusScreen.instance.skilltreeScreen.unlockableIconColor;
         lockedIcon.SetActive(true);
       } else {
-        bg.color = CoupleStatusScreen.instance.skilltreeScreen.lockedPathColor;
+        bg.color = StatusScreen.instance.skilltreeScreen.lockedPathColor;
         skillIcon.gameObject.SetActive(false);
         lockedIcon.SetActive(false);
       }
@@ -61,13 +61,13 @@ public class SkilltreeIcon : MonoBehaviour {
 
 
   public void SelectSkill(int selectedSkillId) {
-    CoupleStatusScreen.instance.skilltreeScreen.selectedSkillId = selectedSkillId;
+    StatusScreen.instance.skilltreeScreen.selectedSkillId = selectedSkillId;
     Skill skill = BattleController.instance.GetSkillById(relationship.skilltree.skills[selectedSkillId].id);
 
     if(IsRequisiteUnlocked() || relationship.skilltree.skills[selectedSkillId].isUnlocked) {
-      CoupleStatusScreen.instance.skilltreeScreen.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
+      StatusScreen.instance.skilltreeScreen.SetSkillDescription(skill, relationship.skilltree.skills[selectedSkillId].isUnlocked);
     } else {
-      CoupleStatusScreen.instance.skilltreeScreen.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);
+      StatusScreen.instance.skilltreeScreen.SetSkillLocked(Skilltree.skillRequisites[selectedSkillId] != -1);
     }
   }
 
@@ -78,7 +78,7 @@ public class SkilltreeIcon : MonoBehaviour {
       return;
     }
     if(relationship.skilltree.skills[skillId].isUnlocked == false) {
-      CoupleStatusScreen.instance.skilltreeScreen.OpenBuySkillConfirmationScreen(skillId);
+      StatusScreen.instance.skilltreeScreen.OpenBuySkillConfirmationScreen(skillId);
     }    
   }
 }

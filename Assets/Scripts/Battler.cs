@@ -239,7 +239,7 @@ public abstract class Battler {
                                                           newCondition.maxDurationShowable);
       receivedNewStatus = true;
     }
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
     UpdateActorGraphics();
     return receivedNewStatus;
   }
@@ -281,13 +281,13 @@ public abstract class Battler {
         statusConditions.RemoveAt(i);
       }
     }
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
     UpdateActorGraphics();
   }
 
   public void RemoveAllStatusConditions() {
     statusConditions.Clear();
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
     UpdateActorGraphics();
   }
 
@@ -301,7 +301,7 @@ public abstract class Battler {
         statusConditions.RemoveAt(i);
       }
     }
-    UIController.instance.UpdateDateUI();
+    UIController.instance.UpdateBattleUI();
     UpdateActorGraphics();
   }
   

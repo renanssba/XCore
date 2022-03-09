@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CoupleStatusScreen : MonoBehaviour {
+public class StatusScreen : MonoBehaviour {
 
-  public static CoupleStatusScreen instance;
+  public static StatusScreen instance;
 
   [Header("- Data -")]
   public Person statusPerson;

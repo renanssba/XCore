@@ -58,7 +58,7 @@ public class GlobalData : MonoBehaviour {
       isMale = true,
       id = 0,
       faceId = 0,
-      attributes = new int[] { 5, 5, 5, 4 }
+      attributes = new int[] { 2, 2, 2, 0 }
     };
     people.Add(p);
     p = new Person() {
@@ -66,7 +66,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] { 5, 3, 3, 8 }
+      attributes = new int[] { 5, 5, 5, 0 }
     };
     people.Add(p);
     p = new Person() {
@@ -74,7 +74,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 6,
-      attributes = new int[] { 4, 7, 4, 3 }
+      attributes = new int[] { 3, 3, 3, 0 }
     };
     people.Add(p);
 

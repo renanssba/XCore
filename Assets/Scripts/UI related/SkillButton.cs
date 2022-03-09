@@ -25,17 +25,17 @@ public class SkillButton : MonoBehaviour {
   public void UpdateUI() {
     if(skill != null) {
       if(skill.HasTag("disadvantage")) {
-        bg.color = CoupleStatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
+        bg.color = StatusScreen.instance.skilltreeScreen.disadvantageSkillColor;
       } else if(skill.type == SkillType.active || skill.type == SkillType.attack) {
-        bg.color = CoupleStatusScreen.instance.activeSkillButtonColor;
+        bg.color = StatusScreen.instance.activeSkillButtonColor;
       } else {
-        bg.color = CoupleStatusScreen.instance.passiveSkillButtonColor;
+        bg.color = StatusScreen.instance.passiveSkillButtonColor;
       }
       skillName.text = skill.GetPrintableName();
       skillIcon.sprite = skill.sprite;
       skillIcon.gameObject.SetActive(true);
     } else {
-      bg.color = CoupleStatusScreen.instance.lockedSkillButtonColor;
+      bg.color = StatusScreen.instance.lockedSkillButtonColor;
       skillName.text = "";
       skillIcon.gameObject.SetActive(false);
     }
