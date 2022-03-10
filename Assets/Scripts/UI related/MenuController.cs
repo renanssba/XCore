@@ -56,7 +56,7 @@ public class MenuController : MonoBehaviour {
 
   public void OpenMenuOnStatus(int personId) {
     currentTab = MenuTabs.status;
-    coupleStatusScreen.Initialize(GlobalData.instance.people[personId]);
+    coupleStatusScreen.Initialize(GlobalData.instance.pilots[personId]);
     myPanel.OpenMenuScreen();
     UpdateMenu();
     VsnAudioManager.instance.PlaySfx("ui_menu_open");

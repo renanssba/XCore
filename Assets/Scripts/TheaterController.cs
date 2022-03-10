@@ -185,10 +185,10 @@ public class TheaterController : MonoBehaviour {
       return;
     }
 
-    Person person = null;
-    for(int i=0; i< GlobalData.instance.people.Count; i++) {
-      if(GlobalData.instance.people[i].nameKey == Utils.GetStringArgument(newActorPrefabName)) {
-        person = GlobalData.instance.people[i];
+    Pilot person = null;
+    for(int i=0; i< GlobalData.instance.pilots.Count; i++) {
+      if(GlobalData.instance.pilots[i].nameKey == Utils.GetStringArgument(newActorPrefabName)) {
+        person = GlobalData.instance.pilots[i];
         break;
       }
     }
@@ -351,7 +351,7 @@ public class TheaterController : MonoBehaviour {
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
 
-    foreach(Person partyMember in BattleController.instance.partyMembers) {
+    foreach(Pilot partyMember in BattleController.instance.partyMembers) {
       partyMember.ClearSkillUsesInBattle();
     }
     BattleController.instance.FullHealEnemies();
@@ -399,7 +399,7 @@ public class TheaterController : MonoBehaviour {
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
 
-    foreach(Person partyMember in BattleController.instance.partyMembers) {
+    foreach(Pilot partyMember in BattleController.instance.partyMembers) {
       partyMember.ClearSkillUsesInBattle();
     }
     BattleController.instance.FullHealEnemies();

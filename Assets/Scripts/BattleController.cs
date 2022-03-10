@@ -35,7 +35,7 @@ public class BattleController : MonoBehaviour {
   public int hp = 10;
 
   [Header("- Battle Members -")]
-  public Person[] partyMembers;
+  public Pilot[] partyMembers;
   public Enemy[] enemyMembers;
 
   [Header("- Player Actions -")]
@@ -68,7 +68,7 @@ public class BattleController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
-    partyMembers = new Person[0];
+    partyMembers = new Pilot[0];
     selectedTargetPartyId = new SkillTarget[0];
     LoadAllEnemies();
     LoadAllSkills();
@@ -80,13 +80,13 @@ public class BattleController : MonoBehaviour {
 
   public void SetupBattleStart() {
     Combat combat = GameController.instance.combatHappening;
-    List<Person> heroesParty = new List<Person>();
+    List<Pilot> heroesParty = new List<Pilot>();
     List<Enemy> enemiesParty = new List<Enemy>();
     string enemyName = "fly";
 
     foreach(Character c in combat.characters) {
       if(c.id <= CharacterId.maya) {
-        heroesParty.Add(GlobalData.instance.people[(int)c.id]);
+        heroesParty.Add(GlobalData.instance.pilots[(int)c.id]);
       } else {
         enemiesParty.Add( GetEnemyByString(c.id.ToString()) );
         enemyName = c.id.ToString();
@@ -137,7 +137,7 @@ public class BattleController : MonoBehaviour {
 
     // recover used celestial items
     foreach(ItemListing itemToRecharge in usedCelestialItems.itemListings) {
-      Inventory ivt = GlobalData.instance.people[0].inventory;
+      Inventory ivt = GlobalData.instance.pilots[0].inventory;
       ivt.AddItem(itemToRecharge.id, itemToRecharge.amount);
     }
 
@@ -162,7 +162,7 @@ public class BattleController : MonoBehaviour {
   }
 
   public void ClearSkillsUsageRegistry() {
-    foreach(Person p in partyMembers) {
+    foreach(Pilot p in partyMembers) {
       p.ClearAllSkillsUsage();
     }
   }
@@ -410,7 +410,7 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public ActionSkin GetActionSkin(Person user, Skill usedSkill) {
+  public ActionSkin GetActionSkin(Pilot user, Skill usedSkill) {
     string sexModifier = (user.isMale ? "_boy" : "_girl");
     string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
     return GetActionSkinByName(actionSkinName);
@@ -442,7 +442,7 @@ public class BattleController : MonoBehaviour {
         case SkillTarget.enemy1:
         case SkillTarget.enemy2:
         case SkillTarget.enemy3:
-          if(((Person)targetActors[0].battler).isMale) {
+          if(((Pilot)targetActors[0].battler).isMale) {
             attackName = "enemy_attacks_boy";
           } else {
             attackName = "enemy_attacks_girl";
@@ -668,7 +668,7 @@ public class BattleController : MonoBehaviour {
     yield return userActor.UseItemAnimation(targetActor, usedItem);
 
     // spend item
-    Inventory ivt = GlobalData.instance.people[0].inventory;
+    Inventory ivt = GlobalData.instance.pilots[0].inventory;
     if(usedItem.HasTag("celestial")) {
       usedCelestialItems.AddItem(usedItem.id, 1);
     }
@@ -826,7 +826,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void EndTurn() {
-    foreach(Person p in partyMembers) {
+    foreach(Pilot p in partyMembers) {
       p.EndTurn();
     }
     GetCurrentEnemy().EndTurn();
@@ -862,7 +862,7 @@ public class BattleController : MonoBehaviour {
     return VsnSaveSystem.GetIntVariable("currentPlayerTurn");
   }
 
-  public Person GetCurrentPlayer() {
+  public Pilot GetCurrentPlayer() {
     int currentPlayer = CurrentPlayerId();
     if(currentPlayer < partyMembers.Length && currentPlayer >= 0) {
       return partyMembers[currentPlayer];
@@ -870,7 +870,7 @@ public class BattleController : MonoBehaviour {
     return null;
   }
 
-  public Person GetCurrentTarget() {
+  public Pilot GetCurrentTarget() {
     int currentPlayer = CurrentPlayerId();
     if(currentPlayer < partyMembers.Length) {
       int target = (int)selectedTargetPartyId[currentPlayer];
@@ -924,8 +924,8 @@ public class BattleController : MonoBehaviour {
 
     string[] loadedTags, loadedImmunities;
     ActionSkin actionSkin;
-
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
+
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
       Debug.LogWarning("Loading enemy: " + dic["name key"]);
 

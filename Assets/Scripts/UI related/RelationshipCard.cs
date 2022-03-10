@@ -27,8 +27,8 @@ public class RelationshipCard : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    characterFaceImage[0].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[0].faceId);
-    characterFaceImage[1].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[1].faceId);
+    characterFaceImage[0].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[0].id);
+    characterFaceImage[1].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[1].id);
 
     int startingPoint = Relationship.LevelStartingExp(relationship.level);
     int neededExp = Relationship.LevelUpNeededExp(relationship.level);
@@ -47,7 +47,9 @@ public class RelationshipCard : MonoBehaviour {
 
     int currentCoupleId = GlobalData.instance.currentRelationshipId;
     GlobalData.instance.currentRelationshipId = relationship.id;
-    coupleNameText.text = SpecialCodes.InterpretStrings(Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple"));
+    coupleNameText.text = Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple")
+      .Replace("XXXXX", relationship.people[0].GetName())
+      .Replace("YYYYY", relationship.people[1].GetName());
     GlobalData.instance.currentRelationshipId = currentCoupleId;
     levelText.text = relationship.level.ToString();
     unusedBondPointIcon.SetActive(relationship.bondPoints > 0);

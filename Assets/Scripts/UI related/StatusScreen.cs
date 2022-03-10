@@ -9,7 +9,7 @@ public class StatusScreen : MonoBehaviour {
   public static StatusScreen instance;
 
   [Header("- Data -")]
-  public Person statusPerson;
+  public Pilot statusPerson;
 
   [Header("- Panels -")]
   public ScreenTransitions panel;
@@ -39,7 +39,7 @@ public class StatusScreen : MonoBehaviour {
     instance = this;
   }
 
-  public void Initialize(Person personToAnalyze) {
+  public void Initialize(Pilot personToAnalyze) {
     instance = this;
 
     statusPerson = personToAnalyze;
@@ -48,7 +48,7 @@ public class StatusScreen : MonoBehaviour {
 
   public void UpdateUI() {
     personCard.Initialize(statusPerson);
-    coupleHpText.text = statusPerson.MaxHP().ToString();
+    coupleHpText.text = statusPerson.AttributeValue((int)Attributes.maxHp).ToString();
 
     if(BattleController.instance.IsBattleHappening()){
       skilltreeButtonShade.gameObject.SetActive(true);
@@ -75,10 +75,10 @@ public class StatusScreen : MonoBehaviour {
 
     SfxManager.StaticPlaySelectSfx();
     personId++;
-    if(personId >= GlobalData.instance.people.Count) {
+    if(personId >= GlobalData.instance.pilots.Count) {
       personId = 0;
     }
-    Initialize(GlobalData.instance.people[personId]);
+    Initialize(GlobalData.instance.pilots[personId]);
   }
 
   public void ClickLeftCoupleButton() {
@@ -88,9 +88,9 @@ public class StatusScreen : MonoBehaviour {
     SfxManager.StaticPlaySelectSfx();
     personId--;
     if(personId < 0) {
-      personId = GlobalData.instance.people.Count - 1;
+      personId = GlobalData.instance.pilots.Count - 1;
     }
-    Initialize(GlobalData.instance.people[personId]);
+    Initialize(GlobalData.instance.pilots[personId]);
   }
 
   public void ClickExitButton() {

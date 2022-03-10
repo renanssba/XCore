@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GlobalData : MonoBehaviour {
 
-  public List<Person> people;
+  [Header("- Pilots and Relationships -")]
+  public TextAsset pilotsFile;
+  public List<Pilot> pilots;
   public Relationship[] relationships;
 
   public int currentRelationshipId;
-  public float playtime = 0f;
 
+  [Header("- System Data -")]
+  public float playtime = 0f;
   public int saveToLoad = -1;
 
 
@@ -32,44 +35,33 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void InitializeChapter() {
-    //if(VsnSaveSystem.GetBoolVariable("global_data_initialized") == true) {
-    //  return;
-    //}
-    //VsnSaveSystem.SetVariable("global_data_initialized", true);
-
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
     VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("observation_played", 0);
     VsnSaveSystem.SetVariable("day", 0);
+
+    pilots = new List<Pilot>();
+
+    SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(pilotsFile, 1);
     
 
-    people = new List<Person>();
-    Person p = new Person() {
-      nameKey = "marcus",
-      isMale = true,
-      id = 0,
-      faceId = 0,
-      attributes = new int[] { 2, 24, 2, 4, 5 }
-    };
-    people.Add(p);
-    p = new Person() {
-      nameKey = "agnes",
-      isMale = false,
-      id = 1,
-      faceId = 5,
-      attributes = new int[] { 2, 16, 5, 5, 5 }
-    };
-    people.Add(p);
-    p = new Person() {
-      nameKey = "maya",
-      isMale = false,
-      id = 2,
-      faceId = 6,
-      attributes = new int[] { 3, 12, 3, 8, 60 }
-    };
-    people.Add(p);
+    foreach(Dictionary<string, string> dic in spreadsheetData.data) {
+      Pilot newPilot = new Pilot();
+
+      newPilot.id = int.Parse(dic["id"]);
+      newPilot.nameKey = dic["nameKey"];
+      newPilot.isMale = dic["isMale"] == "TRUE";
+      newPilot.attributes = new int[]{
+        int.Parse(dic["maxHp"]),
+        int.Parse(dic["movementRange"]),
+        int.Parse(dic["attack"]),
+        int.Parse(dic["agility"]),
+        int.Parse(dic["dodgeRate"])};
+
+      pilots.Add(newPilot);
+    }
 
     ResourcesManager.instance.GenerateCharacterSprites(new string[] {"marcus", "agnes", "maya"});
 
@@ -78,12 +70,12 @@ public class GlobalData : MonoBehaviour {
     for(int i = 0; i < 2; i++) {
       relationships[i] = new Relationship {
         id = i,
-        people = new Person[] { people[0], people[i + 1] }
+        people = new Pilot[] { pilots[0], pilots[i + 1] }
       };
     }
     relationships[2] = new Relationship {
       id = 2,
-      people = new Person[] { people[1], people[2] }
+      people = new Pilot[] { pilots[1], pilots[2] }
     };
 
     /// RELATIONSHIP SKILLTREES
@@ -104,7 +96,7 @@ public class GlobalData : MonoBehaviour {
       return 0;
     }
 
-    Person currentCharacter = BattleController.instance.partyMembers[personId];
+    Pilot currentCharacter = BattleController.instance.partyMembers[personId];
 
     return currentCharacter.AttributeValue(attr);
   }
@@ -120,9 +112,9 @@ public class GlobalData : MonoBehaviour {
     UIController.instance.UpdateUI();
   }
 
-  public Person GetDateablePerson(Person p) {
-    List<Person> dateable = new List<Person>();
-    foreach(Person p2 in people) {
+  public Pilot GetDateablePerson(Pilot p) {
+    List<Pilot> dateable = new List<Pilot>();
+    foreach(Pilot p2 in pilots) {
       if(p.isMale != p2.isMale) {
         dateable.Add(p2);
       }
@@ -201,12 +193,12 @@ public class GlobalData : MonoBehaviour {
     InventorySaveStruct inv = new InventorySaveStruct();
 
     //Debug.LogWarning("SAVING INVENTORIES");
-    for(int i=0; i<people.Count; i++) {
-      inv.itemListings = people[i].inventory.itemListings;
+    for(int i=0; i<pilots.Count; i++) {
+      inv.itemListings = pilots[i].inventory.itemListings;
       VsnSaveSystem.SetVariable("person"+i+"_inventory", JsonUtility.ToJson(inv));
       //Debug.LogWarning("JSON person "+i+" inventory: " + JsonUtility.ToJson(inv));
 
-      inv.itemListings = people[i].giftsReceived.itemListings;
+      inv.itemListings = pilots[i].giftsReceived.itemListings;
       VsnSaveSystem.SetVariable("person" + i + "_gifts_received", JsonUtility.ToJson(inv));
     }
   }
@@ -233,12 +225,12 @@ public class GlobalData : MonoBehaviour {
     InventorySaveStruct inv = new InventorySaveStruct();
 
     //Debug.LogWarning("LOADING INVENTORIES");
-    for(int i = 0; i < people.Count; i++) {
+    for(int i = 0; i < pilots.Count; i++) {
       inv = JsonUtility.FromJson<InventorySaveStruct>(VsnSaveSystem.GetStringVariable("person" + i + "_inventory"));
-      people[i].inventory.itemListings = inv.itemListings;
+      pilots[i].inventory.itemListings = inv.itemListings;
 
       inv = JsonUtility.FromJson<InventorySaveStruct>(VsnSaveSystem.GetStringVariable("person" + i + "_gifts_received"));
-      people[i].giftsReceived.itemListings = inv.itemListings;
+      pilots[i].giftsReceived.itemListings = inv.itemListings;
     }
   }
 

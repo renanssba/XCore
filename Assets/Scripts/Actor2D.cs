@@ -51,13 +51,13 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public void SetCharacter(Person p) {
+  public void SetCharacter(Pilot p) {
     battler = p;
     UpdateGraphics();
   }
 
   public void UpdateGraphics() {
-    if(battler.GetType() == typeof(Person)) {
+    if(battler.GetType() == typeof(Pilot)) {
       UpdateCharacterGraphics();
     }
   }
@@ -182,7 +182,7 @@ public class Actor2D : MonoBehaviour {
     if(spriteName.StartsWith("person(")) {
       string actorName = Utils.GetStringArgument(spriteName);
 
-      foreach(Person p in GlobalData.instance.people) {
+      foreach(Pilot p in GlobalData.instance.pilots) {
         if(p.nameKey == actorName) {
           SetCharacter(p);
           return;

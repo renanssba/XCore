@@ -1,14 +1,12 @@
 ﻿fade_music 0 0.7
 fade_out 0.7
-bg "office"
+bg "Simulator Entrance BG b"
 wait 0.5
 fade_in 0.7
 
 set_var shop_level 1
 
-//play_music "graciel_intro" "graciel_loop"
-
-goto_script "char_right_enter" "Lara face"
+goto_script "char_right_enter" "Lara Sprite Idle "
 say_auto "Lara" "Olá, cadete. Como posso ajudá-lo?"
 goto store_choices
 
@@ -85,9 +83,5 @@ char_reset_all
 bg null
 wait 0.5
 fade_in 0.7
-if daytime == 2
-	play_music "intermission_night_intro" "intermission_night_loop"
-else
-	play_music "intermission_intro" "intermission_loop"
-endif
+play_music "intermission_intro" "intermission_loop"
 

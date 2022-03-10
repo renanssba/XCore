@@ -9,7 +9,7 @@ namespace Command {
 
     public override void Execute() {
       int soldItemId = VsnSaveSystem.GetIntVariable("item_id", -1);
-      Inventory inventory = GlobalData.instance.people[0].inventory;
+      Inventory inventory = GlobalData.instance.pilots[0].inventory;
 
       foreach(ItemListing itemListings in inventory.itemListings) {
         if(itemListings.id == soldItemId) {

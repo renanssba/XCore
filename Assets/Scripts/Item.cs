@@ -167,7 +167,7 @@ public class Item {
   }
 
 
-  public static string UseItemEffect(int itemId, Person target){
+  public static string UseItemEffect(int itemId, Pilot target){
     string itemUseMsg = "*Nada aconteceu.*";
 
     return itemUseMsg;
@@ -181,7 +181,7 @@ public class Item {
 
 [System.Serializable]
 public class Inventory{
-  public Person owner;
+  public Pilot owner;
   public List<ItemListing> itemListings;
 
   public Inventory(){

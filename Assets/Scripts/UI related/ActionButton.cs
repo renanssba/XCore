@@ -17,7 +17,7 @@ public class ActionButton : MonoBehaviour {
 
   public TurnActionType actionType = TurnActionType.useSkill;
 
-  public Person person;
+  public Pilot person;
   public Skill skill;
 
   public ItemListing itemListing;
@@ -30,21 +30,21 @@ public class ActionButton : MonoBehaviour {
   public GameObject shade;
 
 
-  public void InitializeAsSkill(Person p, Skill newSkill) {
+  public void InitializeAsSkill(Pilot p, Skill newSkill) {
     person = p;
     skill = newSkill;
     actionType = TurnActionType.useSkill;
     UpdateUI();
   }
 
-  public void InitializeAsItem(Person p, ItemListing newItem) {
+  public void InitializeAsItem(Pilot p, ItemListing newItem) {
     person = p;
     itemListing = newItem;
     actionType = TurnActionType.useItem;
     UpdateUI();
   }
 
-  public void InitializeGeneric(Person p) {
+  public void InitializeGeneric(Pilot p) {
     person = p;
     UpdateUI();
   }

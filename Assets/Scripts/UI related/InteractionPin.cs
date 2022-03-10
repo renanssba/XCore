@@ -24,7 +24,7 @@ public class InteractionPin : MonoBehaviour {
 
   public void ResetSprite() {
     if(GetPerson() != null) {
-      characterIcon.sprite = ResourcesManager.instance.faceSprites[GetPerson().faceId];
+      characterIcon.sprite = ResourcesManager.instance.faceSprites[GetPerson().id];
     }
   }
 
@@ -36,11 +36,11 @@ public class InteractionPin : MonoBehaviour {
     descriptionText.text = locationName;
   }
 
-  public Person GetPerson() {
-    if(charId <0 || charId > GlobalData.instance.people.Count-1) {
+  public Pilot GetPerson() {
+    if(charId <0 || charId > GlobalData.instance.pilots.Count-1) {
       return null;
     }
-    return GlobalData.instance.people[charId];
+    return GlobalData.instance.pilots[charId];
   }
 
 

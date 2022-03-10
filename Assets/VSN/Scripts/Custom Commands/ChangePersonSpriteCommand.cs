@@ -8,7 +8,7 @@ namespace Command {
   public class ChangePersonSpriteCommand : VsnCommand {
 
     public override void Execute() {
-      GlobalData.instance.people[(int)args[0].GetNumberValue()].faceId = (int)args[1].GetNumberValue();
+      GlobalData.instance.pilots[(int)args[0].GetNumberValue()].id = (int)args[1].GetNumberValue();
     }
 
     public override void AddSupportedSignatures() {

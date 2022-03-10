@@ -24,7 +24,7 @@ public class SystemScreen : MonoBehaviour {
 
 
   public void Initialize() {
-    if(BattleController.instance.IsBattleHappening() || CurrentlyOnGirlInteractionScreen()) {
+    if(BattleController.instance.IsBattleHappening()) {
       Utils.SetButtonDisabledGraphics(systemButtons[0]);
       Utils.SetButtonDisabledGraphics(systemButtons[1]);
       Utils.SetButtonDisabledGraphics(systemButtons[2]);
@@ -41,7 +41,7 @@ public class SystemScreen : MonoBehaviour {
 
 
   public void ClickOpenSavePanel() {
-    if(BattleController.instance.IsBattleHappening() || CurrentlyOnGirlInteractionScreen()) {
+    if(BattleController.instance.IsBattleHappening()) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -55,7 +55,7 @@ public class SystemScreen : MonoBehaviour {
   }
 
   public void ClickOpenLoadPanel() {
-    if(BattleController.instance.IsBattleHappening() || CurrentlyOnGirlInteractionScreen()) {
+    if(BattleController.instance.IsBattleHappening()) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -69,7 +69,7 @@ public class SystemScreen : MonoBehaviour {
   }
 
   public void ClickBackToMenu() {
-    if(BattleController.instance.IsBattleHappening() || CurrentlyOnGirlInteractionScreen()) {
+    if(BattleController.instance.IsBattleHappening()) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -85,9 +85,5 @@ public class SystemScreen : MonoBehaviour {
     savePanel.HidePanel();
     optionsPanel.ShowPanel();
     MenuController.instance.BlockTabsNavigation(false);
-  }
-
-  public bool CurrentlyOnGirlInteractionScreen() {
-    return UIController.instance.girlInteractionScreen.gameObject.activeSelf;
   }
 }

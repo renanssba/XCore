@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Attributes {
-  movementRange = 0,
-  maxHp = 1,
+  maxHp = 0,
+  movementRange = 1,
   attack = 2,
   agility = 3,
   dodgeRate = 4
@@ -23,7 +23,7 @@ public enum PersonId {
 
 
 [System.Serializable]
-public class Person : Battler {
+public class Pilot : Battler {
 
   public bool isMale;
 
@@ -31,16 +31,11 @@ public class Person : Battler {
   public int sp;
   public int skillPoints;
 
-  public string favoriteMatter;
-  public string mostHatedMatter;
-
   public Inventory inventory;
   public Inventory giftsReceived;
 
-  public int faceId;
 
-
-  public Person() {
+  public Pilot() {
     inventory = new Inventory();
     giftsReceived = new Inventory();
     inventory.owner = this;
@@ -48,30 +43,6 @@ public class Person : Battler {
     initialMaxSp = 4;
     sp = 4;
     attributes = new int[] { 1, 1, 1, 1 };
-  }
-
-
-  public void Initialize(int personId) {
-    List<int> attValues = new List<int>();
-    switch (Random.Range(0, 2)) {
-      case 0:
-        attValues.Add(6);
-        attValues.Add(6);
-        attValues.Add(4);
-        break;
-      case 1:
-        attValues.Add(8);
-        attValues.Add(6);
-        attValues.Add(2);
-        break;
-    }
-    attValues = attValues.OrderBy(x => Random.value).ToList();
-
-    //favoriteMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
-    //mostHatedMatter = Lean.Localization.LeanLocalization.GetTranslationText("random_taste/taste_" + Random.Range(0, 20));
-
-    id = personId;
-    faceId = personId;
   }
 
 
@@ -228,7 +199,7 @@ public class Person : Battler {
 [System.Serializable]
 public class Relationship {
   public int id;
-  public Person[] people;
+  public Pilot[] people;
   public int level = 0;
   public int exp = 0;
 

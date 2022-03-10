@@ -15,7 +15,7 @@ public enum PersonCardLayout {
 
 public class PersonCard : MonoBehaviour {
 
-  public Person person = null;
+  public Pilot person = null;
   public Image bgImage;
   public TextMeshProUGUI nameText;
   public Image faceImage;
@@ -36,7 +36,7 @@ public class PersonCard : MonoBehaviour {
   public PersonCardLayout coupleEntryLayout = PersonCardLayout.statusScreen;
 
 
-  public void Initialize(Person p){
+  public void Initialize(Pilot p){
     person = p;
     UpdateUI();
   }
@@ -56,8 +56,9 @@ public class PersonCard : MonoBehaviour {
     UpdateStatusConditions();
 
 
+    /// SP
     if(coupleEntryLayout == PersonCardLayout.dateUI) {
-      faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
+      faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.id);
       spText.text = "<sprite=\"hpANDsp\" index=1 tint>" + Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp")
         + ": " + person.sp + "<size=16>/" + person.GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) + "</size>";
       return;
@@ -75,9 +76,9 @@ public class PersonCard : MonoBehaviour {
       attributeNamesTexts[i].gameObject.SetActive(true);
       string colorTag = ColorTag(i);
       if(colorTag == null) {
-        attrString += person.AttributeValue(i).ToString() + "\n";
-      }else {
-        attrString += colorTag+person.AttributeValue(i).ToString() + "</color>\n";
+        attrString += person.AttributeValue(i+1).ToString() + "\n";
+      } else {
+        attrString += colorTag + person.AttributeValue(i+1).ToString() + "</color>\n";
       }
       
     }

@@ -40,21 +40,21 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   public void OpenSellStore() {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.people[0].inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.store_sell, GlobalData.instance.pilots[0].inventory);
   }
 
   public void OpenEquipSelect() {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.people[0].inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.equip_item, GlobalData.instance.pilots[0].inventory);
   }
 
   public void OpenGiftSelect() {
     VsnAudioManager.instance.PlaySfx("ui_menu_open");
-    OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.people[0].inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.give_gift, GlobalData.instance.pilots[0].inventory);
   }
 
   public void OpenInventory() {
-    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.people[0].inventory);
+    OpenItemSelectorGeneric(ItemInteractionType.inventory, GlobalData.instance.pilots[0].inventory);
   }
 
   public void OpenItemSelectorGeneric(ItemInteractionType interType, Inventory inv) {

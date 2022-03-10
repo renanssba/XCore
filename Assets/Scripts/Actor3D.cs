@@ -23,7 +23,7 @@ public class Actor3D : MonoBehaviour {
     }
   }
 
-  public void SetGraphics(Person person) {
+  public void SetGraphics(Pilot person) {
     ClearBody();
     GameObject actor = ResourcesManager.instance.baseActorPrefab[person.isMale ? 0 : 1];
     Instantiate(actor, transform);

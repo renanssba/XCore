@@ -10,7 +10,7 @@ public class SkillButton : MonoBehaviour {
   public Image skillIcon;
   public TextMeshProUGUI skillName;
   public PersonCard personCard;
-  public Person person;
+  public Pilot person;
   public Skill skill;
   public Image bg;
 

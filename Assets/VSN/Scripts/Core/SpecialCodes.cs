@@ -166,7 +166,7 @@ public class SpecialCodes {
       case "#currentDamageTaken":
         return BattleController.instance.maxHp - BattleController.instance.hp;
       case "#inventory_empty":
-        return GlobalData.instance.people[0].inventory.IsEmpty() ? 1f : 0f;
+        return GlobalData.instance.pilots[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentRelationshipLevel":
         if(currentRelationship != null) {
           return currentRelationship.level;
@@ -176,7 +176,7 @@ public class SpecialCodes {
       case "#currentPlayerStatusConditionsCount":
         int currentPlayerId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
         if(BattleController.instance.partyMembers.Length >= currentPlayerId) {
-          Person currentPlayer = BattleController.instance.partyMembers[currentPlayerId];
+          Pilot currentPlayer = BattleController.instance.partyMembers[currentPlayerId];
           return currentPlayer.statusConditions.Count;
         }
         break;
@@ -226,7 +226,7 @@ public class SpecialCodes {
       return -1;
     }
 
-    return GlobalData.instance.people[id].inventory.ItemCount(toCheck.id);
+    return GlobalData.instance.pilots[id].inventory.ItemCount(toCheck.id);
   }
 
   static int InterpretIfCharactersHasItemFromOtherChar(string keycode) {
@@ -253,6 +253,6 @@ public class SpecialCodes {
       return -1;
     }
 
-    return GlobalData.instance.people[personId].inventory.ItemCountFromOwner(toCheck.id, ownerId);
+    return GlobalData.instance.pilots[personId].inventory.ItemCountFromOwner(toCheck.id, ownerId);
   }
 }

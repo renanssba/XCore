@@ -40,7 +40,7 @@ public class ItemUI : MonoBehaviour {
     string name_suffix = "";
     string description_suffix = "";
     if(itemListing.ownerId != -1) {
-      Person owner = GlobalData.instance.people[itemListing.ownerId];
+      Pilot owner = GlobalData.instance.pilots[itemListing.ownerId];
       name_prefix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_prefix").
                             Replace("XXXXX", owner.GetName());
       name_suffix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_suffix").

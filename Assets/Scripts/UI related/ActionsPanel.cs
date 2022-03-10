@@ -30,7 +30,7 @@ public class ActionsPanel : MonoBehaviour {
     PositionPanels(partyMemberId);
   }
 
-  public Person CurrentCharacter() {
+  public Pilot CurrentCharacter() {
     return BattleController.instance.partyMembers[currentPartyMember];
   }
 
@@ -38,7 +38,7 @@ public class ActionsPanel : MonoBehaviour {
   public void SetupBaseActionButtons(int currentPartyMember) {
     List<GameObject> availableButtons = new List<GameObject>();
     Debug.LogWarning("currentPartyMember: "+ currentPartyMember);
-    Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
+    Pilot currentPerson = BattleController.instance.partyMembers[currentPartyMember];
 
     baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
     baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
@@ -69,7 +69,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void SetupBaseActionButtonsShades() {
-    Person currentPerson = BattleController.instance.partyMembers[currentPartyMember];
+    Pilot currentPerson = BattleController.instance.partyMembers[currentPartyMember];
 
     /// itens button
     baseActionButtonShades[1].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useItem) || !ThereAreItemsAvailable());
@@ -110,7 +110,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void SetupItemButtons() {
-    List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
+    List<ItemListing> battleItems = GlobalData.instance.pilots[0].inventory.GetItemListingsByType(ItemType.battle);
     for(int i = 0; i < skillButtons.Length; i++) {
       if(i < battleItems.Count) {
         skillButtons[i].InitializeAsItem(CurrentCharacter(), battleItems[i]);
@@ -176,7 +176,7 @@ public class ActionsPanel : MonoBehaviour {
 
 
   public bool ThereAreItemsAvailable() {
-    List<ItemListing> battleItems = GlobalData.instance.people[0].inventory.GetItemListingsByType(ItemType.battle);
+    List<ItemListing> battleItems = GlobalData.instance.pilots[0].inventory.GetItemListingsByType(ItemType.battle);
     return battleItems.Count > 0;
   }
 
