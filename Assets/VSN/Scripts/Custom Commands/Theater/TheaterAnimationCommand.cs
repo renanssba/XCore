@@ -9,8 +9,8 @@ namespace Command {
 
     public override void Execute() {
       switch(args[0].GetStringValue()) {
-        case "setup_date":
-          TheaterController.instance.SetupDate();
+        case "setup_battle":
+          TheaterController.instance.SetupBattle();
           break;
         case "party_enters":
           TheaterController.instance.PartyEntersScene();
@@ -23,12 +23,6 @@ namespace Command {
         case "enemy_leaves":
           TheaterController.instance.EnemyLeavesScene();
           VsnController.instance.WaitForSeconds(0.7f);
-          break;
-        case "girl_waiting_for_boy":
-          TheaterController.instance.SetupGirlWaitingForBoy();
-          break;
-        case "boy_waiting_for_girl":
-          TheaterController.instance.SetupBoyWaitingForGirl();
           break;
         case "main_actor_enters":
           TheaterController.instance.MainActorEntersScene();

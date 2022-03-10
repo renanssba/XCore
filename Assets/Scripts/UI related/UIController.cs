@@ -138,25 +138,21 @@ public class UIController : MonoBehaviour {
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
     switch(state) {
       case "hide_all":
-        interactionPinsBoard.HidePanel();
+        //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
         break;
       case "interact_with_board":
-        interactionPinsBoard.ShowPanel();
+        //interactionPinsBoard.ShowPanel();
         uiControllerPanel.ShowPanel();
-        datingPeoplePanel.HidePanel();
         break;
       case "girl_interaction_screen":
-        interactionPinsBoard.HidePanel();
+        //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
         break;
       case "date":
       case "date_challenge":
-        interactionPinsBoard.HidePanel();
+        //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
-        datingPeoplePanel.HidePanel();
         break;
     }
     SetupContext(state, firstButton);
@@ -165,11 +161,11 @@ public class UIController : MonoBehaviour {
 
 
   public void SetupContext(string state, Button firstButton) {
-    if(firstButton != null) {
-      JoystickController.instance.GetContext("Basic Context").lastSelectedObject = firstButton.gameObject;
-    } else {
-      JoystickController.instance.GetContext("Basic Context").lastSelectedObject = menuButtons[0].gameObject;
-    }
+    //if(firstButton != null) {
+    //  JoystickController.instance.GetContext("Basic Context").lastSelectedObject = firstButton.gameObject;
+    //} else {
+    //  JoystickController.instance.GetContext("Basic Context").lastSelectedObject = menuButtons[0].gameObject;
+    //}
   }
 
 
@@ -194,13 +190,15 @@ public class UIController : MonoBehaviour {
     partyPeopleCards[currentPartyMember].ShowShade(false);
   }
 
-  public void ShowDateUI(bool value) {
+  public void ShowBattleUI(bool value) {
     if(value == true) {
-      UpdateBattleUI();
-      datingPeoplePanel.OpenMenuScreen();
+      datingPeoplePanel.gameObject.SetActive(true);
+      datingPeoplePanel.canvasGroup.alpha = 1f;
+      //Debug.LogError("ShowBattleUI: true");
     } else {
-      datingPeoplePanel.CloseMenuScreen();
-    }    
+      //Debug.LogError("ShowBattleUI: false");
+      datingPeoplePanel.gameObject.SetActive(false);
+    }
   }
 
   public void SetHelpMessageText(string helpMessage) {
@@ -217,10 +215,10 @@ public class UIController : MonoBehaviour {
     //bool partTimeUnlocked = false;
     //bool shopButton = false;
 
-    for(int i=0; i<menuButtonAlertIcons.Length; i++) {
-      menuButtonAlertIcons[i].SetActive(false);
-      menuButtons[i].gameObject.SetActive(true); // activate all menu buttons
-    }
+    //for(int i=0; i<menuButtonAlertIcons.Length; i++) {
+    //  menuButtonAlertIcons[i].SetActive(false);
+    //  menuButtons[i].gameObject.SetActive(true); // activate all menu buttons
+    //}
 
     //if(VsnSaveSystem.GetIntVariable("day") >= 2) {
     //  shopButton = true;

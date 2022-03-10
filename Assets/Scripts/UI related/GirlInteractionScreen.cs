@@ -38,11 +38,11 @@ public class GirlInteractionScreen : MonoBehaviour {
   public void SetButtonsGraphics() {
     Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
 
-    if(currentRelationship.heartLocksOpened == 0) {
-      Utils.SetButtonDisabledGraphics(girlInteractionButtons[0]);
-    } else {
-      Utils.SetButtonEnabledGraphics(girlInteractionButtons[0]);
-    }
+    //if(currentRelationship.heartLocksOpened == 0) {
+    //  Utils.SetButtonDisabledGraphics(girlInteractionButtons[0]);
+    //} else {
+    //  Utils.SetButtonEnabledGraphics(girlInteractionButtons[0]);
+    //}
 
     if(currentRelationship.level < 2) {
       Utils.SetButtonDisabledGraphics(girlInteractionButtons[2]);
@@ -97,11 +97,6 @@ public class GirlInteractionScreen : MonoBehaviour {
   }
 
   public void ClickGiveGiftButton() {
-    if(relationshipCard.relationship.heartLocksOpened < 1) {
-      ShowForbiddenMessage("give_gift");
-      return;
-    }
-
     VsnController.instance.BlockExternalInput(true);
     SfxManager.StaticPlayConfirmSfx();
     HideGirlInteractionScreen();
@@ -126,7 +121,7 @@ public class GirlInteractionScreen : MonoBehaviour {
     }
 
     VsnController.instance.BlockExternalInput(true);
-    Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().GetName() + " and " + currentRelationship.GetGirl().GetName());
+    //Debug.LogWarning("Clicked date button "+dateId+" to " + currentRelationship.GetBoy().GetName() + " and " + currentRelationship.GetGirl().GetName());
     SfxManager.StaticPlayBigConfirmSfx();
     VsnSaveSystem.SetVariable("dateId", dateId);
 
@@ -138,17 +133,17 @@ public class GirlInteractionScreen : MonoBehaviour {
     //VsnController.instance.StartVSN("date");
     VsnArgument[] args = new VsnArgument[1];
     args[0] = new VsnString("date_intro_" + dateId);
-    switch(currentRelationship.GetGirl().id) {
-      case 1:
-        VsnController.instance.StartVSN("cap1_conversa_ana", args);
-        break;
-      case 2:
-        VsnController.instance.StartVSN("cap1_conversa_beatrice", args);
-        break;
-      case 3:
-        VsnController.instance.StartVSN("cap1_conversa_clara", args);
-        break;
-    }
+    //switch(currentRelationship.GetGirl().id) {
+    //  case 1:
+    //    VsnController.instance.StartVSN("cap1_conversa_ana", args);
+    //    break;
+    //  case 2:
+    //    VsnController.instance.StartVSN("cap1_conversa_beatrice", args);
+    //    break;
+    //  case 3:
+    //    VsnController.instance.StartVSN("cap1_conversa_clara", args);
+    //    break;
+    //}
   }
 
   public void ShowForbiddenMessage(string waypointToLoad) {

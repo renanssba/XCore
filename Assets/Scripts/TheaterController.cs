@@ -268,63 +268,61 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void SetupGirlWaitingForBoy() {
-    Vector3 distance = new Vector3(3f, 0f, 0f);
+  //public void SetupGirlWaitingForBoy() {
+  //  Vector3 distance = new Vector3(3f, 0f, 0f);
 
-    ClearTheater();
-    ClearBattle();
+  //  ClearTheater();
+  //  ClearBattle();
 
-    partyActors[0].transform.localPosition = secondPosition - distance;
-    partyActors[1].transform.localPosition = firstPosition;
-    partyActors[2].transform.localPosition = thirdPosition - distance;
+  //  partyActors[0].transform.localPosition = secondPosition - distance;
+  //  partyActors[1].transform.localPosition = firstPosition;
+  //  partyActors[2].transform.localPosition = thirdPosition - distance;
 
-    if(GlobalData.instance.CurrentBoy() != null) {
-      partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
-      partyActors[0].FaceRight();
-    }
-    if(GlobalData.instance.CurrentGirl() != null) {
-      partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
-      partyActors[1].FaceLeft();
-      partyActors[1].gameObject.SetActive(true);
-    } else {
-      partyActors[1].gameObject.SetActive(false);
-    }
+  //  if(GlobalData.instance.CurrentBoy() != null) {
+  //    partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
+  //    partyActors[0].FaceRight();
+  //  }
+  //  if(GlobalData.instance.CurrentGirl() != null) {
+  //    partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
+  //    partyActors[1].FaceLeft();
+  //    partyActors[1].gameObject.SetActive(true);
+  //  } else {
+  //    partyActors[1].gameObject.SetActive(false);
+  //  }
 
-    //angelActor.SetCharacter(GlobalData.instance.people[3]);
-    partyActors[2].FaceRight();
-  }
+  //  //angelActor.SetCharacter(GlobalData.instance.people[3]);
+  //  partyActors[2].FaceRight();
+  //}
 
-  public void SetupBoyWaitingForGirl() {
-    Vector3 distance = new Vector3(3f, 0f, 0f);
+  //public void SetupBoyWaitingForGirl() {
+  //  Vector3 distance = new Vector3(3f, 0f, 0f);
 
-    ClearTheater();
-    ClearBattle();
+  //  ClearTheater();
+  //  ClearBattle();
 
-    partyActors[0].transform.localPosition = firstPosition;
-    partyActors[1].transform.localPosition = secondPosition - distance;
-    partyActors[2].transform.localPosition = thirdPosition - distance;
+  //  partyActors[0].transform.localPosition = firstPosition;
+  //  partyActors[1].transform.localPosition = secondPosition - distance;
+  //  partyActors[2].transform.localPosition = thirdPosition - distance;
 
-    if(GlobalData.instance.CurrentBoy() != null) {
-      partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
-      partyActors[0].FaceLeft();
-    }
-    if(GlobalData.instance.CurrentGirl() != null) {
-      partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
-      partyActors[1].FaceRight();
-      partyActors[1].gameObject.SetActive(true);
-    } else {
-      partyActors[1].gameObject.SetActive(false);
-    }
+  //  if(GlobalData.instance.CurrentBoy() != null) {
+  //    partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
+  //    partyActors[0].FaceLeft();
+  //  }
+  //  if(GlobalData.instance.CurrentGirl() != null) {
+  //    partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
+  //    partyActors[1].FaceRight();
+  //    partyActors[1].gameObject.SetActive(true);
+  //  } else {
+  //    partyActors[1].gameObject.SetActive(false);
+  //  }
 
-    //partyActors[2].SetCharacter(GlobalData.instance.people[3]);
-    partyActors[2].FaceRight();
-  }
+  //  //partyActors[2].SetCharacter(GlobalData.instance.people[3]);
+  //  partyActors[2].FaceRight();
+  //}
 
 
 
-  public void SetupDate() {
-    Vector3 distance = new Vector3(3f, 0f, 0f);
-
+  public void SetupBattle() {
     ClearTheater();
     ClearBattle();
 
@@ -342,9 +340,36 @@ public class TheaterController : MonoBehaviour {
       }
     }
 
-    partyActors[0].transform.localPosition = firstPosition - distance;
-    partyActors[1].transform.localPosition = secondPosition - distance;
-    partyActors[2].transform.localPosition = thirdPosition - distance;
+    /// Position Heroes Party
+    partyActors[0].transform.localPosition = firstPosition;
+    partyActors[1].transform.localPosition = secondPosition;
+    partyActors[2].transform.localPosition = thirdPosition;
+
+
+    /// Position Enemis Party
+    Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
+    ChangeActor("enemy", currentEnemy.spriteName);
+    enemyActor.SetEnemy(currentEnemy);
+
+    foreach(Person partyMember in BattleController.instance.partyMembers) {
+      partyMember.ClearSkillUsesInBattle();
+    }
+    BattleController.instance.FullHealEnemies();
+
+    enemyActor.gameObject.SetActive(true);
+    enemyActor.transform.localPosition = enemyPosition;// + new Vector3(2.5f, 0f, 0f);
+    //enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
+    //  VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
+    //  InitializeEnemyLevelAndHp();
+    //  PartyEntersBattleMode();
+    //});
+
+    /// show battle UI
+    UIController.instance.ShowBattleUI(true);
+
+    VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
+    InitializeEnemyLevelAndHp();
+    PartyEntersBattleMode();
   }
 
   public void ClearBattle() {

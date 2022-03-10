@@ -231,7 +231,6 @@ public class Relationship {
   public Person[] people;
   public int level = 0;
   public int exp = 0;
-  public int heartLocksOpened = 0;
 
   public int bondPoints = 0;
   public Skilltree skilltree;
@@ -265,24 +264,6 @@ public class Relationship {
     return levelUpCosts[level];
   }
 
-  public bool OpenHeartLock(int lockId) {
-    bool raised = false;
-    if(lockId > heartLocksOpened) {
-      heartLocksOpened = lockId;
-      raised = true;
-    }
-    UIController.instance.UpdateUI();
-    return raised;
-  }
-
-
-  public Person GetBoy() {
-    return people[0];
-  }
-
-  public Person GetGirl() {
-    return people[1];
-  }
 
   public int GetMaxHp() {
     int count = level * 8 + 30;
@@ -341,10 +322,7 @@ public class Relationship {
   }
 
   public string GetRelationshipLevelDescription() {
-    if(GetGirl().nameKey == "anna" && heartLocksOpened == 0) {
-      return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/friends");
-    }
-    return Utils.RelationshipNameByHeartLocksOpened(heartLocksOpened);
+    return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/colleagues");
   }
 
   public Skill[] GetActiveSkillsByCharacter() {
@@ -404,7 +382,6 @@ public class Relationship {
   public void LoadFromStruct(RelationshipSaveStruct origin) {
     level = origin.level;
     exp = origin.exp;
-    heartLocksOpened = origin.heartLocksOpened;
     bondPoints = origin.bondPoints;
 
     skilltree = origin.skilltree;
@@ -418,7 +395,6 @@ public class RelationshipSaveStruct {
   public int id;
   public int level;
   public int exp;
-  public int heartLocksOpened;
 
   public int bondPoints = 0;
   public Skilltree skilltree;
@@ -430,7 +406,6 @@ public class RelationshipSaveStruct {
     id = origin.id;
     level = origin.level;
     exp = origin.exp;
-    heartLocksOpened = origin.heartLocksOpened;
     bondPoints = origin.bondPoints;
 
     skilltree = origin.skilltree;

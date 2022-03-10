@@ -129,6 +129,9 @@ public class BattleController : MonoBehaviour {
     // fully heal the party
     //FullHealParty();
 
+    // remove battle UI
+    UIController.instance.ShowBattleUI(false);
+
     // remove bg effect
     TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
 

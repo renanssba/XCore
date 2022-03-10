@@ -32,10 +32,10 @@ public class GlobalData : MonoBehaviour {
   }
 
   public void InitializeChapter() {
-    if(VsnSaveSystem.GetBoolVariable("global_data_initialized") == true) {
-      return;
-    }
-    VsnSaveSystem.SetVariable("global_data_initialized", true);
+    //if(VsnSaveSystem.GetBoolVariable("global_data_initialized") == true) {
+    //  return;
+    //}
+    //VsnSaveSystem.SetVariable("global_data_initialized", true);
 
     currentRelationshipId = 0;
 
@@ -90,28 +90,6 @@ public class GlobalData : MonoBehaviour {
     relationships[0].skilltree.InitializeSkillIds(new int[] { 0 });
     relationships[1].skilltree.InitializeSkillIds(new int[] { 0 });
     relationships[2].skilltree.InitializeSkillIds(new int[] { 0 });
-  }
-
-
-  public string CurrentCoupleName() {
-    if(GetCurrentRelationship() == null) {
-      return "";
-    }
-    return Lean.Localization.LeanLocalization.GetTranslationText("char_name/couple");
-  }
-
-  public Person CurrentBoy() {
-    if(GetCurrentRelationship() == null) {
-      return null;
-    }
-    return GetCurrentRelationship().GetBoy();
-  }
-
-  public Person CurrentGirl() {
-    if(GetCurrentRelationship() == null) {
-      return null;
-    }
-    return GetCurrentRelationship().GetGirl();
   }
 
 

@@ -17,18 +17,6 @@ namespace Command {
         GlobalData.instance.currentRelationshipId = (int)args[2].GetNumberValue();
       }
 
-      if(useMultiplier) {
-        switch(GlobalData.instance.GetCurrentRelationship().heartLocksOpened) {
-          case 0:
-            break;
-          case 1:
-            expToGet *= 2;
-            break;
-          case 2:
-            expToGet *= 4;
-            break;
-        }
-      }
       GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet*10);
       VsnController.instance.WaitForCustomInput();
     }

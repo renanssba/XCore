@@ -197,7 +197,7 @@ public class GameController : MonoBehaviour {
     CleanHighlightedTiles();
     currentCharacterId++;
     if(currentCharacterId >= allCharacters.Count) {
-      StartCoroutine(CombatsAnimation());
+      StartCoroutine(FightsPhase());
       return;
     }
 
@@ -212,7 +212,7 @@ public class GameController : MonoBehaviour {
 
 
 
-  public IEnumerator CombatsAnimation() {
+  public IEnumerator FightsPhase() {
     foreach(Combat c in currentCombats) {
       yield return FightBattle(c);
       c.DestroyIcons();
@@ -234,14 +234,19 @@ public class GameController : MonoBehaviour {
   }
 
   public IEnumerator FightBattle(Combat combat) {
-    combatHappening = combat;
-    VsnController.instance.StartVSN("battle");
-    yield break;
-
-
     List<Character> turns = combat.TurnsOrder();
 
     yield return cameraController.FocusOnCombat(combat);
+
+    combatHappening = combat;
+    VsnController.instance.StartVSN("battle");
+    yield return new WaitForSeconds(0.5f);
+
+    while(VsnController.instance.state != ExecutionState.STOPPED) {
+      yield return null;
+    }
+    yield break;
+
 
     foreach(Character currentChar in turns) {
       if(currentChar == null) {
@@ -364,5 +369,7 @@ public class GameController : MonoBehaviour {
 
     TacticalUIController.instance.EndBattlePhase();
     BoardController.instance.gameObject.SetActive(true);
+
+    cameraController.GoToDefaultPosition();
   }
 }

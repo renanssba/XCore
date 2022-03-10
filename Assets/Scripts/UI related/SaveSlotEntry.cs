@@ -65,7 +65,7 @@ public class SaveSlotEntry : MonoBehaviour {
       for(int i=0; i<2; i++) {
         relationshipStruct = JsonUtility.FromJson<RelationshipSaveStruct>(dic["VARSTRING_relationship_" + i]);
         relationshipLevelTexts[i].text = relationshipStruct.level.ToString();
-        heartIcons[i].sprite = ResourcesManager.instance.heartlockSprites[relationshipStruct.heartLocksOpened];
+        //heartIcons[i].sprite = ResourcesManager.instance.heartlockSprites[relationshipStruct.heartLocksOpened];
         if(relationshipStruct.level > 0) {
           humanFaceImages[i].gameObject.SetActive(true);
         } else {

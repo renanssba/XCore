@@ -22,7 +22,6 @@ public class SpecialCodes {
       currentString = InterpretEnemyName(currentString);
       currentString = InterpretLeanText(currentString);
 
-      currentString = currentString.Replace("\\couple", GlobalData.instance.CurrentCoupleName());
       if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
         currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
       }      
@@ -168,29 +167,9 @@ public class SpecialCodes {
         return BattleController.instance.maxHp - BattleController.instance.hp;
       case "#inventory_empty":
         return GlobalData.instance.people[0].inventory.IsEmpty() ? 1f : 0f;
-      case "#currentGirlId":
-        Person girl = GlobalData.instance.CurrentGirl();
-        if(girl != null) {
-          return girl.id;
-        } else {
-          return -1;
-        }
-      case "#currentBoyId":
-        Person boy = GlobalData.instance.CurrentBoy();
-        if(boy != null) {
-          return boy.id;
-        } else {
-          return -1;
-        }
       case "#currentRelationshipLevel":
         if(currentRelationship != null) {
           return currentRelationship.level;
-        } else {
-          return -1;
-        }
-      case "#currentRelationshipHeartLocksOpened":
-        if(currentRelationship != null) {
-          return currentRelationship.heartLocksOpened;
         } else {
           return -1;
         }

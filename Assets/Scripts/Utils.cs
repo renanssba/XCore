@@ -65,18 +65,6 @@ public class Utils {
     }
   }
 
-  public static string RelationshipNameByHeartLocksOpened(int heartlocksOpened) {
-    switch(heartlocksOpened) {
-      case 0:
-      default:
-        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/acquaintances");
-      case 1:
-        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/close_friends");
-      case 2:
-        return Lean.Localization.LeanLocalization.GetTranslationText("relationship_level/lovers");
-    }
-  }
-
 
   public static string AddSuggestedTextMark(string text) {
     return AddSuggestedTextMark(text, true);

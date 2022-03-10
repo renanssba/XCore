@@ -8,7 +8,6 @@ using DG.Tweening;
 public class RelationshipCard : MonoBehaviour {
 
   public Image[] characterFaceImage;
-  public Image heartIcon;
   public TextMeshProUGUI levelText;
   public Slider expSlider;
   public TextMeshProUGUI expText;
@@ -28,8 +27,8 @@ public class RelationshipCard : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    characterFaceImage[0].sprite = ResourcesManager.instance.GetFaceSprite(relationship.GetBoy().faceId);
-    characterFaceImage[1].sprite = ResourcesManager.instance.GetFaceSprite(relationship.GetGirl().faceId);
+    characterFaceImage[0].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[0].faceId);
+    characterFaceImage[1].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[1].faceId);
 
     int startingPoint = Relationship.LevelStartingExp(relationship.level);
     int neededExp = Relationship.LevelUpNeededExp(relationship.level);
@@ -39,7 +38,6 @@ public class RelationshipCard : MonoBehaviour {
     expSlider.value = currentLevelExp;
 
     proximityLevelText.text = relationship.GetRelationshipLevelDescription();
-    heartIcon.sprite = ResourcesManager.instance.heartlockSprites[relationship.heartLocksOpened];
 
     if(relationship.level < 10) {
       expText.text = currentLevelExp.ToString() + " /" + neededExp;
@@ -90,7 +88,6 @@ public class RelationshipCard : MonoBehaviour {
 
           VsnAudioManager.instance.StopAmbience("experience_up");
           VsnAudioManager.instance.PlaySfx("level_up");
-          HeartPulseAnimation();
           yield return new WaitForSeconds(1.2f);
           VsnAudioManager.instance.PlayAmbience("experience_up");
         } else {
@@ -112,12 +109,6 @@ public class RelationshipCard : MonoBehaviour {
     sayArgs[0] = new VsnString("get_exp");
     Command.GotoScriptCommand.StaticExecute("after_get_exp", sayArgs);
   }
-
-  public void HeartPulseAnimation() {
-    VsnAudioManager.instance.PlaySfx("level_up");
-    heartIcon.transform.DOScale(1.4f, 0.4f).SetRelative().SetLoops(2, LoopType.Yoyo);
-  }
-
 
   //public void ClickRelationshipCard() {
   //  MenuController.instance.OpenMenuOnStatus(relationship.id);

@@ -53,7 +53,6 @@ public class ResourcesManager : MonoBehaviour {
 
   [Header("- Misc. -")]
   public GameObject[] baseActorPrefab;
-  public Sprite[] heartlockSprites;
   public VsnCharacterData[] vsnCharacterData;
 
 

@@ -8,11 +8,11 @@ namespace Command {
   public class ShowDateUICommand : VsnCommand {
 
     public override void Execute() {
-      if(args.Length > 0){
-        UIController.instance.ShowDateUI(args[0].GetBooleanValue());
-      } else{
-        UIController.instance.ShowDateUI(true);
-      }
+      //if(args.Length > 0){
+      //  UIController.instance.ShowBattleUI(args[0].GetBooleanValue());
+      //} else{
+      //  UIController.instance.ShowBattleUI(true);
+      //}
     }
 
     public override void AddSupportedSignatures() {

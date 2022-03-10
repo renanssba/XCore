@@ -37,6 +37,9 @@ namespace Command {
         case "main_and_enemy":
           cameraPos = new Vector3(0.5f, 1.3f, -3.6f);
           break;
+        case "far_view":
+          cameraPos = new Vector3(0f, 1.1f, -9.6f);
+          break;
         case "battle_view":
         default:
           cameraPos = new Vector3(0f, 1.1f, -6.4f);

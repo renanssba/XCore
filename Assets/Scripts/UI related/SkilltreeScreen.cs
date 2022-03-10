@@ -42,10 +42,8 @@ public class SkilltreeScreen : MonoBehaviour {
 
     bondPointsText.text = relationship.bondPoints.ToString();
 
-    /// character sprites
-    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.character);
-    //characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.GetBoy().id, CharacterSpritePart.mecha);
-
+    /// characte sprite
+    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.people[0].id, CharacterSpritePart.character);
 
     /// show requisite paths
     if(relationship.skilltree.skills[8].isUnlocked) {
@@ -139,17 +137,17 @@ public class SkilltreeScreen : MonoBehaviour {
       text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/passive") + " ";
     }
 
-    switch(relationship.skilltree.skills[selectedSkillId].affectsPerson) {
-      case SkillAffectsCharacter.boy:
-        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetBoy().GetName() + "\n";
-        break;
-      case SkillAffectsCharacter.girl:
-        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetGirl().GetName() + "\n";
-        break;
-      case SkillAffectsCharacter.couple:
-        text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects_couple") + "\n";
-        break;
-    }
+    //switch(relationship.skilltree.skills[selectedSkillId].affectsPerson) {
+    //  case SkillAffectsCharacter.boy:
+    //    text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetBoy().GetName() + "\n";
+    //    break;
+    //  case SkillAffectsCharacter.girl:
+    //    text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects") + " " + relationship.GetGirl().GetName() + "\n";
+    //    break;
+    //  case SkillAffectsCharacter.couple:
+    //    text += Lean.Localization.LeanLocalization.GetTranslationText("skilltree/affects_couple") + "\n";
+    //    break;
+    //}
     text = text + skill.GetPrintableDescription();
 
     return text;
@@ -173,8 +171,8 @@ public class SkilltreeScreen : MonoBehaviour {
     if(GlobalData.instance.GetCurrentRelationship() == null) {
       return;
     }
-    relationship.GetBoy().HealSp(100);
-    relationship.GetGirl().HealSp(100);
+    relationship.people[0].HealSp(100);
+    relationship.people[1].HealSp(100);
   }
 
   public void ConfirmSkillBuy() {
