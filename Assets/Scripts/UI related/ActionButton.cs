@@ -160,7 +160,7 @@ public class ActionButton : MonoBehaviour {
       return;
     }
     if(VsnSaveSystem.GetBoolVariable("tut_require_click_guts") ) {
-      if(actionType != TurnActionType.useSkill || skill == null || skill.type != SkillType.attack || skill.damageAttribute != Attributes.guts) {
+      if(actionType != TurnActionType.useSkill || skill == null || skill.type != SkillType.attack || skill.damageAttribute != Attributes.maxHp) {
         SfxManager.StaticPlayForbbidenSfx();
         return;
       } else {

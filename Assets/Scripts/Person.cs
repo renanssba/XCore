@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Attributes{
-  guts = 0,
-  intelligence = 1,
-  charisma = 2,
-  endurance = 3
+public enum Attributes {
+  movementRange = 0,
+  maxHp = 1,
+  attack = 2,
+  agility = 3,
+  dodgeRate = 4
 }
 
 public enum PersonState {
@@ -17,8 +18,7 @@ public enum PersonState {
 }
 
 public enum PersonId {
-  main = 0,
-  fertiliel = 10
+  main = 0
 }
 
 
@@ -84,11 +84,6 @@ public class Person : Battler {
       return false;
     }
     if(sp < skillToUse.spCost) {
-      return false;
-    }
-
-    if(TotalStatusEffectPower(StatusConditionEffect.limitActionsToGuts) > 0f &&
-       (skillToUse.type == SkillType.active || skillToUse.damageAttribute != Attributes.guts)) {
       return false;
     }
     return true;
@@ -171,15 +166,10 @@ public class Person : Battler {
     List<Skill> skills = new List<Skill>();
     Relationship relationship = GlobalData.instance.relationships[relationshipId];
 
-    if(id == (int)PersonId.fertiliel) {
-      skills.Add(BattleController.instance.GetSkillById(9));
-      return skills.ToArray();
-    } else {
-      skills.Add(BattleController.instance.GetSkillById(0));
-      skills.Add(BattleController.instance.GetSkillById(1));
-      skills.Add(BattleController.instance.GetSkillById(2));
-    }
-    skills.AddRange(relationship.GetActiveSkillsByCharacter(isMale));
+    skills.Add(BattleController.instance.GetSkillById(0));
+    //skills.Add(BattleController.instance.GetSkillById(1));
+    //skills.Add(BattleController.instance.GetSkillById(2));
+    skills.AddRange(relationship.GetActiveSkillsByCharacter());
 
     return skills.ToArray();
   }
@@ -371,14 +361,14 @@ public class Relationship {
     return Utils.RelationshipNameByHeartLocksOpened(heartLocksOpened);
   }
 
-  public Skill[] GetActiveSkillsByCharacter(bool isBoy) {
+  public Skill[] GetActiveSkillsByCharacter() {
     List<Skill> skills = new List<Skill>();
 
     for(int i = 0; i < skilltree.skills.Length; i++) {
-      if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
-         (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
-        AddActiveSkillToList(skills, i);
-      }
+      //if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
+      //   (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
+      AddActiveSkillToList(skills, i);
+      //}
     }
     return skills.ToArray();
   }

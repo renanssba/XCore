@@ -32,16 +32,6 @@ public class SpecialCodes {
       if(BattleController.instance.GetCurrentTarget() != null) {
         currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
       }
-      if(GlobalData.instance.CurrentBoy() != null) {
-        currentString = currentString.Replace("\\boy", GlobalData.instance.CurrentBoy().GetName());
-        currentString = currentString.Replace("\\guts", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.guts).ToString());
-        currentString = currentString.Replace("\\intelligence", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.intelligence).ToString());
-        currentString = currentString.Replace("\\charisma", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.charisma).ToString());
-        currentString = currentString.Replace("\\magic", GlobalData.instance.CurrentCharacterAttribute((int)Attributes.endurance).ToString());
-      }
-      if(GlobalData.instance.CurrentGirl() != null) {
-        currentString = currentString.Replace("\\girl", GlobalData.instance.CurrentGirl().GetName());
-      }
       currentString = currentString.Replace("\\day", VsnSaveSystem.GetIntVariable("day").ToString());
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
@@ -226,13 +216,6 @@ public class SpecialCodes {
       case "#enemySkillsCount":
         if(enemy != null) {
           return enemy.passiveSkills.Length;
-        } else {
-          return -1;
-        }
-      case "#enemyCustomEventsCount":
-        Enemy bat = BattleController.instance.GetCurrentEnemy();
-        if(enemy != null) {
-          return enemy.customEvents.Length;
         } else {
           return -1;
         }

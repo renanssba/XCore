@@ -40,25 +40,6 @@ public abstract class Battler {
     if(IsSpotted() && action != TurnActionType.idle) {
       return false;
     }
-
-    // limit actions to defend
-    if(action != TurnActionType.defend) {
-      foreach(StatusCondition sc in statusConditions) {
-        if(sc.ContainsStatusEffect(StatusConditionEffect.limitActionsToDefense)) {
-          Debug.LogWarning("cant execute action different from defend");
-          return false;
-        }
-      }
-    }
-    // limit actions to guts
-    if(action != TurnActionType.useSkill) {
-      foreach(StatusCondition sc in statusConditions) {
-        if(sc.ContainsStatusEffect(StatusConditionEffect.limitActionsToGuts)) {
-          Debug.LogWarning("cant execute action different from guts");
-          return false;
-        }
-      }
-    }
     return true;
   }
 

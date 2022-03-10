@@ -44,8 +44,8 @@ public class UIController : MonoBehaviour {
   public GameObject[] selectTargets;
 
   [Header("- Help Panel -")]
-  public ScreenTransitions helpMessagePanel;
-  public TextMeshProUGUI helpMessageText;
+  //public ScreenTransitions helpMessagePanel;
+  //public TextMeshProUGUI helpMessageText;
 
   [Header("- Map Panel -")]
   public ScreenTransitions interactionPinsBoard;
@@ -204,12 +204,12 @@ public class UIController : MonoBehaviour {
   }
 
   public void SetHelpMessageText(string helpMessage) {
-    helpMessageText.text = helpMessage;
-    helpMessageText.maxVisibleCharacters = helpMessage.Length;
+    //helpMessageText.text = helpMessage;
+    //helpMessageText.maxVisibleCharacters = helpMessage.Length;
   }
 
   public void CleanHelpMessagePanel() {
-    helpMessageText.text = "";
+    //helpMessageText.text = "";
   }
 
 

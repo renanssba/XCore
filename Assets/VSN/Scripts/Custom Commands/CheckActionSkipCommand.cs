@@ -11,8 +11,7 @@ namespace Command {
       int partyMemberId = (int)args[0].GetNumberValue();
 
       // if action is idle
-      if(BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.idle &&
-         BattleController.instance.partyMembers[partyMemberId].id == (int)PersonId.fertiliel) {
+      if(BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.idle) {
         ContinueCommand.StaticExecute();
         return;
       }

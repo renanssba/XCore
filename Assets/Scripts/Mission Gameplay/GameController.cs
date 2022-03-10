@@ -348,7 +348,9 @@ public class GameController : MonoBehaviour {
   public void StartBattle() {
     cameras[0].gameObject.SetActive(false);
     cameras[1].gameObject.SetActive(true);
+
     gameState = GameState.battlePhase;
+
     TacticalUIController.instance.Select(null);
     TacticalUIController.instance.EnterBattlePhase();
     BoardController.instance.gameObject.SetActive(false);
@@ -357,6 +359,9 @@ public class GameController : MonoBehaviour {
   public void EndBattle() {
     cameras[0].gameObject.SetActive(true);
     cameras[1].gameObject.SetActive(false);
+
+    gameState = GameState.choosingMovement;
+
     TacticalUIController.instance.EndBattlePhase();
     BoardController.instance.gameObject.SetActive(true);
   }

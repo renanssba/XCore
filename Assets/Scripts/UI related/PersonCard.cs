@@ -58,11 +58,8 @@ public class PersonCard : MonoBehaviour {
 
     if(coupleEntryLayout == PersonCardLayout.dateUI) {
       faceImage.sprite = ResourcesManager.instance.GetFaceSprite(person.faceId);
-      if(person.id != (int)PersonId.fertiliel) {
-        spText.text = "<sprite=\"hpANDsp\" index=1 tint>"+Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp") +": " + person.sp + "<size=16>/" + person.GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) + "</size>";
-      } else {
-        spText.text = "";
-      }      
+      spText.text = "<sprite=\"hpANDsp\" index=1 tint>" + Lean.Localization.LeanLocalization.GetTranslationText("attribute/sp")
+        + ": " + person.sp + "<size=16>/" + person.GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) + "</size>";
       return;
     }
 

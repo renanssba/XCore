@@ -80,17 +80,19 @@ public class BattleController : MonoBehaviour {
 
   public void SetupBattleStart() {
     Combat combat = GameController.instance.combatHappening;
-    List<Person> people = new List<Person>();
+    List<Person> heroesParty = new List<Person>();
+    List<Enemy> enemiesParty = new List<Enemy>();
     string enemyName = "fly";
 
     foreach(Character c in combat.characters) {
       if(c.id <= CharacterId.maya) {
-        people.Add(GlobalData.instance.people[(int)c.id]);
+        heroesParty.Add(GlobalData.instance.people[(int)c.id]);
       } else {
+        enemiesParty.Add( GetEnemyByString(c.id.ToString()) );
         enemyName = c.id.ToString();
       }
     }
-    partyMembers = people.ToArray();
+    partyMembers = heroesParty.ToArray();
 
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
@@ -121,11 +123,11 @@ public class BattleController : MonoBehaviour {
     return VsnSaveSystem.GetBoolVariable("battle_is_happening");
   }
   
-  public void EndDate() {
+  public void EndBattle() {
     VsnSaveSystem.SetVariable("battle_is_happening", false);
 
     // fully heal the party
-    FullHealParty();
+    //FullHealParty();
 
     // remove bg effect
     TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
@@ -135,6 +137,8 @@ public class BattleController : MonoBehaviour {
       Inventory ivt = GlobalData.instance.people[0].inventory;
       ivt.AddItem(itemToRecharge.id, itemToRecharge.amount);
     }
+
+    GameController.instance.EndBattle();
   }
 
 
@@ -305,34 +309,6 @@ public class BattleController : MonoBehaviour {
     Battler currentCharacter = GetBattlerByTargetId(partyMemberId);
 
 
-    // status chances to execute another action instead
-    if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseGuts)) {
-      action = TurnActionType.useSkill;
-      selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.guts);
-      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
-    }
-    if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseIntelligence)) {
-      action = TurnActionType.useSkill;
-      selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.intelligence);
-      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
-    }
-    if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoUseCharisma)) {
-      action = TurnActionType.useSkill;
-      selectedSkills[(int)partyMemberId] = GetSkillById((int)Attributes.charisma);
-      selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
-    }
-    if(Random.Range(0f, 1f) < currentCharacter.TotalStatusEffectPower(StatusConditionEffect.chanceToAutoDefend)) {
-      action = TurnActionType.defend;
-    }
-    if(currentCharacter.TotalStatusEffectPower(StatusConditionEffect.cantAct) >= 1f) {
-      int distractedId = currentCharacter.FindStatusCondition("distracted");
-      if(distractedId != -1 && currentCharacter.statusConditions[distractedId].duration == 1) {
-        action = TurnActionType.useSkill;
-        selectedSkills[(int)partyMemberId] = GetSkillByName("analysis");
-        selectedTargetPartyId[(int)partyMemberId] = SkillTarget.enemy1;
-      }
-    }
-
     switch(action) {
       case TurnActionType.useSkill:
         CharacterUseSkill(partyMemberId);
@@ -377,13 +353,13 @@ public class BattleController : MonoBehaviour {
     Debug.Log("attacker: " + attacker.GetName());
     Debug.Log("defender: " + defender.GetName());
 
-    damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
+    damage = attacker.AttributeValue((int)usedSkill.damageAttribute) * usedSkill.damagePower;
+    //damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
     Debug.LogWarning(attacker.GetName() + " Hits!");
-    Debug.Log("Offense/Defense ratio (ATK/DEF):" + damage);
 
     // skill power
-    damage *= usedSkill.damagePower * Random.Range(0.9f, 1.1f);
+    //damage *= usedSkill.damagePower * Random.Range(0.9f, 1.1f);
 
     // attacker damage multiplier
     damage *= attacker.DamageMultiplier();
@@ -901,20 +877,6 @@ public class BattleController : MonoBehaviour {
     FullHealParty();
   }
 
-  public void GenerateDateEnemies() {
-    List<int> selectedEnemies = new List<int>();
-
-    enemyMembers = new Enemy[dateLength];
-    for(int i = 0; i < dateLength; i++) {
-      int selectedId = GetNewEnemy(selectedEnemies);
-      enemyMembers[i] = allEnemies[selectedId];
-      selectedEnemies.Add(selectedId);
-    }
-    System.Array.Sort(enemyMembers, new System.Comparison<Enemy>(
-                      (event1, event2) => event1.stage.CompareTo(event2.stage)));
-    RecoverEnemiesHp();
-  }
-
   public void SetupDateLocation(){
     TheaterController.instance.SetLocation(currentDateLocation.ToString());
   }
@@ -926,30 +888,6 @@ public class BattleController : MonoBehaviour {
       }
     }
     return null;
-  }
-
-  public int GetNewEnemy(List<int> selectedEvents) {
-    //return 2;
-    //return 4;
-    //return 6;
-    //return 7;
-    //return 11;
-    //return Random.Range(5, 9);
-    //return Random.Range(0, 12);
-
-    int selectedEnemyId;
-    do {
-      //selectedId = Random.Range(0, allDateEvents.Count);
-      selectedEnemyId = Random.Range(0, 9);
-
-      Debug.LogWarning("selected location: " + allEnemies[selectedEnemyId].location);
-      Debug.LogWarning("date location: " + currentDateLocation.ToString());
-
-    } while(selectedEvents.Contains(selectedEnemyId) ||
-            (string.Compare(allEnemies[selectedEnemyId].location, currentDateLocation.ToString()) != 0 &&
-             string.Compare(allEnemies[selectedEnemyId].location, DateLocation.generic.ToString()) != 0));
-
-    return selectedEnemyId;
   }
 
   public int CurrentPlayerId() {
@@ -1035,7 +973,6 @@ public class BattleController : MonoBehaviour {
   public void LoadAllEnemies() {
     allEnemies = new List<Enemy>();
 
-    float guts, intelligence, charisma;
     string[] loadedTags, loadedImmunities;
     ActionSkin actionSkin;
 
@@ -1043,11 +980,7 @@ public class BattleController : MonoBehaviour {
     foreach(Dictionary<string, string> dic in spreadsheetData.data) {
       Debug.LogWarning("Loading enemy: " + dic["name key"]);
 
-      Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] +
-                                                      ", \"customEvents\" :" + dic["custom events"] + "}");
-      guts = GetEffectivityByName(dic["guts effectivity"]);
-      intelligence = GetEffectivityByName(dic["intelligence effectivity"]);
-      charisma = GetEffectivityByName(dic["charisma effectivity"]);
+      Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] + "}");
       loadedTags = Utils.SeparateTags(dic["tags"]);
       loadedImmunities = Utils.SeparateTags(dic["status immunities"]);
 
@@ -1057,27 +990,26 @@ public class BattleController : MonoBehaviour {
       actionSkin.animation = GetSkillAnimationByString(dic["base attack animation"]);
       actionSkin.animationArgument = Utils.GetStringArgument(dic["base attack animation"]);
 
-      allEnemies.Add(new Enemy {
-        id = int.Parse(dic["id"]),
-        nameKey = dic["name key"],
-        level = int.Parse(dic["level"]),
-        maxHp = int.Parse(dic["max hp"]),
-        attributeEffectivity = new float[] { guts, intelligence, charisma },
-        spriteName = dic["sprite name"],
-        baseAttackSkin = actionSkin,
-        appearSfxName = dic["appear sfx"],
-        stage = int.Parse(dic["stage"]),
-        location = dic["location"],
-        expReward = int.Parse(dic["exp reward"]),
-        moneyReward = int.Parse(dic["money reward"]),
-        attributes = new int[]{int.Parse(dic["guts"]), int.Parse(dic["intelligence"]),
-          int.Parse(dic["charisma"]), int.Parse(dic["endurance"])},
-        passiveSkills = Utils.SeparateInts(dic["passive skills"]),
-        activeSkillLogics = loadedEnemy.activeSkillLogics,
-        customEvents = loadedEnemy.customEvents,
-        tags = loadedTags,
-        statusImmunities = loadedImmunities
-      }); ;
+      loadedEnemy.id = int.Parse(dic["id"]);
+      loadedEnemy.nameKey = dic["name key"];
+      loadedEnemy.level = int.Parse(dic["level"]);
+      loadedEnemy.maxHp = int.Parse(dic["maxHp"]);
+      loadedEnemy.spriteName = dic["sprite name"];
+      loadedEnemy.baseAttackSkin = actionSkin;
+      loadedEnemy.appearSfxName = dic["appear sfx"];
+      loadedEnemy.expReward = int.Parse(dic["exp reward"]);
+      loadedEnemy.moneyReward = int.Parse(dic["money reward"]);
+      loadedEnemy.attributes = new int[]{
+        int.Parse(dic["maxHp"]),
+        int.Parse(dic["movementRange"]),
+        int.Parse(dic["attack"]),
+        int.Parse(dic["agility"]),
+        int.Parse(dic["dodgeRate"])};
+      loadedEnemy.passiveSkills = Utils.SeparateInts(dic["passive skills"]);
+      loadedEnemy.statusImmunities = loadedImmunities;
+      loadedEnemy.tags = loadedTags;
+
+      allEnemies.Add(loadedEnemy);
     }
   }
 
@@ -1118,7 +1050,7 @@ public class BattleController : MonoBehaviour {
         newSkill.effectPower = float.Parse(entry["effect power"]);
       }
 
-      newSkill.damageAttribute = Utils.GetAttributeByString(entry["damage attribute"]);
+      newSkill.damageAttribute = (Attributes)System.Enum.Parse(typeof(Attributes), entry["damage attribute"]);
       if(!string.IsNullOrEmpty(entry["damage power"])) {
         newSkill.damagePower = int.Parse(entry["damage power"]);
       }

@@ -8,10 +8,6 @@ public class GlobalData : MonoBehaviour {
   public Relationship[] relationships;
 
   public int currentRelationshipId;
-
-  public int boysToGenerate = 5;
-  public int girlsToGenerate = 5;
-
   public float playtime = 0f;
 
   public int saveToLoad = -1;
@@ -49,16 +45,13 @@ public class GlobalData : MonoBehaviour {
     VsnSaveSystem.SetVariable("day", 0);
     
 
-    boysToGenerate = 1;
-    girlsToGenerate = 2;
-
     people = new List<Person>();
     Person p = new Person() {
       nameKey = "marcus",
       isMale = true,
       id = 0,
       faceId = 0,
-      attributes = new int[] { 2, 2, 2, 0 }
+      attributes = new int[] { 2, 24, 2, 4, 5 }
     };
     people.Add(p);
     p = new Person() {
@@ -66,7 +59,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 1,
       faceId = 5,
-      attributes = new int[] { 5, 5, 5, 0 }
+      attributes = new int[] { 2, 16, 5, 5, 5 }
     };
     people.Add(p);
     p = new Person() {
@@ -74,7 +67,7 @@ public class GlobalData : MonoBehaviour {
       isMale = false,
       id = 2,
       faceId = 6,
-      attributes = new int[] { 3, 3, 3, 0 }
+      attributes = new int[] { 3, 12, 3, 8, 60 }
     };
     people.Add(p);
 
@@ -82,7 +75,7 @@ public class GlobalData : MonoBehaviour {
 
 
     relationships = new Relationship[3];
-    for(int i = 0; i < girlsToGenerate; i++) {
+    for(int i = 0; i < 2; i++) {
       relationships[i] = new Relationship {
         id = i,
         people = new Person[] { people[0], people[i + 1] }
@@ -94,12 +87,9 @@ public class GlobalData : MonoBehaviour {
     };
 
     /// RELATIONSHIP SKILLTREES
-    relationships[0].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 15, 13, 14, 23, 26, 26, 27, 26, 30 });
-    relationships[1].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 32, 29, 27, 28, 27, 26, 30 });
-    relationships[2].skilltree.InitializeSkillIds(new int[] { 10, 11, 12, 22, 31, 4, 32, 29, 27, 28, 27, 26, 30 });
-
-    relationships[1].skilltree.skills[9].affectsPerson = SkillAffectsCharacter.boy;
-    //VsnSaveSystem.SetVariable("money", 200);
+    relationships[0].skilltree.InitializeSkillIds(new int[] { 0 });
+    relationships[1].skilltree.InitializeSkillIds(new int[] { 0 });
+    relationships[2].skilltree.InitializeSkillIds(new int[] { 0 });
   }
 
 

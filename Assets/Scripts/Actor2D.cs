@@ -88,17 +88,6 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void UpdateCharacterGraphics() {
-    if(battler.id == (int)PersonId.fertiliel) {
-      Sprite hidingSpotSprite = Resources.Load<Sprite>("Characters/hiding-spot-" + BattleController.instance.currentDateLocation.ToString());
-      if(hidingSpotSprite != null) {
-        renderers[4].sprite = hidingSpotSprite;
-      } else {
-        renderers[4].sprite = null;
-      }      
-      spottedIcon.SetActive(battler.IsSpotted());
-      return;
-    }
-
     if(!string.IsNullOrEmpty(battler.GetName())) {
       renderers[0].gameObject.SetActive(true);
       renderers[1].gameObject.SetActive(false);
@@ -149,18 +138,18 @@ public class Actor2D : MonoBehaviour {
 
   public void SetAuraVisibility() {
     //Debug.LogWarning("SETTING AURA VISIBILITY");
-    if(battler.CurrentStatusConditionStacks("encouraged") > 0) {
-      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.guts]);
-    } else if(battler.CurrentStatusConditionStacks("focused") > 0) {
-      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.intelligence]);
-    } else if(battler.CurrentStatusConditionStacks("inspired") > 0) {
-      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.charisma]);
-    } else if(battler.CurrentStatusConditionStacks("blessed") > 0) {
-      ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.endurance]);
-    } else {
-      //Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
-      buffAuraRenderers[0].gameObject.SetActive(false);
-    }
+    //if(battler.CurrentStatusConditionStacks("encouraged") > 0) {
+    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.maxHp]);
+    //} else if(battler.CurrentStatusConditionStacks("focused") > 0) {
+    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.attack]);
+    //} else if(battler.CurrentStatusConditionStacks("inspired") > 0) {
+    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.dodge]);
+    //} else if(battler.CurrentStatusConditionStacks("blessed") > 0) {
+    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.endurance]);
+    //} else {
+    //  //Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
+    //  buffAuraRenderers[0].gameObject.SetActive(false);
+    //}
   }
 
   public void ShowAura(Color c) {

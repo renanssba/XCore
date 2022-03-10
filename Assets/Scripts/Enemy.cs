@@ -22,21 +22,11 @@ public class ActiveSkillLogic {
   public string[] conditions;
 }
 
-[System.Serializable]
-public class CustomEventLogic {
-  public string scriptWaypoint;
-  public string situationTrigger;
-  public string[] conditions;
-}
-
 
 [System.Serializable]
 public class Enemy : Battler {
 
-  public float[] attributeEffectivity;
   public int level;
-  public int stage;
-  public string location;
   public string spriteName;
   public string appearSfxName;
 
@@ -46,7 +36,6 @@ public class Enemy : Battler {
   public ActionSkin baseAttackSkin;
 
   public ActiveSkillLogic[] activeSkillLogics;
-  public CustomEventLogic[] customEvents;
   public int[] passiveSkills;
 
   public int expReward;
@@ -63,21 +52,21 @@ public class Enemy : Battler {
 
   public Attributes[] GetWeaknesses() {
     List<Attributes> att = new List<Attributes>();
-    for(int i=0; i<3; i++) {
-      if(attributeEffectivity[i] > 1f) {
-        att.Add((Attributes)i);
-      }
-    }
+    //for(int i=0; i<3; i++) {
+    //  if(attributeEffectivity[i] > 1f) {
+    //    att.Add((Attributes)i);
+    //  }
+    //}
     return att.ToArray();
   }
 
   public Attributes[] GetResistances() {
     List<Attributes> att = new List<Attributes>();
-    for(int i = 0; i<3; i++) {
-      if(attributeEffectivity[i] < 1f) {
-        att.Add((Attributes)i);
-      }
-    }
+    //for(int i = 0; i<3; i++) {
+    //  if(attributeEffectivity[i] < 1f) {
+    //    att.Add((Attributes)i);
+    //  }
+    //}
     return att.ToArray();
   }
 
@@ -95,7 +84,8 @@ public class Enemy : Battler {
   }
 
   public override float GetAttributeEffectivity(Attributes att) {
-    return attributeEffectivity[(int)att];
+    //return attributeEffectivity[(int)att];
+    return 1f;
   }
 
 

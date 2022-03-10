@@ -8,14 +8,6 @@ if game_has_ended == 1
   end_script
 endif
 
-if daytime == 2
-  /// CHECK TO SEE IF ACHIEVEMENT SLEEP ALL DAY
-  if times_slept_today >= 3
-    get_achievement "SLEEP_ALL_DAY"
-  endif
-  set_var times_slept_today 0
-endif
-
 pass_time
 save 0
 goto_script "select_daytime_interaction"

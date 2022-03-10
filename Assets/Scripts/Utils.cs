@@ -122,20 +122,6 @@ public class Utils {
     }
   }
 
-  public static Attributes GetAttributeByString(string attrName) {
-    switch(attrName) {
-      case "guts":
-        return Attributes.guts;
-      case "intelligence":
-        return Attributes.intelligence;
-      case "charisma":
-        return Attributes.charisma;
-      case "magic":
-        return Attributes.endurance;
-    }
-    return Attributes.guts;
-  }
-
   public static Color GetColorByString(string colorName) {
     switch(colorName) {
       case "red":

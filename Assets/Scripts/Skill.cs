@@ -35,7 +35,6 @@ public enum SkillTarget {
 public enum SkillSpecialEffect {
   sensor,
   buffDebuff,
-  fleeChanceBonus,
   healingItemBonus,
   healingSkillBonus,
   damageTakenBonus,
@@ -99,6 +98,13 @@ public class Skilltree {
 
 
   public Skilltree() {
+    skills = new SkilltreeEntry[1];
+
+    skills[0].affectsPerson = SkillAffectsCharacter.boy;
+    skills[0].isUnlocked = true;
+  }
+
+  public void Skilltree_old() {
     skills = new SkilltreeEntry[13];
     for(int i = 0; i < skills.Length; i++) {
       skills[i].isUnlocked = false;
