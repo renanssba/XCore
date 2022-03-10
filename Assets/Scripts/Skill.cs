@@ -86,8 +86,6 @@ public enum SkillAnimation {
 public struct SkilltreeEntry {
   public int id;
   public bool isUnlocked;
-  public SkillAffectsCharacter affectsPerson;
-  //public int prerequisite;
 }
 
 
@@ -100,7 +98,6 @@ public class Skilltree {
   public Skilltree() {
     skills = new SkilltreeEntry[1];
 
-    skills[0].affectsPerson = SkillAffectsCharacter.boy;
     skills[0].isUnlocked = true;
   }
 
@@ -109,13 +106,6 @@ public class Skilltree {
     for(int i = 0; i < skills.Length; i++) {
       skills[i].isUnlocked = false;
     }
-
-    for(int i=0; i<4; i++) {
-      skills[i].affectsPerson = SkillAffectsCharacter.boy;
-      skills[4 + i].affectsPerson = SkillAffectsCharacter.girl;
-      skills[8 + i].affectsPerson = SkillAffectsCharacter.couple;
-    }
-    skills[12].affectsPerson = SkillAffectsCharacter.girl;
 
     skills[3].isUnlocked = true;
     skills[7].isUnlocked = true;

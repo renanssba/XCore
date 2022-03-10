@@ -53,29 +53,7 @@ namespace Command {
 
     public void CheckPlayersSkills(int skillPos, string situation) {
       Relationship relationship = GlobalData.instance.GetCurrentRelationship();
-      SkillTarget partyMemberId = SkillTarget.none;
-
-      switch(relationship.skilltree.skills[skillPos].affectsPerson) {
-        case SkillAffectsCharacter.boy:
-          for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
-            if(BattleController.instance.partyMembers[i].isMale) {
-              partyMemberId = (SkillTarget)i;
-              break;
-            }
-          }
-          break;
-        case SkillAffectsCharacter.girl:
-          for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
-            if(!BattleController.instance.partyMembers[i].isMale) {
-              partyMemberId = (SkillTarget)i;
-              break;
-            }
-          }
-          break;
-        case SkillAffectsCharacter.couple:
-          partyMemberId = SkillTarget.allHeroes;
-          break;
-      }
+      SkillTarget partyMemberId = SkillTarget.allHeroes;
       Skill skillChecked = BattleController.instance.GetSkillById(relationship.skilltree.skills[skillPos].id);
 
 

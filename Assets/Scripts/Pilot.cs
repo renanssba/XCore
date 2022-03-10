@@ -312,11 +312,8 @@ public class Relationship {
     List<Skill> skills = new List<Skill>();
 
     for(int i=0; i<skilltree.skills.Length; i++) {
-      if((isBoy && skilltree.skills[i].affectsPerson == SkillAffectsCharacter.boy) ||
-         (!isBoy && skilltree.skills[i].affectsPerson == SkillAffectsCharacter.girl) ) {
-        AddActiveSkillToList(skills, i);
-        AddPassiveSkillToList(skills, i);
-      }
+      AddActiveSkillToList(skills, i);
+      AddPassiveSkillToList(skills, i);
     }
     return skills.ToArray();
   }
@@ -325,10 +322,7 @@ public class Relationship {
     List<Skill> skills = new List<Skill>();
 
     for(int i = 0; i < skilltree.skills.Length; i++) {
-      if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
-         (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
-        AddPassiveSkillToList(skills, i);
-      }
+      AddPassiveSkillToList(skills, i);
     }
     return skills.ToArray();
   }
