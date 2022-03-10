@@ -221,15 +221,6 @@ public class BattleController : MonoBehaviour {
       case TurnActionType.useSkill:
         WaitToSelectTarget(selectedActionType[currentPlayerTurn], selectedSkills[currentPlayerTurn].range, currentPlayerTurn);
         return;
-      case TurnActionType.flee:
-        if(!GetCurrentEnemy().HasTag("boss")) {
-          VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
-        } else {
-          VsnArgument[] args = new VsnArgument[1];
-          args[0] = new VsnString("forbid_fleeing");
-          Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
-        }
-        break;
       case TurnActionType.idle:
         //RecoverStealth(stealthRecoveredWhenIdle);
         break;
@@ -319,9 +310,6 @@ public class BattleController : MonoBehaviour {
         break;
       case TurnActionType.defend:
         StartCoroutine(ExecuteDefend(partyMemberId));
-        break;
-      case TurnActionType.flee:
-        StartCoroutine(ExecuteTryToFlee());
         break;
       case TurnActionType.idle:
         StartCoroutine(ExecuteIdle(partyMemberId));
@@ -773,29 +761,6 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public IEnumerator ExecuteTryToFlee() {
-    VsnSaveSystem.SetVariable("currentPlayerTurn", partyMembers.Length);
-
-    bool fleeSuccess = Random.Range(0f, 1f) < GlobalData.instance.GetCurrentRelationship().FleeChance();
-    //fleeSuccess = true; // DEBUG TO TEST DAMAGE
-    if(fleeSuccess) {
-      yield return new WaitForSeconds(0.5f);
-      int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-      TheaterController.instance.EnemyLeavesScene();
-      FleeDateSegment(currentDateEvent);
-
-      yield return new WaitForSeconds(1f);
-      Command.GotoCommand.StaticExecute("new_enemy_appears");
-      VsnController.instance.state = ExecutionState.PLAYING;
-    } else {
-      yield return new WaitForSeconds(0.5f);
-      VsnArgument[] args = new VsnArgument[1];
-      args[0] = new VsnString("flee_fail");
-      Command.GotoScriptCommand.StaticExecute("action_descriptions", args);
-    }
-  }
-
-
   public void EnemyAttack() {
     SkillTarget targetId = (SkillTarget)VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
@@ -947,25 +912,6 @@ public class BattleController : MonoBehaviour {
     for(int i = 0; i < dateLength; i++) {
       enemyMembers[i].hp = enemyMembers[i].maxHp;
     }
-  }
-
-  public void FleeDateSegment(int positionId) {
-    //List<int> currentUsedEvents = new List<int>();
-    //foreach(Enemy d in dateEnemies) {
-    //  currentUsedEvents.Add(d.id);
-    //}
-
-    //Debug.LogWarning("currentUsedEvents: ");
-    //foreach(int i in currentUsedEvents) {
-    //  Debug.Log("i: " + i);
-    //}
-
-    //int selectedId = GetNewEnemy(currentUsedEvents);
-    ////selectedId = 1;
-    //dateEnemies[positionId] = allEnemies[selectedId];
-    //currentUsedEvents.Clear();
-
-    RecoverEnemiesHp();
   }
 
 

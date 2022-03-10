@@ -324,20 +324,6 @@ public class Relationship {
     return count;
   }
 
-  public float FleeChance() {
-    float count = 0.6f;
-
-    for(int i = 0; i < skilltree.skills.Length; i++) {
-      Skill skill = BattleController.instance.GetSkillById(skilltree.skills[i].id);
-      if(skilltree.skills[i].isUnlocked && skill.type == SkillType.passive &&
-         skill.specialEffect == SkillSpecialEffect.fleeChanceBonus) {
-        count += skill.effectPower;
-      }
-    }
-    Debug.LogWarning("Flee chance: " + (100*count)+"%");
-    return count;
-  }
-
 
 
   public bool GetExp(int value) {

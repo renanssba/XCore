@@ -42,7 +42,6 @@ public class ActionsPanel : MonoBehaviour {
 
     baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
     baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
-    baseActionButtons[4].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
 
     baseActionButtons[0].SetActive(false);
     baseActionButtons[1].SetActive(false);
@@ -53,12 +52,9 @@ public class ActionsPanel : MonoBehaviour {
 
     if (currentPartyMember == 0) {
       baseActionButtons[4].SetActive(false);
-      availableButtons.Add(baseActionButtons[4]);
-      baseActionButtons[5].SetActive(false);
     } else {
-      baseActionButtons[4].SetActive(false);
-      baseActionButtons[5].SetActive(true);
-      availableButtons.Add(baseActionButtons[5]);
+      baseActionButtons[4].SetActive(true);
+      availableButtons.Add(baseActionButtons[4]);
     }
 
     SetupBaseActionButtonsPositions(availableButtons);
@@ -83,9 +79,6 @@ public class ActionsPanel : MonoBehaviour {
 
     /// defend button
     //baseActionButtonShades[3].SetActive(!currentPerson.CanExecuteAction(TurnActionType.defend));
-
-    /// flee button
-    baseActionButtonShades[4].SetActive(BattleController.instance.GetCurrentEnemy().HasTag("boss"));
   }
 
 
@@ -164,13 +157,6 @@ public class ActionsPanel : MonoBehaviour {
     Utils.SelectUiElement(skillButtons[0].gameObject);
   }
 
-  //public void ClickDefendButton() {
-  //  Debug.LogWarning("clicked DEFEND button");
-  //}
-
-  //public void ClickFleeButton() {
-  //  Debug.LogWarning("clicked FLEE button");
-  //}
 
   public void ClickBackButton() {
     Debug.LogWarning("clicked BACK button");

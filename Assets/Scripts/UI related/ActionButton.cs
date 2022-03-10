@@ -8,7 +8,6 @@ using TMPro;
 public enum TurnActionType {
   useSkill,
   useItem,
-  flee,
   defend,
   idle
 }
@@ -60,7 +59,6 @@ public class ActionButton : MonoBehaviour {
         break;
       case TurnActionType.defend:
       case TurnActionType.idle:
-      case TurnActionType.flee:
         shade.gameObject.SetActive(!ActionCanBeUsed());
         break;
     }
