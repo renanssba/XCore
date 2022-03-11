@@ -30,7 +30,6 @@ public class Enemy : Battler {
   public string spriteName;
   public string appearSfxName;
 
-  public int maxHp;
   public int hp;
 
   public ActionSkin baseAttackSkin;
@@ -101,11 +100,15 @@ public class Enemy : Battler {
   
   
   public override void HealHP(int value) {
-    BattleController.instance.HealEnemyHp(value);
+    int initialHp = hp;
+    hp += value;
+    hp = Mathf.Min(hp, AttributeValue((int)Attributes.maxHp));
+    hp = Mathf.Max(hp, 0);
+    UIController.instance.AnimateEnemyHpChange(initialHp, hp);
   }
 
   public override void HealHpPercent(float fraction) {
-    BattleController.instance.HealEnemyHp((int)(maxHp*fraction));
+    HealHP((int)(AttributeValue((int)Attributes.maxHp) * fraction));
   }
 
   public override void TakeDamage(int value) {
@@ -131,7 +134,7 @@ public class Enemy : Battler {
   }
 
   public override int MaxHP() {
-    return maxHp;
+    return AttributeValue((int)Attributes.maxHp);
   }
 
   public override int CurrentHP() {

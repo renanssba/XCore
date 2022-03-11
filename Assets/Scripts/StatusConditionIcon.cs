@@ -138,7 +138,7 @@ public class StatusConditionIcon : MonoBehaviour {
   public Image imageIcon;
   public TextMeshProUGUI durationText;
 
-  public ScreenTransitions descriptionPanel;
+  public Panel descriptionPanel;
   public TextMeshProUGUI nameText;
   public TextMeshProUGUI descriptionText;
 

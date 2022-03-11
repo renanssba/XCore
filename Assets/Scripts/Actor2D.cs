@@ -632,7 +632,6 @@ public class Actor2D : MonoBehaviour {
         BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = (SkillTarget)i;
       }
     }
-    UIController.instance.CleanHelpMessagePanel();
     UIController.instance.selectTargetPanel.SetActive(false);
     VsnController.instance.GotCustomInput();
   }

@@ -6,12 +6,12 @@ using DG.Tweening;
 
 public class GirlInteractionScreen : MonoBehaviour {
 
-  public ScreenTransitions girlInteractionPanel;
-  public ScreenTransitions girlInteractionButtonsPanel;
+  public Panel girlInteractionPanel;
+  public Panel girlInteractionButtonsPanel;
 
   public RelationshipCard relationshipCard;
 
-  public ScreenTransitions dateSelectPanel;
+  public Panel dateSelectPanel;
   public Button[] girlInteractionButtons;
   public Button[] dateSelectButtons;
 

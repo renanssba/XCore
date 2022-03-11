@@ -31,6 +31,8 @@ public class Pilot : Battler {
   public int sp;
   public int skillPoints;
 
+  public int hp;
+
   public Inventory inventory;
   public Inventory giftsReceived;
 
@@ -65,11 +67,11 @@ public class Pilot : Battler {
   }
 
   public override int MaxHP() {
-    return BattleController.instance.maxHp;
+    return AttributeValue((int)Attributes.maxHp);
   }
 
   public override int CurrentHP() {
-    return BattleController.instance.hp;
+    return hp;
   }
 
   public override int MaxSP() {
@@ -138,8 +140,6 @@ public class Pilot : Battler {
     Relationship relationship = GlobalData.instance.relationships[relationshipId];
 
     skills.Add(BattleController.instance.GetSkillById(0));
-    //skills.Add(BattleController.instance.GetSkillById(1));
-    //skills.Add(BattleController.instance.GetSkillById(2));
     skills.AddRange(relationship.GetActiveSkillsByCharacter());
 
     return skills.ToArray();
@@ -172,11 +172,14 @@ public class Pilot : Battler {
   
 
   public override void HealHP(int value) {
-    BattleController.instance.HealPartyHp(value);
+    hp += value;
+    hp = Mathf.Min(sp, AttributeValue((int)Attributes.maxHp));
+    hp = Mathf.Max(sp, 0);
+    UIController.instance.UpdateBattleUI();
   }
 
   public override void HealHpPercent(float fraction) {
-    BattleController.instance.HealPartyHp((int)(BattleController.instance.maxHp * fraction));
+    HealHP((int)(BattleController.instance.maxHp * fraction));
   }
 
   public override void TakeDamage(int value) {
@@ -300,10 +303,7 @@ public class Relationship {
     List<Skill> skills = new List<Skill>();
 
     for(int i = 0; i < skilltree.skills.Length; i++) {
-      //if((isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.girl) ||
-      //   (!isBoy && skilltree.skills[i].affectsPerson != SkillAffectsCharacter.boy)) {
       AddActiveSkillToList(skills, i);
-      //}
     }
     return skills.ToArray();
   }

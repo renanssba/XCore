@@ -7,7 +7,7 @@ using TMPro;
 public class CoupleEntry : MonoBehaviour {
 
   public Relationship relationship;
-  public PersonCard[] coupleCards;
+  public PilotCard[] coupleCards;
   public Image[] heartIcons;
   public Image[] skillIcons;
   public TextMeshProUGUI[] skillNameTexts;
@@ -24,7 +24,7 @@ public class CoupleEntry : MonoBehaviour {
 
 
   public void UpdateUI() {
-    foreach(PersonCard pcard in coupleCards) {
+    foreach(PilotCard pcard in coupleCards) {
       pcard.UpdateUI();
     }
     // heart icons

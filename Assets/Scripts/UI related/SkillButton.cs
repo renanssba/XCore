@@ -9,15 +9,15 @@ public class SkillButton : MonoBehaviour {
 
   public Image skillIcon;
   public TextMeshProUGUI skillName;
-  public PersonCard personCard;
+  public PilotCard pilotCard;
   public Pilot person;
   public Skill skill;
   public Image bg;
 
 
-  public void Initialize(PersonCard argPersonCard, Skill argskill) {
-    personCard = argPersonCard;
-    person = personCard.person;
+  public void Initialize(PilotCard argPersonCard, Skill argskill) {
+    pilotCard = argPersonCard;
+    person = pilotCard.person;
     skill = argskill;
     UpdateUI();
   }
@@ -43,13 +43,13 @@ public class SkillButton : MonoBehaviour {
 
   public void SelectedButton() {
     Utils.SelectUiElement(gameObject);
-    personCard.UpdateUI();
+    pilotCard.UpdateUI();
   }
 
   public void UnselectButton() {
     if(EventSystem.current.currentSelectedGameObject == gameObject) {
       Utils.SelectUiElement(null);
-      personCard.UpdateUI();
+      pilotCard.UpdateUI();
     }
   }
 }

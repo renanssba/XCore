@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 
+
 public class RoutineController : MonoBehaviour {
 
   public static RoutineController instance;
 
   public bool skipIntro;
-
 
 
   public void Awake() {
@@ -38,12 +38,11 @@ public class RoutineController : MonoBehaviour {
       VsnController.instance.StartVSN("select_daytime_interaction");
     } else {
       VsnController.instance.StartVSN("cap0");
-    }    
+    }
   }
 
 
   public void Update() {
-
     // count playtime
     GlobalData.instance.playtime += Time.deltaTime;
 
@@ -83,16 +82,16 @@ public class RoutineController : MonoBehaviour {
       if(enemy.hp > 1) {
         BattleController.instance.DamageEnemyHp(enemy.hp - 1);
       } else {
-        enemy.HealHP(enemy.maxHp);
+        enemy.HealHP(enemy.AttributeValue((int)Attributes.maxHp));
       }
     }
-    if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift)) {
-      if(BattleController.instance.hp < BattleController.instance.maxHp) {
-        BattleController.instance.HealPartyHp(BattleController.instance.maxHp);
-      } else {
-        BattleController.instance.DamagePartyHp(BattleController.instance.hp-1);
-      }
-    }
+    //if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift)) {
+    //  if(BattleController.instance.hp < BattleController.instance.maxHp) {
+    //    BattleController.instance.HealPartyHp(BattleController.instance.maxHp);
+    //  } else {
+    //    BattleController.instance.DamagePartyHp(BattleController.instance.hp-1);
+    //  }
+    //}
     if(Input.GetKeyDown(KeyCode.S) && Input.GetKey(KeyCode.LeftShift)) {
       foreach(Relationship rel in GlobalData.instance.relationships) {
         for(int i=0; i<rel.skilltree.skills.Length; i++) {

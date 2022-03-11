@@ -17,9 +17,9 @@ public class MenuController : MonoBehaviour {
   public StatusScreen coupleStatusScreen;
   public ItemSelectorScreen inventoryScreen;
   public SystemScreen systemScreen;
-  public ScreenTransitions extrasPanel;
+  public Panel extrasPanel;
 
-  public ScreenTransitions myPanel;
+  public Panel myPanel;
 
   public ToggleGroup tabsToggleGroup;
   public Toggle[] tabToggles;

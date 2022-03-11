@@ -6,7 +6,7 @@ using TMPro;
 
 public class VsnLogWindow : MonoBehaviour {
   
-  public ScreenTransitions logWindowPanel;
+  public Panel logWindowPanel;
   public TextMeshProUGUI logText;
   public ScrollRect logScrollRect;
   public string logString;

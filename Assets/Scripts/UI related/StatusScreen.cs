@@ -12,12 +12,11 @@ public class StatusScreen : MonoBehaviour {
   public Pilot statusPerson;
 
   [Header("- Panels -")]
-  public ScreenTransitions panel;
-  public PersonCard personCard;
+  public Panel panel;
+  public PilotCard pilotCard;
   public SkilltreeScreen skilltreeScreen;
 
   [Header("- Relationship Cards -")]
-  //public RelationshipCard relationshipCard;
   public GameObject relationshipCardPrefab;
   public Transform relationshipsContent;
 
@@ -32,7 +31,7 @@ public class StatusScreen : MonoBehaviour {
   public Color debuffSkillButtonColor;
   public Color lockedSkillButtonColor;
 
-  public TextMeshProUGUI coupleHpText;
+  public TextMeshProUGUI hpText;
 
 
   public void Awake() {
@@ -47,8 +46,8 @@ public class StatusScreen : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    personCard.Initialize(statusPerson);
-    coupleHpText.text = statusPerson.AttributeValue((int)Attributes.maxHp).ToString();
+    pilotCard.Initialize(statusPerson);
+    hpText.text = statusPerson.AttributeValue((int)Attributes.maxHp).ToString() +" /"+ statusPerson.AttributeValue((int)Attributes.maxHp);
 
     if(BattleController.instance.IsBattleHappening()){
       skilltreeButtonShade.gameObject.SetActive(true);

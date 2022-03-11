@@ -367,8 +367,8 @@ public class TheaterController : MonoBehaviour {
     /// show battle UI
     UIController.instance.ShowBattleUI(true);
 
-    VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-    InitializeEnemyLevelAndHp();
+    //VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
+    InitializeEnemyHp();
     PartyEntersBattleMode();
   }
 
@@ -408,7 +408,7 @@ public class TheaterController : MonoBehaviour {
     enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
       VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-      InitializeEnemyLevelAndHp();
+      InitializeEnemyHp();
       PartyEntersBattleMode();
     });
   }
@@ -538,13 +538,12 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void InitializeEnemyLevelAndHp() {
+  public void InitializeEnemyHp() {
     Debug.LogWarning("Called InitializeChallengeLevelAndHp");
     Enemy enemy = BattleController.instance.GetCurrentEnemy();
-    UIController.instance.enemyHpSlider.SetMaxValue(enemy.maxHp);
-    UIController.instance.enemyHpSlider.SetSliderValueWithoutAnimation(enemy.maxHp);
-    UIController.instance.AnimateEnemyHpChange(enemy.maxHp, enemy.maxHp);
-    UIController.instance.enemyLevelText.text = "<size=60>"+Lean.Localization.LeanLocalization.GetTranslationText("attribute/lvl") +" </size>" + enemy.level;
+    //UIController.instance.enemyHpSlider.SetMaxValue(enemy.AttributeValue((int)Attributes.maxHp));
+    //UIController.instance.enemyHpSlider.SetSliderValueWithoutAnimation(enemy.AttributeValue((int)Attributes.maxHp));
+    //UIController.instance.AnimateEnemyHpChange(enemy.AttributeValue((int)Attributes.maxHp), enemy.AttributeValue((int)Attributes.maxHp));
   }
 
   public void EnemyLeavesScene() {

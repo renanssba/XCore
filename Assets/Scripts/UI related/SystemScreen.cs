@@ -7,7 +7,7 @@ using TMPro;
 public class SystemScreen : MonoBehaviour {
 
   public Panel optionsPanel;
-  public ScreenTransitions savePanel;
+  public Panel savePanel;
   public bool isInSaveMode = true;
 
   public TextMeshProUGUI saveLoadTitleText;

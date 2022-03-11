@@ -17,7 +17,7 @@ public class ItemSelectorScreen : MonoBehaviour {
   public Sprite mundaneSprite;
   public Sprite celestialSprite;
 
-  public ScreenTransitions screenTransition;
+  public Panel screenTransition;
 
   public ScreenContext screenContext;
 

@@ -13,7 +13,7 @@ public class RelationshipCard : MonoBehaviour {
   public TextMeshProUGUI expText;
 
   public TextMeshProUGUI coupleNameText;
-  public ScreenTransitions screenTransitions;
+  public Panel screenTransitions;
 
   public TextMeshProUGUI proximityLevelText;
 

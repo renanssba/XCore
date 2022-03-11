@@ -66,25 +66,9 @@ public class ActionButton : MonoBehaviour {
 
   public void UpdateUIAsSkill() {
     nameText.text = skill.GetPrintableName();
-    if(skill.type == SkillType.attack) {
-      string prefix = "";
-      string[] nameParts = skill.GetPrintableName().Split(' ');
-      if(nameParts.Length > 1) {
-        prefix = nameParts[0] + " ";
-      }
-
-      /// TODO: Implement correct skill names
-      nameText.text = prefix + Lean.Localization.LeanLocalization.GetTranslationText("action/button/strike");
-      iconImage.sprite = ResourcesManager.instance.attributeSprites[(int)skill.damageAttribute];
-      iconImage.color = ResourcesManager.instance.attributeColor[(int)skill.damageAttribute];
-
-      /// improvement icon
-      improvementIconImage.gameObject.SetActive(skill.id >= 3);
-    } else {
-      iconImage.sprite = skill.sprite;
-      iconImage.color = Color.white;
-      improvementIconImage.gameObject.SetActive(false);
-    }
+    iconImage.sprite = skill.sprite;
+    iconImage.color = Color.white;
+    improvementIconImage.gameObject.SetActive(false);
 
     /// SP cost
     if(skill.spCost > 0) {
@@ -121,21 +105,7 @@ public class ActionButton : MonoBehaviour {
 
 
   public void SetHelpText() {
-    if(transform.parent.GetComponent<CanvasGroup>().interactable == false) {
-      return;
-    }
-
-    string s = "";
-    switch(actionType) {
-      case TurnActionType.useSkill:
-        s = skill.GetPrintableDescription();
-        break;
-      case TurnActionType.useItem:
-        Item it = Item.GetItemById(itemListing.id);
-        s = it.GetBattleDescription(true);
-        break;
-    }
-    UIController.instance.SetHelpMessageText(s);
+    
   }
 
   public void SetBackHelpText() {

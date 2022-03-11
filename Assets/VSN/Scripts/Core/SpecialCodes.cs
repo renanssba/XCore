@@ -24,12 +24,14 @@ public class SpecialCodes {
 
       if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
         currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
-      }      
-      if(BattleController.instance.GetCurrentPlayer() != null) {
-        currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().GetName());
       }
-      if(BattleController.instance.GetCurrentTarget() != null) {
-        currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
+      if(BattleController.instance != null) {
+        if(BattleController.instance.GetCurrentPlayer() != null) {
+          currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().GetName());
+        }
+        if(BattleController.instance.GetCurrentTarget() != null) {
+          currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
+        }
       }
       currentString = currentString.Replace("\\day", VsnSaveSystem.GetIntVariable("day").ToString());
       currentString = currentString.Replace("\\n", "\n");
@@ -123,7 +125,10 @@ public class SpecialCodes {
   }
 
   static float InterpretSpecialNumber(string keycode) {
-    Enemy enemy = BattleController.instance.GetCurrentEnemy();
+    Enemy enemy = null;
+    if(BattleController.instance != null) {
+      enemy = BattleController.instance.GetCurrentEnemy();
+    }    
 
     if(keycode.Contains("#char[") && keycode.Contains("]item_count[") &&
        keycode.Contains("]from[")) {
@@ -147,8 +152,6 @@ public class SpecialCodes {
     switch(keycode) {
       case "#random100":
         return Random.Range(0, 100);
-      case "#dateLength":
-        return BattleController.instance.dateLength;
       case "#partyLength":
         return BattleController.instance.partyMembers.Length;
       case "#enemiesLength":

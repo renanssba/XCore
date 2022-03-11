@@ -43,7 +43,6 @@ public class BattleController : MonoBehaviour {
   public Skill[] selectedSkills;
   public Item[] selectedItems;
   public SkillTarget[] selectedTargetPartyId;
-  public int dateLength;
 
   public DateLocation currentDateLocation;
 
@@ -74,7 +73,6 @@ public class BattleController : MonoBehaviour {
     LoadAllSkills();
     LoadAllActionSkins();
     LoadAllStatusConditions();
-    dateLength = 3;
   }
 
 
@@ -116,7 +114,7 @@ public class BattleController : MonoBehaviour {
 
     SetDateEnemiesAndLocation(enemyName);
     VsnSaveSystem.SetVariable("currentDateEvent", 0);
-    TheaterController.instance.InitializeEnemyLevelAndHp();
+    TheaterController.instance.InitializeEnemyHp();
   }
 
   public bool IsBattleHappening() {
@@ -149,13 +147,13 @@ public class BattleController : MonoBehaviour {
     HealPartyHp(maxHp);
     RemovePartyStatusConditions();
     for(int i=0; i < partyMembers.Length; i++) {
-      partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id) );
+      partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
     }
   }
 
   public void FullHealEnemies() {
     foreach(Enemy currentEnemy in enemyMembers) {
-      currentEnemy.hp = currentEnemy.maxHp;
+      currentEnemy.hp = currentEnemy.AttributeValue((int)Attributes.maxHp);
       currentEnemy.RemoveAllStatusConditions();
       currentEnemy.ClearAllSkillsUsage();
     }
@@ -168,19 +166,14 @@ public class BattleController : MonoBehaviour {
   }
 
   public void HealPartyHp(int value) {
-    int initialHp = hp;
-    hp += value;
-    hp = Mathf.Min(hp, maxHp);
-    hp = Mathf.Max(hp, 0);
-    UIController.instance.AnimatePartyHpChange(initialHp, hp);
+    for(int i = 0; i < partyMembers.Length; i++) {
+      partyMembers[i].HealHP(partyMembers[i].AttributeValue((int)Attributes.maxHp));
+    }
+    //UIController.instance.AnimatePartyHpChange(initialHp, hp);
   }
 
   public void HealEnemyHp(int value) {
-    int initialHp = hp;
-    GetCurrentEnemy().hp += value;
-    GetCurrentEnemy().hp = Mathf.Min(GetCurrentEnemy().hp, GetCurrentEnemy().maxHp);
-    GetCurrentEnemy().hp = Mathf.Max(GetCurrentEnemy().hp, 0);
-    UIController.instance.AnimateEnemyHpChange(initialHp, GetCurrentEnemy().hp);
+    GetCurrentEnemy().HealHP(GetCurrentEnemy().AttributeValue((int)Attributes.maxHp));
   }
 
   public void RemovePartyStatusConditions() {
@@ -236,7 +229,6 @@ public class BattleController : MonoBehaviour {
 
   public void HideActionButtons() {
     UIController.instance.actionsPanel.EndActionSelect();
-    UIController.instance.CleanHelpMessagePanel();
   }
 
   public void WaitToSelectTarget(TurnActionType actionType, ActionRange range, int currentPlayerTurn) {
@@ -255,11 +247,11 @@ public class BattleController : MonoBehaviour {
         break;
       case ActionRange.one_ally:
         SetAllTargetSelections(true);
-        UIController.instance.selectTargets[2].SetActive(false);
+        UIController.instance.selectTargets[3].SetActive(false);
         break;
       case ActionRange.other_ally:
         SetAllTargetSelections(true);
-        UIController.instance.selectTargets[2].SetActive(false);
+        UIController.instance.selectTargets[3].SetActive(false);
         for(int i = 0; i < 2; i++) {
           if(i == currentPlayerTurn) {
             UIController.instance.selectTargets[i].SetActive(false);
@@ -268,7 +260,7 @@ public class BattleController : MonoBehaviour {
         break;
       case ActionRange.one_enemy:
         SetAllTargetSelections(false);
-        UIController.instance.selectTargets[2].SetActive(true);
+        UIController.instance.selectTargets[3].SetActive(true);
         break;
       case ActionRange.anyone:
         SetAllTargetSelections(true);
@@ -404,7 +396,6 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(1f);
 
-    UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -635,7 +626,6 @@ public class BattleController : MonoBehaviour {
 
 
     TheaterController.instance.UnfocusActors();
-    UIController.instance.CleanHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -719,7 +709,6 @@ public class BattleController : MonoBehaviour {
     yield return new WaitForSeconds(0.5f);
 
     TheaterController.instance.UnfocusActors();
-    UIController.instance.CleanHelpMessagePanel();
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
     // spend stealth bar
@@ -744,7 +733,6 @@ public class BattleController : MonoBehaviour {
       yield return new WaitForSeconds(1.5f);
     }
 
-    UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -759,7 +747,6 @@ public class BattleController : MonoBehaviour {
 
     yield return new WaitForSeconds(0.5f);
 
-    UIController.instance.CleanHelpMessagePanel();
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
@@ -834,13 +821,11 @@ public class BattleController : MonoBehaviour {
 
   public void SetDateEnemiesAndLocation(string enemyName) {
     currentDateLocation = DateLocation.desert;
-    dateLength = 1;
     enemyMembers = new Enemy[] { GetEnemyByString(enemyName) };
   }
 
   public void SetCustomBattle(int enemyId) {
     currentDateLocation = DateLocation.desert;
-    dateLength = 1;
     enemyMembers = new Enemy[] {allEnemies[enemyId]};
     FullHealParty();
   }
@@ -912,8 +897,8 @@ public class BattleController : MonoBehaviour {
 
 
   public void RecoverEnemiesHp() {
-    for(int i = 0; i < dateLength; i++) {
-      enemyMembers[i].hp = enemyMembers[i].maxHp;
+    for(int i = 0; i < enemyMembers.Length; i++) {
+      enemyMembers[i].hp = enemyMembers[i].AttributeValue((int)Attributes.maxHp);
     }
   }
 
@@ -942,7 +927,6 @@ public class BattleController : MonoBehaviour {
       loadedEnemy.id = int.Parse(dic["id"]);
       loadedEnemy.nameKey = dic["name key"];
       loadedEnemy.level = int.Parse(dic["level"]);
-      loadedEnemy.maxHp = int.Parse(dic["maxHp"]);
       loadedEnemy.spriteName = dic["sprite name"];
       loadedEnemy.baseAttackSkin = actionSkin;
       loadedEnemy.appearSfxName = dic["appear sfx"];
@@ -1019,11 +1003,7 @@ public class BattleController : MonoBehaviour {
         newSkill.triggerChance = float.Parse(entry["trigger chance"]);
       }
 
-      if(newSkill.id < 3) {
-        newSkill.sprite = null;
-      } else {
-        newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
-      }
+      newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       newSkill.animationSkin = new ActionSkin();
       newSkill.animationSkin.animation = GetSkillAnimationByString(entry["animation"]);
       newSkill.animationSkin.animationArgument = Utils.GetStringArgument(entry["animation"]);

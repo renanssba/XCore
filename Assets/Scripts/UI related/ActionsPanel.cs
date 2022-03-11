@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class ActionsPanel : MonoBehaviour {
   public static ActionsPanel instance;
 
-  public ScreenTransitions baseActionsPanel;
-  public ScreenTransitions skillsPanel;
+  public Panel baseActionsPanel;
+  public Panel skillsPanel;
 
   public GameObject[] baseActionButtons;
   public ActionButton[] skillButtons;
@@ -200,10 +200,9 @@ public class ActionsPanel : MonoBehaviour {
       Utils.SelectUiElement(baseActionButtons[2]);
     }    
     UIController.instance.selectTargetPanel.SetActive(false);
-    UIController.instance.CleanHelpMessagePanel();
   }
 
-  public IEnumerator WaitAndShowActionsPanel(ScreenTransitions panel) {
+  public IEnumerator WaitAndShowActionsPanel(Panel panel) {
     yield return new WaitForSeconds(0.3f);
     panel.ShowPanel();
   }

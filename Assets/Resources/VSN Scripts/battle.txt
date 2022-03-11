@@ -6,14 +6,11 @@ fade_out 0.5
 bg null
 
 wait 0.2
-// show_date_ui true
 play_music "" "XCore1 Boss Theme"
 wait 0.2
 
 theater_animation "setup_battle"
 
-// move_camera "close_shot" 0
-// move_camera "battle_view" 0.5
 // move_camera "far_view" 0
 move_camera "battle_view" 0
 
@@ -23,41 +20,22 @@ set_current_character_turn -1
 
 fade_in 0.5
 
-//wait 0.5
-
-//  theater_animation "party_enters"
 
 
+/// EXECUTE THE FIGHT
+// for currentDateEvent #dateLength
+  // set_var currentBattleTurn 0
 
-/// EXECUTE FIGHT PER SE
-for currentDateEvent #dateLength
-  waypoint new_enemy_appears
-  actor_face main "right"
-  // move_camera "battle_view" 0.3
-  // wait 0.5
-
-  set_var currentBattleTurn 0
-  // theater_animation "enemy_enters"
-
-  // wait 0.3
-  // actor_animator_parameter main "Battle" true
-  // actor_animator_parameter support "Battle" true
-  // actor_animator_parameter enemy "Battle" true
-
-  // play battle song
-  // if "\currentMusic" != "boss1_loop"
-  // play_music "battle1_intro" "battle1_loop"
-  play_music "" "XCore1 Boss Theme"
-  // endif
+  // play_music "" "XCore1 Boss Theme"
   wait 0.5
 
 
-  goto_script "check_passive_triggers" "enemy_appears"
+  // goto_script "check_passive_triggers" "enemy_appears"
 
 
-  waypoint start_new_turn
+  // waypoint start_new_turn
 
-  add_var currentBattleTurn 1
+  // add_var currentBattleTurn 1
   goto_script "check_passive_triggers" "turn_started"
 
   // PARTY MEMBERS receive effects from conditions (like take poison damage)
@@ -76,51 +54,51 @@ for currentDateEvent #dateLength
 
   goto_script "check_passive_triggers" "before_death_checks"
   if #currentHp <= 0
-    goto fail_date
+    goto end
   endif
 
 
   // if opponent is defeated, go to new event
-  if #currentEnemyHp <= 0
-    goto defeat_enemy
-  endif
+  // if #currentEnemyHp <= 0
+    // goto end_battle
+  // endif
 
 
   // character action inputs
   for currentPlayerTurn #partyLength
 
     // first battle tutorials
-    if tutorial_skills == false
-      goto_script "tutorials" "using_skills"
-    endif
+    // if tutorial_skills == false
+      // goto_script "tutorials" "using_skills"
+    // endif
 
     /// Skip action input if already selected
-    if input_already_selected == true
-      set_var input_already_selected false
-      continue
-    endif
+    // if input_already_selected == true
+      // set_var input_already_selected false
+      // continue
+    // endif
 
     /// Ask for action input if not selected
     action_input currentPlayerTurn
-  endfor
-
-  set_current_character_turn -1
-  wait 0.5
-
-  // execute player actions
-  for currentPlayerTurn #partyLength
+    
     check_action_skip currentPlayerTurn
     goto_script "check_passive_triggers" "before_action"
-    // character_action_description currentPlayerTurn
     character_action currentPlayerTurn
     goto_script "check_passive_triggers" "after_action"
     wait 0.5
+    
+    // if enemy is defeated, end battle
+    if #currentEnemyHp <= 0
+      goto end
+      goto_script "check_passive_triggers" "enemy_defeated"
+    endif
   endfor
 
   // if enemy is defeated, go to new enemy
-  if #currentEnemyHp <= 0
-    goto defeat_enemy
-  endif
+  // if #currentEnemyHp <= 0
+    // goto end
+    // goto_script "check_passive_triggers" "enemy_defeated"
+  // endif
 
 
   // enemy turn
@@ -132,58 +110,27 @@ for currentDateEvent #dateLength
 
 
   goto_script "check_passive_triggers" "before_death_checks"
-  if #currentHp <= 0
-    goto fail_date
-  endif
+  goto end
 
-  goto start_new_turn
-endfor
+  // goto start_new_turn
+// endfor
 
 
-
-
-waypoint defeat_enemy
-theater_animation "enemy_leaves"
-// challenge_result true
-// update_ui
-// play_sfx "ui_success"
-// wait 2
-
-goto_script "check_passive_triggers" "enemy_defeated"
-fade_music 0 1
-goto win_date
-
-
-
-
-waypoint win_date
-enable_input false
-
-/// Check to unlock achievement
-if #currentDamageTaken == 0
-  get_achievement "PERFECT_DATE"
-endif
-
-play_sfx "date_end"
-
-actor_tint main 0 1 "white"
-actor_tint support 0 1 "white"
-goto end
-
-
-
-waypoint fail_date
-
-challenge_result false
-update_ui
-play_sfx "ui_fail"
-wait 2
-enable_input false
-
-goto end
 
 
 waypoint end
+fade_music 0 1
+enable_input false
+
+// play_sfx "date_end"
+
+// actor_tint main 0 1 "white"
+// actor_tint support 0 1 "white"
+// goto end
+
+
+
+// waypoint end
 fade_music 0 1
 fade_out 0.5
 

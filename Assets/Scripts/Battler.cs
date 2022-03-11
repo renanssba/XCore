@@ -13,6 +13,8 @@ public abstract class Battler {
   public List<int> usedSkillsInBattle;
   public List<int> usedSkillsInDate;
 
+  public Character character;
+
 
   public Battler() {
     attributes = new int[4];

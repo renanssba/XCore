@@ -6,7 +6,7 @@ using TMPro;
 
 public class SkilltreeScreen : MonoBehaviour {
 
-  public ScreenTransitions screenTransitions;
+  public Panel screenTransitions;
   public Relationship relationship;
 
   public Image[] characterImages;
@@ -20,7 +20,7 @@ public class SkilltreeScreen : MonoBehaviour {
   public TextMeshProUGUI bondPointsText;
 
   public int selectedSkillId;
-  public ScreenTransitions buySkillConfirmationPanel;
+  public Panel buySkillConfirmationPanel;
   public TextMeshProUGUI confirmPanelText;
 
   public Color lockedPathColor;
