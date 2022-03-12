@@ -1,5 +1,101 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &21522181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21522182}
+  - component: {fileID: 21522184}
+  - component: {fileID: 21522183}
+  m_Layer: 5
+  m_Name: Back Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &21522182
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21522181}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 666003551}
+  m_Father: {fileID: 1288487235}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &21522184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21522181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 0.44705886, g: 0.7607844, b: 0.8431373, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 1422511507}
+  m_FillRect: {fileID: 1422511506}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.68
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!222 &21522183
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21522181}
+  m_CullTransparentMesh: 0
 --- !u!1 &23505460
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +451,139 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &101223506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 101223507}
+  - component: {fileID: 101223508}
+  m_Layer: 5
+  m_Name: SP Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &101223507
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101223506}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 693593098}
+  - {fileID: 815425033}
+  m_Father: {fileID: 1815836037}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &101223508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101223506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d384e75d30e1b4789325a9e1c5c104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backSlider: {fileID: 693593100}
+  fillSlider: {fileID: 815425035}
+  hpText: {fileID: 854115168}
+  impactTime: 1
+  currentTime: 5
+  movementTime: 0.6
+  initialValue: 0
+  finalValue: 0
+--- !u!1 &219709178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 219709179}
+  - component: {fileID: 219709181}
+  - component: {fileID: 219709180}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &219709179
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219709178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1915534715}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &219709181
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219709178}
+  m_CullTransparentMesh: 0
+--- !u!114 &219709180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219709178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.47058824, g: 0.76339865, b: 0.78431374, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &237123340
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +872,157 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &399109748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399109749}
+  - component: {fileID: 399109752}
+  - component: {fileID: 399109751}
+  - component: {fileID: 399109750}
+  m_Layer: 5
+  m_Name: Sp Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &399109749
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399109748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815836037}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 9.114988}
+  m_SizeDelta: {x: 0, y: 22}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &399109752
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399109748}
+  m_CullTransparentMesh: 0
+--- !u!114 &399109751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399109748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: SP
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
+  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0.18431373, g: 0.34901962, b: 0.61960787, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &399109750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399109748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasePath: attribute/sp
+  FallbackText: <missing>
+  Args: []
 --- !u!1 &433306637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1475,213 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &666003550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666003551}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &666003551
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666003550}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1422511506}
+  m_Father: {fileID: 21522182}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &693593097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 693593098}
+  - component: {fileID: 693593100}
+  - component: {fileID: 693593099}
+  m_Layer: 5
+  m_Name: Back Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &693593098
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693593097}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1001224755}
+  m_Father: {fileID: 101223507}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &693593100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693593097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 0.44705886, g: 0.7607844, b: 0.8431373, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 2143088030}
+  m_FillRect: {fileID: 2143088029}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.68
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!222 &693593099
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693593097}
+  m_CullTransparentMesh: 0
+--- !u!1 &697025589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697025590}
+  - component: {fileID: 697025592}
+  - component: {fileID: 697025591}
+  m_Layer: 5
+  m_Name: Bg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &697025590
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697025589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1046898190}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &697025592
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697025589}
+  m_CullTransparentMesh: 0
+--- !u!114 &697025591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697025589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &720391738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1984,237 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &815425032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 815425033}
+  - component: {fileID: 815425035}
+  - component: {fileID: 815425034}
+  m_Layer: 5
+  m_Name: Fill Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &815425033
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815425032}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1915534715}
+  m_Father: {fileID: 101223507}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &815425035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815425032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 0.44705886, g: 0.7607844, b: 0.8431373, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 219709179}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.658
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!222 &815425034
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815425032}
+  m_CullTransparentMesh: 0
+--- !u!1 &854115166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854115167}
+  - component: {fileID: 854115169}
+  - component: {fileID: 854115168}
+  m_Layer: 5
+  m_Name: Sp Value Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &854115167
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854115166}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815836037}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 9.115009}
+  m_SizeDelta: {x: 0, y: 22}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &854115169
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854115166}
+  m_CullTransparentMesh: 0
+--- !u!114 &854115168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854115166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 100 /100
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
+  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0.18431373, g: 0.34901962, b: 0.61960787, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &860230435
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2849,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1001224754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001224755}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1001224755
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001224754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2143088029}
+  m_Father: {fileID: 693593098}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1005874974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,6 +2960,90 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1046898189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1046898190}
+  - component: {fileID: 1046898191}
+  m_Layer: 5
+  m_Name: HP Slider Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1046898190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046898189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.1325972, y: 2.1325972, z: 2.1325972}
+  m_Children:
+  - {fileID: 697025590}
+  - {fileID: 1288487235}
+  - {fileID: 1430284065}
+  - {fileID: 1416975998}
+  m_Father: {fileID: 8909666228234000991}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -384.2, y: 343}
+  m_SizeDelta: {x: 172.95093, y: 15.810303}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1046898191
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046898189}
+  m_CullTransparentMesh: 0
+--- !u!1 &1197527994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197527995}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1197527995
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197527994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1988472169}
+  m_Father: {fileID: 2058084457}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1231409470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,6 +3270,500 @@ MonoBehaviour:
   phrasePath: choices/cancel
   FallbackText: <missing>
   Args: []
+--- !u!1 &1288487234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1288487235}
+  - component: {fileID: 1288487236}
+  m_Layer: 5
+  m_Name: HP Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1288487235
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288487234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 21522182}
+  - {fileID: 2058084457}
+  m_Father: {fileID: 1046898190}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1288487236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288487234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d384e75d30e1b4789325a9e1c5c104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backSlider: {fileID: 21522184}
+  fillSlider: {fileID: 2058084459}
+  hpText: {fileID: 1416975999}
+  impactTime: 1
+  currentTime: 5
+  movementTime: 0.6
+  initialValue: 0
+  finalValue: 0
+--- !u!1 &1416975997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1416975998}
+  - component: {fileID: 1416976000}
+  - component: {fileID: 1416975999}
+  m_Layer: 5
+  m_Name: Hp Value Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1416975998
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416975997}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1046898190}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 9.115009}
+  m_SizeDelta: {x: 0, y: 22}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1416976000
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416975997}
+  m_CullTransparentMesh: 0
+--- !u!114 &1416975999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416975997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 100 /100
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
+  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4288567599
+  m_fontColor: {r: 0.18431373, g: 0.34901962, b: 0.61960787, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1422511505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1422511506}
+  - component: {fileID: 1422511508}
+  - component: {fileID: 1422511507}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1422511506
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422511505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 666003551}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1422511508
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422511505}
+  m_CullTransparentMesh: 0
+--- !u!114 &1422511507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422511505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7075472, g: 0.19023673, b: 0.19023673, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1430284064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430284065}
+  - component: {fileID: 1430284068}
+  - component: {fileID: 1430284067}
+  - component: {fileID: 1430284066}
+  m_Layer: 5
+  m_Name: Hp Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1430284065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430284064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1046898190}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 9.114988}
+  m_SizeDelta: {x: 0, y: 22}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1430284068
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430284064}
+  m_CullTransparentMesh: 0
+--- !u!114 &1430284067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430284064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: HP
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
+  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4288567599
+  m_fontColor: {r: 0.18431373, g: 0.34901962, b: 0.61960787, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 16
+  m_fontSizeBase: 16
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1430284066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430284064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phrasePath: attribute/hp
+  FallbackText: <missing>
+  Args: []
+--- !u!1 &1480805294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480805295}
+  - component: {fileID: 1480805297}
+  - component: {fileID: 1480805296}
+  m_Layer: 5
+  m_Name: Bg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1480805295
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480805294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815836037}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1480805297
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480805294}
+  m_CullTransparentMesh: 0
+--- !u!114 &1480805296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480805294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1563309301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2895,6 +4327,54 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1815836036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815836037}
+  - component: {fileID: 1815836038}
+  m_Layer: 5
+  m_Name: SP Slider Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1815836037
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815836036}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.1325972, y: 2.1325972, z: 2.1325972}
+  m_Children:
+  - {fileID: 1480805295}
+  - {fileID: 101223507}
+  - {fileID: 399109749}
+  - {fileID: 854115167}
+  m_Father: {fileID: 8909666228234000991}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -384.20004, y: 338.10004}
+  m_SizeDelta: {x: 172.95093, y: 15.810303}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1815836038
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815836036}
+  m_CullTransparentMesh: 0
 --- !u!1 &1900000415
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +4626,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bda83328624a24586fcad253e7076a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1915534714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915534715}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1915534715
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915534714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 219709179}
+  m_Father: {fileID: 815425033}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1985210816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,6 +4729,81 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c64d815c8100d2549a801926414c720b, type: 3}
   m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1988472168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1988472169}
+  - component: {fileID: 1988472171}
+  - component: {fileID: 1988472170}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1988472169
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988472168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1197527995}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1988472171
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988472168}
+  m_CullTransparentMesh: 0
+--- !u!114 &1988472170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988472168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4943909, g: 0.7830189, b: 0.46907264, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3296,6 +4887,102 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2058084456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2058084457}
+  - component: {fileID: 2058084459}
+  - component: {fileID: 2058084458}
+  m_Layer: 5
+  m_Name: Fill Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2058084457
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058084456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1197527995}
+  m_Father: {fileID: 1288487235}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &2058084459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058084456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 0.44705886, g: 0.7607844, b: 0.8431373, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 1988472169}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.658
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!222 &2058084458
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058084456}
+  m_CullTransparentMesh: 0
 --- !u!1 &2064523243
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,6 +5325,81 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2143088028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143088029}
+  - component: {fileID: 2143088031}
+  - component: {fileID: 2143088030}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2143088029
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143088028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1001224755}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2143088031
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143088028}
+  m_CullTransparentMesh: 0
+--- !u!114 &2143088030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143088028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.24951048, g: 0.48566982, b: 0.5943396, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d6965fea3903bd945aad4be140af765d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5209,6 +6971,81 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6576817709153735804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2755355339150609734}
+  - component: {fileID: 7770962769172533444}
+  - component: {fileID: 1892948831715005085}
+  m_Layer: 5
+  m_Name: Face Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2755355339150609734
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576817709153735804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8909666228234000991}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -547, y: 489}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7770962769172533444
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576817709153735804}
+  m_CullTransparentMesh: 0
+--- !u!114 &1892948831715005085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6576817709153735804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3a7957046dd1da8449b81784e54a5a1c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6885142387470425130
 GameObject:
   m_ObjectHideFlags: 0
@@ -7764,100 +9601,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666228481119197}
-  skillName: {fileID: 8909666229124638375}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -7865,83 +9699,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -7974,6 +9808,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666227625790613}
+  skillIcon: {fileID: 8909666228481119197}
+  skillName: {fileID: 8909666229124638375}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666227625790613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12101,100 +13938,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666229192888970}
-  skillName: {fileID: 8909666228284264600}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -12202,83 +14036,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -12311,6 +14145,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666227787310498}
+  skillIcon: {fileID: 8909666229192888970}
+  skillName: {fileID: 8909666228284264600}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666227787310498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16064,81 +17901,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &8909666227949719601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666227949719600}
-  - component: {fileID: 8909666227949719602}
-  - component: {fileID: 8909666227949719603}
-  m_Layer: 5
-  m_Name: HP Icon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666227949719600
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227949719601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8909666229491449484}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -820.80005, y: 19.599995}
-  m_SizeDelta: {x: 48, y: 48}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666227949719602
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227949719601}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666227949719603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227949719601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.18431373, g: 0.34901962, b: 0.61960787, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40aeb3cd05e338d43a97e2e8fd8cfd53, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8909666227952280628
 GameObject:
   m_ObjectHideFlags: 0
@@ -16458,157 +18220,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &8909666227967155600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666227967155603}
-  - component: {fileID: 8909666227967155604}
-  - component: {fileID: 8909666227967155605}
-  - component: {fileID: 8909666227967155602}
-  m_Layer: 5
-  m_Name: HP Desc Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666227967155603
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227967155600}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000117, y: 1.0000117, z: 1.0000117}
-  m_Children: []
-  m_Father: {fileID: 8909666229491449484}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -766, y: -59}
-  m_SizeDelta: {x: 67.24, y: 53.07}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666227967155604
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227967155600}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666227967155605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227967155600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: HP
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
-  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4288304426
-  m_fontColor: {r: 0.16470589, g: 0.33333334, b: 0.6039216, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 44.2
-  m_fontSizeBase: 50
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 50
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8909666227967155602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227967155600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ee4021ce59f313499a5cab041f02aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phrasePath: attribute/hp
-  FallbackText: <missing>
-  Args: []
 --- !u!1 &8909666227967725856
 GameObject:
   m_ObjectHideFlags: 0
@@ -23213,8 +24824,9 @@ GameObject:
   - component: {fileID: 8909666228234000992}
   - component: {fileID: 8909666228234000993}
   - component: {fileID: 8909666228234000990}
+  - component: {fileID: 756518472}
   m_Layer: 5
-  m_Name: Person Card
+  m_Name: Pilot Details Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23238,6 +24850,9 @@ RectTransform:
   - {fileID: 8909666228973005258}
   - {fileID: 8909666228520094916}
   - {fileID: 8909666228211226661}
+  - {fileID: 1046898190}
+  - {fileID: 1815836037}
+  - {fileID: 2755355339150609734}
   m_Father: {fileID: 8909666229488516034}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23258,187 +24873,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f07621447e18948a5873a7c5eb1307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  person:
-    nameKey: 
-    id: 0
-    attributes: 
-    statusConditions: []
-    usedSkillsInBattle: 
-    usedSkillsInDate: 
-    isMale: 0
-    sp: 3
-    skillPoints: 0
-    inventory:
-      owner:
-        nameKey: 
-        id: 0
-        attributes: 
-        statusConditions: []
-        usedSkillsInBattle: 
-        usedSkillsInDate: 
-        isMale: 0
-        sp: 3
-        skillPoints: 0
-        inventory:
-          owner:
-            nameKey: 
-            id: 0
-            attributes: 
-            statusConditions: []
-            usedSkillsInBattle: 
-            usedSkillsInDate: 
-            isMale: 0
-            sp: 3
-            skillPoints: 0
-            inventory:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-          itemListings: []
-        giftsReceived:
-          owner:
-            nameKey: 
-            id: 0
-            attributes: 
-            statusConditions: []
-            usedSkillsInBattle: 
-            usedSkillsInDate: 
-            isMale: 0
-            sp: 3
-            skillPoints: 0
-            inventory:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-          itemListings: []
-      itemListings: []
-    giftsReceived:
-      owner:
-        nameKey: 
-        id: 0
-        attributes: 
-        statusConditions: []
-        usedSkillsInBattle: 
-        usedSkillsInDate: 
-        isMale: 0
-        sp: 3
-        skillPoints: 0
-        inventory:
-          owner:
-            nameKey: 
-            id: 0
-            attributes: 
-            statusConditions: []
-            usedSkillsInBattle: 
-            usedSkillsInDate: 
-            isMale: 0
-            sp: 3
-            skillPoints: 0
-            inventory:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-          itemListings: []
-        giftsReceived:
-          owner:
-            nameKey: 
-            id: 0
-            attributes: 
-            statusConditions: []
-            usedSkillsInBattle: 
-            usedSkillsInDate: 
-            isMale: 0
-            sp: 3
-            skillPoints: 0
-            inventory:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-            giftsReceived:
-              owner:
-                nameKey: 
-                id: 0
-                attributes: 
-                statusConditions: []
-                usedSkillsInBattle: 
-                usedSkillsInDate: 
-                isMale: 0
-                sp: 3
-                skillPoints: 0
-              itemListings: []
-          itemListings: []
-      itemListings: []
-  bgImage: {fileID: 8909666228234000990}
+  canvasGroup: {fileID: 756518472}
   nameText: {fileID: 8909666229563388925}
-  faceImage: {fileID: 0}
+  faceImage: {fileID: 1892948831715005085}
+  hpSlider: {fileID: 1288487236}
+  spSlider: {fileID: 101223508}
+  statusConditionsContent: {fileID: 8909666228211226661}
   bodyImage: {fileID: 8909666227952280630}
   attributeNamesTexts:
   - {fileID: 8909666228366752105}
@@ -23447,12 +24887,6 @@ MonoBehaviour:
   - {fileID: 8909666229122892168}
   - {fileID: 8909666228387814405}
   attributeValuesText: {fileID: 8909666228026566638}
-  shade: {fileID: 0}
-  spText: {fileID: 0}
-  statusConditionsContent: {fileID: 8909666228211226661}
-  skillDescriptionPanel: {fileID: 8909666228520094918}
-  skillNameText: {fileID: 8909666228732420022}
-  skillDescriptionText: {fileID: 8909666228658274999}
   skillButtons:
   - {fileID: 8909666227625790612}
   - {fileID: 8909666227787310501}
@@ -23460,6 +24894,9 @@ MonoBehaviour:
   - {fileID: 8909666228465745705}
   - {fileID: 8909666228668159117}
   - {fileID: 8909666228606407970}
+  skillDescriptionPanel: {fileID: 8909666228520094918}
+  skillNameText: {fileID: 8909666228732420022}
+  skillDescriptionText: {fileID: 8909666228658274999}
   coupleEntryLayout: 0
 --- !u!222 &8909666228234000993
 CanvasRenderer:
@@ -23499,6 +24936,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &756518472
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909666228234000988}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8909666228236420787
 GameObject:
   m_ObjectHideFlags: 0
@@ -26251,100 +27700,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666228081014942}
-  skillName: {fileID: 8909666229630752135}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -26352,83 +27798,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -26461,6 +27907,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666228338112180}
+  skillIcon: {fileID: 8909666228081014942}
+  skillName: {fileID: 8909666229630752135}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666228338112180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29831,100 +31280,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666228105901293}
-  skillName: {fileID: 8909666229165249833}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -29932,83 +31378,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -30041,6 +31487,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666228465745702}
+  skillIcon: {fileID: 8909666228105901293}
+  skillName: {fileID: 8909666229165249833}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666228465745702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32563,100 +34012,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666228371002900}
-  skillName: {fileID: 8909666227679773708}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -32664,83 +34110,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -32773,6 +34219,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666228606407971}
+  skillIcon: {fileID: 8909666228371002900}
+  skillName: {fileID: 8909666227679773708}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666228606407971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34988,100 +36437,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe141fa51a99794d9905f2f263efde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 8909666229089217304}
-  skillName: {fileID: 8909666227609141025}
-  personCard: {fileID: 0}
-  person:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 3
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -35089,83 +36535,83 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 3
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 3
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 3
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -35198,6 +36644,9 @@ MonoBehaviour:
       projectilePrefab: {fileID: 0}
     tags: []
   bg: {fileID: 8909666228668159114}
+  skillIcon: {fileID: 8909666229089217304}
+  skillName: {fileID: 8909666227609141025}
+  pilotCard: {fileID: 0}
 --- !u!114 &8909666228668159114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38830,7 +40279,7 @@ RectTransform:
   - {fileID: 8909666228100466088}
   - {fileID: 8909666227824836029}
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -51091,7 +52540,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -55771,7 +57220,6 @@ RectTransform:
   - {fileID: 8909666229295901447}
   - {fileID: 8909666229216866900}
   - {fileID: 8909666228234000991}
-  - {fileID: 8909666229491449484}
   - {fileID: 8909666228822529101}
   - {fileID: 8909666229308962002}
   - {fileID: 8909666229563502350}
@@ -55795,97 +57243,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c5fa028056a3b4b98dca1a9fa5a789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusPerson:
+  pilot:
     nameKey: 
     id: 0
-    attributes: 01000000010000000100000001000000
+    attributes: 0100000001000000010000000100000001000000
+    hp: 0
     statusConditions: []
     usedSkillsInBattle: 
-    usedSkillsInDate: 
     isMale: 0
-    sp: 4
     skillPoints: 0
+    sp: 4
     inventory:
       owner:
         nameKey: 
         id: 0
-        attributes: 01000000010000000100000001000000
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 4
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 01000000010000000100000001000000
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 4
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 01000000010000000100000001000000
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 4
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
@@ -55893,88 +57341,88 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 01000000010000000100000001000000
+        attributes: 0100000001000000010000000100000001000000
+        hp: 0
         statusConditions: []
         usedSkillsInBattle: 
-        usedSkillsInDate: 
         isMale: 0
-        sp: 4
         skillPoints: 0
+        sp: 4
         inventory:
           owner:
             nameKey: 
             id: 0
-            attributes: 01000000010000000100000001000000
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 4
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
         giftsReceived:
           owner:
             nameKey: 
             id: 0
-            attributes: 01000000010000000100000001000000
+            attributes: 0100000001000000010000000100000001000000
+            hp: 0
             statusConditions: []
             usedSkillsInBattle: 
-            usedSkillsInDate: 
             isMale: 0
-            sp: 4
             skillPoints: 0
+            sp: 4
             inventory:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
             giftsReceived:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 01000000010000000100000001000000
+                attributes: 0100000001000000010000000100000001000000
+                hp: 0
                 statusConditions: []
                 usedSkillsInBattle: 
-                usedSkillsInDate: 
                 isMale: 0
-                sp: 4
                 skillPoints: 0
+                sp: 4
               itemListings: []
           itemListings: []
       itemListings: []
   panel: {fileID: 8909666229488516037}
-  personCard: {fileID: 8909666228234000992}
+  pilotCard: {fileID: 8909666228234000992}
   skilltreeScreen: {fileID: 2078669583}
   relationshipCardPrefab: {fileID: 1153618359957840, guid: a42198a83010eb84ba61d221f6ad865a,
     type: 3}
@@ -55986,7 +57434,6 @@ MonoBehaviour:
   passiveSkillButtonColor: {r: 0.75686276, g: 0.75686276, b: 0.75686276, a: 1}
   debuffSkillButtonColor: {r: 0.7764706, g: 0.19607843, b: 0.19607843, a: 1}
   lockedSkillButtonColor: {r: 0.75686276, g: 0.75686276, b: 0.75686276, a: 0.4}
-  hpText: {fileID: 8909666229683868930}
 --- !u!222 &8909666229488516039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56088,84 +57535,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 694e173149f0cfc4aae79987403d5dc1, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8909666229491449485
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666229491449484}
-  - component: {fileID: 8909666229491449486}
-  - component: {fileID: 8909666229491449487}
-  m_Layer: 5
-  m_Name: HP Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666229491449484
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229491449485}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999386, y: 0.99999386, z: 0.99999386}
-  m_Children:
-  - {fileID: 8909666227949719600}
-  - {fileID: 8909666227967155603}
-  - {fileID: 8909666229683868931}
-  m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 178.1}
-  m_SizeDelta: {x: 200, y: 160.13}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666229491449486
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229491449485}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666229491449487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229491449485}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 10ac9a1cc4ebfcc42b7310fa1578180f, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -57656,7 +59025,7 @@ RectTransform:
   - {fileID: 8909666228079381186}
   - {fileID: 8909666227792788009}
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -60290,141 +61659,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &8909666229683868928
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666229683868931}
-  - component: {fileID: 8909666229683868933}
-  - component: {fileID: 8909666229683868930}
-  m_Layer: 5
-  m_Name: HP Value Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666229683868931
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229683868928}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8909666229491449484}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -603, y: 21.800003}
-  m_SizeDelta: {x: 200, y: 43.59999}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666229683868933
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229683868928}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666229683868930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666229683868928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 60
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82998e4ebdea2e04da0258481d54e210, type: 2}
-  m_sharedMaterial: {fileID: 21111712885850736, guid: 82998e4ebdea2e04da0258481d54e210,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4288238633
-  m_fontColor: {r: 0.16078432, g: 0.32941177, b: 0.6, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 4
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8909666229687715043
 GameObject:
   m_ObjectHideFlags: 0
@@ -61026,12 +62260,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550512711815534 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666227906267196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436412372756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -61044,6 +62272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550512711815534 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666227906267196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228022299702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62342,12 +63576,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8909666228243938459}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &8699102654071867435 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224078255707829424, guid: 1ad290d9b7146db4f8f20d527db3c477,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228243938459}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805651459332799853 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114432100960584182, guid: 1ad290d9b7146db4f8f20d527db3c477,
@@ -62360,6 +63588,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a4b6ecbbe157c4dacd88d42b870092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8699102654071867435 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224078255707829424, guid: 1ad290d9b7146db4f8f20d527db3c477,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228243938459}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228301281593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62478,6 +63712,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550513643692139 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228301281593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436824745489 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62490,12 +63730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550513643692139 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228301281593}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228342679312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62610,6 +63844,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550513685102146 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228342679312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436781283384 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62622,12 +63862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550513685102146 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228342679312}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228554449537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62746,6 +63980,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550513397750739 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228554449537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184437110562217 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62758,12 +63998,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550513397750739 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228554449537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228683380777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62886,12 +64120,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550514025529723 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228683380777}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435109103361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62904,6 +64132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550514025529723 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228683380777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228703526622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63158,12 +64392,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550514178239142 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228798075892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435256306908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -63176,6 +64404,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550514178239142 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228798075892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228827237107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63294,6 +64528,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550514207142817 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228827237107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435219019227 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -63306,12 +64546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550514207142817 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228827237107}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228887371022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63434,6 +64668,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550513726465116 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228887371022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435431252518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -63446,12 +64686,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550513726465116 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228887371022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666229215639631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63570,12 +64804,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550514558050589 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666229215639631}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435641952103 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -63588,6 +64816,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550514558050589 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666229215639631}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666229308729869
 PrefabInstance:
   m_ObjectHideFlags: 0

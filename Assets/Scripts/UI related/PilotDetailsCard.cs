@@ -45,7 +45,7 @@ public class PilotDetailsCard : BattlerInfoPanel {
     UpdateBattlerUI();
 
 
-    int relationshipId = StatusScreen.instance.statusPerson.id;
+    int relationshipId = StatusScreen.instance.pilot.id;
     bodyImage.sprite = ResourcesManager.instance.GetCharacterSprite(character.id, CharacterSpritePart.character);
 
 

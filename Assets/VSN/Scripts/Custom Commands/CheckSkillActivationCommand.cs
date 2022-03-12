@@ -104,6 +104,12 @@ namespace Command {
       if(skillToActivate.range == ActionRange.self) {
         return partyMemberId;
       }
+      if(skillToActivate.range == ActionRange.all_characters) {
+        return SkillTarget.allCharacters;
+      }
+      if(skillToActivate.range == ActionRange.all_other_characters) {
+        return (SkillTarget)((int)SkillTarget.allButPartyMember1 + (int)partyMemberId);
+      }
       
       switch(partyMemberId) {
         case SkillTarget.enemy1:

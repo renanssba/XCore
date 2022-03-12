@@ -51,7 +51,6 @@ public class BattleController : MonoBehaviour {
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
-  public GameObject detectParticlePrefab;
 
   const float attackAnimationTime = 0.15f;
 
@@ -77,19 +76,19 @@ public class BattleController : MonoBehaviour {
     Combat combat = GameController.instance.combatHappening;
     List<Pilot> heroesParty = new List<Pilot>();
     List<Enemy> enemiesParty = new List<Enemy>();
-    string enemyName = "fly";
 
-    foreach(Character c in combat.characters) {
-      if(c.id <= CharacterId.maya) {
-        heroesParty.Add(GlobalData.instance.pilots[(int)c.id]);
+    foreach(CharacterToken characterToken in combat.characters) {
+      if(characterToken.id <= CharacterId.maya) {
+        heroesParty.Add((Pilot)characterToken.battler);
       } else {
-        enemiesParty.Add( GetEnemyByString(c.id.ToString()) );
-        enemyName = c.id.ToString();
+        enemiesParty.Add((Enemy)characterToken.battler);
       }
     }
     partyMembers = heroesParty.ToArray();
+    enemyMembers = enemiesParty.ToArray();
 
-    SetDateEnemiesAndLocation(enemyName);
+    /// set location
+    currentDateLocation = DateLocation.desert;
 
 
     selectedActionType = new TurnActionType[partyMembers.Length];
@@ -100,18 +99,15 @@ public class BattleController : MonoBehaviour {
     }
     selectedTargetPartyId = new SkillTarget[partyMembers.Length];
 
-    FullHealParty();
-    FullHealEnemies();
-
     ClearSkillsUsageRegistry();
-    //UIController.instance.ShowPartyPeopleCards();
 
-    
     VsnSaveSystem.SetVariable("battle_is_happening", true);
     VsnSaveSystem.SetVariable("currentDateEvent", 0);
     TheaterController.instance.InitializeEnemyHp();
 
+    /// Show Battle UI, with HP set instantaneously
     UIController.instance.UpdateBattleUI();
+    UIController.instance.SkipHpBarAnimations();
   }
 
   public bool IsBattleHappening() {
@@ -120,12 +116,6 @@ public class BattleController : MonoBehaviour {
   
   public void EndBattle() {
     VsnSaveSystem.SetVariable("battle_is_happening", false);
-
-    // fully heal the party
-    //FullHealParty();
-
-    // remove battle UI
-    UIController.instance.ShowBattleUI(false);
 
     // remove bg effect
     TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
@@ -137,14 +127,14 @@ public class BattleController : MonoBehaviour {
   public void FullHealParty() {
     for(int i=0; i < partyMembers.Length; i++) {
       partyMembers[i].RemoveAllStatusConditions();
-      partyMembers[i].HealHP(partyMembers[i].AttributeValue((int)Attributes.maxHp));
+      partyMembers[i].HealHP(partyMembers[i].AttributeValue(Attributes.maxHp));
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp());
     }
   }
 
   public void FullHealEnemies() {
     foreach(Enemy currentEnemy in enemyMembers) {
-      currentEnemy.hp = currentEnemy.AttributeValue((int)Attributes.maxHp);
+      currentEnemy.hp = currentEnemy.AttributeValue(Attributes.maxHp);
       currentEnemy.RemoveAllStatusConditions();
       currentEnemy.ClearAllSkillsUsage();
     }
@@ -302,7 +292,7 @@ public class BattleController : MonoBehaviour {
     Debug.Log("attacker: " + attacker.GetName());
     Debug.Log("defender: " + defender.GetName());
 
-    damage = attacker.AttributeValue((int)usedSkill.damageAttribute) * usedSkill.damagePower;
+    damage = attacker.AttributeValue(usedSkill.damageAttribute) * usedSkill.damagePower;
     //damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
     Debug.LogWarning(attacker.GetName() + " Hits!");
@@ -383,30 +373,12 @@ public class BattleController : MonoBehaviour {
     }
 
 
-
     /// register skill usage
     skillUser.RegisterUsedSkill(usedSkill.id);
 
-    if(usedSkill.type == SkillType.attack) {
-      string attackName = "pre_attack";
-
-      switch(skillUserId) {
-        case SkillTarget.enemy1:
-        case SkillTarget.enemy2:
-        case SkillTarget.enemy3:
-          if(((Pilot)targetActors[0].battler).isMale) {
-            attackName = "enemy_attacks_boy";
-          } else {
-            attackName = "enemy_attacks_girl";
-          }
-          break;
-        case SkillTarget.partyMember1:
-          break;
-      }
-    }
 
     // focus actors
-    if(targetId != SkillTarget.allEnemies && targetId != SkillTarget.allHeroes) {
+    if(targetId <= SkillTarget.allEnemies) {
       TheaterController.instance.FocusActors(new Actor2D[] { skillUserActor, targetActors[0] });
       yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
     }
@@ -440,25 +412,19 @@ public class BattleController : MonoBehaviour {
       // skill receive animation
       if(usedSkill.animationSkin.animation != SkillAnimation.none &&
          usedSkill.animationSkin.animation != SkillAnimation.passive) {
-        if(targetActor.enemy != null && targetActor.enemy.HasTag("ally")) {
-          // special animation for hitting allies
-          targetActor.ShineGreen();
-        } else {
-          switch(usedSkill.animationSkin.animation) {
-            case SkillAnimation.active_support:
-            case SkillAnimation.long_charge:
-              targetActor.ShineGreen();
-              break;
-            case SkillAnimation.attack:
-            case SkillAnimation.charged_attack:
-            case SkillAnimation.active_offensive:
-            case SkillAnimation.run_over:
-            case SkillAnimation.throw_object:
-            case SkillAnimation.multi_throw:
-            default:
-              targetActor.ShineRed();
-              break;
-          }
+        switch(usedSkill.animationSkin.animation) {
+          case SkillAnimation.active_support:
+          case SkillAnimation.long_charge:
+            targetActor.ShineGreen();
+            break;
+          case SkillAnimation.attack:
+          case SkillAnimation.charged_attack:
+          case SkillAnimation.active_offensive:
+          case SkillAnimation.throw_object:
+          case SkillAnimation.multi_throw:
+          default:
+            targetActor.ShineRed();
+            break;
         }
       }
 
@@ -469,11 +435,7 @@ public class BattleController : MonoBehaviour {
 
         float effectivity = targetActor.battler.DamageTakenMultiplier(usedSkill.damageAttribute);
 
-        if(targetActor.enemy != null && targetActor.enemy.HasTag("ally")) {
-          VsnAudioManager.instance.PlaySfx("heal_default");
-        }
-
-        else if(targetActor.battler.IsDefending()) {
+        if(targetActor.battler.IsDefending()) {
           targetActor.ShowDefendHitParticle();
           VsnAudioManager.instance.PlaySfx("damage_block");
           TheaterController.instance.Screenshake(0.5f);
@@ -489,11 +451,7 @@ public class BattleController : MonoBehaviour {
         }
 
 
-        if(targetActor.enemy == null || !targetActor.enemy.HasTag("ally")) {
-          targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
-        } else {
-          targetActor.ShowDamageParticle(effectiveAttackDamage, -1f);
-        }
+        targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
         //yield return new WaitForSeconds(1f);
 
         targetActor.battler.TakeDamage(effectiveAttackDamage);
@@ -700,9 +658,6 @@ public class BattleController : MonoBehaviour {
     Battler defender = idleActor.battler;
     VsnSaveSystem.SetVariable("target_name", idleActor.battler.GetName());
 
-    //yield return ShowDistractedMessage();
-    idleActor.DistractedAnimation();
-
     yield return new WaitForSeconds(0.5f);
 
     VsnController.instance.state = ExecutionState.PLAYING;
@@ -742,28 +697,13 @@ public class BattleController : MonoBehaviour {
     GetCurrentEnemy().EndTurn();
   }
 
-  public void SetDateEnemiesAndLocation(string enemyName) {
-    currentDateLocation = DateLocation.desert;
-    enemyMembers = new Enemy[] { GetEnemyByString(enemyName) };
-  }
-
   public void SetCustomBattle(int enemyId) {
     currentDateLocation = DateLocation.desert;
     enemyMembers = new Enemy[] { GetEnemyById(enemyId) };
-    FullHealParty();
   }
 
   public void SetupDateLocation(){
     TheaterController.instance.SetLocation(currentDateLocation.ToString());
-  }
-
-  public Enemy GetEnemyByString(string nameKey) {
-    foreach(Enemy enemy in allEnemies) {
-      if(enemy.nameKey == nameKey) {
-        return enemy;
-      }
-    }
-    return null;
   }
 
   public Enemy GetEnemyById(int id) {
@@ -830,7 +770,7 @@ public class BattleController : MonoBehaviour {
 
   public void RecoverEnemiesHp() {
     for(int i = 0; i < enemyMembers.Length; i++) {
-      enemyMembers[i].hp = enemyMembers[i].AttributeValue((int)Attributes.maxHp);
+      enemyMembers[i].hp = enemyMembers[i].AttributeValue(Attributes.maxHp);
     }
   }
 

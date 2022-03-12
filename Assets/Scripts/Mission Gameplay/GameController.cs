@@ -8,17 +8,17 @@ using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Combat {
-  public List<Character> characters;
+  public List<CharacterToken> characters;
   public List<GameObject> engageIcons;
 
-  public Combat(Character a, Character b) {
-    characters = new List<Character>();
+  public Combat(CharacterToken a, CharacterToken b) {
+    characters = new List<CharacterToken>();
     engageIcons = new List<GameObject>();
     
     AddConflict(a, b);
   }
 
-  public void AddConflict(Character a, Character b) {
+  public void AddConflict(CharacterToken a, CharacterToken b) {
     if(!characters.Contains(a)) {
       characters.Add(a);
     }
@@ -33,13 +33,13 @@ public class Combat {
   }
 
 
-  public List<Character> TurnsOrder() {
-    return characters.OrderByDescending(q => q.agility).ToList();
+  public List<CharacterToken> TurnsOrder() {
+    return characters.OrderByDescending(q => q.battler.AttributeValue(Attributes.agility)).ToList();
   }
 
-  public Character RandomCharacterInTeam(CombatTeam team) {
-    List<Character> chars = new List<Character>();
-    foreach(Character c in characters) {
+  public CharacterToken RandomCharacterInTeam(CombatTeam team) {
+    List<CharacterToken> chars = new List<CharacterToken>();
+    foreach(CharacterToken c in characters) {
       if(c.combatTeam == team) {
         chars.Add(c);
       }      
@@ -53,7 +53,7 @@ public class Combat {
 
   public Vector3 CenterPosition() {
     Vector3 pos = Vector3.zero;
-    foreach(Character c in characters) {
+    foreach(CharacterToken c in characters) {
       pos += c.transform.position;
     }
     return pos / (float)characters.Count;
@@ -67,7 +67,7 @@ public class Combat {
   }
 
 
-  public static bool CharacterIsEngagedInCombat(Character a) {
+  public static bool CharacterIsEngagedInCombat(CharacterToken a) {
     foreach(Combat c in GameController.instance.currentCombats) {
       if(c.characters.Contains(a)) {
         return true;
@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour {
 
 
   [Header("- Characters -")]
-  public List<Character> allCharacters;
+  public List<CharacterToken> allCharacters;
   public int currentCharacterId;
 
 
@@ -101,11 +101,10 @@ public class GameController : MonoBehaviour {
   public CameraController cameraController;
 
   [Header("- Battle Setup -")]
-  public Camera[] cameras;
   public BattleController battleController;
 
 
-  public Character CurrentCharacter {
+  public CharacterToken CurrentCharacter {
     get { return allCharacters[currentCharacterId]; }
   }
 
@@ -114,7 +113,7 @@ public class GameController : MonoBehaviour {
   public void Awake() {
     instance = this;
 
-    allCharacters = new List<Character>();
+    allCharacters = new List<CharacterToken>();
     currentCombats = new List<Combat>();
   }
 
@@ -144,13 +143,12 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickedMap() {
-    if(gameState == GameState.noInput || gameState == GameState.battlePhase) {
+    if(gameState == GameState.noInput || gameState == GameState.battlePhase ||
+       Input.GetMouseButtonDown(0) == false) {
       return;
     }
     Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
     Vector3 pos = BoardController.instance.floorBoard.layoutGrid.CellToWorld(clickedGridPos);
-
-    ClickDamageCharacter();
 
     if(BoardController.instance.selectionBoard.GetTile(new Vector2Int(clickedGridPos.x, clickedGridPos.y)) == null) {
       Debug.LogWarning("Error SFX");
@@ -169,15 +167,6 @@ public class GameController : MonoBehaviour {
     }    
   }
 
-
-  public void ClickDamageCharacter() {
-    if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
-      if(MouseInput.instance.SelectedCharacter != null) {
-        Debug.LogWarning(MouseInput.instance.SelectedCharacter.name + " clicked to receive damage!");
-        MouseInput.instance.SelectedCharacter.TakeDamage(1);
-      }
-    }
-  }
 
 
   public void CleanHighlightedTiles() {
@@ -234,7 +223,7 @@ public class GameController : MonoBehaviour {
   }
 
   public IEnumerator FightBattle(Combat combat) {
-    List<Character> turns = combat.TurnsOrder();
+    List<CharacterToken> turns = combat.TurnsOrder();
 
     yield return cameraController.FocusOnCombat(combat);
 
@@ -245,32 +234,15 @@ public class GameController : MonoBehaviour {
     while(VsnController.instance.state != ExecutionState.STOPPED) {
       yield return null;
     }
-    yield break;
 
-
-    foreach(Character currentChar in turns) {
-      if(currentChar == null) {
-        continue;
-      }
-
-      Debug.LogWarning("Character "+currentChar+" will attack!");
-
-      yield return new WaitForSeconds(0.1f);
-
-      // attack and take damage
-      Character targetChar = combat.RandomCharacterInTeam(currentChar.OpponentCombatTeam());
-      if(targetChar == null) {
-        continue;
-      }
-      currentChar.TackleAnim(targetChar.transform.position);
-      yield return new WaitForSeconds(0.3f);
-
-      if(Random.Range(0, 100) < targetChar.dodgeRate) {
-        targetChar.MissParticle();
-      } else {
-        targetChar.TakeDamage(currentChar.attack);
-      }
-      yield return new WaitForSeconds(1.5f);
+    bool someoneDies = false;
+    foreach(CharacterToken ct in combat.characters) {
+      ct.UpdateHPSlider();
+      bool died = ct.CheckToDie();
+      someoneDies = someoneDies || died;
+    }
+    if(someoneDies) {
+      yield return new WaitForSeconds(0.5f);
     }
   }
 
@@ -306,7 +278,7 @@ public class GameController : MonoBehaviour {
   
 
   public void StartEngagement() {
-    Character clicked = MouseInput.instance.SelectedCharacter;
+    CharacterToken clicked = MouseInput.instance.SelectedCharacter;
     foreach(Combat c in currentCombats) {
       if(c.characters.Contains(clicked)) {
         c.AddConflict(clicked, CurrentCharacter);
@@ -320,19 +292,19 @@ public class GameController : MonoBehaviour {
   }
 
 
-  public void RegisterCharacter(Character newCharacter) {
+  public void RegisterCharacter(CharacterToken newCharacter) {
     allCharacters.Add(newCharacter);
     allCharacters = allCharacters.OrderBy(o => o.id).ToList();
   }
 
-  public void CharacterDies(Character dyingCharacter) {
+  public void CharacterDies(CharacterToken dyingCharacter) {
     int indexInList = allCharacters.IndexOf(dyingCharacter);
     allCharacters.Remove(dyingCharacter);
   }
 
 
   public bool VictoryConditionMet() {
-    foreach(Character c in allCharacters) {
+    foreach(CharacterToken c in allCharacters) {
       if(c != null && c.combatTeam == CombatTeam.enemy) {
         return false;
       }
@@ -341,7 +313,7 @@ public class GameController : MonoBehaviour {
   }
 
   public bool DefeatConditionMet() {
-    foreach(Character c in allCharacters) {
+    foreach(CharacterToken c in allCharacters) {
       if(c != null && c.combatTeam == CombatTeam.player) {
         return false;
       }
@@ -351,25 +323,10 @@ public class GameController : MonoBehaviour {
 
 
   public void StartBattle() {
-    cameras[0].gameObject.SetActive(false);
-    cameras[1].gameObject.SetActive(true);
-
     gameState = GameState.battlePhase;
-
-    TacticalUIController.instance.Select(null);
-    TacticalUIController.instance.EnterBattlePhase();
-    BoardController.instance.gameObject.SetActive(false);
   }
 
   public void EndBattle() {
-    cameras[0].gameObject.SetActive(true);
-    cameras[1].gameObject.SetActive(false);
-
     gameState = GameState.choosingMovement;
-
-    TacticalUIController.instance.EndBattlePhase();
-    BoardController.instance.gameObject.SetActive(true);
-
-    cameraController.GoToDefaultPosition();
   }
 }

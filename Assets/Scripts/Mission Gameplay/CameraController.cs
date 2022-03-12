@@ -4,9 +4,15 @@ using UnityEngine;
 using DG.Tweening;
 
 public class CameraController : MonoBehaviour {
-  public Camera camera;
+  public static CameraController instance;
+
+  public Camera[] cameras;
   public Vector3 defaultCameraPos;
   public float cameraMoveTime = 0.3f;
+
+  public void Awake() {
+    instance = this;
+  }
 
 
   public IEnumerator GoToDefaultPosition() {
@@ -21,5 +27,12 @@ public class CameraController : MonoBehaviour {
     Camera.main.transform.DOMove(combatCenter, cameraMoveTime);
     Camera.main.DOOrthoSize(3.5f, cameraMoveTime);
     yield return new WaitForSeconds(cameraMoveTime);
+  }
+
+  public void SetActiveCamera(int cameraId) {
+    foreach(Camera c in cameras) {
+      c.gameObject.SetActive(false);
+    }
+    cameras[cameraId].gameObject.SetActive(true);
   }
 }

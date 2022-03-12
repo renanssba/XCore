@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GlobalData : MonoBehaviour {
 
-  [Header("- Pilots and Relationships -")]
+  [Header("- Pilots -")]
   public TextAsset pilotsFile;
   public List<Pilot> pilots;
-  public Relationship[] relationships;
 
+  [Header("- Relationships -")]
+  public Relationship[] relationships;
   public int currentRelationshipId;
+
+  [Header("- Current Enemies -")]
+  public List<Enemy> instancedEnemies;
+
 
   [Header("- System Data -")]
   public float playtime = 0f;
@@ -27,19 +32,20 @@ public class GlobalData : MonoBehaviour {
       return;
     }
     DontDestroyOnLoad(gameObject);
+
+    InitializePilots();
   }
 
 
-  public void Start() {
-    InitializeChapter();
-  }
+  //public void Start() {
+  //  InitializeChapter();
+  //}
 
-  public void InitializeChapter() {
+  public void InitializePilots() {
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
-    VsnSaveSystem.SetVariable("max_days", 14);
-    VsnSaveSystem.SetVariable("observation_played", 0);
+    //VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("day", 0);
 
     pilots = new List<Pilot>();
@@ -59,6 +65,7 @@ public class GlobalData : MonoBehaviour {
         int.Parse(dic["attack"]),
         int.Parse(dic["agility"]),
         int.Parse(dic["dodgeRate"])};
+      newPilot.HealHpPercent(1f);
 
       pilots.Add(newPilot);
     }
@@ -82,24 +89,10 @@ public class GlobalData : MonoBehaviour {
     relationships[0].skilltree.InitializeSkillIds(new int[] { 0 });
     relationships[1].skilltree.InitializeSkillIds(new int[] { 0 });
     relationships[2].skilltree.InitializeSkillIds(new int[] { 0 });
+
+    instancedEnemies = new List<Enemy>();
   }
 
-
-  public int CurrentCharacterAttribute(int attr) {
-
-    if(BattleController.instance.GetCurrentEnemy() == null) {
-      return 0;
-    }
-
-    int personId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
-    if(personId >= BattleController.instance.partyMembers.Length) {
-      return 0;
-    }
-
-    Pilot currentCharacter = BattleController.instance.partyMembers[personId];
-
-    return currentCharacter.AttributeValue(attr);
-  }
 
   public void PassTime() {
     int daytime = VsnSaveSystem.GetIntVariable("daytime");

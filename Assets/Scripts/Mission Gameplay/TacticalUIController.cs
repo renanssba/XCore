@@ -8,11 +8,7 @@ public class TacticalUIController : MonoBehaviour {
   public static TacticalUIController instance;
   
   [Header("- Character Detail Panel -")]
-  public CanvasGroup detailPanel;
-  public Slider hpSlider;
-  public TextMeshProUGUI characterName;
-  public TextMeshProUGUI hpText;
-  public Image characterImage;
+  public BattlerInfoPanel battlerInfoPanel;
 
   [Header("- Skip Turn Button -")]
   public GameObject skipTurnButton;
@@ -29,6 +25,7 @@ public class TacticalUIController : MonoBehaviour {
   }
 
   public void EnterBattlePhase() {
+    Select(null);
     clickMapButton.SetActive(false);
   }
 
@@ -36,21 +33,14 @@ public class TacticalUIController : MonoBehaviour {
     clickMapButton.SetActive(true);
   }
 
-  public void Select(Character character) {
+  public void Select(CharacterToken character) {
     if(character == null) {
-      detailPanel.alpha = 0f;
+      battlerInfoPanel.canvasGroup.alpha = 0f;
       return;
     }
 
-    detailPanel.alpha = 1f;
-
-    // face and name
-    characterImage.sprite = ResourcesManager.instance.tacticalFaceSprites[(int)character.id];
-    characterName.text = character.id.ToString().ToTitleCase();
-
-    // hp bar
-    hpSlider.maxValue = character.maxHp;
-    hpSlider.value = character.hp;
-    hpText.text = character.hp.ToString() + " /"+ character.maxHp.ToString();
+    battlerInfoPanel.canvasGroup.alpha = 1f;
+    battlerInfoPanel.Initialize(character.battler);
+    battlerInfoPanel.SkipHpBarAnimation();
   }
 }

@@ -9,6 +9,7 @@ public class BattlerInfoPanel : MonoBehaviour {
   public Battler character = null;
 
   [Header("- Visuals -")]
+  public CanvasGroup canvasGroup;
   public TextMeshProUGUI nameText;
   public Image faceImage;
 
@@ -32,11 +33,11 @@ public class BattlerInfoPanel : MonoBehaviour {
     }
 
     /// Name and Face
-    nameText.text = character.GetName();
+    nameText.text = character.GetName().ToUpper();
     faceImage.sprite = ResourcesManager.instance.GetFaceSprite(character.id);
 
     /// HP
-    hpSlider.SetMaxValue(character.AttributeValue((int)Attributes.maxHp));
+    hpSlider.SetMaxValue(character.AttributeValue(Attributes.maxHp));
     hpSlider.SetSliderValue(character.hp);
 
     /// SP
@@ -50,6 +51,20 @@ public class BattlerInfoPanel : MonoBehaviour {
 
     /// STATUS CONDITIONS
     UpdateStatusConditions();
+  }
+
+  public void SkipHpBarAnimation() {
+    if(character == null) {
+      return;
+    }
+
+    /// HP
+    hpSlider.SetSliderValueWithoutAnimation(character.hp);
+
+    /// SP
+    if(character.GetType() == typeof(Pilot)) {
+      spSlider.SetSliderValueWithoutAnimation(((Pilot)character).sp);
+    }
   }
 
 

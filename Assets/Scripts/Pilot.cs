@@ -132,7 +132,7 @@ public class Pilot : Battler {
 
 
   public override Actor2D GetActor2D() {
-    return TheaterController.instance.GetActorByBattlingCharacter(this);
+    return TheaterController.instance.GetActorByBattler(this);
   }
   
 

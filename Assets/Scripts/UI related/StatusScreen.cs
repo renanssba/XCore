@@ -9,7 +9,7 @@ public class StatusScreen : MonoBehaviour {
   public static StatusScreen instance;
 
   [Header("- Data -")]
-  public Pilot statusPerson;
+  public Pilot pilot;
 
   [Header("- Panels -")]
   public Panel panel;
@@ -31,35 +31,32 @@ public class StatusScreen : MonoBehaviour {
   public Color debuffSkillButtonColor;
   public Color lockedSkillButtonColor;
 
-  public TextMeshProUGUI hpText;
-
 
   public void Awake() {
     instance = this;
   }
 
-  public void Initialize(Pilot personToAnalyze) {
+  public void Initialize(Pilot currentPilot) {
     instance = this;
 
-    statusPerson = personToAnalyze;
+    pilot = currentPilot;
     UpdateUI();
   }
 
   public void UpdateUI() {
-    pilotCard.Initialize(statusPerson);
-    hpText.text = statusPerson.AttributeValue((int)Attributes.maxHp).ToString() +" /"+ statusPerson.AttributeValue((int)Attributes.maxHp);
+    pilotCard.Initialize(pilot);
 
     if(BattleController.instance.IsBattleHappening()){
       skilltreeButtonShade.gameObject.SetActive(true);
       unusedBondPointsIcon.SetActive(false);
     } else {
       skilltreeButtonShade.gameObject.SetActive(false);
-      unusedBondPointsIcon.SetActive(statusPerson.skillPoints != 0);
+      unusedBondPointsIcon.SetActive(pilot.skillPoints != 0);
     }
 
     /// relationship cards
     relationshipsContent.ClearChildren();
-    foreach(Relationship rel in statusPerson.GetRelationships()) {
+    foreach(Relationship rel in pilot.GetRelationships()) {
       GameObject newobj = Instantiate(relationshipCardPrefab, relationshipsContent);
       newobj.GetComponentInChildren<RelationshipCard>().Initialize(rel);
     }
@@ -69,7 +66,7 @@ public class StatusScreen : MonoBehaviour {
 
 
   public void ClickRightCoupleButton() {
-    int initialPerson = statusPerson.id;
+    int initialPerson = pilot.id;
     int personId = initialPerson;
 
     SfxManager.StaticPlaySelectSfx();
@@ -81,7 +78,7 @@ public class StatusScreen : MonoBehaviour {
   }
 
   public void ClickLeftCoupleButton() {
-    int initialPerson = statusPerson.id;
+    int initialPerson = pilot.id;
     int personId = initialPerson;
 
     SfxManager.StaticPlaySelectSfx();

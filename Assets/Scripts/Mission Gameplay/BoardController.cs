@@ -73,7 +73,7 @@ public class BoardController : MonoBehaviour {
 
 
 
-  public void HighlightWalkableTiles(Character character) {
+  public void HighlightWalkableTiles(CharacterToken character) {
     List<Vector2Int> neighbors = character.GetWalkableTiles();
 
     foreach(Vector2Int pos in neighbors) {
@@ -99,7 +99,7 @@ public class BoardController : MonoBehaviour {
 
 
 
-  public void HighlightAdjacentEnemies(Character character) {
+  public void HighlightAdjacentEnemies(CharacterToken character) {
     List<Vector2Int> neighbors = character.GetAdjacentTiles();
     CombatTeam opponentTeam = character.OpponentCombatTeam();
 
@@ -127,7 +127,7 @@ public class BoardController : MonoBehaviour {
 
 
   public CombatTeam TeamInTile(Vector2Int pos) {
-    foreach(Character c in GameController.instance.allCharacters) {
+    foreach(CharacterToken c in GameController.instance.allCharacters) {
       if(c.BoardGridPosition() == pos) {
         return c.combatTeam;
       }

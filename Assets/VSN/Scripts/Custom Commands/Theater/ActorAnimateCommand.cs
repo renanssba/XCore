@@ -20,10 +20,6 @@ namespace Command {
         case "defend":
           actor.DefendActionAnimation();
           break;
-        case "run over":
-          skin.animation = SkillAnimation.run_over;
-          actor.StartCoroutine(actor.CharacterAttackAnim(skin));
-          break;
         case "shine red":
           actor.ShineRed();
           break;

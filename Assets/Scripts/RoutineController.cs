@@ -20,7 +20,7 @@ public class RoutineController : MonoBehaviour {
   }
 
   public void Start() {
-    GlobalData.instance.InitializeChapter();
+    GlobalData.instance.InitializePilots();
 
     if(GlobalData.instance.saveToLoad != -1) {
       // LOAD DATA FROM SAVE

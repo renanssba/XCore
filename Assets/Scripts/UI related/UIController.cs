@@ -76,8 +76,8 @@ public class UIController : MonoBehaviour {
 
     for(int i=0; i<3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
-        heroesInfoPanels[i].Initialize(BattleController.instance.partyMembers[i]);
         heroesInfoPanels[i].gameObject.SetActive(true);
+        heroesInfoPanels[i].Initialize(BattleController.instance.partyMembers[i]);
       } else {
         heroesInfoPanels[i].gameObject.SetActive(false);
       }
@@ -91,6 +91,20 @@ public class UIController : MonoBehaviour {
   }
 
 
+  public void SkipHpBarAnimations() {
+    for(int i = 0; i < 3; i++) {
+      if(BattleController.instance.partyMembers.Length > i) {
+        heroesInfoPanels[i].SkipHpBarAnimation();
+      }
+    }
+
+    if(BattleController.instance.enemyMembers != null &&
+      BattleController.instance.enemyMembers.Length > 0 &&
+      BattleController.instance.enemyMembers[0] != null) {
+      enemyInfoPanels.SkipHpBarAnimation();
+    }
+  }
+
 
   public void SetScreenLayout(string state) {
     TheaterController theater = TheaterController.instance;
@@ -99,16 +113,29 @@ public class UIController : MonoBehaviour {
     Debug.LogWarning("SETTING SCREEN LAYOUT: " + state);
     switch(state) {
       case "hide_all":
-        //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
         break;
       case "interact_with_board":
-        //interactionPinsBoard.ShowPanel();
         uiControllerPanel.ShowPanel();
         break;
+      case "tactical_view":
+        uiControllerPanel.ShowPanel();
+        battleInfoPanel.HidePanel();
+        TacticalUIController.instance.EndBattlePhase();
+        BattleController.instance.gameObject.SetActive(false);
+        BoardController.instance.gameObject.SetActive(true);
+
+        CameraController.instance.SetActiveCamera(0);
+        CameraController.instance.GoToDefaultPosition();
+        break;
       case "battle":
-        //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
+        battleInfoPanel.ShowPanel();
+        TacticalUIController.instance.EnterBattlePhase();
+        BattleController.instance.gameObject.SetActive(true);
+        BoardController.instance.gameObject.SetActive(false);
+
+        CameraController.instance.SetActiveCamera(1);
         break;
     }
     SetupContext(state, firstButton);

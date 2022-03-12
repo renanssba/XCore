@@ -42,6 +42,29 @@ public class Enemy : Battler {
 
 
 
+  public Enemy(Enemy copyFrom) {
+    nameKey = copyFrom.nameKey;
+    id = copyFrom.id;
+    attributes = copyFrom.attributes;
+
+    /// HP starts full
+    hp = attributes[(int)Attributes.maxHp];
+
+    spriteName = copyFrom.spriteName;
+    appearSfxName = copyFrom.appearSfxName;
+    baseAttackSkin = copyFrom.baseAttackSkin;
+
+    activeSkillLogics = copyFrom.activeSkillLogics;
+    passiveSkills = copyFrom.passiveSkills;
+    expReward = copyFrom.hp;
+    moneyReward = copyFrom.hp;
+    statusImmunities = copyFrom.statusImmunities;
+    tags = copyFrom.tags;
+
+    statusConditions = new List<StatusCondition>();
+    usedSkillsInBattle = new List<int>();
+  }
+
   public override string GetName() {
     return Lean.Localization.LeanLocalization.GetTranslationText("enemy/name/" + nameKey);
   }
@@ -86,13 +109,7 @@ public class Enemy : Battler {
 
 
   public override Actor2D GetActor2D() {
-    return TheaterController.instance.GetActorByBattlingCharacter(this);
-
-    //SkillTarget partyMemberPos = BattleController.instance.GetPartyMemberPosition(this);
-    //if(partyMemberPos == SkillTarget.none) {
-    //  return null;
-    //}
-    //return TheaterController.instance.GetActorByIdInParty(partyMemberPos);
+    return TheaterController.instance.GetActorByBattler(this);
   }
   
   
@@ -108,7 +125,7 @@ public class Enemy : Battler {
 
   public override int StatusResistance(string statusName) {
     if(Utils.TagIsInArray(statusName, statusImmunities)) {
-      Debug.LogWarning("Resitance: 100%");
+      //Debug.LogWarning("Resitance: 100%");
       return 100;
     }
     return 0;

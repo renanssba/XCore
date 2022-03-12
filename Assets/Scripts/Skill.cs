@@ -17,6 +17,8 @@ public enum ActionRange {
   all_allies,
   all_enemies,
   random_enemy,
+  all_other_characters,
+  all_characters,
   none
 }
 
@@ -27,9 +29,19 @@ public enum SkillTarget {
   enemy1 = 3,
   enemy2 = 4,
   enemy3 = 5,
+
   allEnemies = 6,
   allHeroes = 7,
-  none = 8
+  allCharacters = 8,
+
+  none = 9,
+
+  allButPartyMember1 = 10,
+  allButPartyMember2 = 11,
+  allButPartyMember3 = 12,
+  allButEnemy1 = 13,
+  allButEnemy2 = 14,
+  allButEnemy3 = 15,
 }
 
 public enum SkillSpecialEffect {
@@ -66,7 +78,6 @@ public enum SkillAffectsCharacter {
 
 public enum SkillAnimation {
   attack,
-  run_over,
   charged_attack,
   active_support,
   active_offensive,

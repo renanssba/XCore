@@ -213,12 +213,6 @@ public class Actor2D : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         break;
 
-      case SkillAnimation.run_over:
-        VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
-        VsnAudioManager.instance.PlaySfx("enemy_attack_sale_stampede");
-        yield return RunOverAnimation();
-        break;
-
       case SkillAnimation.projectile:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
         if(actionSkin.animationArgument == "shout" ||
@@ -280,20 +274,6 @@ public class Actor2D : MonoBehaviour {
     yield return new WaitForSeconds(attackAnimTime*2f + 0.5f);
   }
 
-  public IEnumerator RunOverAnimation() {
-    float movementX = -7.8f;
-    Vector3 pos = transform.localPosition;
-    float animTime = 3f;
-
-    TheaterController.instance.Screenshake(2f, animTime+0.7f);
-    transform.DOMoveX(movementX, animTime).SetRelative().SetEase(Ease.InSine);
-    yield return new WaitForSeconds(animTime);
-
-    transform.localPosition = pos + new Vector3(3f, 0f, 0f);
-    transform.DOMoveX(-3f, 0.8f).SetRelative();
-    yield return new WaitForSeconds(0.8f);
-  }
-
   public IEnumerator UseItemAnimation(Actor2D destiny, Item item) {
     yield return ShowThrowItemAnimation(item.spriteName, destiny, new Vector3(0.08f, 0.08f, 0.08f));
   }
@@ -307,17 +287,6 @@ public class Actor2D : MonoBehaviour {
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
   }
 
-  public void DistractedAnimation() {
-
-  }
-
-
-  public void DetectAnimation() {
-    GameObject particlePrefab = BattleController.instance.detectParticlePrefab;
-    Vector3 particlePrefabPos = particlePrefab.transform.localPosition;
-    //VsnAudioManager.instance.PlaySfx("buff_default");
-    GameObject newParticle = Instantiate(particlePrefab, transform);
-  }
 
   [ContextMenu("Shine Red")]
   public void ShineRed() {

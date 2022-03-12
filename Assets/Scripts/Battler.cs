@@ -29,6 +29,10 @@ public abstract class Battler {
 
   public abstract string GetName();
 
+  public int AttributeValue(Attributes att) {
+    return AttributeValue((int)att);
+  }
+
   public int AttributeValue(int att){
     if(attributes == null) {
       return 0;
@@ -88,13 +92,13 @@ public abstract class Battler {
 
   public virtual void HealHP(int value) {
     hp += value;
-    hp = Mathf.Min(hp, AttributeValue((int)Attributes.maxHp));
+    hp = Mathf.Min(hp, AttributeValue(Attributes.maxHp));
     hp = Mathf.Max(hp, 0);
     UIController.instance.UpdateBattleUI();
   }
 
   public virtual void HealHpPercent(float fraction) {
-    HealHP((int)(AttributeValue((int)Attributes.maxHp) * fraction));
+    HealHP((int)(AttributeValue(Attributes.maxHp) * fraction));
   }
 
   public virtual void TakeDamage(int value) {
@@ -114,7 +118,7 @@ public abstract class Battler {
   }
 
   public virtual int MaxHP() {
-    return AttributeValue((int)Attributes.maxHp);
+    return AttributeValue(Attributes.maxHp);
   }
 
   public virtual int CurrentHP() {
@@ -203,7 +207,7 @@ public abstract class Battler {
   public bool ReceiveStatusCondition(StatusCondition newCondition) {
     int i = FindStatusCondition(newCondition.name);
     bool receivedNewStatus = false;
-    Actor2D actor = TheaterController.instance.GetActorByBattlingCharacter(this);
+    Actor2D actor = TheaterController.instance.GetActorByBattler(this);
 
     Debug.LogWarning("receiving new condition: " + newCondition.name+", turns: "+newCondition.duration);
 

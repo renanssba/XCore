@@ -1,13 +1,10 @@
-﻿set_var battle_is_happening false
-set_var currentDateEvent 0
-setup_date
+﻿set_var currentDateEvent 0
+setup_battle
 
 fade_out 0.5
 bg null
 
-wait 0.2
 play_music "" "XCore1 Boss Theme"
-wait 0.2
 
 theater_animation "setup_battle"
 
@@ -25,7 +22,7 @@ fade_in 0.5
 /// EXECUTE THE FIGHT
 // for currentDateEvent #dateLength
   // set_var currentBattleTurn 0
-  wait 0.5
+  // wait 0.5
 
   // waypoint start_new_turn
   goto_script "check_passive_triggers" "turn_started"
@@ -123,6 +120,7 @@ fade_music 0 1
 fade_out 0.5
 
 end_battle
+set_screen "tactical_view"
 
 bg null
 fade_in 0.5

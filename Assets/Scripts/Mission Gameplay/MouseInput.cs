@@ -9,11 +9,11 @@ public class MouseInput : MonoBehaviour {
 
   public Tilemap world;
 
-  public Character SelectedCharacter {
+  public CharacterToken SelectedCharacter {
     get {
       Vector2Int selectedPos = SelectedGridPosition();
 
-      foreach(Character c in GameController.instance.allCharacters) {
+      foreach(CharacterToken c in GameController.instance.allCharacters) {
         if(c.BoardGridPosition() == selectedPos) {
           return c;
         }
