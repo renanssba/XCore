@@ -43,6 +43,7 @@ public class PilotDetailsCard : BattlerInfoPanel {
 
     /// Update Basic Info, like HP, SP and 
     UpdateBattlerUI();
+    SkipHpBarAnimation();
 
 
     int relationshipId = StatusScreen.instance.pilot.id;

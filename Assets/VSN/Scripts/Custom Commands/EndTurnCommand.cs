@@ -8,7 +8,7 @@ namespace Command {
   public class EndTurnCommand : VsnCommand {
 
     public override void Execute() {
-      Debug.LogWarning("END TURN CALLED");
+      //Debug.LogWarning("END TURN CALLED");
       if(args.Length == 0) {
         BattleController.instance.EndTurn();
       } else {

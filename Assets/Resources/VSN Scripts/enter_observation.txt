@@ -9,11 +9,6 @@ endif
 wait 0.5
 bg null
 theater_bg arg1
-if #currentGirlId == 3
-  theater_animation "boy_waiting_for_girl"
-else
-  theater_animation "girl_waiting_for_boy"
-endif
 set_screen "girl_interaction_screen"
 move_camera "girl_interaction" 0
 

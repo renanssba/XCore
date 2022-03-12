@@ -288,7 +288,6 @@ public class TheaterController : MonoBehaviour {
     enemyActor.transform.localPosition = enemyPosition;
 
     //VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-    InitializeEnemyHp();
     PartyEntersBattleMode();
   }
 
@@ -328,7 +327,6 @@ public class TheaterController : MonoBehaviour {
     enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);
     enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
       VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-      InitializeEnemyHp();
       PartyEntersBattleMode();
     });
   }
@@ -457,14 +455,6 @@ public class TheaterController : MonoBehaviour {
     }
   }
 
-
-  public void InitializeEnemyHp() {
-    Debug.LogWarning("Called InitializeChallengeLevelAndHp");
-    Enemy enemy = BattleController.instance.GetCurrentEnemy();
-    //UIController.instance.enemyHpSlider.SetMaxValue(enemy.AttributeValue((int)Attributes.maxHp));
-    //UIController.instance.enemyHpSlider.SetSliderValueWithoutAnimation(enemy.AttributeValue((int)Attributes.maxHp));
-    //UIController.instance.AnimateEnemyHpChange(enemy.AttributeValue((int)Attributes.maxHp), enemy.AttributeValue((int)Attributes.maxHp));
-  }
 
   public void EnemyLeavesScene() {
     //UIController.instance.enemyHpSlider.gameObject.SetActive(false);  

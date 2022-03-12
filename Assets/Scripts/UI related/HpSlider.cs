@@ -23,11 +23,6 @@ public class HpSlider : MonoBehaviour {
   public static Color damageColor = new Color(0.8f, 0f, 0f);
 
 
-  public void Start() {
-    //SetSliderValue(1f);
-  }
-
-
   public void SetMaxValue(float maxValue) {
     fillSlider.maxValue = maxValue;
     backSlider.maxValue = maxValue;
@@ -37,14 +32,11 @@ public class HpSlider : MonoBehaviour {
   public void SetSliderValueWithoutAnimation(float value) {
     fillSlider.value = value;
     backSlider.value = value;
-    //Debug.LogError("setting slider values to: " + value);
     currentTime = 0f;
     UpdateText((int)value, (int)fillSlider.maxValue);
   }
 
   public void SetSliderValue(float value) {
-    Debug.LogWarning("Calling SetSliderValue to: " + value);
-
     initialValue = fillSlider.value;
     finalValue = value;
     if(finalValue < initialValue) {

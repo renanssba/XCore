@@ -92,6 +92,7 @@ public class UIController : MonoBehaviour {
 
 
   public void SkipHpBarAnimations() {
+    Debug.LogWarning("SKIPPING HP BAR ANIM FOR HEROES");
     for(int i = 0; i < 3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
         heroesInfoPanels[i].SkipHpBarAnimation();
@@ -101,6 +102,7 @@ public class UIController : MonoBehaviour {
     if(BattleController.instance.enemyMembers != null &&
       BattleController.instance.enemyMembers.Length > 0 &&
       BattleController.instance.enemyMembers[0] != null) {
+      Debug.LogWarning("SKIPPING HP BAR ANIM FOR ENEMY");
       enemyInfoPanels.SkipHpBarAnimation();
     }
   }

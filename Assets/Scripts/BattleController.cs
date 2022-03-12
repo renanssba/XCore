@@ -103,7 +103,6 @@ public class BattleController : MonoBehaviour {
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
     VsnSaveSystem.SetVariable("currentDateEvent", 0);
-    TheaterController.instance.InitializeEnemyHp();
 
     /// Show Battle UI, with HP set instantaneously
     UIController.instance.UpdateBattleUI();
@@ -765,13 +764,6 @@ public class BattleController : MonoBehaviour {
         return GetBattlerByTargetId(SkillTarget.enemy1);
     }
     return null;
-  }
-
-
-  public void RecoverEnemiesHp() {
-    for(int i = 0; i < enemyMembers.Length; i++) {
-      enemyMembers[i].hp = enemyMembers[i].AttributeValue(Attributes.maxHp);
-    }
   }
 
 
