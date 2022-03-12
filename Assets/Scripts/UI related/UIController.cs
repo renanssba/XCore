@@ -22,17 +22,12 @@ public class UIController : MonoBehaviour {
   [Header("- Item Selector Screen -")]
   public ItemSelectorScreen itemSelectorScreen;
 
-  [Header("- Dating Panel -")]
-  public Panel datingPeoplePanel;
-
-  [Header("- HP Sliders -")]
-  //public HpSlider partyHpSlider;
-  //public TextMeshProUGUI partyHpText;
-  //public HpSlider enemyHpSlider;
-  //public TextMeshProUGUI enemyHpText;
-
+  [Header("- Battle Panel -")]
   public Panel battleInfoPanel;
-  public PilotCard[] partyPeopleCards;
+
+  [Header("- Info Panels -")]
+  public BattlerInfoPanel[] heroesInfoPanels;
+  public BattlerInfoPanel enemyInfoPanels;
 
   [Header("- Actions Panel -")]
   public ActionsPanel actionsPanel;
@@ -79,46 +74,22 @@ public class UIController : MonoBehaviour {
       return;
     }
 
-    //partyHpSlider.SetMaxValue(BattleController.instance.maxHp);
-    //partyHpSlider.SetSliderValueWithoutAnimation(BattleController.instance.hp);
-    //partyHpText.text = BattleController.instance.hp.ToString();
-
     for(int i=0; i<3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
-        partyPeopleCards[i].Initialize(BattleController.instance.partyMembers[i]);
-        partyPeopleCards[i].gameObject.SetActive(true);
+        heroesInfoPanels[i].Initialize(BattleController.instance.partyMembers[i]);
+        heroesInfoPanels[i].gameObject.SetActive(true);
       } else {
-        partyPeopleCards[i].gameObject.SetActive(false);
+        heroesInfoPanels[i].gameObject.SetActive(false);
       }
     }
 
-    if(BattleController.instance.GetCurrentEnemy() != null) {
-      BattleController.instance.GetCurrentEnemy().UpdateStatusConditions();
+    if(BattleController.instance.enemyMembers != null &&
+      BattleController.instance.enemyMembers.Length > 0 &&
+      BattleController.instance.enemyMembers[0] != null) {
+      enemyInfoPanels.Initialize(BattleController.instance.enemyMembers[0]);
     }
   }
 
-
-  public void AnimatePartyHpChange(int initialHp, int finalHp) {
-    //partyHpSlider.SetSliderValue(finalHp);
-    //partyHpText.text = finalHp.ToString();
-
-    //float currentShownHp = initialHp;
-    //DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
-    //  //partyHpSlider.value = currentShownHp;
-    //  partyHpText.text = ((int)currentShownHp).ToString();
-    //} );
-  }
-
-  public void AnimateEnemyHpChange(int initialHp, int finalHp) {
-    //enemyHpSlider.SetSliderValue(finalHp);
-    //enemyHpText.text = finalHp.ToString();
-
-    //float currentShownHp = initialHp;
-    //DOTween.To(() => currentShownHp, x => currentShownHp = x, finalHp, 1f).OnUpdate( ()=> {
-    //  //enemyHpSlider.value = currentShownHp;
-    //  enemyHpText.text = ((int)currentShownHp).ToString();
-    //} );
-  }
 
 
   public void SetScreenLayout(string state) {
@@ -135,12 +106,7 @@ public class UIController : MonoBehaviour {
         //interactionPinsBoard.ShowPanel();
         uiControllerPanel.ShowPanel();
         break;
-      case "girl_interaction_screen":
-        //interactionPinsBoard.HidePanel();
-        uiControllerPanel.HidePanel();
-        break;
-      case "date":
-      case "date_challenge":
+      case "battle":
         //interactionPinsBoard.HidePanel();
         uiControllerPanel.HidePanel();
         break;
@@ -164,31 +130,20 @@ public class UIController : MonoBehaviour {
 
     // set no character's turn
     if(currentPartyMember == -1) {
-      for(int i = 0; i < 3; i++) {
-        partyPeopleCards[i].ShowShade(false);
-      }
       return;
     }
 
     // position actions panel
     actionsPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f*currentPartyMember, 0f, 0f);
-
-    // turn characters UI
-    partyPeopleCards[currentPartyMember].ShowShade(false);
   }
 
   public void ShowBattleUI(bool value) {
     if(value == true) {
-      datingPeoplePanel.gameObject.SetActive(true);
-      datingPeoplePanel.canvasGroup.alpha = 1f;
+      battleInfoPanel.gameObject.SetActive(true);
+      battleInfoPanel.canvasGroup.alpha = 1f;
     } else {
-      datingPeoplePanel.gameObject.SetActive(false);
+      battleInfoPanel.gameObject.SetActive(false);
     }
-  }
-
-  public void SetHelpMessageText(string helpMessage) {
-    //helpMessageText.text = helpMessage;
-    //helpMessageText.maxVisibleCharacters = helpMessage.Length;
   }
 
 
@@ -209,15 +164,5 @@ public class UIController : MonoBehaviour {
 
   public void SetInteractionPinLocationName(int id, string locationName) {
     interactionPins[id].SetLocation(locationName);
-  }
-
-
-
-
-  public void ShowPartyPeopleCards() {
-    for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
-      partyPeopleCards[i].Initialize( BattleController.instance.partyMembers[i]);
-    }
-
   }
 }

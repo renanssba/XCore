@@ -13,7 +13,7 @@ public class StatusScreen : MonoBehaviour {
 
   [Header("- Panels -")]
   public Panel panel;
-  public PilotCard pilotCard;
+  public PilotDetailsCard pilotCard;
   public SkilltreeScreen skilltreeScreen;
 
   [Header("- Relationship Cards -")]

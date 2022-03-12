@@ -26,11 +26,8 @@ public class ActiveSkillLogic {
 [System.Serializable]
 public class Enemy : Battler {
 
-  public int level;
   public string spriteName;
   public string appearSfxName;
-
-  public int hp;
 
   public ActionSkin baseAttackSkin;
 
@@ -99,22 +96,6 @@ public class Enemy : Battler {
   }
   
   
-  public override void HealHP(int value) {
-    int initialHp = hp;
-    hp += value;
-    hp = Mathf.Min(hp, AttributeValue((int)Attributes.maxHp));
-    hp = Mathf.Max(hp, 0);
-    UIController.instance.AnimateEnemyHpChange(initialHp, hp);
-  }
-
-  public override void HealHpPercent(float fraction) {
-    HealHP((int)(AttributeValue((int)Attributes.maxHp) * fraction));
-  }
-
-  public override void TakeDamage(int value) {
-    BattleController.instance.DamageEnemyHp(value);
-  }
-
   public override void HealSp(int value){}
 
   public override bool IsDefending() {
@@ -131,18 +112,6 @@ public class Enemy : Battler {
       return 100;
     }
     return 0;
-  }
-
-  public override int MaxHP() {
-    return AttributeValue((int)Attributes.maxHp);
-  }
-
-  public override int CurrentHP() {
-    return hp;
-  }
-
-  public override int Level() {
-    return level;
   }
 
 

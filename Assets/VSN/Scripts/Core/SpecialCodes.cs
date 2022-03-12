@@ -155,7 +155,7 @@ public class SpecialCodes {
       case "#partyLength":
         return BattleController.instance.partyMembers.Length;
       case "#enemiesLength":
-        return 1; // TODO: implement
+        return BattleController.instance.enemyMembers.Length;
       case "#currentEnemyHp":
         return BattleController.instance.GetCurrentEnemy().hp;
       case "#currentEnemyExp":
@@ -164,10 +164,6 @@ public class SpecialCodes {
         return BattleController.instance.GetCurrentEnemy().moneyReward;
       case "#currentDateLocation":
         return (int)BattleController.instance.currentDateLocation;
-      case "#currentHp":
-        return BattleController.instance.hp;
-      case "#currentDamageTaken":
-        return BattleController.instance.maxHp - BattleController.instance.hp;
       case "#inventory_empty":
         return GlobalData.instance.pilots[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentRelationshipLevel":
@@ -189,9 +185,8 @@ public class SpecialCodes {
         }
         break;
       case "#currentCoupleSkillsCount":
-        Relationship rel = GlobalData.instance.GetCurrentRelationship();
-        if(rel != null) {
-          return rel.skilltree.skills.Length;
+        if(currentRelationship != null) {
+          return currentRelationship.skilltree.skills.Length;
         } else {
           return -1;
         }

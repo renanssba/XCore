@@ -116,7 +116,7 @@ public class Character : MonoBehaviour {
 
     hp -= damage;
     UpdateHPSlider();
-    if(hp<=0) {
+    if(hp <= 0) {
       Die();
     }
   }

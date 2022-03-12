@@ -104,19 +104,7 @@ public class ActionButton : MonoBehaviour {
   }
 
 
-  public void SetHelpText() {
-    
-  }
-
-  public void SetBackHelpText() {
-    if(transform.parent.GetComponent<CanvasGroup>().interactable == false) {
-      return;
-    }
-
-    string s = Lean.Localization.LeanLocalization.GetTranslationText("choices/cancel");
-    UIController.instance.SetHelpMessageText(s);
-  }
-
+  
 
   public void ClickedActionButton() {
     if(!ActionCanBeUsed()) {

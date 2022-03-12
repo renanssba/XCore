@@ -1,7 +1,7 @@
 ﻿set_var battle_is_happening false
 set_var currentDateEvent 0
 setup_date
-set_custom_battle 0
+set_custom_battle 30
 goto_script "battle"
 goto end
 /// DEBUG AUTO-BATTLE
@@ -17,12 +17,12 @@ choices "Agnes" agnes "Maya" maya "Cancelar" end
 
 waypoint agnes
 set_current_couple 0
-set_var girl_script_name "cap1_conversa_ana"
+// set_var girl_script_name "cap1_conversa_ana"
 goto girl_menu
 
 waypoint maya
 set_current_couple 1
-set_var girl_script_name "cap1_conversa_beatrice"
+// set_var girl_script_name "cap1_conversa_beatrice"
 set_var conhece_beatrice true
 // change_person_sprite 2 6
 goto girl_menu

@@ -333,12 +333,6 @@ public class Utils {
         continue;
       }
 
-      if(condition.StartsWith("limit_uses_in_date")) {
-        if(user.CheckSkillUsesInDate(usedSkill.id) >= int.Parse(conditionArgument)) {
-          return false;
-        }
-      }
-
       if(condition.StartsWith("limit_uses_in_battle")) {
         if(user.CheckSkillUsesInBattle(usedSkill.id) >= int.Parse(conditionArgument)) {
           return false;

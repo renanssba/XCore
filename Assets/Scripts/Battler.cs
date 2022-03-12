@@ -5,19 +5,23 @@ using UnityEngine;
 
 [System.Serializable]
 public abstract class Battler {
+  [Header("- Identity -")]
   public string nameKey;
   public int id;
+
+  [Header("- Attributes -")]
   public int[] attributes;
+  public int hp;
+
+
+  [Header("- Status Conditions -")]
   public List<StatusCondition> statusConditions;
   
   public List<int> usedSkillsInBattle;
-  public List<int> usedSkillsInDate;
-
-  public Character character;
 
 
   public Battler() {
-    attributes = new int[4];
+    attributes = new int[5];
     statusConditions = new List<StatusCondition>();
   }
 
@@ -39,9 +43,6 @@ public abstract class Battler {
   }
 
   public bool CanExecuteAction(TurnActionType action) {
-    if(IsSpotted() && action != TurnActionType.idle) {
-      return false;
-    }
     return true;
   }
 
@@ -85,10 +86,21 @@ public abstract class Battler {
 
   public abstract float GetAttributeEffectivity(Attributes att);
 
-  public abstract void HealHP(int value);
-  public abstract void HealHpPercent(float fraction);
-  public abstract void TakeDamage(int value);
-  
+  public virtual void HealHP(int value) {
+    hp += value;
+    hp = Mathf.Min(hp, AttributeValue((int)Attributes.maxHp));
+    hp = Mathf.Max(hp, 0);
+    UIController.instance.UpdateBattleUI();
+  }
+
+  public virtual void HealHpPercent(float fraction) {
+    HealHP((int)(AttributeValue((int)Attributes.maxHp) * fraction));
+  }
+
+  public virtual void TakeDamage(int value) {
+    HealHP(-value);
+  }
+
   public abstract void HealSp(int value);
 
   public abstract bool IsDefending();
@@ -101,26 +113,24 @@ public abstract class Battler {
     return 0;
   }
 
-  public virtual bool IsSpotted() { return false; }
+  public virtual int MaxHP() {
+    return AttributeValue((int)Attributes.maxHp);
+  }
 
-  public abstract int MaxHP();
-
-  public abstract int CurrentHP();
+  public virtual int CurrentHP() {
+    return hp;
+  }
 
   public virtual int MaxSP() { return 0; }
 
   public virtual int CurrentSP() { return 0; }
 
-  public abstract int Level();
-
   public void ClearAllSkillsUsage() {
     ClearSkillUsesInBattle();
-    ClearSkillUsesInDate();
   }
 
   public void RegisterUsedSkill(int skillId) {
     usedSkillsInBattle.Add(skillId);
-    usedSkillsInDate.Add(skillId);
   }
 
   public int CheckSkillUsesInBattle(int skillId) {
@@ -142,22 +152,8 @@ public abstract class Battler {
     return 1000;
   }
 
-  public int CheckSkillUsesInDate(int skillId) {
-    int count = 0;
-    foreach(int used in usedSkillsInDate) {
-      if(skillId == used) {
-        count++;
-      }
-    }
-    return count;
-  }
-
   public void ClearSkillUsesInBattle() {
     usedSkillsInBattle = new List<int>();
-  }
-
-  public void ClearSkillUsesInDate() {
-    usedSkillsInDate = new List<int>();
   }
 
 

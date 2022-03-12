@@ -30,10 +30,6 @@ public class BattleController : MonoBehaviour {
   public List<StatusCondition> allStatusConditions;
   public TextAsset statusConditionsFile;
 
-  [Header("- HP -")]
-  public int maxHp = 10;
-  public int hp = 10;
-
   [Header("- Battle Members -")]
   public Pilot[] partyMembers;
   public Enemy[] enemyMembers;
@@ -44,10 +40,13 @@ public class BattleController : MonoBehaviour {
   public Item[] selectedItems;
   public SkillTarget[] selectedTargetPartyId;
 
+  [Header("- Date Location -")]
   public DateLocation currentDateLocation;
 
+  [Header("- Actor Prefabs -")]
   public GameObject defaultEnemyPrefab;
 
+  [Header("- Particle Prefabs -")]
   public GameObject damageParticlePrefab;
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
@@ -61,8 +60,6 @@ public class BattleController : MonoBehaviour {
 
   public float damageShineTime;
   public float damageShineAlpha;
-
-  public Inventory usedCelestialItems;
 
 
   public void Awake() {
@@ -92,29 +89,29 @@ public class BattleController : MonoBehaviour {
     }
     partyMembers = heroesParty.ToArray();
 
+    SetDateEnemiesAndLocation(enemyName);
+
+
+    selectedActionType = new TurnActionType[partyMembers.Length];
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
-    selectedActionType = new TurnActionType[partyMembers.Length];
     for(int i=0; i< selectedActionType.Length; i++) {
       selectedActionType[i] = TurnActionType.idle;
     }
     selectedTargetPartyId = new SkillTarget[partyMembers.Length];
-    usedCelestialItems = new Inventory();
-
-    maxHp = GlobalData.instance.GetCurrentRelationship().GetMaxHp();
 
     FullHealParty();
     FullHealEnemies();
 
     ClearSkillsUsageRegistry();
     //UIController.instance.ShowPartyPeopleCards();
-    UIController.instance.UpdateBattleUI();
 
+    
     VsnSaveSystem.SetVariable("battle_is_happening", true);
-
-    SetDateEnemiesAndLocation(enemyName);
     VsnSaveSystem.SetVariable("currentDateEvent", 0);
     TheaterController.instance.InitializeEnemyHp();
+
+    UIController.instance.UpdateBattleUI();
   }
 
   public bool IsBattleHappening() {
@@ -133,21 +130,15 @@ public class BattleController : MonoBehaviour {
     // remove bg effect
     TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
 
-    // recover used celestial items
-    foreach(ItemListing itemToRecharge in usedCelestialItems.itemListings) {
-      Inventory ivt = GlobalData.instance.pilots[0].inventory;
-      ivt.AddItem(itemToRecharge.id, itemToRecharge.amount);
-    }
-
     GameController.instance.EndBattle();
   }
 
 
   public void FullHealParty() {
-    HealPartyHp(maxHp);
-    RemovePartyStatusConditions();
     for(int i=0; i < partyMembers.Length; i++) {
-      partyMembers[i].HealSp(partyMembers[i].GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
+      partyMembers[i].RemoveAllStatusConditions();
+      partyMembers[i].HealHP(partyMembers[i].AttributeValue((int)Attributes.maxHp));
+      partyMembers[i].HealSp(partyMembers[i].GetMaxSp());
     }
   }
 
@@ -162,23 +153,6 @@ public class BattleController : MonoBehaviour {
   public void ClearSkillsUsageRegistry() {
     foreach(Pilot p in partyMembers) {
       p.ClearAllSkillsUsage();
-    }
-  }
-
-  public void HealPartyHp(int value) {
-    for(int i = 0; i < partyMembers.Length; i++) {
-      partyMembers[i].HealHP(partyMembers[i].AttributeValue((int)Attributes.maxHp));
-    }
-    //UIController.instance.AnimatePartyHpChange(initialHp, hp);
-  }
-
-  public void HealEnemyHp(int value) {
-    GetCurrentEnemy().HealHP(GetCurrentEnemy().AttributeValue((int)Attributes.maxHp));
-  }
-
-  public void RemovePartyStatusConditions() {
-    for(int i = 0; i < partyMembers.Length; i++) {
-      partyMembers[i].RemoveAllStatusConditions();
     }
   }
 
@@ -212,14 +186,11 @@ public class BattleController : MonoBehaviour {
 
     switch(selectedActionType[currentPlayerTurn]) {
       case TurnActionType.useItem:
-        WaitToSelectTarget(selectedActionType[currentPlayerTurn], selectedItems[currentPlayerTurn].range, currentPlayerTurn);
+        WaitToSelectTarget(selectedItems[currentPlayerTurn].range, currentPlayerTurn);
         return;
       case TurnActionType.useSkill:
-        WaitToSelectTarget(selectedActionType[currentPlayerTurn], selectedSkills[currentPlayerTurn].range, currentPlayerTurn);
+        WaitToSelectTarget(selectedSkills[currentPlayerTurn].range, currentPlayerTurn);
         return;
-      case TurnActionType.idle:
-        //RecoverStealth(stealthRecoveredWhenIdle);
-        break;
     }
 
     HideActionButtons();
@@ -231,14 +202,9 @@ public class BattleController : MonoBehaviour {
     UIController.instance.actionsPanel.EndActionSelect();
   }
 
-  public void WaitToSelectTarget(TurnActionType actionType, ActionRange range, int currentPlayerTurn) {
+  public void WaitToSelectTarget(ActionRange range, int currentPlayerTurn) {
     UIController.instance.actionsPanel.EndActionSelect();
-    if(actionType == TurnActionType.useItem) {
-      UIController.instance.SetHelpMessageText(Lean.Localization.LeanLocalization.GetTranslationText("action/target/item"));
-    } else if(actionType == TurnActionType.useSkill) {
-      UIController.instance.SetHelpMessageText(Lean.Localization.LeanLocalization.GetTranslationText("action/target/skill"));
-    }
-
+    
     UIController.instance.selectTargetPanel.SetActive(true);
     switch(range) {
       case ActionRange.self:
@@ -349,11 +315,6 @@ public class BattleController : MonoBehaviour {
 
     // defender damage taken multiplier
     damage *= defender.DamageTakenMultiplier(usedSkill.damageAttribute);
-
-    // level damage scaling
-    //damage *= LevelModifier(attacker.Level(), defender.Level());
-
-    Debug.LogWarning("LEVEL MODIFIER: " + LevelModifier(attacker.Level(), defender.Level()));
 
     // defend?
     damage /= (defender.IsDefending() ? 2f : 1f);
@@ -659,9 +620,6 @@ public class BattleController : MonoBehaviour {
 
     // spend item
     Inventory ivt = GlobalData.instance.pilots[0].inventory;
-    if(usedItem.HasTag("celestial")) {
-      usedCelestialItems.AddItem(usedItem.id, 1);
-    }
     ivt.ConsumeItem(usedItem.id, 1);
 
 
@@ -777,41 +735,6 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public void ShowChallengeResult(bool success) {
-    Vector3 v = damageParticlePrefab.transform.localPosition;
-    GameObject newParticle = Instantiate(damageParticlePrefab, new Vector3(transform.position.x, v.y, v.z), Quaternion.identity, transform);
-    //newParticle.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-    newParticle.GetComponent<JumpingParticle>().duration = 1f;
-    if(success == true) {
-      newParticle.GetComponent<JumpingParticle>().jumpForce = 0.01f;
-    } else {
-      newParticle.GetComponent<JumpingParticle>().jumpForce = 0;
-    }
-    newParticle.GetComponent<TextMeshPro>().text = success ?
-      Lean.Localization.LeanLocalization.GetTranslationText("date/success_message") :
-      Lean.Localization.LeanLocalization.GetTranslationText("date/failure_message");
-    newParticle.GetComponent<TextMeshPro>().color = success ? greenColor : redColor;
-    newParticle.GetComponentInChildren<SpriteRenderer>().gameObject.SetActive(false);
-  }
-
-
-
-  public void DamageEnemyHp(int dmg) {
-    int initialHp = GetCurrentEnemy().hp;
-    GetCurrentEnemy().hp -= dmg;
-    GetCurrentEnemy().hp = Mathf.Max(GetCurrentEnemy().hp, 0);
-    UIController.instance.AnimateEnemyHpChange(initialHp, GetCurrentEnemy().hp);
-  }
-
-  public void DamagePartyHp(int dmg) {
-    int initialHp = hp;
-    hp -= dmg;
-    hp = Mathf.Max(hp, 0);
-    UIController.instance.AnimatePartyHpChange(initialHp, hp);
-  }
-
-
   public void EndTurn() {
     foreach(Pilot p in partyMembers) {
       p.EndTurn();
@@ -826,7 +749,7 @@ public class BattleController : MonoBehaviour {
 
   public void SetCustomBattle(int enemyId) {
     currentDateLocation = DateLocation.desert;
-    enemyMembers = new Enemy[] {allEnemies[enemyId]};
+    enemyMembers = new Enemy[] { GetEnemyById(enemyId) };
     FullHealParty();
   }
 
@@ -837,6 +760,15 @@ public class BattleController : MonoBehaviour {
   public Enemy GetEnemyByString(string nameKey) {
     foreach(Enemy enemy in allEnemies) {
       if(enemy.nameKey == nameKey) {
+        return enemy;
+      }
+    }
+    return null;
+  }
+
+  public Enemy GetEnemyById(int id) {
+    foreach(Enemy enemy in allEnemies) {
+      if(enemy.id == id) {
         return enemy;
       }
     }
@@ -907,7 +839,6 @@ public class BattleController : MonoBehaviour {
   public void LoadAllEnemies() {
     allEnemies = new List<Enemy>();
 
-    string[] loadedTags, loadedImmunities;
     ActionSkin actionSkin;
     SpreadsheetData spreadsheetData = SpreadsheetReader.ReadTabSeparatedFile(enemiesFile, 1);
 
@@ -915,32 +846,32 @@ public class BattleController : MonoBehaviour {
       Debug.LogWarning("Loading enemy: " + dic["name key"]);
 
       Enemy loadedEnemy = JsonUtility.FromJson<Enemy>("{\"activeSkillLogics\" :" + dic["active skills logic"] + "}");
-      loadedTags = Utils.SeparateTags(dic["tags"]);
-      loadedImmunities = Utils.SeparateTags(dic["status immunities"]);
-
-
-      actionSkin = new ActionSkin();
-      actionSkin.sfxName = dic["base attack sfx"];
-      actionSkin.animation = GetSkillAnimationByString(dic["base attack animation"]);
-      actionSkin.animationArgument = Utils.GetStringArgument(dic["base attack animation"]);
 
       loadedEnemy.id = int.Parse(dic["id"]);
       loadedEnemy.nameKey = dic["name key"];
-      loadedEnemy.level = int.Parse(dic["level"]);
-      loadedEnemy.spriteName = dic["sprite name"];
-      loadedEnemy.baseAttackSkin = actionSkin;
-      loadedEnemy.appearSfxName = dic["appear sfx"];
-      loadedEnemy.expReward = int.Parse(dic["exp reward"]);
-      loadedEnemy.moneyReward = int.Parse(dic["money reward"]);
+
       loadedEnemy.attributes = new int[]{
         int.Parse(dic["maxHp"]),
         int.Parse(dic["movementRange"]),
         int.Parse(dic["attack"]),
         int.Parse(dic["agility"]),
-        int.Parse(dic["dodgeRate"])};
+        int.Parse(dic["dodgeRate"]) };
+
+      loadedEnemy.statusImmunities = Utils.SeparateTags(dic["status immunities"]);
       loadedEnemy.passiveSkills = Utils.SeparateInts(dic["passive skills"]);
-      loadedEnemy.statusImmunities = loadedImmunities;
-      loadedEnemy.tags = loadedTags;
+      loadedEnemy.expReward = int.Parse(dic["exp reward"]);
+      loadedEnemy.moneyReward = int.Parse(dic["money reward"]);
+
+      loadedEnemy.spriteName = dic["sprite name"];
+
+      actionSkin = new ActionSkin();
+      actionSkin.sfxName = dic["base attack sfx"];
+      actionSkin.animation = GetSkillAnimationByString(dic["base attack animation"]);
+      actionSkin.animationArgument = Utils.GetStringArgument(dic["base attack animation"]);
+      loadedEnemy.baseAttackSkin = actionSkin;
+
+      loadedEnemy.appearSfxName = dic["appear sfx"];
+      loadedEnemy.tags = Utils.SeparateTags(dic["tags"]);
 
       allEnemies.Add(loadedEnemy);
     }

@@ -77,14 +77,14 @@ public class RoutineController : MonoBehaviour {
         VsnController.instance.state = ExecutionState.STOPPED;
       }
     }
-    if(Input.GetKeyDown(KeyCode.B) && Input.GetKey(KeyCode.LeftShift)) {
-      Enemy enemy = BattleController.instance.GetCurrentEnemy();
-      if(enemy.hp > 1) {
-        BattleController.instance.DamageEnemyHp(enemy.hp - 1);
-      } else {
-        enemy.HealHP(enemy.AttributeValue((int)Attributes.maxHp));
-      }
-    }
+    //if(Input.GetKeyDown(KeyCode.B) && Input.GetKey(KeyCode.LeftShift)) {
+    //  Enemy enemy = BattleController.instance.GetCurrentEnemy();
+    //  if(enemy.hp > 1) {
+    //    BattleController.instance.DamageEnemyHp(enemy.hp - 1);
+    //  } else {
+    //    enemy.HealHP(enemy.AttributeValue((int)Attributes.maxHp));
+    //  }
+    //}
     //if(Input.GetKeyDown(KeyCode.H) && Input.GetKey(KeyCode.LeftShift)) {
     //  if(BattleController.instance.hp < BattleController.instance.maxHp) {
     //    BattleController.instance.HealPartyHp(BattleController.instance.maxHp);

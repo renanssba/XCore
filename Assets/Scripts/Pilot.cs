@@ -11,15 +11,6 @@ public enum Attributes {
   dodgeRate = 4
 }
 
-public enum PersonState {
-  unrevealed,
-  available,
-  shipped
-}
-
-public enum PersonId {
-  main = 0
-}
 
 
 [System.Serializable]
@@ -28,10 +19,9 @@ public class Pilot : Battler {
   public bool isMale;
 
   protected int initialMaxSp;
-  public int sp;
   public int skillPoints;
 
-  public int hp;
+  public int sp;
 
   public Inventory inventory;
   public Inventory giftsReceived;
@@ -44,7 +34,7 @@ public class Pilot : Battler {
     giftsReceived.owner = this;
     initialMaxSp = 4;
     sp = 4;
-    attributes = new int[] { 1, 1, 1, 1 };
+    attributes = new int[] { 1, 1, 1, 1, 1 };
   }
 
 
@@ -62,55 +52,31 @@ public class Pilot : Battler {
     return true;
   }
 
-  public override bool IsSpotted() {
-    return CurrentStatusConditionStacks("spotted") > 0;
-  }
-
-  public override int MaxHP() {
-    return AttributeValue((int)Attributes.maxHp);
-  }
-
-  public override int CurrentHP() {
-    return hp;
-  }
-
   public override int MaxSP() {
-    return GetMaxSp(GlobalData.instance.GetCurrentRelationship().id);
+    return GetMaxSp();
   }
 
   public override int CurrentSP() {
     return sp;
   }
 
-  public override int Level() {
-    return GlobalData.instance.GetCurrentRelationship().level;
-  }
 
-
-  public int GetMaxSp(int relationshipId) {
-    Relationship relationship = GlobalData.instance.relationships[relationshipId];
+  public int GetMaxSp() {
     int count = initialMaxSp;
-    Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
+    //Skill[] skills = relationship.GetPassiveSkillsByCharacter(isMale);
 
-    if(relationship.level >= 4) {
-      count += 3;
-    }
-    if(relationship.level >= 6) {
-      count += 5;
-    }
-
-    for(int i = 0; i < skills.Length; i++) {
-      if(skills[i].specialEffect == SkillSpecialEffect.raiseMaxSp) {
-        count += (int)skills[i].effectPower;
-      }
-    }
+    //for(int i = 0; i < skills.Length; i++) {
+    //  if(skills[i].specialEffect == SkillSpecialEffect.raiseMaxSp) {
+    //    count += (int)skills[i].effectPower;
+    //  }
+    //}
     return count;
   }
 
 
   public override void HealSp(int value) {
     sp += value;
-    sp = Mathf.Min(sp, GetMaxSp(GlobalData.instance.GetCurrentRelationship().id));
+    sp = Mathf.Min(sp, GetMaxSp());
     sp = Mathf.Max(sp, 0);
     UIController.instance.UpdateBattleUI();
   }
@@ -130,7 +96,6 @@ public class Pilot : Battler {
 
   public override void SpendSp(int value) {
     sp -= value;
-    //sp = Mathf.Min(sp, maxSp);
     sp = Mathf.Max(sp, 0);
     UIController.instance.UpdateBattleUI();
   }
@@ -145,10 +110,10 @@ public class Pilot : Battler {
     return skills.ToArray();
   }
 
-  public Skill[] GetAllCharacterSpecificSkills(int relationshipId) {
-    Relationship relationship = GlobalData.instance.relationships[relationshipId];
-
-    return relationship.GetAllCharacterSpecificSkills(isMale);
+  public Skill[] GetAllCharacterSpecificSkills() {
+    return new Skill[0];
+    //Relationship relationship = GlobalData.instance.relationships[relationshipId];
+    //return relationship.GetAllCharacterSpecificSkills(isMale);
   }
 
 
@@ -170,21 +135,6 @@ public class Pilot : Battler {
     return TheaterController.instance.GetActorByBattlingCharacter(this);
   }
   
-
-  public override void HealHP(int value) {
-    hp += value;
-    hp = Mathf.Min(sp, AttributeValue((int)Attributes.maxHp));
-    hp = Mathf.Max(sp, 0);
-    UIController.instance.UpdateBattleUI();
-  }
-
-  public override void HealHpPercent(float fraction) {
-    HealHP((int)(BattleController.instance.maxHp * fraction));
-  }
-
-  public override void TakeDamage(int value) {
-    BattleController.instance.DamagePartyHp(value);
-  }
 
   public Relationship[] GetRelationships() {
     /// TODO: Implement
@@ -210,8 +160,6 @@ public class Relationship {
   public Skilltree skilltree;
 
   public static readonly int[] levelUpCosts = {20, 40, 60, 100, 180, 240, 340, 500, 600, 800};
-  public static readonly int[] childrenNumber = {5, 4, 6};
-  public const int skillTreeSize = 13;
 
   public List<string> talkedDialogs;
 
@@ -304,16 +252,6 @@ public class Relationship {
 
     for(int i = 0; i < skilltree.skills.Length; i++) {
       AddActiveSkillToList(skills, i);
-    }
-    return skills.ToArray();
-  }
-
-  public Skill[] GetAllCharacterSpecificSkills(bool isBoy) {
-    List<Skill> skills = new List<Skill>();
-
-    for(int i=0; i<skilltree.skills.Length; i++) {
-      AddActiveSkillToList(skills, i);
-      AddPassiveSkillToList(skills, i);
     }
     return skills.ToArray();
   }

@@ -38,7 +38,6 @@ public class VsnCharacterData {
 public class ResourcesManager : MonoBehaviour {
   [Header("- Character Sprites -")]
   public Sprite[] faceSprites;
-  public Sprite[] fixedCharactersFaceSprites;
   public Sprite[] tacticalFaceSprites;
   public List<CharacterSpriteCollection> characterSpritesCollections;
 

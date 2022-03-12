@@ -14,7 +14,7 @@ theater_animation "setup_battle"
 // move_camera "far_view" 0
 move_camera "battle_view" 0
 
-set_screen "date"
+set_screen "battle"
 enable_input true
 set_current_character_turn -1
 
@@ -25,17 +25,9 @@ fade_in 0.5
 /// EXECUTE THE FIGHT
 // for currentDateEvent #dateLength
   // set_var currentBattleTurn 0
-
-  // play_music "" "XCore1 Boss Theme"
   wait 0.5
 
-
-  // goto_script "check_passive_triggers" "enemy_appears"
-
-
   // waypoint start_new_turn
-
-  // add_var currentBattleTurn 1
   goto_script "check_passive_triggers" "turn_started"
 
   // PARTY MEMBERS receive effects from conditions (like take poison damage)
@@ -53,14 +45,10 @@ fade_in 0.5
   end_turn
 
   goto_script "check_passive_triggers" "before_death_checks"
-  if #currentHp <= 0
-    goto end
-  endif
-
-
-  // if opponent is defeated, go to new event
-  // if #currentEnemyHp <= 0
-    // goto end_battle
+  
+  /// TODO: check if all the party members are dead and end battle
+  // if #currentHp <= 0
+    // goto end
   // endif
 
 

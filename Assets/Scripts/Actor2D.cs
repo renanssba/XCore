@@ -101,8 +101,6 @@ public class Actor2D : MonoBehaviour {
       //} else {
       //  renderers[2].gameObject.SetActive(false);
       //}   
-
-      SetAuraVisibility();
     } else {
       gameObject.SetActive(false);
     }
@@ -136,34 +134,6 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public void SetAuraVisibility() {
-    //Debug.LogWarning("SETTING AURA VISIBILITY");
-    //if(battler.CurrentStatusConditionStacks("encouraged") > 0) {
-    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.maxHp]);
-    //} else if(battler.CurrentStatusConditionStacks("focused") > 0) {
-    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.attack]);
-    //} else if(battler.CurrentStatusConditionStacks("inspired") > 0) {
-    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.dodge]);
-    //} else if(battler.CurrentStatusConditionStacks("blessed") > 0) {
-    //  ShowAura(ResourcesManager.instance.attributeColor[(int)Attributes.endurance]);
-    //} else {
-    //  //Debug.LogWarning("SETTING AURA VISIBILITY TO FALSE");
-    //  buffAuraRenderers[0].gameObject.SetActive(false);
-    //}
-  }
-
-  public void ShowAura(Color c) {
-    c = 2f * c;
-    Debug.LogWarning("showing aura: " + c);
-
-    ParticleSystem.MainModule settings = particleSystem.main;
-    settings.startColor = new ParticleSystem.MinMaxGradient(c);
-
-    buffAuraRenderers[0].color = c;
-    buffAuraRenderers[1].color = c;
-    buffAuraRenderers[0].gameObject.SetActive(true);
-  }
-
   public void SetEnemy(Enemy currentEvent) {
     enemy = currentEvent;
     battler = currentEvent;
@@ -171,10 +141,6 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetActorGraphics(string spriteName) {
-    //if(string.IsNullOrEmpty(spriteName)){
-    //  gameObject.SetActive(false);
-    //  return;
-    //}
     if(gameObject.name.Contains(spriteName)) {
       return;
     }
@@ -188,21 +154,6 @@ public class Actor2D : MonoBehaviour {
           return;
         }
       }
-      //Debug.LogWarning("Setting enemy sprite to: " + actorName);
-
-      //CharacterSpriteCollection spriteCollection = ResourcesManager.instance.GetCharacterSpriteCollection(actorName);
-
-      //renderers[0].sprite = spriteCollection.baseBody;
-      //renderers[0].flipX = true;
-
-      //if(TheaterController.instance.bgRenderer.sprite.name.Contains("school")) {
-      //  renderers[1].sprite = spriteCollection.schoolClothes;
-      //} else {
-      //  renderers[1].sprite = spriteCollection.casualClothes;
-      //}
-      //renderers[1].gameObject.SetActive(true);
-      //renderers[1].flipX = true;
-      //shadowRenderer.transform.localScale = Vector3.one;
     } else {
       renderers[0].sprite = LoadSprite("Enemies/" + spriteName);
       if(renderers[0].GetComponent<SpriteMask>() != null) {
@@ -227,7 +178,7 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void SetChooseActionMode(bool value) {
-    animator.SetBool("Choosing Action", value && !battler.IsSpotted());
+    animator.SetBool("Choosing Action", value);
     choosingActionIndicator.SetActive(value);
   }
 

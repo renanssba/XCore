@@ -26,6 +26,7 @@ public class TheaterController : MonoBehaviour {
 
   public Camera mainCamera;
 
+  [Header("- Actor Positions -")]
   public Vector3 firstPosition;
   public Vector3 secondPosition;
   public Vector3 thirdPosition;
@@ -48,6 +49,7 @@ public class TheaterController : MonoBehaviour {
   public GameObject[] bgEffectPrefabs;
   public GameObject overlayPrefab;
 
+  [Header("- Background -")]
   public SpriteRenderer bgRenderer;
   public SpriteRenderer bgRendererFront;
   public GameObject bgEffect;
@@ -266,59 +268,6 @@ public class TheaterController : MonoBehaviour {
     }
     return null;
   }
-
-
-  //public void SetupGirlWaitingForBoy() {
-  //  Vector3 distance = new Vector3(3f, 0f, 0f);
-
-  //  ClearTheater();
-  //  ClearBattle();
-
-  //  partyActors[0].transform.localPosition = secondPosition - distance;
-  //  partyActors[1].transform.localPosition = firstPosition;
-  //  partyActors[2].transform.localPosition = thirdPosition - distance;
-
-  //  if(GlobalData.instance.CurrentBoy() != null) {
-  //    partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
-  //    partyActors[0].FaceRight();
-  //  }
-  //  if(GlobalData.instance.CurrentGirl() != null) {
-  //    partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
-  //    partyActors[1].FaceLeft();
-  //    partyActors[1].gameObject.SetActive(true);
-  //  } else {
-  //    partyActors[1].gameObject.SetActive(false);
-  //  }
-
-  //  //angelActor.SetCharacter(GlobalData.instance.people[3]);
-  //  partyActors[2].FaceRight();
-  //}
-
-  //public void SetupBoyWaitingForGirl() {
-  //  Vector3 distance = new Vector3(3f, 0f, 0f);
-
-  //  ClearTheater();
-  //  ClearBattle();
-
-  //  partyActors[0].transform.localPosition = firstPosition;
-  //  partyActors[1].transform.localPosition = secondPosition - distance;
-  //  partyActors[2].transform.localPosition = thirdPosition - distance;
-
-  //  if(GlobalData.instance.CurrentBoy() != null) {
-  //    partyActors[0].SetCharacter(GlobalData.instance.CurrentBoy());
-  //    partyActors[0].FaceLeft();
-  //  }
-  //  if(GlobalData.instance.CurrentGirl() != null) {
-  //    partyActors[1].SetCharacter(GlobalData.instance.CurrentGirl());
-  //    partyActors[1].FaceRight();
-  //    partyActors[1].gameObject.SetActive(true);
-  //  } else {
-  //    partyActors[1].gameObject.SetActive(false);
-  //  }
-
-  //  //partyActors[2].SetCharacter(GlobalData.instance.people[3]);
-  //  partyActors[2].FaceRight();
-  //}
 
 
 

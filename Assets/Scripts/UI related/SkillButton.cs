@@ -7,17 +7,20 @@ using UnityEngine.EventSystems;
 
 public class SkillButton : MonoBehaviour {
 
+  [Header("- References -")]
+  public Pilot pilot;
+  public Skill skill;
+
+  [Header("- Visuals -")]
+  public Image bg;
   public Image skillIcon;
   public TextMeshProUGUI skillName;
-  public PilotCard pilotCard;
-  public Pilot person;
-  public Skill skill;
-  public Image bg;
+  public PilotDetailsCard pilotCard;
 
 
-  public void Initialize(PilotCard argPersonCard, Skill argskill) {
+  public void Initialize(PilotDetailsCard argPersonCard, Skill argskill) {
     pilotCard = argPersonCard;
-    person = pilotCard.person;
+    pilot = ((Pilot)pilotCard.character);
     skill = argskill;
     UpdateUI();
   }
