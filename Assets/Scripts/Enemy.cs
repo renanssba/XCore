@@ -10,11 +10,6 @@ public enum RewardType {
 }
 
 
-public enum DateLocation {
-  desert,
-  generic
-}
-
 [System.Serializable]
 public class ActiveSkillLogic {
   public int skillId;

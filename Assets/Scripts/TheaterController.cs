@@ -282,7 +282,6 @@ public class TheaterController : MonoBehaviour {
     foreach(Pilot partyMember in BattleController.instance.partyMembers) {
       partyMember.ClearSkillUsesInBattle();
     }
-    BattleController.instance.FullHealEnemies();
 
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = enemyPosition;
@@ -321,7 +320,7 @@ public class TheaterController : MonoBehaviour {
     foreach(Pilot partyMember in BattleController.instance.partyMembers) {
       partyMember.ClearSkillUsesInBattle();
     }
-    BattleController.instance.FullHealEnemies();
+    currentEnemy.ClearSkillUsesInBattle();
 
     enemyActor.gameObject.SetActive(true);
     enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);

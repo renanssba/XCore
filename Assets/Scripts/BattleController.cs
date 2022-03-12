@@ -12,6 +12,12 @@ public class SkillsUsedEntry {
 }
 
 
+public enum DateLocation {
+  desert,
+  generic
+}
+
+
 public class BattleController : MonoBehaviour {
   public static BattleController instance;
 
@@ -90,7 +96,6 @@ public class BattleController : MonoBehaviour {
     /// set location
     currentDateLocation = DateLocation.desert;
 
-
     selectedActionType = new TurnActionType[partyMembers.Length];
     selectedSkills = new Skill[partyMembers.Length];
     selectedItems = new Item[partyMembers.Length];
@@ -128,14 +133,6 @@ public class BattleController : MonoBehaviour {
       partyMembers[i].RemoveAllStatusConditions();
       partyMembers[i].HealHP(partyMembers[i].AttributeValue(Attributes.maxHp));
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp());
-    }
-  }
-
-  public void FullHealEnemies() {
-    foreach(Enemy currentEnemy in enemyMembers) {
-      currentEnemy.hp = currentEnemy.AttributeValue(Attributes.maxHp);
-      currentEnemy.RemoveAllStatusConditions();
-      currentEnemy.ClearAllSkillsUsage();
     }
   }
 
@@ -564,8 +561,6 @@ public class BattleController : MonoBehaviour {
     Actor2D userActor = TheaterController.instance.GetActorByIdInParty(itemUserId);
     Actor2D targetActor = TheaterController.instance.GetActorByIdInParty(targetId);
     Battler target = targetActor.battler;
-
-    //yield return ShowUseItemMessage(userActor.battler.GetName(), usedItem.GetPrintableName());
 
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);

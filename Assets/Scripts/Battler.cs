@@ -91,6 +91,7 @@ public abstract class Battler {
   public abstract float GetAttributeEffectivity(Attributes att);
 
   public virtual void HealHP(int value) {
+    //Debug.Log("Healed "+nameKey+" for "+value+" hp!");
     hp += value;
     hp = Mathf.Min(hp, AttributeValue(Attributes.maxHp));
     hp = Mathf.Max(hp, 0);
