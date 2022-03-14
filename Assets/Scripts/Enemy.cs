@@ -157,25 +157,6 @@ public class Enemy : Battler {
   }
 
 
-
-
-  public void UpdateStatusConditions() {
-    ClearStatusConditionIcons();
-
-    for(int i = 0; i < statusConditions.Count; i++) {
-      GameObject newObj = MonoBehaviour.Instantiate(UIController.instance.statusConditionIconPrefab, UIController.instance.enemyStatusConditionsContent);
-      newObj.GetComponent<StatusConditionIcon>().Initialize(statusConditions[i]);
-    }
-  }
-
-  public void ClearStatusConditionIcons() {
-    int childCount = UIController.instance.enemyStatusConditionsContent.transform.childCount;
-
-    for(int i = 0; i < childCount; i++) {
-      MonoBehaviour.Destroy(UIController.instance.enemyStatusConditionsContent.transform.GetChild(i).gameObject);
-    }
-  }
-
   public bool HasTag(string tagToSearch) {
     return Utils.TagIsInArray(tagToSearch, tags);
   }

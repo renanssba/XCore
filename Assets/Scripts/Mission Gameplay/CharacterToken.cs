@@ -27,18 +27,19 @@ public enum CombatTeam {
 public class CharacterToken : MonoBehaviour {
   public CharacterId id;
 
-  [Header("- My Battler -")]
-  public Battler battler;
-
   [Header("- Team -")]
   public CombatTeam combatTeam = CombatTeam.enemy;
 
-  [Header("- HP Slider -")]
+  [Header("- Visuals -")]
+  public SpriteRenderer renderer;
   public GameObject hpSlider;
 
   [Header("- Effect Particles -")]
   public GameObject damageParticlePrefab;
   public GameObject missParticlePrefab;
+
+  [Header("- My Battler -")]
+  public Battler battler;
 
 
   public void Start() {
@@ -53,6 +54,7 @@ public class CharacterToken : MonoBehaviour {
 
     Debug.LogWarning("character " + name + " registering");
     GameController.instance.RegisterCharacter(this);
+    //renderer.sprite = ResourcesManager.instance
     UpdateHPSlider();
     SnapToTile();
   }

@@ -19,6 +19,7 @@ public class BattlerInfoPanel : MonoBehaviour {
 
   [Header("- Status Conditions -")]
   public Transform statusConditionsContent;
+  public GameObject statusConditionIconPrefab;
 
 
   public virtual void Initialize(Battler myBattler) {
@@ -72,7 +73,7 @@ public class BattlerInfoPanel : MonoBehaviour {
     statusConditionsContent.ClearChildren();
 
     for(int i = 0; i < character.statusConditions.Count; i++) {
-      GameObject newObj = Instantiate(UIController.instance.statusConditionIconPrefab, statusConditionsContent);
+      GameObject newObj = Instantiate(statusConditionIconPrefab, statusConditionsContent);
       newObj.GetComponent<StatusConditionIcon>().Initialize(character.statusConditions[i]);
     }
   }

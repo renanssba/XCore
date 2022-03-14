@@ -25,7 +25,7 @@ goto_script "check_passive_triggers" "battle_started"
 
 // PARTY MEMBERS receive effects from conditions (like take poison damage)
 // for currentBattlerTurn #battlersLength
-  // for currentStatusCondition #currentPlayerStatusConditionsCount
+  // for currentStatusCondition #currentBattlerStatusConditionsCount
     // activate_status_condition_effect currentBattlerTurn currentStatusCondition
   // endfor
 // endfor
@@ -39,12 +39,6 @@ goto_script "check_passive_triggers" "battle_started"
 
 // goto_script "check_passive_triggers" "before_death_checks"
 
-/// TODO: check if all the party members are dead and end battle
-// if #currentHp <= 0
-  // goto end
-// endif
-
-
 // character turns
 for currentBattlerTurn #battlersLength
 
@@ -57,16 +51,18 @@ for currentBattlerTurn #battlersLength
   goto_script "check_passive_triggers" "after_action"
   wait 0.5
   
-  // if enemy is defeated, end battle
-  if #currentEnemyHp <= 0
+  // if all enemies or all heroes are defeated, end battle
+  if #enemiesAlive <= 0
     goto end
-    goto_script "check_passive_triggers" "enemy_defeated"
+  endif
+  if #heroesAlive <= 0
+    goto end
   endif
 endfor
 
 
 // enemy turn
-set_var currentBattlerTurn 0
+set_var currentBattlerTurn 1
 enemy_attack_target
 goto_script "check_passive_triggers" "before_enemy_attack"
 enemy_attack

@@ -185,8 +185,8 @@ public class SkilltreeScreen : MonoBehaviour {
     UpdateUI();
     StatusScreen.instance.UpdateUI();
     UIController.instance.UpdateUI();
-    UIController.instance.girlInteractionScreen.relationshipCard.Initialize(GlobalData.instance.GetCurrentRelationship());
-    UIController.instance.girlInteractionScreen.relationshipCard.UpdateUI();
+    //UIController.instance.girlInteractionScreen.relationshipCard.Initialize(GlobalData.instance.GetCurrentRelationship());
+    //UIController.instance.girlInteractionScreen.relationshipCard.UpdateUI();
 
     SfxManager.StaticPlayBigConfirmSfx();
     buySkillConfirmationPanel.HidePanel();

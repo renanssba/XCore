@@ -126,6 +126,7 @@ public class SpecialCodes {
 
   static float InterpretSpecialNumber(string keycode) {
     Enemy enemy = null;
+    int count = 0;
     if(BattleController.instance != null) {
       enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
     }
@@ -139,6 +140,20 @@ public class SpecialCodes {
         return BattleController.instance.partyMembers.Length;
       case "#enemiesLength":
         return BattleController.instance.enemyMembers.Length;
+      case "#heroesAlive":
+        foreach(Pilot pilot in BattleController.instance.partyMembers) {
+          if(pilot.hp > 0) {
+            count++;
+          }
+        }
+        return count;
+      case "#enemiesAlive":
+        foreach(Enemy en in BattleController.instance.enemyMembers) {
+          if(en.hp > 0) {
+            count++;
+          }
+        }
+        return count;
       case "#inventory_empty":
         return GlobalData.instance.pilots[0].inventory.IsEmpty() ? 1f : 0f;
       case "#currentRelationshipLevel":
@@ -147,8 +162,8 @@ public class SpecialCodes {
         } else {
           return -1;
         }
-      case "#currentPlayerStatusConditionsCount":
-        int currentPlayerId = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+      case "#currentBattlerStatusConditionsCount":
+        int currentPlayerId = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
         if(BattleController.instance.partyMembers.Length >= currentPlayerId) {
           Pilot currentPlayer = BattleController.instance.partyMembers[currentPlayerId];
           return currentPlayer.statusConditions.Count;

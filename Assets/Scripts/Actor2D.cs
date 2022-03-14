@@ -521,13 +521,13 @@ public class Actor2D : MonoBehaviour {
   }
 
   public void ClickedTargetSelectButton() {
-    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentBattler = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
 
     Debug.LogWarning("clicked person: " + battler.GetName());
 
     for(int i = 0; i < BattleController.instance.partyMembers.Length; i++) {
       if(BattleController.instance.partyMembers[i] == battler) {
-        BattleController.instance.selectedTargetPartyId[currentPlayerTurn] = (SkillTarget)i;
+        BattleController.instance.selectedTargetPartyId[currentBattler] = (SkillTarget)i;
       }
     }
     UIController.instance.selectTargetPanel.SetActive(false);

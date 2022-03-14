@@ -12,13 +12,11 @@ public class UIController : MonoBehaviour {
   public Panel uiControllerPanel;
   public TextMeshProUGUI dayText;
   public Image daytimeIcon;
+  public TextMeshProUGUI moneyText;
 
   public RelationshipCard relationshipUpAnimationCard;
 
-  public CoupleEntry[] coupleEntries;
-
-  public TextMeshProUGUI moneyText;
-
+  
   [Header("- Item Selector Screen -")]
   public ItemSelectorScreen itemSelectorScreen;
 
@@ -39,15 +37,12 @@ public class UIController : MonoBehaviour {
   public InteractionPin[] interactionPins;
 
 
-  public StatusScreen coupleStatusScreen;
+  [Header("- Tactical Battler INFO Panel -")]
+  public BattlerInfoPanel battlerInfoPanel;
 
-
-  public Transform enemyStatusConditionsContent;
-
-
-  public GirlInteractionScreen girlInteractionScreen;
-
-  public GameObject statusConditionIconPrefab;
+  [Header("- Tactical Buttons -")]
+  public GameObject skipTurnButton;
+  public GameObject clickMapButton;
 
 
 
@@ -56,6 +51,11 @@ public class UIController : MonoBehaviour {
   }
 
 
+
+  public void Update() {
+    skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
+                             GameController.instance.gameState != GameState.battlePhase);
+  }
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
@@ -123,8 +123,8 @@ public class UIController : MonoBehaviour {
       case "tactical_view":
         uiControllerPanel.ShowPanel();
         battleInfoPanel.HidePanel();
-        TacticalUIController.instance.EndBattlePhase();
-        BattleController.instance.gameObject.SetActive(false);
+        UIController.instance.EndBattlePhase();
+        TheaterController.instance.gameObject.SetActive(false);
         BoardController.instance.gameObject.SetActive(true);
 
         CameraController.instance.SetActiveCamera(0);
@@ -133,8 +133,8 @@ public class UIController : MonoBehaviour {
       case "battle":
         uiControllerPanel.HidePanel();
         battleInfoPanel.ShowPanel();
-        TacticalUIController.instance.EnterBattlePhase();
-        BattleController.instance.gameObject.SetActive(true);
+        UIController.instance.EnterBattlePhase();
+        TheaterController.instance.gameObject.SetActive(true);
         BoardController.instance.gameObject.SetActive(false);
 
         CameraController.instance.SetActiveCamera(1);
@@ -193,5 +193,27 @@ public class UIController : MonoBehaviour {
 
   public void SetInteractionPinLocationName(int id, string locationName) {
     interactionPins[id].SetLocation(locationName);
+  }
+
+
+
+  public void EnterBattlePhase() {
+    Select(null);
+    clickMapButton.SetActive(false);
+  }
+
+  public void EndBattlePhase() {
+    clickMapButton.SetActive(true);
+  }
+
+  public void Select(CharacterToken character) {
+    if(character == null) {
+      battlerInfoPanel.canvasGroup.alpha = 0f;
+      return;
+    }
+
+    battlerInfoPanel.canvasGroup.alpha = 1f;
+    battlerInfoPanel.Initialize(character.battler);
+    battlerInfoPanel.SkipHpBarAnimation();
   }
 }

@@ -125,15 +125,15 @@ public class ActionButton : MonoBehaviour {
     } 
 
     SfxManager.StaticPlayConfirmSfx();
-    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentBattler = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
 
-    BattleController.instance.selectedActionType[currentPlayerTurn] = actionType;
+    BattleController.instance.selectedActionType[currentBattler] = actionType;
     switch(actionType) {
       case TurnActionType.useSkill:
-        BattleController.instance.selectedSkills[currentPlayerTurn] = skill;
+        BattleController.instance.selectedSkills[currentBattler] = skill;
         break;
       case TurnActionType.useItem:
-        BattleController.instance.selectedItems[currentPlayerTurn] = Item.GetItemById(itemListing.id);
+        BattleController.instance.selectedItems[currentBattler] = Item.GetItemById(itemListing.id);
         break;
     }
 

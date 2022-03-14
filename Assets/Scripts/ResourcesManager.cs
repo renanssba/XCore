@@ -42,11 +42,7 @@ public class ResourcesManager : MonoBehaviour {
   public List<CharacterSpriteCollection> characterSpritesCollections;
 
   [Header("- UI Sprites -")]
-  public Sprite[] cardSprites;
-  public Sprite[] itemSprites;
-  public Sprite[] attributeSprites;
   public Sprite[] daytimeSprites;
-  public Sprite unknownSprite;
   public Color[] attributeColor;
   public Sprite[] buttonSprites;
 
@@ -56,6 +52,7 @@ public class ResourcesManager : MonoBehaviour {
 
 
   public static ResourcesManager instance;
+
 
   public void Awake() {
     instance = this;

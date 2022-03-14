@@ -8,24 +8,13 @@ namespace Command {
   public class EnemyAttackTargetCommand : VsnCommand {
 
     public override void Execute() {
-      int targetId = Random.Range(0, Mathf.Min(BattleController.instance.partyMembers.Length, 2));
-      VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
+      int currentBattler = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
+      int targetId = Random.Range(0, BattleController.instance.partyMembers.Length);
+      BattleController.instance.selectedTargetPartyId[currentBattler] = (SkillTarget)targetId;
 
-      //VsnArgument[] newArgs = new VsnArgument[1];
-      //string scriptToLoadPath = "date_enemies/" + BattleController.instance.GetCurrentEnemyName();
-
-      //switch(targetId) {
-      //  case 0:
-      //    newArgs[0] = new VsnString("attack_boy");
-      //    break;
-      //  case 1:
-      //    newArgs[0] = new VsnString("attack_girl");
-      //    break;
-      //  case 2:
-      //    newArgs[0] = new VsnString("attack_angel");
-      //    break;
-      //}
-      //GotoScriptCommand.StaticExecute(scriptToLoadPath, newArgs);
+      // old implementation
+      //int targetId = Random.Range(0, Mathf.Min(BattleController.instance.partyMembers.Length, 2));
+      //VsnSaveSystem.SetVariable("enemyAttackTargetId", targetId);
     }
 
     public override void AddSupportedSignatures() {

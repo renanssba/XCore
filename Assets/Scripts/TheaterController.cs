@@ -60,13 +60,6 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public void ClearTheater() {
-    for(int i = 0; i < partyActors.Length; i++) {
-      partyActors[i].MoveToPosition(outPositionLeft, 0f);
-    }
-    DestroyEnemyActor();
-  }
-
   public GameObject SpawnActor(string actorPrefabName) {
     GameObject prefabToSpawn = Resources.Load<GameObject>("Enemy Prefabs/" + actorPrefabName);
     GameObject spawnedActor;
@@ -108,56 +101,7 @@ public class TheaterController : MonoBehaviour {
     return actor;
   }
 
-  public Vector3 GetPositionByString(string positionName) {
-    Vector3 position = Vector3.zero;
-
-    switch(positionName.Replace("_back", "").Replace("_front", "")) {
-      case "angel":
-        position = thirdPosition;
-        break;
-      case "out_left":
-      case "grid_0":
-        position = outPositionLeft;
-        break;
-      case "grid_1":
-        position = secondPosition + new Vector3(-1f, 0f, 0f);
-        break;
-      case "support":
-      case "grid_2":
-        position = secondPosition;
-        break;
-      case "main":
-      case "grid_3":
-        position = firstPosition;
-        break;
-      case "enemy_0":
-      case "grid_4":
-        position = enemyPosition + new Vector3(-1f, 0f, 0f);
-        break;
-      case "enemy":
-      case "enemy_1":
-      case "grid_5":
-        position = enemyPosition;
-        break;
-      case "enemy_2":
-      case "grid_6":
-        position = enemyPosition + new Vector3(1f, 0f, 0f);
-        break;
-      case "out_right":
-      case "grid_7":
-        position = outPositionRight;
-        break;
-    }
-    if(positionName.Contains("_back")) {
-      position = position + new Vector3(0f, 0f, 1f);
-    }
-    if(positionName.Contains("_front")) {
-      position = position + new Vector3(0f, 0f, -1f);
-    }
-
-    return position;
-  }
-
+  
   public void ChangeActor(string actorReference, string newActorPrefabName) {
     Actor2D targetActor = GetActorByString(actorReference);
     GameObject newObj;
@@ -211,7 +155,7 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public Actor2D GetActorByIdInParty(SkillTarget actorId) {
+  public Actor2D GetActorByPartyId(SkillTarget actorId) {
     switch(actorId) {
       case SkillTarget.partyMember1:
         return partyActors[0];
@@ -249,7 +193,6 @@ public class TheaterController : MonoBehaviour {
 
 
   public void SetupBattle() {
-    ClearTheater();
     ClearBattle();
 
     GameController.instance.StartBattle();
@@ -291,43 +234,12 @@ public class TheaterController : MonoBehaviour {
 
   public void ClearBattle() {
     for(int i = 0; i < partyActors.Length; i++) {
+      partyActors[i].MoveToPosition(outPositionLeft, 0f);
       partyActors[i].SetBattleMode(false);
     }
-
     DestroyEnemyActor();
   }
 
-  public void PartyEntersScene() {
-    for(int i = 0; i < partyActors.Length; i++) {
-      partyActors[i].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true).SetEase(Ease.Linear);
-    }
-  }
-
-  public void MainActorEntersScene() {
-    partyActors[0].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
-  }
-
-  public void SupportActorEntersScene() {
-    partyActors[1].transform.DOLocalMoveX(3f, enterAnimationDuration).SetRelative(true);
-  }
-
-  public void EnemyEntersScene() {
-    Enemy currentEnemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
-    ChangeActor("enemy", currentEnemy.spriteName);
-    enemyActor.SetEnemy(currentEnemy);
-
-    foreach(Pilot partyMember in BattleController.instance.partyMembers) {
-      partyMember.ClearSkillUsesInBattle();
-    }
-    currentEnemy.ClearSkillUsesInBattle();
-
-    enemyActor.gameObject.SetActive(true);
-    enemyActor.transform.localPosition = enemyPosition + new Vector3(2.5f, 0f, 0f);
-    enemyActor.transform.DOLocalMoveX(enemyPosition.x, 0.5f).OnComplete(() => {
-      VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-      PartyEntersBattleMode();
-    });
-  }
 
   public IEnumerator WaitThenDeleteBgEffect() {
     bgEffect.GetComponent<Animator>().SetInteger("Intensity", 0);
@@ -337,10 +249,10 @@ public class TheaterController : MonoBehaviour {
 
   public void SetCharacterChoosingAction(int characterId) {
     for(int i = 0; i < 3; i++) {
-      GetActorByIdInParty((SkillTarget)i).SetChooseActionMode(false);
+      GetActorByPartyId((SkillTarget)i).SetChooseActionMode(false);
     }
     if(characterId >= 0 && characterId <= 2) {
-      GetActorByIdInParty((SkillTarget)characterId).SetChooseActionMode(true);
+      GetActorByPartyId((SkillTarget)characterId).SetChooseActionMode(true);
     }
   }
 

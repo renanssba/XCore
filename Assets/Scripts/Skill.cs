@@ -53,9 +53,6 @@ public enum SkillSpecialEffect {
   damageGivenBonus,
   raiseMaxHp,
   raiseMaxSp,
-  becomeEnemyTarget,
-  divertEnemyTarget,
-  reflectEnemyTarget,
   none
 }
 

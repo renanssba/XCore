@@ -25,10 +25,10 @@ tutorial_icon "hp_enemy" true
 wait 1
 say "tutorials/say_4"
 
-set_var currentPlayerTurn 0
+set_var currentBattlerTurn 0
 tutorial_icon "hp_enemy" false
 
-action_input currentPlayerTurn false
+action_input currentBattlerTurn false
 say "tutorials/say_5"
 tutorial_icon "action_button" true
 say "tutorials/say_6"
@@ -63,14 +63,14 @@ if tutorial_3 == true
   goto end
 endif
 set_var tutorial_3 true
-set_var currentPlayerTurn 0
-action_input currentPlayerTurn false
+set_var currentBattlerTurn 0
+action_input currentBattlerTurn false
 tutorial_icon "defend_button" true
 say "char_name/none" "tutorials/say_10"
 tutorial_icon "defend_button" false
 say "tutorials/say_11"
 vsn_state "WAITINGCUSTOMINPUT"
-if currentPlayerTurn != -1
+if currentBattlerTurn != -1
   set_var input_already_selected true
 endif
 goto end
@@ -82,8 +82,8 @@ if tutorial_skills == true
   goto end
 endif
 say "char_name/none" "tutorials/say_12"
-set_var currentPlayerTurn 0
-action_input currentPlayerTurn false
+set_var currentBattlerTurn 0
+action_input currentBattlerTurn false
 tutorial_icon "action_button" true
 say "tutorials/say_13"
 set_var tut_require_click_action_button true
@@ -102,7 +102,7 @@ say "tutorials/say_17"
 say "tutorials/say_18"
 tutorial_icon "skill_points" false
 vsn_state "WAITINGCUSTOMINPUT"
-if currentPlayerTurn != -1
+if currentBattlerTurn != -1
   set_var input_already_selected true
 endif
 
@@ -124,7 +124,7 @@ wait 1
 say "char_name/fertiliel" "tutorials/say_19"
 say "tutorials/say_20"
 
-action_input currentPlayerTurn false
+action_input currentBattlerTurn false
 tutorial_icon "item_button" true
 wait 1
 say "tutorials/say_21"

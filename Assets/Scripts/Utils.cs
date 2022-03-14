@@ -195,21 +195,14 @@ public class Utils {
 
   public static bool AreAllConditionsMet(Skill usedSkill, string[] allConditions, SkillTarget skillUserId) {
     string conditionArgument;
-    int currentPlayerTurn = VsnSaveSystem.GetIntVariable("currentPlayerTurn");
+    int currentBattler = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
     Battler user = BattleController.instance.GetBattlerByTargetId(skillUserId);
-    Battler main = BattleController.instance.GetBattlerByTargetId(SkillTarget.partyMember1);
 
 
     foreach(string condition in allConditions) {
       conditionArgument = GetStringArgument(condition);
 
       //Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
-
-      if(condition.StartsWith("enemy_has_tag")) {
-        if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemyCHANGETHISCALL().tags)) {
-          return false;
-        }
-      }
 
       if(condition.StartsWith("is_turn")) {
         if(VsnSaveSystem.GetIntVariable("currentBattleTurn") != int.Parse(conditionArgument)) {
@@ -231,41 +224,21 @@ public class Utils {
 
       // TODO: improve this with a more thorough/accurate checking
       if(condition.StartsWith("cured_status")) {
-        if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useItem &&
-           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] == skillUserId &&
-           TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].healsConditionNames)) {
+        if(BattleController.instance.selectedActionType[currentBattler] == TurnActionType.useItem &&
+           BattleController.instance.selectedTargetPartyId[currentBattler] == skillUserId &&
+           TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentBattler].healsConditionNames)) {
           continue;
         }
-        if(BattleController.instance.selectedActionType[currentPlayerTurn] == TurnActionType.useSkill &&
-           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] == skillUserId &&
-           TagIsInArray(conditionArgument, BattleController.instance.selectedSkills[currentPlayerTurn].healsConditionNames)) {
+        if(BattleController.instance.selectedActionType[currentBattler] == TurnActionType.useSkill &&
+           BattleController.instance.selectedTargetPartyId[currentBattler] == skillUserId &&
+           TagIsInArray(conditionArgument, BattleController.instance.selectedSkills[currentBattler].healsConditionNames)) {
           continue;
         }
         return false;
       }
 
-      if(condition.StartsWith("received_item_with_tag")) {
-        //Debug.LogWarning("Checking received_item_with_tag. Action: " + BattleController.instance.selectedActionType[currentPlayerTurn]);
-        if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useItem) {
-          return false;
-        }
-        //Debug.LogWarning("Condition argument: " + conditionArgument);
-        if(!TagIsInArray(conditionArgument, BattleController.instance.selectedItems[currentPlayerTurn].tags) ||
-           BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != skillUserId) {
-          return false;
-        }
-      }
-
       if(condition.StartsWith("hp_percent_is_less")) {
         float hpPercent = ((float)user.CurrentHP()) / (float)user.MaxHP();
-        //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
-        if(hpPercent > float.Parse(conditionArgument)) {
-          return false;
-        }
-      }
-
-      if(condition.StartsWith("main_hp_percent_is_less")) {
-        float hpPercent = ((float)main.CurrentHP()) / (float)main.MaxHP();
         //Debug.LogWarning("Current HP percent: " + hpPercent + ". argument: " + float.Parse(conditionArgument));
         if(hpPercent > float.Parse(conditionArgument)) {
           return false;
@@ -289,10 +262,10 @@ public class Utils {
           case SkillTarget.enemy1:
           case SkillTarget.enemy2:
           case SkillTarget.enemy3:
-            if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useSkill) {
+            if(BattleController.instance.selectedActionType[currentBattler] != TurnActionType.useSkill) {
               return false;
             }
-            if(BattleController.instance.selectedSkills[currentPlayerTurn].damagePower <= 0) {
+            if(BattleController.instance.selectedSkills[currentBattler].damagePower <= 0) {
               return false;
             }
             break;
@@ -304,10 +277,10 @@ public class Utils {
           case SkillTarget.enemy1:
           case SkillTarget.enemy2:
           case SkillTarget.enemy3:
-            if(BattleController.instance.selectedActionType[currentPlayerTurn] != TurnActionType.useSkill) {
+            if(BattleController.instance.selectedActionType[currentBattler] != TurnActionType.useSkill) {
               return false;
             }
-            if(BattleController.instance.selectedTargetPartyId[currentPlayerTurn] != skillUserId) {
+            if(BattleController.instance.selectedTargetPartyId[currentBattler] != skillUserId) {
               return false;
             }
             break;
@@ -315,15 +288,7 @@ public class Utils {
       }
 
 
-      if(condition == "ally_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") == (int)skillUserId) {
-        return false;
-      }
-
-      if(condition == "self_targeted" && VsnSaveSystem.GetIntVariable("enemyAttackTargetId") != (int)skillUserId) {
-        return false;
-      }
-
-      if(condition == "defending" && !TheaterController.instance.GetActorByIdInParty(skillUserId).battler.IsDefending()) {
+      if(condition == "defending" && !TheaterController.instance.GetActorByPartyId(skillUserId).battler.IsDefending()) {
         return false;
       }
 
