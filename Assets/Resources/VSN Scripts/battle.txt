@@ -19,103 +19,69 @@ fade_in 0.5
 
 
 
-/// EXECUTE THE FIGHT
-// for currentDateEvent #dateLength
-  // set_var currentBattleTurn 0
-  // wait 0.5
+/// START THE FIGHT
 
-  // waypoint start_new_turn
-  goto_script "check_passive_triggers" "turn_started"
+goto_script "check_passive_triggers" "battle_started"
 
-  // PARTY MEMBERS receive effects from conditions (like take poison damage)
-  for currentPlayerTurn #partyLength
-    for currentStatusCondition #currentPlayerStatusConditionsCount
-      activate_status_condition_effect currentPlayerTurn currentStatusCondition
-    endfor
-  endfor
-
-  // ENEMY receives effects from conditions
-  for currentStatusCondition #currentEnemyStatusConditionsCount
-    activate_status_condition_effect 3 currentStatusCondition
-  endfor
-  // end turn (to pass time on status conditions)
-  end_turn
-
-  goto_script "check_passive_triggers" "before_death_checks"
-  
-  /// TODO: check if all the party members are dead and end battle
-  // if #currentHp <= 0
-    // goto end
-  // endif
-
-
-  // character action inputs
-  for currentPlayerTurn #partyLength
-
-    // first battle tutorials
-    // if tutorial_skills == false
-      // goto_script "tutorials" "using_skills"
-    // endif
-
-    /// Skip action input if already selected
-    // if input_already_selected == true
-      // set_var input_already_selected false
-      // continue
-    // endif
-
-    /// Ask for action input if not selected
-    action_input currentPlayerTurn
-    
-    check_action_skip currentPlayerTurn
-    goto_script "check_passive_triggers" "before_action"
-    character_action currentPlayerTurn
-    goto_script "check_passive_triggers" "after_action"
-    wait 0.5
-    
-    // if enemy is defeated, end battle
-    if #currentEnemyHp <= 0
-      goto end
-      goto_script "check_passive_triggers" "enemy_defeated"
-    endif
-  endfor
-
-  // if enemy is defeated, go to new enemy
-  // if #currentEnemyHp <= 0
-    // goto end
-    // goto_script "check_passive_triggers" "enemy_defeated"
-  // endif
-
-
-  // enemy turn
-  set_var currentPlayerTurn 0
-  enemy_attack_target
-  goto_script "check_passive_triggers" "before_enemy_attack"
-  enemy_attack
-  goto_script "check_passive_triggers" "after_enemy_attack"
-
-
-  goto_script "check_passive_triggers" "before_death_checks"
-  goto end
-
-  // goto start_new_turn
+// PARTY MEMBERS receive effects from conditions (like take poison damage)
+// for currentBattlerTurn #battlersLength
+  // for currentStatusCondition #currentPlayerStatusConditionsCount
+    // activate_status_condition_effect currentBattlerTurn currentStatusCondition
+  // endfor
 // endfor
 
+// ENEMY receives effects from conditions
+// for currentStatusCondition #currentEnemyStatusConditionsCount
+  // activate_status_condition_effect 3 currentStatusCondition
+// endfor
+// end turn (to pass time on status conditions)
+// end_turn
+
+// goto_script "check_passive_triggers" "before_death_checks"
+
+/// TODO: check if all the party members are dead and end battle
+// if #currentHp <= 0
+  // goto end
+// endif
+
+
+// character turns
+for currentBattlerTurn #battlersLength
+
+  /// Ask for action input
+  action_input currentBattlerTurn
+  
+  check_action_skip currentBattlerTurn
+  goto_script "check_passive_triggers" "before_action"
+  character_action currentBattlerTurn
+  goto_script "check_passive_triggers" "after_action"
+  wait 0.5
+  
+  // if enemy is defeated, end battle
+  if #currentEnemyHp <= 0
+    goto end
+    goto_script "check_passive_triggers" "enemy_defeated"
+  endif
+endfor
+
+
+// enemy turn
+set_var currentBattlerTurn 0
+enemy_attack_target
+goto_script "check_passive_triggers" "before_enemy_attack"
+enemy_attack
+goto_script "check_passive_triggers" "after_enemy_attack"
+
+
+// goto_script "check_passive_triggers" "before_death_checks"
+goto end
+
+// END THE FIGHT
 
 
 
 waypoint end
-fade_music 0 1
 enable_input false
-
-// play_sfx "date_end"
-
-// actor_tint main 0 1 "white"
-// actor_tint support 0 1 "white"
-// goto end
-
-
-
-// waypoint end
 fade_music 0 1
 fade_out 0.5
 

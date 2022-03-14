@@ -59,17 +59,7 @@ public class OpenHyperlinks : MonoBehaviour, IPointerClickHandler {
 
   public void OnPointerClick(PointerEventData eventData) {
     // Debug.Log("Click at POS: " + eventData.position + "  World POS: " + eventData.worldPosition);
-
     return;
-
-    int linkIndex = TMP_TextUtilities.FindIntersectingLink(pTextMeshPro, Input.mousePosition, pCamera);
-    if(linkIndex != -1) { // was a link clicked?
-      TMP_LinkInfo linkInfo = pTextMeshPro.textInfo.linkInfo[linkIndex];
-
-      // Debug.Log(string.Format("id: {0}, text: {1}", linkInfo.GetLinkID(), linkInfo.GetLinkText()));
-      // open the link id as a url, which is the metadata we added in the text field
-      Application.OpenURL(linkInfo.GetLinkID());
-    }
   }
 
   public bool IsInLinkRegion() {

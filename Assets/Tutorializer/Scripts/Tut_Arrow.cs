@@ -7,7 +7,6 @@ public class Tut_Arrow : MonoBehaviour {
   public float animDuration;
   public float waitTime;
 
-  private float clock = 0f;
   private bool hasStarted = false;
 
 
@@ -18,7 +17,6 @@ public class Tut_Arrow : MonoBehaviour {
     finalRect.gameObject.SetActive(false);
     initialPos = GetComponent<RectTransform>().anchoredPosition;
     finalPos = finalRect.anchoredPosition;
-    clock = 0f;
 
     Initialize();
 	}

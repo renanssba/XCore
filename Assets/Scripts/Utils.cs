@@ -206,7 +206,7 @@ public class Utils {
       //Debug.LogWarning("Check for skill activation. Checking condition: " + condition);
 
       if(condition.StartsWith("enemy_has_tag")) {
-        if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemy().tags)) {
+        if(!TagIsInArray(conditionArgument, BattleController.instance.GetCurrentEnemyCHANGETHISCALL().tags)) {
           return false;
         }
       }

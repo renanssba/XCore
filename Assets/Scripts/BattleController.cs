@@ -107,7 +107,6 @@ public class BattleController : MonoBehaviour {
     ClearSkillsUsageRegistry();
 
     VsnSaveSystem.SetVariable("battle_is_happening", true);
-    VsnSaveSystem.SetVariable("currentDateEvent", 0);
 
     /// Show Battle UI, with HP set instantaneously
     UIController.instance.UpdateBattleUI();
@@ -120,10 +119,6 @@ public class BattleController : MonoBehaviour {
   
   public void EndBattle() {
     VsnSaveSystem.SetVariable("battle_is_happening", false);
-
-    // remove bg effect
-    TheaterController.instance.ApplyBgEffect(BgEffect.pulsingEffect, 0);
-
     GameController.instance.EndBattle();
   }
 
@@ -144,7 +139,7 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public Enemy GetCurrentEnemy() {
+  public Enemy GetCurrentEnemyCHANGETHISCALL() {
     int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
     if(enemyMembers.Length <= currentDateEvent) {
       return null;
@@ -159,8 +154,12 @@ public class BattleController : MonoBehaviour {
       return SkillTarget.partyMember2;
     } else if(partyMembers.Length >= 3 && partyMembers[2] == character) {
       return SkillTarget.partyMember3;
-    } else if(GetCurrentEnemy() == character) {
+    } else if(enemyMembers[0] == character) {
       return SkillTarget.enemy1;
+    } else if(enemyMembers.Length >= 2 && enemyMembers[1] == character) {
+      return SkillTarget.enemy2;
+    } else if(enemyMembers.Length >= 3 && enemyMembers[2] == character) {
+      return SkillTarget.enemy3;
     }
     return SkillTarget.none;
   }
@@ -565,7 +564,7 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    Enemy currentEvent = GetCurrentEnemy();
+    Enemy currentEvent = GetCurrentEnemyCHANGETHISCALL();
 
     VsnAudioManager.instance.PlaySfx("challenge_default");
     yield return userActor.UseItemAnimation(targetActor, usedItem);
@@ -662,7 +661,7 @@ public class BattleController : MonoBehaviour {
     SkillTarget targetId = (SkillTarget)VsnSaveSystem.GetIntVariable("enemyAttackTargetId");
     VsnController.instance.state = ExecutionState.WAITING;
 
-    Skill skillUsed = GetCurrentEnemy().DecideWhichSkillToUse();
+    Skill skillUsed = GetCurrentEnemyCHANGETHISCALL().DecideWhichSkillToUse();
 
     if(skillUsed.range == ActionRange.all_allies) {
       targetId = SkillTarget.allEnemies;
@@ -688,7 +687,7 @@ public class BattleController : MonoBehaviour {
     foreach(Pilot p in partyMembers) {
       p.EndTurn();
     }
-    GetCurrentEnemy().EndTurn();
+    GetCurrentEnemyCHANGETHISCALL().EndTurn();
   }
 
   public void SetCustomBattle(int enemyId) {
@@ -742,7 +741,7 @@ public class BattleController : MonoBehaviour {
         return partyMembers[2];
       case SkillTarget.enemy1:
       default:
-        return GetCurrentEnemy();
+        return GetCurrentEnemyCHANGETHISCALL();
     }
     return null;
   }

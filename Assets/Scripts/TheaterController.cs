@@ -45,8 +45,6 @@ public class TheaterController : MonoBehaviour {
   public Actor2D enemyActor;
 
   public GameObject personPrefab;
-  public GameObject[] bgEffectPrefabs;
-  public GameObject overlayPrefab;
 
   [Header("- Background -")]
   public SpriteRenderer bgRenderer;
@@ -170,8 +168,8 @@ public class TheaterController : MonoBehaviour {
       }
       newObj = SpawnActor(newActorPrefabName);
       enemyActor = newObj.GetComponent<Actor2D>();
-      enemyActor.enemy = BattleController.instance.GetCurrentEnemy();
-      enemyActor.battler = BattleController.instance.GetCurrentEnemy();
+      enemyActor.enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
+      enemyActor.battler = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
       return;
     }
 
@@ -275,7 +273,7 @@ public class TheaterController : MonoBehaviour {
 
 
     /// Position Enemies Party
-    Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
+    Enemy currentEnemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
 
@@ -284,7 +282,8 @@ public class TheaterController : MonoBehaviour {
     }
 
     enemyActor.gameObject.SetActive(true);
-    enemyActor.transform.localPosition = enemyPosition;
+    //enemyActor.transform.localPosition = enemyPosition;
+    enemyActor.transform.localPosition = new Vector3(-firstPosition.x, firstPosition.y, firstPosition.z);
 
     //VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
     PartyEntersBattleMode();
@@ -313,7 +312,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public void EnemyEntersScene() {
-    Enemy currentEnemy = BattleController.instance.GetCurrentEnemy();
+    Enemy currentEnemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
     ChangeActor("enemy", currentEnemy.spriteName);
     enemyActor.SetEnemy(currentEnemy);
 
@@ -328,19 +327,6 @@ public class TheaterController : MonoBehaviour {
       VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
       PartyEntersBattleMode();
     });
-  }
-
-  public void ApplyBgEffect(BgEffect type, int intensity) {
-    if(bgEffect != null && intensity <= 0) {
-      StartCoroutine(WaitThenDeleteBgEffect());
-    }
-
-    if(intensity > 0) {
-      if(bgEffect == null) {
-        bgEffect = Instantiate(bgEffectPrefabs[(int)type], gameObject.transform);
-      }
-      bgEffect.GetComponent<Animator>().SetInteger("Intensity", intensity);
-    }
   }
 
   public IEnumerator WaitThenDeleteBgEffect() {

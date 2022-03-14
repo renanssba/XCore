@@ -12,7 +12,6 @@ public class Actor2D : MonoBehaviour {
   public SpriteRenderer[] renderers;
   public SpriteRenderer[] dirtySplashRenderers;
   public SpriteRenderer[] buffAuraRenderers;
-  public List<SpriteRenderer> overlays;
   public new ParticleSystem particleSystem;
   public SpriteRenderer shadowRenderer;
 
@@ -47,7 +46,6 @@ public class Actor2D : MonoBehaviour {
 
   void Awake() {
     materialProperties = new MaterialPropertyBlock();
-    overlays = new List<SpriteRenderer>();
   }
 
 
@@ -65,26 +63,6 @@ public class Actor2D : MonoBehaviour {
   public void UpdateToSpecificPose(SkillAnimation animationPose) {
     /// DEBUG
     return;
-
-    if(actorReference == "enemy") {
-      return;
-    }
-
-    renderers[0].gameObject.SetActive(true);
-    renderers[1].gameObject.SetActive(false);
-
-    switch(animationPose) {
-      case SkillAnimation.attack:
-      case SkillAnimation.charged_attack:
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_punch);
-        break;
-      case SkillAnimation.shout:
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_shout);
-        break;
-      case SkillAnimation.interact:
-        renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.pose_interact);
-        break;
-    }
   }
 
   public void UpdateCharacterGraphics() {
@@ -572,22 +550,5 @@ public class Actor2D : MonoBehaviour {
         }
       }
     }
-  }
-
-  public void AddOverlay(string name) {
-    GameObject asd = Instantiate(TheaterController.instance.overlayPrefab, renderers[0].transform);
-    asd.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/" + name);
-    overlays.Add(asd.GetComponent<SpriteRenderer>());
-  }
-
-  public void RemoveOveraly(string name) {
-    SpriteRenderer overlay = null;
-    for(int i=0; i<overlays.Count; i++) {
-      if(overlays[i].sprite.name == name) {
-        overlay = overlays[i];
-      }
-    }
-    overlays.Remove(overlay);
-    Destroy(overlay.gameObject);
   }
 }

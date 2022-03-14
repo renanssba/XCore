@@ -23,7 +23,7 @@ namespace Command {
 
 
     public void CheckEnemySkills(int skillPos, string situation) {
-      Enemy enemy = BattleController.instance.GetCurrentEnemy();
+      Enemy enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
       Skill skillChecked = BattleController.instance.GetSkillById(enemy.passiveSkills[skillPos]);
 
 
