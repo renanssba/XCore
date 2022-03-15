@@ -8,23 +8,31 @@ namespace Command {
   public class ActionInputCommand : VsnCommand {
 
     public override void Execute() {
-      int currentPlayer = (int)args[0].GetNumberValue();
-      bool waitForInput = true;
-
-      if(args.Length > 1) {
-        waitForInput = args[1].GetBooleanValue();
-      }
-
-      /// skip input if character cant act
-      if(BattleController.instance.partyMembers[currentPlayer].TotalStatusEffectPower(StatusConditionEffect.cantAct) > 0f) {
-        BattleController.instance.selectedActionType[currentPlayer] = TurnActionType.idle;
+      Debug.LogWarning("action_input called!");
+      if(BattleController.instance.CurrentBattler.GetType() == typeof(Enemy)) {
+        Debug.LogWarning("action_input retuning because current battler is enemy: "+ BattleController.instance.CurrentBattler);
         return;
       }
 
-      WaitForCharacterInput(currentPlayer, waitForInput);
+      int currentBattler = BattleController.instance.CurrentBattlerId;
+      bool waitForInput = true;
+
+      if(args.Length > 0) {
+        waitForInput = args[0].GetBooleanValue();
+      }
+
+      /// skip input if character cant act
+      if(BattleController.instance.CurrentBattler.TotalStatusEffectPower(StatusConditionEffect.cantAct) > 0f) {
+        BattleController.instance.selectedActionType[BattleController.instance.CurrentBattlerId] = TurnActionType.idle;
+        return;
+      }
+
+      WaitForCharacterInput(currentBattler, waitForInput);
     }
 
     public static void WaitForCharacterInput(int currentPlayer, bool waitForInput = true) {
+      Debug.LogWarning("action_input calling for character input");
+
       TheaterController.instance.SetCharacterChoosingAction(currentPlayer);
       UIController.instance.SetupCurrentCharacterUi(currentPlayer);
       UIController.instance.actionsPanel.Initialize();
@@ -35,12 +43,9 @@ namespace Command {
 
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg
-      });
+      signatures.Add(new VsnArgType[0]);
 
       signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg,
         VsnArgType.booleanArg
       });
     }

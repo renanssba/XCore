@@ -8,7 +8,6 @@ using TMPro;
 
 
 public class Actor2D : MonoBehaviour {
-  public string actorReference;
   public SpriteRenderer[] renderers;
   public SpriteRenderer[] dirtySplashRenderers;
   public SpriteRenderer[] buffAuraRenderers;
@@ -18,11 +17,7 @@ public class Actor2D : MonoBehaviour {
   public float[] initialRendererFlashPowers;
   public Color[] initialrendererColors;
 
-  public SpriteRenderer weaknessCardRenderer;
-  public TextMeshPro weaknessCardText;
-
   public Battler battler;
-  public Enemy enemy;
   public Animator animator;
 
   public Button targetSelectButton;
@@ -112,12 +107,6 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public void SetEnemy(Enemy currentEvent) {
-    enemy = currentEvent;
-    battler = currentEvent;
-    SetActorGraphics(enemy.spriteName);
-  }
-
   public void SetActorGraphics(string spriteName) {
     if(gameObject.name.Contains(spriteName)) {
       return;
@@ -149,10 +138,6 @@ public class Actor2D : MonoBehaviour {
       Debug.LogError("Error loading " + spriteName + " sprite. Please check its path");
     }
     return sprite;
-  }
-
-  public void SetBattleMode(bool value) {
-    animator.SetBool("Battle", value);
   }
 
   public void SetChooseActionMode(bool value) {
@@ -389,46 +374,6 @@ public class Actor2D : MonoBehaviour {
 
   public void HideInternalSprite() {
     renderers[renderers.Length - 1].DOFade(0f, 1f);
-  }
-
-
-  public void ShowWeaknessCard(bool activate) {
-    if(enemy == null) {
-      return;
-    }
-    weaknessCardRenderer.gameObject.SetActive(activate);
-    if(activate) {
-      VsnAudioManager.instance.PlaySfx("relationship_up");
-      SetWeaknessCardText();
-    }
-  }
-
-  public void SetWeaknessCardText() {
-    if(enemy == null) {
-      return;
-    }
-
-    string text = "";
-    Attributes[] weak = enemy.GetWeaknesses();
-    Attributes[] resistant = enemy.GetResistances();
-
-    if(weak.Length > 0) {
-      text += Lean.Localization.LeanLocalization.GetTranslationText("date/weakness") + "\n";
-      for(int i = 0; i < weak.Length; i++) {
-        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + weak[i].ToString()) + "\n";
-      }
-    }
-    if(resistant.Length > 0) {
-      if(!string.IsNullOrEmpty(text)) {
-        text += "\n";
-      }
-      text += Lean.Localization.LeanLocalization.GetTranslationText("date/resistance") + "\n";
-      for(int i = 0; i < resistant.Length; i++) {
-        text += Lean.Localization.LeanLocalization.GetTranslationText("attribute/" + resistant[i].ToString()) + "\n";
-      }
-    }
-
-    weaknessCardText.text = text;
   }
 
 

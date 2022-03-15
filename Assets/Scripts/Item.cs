@@ -204,14 +204,14 @@ public class Inventory{
   }
 
 
-  void EffectiveAddItem(int id, int amount, int ownerId) {
+  void EffectiveAddItem(int id, int amount) {
     if(id == -1) {
       Debug.LogError("No item to add");
       return;
     }
 
     for(int i = 0; i < itemListings.Count; i++) {
-      if(itemListings[i].id == id && itemListings[i].ownerId == ownerId) {
+      if(itemListings[i].id == id) {
         itemListings[i].amount += amount;
         SortItems();
         return;
@@ -221,25 +221,16 @@ public class Inventory{
     itemListings.Add(new ItemListing() {
       id = id,
       amount = amount,
-      ownerId = ownerId
     });
     SortItems();
   }
 
   public void AddItem(int id, int amount){
-    EffectiveAddItem(id, amount, -1);
+    EffectiveAddItem(id, amount);
   }
 
   public void AddItem(string itemName, int amount) {
     AddItem(ItemDatabase.instance.GetItemByName(itemName).id, amount);
-  }
-
-  public void AddItemWithOwnership(string itemName, int amount, int ownerId) {
-    EffectiveAddItem(ItemDatabase.instance.GetItemByName(itemName).id, amount, ownerId);
-  }
-
-  public void AddItemWithOwnership(int id, int amount, int ownerId) {
-    EffectiveAddItem(id, amount, ownerId);
   }
 
 
@@ -285,15 +276,6 @@ public class Inventory{
   public int ItemCount(int id) {
     foreach(ItemListing item in itemListings) {
       if(item.id == id) {
-        return item.amount;
-      }
-    }
-    return 0;
-  }
-
-  public int ItemCountFromOwner(int id, int ownerId) {
-    foreach(ItemListing item in itemListings) {
-      if(item.id == id && item.ownerId == ownerId) {
         return item.amount;
       }
     }
@@ -348,9 +330,4 @@ public class InventorySaveStruct {
 public class ItemListing{
   public int id;
   public int amount;
-  public int ownerId;
-
-  public ItemListing(){
-    ownerId = -1;
-  }
 }

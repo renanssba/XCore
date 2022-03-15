@@ -12,10 +12,6 @@ namespace Command {
         case "setup_battle":
           TheaterController.instance.SetupBattle();
           break;
-        case "enemy_leaves":
-          TheaterController.instance.EnemyLeavesScene();
-          VsnController.instance.WaitForSeconds(0.7f);
-          break;
         case "color_bg_dark":
           TheaterController.instance.bgRenderer.color = new Color(0.8f, 0.8f, 0.8f);
           break;

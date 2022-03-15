@@ -1,10 +1,14 @@
-﻿for currentSkillChecked #currentCoupleSkillsCount
+﻿
+/// TODO: fix this
+end_script
+
+
+for currentSkillChecked #currentCoupleSkillsCount
   check_skill_activation "players" currentSkillChecked arg1
 endfor
 
 for currentSkillChecked #enemySkillsCount
-  check_skill_activation "enemy" currentSkillChecked arg1
+  check_skill_activation "enemies" currentSkillChecked arg1
 endfor
 
 end_script
-

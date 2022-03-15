@@ -30,10 +30,12 @@ public class Combat {
     GameObject newObj = MonoBehaviour.Instantiate(GameController.instance.engageIconPrefab,
       position, Quaternion.identity, GameController.instance.transform);
     engageIcons.Add(newObj);
+
+    characters = OrderByAgility();
   }
 
 
-  public List<CharacterToken> TurnsOrder() {
+  public List<CharacterToken> OrderByAgility() {
     return characters.OrderByDescending(q => q.battler.AttributeValue(Attributes.agility)).ToList();
   }
 
@@ -68,7 +70,7 @@ public class Combat {
 
 
   public static bool CharacterIsEngagedInCombat(CharacterToken a) {
-    foreach(Combat c in GameController.instance.currentCombats) {
+    foreach(Combat c in GameController.instance.activeCombats) {
       if(c.characters.Contains(a)) {
         return true;
       }
@@ -91,10 +93,10 @@ public class GameController : MonoBehaviour {
 
 
   [Header("- Combats -")]
-  public List<Combat> currentCombats;
+  public List<Combat> activeCombats;
   public GameObject engageIconPrefab;
 
-  public Combat combatHappening;
+  public Combat currentCombat;
 
 
   [Header("- Camera -")]
@@ -114,7 +116,7 @@ public class GameController : MonoBehaviour {
     instance = this;
 
     allCharacters = new List<CharacterToken>();
-    currentCombats = new List<Combat>();
+    activeCombats = new List<Combat>();
   }
 
   public void Start() {
@@ -202,11 +204,11 @@ public class GameController : MonoBehaviour {
 
 
   public IEnumerator FightsPhase() {
-    foreach(Combat c in currentCombats) {
+    foreach(Combat c in activeCombats) {
       yield return FightBattle(c);
       c.DestroyIcons();
     }
-    currentCombats.Clear();
+    activeCombats.Clear();
 
     yield return cameraController.GoToDefaultPosition();
     yield return new WaitForSeconds(0.3f);
@@ -223,11 +225,9 @@ public class GameController : MonoBehaviour {
   }
 
   public IEnumerator FightBattle(Combat combat) {
-    List<CharacterToken> turns = combat.TurnsOrder();
-
     yield return cameraController.FocusOnCombat(combat);
 
-    combatHappening = combat;
+    currentCombat = combat;
     VsnController.instance.StartVSN("battle");
     yield return new WaitForSeconds(0.5f);
 
@@ -279,7 +279,7 @@ public class GameController : MonoBehaviour {
 
   public void StartEngagement() {
     CharacterToken clicked = MouseInput.instance.SelectedCharacter;
-    foreach(Combat c in currentCombats) {
+    foreach(Combat c in activeCombats) {
       if(c.characters.Contains(clicked)) {
         c.AddConflict(clicked, CurrentCharacter);
         EndCurrentCharacterTurn();
@@ -287,7 +287,7 @@ public class GameController : MonoBehaviour {
       }
     }
 
-    currentCombats.Add(new Combat(clicked, CurrentCharacter));
+    activeCombats.Add(new Combat(clicked, CurrentCharacter));
     EndCurrentCharacterTurn();
   }
 

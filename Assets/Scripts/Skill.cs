@@ -83,7 +83,6 @@ public enum SkillAnimation {
   throw_object,
   multi_throw,
   projectile,
-  skinnable,
   shout,
   interact,
   none

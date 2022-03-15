@@ -39,16 +39,6 @@ public class ItemUI : MonoBehaviour {
     string name_prefix = "";
     string name_suffix = "";
     string description_suffix = "";
-    if(itemListing.ownerId != -1) {
-      Pilot owner = GlobalData.instance.pilots[itemListing.ownerId];
-      name_prefix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_prefix").
-                            Replace("XXXXX", owner.GetName());
-      name_suffix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/name_suffix").
-                            Replace("XXXXX", owner.GetName());
-
-      description_suffix = Lean.Localization.LeanLocalization.GetTranslationText("item/description/belongs_to").
-                            Replace("XXXXX", owner.GetName());
-    }
 
     nameText.text = name_prefix + item.GetPrintableName() + name_suffix;
     descriptionText.text = item.GetPrintableDescription() +" "+ item.GetBattleDescription() + description_suffix;
@@ -80,10 +70,9 @@ public class ItemUI : MonoBehaviour {
     Item item = Item.GetItemById(itemListing.id);
     //ItemSelectorScreen.instance.screenTransition.FadeOutShade(ScreenTransitions.fadeTime);
     VsnSaveSystem.SetVariable("item_id", item.id);
-    VsnSaveSystem.SetVariable("item_owner", itemListing.ownerId);
     VsnSaveSystem.SetVariable("item_name", Item.GetPrintableNameById(item.id));
     VsnSaveSystem.SetVariable("item_key", Item.GetKeyById(item.id));
-    switch (interactionType) {
+    switch(interactionType) {
       case ItemInteractionType.store_buy:
         VsnSaveSystem.SetVariable("item_price", item.price);
         break;

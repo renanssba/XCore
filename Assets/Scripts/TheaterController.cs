@@ -30,11 +30,20 @@ public class TheaterController : MonoBehaviour {
   public Vector3 firstPosition;
   public Vector3 secondPosition;
   public Vector3 thirdPosition;
-  public Vector3 enemyPosition;
-
-  public Vector3 outPositionRight;
   public Vector3 outPositionLeft;
 
+  public Vector3 enemyPosition1 {
+    get { return new Vector3(-firstPosition.x, firstPosition.y, firstPosition.z); }
+  }
+  public Vector3 enemyPosition2 {
+    get { return new Vector3(-secondPosition.x, secondPosition.y, secondPosition.z); }
+  }
+  public Vector3 enemyPosition3 {
+    get { return new Vector3(-thirdPosition.x, thirdPosition.y, thirdPosition.z); }
+  }
+
+
+  [Header("- Focus Animation -")]
   public Vector3[] focusPositionForTwo;
   public Vector3 focusPositionForOne;
   public SpriteRenderer focusShade;
@@ -42,7 +51,7 @@ public class TheaterController : MonoBehaviour {
 
   [Header("- Actors -")]
   public Actor2D[] partyActors;
-  public Actor2D enemyActor;
+  public Actor2D[] enemyActors;
 
   public GameObject personPrefab;
 
@@ -71,10 +80,10 @@ public class TheaterController : MonoBehaviour {
       }
 
       Debug.LogWarning("No prefab to load for enemy: " + actorPrefabName + ". Using default prefab");
-      spawnedActor = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
+      spawnedActor = Instantiate(prefabToSpawn, enemyPosition1, Quaternion.identity, transform);
       spawnedActor.GetComponent<Actor2D>().SetActorGraphics(actorPrefabName);
     } else {
-      spawnedActor = Instantiate(prefabToSpawn, enemyPosition, Quaternion.identity, transform);
+      spawnedActor = Instantiate(prefabToSpawn, enemyPosition1, Quaternion.identity, transform);
     }
     return spawnedActor;
   }
@@ -83,17 +92,23 @@ public class TheaterController : MonoBehaviour {
     Actor2D actor = null;
 
     switch(actorReference) {
-      case "main":
+      case "hero_1":
         actor = partyActors[0];
         break;
-      case "support":
+      case "hero_2":
         actor = partyActors[1];
         break;
-      case "angel":
+      case "hero_3":
         actor = partyActors[2];
         break;
-      case "enemy":
-        actor = enemyActor;
+      case "enemy_1":
+        actor = enemyActors[0];
+        break;
+      case "enemy_2":
+        actor = enemyActors[1];
+        break;
+      case "enemy_3":
+        actor = enemyActors[2];
         break;
       default:
         break;
@@ -105,52 +120,63 @@ public class TheaterController : MonoBehaviour {
   public void ChangeActor(string actorReference, string newActorPrefabName) {
     Actor2D targetActor = GetActorByString(actorReference);
     GameObject newObj;
+    Pilot person = null;
+    int actorId = 0;
 
-    if(actorReference == "enemy") {
+    if(actorReference.Contains("enemy")) {
+      switch(actorReference) {
+        case "enemy_1":
+          actorId = 0;
+          break;
+        case "enemy_2":
+          actorId = 1;
+          break;
+        case "enemy_3":
+          actorId = 2;
+          break;
+          
+      }
       if(targetActor != null) {
         Destroy(targetActor.gameObject);
       }
       newObj = SpawnActor(newActorPrefabName);
-      enemyActor = newObj.GetComponent<Actor2D>();
-      enemyActor.enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
-      enemyActor.battler = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
+      enemyActors[actorId] = newObj.GetComponent<Actor2D>();
+      enemyActors[actorId].battler = BattleController.instance.enemyMembers[actorId];
       return;
     }
 
-    Pilot person = null;
     for(int i=0; i< GlobalData.instance.pilots.Count; i++) {
       if(GlobalData.instance.pilots[i].nameKey == Utils.GetStringArgument(newActorPrefabName)) {
         person = GlobalData.instance.pilots[i];
         break;
       }
     }
+    
     switch(actorReference) {
-      case "main":
-        partyActors[0].SetCharacter(person);
-        partyActors[0].FaceRight();
-        partyActors[0].gameObject.SetActive(true);
+      case "hero_1":
+        actorId = 0;
         break;
-      case "support":
-        partyActors[1].SetCharacter(person);
-        partyActors[1].FaceRight();
-        partyActors[1].gameObject.SetActive(true);
+      case "hero_2":
+        actorId = 1;
         break;
-      case "angel":
-        partyActors[2].SetCharacter(person);
-        partyActors[2].FaceRight();
-        partyActors[2].gameObject.SetActive(true);
+      case "hero_3":
+        actorId = 2;
         break;
       default:
         targetActor = null;
         newObj = SpawnActor(newActorPrefabName);
-        newObj.GetComponent<Actor2D>().actorReference = actorReference;
         break;
     }
+    partyActors[actorId].SetCharacter(person);
+    partyActors[actorId].FaceRight();
+    partyActors[actorId].gameObject.SetActive(true);
   }
 
-  public void DestroyEnemyActor() {
-    if(enemyActor != null) {
-      Destroy(enemyActor.gameObject);
+  public void DestroyEnemyActors() {
+    for(int i=0; i<enemyActors.Length; i++) {
+      if(enemyActors[i] != null) {
+        Destroy(enemyActors[i].gameObject);
+      }
     }
   }
 
@@ -164,7 +190,11 @@ public class TheaterController : MonoBehaviour {
       case SkillTarget.partyMember3:
         return partyActors[2];
       case SkillTarget.enemy1:
-        return enemyActor;
+        return enemyActors[0];
+      case SkillTarget.enemy2:
+        return enemyActors[1];
+      case SkillTarget.enemy3:
+        return enemyActors[2];
     }
     return null;
   }
@@ -174,7 +204,7 @@ public class TheaterController : MonoBehaviour {
   }
 
   public Actor2D[] GetAllEnemiesActors() {
-    return new Actor2D[] { enemyActor };
+    return enemyActors;
   }
 
   public Actor2D GetActorByBattler(Battler character) {
@@ -184,8 +214,10 @@ public class TheaterController : MonoBehaviour {
       }
     }
 
-    if(enemyActor != null && enemyActor.battler == character) {
-      return enemyActor;
+    for(int i = 0; i < enemyActors.Length; i++) {
+      if(enemyActors[i].battler == character) {
+        return enemyActors[i];
+      }
     }
     return null;
   }
@@ -199,7 +231,7 @@ public class TheaterController : MonoBehaviour {
     BattleController.instance.SetupDateLocation();
 
 
-    for(int i=0; i< partyActors.Length; i++) {
+    for(int i=0; i< 3; i++) {
       if(i < BattleController.instance.partyMembers.Length) {
         partyActors[i].SetCharacter(BattleController.instance.partyMembers[i]);
         partyActors[i].gameObject.SetActive(true);
@@ -207,6 +239,18 @@ public class TheaterController : MonoBehaviour {
       } else {
         partyActors[i].gameObject.SetActive(false);
       }
+
+      if(i < BattleController.instance.enemyMembers.Length) {
+        Enemy currentEnemy = BattleController.instance.enemyMembers[i];
+        ChangeActor("enemy_"+(i+1).ToString(), currentEnemy.spriteName);
+        enemyActors[i].gameObject.SetActive(true);
+        //enemyActors[i].SetCharacter(BattleController.instance.enemyMembers[i]);
+      }
+      //else {
+      //  if(enemyActors[i] != null) {
+      //    enemyActors[i].gameObject.SetActive(false);
+      //  }
+      //}
     }
 
     /// Position Heroes Party
@@ -214,30 +258,31 @@ public class TheaterController : MonoBehaviour {
     partyActors[1].transform.localPosition = secondPosition;
     partyActors[2].transform.localPosition = thirdPosition;
 
-
     /// Position Enemies Party
-    Enemy currentEnemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
-    ChangeActor("enemy", currentEnemy.spriteName);
-    enemyActor.SetEnemy(currentEnemy);
+    enemyActors[0].transform.localPosition = enemyPosition1;
+    if(enemyActors[1] != null) {
+      enemyActors[1].transform.localPosition = enemyPosition2;
+    }
+    if(enemyActors[2] != null) {
+      enemyActors[2].transform.localPosition = enemyPosition3;
+    }
 
+
+    /// Clear Skill Uses
     foreach(Pilot partyMember in BattleController.instance.partyMembers) {
       partyMember.ClearSkillUsesInBattle();
     }
-
-    enemyActor.gameObject.SetActive(true);
-    //enemyActor.transform.localPosition = enemyPosition;
-    enemyActor.transform.localPosition = new Vector3(-firstPosition.x, firstPosition.y, firstPosition.z);
-
-    //VsnAudioManager.instance.PlaySfx(currentEnemy.appearSfxName);
-    PartyEntersBattleMode();
+    foreach(Enemy enemyMember in BattleController.instance.enemyMembers) {
+      enemyMember.ClearSkillUsesInBattle();
+    }
   }
+
 
   public void ClearBattle() {
     for(int i = 0; i < partyActors.Length; i++) {
       partyActors[i].MoveToPosition(outPositionLeft, 0f);
-      partyActors[i].SetBattleMode(false);
     }
-    DestroyEnemyActor();
+    DestroyEnemyActors();
   }
 
 
@@ -321,48 +366,23 @@ public class TheaterController : MonoBehaviour {
         partyActors[2].transform.DOLocalMove(thirdPosition, focusAnimationDuration);
         continue;
       }
-      if(actorToPositionBack == enemyActor) {
-        enemyActor.transform.DOLocalMove(enemyPosition, focusAnimationDuration);
+
+      if(actorToPositionBack == enemyActors[0]) {
+        enemyActors[0].transform.DOLocalMove(enemyPosition1, focusAnimationDuration);
+        continue;
+      }
+      if(actorToPositionBack == enemyActors[1]) {
+        enemyActors[1].transform.DOLocalMove(enemyPosition1, focusAnimationDuration);
+        continue;
+      }
+      if(actorToPositionBack == enemyActors[2]) {
+        enemyActors[2].transform.DOLocalMove(enemyPosition1, focusAnimationDuration);
         continue;
       }
     }
   }
 
 
-
-
-  public void SetActorAnimatorParameter(string actorReference, string parameterName, bool value) {
-    Actor2D actor = GetActorByString(actorReference);
-
-    if(actor == null) {
-      return;
-    }
-    actor.SetAnimationParameter(parameterName, value);
-  }
-
-  public void PartyEntersBattleMode() {
-    for(int i = 0; i < partyActors.Length; i++) {
-      partyActors[i].SetBattleMode(true);
-    }
-  }
-
-  public void PartyLeavesBattleMode() {
-    for(int i = 0; i < partyActors.Length; i++) {
-      partyActors[i].SetBattleMode(false);
-    }
-  }
-
-
-  public void EnemyLeavesScene() {
-    //UIController.instance.enemyHpSlider.gameObject.SetActive(false);  
-    enemyActor.ShowWeaknessCard(false);
-
-    enemyActor.transform.DOLocalMoveX(2.5f, 0.5f).SetRelative().OnComplete(() => {
-      //enemyActor.gameObject.SetActive(false);
-      PartyLeavesBattleMode();
-      DestroyEnemyActor();
-    });
-  }
 
 
   public void SetLocation(string place) {

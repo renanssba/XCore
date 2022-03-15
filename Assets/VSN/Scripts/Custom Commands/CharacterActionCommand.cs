@@ -8,13 +8,17 @@ namespace Command {
   public class CharacterActionCommand : VsnCommand {
 
     public override void Execute() {
-      BattleController.instance.CharacterTurn((SkillTarget)(int)args[0].GetNumberValue());
+      if(BattleController.instance.CurrentBattler.GetType() != typeof(Enemy)) {
+        BattleController.instance.CharacterTurn();
+      } else {
+        Debug.LogWarning("character_action for enemy!");
+        BattleController.instance.SelectEnemyTarget();
+        BattleController.instance.EnemyAttack();
+      }
     }
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg
-      });
+      signatures.Add(new VsnArgType[0]);
     }
   }
 }

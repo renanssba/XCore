@@ -8,27 +8,20 @@ namespace Command {
   public class CheckActionSkipCommand : VsnCommand {
 
     public override void Execute() {
-      int partyMemberId = (int)args[0].GetNumberValue();
-
-      // if action is idle
-      if(BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.idle) {
-        ContinueCommand.StaticExecute();
+      if(BattleController.instance.CurrentBattler.GetType() == typeof(Enemy)) {
         return;
       }
 
-      // if enemy is already dead
-      if(BattleController.instance.GetCurrentEnemyCHANGETHISCALL().hp <= 0 &&
-         BattleController.instance.selectedActionType[partyMemberId] == TurnActionType.useSkill &&
-         BattleController.instance.selectedSkills[partyMemberId].type == SkillType.attack) {
+      // if action is idle
+      if(BattleController.instance.selectedActionType[BattleController.instance.CurrentBattlerId] == TurnActionType.idle) {
         ContinueCommand.StaticExecute();
+        return;
       }
     }
 
 
     public override void AddSupportedSignatures() {
-      signatures.Add(new VsnArgType[] {
-        VsnArgType.numberArg
-      });
+      signatures.Add(new VsnArgType[0]);
     }
   }
 }

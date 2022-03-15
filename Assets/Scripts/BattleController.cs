@@ -21,6 +21,16 @@ public enum DateLocation {
 public class BattleController : MonoBehaviour {
   public static BattleController instance;
 
+  [Header("- Battle Members -")]
+  public Pilot[] partyMembers;
+  public Enemy[] enemyMembers;
+
+  [Header("- Player Actions -")]
+  public TurnActionType[] selectedActionType;
+  public Skill[] selectedSkills;
+  public Item[] selectedItems;
+  public SkillTarget[] selectedTargetPartyId;
+
   [Header("- Enemies -")]
   public List<Enemy> allEnemies;
   public TextAsset enemiesFile;
@@ -36,16 +46,6 @@ public class BattleController : MonoBehaviour {
   public List<StatusCondition> allStatusConditions;
   public TextAsset statusConditionsFile;
 
-  [Header("- Battle Members -")]
-  public Pilot[] partyMembers;
-  public Enemy[] enemyMembers;
-
-  [Header("- Player Actions -")]
-  public TurnActionType[] selectedActionType;
-  public Skill[] selectedSkills;
-  public Item[] selectedItems;
-  public SkillTarget[] selectedTargetPartyId;
-
   [Header("- Date Location -")]
   public DateLocation currentDateLocation;
 
@@ -58,17 +58,39 @@ public class BattleController : MonoBehaviour {
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
 
-  const float attackAnimationTime = 0.15f;
-
+  [Header("- Attack Animation -")]
   public Color greenColor;
   public Color redColor;
-
   public float damageShineTime;
   public float damageShineAlpha;
 
 
-  public int CurrentBattler {
+  public int CurrentBattlerId {
     get{ return VsnSaveSystem.GetIntVariable("currentBattlerTurn"); }
+  }
+
+  public Battler CurrentBattler {
+    get { return GameController.instance.currentCombat.characters[CurrentBattlerId].battler; }
+  }
+
+  public Actor2D CurrentBattlerActor {
+    get { return TheaterController.instance.GetActorByBattler(CurrentBattler); }
+  }
+
+  public SkillTarget CurrentPartyPos {
+    get {
+      for(int i=0; i<partyMembers.Length; i++) {
+        if(partyMembers[i] == CurrentBattler) {
+          return SkillTarget.partyMember1+i;
+        }
+      }
+      for(int i = 0; i < enemyMembers.Length; i++) {
+        if(enemyMembers[i] == CurrentBattler) {
+          return SkillTarget.enemy1 + i;
+        }
+      }
+      return SkillTarget.none;
+    }
   }
 
 
@@ -84,7 +106,7 @@ public class BattleController : MonoBehaviour {
 
 
   public void SetupBattleStart() {
-    Combat combat = GameController.instance.combatHappening;
+    Combat combat = GameController.instance.currentCombat;
     List<Pilot> heroesParty = new List<Pilot>();
     List<Enemy> enemiesParty = new List<Enemy>();
 
@@ -101,13 +123,13 @@ public class BattleController : MonoBehaviour {
     /// set location
     currentDateLocation = DateLocation.desert;
 
-    selectedActionType = new TurnActionType[GameController.instance.combatHappening.characters.Count];
-    selectedSkills = new Skill[GameController.instance.combatHappening.characters.Count];
-    selectedItems = new Item[GameController.instance.combatHappening.characters.Count];
+    selectedActionType = new TurnActionType[GameController.instance.currentCombat.characters.Count];
+    selectedSkills = new Skill[GameController.instance.currentCombat.characters.Count];
+    selectedItems = new Item[GameController.instance.currentCombat.characters.Count];
     for(int i=0; i< selectedActionType.Length; i++) {
       selectedActionType[i] = TurnActionType.idle;
     }
-    selectedTargetPartyId = new SkillTarget[GameController.instance.combatHappening.characters.Count];
+    selectedTargetPartyId = new SkillTarget[GameController.instance.currentCombat.characters.Count];
 
     ClearSkillsUsageRegistry();
 
@@ -144,14 +166,6 @@ public class BattleController : MonoBehaviour {
 
 
 
-  public Enemy GetCurrentEnemyCHANGETHISCALL() {
-    int currentDateEvent = VsnSaveSystem.GetIntVariable("currentDateEvent");
-    if(enemyMembers.Length <= currentDateEvent) {
-      return null;
-    }
-    return enemyMembers[currentDateEvent];
-  }
-
   public SkillTarget GetPartyMemberPosition(Battler character) {
     if(partyMembers[0] == character) {
       return SkillTarget.partyMember1;
@@ -172,12 +186,12 @@ public class BattleController : MonoBehaviour {
 
 
   public void FinishSelectingCharacterAction() {
-    switch(selectedActionType[CurrentBattler]) {
+    switch(selectedActionType[CurrentBattlerId]) {
       case TurnActionType.useItem:
-        WaitToSelectTarget(selectedItems[CurrentBattler].range, CurrentBattler);
+        WaitToSelectTarget(selectedItems[CurrentBattlerId].range, CurrentBattlerId);
         return;
       case TurnActionType.useSkill:
-        WaitToSelectTarget(selectedSkills[CurrentBattler].range, CurrentBattler);
+        WaitToSelectTarget(selectedSkills[CurrentBattlerId].range, CurrentBattlerId);
         return;
     }
 
@@ -196,28 +210,26 @@ public class BattleController : MonoBehaviour {
     UIController.instance.selectTargetPanel.SetActive(true);
     switch(range) {
       case ActionRange.self:
-        SetAllTargetSelections(false);
+        SetHeroTargetSelections(false);
+        SetEnemyTargetSelections(false);
         UIController.instance.selectTargets[currentBattler].SetActive(true);
         break;
       case ActionRange.one_ally:
-        SetAllTargetSelections(true);
-        UIController.instance.selectTargets[3].SetActive(false);
+        SetHeroTargetSelections(true);
+        SetEnemyTargetSelections(false);
         break;
       case ActionRange.other_ally:
-        SetAllTargetSelections(true);
-        UIController.instance.selectTargets[3].SetActive(false);
-        for(int i = 0; i < 2; i++) {
-          if(i == currentBattler) {
-            UIController.instance.selectTargets[i].SetActive(false);
-          }
-        }
+        SetHeroTargetSelections(true);
+        SetEnemyTargetSelections(false);
+        UIController.instance.selectTargets[currentBattler].SetActive(false);
         break;
       case ActionRange.one_enemy:
-        SetAllTargetSelections(false);
-        UIController.instance.selectTargets[3].SetActive(true);
+        SetHeroTargetSelections(false);
+        SetEnemyTargetSelections(true);
         break;
       case ActionRange.anyone:
-        SetAllTargetSelections(true);
+        SetHeroTargetSelections(true);
+        SetEnemyTargetSelections(true);
         break;
       case ActionRange.random_enemy:
         UIController.instance.selectTargetPanel.SetActive(false);
@@ -236,47 +248,60 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public void SetAllTargetSelections(bool value) {
-    for(int i = 0; i < UIController.instance.selectTargets.Length; i++) {
-      UIController.instance.selectTargets[i].SetActive(value);
+  public void SetHeroTargetSelections(bool value) {
+    for(int i = 0; i < 3; i++) {
+      if(partyMembers.Length > i) {
+        UIController.instance.selectTargets[i].SetActive(value);
+      } else {
+        UIController.instance.selectTargets[i].SetActive(false);
+      }      
+    }
+  }
+  public void SetEnemyTargetSelections(bool value) {
+    for(int i = 3; i < 6; i++) {
+      if(enemyMembers.Length > (i-3)) {
+        UIController.instance.selectTargets[i].SetActive(value);
+      } else {
+        UIController.instance.selectTargets[i].SetActive(false);
+      }
     }
   }
 
-  public void CharacterTurn(SkillTarget partyMemberId) {
+
+
+  public void CharacterTurn() {
     VsnController.instance.state = ExecutionState.WAITING;
-
-    TurnActionType action = selectedActionType[(int)partyMemberId];
-    Battler currentCharacter = GetBattlerByTargetId(partyMemberId);
-
+    TurnActionType action = selectedActionType[CurrentBattlerId];
 
     switch(action) {
       case TurnActionType.useSkill:
-        CharacterUseSkill(partyMemberId);
+        CharacterUseSkill();
         break;
       case TurnActionType.useItem:
-        StartCoroutine(ExecuteUseItem(partyMemberId, selectedTargetPartyId[(int)partyMemberId], selectedItems[(int)partyMemberId]));
+        StartCoroutine(ExecuteUseItem((SkillTarget)CurrentBattlerId, selectedTargetPartyId[CurrentBattlerId], selectedItems[CurrentBattlerId]));
         AchievementsController.StatProgress("ITEMS_USED", 1);
         break;
       case TurnActionType.defend:
-        StartCoroutine(ExecuteDefend(partyMemberId));
+        StartCoroutine(ExecuteDefend((SkillTarget)CurrentBattlerId));
         break;
       case TurnActionType.idle:
-        StartCoroutine(ExecuteIdle(partyMemberId));
+        StartCoroutine(ExecuteIdle((SkillTarget)CurrentBattlerId));
         break;
     }
   }
 
-  public void CharacterUseSkill(SkillTarget partyMemberId) {
+  public void CharacterUseSkill() {
+    Skill usedSkill = selectedSkills[CurrentBattlerId];
     // spend SP
-    GetBattlerByTargetId(partyMemberId).SpendSp(selectedSkills[(int)partyMemberId].spCost);
+    CurrentBattler.SpendSp(usedSkill.spCost);
 
-    switch(selectedSkills[(int)partyMemberId].type) {
+    switch(usedSkill.type) {
       case SkillType.attack:
       case SkillType.active:
-        StartCoroutine(ExecuteBattlerSkill(partyMemberId, selectedTargetPartyId[(int)partyMemberId], selectedSkills[(int)partyMemberId]));
+        StartCoroutine(ExecuteBattlerSkill(selectedTargetPartyId[CurrentBattlerId], usedSkill));
         break;
       case SkillType.passive:
-        Debug.LogError("Passive skill " + selectedSkills[(int)partyMemberId].name + " used actively.");
+        Debug.LogError("Passive skill " + selectedSkills[CurrentBattlerId].name + " used actively.");
         break;
     }
   }
@@ -353,13 +378,14 @@ public class BattleController : MonoBehaviour {
   public ActionSkin GetActionSkin(Pilot user, Skill usedSkill) {
     string sexModifier = (user.isMale ? "_boy" : "_girl");
     string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
+    Debug.LogWarning("actionSkinName: "+ actionSkinName);
     return GetActionSkinByName(actionSkinName);
   }
 
 
-  public IEnumerator ExecuteBattlerSkill(SkillTarget skillUserId, SkillTarget targetId, Skill usedSkill) {
-    Actor2D skillUserActor = TheaterController.instance.GetActorByPartyId(skillUserId);
-    Battler skillUser = skillUserActor.battler;
+  public IEnumerator ExecuteBattlerSkill(SkillTarget targetId, Skill usedSkill) {
+    Battler skillUser = CurrentBattler;
+    Actor2D skillUserActor = TheaterController.instance.GetActorByBattler(skillUser);
     Actor2D[] targetActors;
 
     if(targetId == SkillTarget.allEnemies) {
@@ -384,16 +410,6 @@ public class BattleController : MonoBehaviour {
 
     // skill cast animation
     switch(usedSkill.animationSkin.animation) {
-      case SkillAnimation.skinnable:
-        ActionSkin actionSkin;
-        if(skillUserId == SkillTarget.partyMember1 || skillUserId == SkillTarget.partyMember2) {
-          actionSkin = GetActionSkin(partyMembers[(int)skillUserId], usedSkill);
-        } else {
-          actionSkin = skillUserActor.enemy.baseAttackSkin;
-        }
-        yield return skillUserActor.CharacterAttackAnim(actionSkin, targetActors);
-        break;
-
       default:
         yield return skillUserActor.CharacterAttackAnim(usedSkill.animationSkin, targetActors);
         break;
@@ -456,16 +472,6 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
       }
 
-
-      // execute special effects
-      switch(usedSkill.specialEffect) {
-        case SkillSpecialEffect.sensor:
-          VsnAudioManager.instance.PlaySfx("skill_activate_good");
-          targetActor.ShineRed();
-          targetActor.ShowWeaknessCard(true);
-          yield return new WaitForSeconds(1f);
-          break;
-      }
 
 
       // heal status condition
@@ -558,8 +564,6 @@ public class BattleController : MonoBehaviour {
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
     yield return new WaitForSeconds(TheaterController.instance.focusAnimationDuration);
 
-    Enemy currentEvent = GetCurrentEnemyCHANGETHISCALL();
-
     VsnAudioManager.instance.PlaySfx("challenge_default");
     yield return userActor.UseItemAnimation(targetActor, usedItem);
 
@@ -567,17 +571,9 @@ public class BattleController : MonoBehaviour {
     Inventory ivt = GlobalData.instance.pilots[0].inventory;
     ivt.ConsumeItem(usedItem.id, 1);
 
-
-    // sensor effect
-    if(usedItem.nameKey == "sensor") {
-      VsnAudioManager.instance.PlaySfx("skill_activate_good");
-      targetActor.ShineRed();
-      targetActor.ShowWeaknessCard(true);
-      yield return new WaitForSeconds(1f);
-    } else {
-      VsnAudioManager.instance.PlaySfx("item_use");
-      targetActor.ShineGreen();
-    }
+    // sound effect and shine
+    VsnAudioManager.instance.PlaySfx("item_use");
+    targetActor.ShineGreen();
 
     // heal status condition
     if(usedItem.HealsStatusCondition()) {
@@ -651,11 +647,15 @@ public class BattleController : MonoBehaviour {
   }
 
 
-  public void EnemyAttack() {
-    SkillTarget targetId = selectedTargetPartyId[CurrentBattler];
-    VsnController.instance.state = ExecutionState.WAITING;
+  public void SelectEnemyTarget() {
+    int targetId = Random.Range(0, partyMembers.Length);
+    selectedTargetPartyId[CurrentBattlerId] = (SkillTarget)targetId;
+  }
 
-    Skill skillUsed = GetCurrentEnemyCHANGETHISCALL().DecideWhichSkillToUse();
+  public void EnemyAttack() {
+    SkillTarget targetId = selectedTargetPartyId[CurrentBattlerId];
+    VsnController.instance.state = ExecutionState.WAITING;
+    Skill skillUsed = ((Enemy)CurrentBattler).DecideWhichSkillToUse();
 
     if(skillUsed.range == ActionRange.all_allies) {
       targetId = SkillTarget.allEnemies;
@@ -672,7 +672,7 @@ public class BattleController : MonoBehaviour {
       }
     }
 
-    StartCoroutine(ExecuteBattlerSkill(SkillTarget.enemy1, targetId, skillUsed));
+    StartCoroutine(ExecuteBattlerSkill(targetId, skillUsed));
   }
 
 
@@ -681,7 +681,9 @@ public class BattleController : MonoBehaviour {
     foreach(Pilot p in partyMembers) {
       p.EndTurn();
     }
-    GetCurrentEnemyCHANGETHISCALL().EndTurn();
+    foreach(Enemy en in enemyMembers) {
+      en.EndTurn();
+    }
   }
 
   public void SetCustomBattle(int enemyId) {
@@ -702,23 +704,6 @@ public class BattleController : MonoBehaviour {
     return null;
   }
 
-  public Pilot GetCurrentPlayer() {
-    if(CurrentBattler < partyMembers.Length && CurrentBattler >= 0) {
-      return partyMembers[CurrentBattler];
-    }
-    return null;
-  }
-
-  public Pilot GetCurrentTarget() {
-    if(CurrentBattler < partyMembers.Length) {
-      int target = (int)selectedTargetPartyId[CurrentBattler];
-      if(target < partyMembers.Length) {
-        return partyMembers[target];
-      }
-    }
-    return null;
-  }
-
   public Battler GetBattlerByTargetId(SkillTarget targetId) {
     switch(targetId) {
       case SkillTarget.partyMember1:
@@ -730,20 +715,6 @@ public class BattleController : MonoBehaviour {
       case SkillTarget.enemy1:
       default:
         return enemyMembers[0];
-    }
-    return null;
-  }
-
-  public Battler GetBattlerByString(string targetName) {
-    switch(targetName) {
-      case "main":
-        return GetBattlerByTargetId(SkillTarget.partyMember1);
-      case "support":
-        return GetBattlerByTargetId(SkillTarget.partyMember2);
-      case "angel":
-        return GetBattlerByTargetId(SkillTarget.partyMember3);
-      case "enemy":
-        return GetBattlerByTargetId(SkillTarget.enemy1);
     }
     return null;
   }

@@ -15,7 +15,7 @@ namespace Command {
         case "players":
           CheckPlayersSkills(skillPos, situation);
           break;
-        case "enemy":
+        case "enemies":
           CheckEnemySkills(skillPos, situation);
           break;
       }
@@ -23,31 +23,34 @@ namespace Command {
 
 
     public void CheckEnemySkills(int skillPos, string situation) {
-      Enemy enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
-      Skill skillChecked = BattleController.instance.GetSkillById(enemy.passiveSkills[skillPos]);
+      /// TODO: implement this
+      return;
+
+      //Enemy enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
+      //Skill skillChecked = BattleController.instance.GetSkillById(enemy.passiveSkills[skillPos]);
 
 
-      //Debug.LogWarning("CHECKING for ENEMY skill activation. skill: "+skillChecked.name+", situation: "+situation);
-      // return if not checking the correct activation trigger, or the skill is not passive / unlocked
-      if(skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
-        return;
-      }
+      ////Debug.LogWarning("CHECKING for ENEMY skill activation. skill: "+skillChecked.name+", situation: "+situation);
+      //// return if not checking the correct activation trigger, or the skill is not passive / unlocked
+      //if(skillChecked.type != SkillType.passive || skillChecked.activationTrigger.ToString() != situation) {
+      //  return;
+      //}
 
-      // check trigger chance
-      if(Random.Range(0, 100) >= skillChecked.triggerChance) {
-        return;
-      }
-      //Debug.LogWarning("Check for skill activation. Passed trigger chance.");
-
-
-      // check all trigger conditions
-      if(!Utils.AreAllConditionsMet(skillChecked, skillChecked.triggerConditions, SkillTarget.enemy1)) {
-        return;
-      }
+      //// check trigger chance
+      //if(Random.Range(0, 100) >= skillChecked.triggerChance) {
+      //  return;
+      //}
+      ////Debug.LogWarning("Check for skill activation. Passed trigger chance.");
 
 
-      // activate passive skill
-      ActivatePassiveSkill(skillChecked, SkillTarget.enemy1);
+      //// check all trigger conditions
+      //if(!Utils.AreAllConditionsMet(skillChecked, skillChecked.triggerConditions, SkillTarget.enemy1)) {
+      //  return;
+      //}
+
+
+      //// activate passive skill
+      //ActivatePassiveSkill(skillChecked, SkillTarget.enemy1);
     }
 
 
@@ -90,13 +93,14 @@ namespace Command {
 
     
     public static void ActivatePassiveSkill(Skill skillToActivate, SkillTarget partyMemberId) {
-      BattleController battle = BattleController.instance;
-      SkillTarget target = GetTargetFromSkill(skillToActivate, partyMemberId);
+      /// TODO: Implement this. commented because ExecuteBattlerSkill signature changed and this became incompatible
+      //BattleController battle = BattleController.instance;
+      //SkillTarget target = GetTargetFromSkill(skillToActivate, partyMemberId);
 
-      Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);
+      //Debug.LogWarning("Activating passive skill: " + skillToActivate+", party member id:" + partyMemberId);
 
-      VsnController.instance.state = ExecutionState.WAITING;
-      battle.StartCoroutine(battle.ExecuteBattlerSkill(partyMemberId, target, skillToActivate));
+      //VsnController.instance.state = ExecutionState.WAITING;
+      //battle.StartCoroutine(battle.ExecuteBattlerSkill(partyMemberId, target, skillToActivate));
     }
 
 

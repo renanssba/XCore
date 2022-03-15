@@ -28,7 +28,7 @@ say "tutorials/say_4"
 set_var currentBattlerTurn 0
 tutorial_icon "hp_enemy" false
 
-action_input currentBattlerTurn false
+action_input false
 say "tutorials/say_5"
 tutorial_icon "action_button" true
 say "tutorials/say_6"
@@ -64,7 +64,7 @@ if tutorial_3 == true
 endif
 set_var tutorial_3 true
 set_var currentBattlerTurn 0
-action_input currentBattlerTurn false
+action_input false
 tutorial_icon "defend_button" true
 say "char_name/none" "tutorials/say_10"
 tutorial_icon "defend_button" false
@@ -83,7 +83,7 @@ if tutorial_skills == true
 endif
 say "char_name/none" "tutorials/say_12"
 set_var currentBattlerTurn 0
-action_input currentBattlerTurn false
+action_input false
 tutorial_icon "action_button" true
 say "tutorials/say_13"
 set_var tut_require_click_action_button true
@@ -124,7 +124,7 @@ wait 1
 say "char_name/fertiliel" "tutorials/say_19"
 say "tutorials/say_20"
 
-action_input currentBattlerTurn false
+action_input false
 tutorial_icon "item_button" true
 wait 1
 say "tutorials/say_21"

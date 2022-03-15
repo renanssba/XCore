@@ -1,5 +1,4 @@
 ﻿set_var battle_is_happening false
-set_var currentDateEvent 0
 setup_date
 set_custom_battle 30
 goto_script "battle"
@@ -10,7 +9,6 @@ goto end
 
 say_auto "DEBUG MENU"
 set_var battle_is_happening false
-set_var currentDateEvent 0
 setup_date
 choices "Agnes" agnes "Maya" maya "Cancelar" end
 

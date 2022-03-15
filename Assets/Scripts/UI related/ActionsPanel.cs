@@ -14,20 +14,18 @@ public class ActionsPanel : MonoBehaviour {
   public GameObject[] baseActionButtons;
   public ActionButton[] skillButtons;
 
-  //public int currentPartyMember;
-
   public GameObject[] baseActionButtonShades;
 
   public Vector2[] fourButtonPositions;
   public Vector2[] threeButtonPositions;
 
 
-  public int CurrentBattler {
-    get { return VsnSaveSystem.GetIntVariable("currentBattlerTurn"); }
+  public int CurrentBattlerId {
+    get { return BattleController.instance.CurrentBattlerId; }
   }
 
   public Pilot CurrentPilot {
-    get { return BattleController.instance.partyMembers[CurrentBattler]; }
+    get { return (Pilot)BattleController.instance.CurrentBattler; }
   }
 
 
@@ -37,17 +35,16 @@ public class ActionsPanel : MonoBehaviour {
 
   public void Initialize() {
     SetupBaseActionButtons();
-    PositionPanels(CurrentBattler);
+    PositionPanels();
   }
 
 
   public void SetupBaseActionButtons() {
     List<GameObject> availableButtons = new List<GameObject>();
-    Debug.LogWarning("currentPartyMember: "+ CurrentBattler);
-    Pilot currentPerson = BattleController.instance.partyMembers[CurrentBattler];
+    Debug.LogWarning("Current Battler Id: "+ CurrentBattlerId);
 
-    baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
-    baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(currentPerson);
+    baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(CurrentPilot);
+    baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(CurrentPilot);
 
     baseActionButtons[0].SetActive(false);
     baseActionButtons[1].SetActive(false);
@@ -55,16 +52,7 @@ public class ActionsPanel : MonoBehaviour {
     availableButtons.Add(baseActionButtons[2]);
     baseActionButtons[3].SetActive(true);
     availableButtons.Add(baseActionButtons[3]);
-
-    //if (CurrentBattler == 0) {
-    //  baseActionButtons[4].SetActive(false);
-    //} else {
-    //  baseActionButtons[4].SetActive(true);
-    //  availableButtons.Add(baseActionButtons[4]);
-    //}
-
     SetupBaseActionButtonsPositions(availableButtons);
-
 
     skillsPanel.gameObject.SetActive(false);
     baseActionsPanel.gameObject.SetActive(true);
@@ -75,13 +63,13 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void SetupBaseActionButtonsShades() {
-    Pilot currentPerson = BattleController.instance.partyMembers[CurrentBattler];
+    Battler currentPilot = CurrentPilot;
 
     /// itens button
-    baseActionButtonShades[1].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useItem) || !ThereAreItemsAvailable());
+    baseActionButtonShades[1].SetActive(!currentPilot.CanExecuteAction(TurnActionType.useItem) || !ThereAreItemsAvailable());
 
     /// skills button
-    baseActionButtonShades[2].SetActive(!currentPerson.CanExecuteAction(TurnActionType.useSkill));
+    baseActionButtonShades[2].SetActive(!currentPilot.CanExecuteAction(TurnActionType.useSkill));
   }
 
 
@@ -97,7 +85,7 @@ public class ActionsPanel : MonoBehaviour {
     }
   }
 
-  public void SetupCharacterActions(int currentPartyMember) {
+  public void SetupCharacterActions() {
     int relationshipId = GlobalData.instance.GetCurrentRelationship().id;
 
     for(int i = 0; i < skillButtons.Length; i++) {
@@ -124,20 +112,21 @@ public class ActionsPanel : MonoBehaviour {
     }
   }
 
-  public void PositionPanels(int currentPartyMember) {
-    transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(-320f + 160f * currentPartyMember, 0f, 0f);
+  public void PositionPanels() {
+    SkillTarget currentPosInParty = BattleController.instance.CurrentPartyPos;
+    transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(-320f + 160f * (int)currentPosInParty, 0f, 0f);
   }
 
 
   public void ClickSkillsPanel() {
-    if(!BattleController.instance.partyMembers[CurrentBattler].CanExecuteAction(TurnActionType.useSkill)) {
+    if(!CurrentPilot.CanExecuteAction(TurnActionType.useSkill)) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
 
     SfxManager.StaticPlayConfirmSfx();
     baseActionsPanel.gameObject.SetActive(false);
-    SetupCharacterActions(CurrentBattler);
+    SetupCharacterActions();
     skillsPanel.gameObject.SetActive(true);
     Utils.SelectUiElement(skillButtons[0].gameObject);
 
@@ -148,7 +137,7 @@ public class ActionsPanel : MonoBehaviour {
   }
 
   public void ClickItemsPanel() {
-    if(!ThereAreItemsAvailable() || !BattleController.instance.partyMembers[CurrentBattler].CanExecuteAction(TurnActionType.useItem)) {
+    if(!ThereAreItemsAvailable() || !CurrentPilot.CanExecuteAction(TurnActionType.useItem)) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -158,23 +147,6 @@ public class ActionsPanel : MonoBehaviour {
     SetupItemButtons();
     skillsPanel.gameObject.SetActive(true);
     Utils.SelectUiElement(skillButtons[0].gameObject);
-  }
-
-
-  public void ClickBackButton() {
-    Debug.LogWarning("clicked BACK button");
-    SfxManager.StaticPlayConfirmSfx();
-
-    int currentPlayer = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
-    currentPlayer -= 1;
-
-    // TODO: consider all cases, considering which previous can input 
-    if(BattleController.instance.partyMembers[currentPlayer].TotalStatusEffectPower(StatusConditionEffect.cantAct) >= 1f) {
-      currentPlayer -= 1;
-    }
-
-    VsnSaveSystem.SetVariable("currentBattlerTurn", currentPlayer);
-    Command.ActionInputCommand.WaitForCharacterInput(currentPlayer);
   }
 
 

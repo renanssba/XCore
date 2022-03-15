@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour {
 
   [Header("- Info Panels -")]
   public BattlerInfoPanel[] heroesInfoPanels;
-  public BattlerInfoPanel enemyInfoPanels;
+  public BattlerInfoPanel[] enemyInfoPanels;
 
   [Header("- Actions Panel -")]
   public ActionsPanel actionsPanel;
@@ -81,12 +81,14 @@ public class UIController : MonoBehaviour {
       } else {
         heroesInfoPanels[i].gameObject.SetActive(false);
       }
-    }
 
-    if(BattleController.instance.enemyMembers != null &&
-      BattleController.instance.enemyMembers.Length > 0 &&
-      BattleController.instance.enemyMembers[0] != null) {
-      enemyInfoPanels.Initialize(BattleController.instance.enemyMembers[0]);
+      if(BattleController.instance.enemyMembers != null &&
+         BattleController.instance.enemyMembers.Length > i) {
+        enemyInfoPanels[i].gameObject.SetActive(true);
+        enemyInfoPanels[i].Initialize(BattleController.instance.enemyMembers[i]);
+      } else {
+        enemyInfoPanels[i].gameObject.SetActive(false);
+      }
     }
   }
 
@@ -97,13 +99,11 @@ public class UIController : MonoBehaviour {
       if(BattleController.instance.partyMembers.Length > i) {
         heroesInfoPanels[i].SkipHpBarAnimation();
       }
-    }
 
-    if(BattleController.instance.enemyMembers != null &&
-      BattleController.instance.enemyMembers.Length > 0 &&
-      BattleController.instance.enemyMembers[0] != null) {
-      Debug.LogWarning("SKIPPING HP BAR ANIM FOR ENEMY");
-      enemyInfoPanels.SkipHpBarAnimation();
+      if(BattleController.instance.enemyMembers != null &&
+         BattleController.instance.enemyMembers.Length > i) {
+        enemyInfoPanels[i].SkipHpBarAnimation();
+      }
     }
   }
 
@@ -163,7 +163,7 @@ public class UIController : MonoBehaviour {
     }
 
     // position actions panel
-    actionsPanel.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f - 320f*currentPartyMember, 0f, 0f);
+    actionsPanel.PositionPanels();
   }
 
   public void ShowBattleUI(bool value) {

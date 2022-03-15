@@ -25,14 +25,6 @@ public class SpecialCodes {
       if(VsnAudioManager.instance.musicPlayer.loopSource.clip != null) {
         currentString = currentString.Replace("\\currentMusic", VsnAudioManager.instance.musicPlayer.loopSource.clip.name);
       }
-      if(BattleController.instance != null) {
-        if(BattleController.instance.GetCurrentPlayer() != null) {
-          currentString = currentString.Replace("\\active", BattleController.instance.GetCurrentPlayer().GetName());
-        }
-        if(BattleController.instance.GetCurrentTarget() != null) {
-          currentString = currentString.Replace("\\target", BattleController.instance.GetCurrentTarget().GetName());
-        }
-      }
       currentString = currentString.Replace("\\day", VsnSaveSystem.GetIntVariable("day").ToString());
       currentString = currentString.Replace("\\n", "\n");
       currentString = currentString.Replace("\\q", "\"");
@@ -125,19 +117,17 @@ public class SpecialCodes {
   }
 
   static float InterpretSpecialNumber(string keycode) {
-    Enemy enemy = null;
     int count = 0;
-    if(BattleController.instance != null) {
-      enemy = BattleController.instance.GetCurrentEnemyCHANGETHISCALL();
-    }
-
     Relationship currentRelationship = GlobalData.instance.GetCurrentRelationship();
 
     switch(keycode) {
       case "#random100":
         return Random.Range(0, 100);
       case "#battlersLength":
-        return BattleController.instance.partyMembers.Length;
+        if(GameController.instance != null && GameController.instance.currentCombat != null) {
+          return GameController.instance.currentCombat.characters.Count;
+        }
+        return 0;
       case "#enemiesLength":
         return BattleController.instance.enemyMembers.Length;
       case "#heroesAlive":
@@ -163,29 +153,23 @@ public class SpecialCodes {
           return -1;
         }
       case "#currentBattlerStatusConditionsCount":
-        int currentPlayerId = VsnSaveSystem.GetIntVariable("currentBattlerTurn");
-        if(BattleController.instance.partyMembers.Length >= currentPlayerId) {
-          Pilot currentPlayer = BattleController.instance.partyMembers[currentPlayerId];
-          return currentPlayer.statusConditions.Count;
+        if(BattleController.instance.CurrentBattler != null) {
+          return BattleController.instance.CurrentBattler.statusConditions.Count;
         }
         break;
-      case "#currentEnemyStatusConditionsCount":
-        if(BattleController.instance.GetCurrentEnemyCHANGETHISCALL() != null) {
-          return BattleController.instance.GetCurrentEnemyCHANGETHISCALL().statusConditions.Count;
-        }
-        break;
-      case "#currentCoupleSkillsCount":
-        if(currentRelationship != null) {
-          return currentRelationship.skilltree.skills.Length;
-        } else {
-          return -1;
-        }
-      case "#enemySkillsCount":
-        if(enemy != null) {
-          return enemy.passiveSkills.Length;
-        } else {
-          return -1;
-        }
+      /// TODO: reimplement for passive skills
+      //case "#currentCoupleSkillsCount":
+      //  if(currentRelationship != null) {
+      //    return currentRelationship.skilltree.skills.Length;
+      //  } else {
+      //    return -1;
+      //  }
+      //case "#enemySkillsCount":
+      //  if(enemy != null) {
+      //    return enemy.passiveSkills.Length;
+      //  } else {
+      //    return -1;
+      //  }
       default:
         return 0f;
     }

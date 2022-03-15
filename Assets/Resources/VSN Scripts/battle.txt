@@ -1,5 +1,4 @@
-﻿set_var currentDateEvent 0
-setup_battle
+﻿setup_battle
 
 fade_out 0.5
 bg null
@@ -8,7 +7,6 @@ play_music "" "XCore1 Boss Theme"
 
 theater_animation "setup_battle"
 
-// move_camera "far_view" 0
 move_camera "battle_view" 0
 
 set_screen "battle"
@@ -37,17 +35,16 @@ goto_script "check_passive_triggers" "battle_started"
 // end turn (to pass time on status conditions)
 // end_turn
 
-// goto_script "check_passive_triggers" "before_death_checks"
-
 // character turns
 for currentBattlerTurn #battlersLength
 
   /// Ask for action input
-  action_input currentBattlerTurn
+  action_input
   
-  check_action_skip currentBattlerTurn
+  check_action_skip
+  
   goto_script "check_passive_triggers" "before_action"
-  character_action currentBattlerTurn
+  character_action
   goto_script "check_passive_triggers" "after_action"
   wait 0.5
   
@@ -60,16 +57,6 @@ for currentBattlerTurn #battlersLength
   endif
 endfor
 
-
-// enemy turn
-set_var currentBattlerTurn 1
-enemy_attack_target
-goto_script "check_passive_triggers" "before_enemy_attack"
-enemy_attack
-goto_script "check_passive_triggers" "after_enemy_attack"
-
-
-// goto_script "check_passive_triggers" "before_death_checks"
 goto end
 
 // END THE FIGHT
