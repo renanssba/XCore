@@ -11,9 +11,13 @@ public class ItemDatabase : MonoBehaviour {
 
 
   void Awake(){
-    if(instance == null){
+    if(instance == null) {
       instance = this;
+    } else if(instance != this) {
+      Destroy(gameObject);
+      return;
     }
+    DontDestroyOnLoad(gameObject);
     itemsForSale = new List<int>();
   }
 

@@ -8,8 +8,6 @@ public class PartialLoopPlayer : MonoBehaviour {
   public AudioSource loopSource;
   public bool autoPlay = false;
 
-  private bool started = false;
-
 
   void Start() {
     if(autoPlay)
@@ -49,7 +47,6 @@ public class PartialLoopPlayer : MonoBehaviour {
       loopSource.time = 0f;
       loopSource.Play();
     }
-    started = true;
   }
 
   public IEnumerator PlayWithDelay(float waitTime) {

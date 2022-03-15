@@ -8,9 +8,8 @@ namespace Command {
   public class ActionInputCommand : VsnCommand {
 
     public override void Execute() {
-      Debug.LogWarning("action_input called!");
       if(BattleController.instance.CurrentBattler.GetType() == typeof(Enemy)) {
-        Debug.LogWarning("action_input retuning because current battler is enemy: "+ BattleController.instance.CurrentBattler);
+        BattleController.instance.selectedActionType[BattleController.instance.CurrentBattlerId] = TurnActionType.useSkill;
         return;
       }
 

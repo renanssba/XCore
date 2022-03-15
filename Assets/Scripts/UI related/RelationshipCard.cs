@@ -27,8 +27,8 @@ public class RelationshipCard : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    characterFaceImage[0].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[0].id);
-    characterFaceImage[1].sprite = ResourcesManager.instance.GetFaceSprite(relationship.people[1].id);
+    characterFaceImage[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.people[0].id, CharacterSpritePart.face);
+    characterFaceImage[1].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.people[1].id, CharacterSpritePart.face);
 
     int startingPoint = Relationship.LevelStartingExp(relationship.level);
     int neededExp = Relationship.LevelUpNeededExp(relationship.level);

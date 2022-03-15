@@ -623,14 +623,15 @@ public class BattleController : MonoBehaviour {
     defendingActor.DefendActionAnimation();
     //yield return ShowDefendMessage();
 
-    if(defender.CurrentSP() < defender.MaxSP()) {
-      yield return new WaitForSeconds(0.2f);
-      defender.HealSp(1);
-      defendingActor.ShowHealSpParticle(1);
-      yield return new WaitForSeconds(0.5f);
-    } else {
-      yield return new WaitForSeconds(1.5f);
-    }
+    yield return new WaitForSeconds(1.5f);
+    //if(defender.CurrentSP() < defender.MaxSP()) {
+    //  yield return new WaitForSeconds(0.2f);
+    //  defender.HealSp(1);
+    //  defendingActor.ShowHealSpParticle(1);
+    //  yield return new WaitForSeconds(0.5f);
+    //} else {
+    //  yield return new WaitForSeconds(1.5f);
+    //}
 
     VsnController.instance.state = ExecutionState.PLAYING;
   }

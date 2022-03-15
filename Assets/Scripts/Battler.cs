@@ -10,8 +10,8 @@ public abstract class Battler {
   public int id;
 
   [Header("- Attributes -")]
-  public int[] attributes;
   public int hp;
+  public int[] attributes;
 
 
   [Header("- Status Conditions -")]

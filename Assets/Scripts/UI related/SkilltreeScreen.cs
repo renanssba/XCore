@@ -42,8 +42,8 @@ public class SkilltreeScreen : MonoBehaviour {
 
     bondPointsText.text = relationship.bondPoints.ToString();
 
-    /// characte sprite
-    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.people[0].id, CharacterSpritePart.character);
+    /// fullbody sprite
+    characterImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(relationship.people[0].id, CharacterSpritePart.fullBody);
 
     /// show requisite paths
     if(relationship.skilltree.skills[8].isUnlocked) {

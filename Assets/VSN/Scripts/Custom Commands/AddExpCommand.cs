@@ -17,7 +17,7 @@ namespace Command {
         GlobalData.instance.currentRelationshipId = (int)args[2].GetNumberValue();
       }
 
-      GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet*10);
+      //GlobalData.instance.AddExpForRelationship(GlobalData.instance.GetCurrentRelationship(), expToGet*10);
       VsnController.instance.WaitForCustomInput();
     }
 

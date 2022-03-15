@@ -45,7 +45,6 @@ public class GlobalData : MonoBehaviour {
     currentRelationshipId = 0;
 
     VsnSaveSystem.SetVariable("money", 0);
-    //VsnSaveSystem.SetVariable("max_days", 14);
     VsnSaveSystem.SetVariable("day", 0);
 
     pilots = new List<Pilot>();
@@ -70,7 +69,7 @@ public class GlobalData : MonoBehaviour {
       pilots.Add(newPilot);
     }
 
-    ResourcesManager.instance.GenerateCharacterSprites(new string[] {"marcus", "agnes", "maya"});
+    ResourcesManager.instance.GenerateCharacterSprites();
 
 
     relationships = new Relationship[3];
@@ -142,10 +141,10 @@ public class GlobalData : MonoBehaviour {
   }
 
 
-  public void AddExpForRelationship(Relationship rel, int expToAdd) {
-    UIController.instance.relationshipUpAnimationCard.Initialize(rel);
-    UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
-  }
+  //public void AddExpForRelationship(Relationship rel, int expToAdd) {
+  //  UIController.instance.relationshipUpAnimationCard.Initialize(rel);
+  //  UIController.instance.relationshipUpAnimationCard.RaiseExp(expToAdd);
+  //}
 
   public AudioClip GetDialogSfxByName(string name) {
     foreach(VsnCharacterData chara in ResourcesManager.instance.vsnCharacterData) {

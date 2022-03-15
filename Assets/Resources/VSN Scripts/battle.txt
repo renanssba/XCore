@@ -35,9 +35,10 @@ goto_script "check_passive_triggers" "battle_started"
 // end turn (to pass time on status conditions)
 // end_turn
 
+wait 1
+
 // character turns
 for currentBattlerTurn #battlersLength
-
   /// Ask for action input
   action_input
   

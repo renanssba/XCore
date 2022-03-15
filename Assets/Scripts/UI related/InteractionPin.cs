@@ -22,12 +22,6 @@ public class InteractionPin : MonoBehaviour {
     }
   }
 
-  public void ResetSprite() {
-    if(GetPerson() != null) {
-      characterIcon.sprite = ResourcesManager.instance.faceSprites[GetPerson().id];
-    }
-  }
-
   public void SetSprite(Sprite s) {
     characterIcon.sprite = s;
   }

@@ -23,7 +23,7 @@ public class GirlInteractionScreen : MonoBehaviour {
     }
 
     //UIController.instance.SetScreenLayout("girl_interaction_screen");
-    UIController.instance.relationshipUpAnimationCard.Initialize(currentRelationship);
+    //UIController.instance.relationshipUpAnimationCard.Initialize(currentRelationship);
     VsnController.instance.BlockExternalInput(false);
 
     relationshipCard.Initialize(currentRelationship);

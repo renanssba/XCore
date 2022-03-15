@@ -8,27 +8,22 @@ using TMPro;
 
 
 public class Actor2D : MonoBehaviour {
-  public SpriteRenderer[] renderers;
-  public SpriteRenderer[] dirtySplashRenderers;
-  public SpriteRenderer[] buffAuraRenderers;
-  public new ParticleSystem particleSystem;
-  public SpriteRenderer shadowRenderer;
 
-  public float[] initialRendererFlashPowers;
-  public Color[] initialrendererColors;
-
+  [Header("- Data -")]
   public Battler battler;
+
+  [Header("- Renderers -")]
+  public SpriteRenderer[] renderers;
+  public SpriteRenderer shadowRenderer;
+  public GameObject choosingActionIndicator;
+
+  [Header("- Animator -")]
   public Animator animator;
 
-  public Button targetSelectButton;
-
-  public GameObject choosingActionIndicator;
-  public GameObject spottedIcon;
+  private MaterialPropertyBlock materialProperties;
 
 
   const float attackAnimTime = 0.18f;
-
-  public MaterialPropertyBlock materialProperties;
 
 
 
@@ -44,7 +39,7 @@ public class Actor2D : MonoBehaviour {
   }
 
 
-  public void SetCharacter(Pilot p) {
+  public void SetCharacter(Battler p) {
     battler = p;
     UpdateGraphics();
   }
@@ -52,31 +47,34 @@ public class Actor2D : MonoBehaviour {
   public void UpdateGraphics() {
     if(battler.GetType() == typeof(Pilot)) {
       UpdateCharacterGraphics();
+    } else if(battler.GetType() == typeof(Enemy)){
+      UpdateEnemyGraphics();
     }
+    renderers[1].gameObject.SetActive(false);
   }
 
-  public void UpdateToSpecificPose(SkillAnimation animationPose) {
-    /// DEBUG
-    return;
-  }
+  void UpdateCharacterGraphics() {
+    if(battler.GetType() != typeof(Pilot)) {
+      return;
+    }
 
-  public void UpdateCharacterGraphics() {
     if(!string.IsNullOrEmpty(battler.GetName())) {
-      renderers[0].gameObject.SetActive(true);
-      renderers[1].gameObject.SetActive(false);
-
-      //renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.character);
+      Debug.LogWarning("UpdateCharacterGraphics. battler not NULL");
       renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.mecha);
-      //renderers[1].GetComponent<SpriteMask>().sprite = renderers[1].sprite;
-      //renderers[2].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.bruises);
-      //if(battler.CurrentStatusConditionStacks("injured") > 0) {
-      //  renderers[2].gameObject.SetActive(true);
-      //} else {
-      //  renderers[2].gameObject.SetActive(false);
-      //}   
+      renderers[0].gameObject.SetActive(true);
     } else {
       gameObject.SetActive(false);
     }
+  }
+
+  void UpdateEnemyGraphics() {
+    if(battler.GetType() != typeof(Enemy) || battler == null) {
+      return;
+    }
+
+    renderers[0].sprite = LoadSprite("Enemies/" + ((Enemy)battler).spriteName);
+    renderers[0].flipX = false;
+    shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
   }
 
   public void FaceLeft() {
@@ -107,31 +105,6 @@ public class Actor2D : MonoBehaviour {
     }
   }
 
-  public void SetActorGraphics(string spriteName) {
-    if(gameObject.name.Contains(spriteName)) {
-      return;
-    }
-
-    if(spriteName.StartsWith("person(")) {
-      string actorName = Utils.GetStringArgument(spriteName);
-
-      foreach(Pilot p in GlobalData.instance.pilots) {
-        if(p.nameKey == actorName) {
-          SetCharacter(p);
-          return;
-        }
-      }
-    } else {
-      renderers[0].sprite = LoadSprite("Enemies/" + spriteName);
-      if(renderers[0].GetComponent<SpriteMask>() != null) {
-        renderers[0].GetComponent<SpriteMask>().sprite = LoadSprite("Enemies/" + spriteName);
-      }
-      renderers[0].flipX = false;
-      renderers[1].gameObject.SetActive(false);
-      shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
-    }
-  }
-
   public Sprite LoadSprite(string spriteName) {
     Sprite sprite = Resources.Load<Sprite>(spriteName);
     if(sprite == null) {
@@ -145,19 +118,8 @@ public class Actor2D : MonoBehaviour {
     choosingActionIndicator.SetActive(value);
   }
 
-  public void SetAttackMode(bool value) {
-    animator.SetBool("Attacking", value);
-  }
-
   public void SetAnimationParameter(string param, bool value) {
     animator.SetBool(param, value);
-  }
-
-  public void SetAnimationTrigger(string triggerName) {
-    if(triggerName == "Elimination" && buffAuraRenderers.Length > 0) {
-      buffAuraRenderers[0].gameObject.SetActive(false);
-    }
-    animator.SetTrigger(triggerName);
   }
 
 
@@ -178,10 +140,6 @@ public class Actor2D : MonoBehaviour {
 
       case SkillAnimation.projectile:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
-        if(actionSkin.animationArgument == "shout" ||
-           actionSkin.animationArgument == "talk insult") {
-          UpdateToSpecificPose(SkillAnimation.shout);
-        }
         yield return ProjectileAnimation(actionSkin);
         UpdateGraphics();
         break;
@@ -189,7 +147,6 @@ public class Actor2D : MonoBehaviour {
 
       case SkillAnimation.interact:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
-        UpdateToSpecificPose(SkillAnimation.interact);
         yield return TackleAnimation();
         UpdateGraphics();
         break;
@@ -198,7 +155,6 @@ public class Actor2D : MonoBehaviour {
       case SkillAnimation.attack:
       case SkillAnimation.charged_attack:
         VsnAudioManager.instance.PlaySfx(actionSkin.sfxName);
-        UpdateToSpecificPose(SkillAnimation.attack);
         yield return TackleAnimation();
         UpdateGraphics();
         break;
@@ -346,12 +302,6 @@ public class Actor2D : MonoBehaviour {
         currentRenderer.SetPropertyBlock(materialProperties);
       });
     }
-
-    if(finalTint == 1f) {
-      ShowInternalSprite();
-    } else {
-      HideInternalSprite();
-    }
   }
 
   [ContextMenu("Tint Actor To Pink")]
@@ -364,16 +314,6 @@ public class Actor2D : MonoBehaviour {
   public void TintActorToNormalColor() {
     Color c = new Color(0.92f, 0.73f, 0.81f);
     TintActorToColor(0f, 1f, c);
-  }
-
-  //public void TintActor
-
-  public void ShowInternalSprite() {
-    renderers[renderers.Length - 1].DOFade(1f, 1f);
-  }
-
-  public void HideInternalSprite() {
-    renderers[renderers.Length - 1].DOFade(0f, 1f);
   }
 
 
@@ -458,9 +398,10 @@ public class Actor2D : MonoBehaviour {
       newParticle.transform.SetParent(newParticle.transform.parent.parent);
       newParticle.transform.localScale = scale;
     }
-    //newParticle.transform.SetParent(newParticle.transform.parent.parent);
 
-    newParticle.GetComponent<JumpingParticle>().finalPosition = new Vector3(targetPerson.renderers[0].transform.position.x, particlePrefab.transform.position.y, targetPerson.renderers[0].transform.position.z);
+    newParticle.GetComponent<JumpingParticle>().finalPosition =
+      new Vector3(targetPerson.renderers[0].transform.position.x, particlePrefab.transform.position.y,
+                  targetPerson.renderers[0].transform.position.z);
 
     yield return new WaitForSeconds(1.5f);
   }

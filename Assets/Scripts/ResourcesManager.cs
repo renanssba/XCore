@@ -7,21 +7,21 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CharacterSpriteCollection {
   public string name;
-  public Sprite characterBody;
+  public Sprite fullBody;
+
+  [Header("- Battle Sprite -")]
   public Sprite mechaBody;
 
-  [Header("Poses")]
-  public Sprite pose_punch;
-  public Sprite pose_shout;
-  public Sprite pose_interact;
+  [Header("- Tactical Icons -")]
+  public Sprite faceIcon;
+  public Sprite portraitIcon;
 }
 
 public enum CharacterSpritePart {
-  character,
+  fullBody,
   mecha,
-  pose_punch,
-  pose_shout,
-  pose_interact
+  face,
+  portrait
 }
 
 
@@ -37,9 +37,7 @@ public class VsnCharacterData {
 
 public class ResourcesManager : MonoBehaviour {
   [Header("- Character Sprites -")]
-  public Sprite[] faceSprites;
-  public Sprite[] tacticalFaceSprites;
-  public List<CharacterSpriteCollection> characterSpritesCollections;
+  public CharacterSpriteCollection[] characterSpritesCollections;
 
   [Header("- UI Sprites -")]
   public Sprite[] daytimeSprites;
@@ -55,59 +53,56 @@ public class ResourcesManager : MonoBehaviour {
 
 
   public void Awake() {
-    instance = this;
-    characterSpritesCollections = new List<CharacterSpriteCollection>();
-  }
-
-  public Sprite GetFaceSprite(int index){
-    return faceSprites[index];
+    if(instance == null) {
+      instance = this;
+    } else if(instance != this) {
+      Destroy(gameObject);
+      return;
+    }
+    DontDestroyOnLoad(gameObject);
   }
 
   public Sprite GetCharacterSprite(int id, CharacterSpritePart spritePart) {
-    if(id >= characterSpritesCollections.Count) {
+    if(id >= characterSpritesCollections.Length) {
       return null;
     }
     CharacterSpriteCollection collection = characterSpritesCollections[id];
+
     switch(spritePart) {
       case CharacterSpritePart.mecha:
         return collection.mechaBody;
-      case CharacterSpritePart.pose_punch:
-        return collection.pose_punch;
-      case CharacterSpritePart.pose_shout:
-        return collection.pose_shout;
-      case CharacterSpritePart.pose_interact:
-        return collection.pose_interact;
+      case CharacterSpritePart.fullBody:
+        return collection.fullBody;
+      case CharacterSpritePart.face:
+        return collection.faceIcon;
+      case CharacterSpritePart.portrait:
+        return collection.portraitIcon;
       default:
-      case CharacterSpritePart.character:
-        return collection.characterBody;
+        return null;
     }
   }
 
-  public CharacterSpriteCollection GetCharacterSpriteCollection(string charName) {
-    foreach(CharacterSpriteCollection collection in characterSpritesCollections) {
-      if(collection.name == charName) {
-        return collection;
-      }
-    }
-    return null;
+  public void GenerateCharacterSprites() {
+    characterSpritesCollections = new CharacterSpriteCollection[33];
+    characterSpritesCollections[0] = NewSpriteCollection("marcus");
+    characterSpritesCollections[1] = NewSpriteCollection("agnes");
+    characterSpritesCollections[2] = NewSpriteCollection("maya");
+
+    characterSpritesCollections[30] = NewSpriteCollection("fly");
+    characterSpritesCollections[31] = NewSpriteCollection("brute");
+    characterSpritesCollections[32] = NewSpriteCollection("boss");
   }
 
-  public void GenerateCharacterSprites(string[] characterNames) {
-    foreach(string charName in characterNames) {
-      NewSpriteCollection(charName);
-    }
-  }
-
-  public void NewSpriteCollection(string charName) {
+  public CharacterSpriteCollection NewSpriteCollection(string charName) {
     string characterSpritesPath = "Characters/";
     CharacterSpriteCollection spriteCollection = new CharacterSpriteCollection();
 
     spriteCollection.name = charName;
-    spriteCollection.characterBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
+    spriteCollection.fullBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-base");
     spriteCollection.mechaBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-mecha");
-
-    characterSpritesCollections.Add(spriteCollection);
-    return;
+    spriteCollection.faceIcon = Resources.Load<Sprite>(characterSpritesPath + charName + "-face");
+    spriteCollection.portraitIcon = Resources.Load<Sprite>(characterSpritesPath + charName + "-portrait");
+    return spriteCollection;
   }
 
   public Color[] ImageAddition(Color[] a, Color[] b) {

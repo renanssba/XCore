@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 4400154602929113207, guid: c503764da78b9d94c8fce4d3a56dce8d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c503764da78b9d94c8fce4d3a56dce8d, type: 3}
@@ -723,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4685759218051828, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4685759218051828, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -736,6 +736,11 @@ PrefabInstance:
     - target: {fileID: 4685759218051828, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114027273821295224, guid: e5834ae36114aa74d99b60f1e1cc830e,
+        type: 3}
+      propertyPath: characterSpritesCollections.Array.size
+      value: 32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5834ae36114aa74d99b60f1e1cc830e, type: 3}
@@ -1326,7 +1331,7 @@ Transform:
   - {fileID: 1461530797}
   - {fileID: 929820028}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195407075
 GameObject:
@@ -2146,7 +2151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4747404691726268, guid: 96c719e8cdf015747a501b3d1bd27524, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4747404691726268, guid: 96c719e8cdf015747a501b3d1bd27524, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3157,7 +3162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &358923002
 MonoBehaviour:
@@ -3382,7 +3387,7 @@ Transform:
   - {fileID: 16363474}
   - {fileID: 1337211108}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &391564812
 MonoBehaviour:
@@ -3791,7 +3796,7 @@ PrefabInstance:
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
@@ -3811,7 +3816,7 @@ PrefabInstance:
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 292
       objectReference: {fileID: 0}
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
@@ -5467,8 +5472,8 @@ MonoBehaviour:
   person:
     nameKey: 
     id: 0
-    attributes: 
     hp: 0
+    attributes: 
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -5478,8 +5483,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
         hp: 0
+        attributes: 
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -5489,8 +5494,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -5500,8 +5505,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5512,8 +5517,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5525,8 +5530,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -5536,8 +5541,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5548,8 +5553,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5562,8 +5567,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
         hp: 0
+        attributes: 
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -5573,8 +5578,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -5584,8 +5589,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5596,8 +5601,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5609,8 +5614,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -5620,8 +5625,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -5632,8 +5637,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -6052,9 +6057,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 494327175}
-  - {fileID: 1116061133}
   - {fileID: 920683057}
+  - {fileID: 1116061133}
+  - {fileID: 494327175}
   m_Father: {fileID: 1635925580}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6094,7 +6099,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 3
   m_Spacing: 12
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -6798,7 +6803,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &903092418
 GameObject:
@@ -7047,7 +7052,7 @@ PrefabInstance:
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
@@ -8158,7 +8163,7 @@ PrefabInstance:
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 572
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 224543356433288602, guid: dbeabc4ad34f7964c9f52ca2adf12e26,
         type: 3}
@@ -9233,7 +9238,7 @@ PrefabInstance:
     - target: {fileID: 3061588871694631126, guid: c503764da78b9d94c8fce4d3a56dce8d,
         type: 3}
       propertyPath: id
-      value: 31
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4400154602929113204, guid: c503764da78b9d94c8fce4d3a56dce8d,
         type: 3}
@@ -9794,7 +9799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4630248921178718, guid: 75367e8b2d86aa2409f6c14a38a91213, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4630248921178718, guid: 75367e8b2d86aa2409f6c14a38a91213, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13352,8 +13357,8 @@ MonoBehaviour:
   person:
     nameKey: 
     id: 0
-    attributes: 
     hp: 0
+    attributes: 
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -13363,8 +13368,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
         hp: 0
+        attributes: 
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -13374,8 +13379,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -13385,8 +13390,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13397,8 +13402,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13410,8 +13415,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -13421,8 +13426,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13433,8 +13438,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13447,8 +13452,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 
         hp: 0
+        attributes: 
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -13458,8 +13463,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -13469,8 +13474,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13481,8 +13486,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13494,8 +13499,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 
             hp: 0
+            attributes: 
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -13505,8 +13510,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13517,8 +13522,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 
                 hp: 0
+                attributes: 
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13735,7 +13740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6605f5dbe39e1f44a3993afa20cbf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTargetId: 3
+  currentTargetId: 5
 --- !u!114 &1797119873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20768,7 +20773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6605f5dbe39e1f44a3993afa20cbf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTargetId: 3
+  currentTargetId: 4
 --- !u!114 &1883260430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21413,7 +21418,7 @@ RectTransform:
   - {fileID: 1740242281}
   - {fileID: 2077745194}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -22320,7 +22325,7 @@ PrefabInstance:
     - target: {fileID: 854586399218220683, guid: a7f4943687b16894ab6ec847e5f79f55,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f4943687b16894ab6ec847e5f79f55, type: 3}
@@ -22339,7 +22344,7 @@ PrefabInstance:
     - target: {fileID: 4050519425243507469, guid: cda9d24a54c1ac4489689ad2ebab2d28,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4050519425243507470, guid: cda9d24a54c1ac4489689ad2ebab2d28,
         type: 3}
@@ -23074,7 +23079,7 @@ Transform:
   - {fileID: 1324580830}
   - {fileID: 1250208693}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8390154011432228857
 MonoBehaviour:

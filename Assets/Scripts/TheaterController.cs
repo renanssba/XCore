@@ -80,11 +80,8 @@ public class TheaterController : MonoBehaviour {
       }
 
       Debug.LogWarning("No prefab to load for enemy: " + actorPrefabName + ". Using default prefab");
-      spawnedActor = Instantiate(prefabToSpawn, enemyPosition1, Quaternion.identity, transform);
-      spawnedActor.GetComponent<Actor2D>().SetActorGraphics(actorPrefabName);
-    } else {
-      spawnedActor = Instantiate(prefabToSpawn, enemyPosition1, Quaternion.identity, transform);
     }
+    spawnedActor = Instantiate(prefabToSpawn, transform);
     return spawnedActor;
   }
 
@@ -141,7 +138,9 @@ public class TheaterController : MonoBehaviour {
       }
       newObj = SpawnActor(newActorPrefabName);
       enemyActors[actorId] = newObj.GetComponent<Actor2D>();
-      enemyActors[actorId].battler = BattleController.instance.enemyMembers[actorId];
+      enemyActors[actorId].SetCharacter(BattleController.instance.enemyMembers[actorId]);
+      //enemyActors[actorId].battler = BattleController.instance.enemyMembers[actorId];
+      //enemyActors[actorId].UpdateGraphics();
       return;
     }
 
@@ -244,13 +243,7 @@ public class TheaterController : MonoBehaviour {
         Enemy currentEnemy = BattleController.instance.enemyMembers[i];
         ChangeActor("enemy_"+(i+1).ToString(), currentEnemy.spriteName);
         enemyActors[i].gameObject.SetActive(true);
-        //enemyActors[i].SetCharacter(BattleController.instance.enemyMembers[i]);
       }
-      //else {
-      //  if(enemyActors[i] != null) {
-      //    enemyActors[i].gameObject.SetActive(false);
-      //  }
-      //}
     }
 
     /// Position Heroes Party
@@ -334,11 +327,9 @@ public class TheaterController : MonoBehaviour {
       for(int i=0; i<2; i++) {
         float heightDifference = 1f - focusedCharacters[i].transform.localScale.y;
         focusedCharacters[i].transform.DOLocalMove(focusPositionForTwo[i] + new Vector3(0f, heightDifference*1.25f, 0f), focusAnimationDuration);
-        focusedCharacters[i].SetAttackMode(true);
       }
     } else {
       focusedCharacters[0].transform.DOLocalMove(focusPositionForOne, focusAnimationDuration);
-      focusedCharacters[0].SetAttackMode(true);
     }
   }
 
@@ -346,7 +337,6 @@ public class TheaterController : MonoBehaviour {
     focusShade.DOFade(0f, focusAnimationDuration).OnComplete(() => {
       for(int i = 0; i < focusedCharacters.Length; i++) {
         focusedCharacters[i].SetFocusedSortingLayer(false);
-        focusedCharacters[i].SetAttackMode(false);
       }
     });
     PositionActorsBack();

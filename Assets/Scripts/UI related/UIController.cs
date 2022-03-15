@@ -14,8 +14,6 @@ public class UIController : MonoBehaviour {
   public Image daytimeIcon;
   public TextMeshProUGUI moneyText;
 
-  public RelationshipCard relationshipUpAnimationCard;
-
   
   [Header("- Item Selector Screen -")]
   public ItemSelectorScreen itemSelectorScreen;

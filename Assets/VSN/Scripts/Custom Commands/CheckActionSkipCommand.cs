@@ -8,7 +8,8 @@ namespace Command {
   public class CheckActionSkipCommand : VsnCommand {
 
     public override void Execute() {
-      if(BattleController.instance.CurrentBattler.GetType() == typeof(Enemy)) {
+      if(BattleController.instance.CurrentBattler.hp <= 0) {
+        ContinueCommand.StaticExecute();
         return;
       }
 
