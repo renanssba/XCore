@@ -5175,7 +5175,7 @@ RectTransform:
   - {fileID: 792781843}
   - {fileID: 1702603332}
   m_Father: {fileID: 8909666229355251402}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5887,85 +5887,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &3296005858308763684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8844643724511272808}
-  - component: {fileID: 2322544975579461167}
-  - component: {fileID: 3557549924130445907}
-  m_Layer: 5
-  m_Name: Cellphone BG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8844643724511272808
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296005858308763684}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.82, y: 0.82, z: 1}
-  m_Children:
-  - {fileID: 8909666229644190593}
-  - {fileID: 8909666228270143443}
-  - {fileID: 8909666229364543687}
-  - {fileID: 8909666228680513041}
-  m_Father: {fileID: 8909666229355251402}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2270, y: 1290}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2322544975579461167
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296005858308763684}
-  m_CullTransparentMesh: 0
---- !u!114 &3557549924130445907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296005858308763684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4c6f2e2a161184242a62ef2e29581f53, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3884812503879780852
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,7 +6141,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &7927401809955438353
 MonoBehaviour:
@@ -6497,7 +6417,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &71236231194880609
 MonoBehaviour:
@@ -9604,8 +9523,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -9615,8 +9534,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -9626,8 +9545,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -9637,8 +9556,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9649,8 +9568,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9662,8 +9581,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -9673,8 +9592,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9685,8 +9604,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9699,8 +9618,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -9710,8 +9629,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -9721,8 +9640,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9733,8 +9652,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9746,8 +9665,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -9757,8 +9676,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -9769,8 +9688,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -12545,7 +12464,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8844643724511272808}
+  - {fileID: 8909666229364543687}
+  - {fileID: 8909666229644190593}
+  - {fileID: 8909666228270143443}
   - {fileID: 2078669580}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -12571,7 +12492,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8909666227711619676}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -13050,11 +12971,11 @@ RectTransform:
   - {fileID: 8909666228711865785}
   - {fileID: 8909666228408371577}
   m_Father: {fileID: 8909666229364543687}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0000017285347}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666227730635081
@@ -13941,8 +13862,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -13952,8 +13873,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -13963,8 +13884,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -13974,8 +13895,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13986,8 +13907,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -13999,8 +13920,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -14010,8 +13931,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -14022,8 +13943,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -14036,8 +13957,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -14047,8 +13968,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -14058,8 +13979,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -14070,8 +13991,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -14083,8 +14004,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -14094,8 +14015,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -14106,8 +14027,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -16467,81 +16388,6 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8909666227883252745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666227883252744}
-  - component: {fileID: 8909666227883252746}
-  - component: {fileID: 8909666227883252747}
-  m_Layer: 5
-  m_Name: White Footer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666227883252744
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227883252745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8909666228096274048}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 441.4}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!222 &8909666227883252746
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227883252745}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666227883252747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666227883252745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -21599,82 +21445,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!1 &8909666228096274049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228096274048}
-  - component: {fileID: 8909666228096274050}
-  - component: {fileID: 8909666228096274051}
-  m_Layer: 5
-  m_Name: Bg Dots
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666228096274048
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228096274049}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
-  m_Children:
-  - {fileID: 8909666227883252744}
-  m_Father: {fileID: 8909666228919746084}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -39}
-  m_SizeDelta: {x: 6600, y: 2400}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666228096274050
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228096274049}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228096274051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228096274049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.6627451}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 74db53d12d26b3d449235158f9cb0613, type: 3}
-  m_Type: 2
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8909666228100466089
 GameObject:
   m_ObjectHideFlags: 0
@@ -22975,82 +22745,6 @@ MonoBehaviour:
   phrasePath: save_load_panel/empty
   FallbackText: <missing>
   Args: []
---- !u!1 &8909666228150706634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228150706637}
-  - component: {fileID: 8909666228150706639}
-  - component: {fileID: 8909666228150706636}
-  m_Layer: 5
-  m_Name: Bg Gradient
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666228150706637
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228150706634}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
-  m_Children:
-  - {fileID: 8909666228914307766}
-  m_Father: {fileID: 8909666228919746084}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 11.1}
-  m_SizeDelta: {x: 1920, y: 737.8}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666228150706639
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228150706634}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228150706636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228150706634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.3529412, g: 0.83137256, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51b216a77607f1b43806839514553127, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8909666228157185237
 GameObject:
   m_ObjectHideFlags: 0
@@ -24854,11 +24548,11 @@ RectTransform:
   - {fileID: 1815836037}
   - {fileID: 2755355339150609734}
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -327.1, y: -130}
+  m_AnchoredPosition: {x: -327.1, y: -86}
   m_SizeDelta: {x: 1204.1, y: 864.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8909666228234000992
@@ -24879,6 +24573,7 @@ MonoBehaviour:
   hpSlider: {fileID: 1288487236}
   spSlider: {fileID: 101223508}
   statusConditionsContent: {fileID: 8909666228211226661}
+  statusConditionIconPrefab: {fileID: 0}
   bodyImage: {fileID: 8909666227952280630}
   attributeNamesTexts:
   - {fileID: 8909666228366752105}
@@ -25625,14 +25320,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8844643724511272808}
-  m_RootOrder: 1
+  m_Father: {fileID: 8909666229355251402}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 541}
-  m_SizeDelta: {x: 1920, y: 110}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 110}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8909666228270143445
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27703,8 +27398,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -27714,8 +27409,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -27725,8 +27420,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -27736,8 +27431,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27748,8 +27443,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27761,8 +27456,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -27772,8 +27467,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27784,8 +27479,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27798,8 +27493,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -27809,8 +27504,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -27820,8 +27515,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27832,8 +27527,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27845,8 +27540,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -27856,8 +27551,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -27868,8 +27563,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31283,8 +30978,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -31294,8 +30989,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -31305,8 +31000,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -31316,8 +31011,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31328,8 +31023,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31341,8 +31036,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -31352,8 +31047,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31364,8 +31059,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31378,8 +31073,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -31389,8 +31084,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -31400,8 +31095,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31412,8 +31107,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31425,8 +31120,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -31436,8 +31131,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31448,8 +31143,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -31676,81 +31371,6 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: d722d588429cfc44e8d728743d845363, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8909666228478442307
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228478442306}
-  - component: {fileID: 8909666228478442308}
-  - component: {fileID: 8909666228478442309}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666228478442306
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228478442307}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8909666229364543687}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -10.5}
-  m_SizeDelta: {x: 1848.1, y: 1041.8}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666228478442308
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228478442307}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228478442309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228478442307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3b45bbcfcab7f9044972acee87c89f47, type: 3}
-  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -34015,8 +33635,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -34026,8 +33646,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -34037,8 +33657,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -34048,8 +33668,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34060,8 +33680,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34073,8 +33693,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -34084,8 +33704,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34096,8 +33716,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34110,8 +33730,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -34121,8 +33741,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -34132,8 +33752,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34144,8 +33764,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34157,8 +33777,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -34168,8 +33788,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -34180,8 +33800,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36440,8 +36060,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -36451,8 +36071,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -36462,8 +36082,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -36473,8 +36093,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36485,8 +36105,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36498,8 +36118,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -36509,8 +36129,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36521,8 +36141,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36535,8 +36155,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -36546,8 +36166,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -36557,8 +36177,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36569,8 +36189,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36582,8 +36202,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -36593,8 +36213,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36605,8 +36225,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -36983,81 +36603,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: fd6f31ca6279ffc42af8441dec38eda6, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8909666228680513038
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228680513041}
-  - component: {fileID: 8909666228680513043}
-  - component: {fileID: 8909666228680513040}
-  m_Layer: 5
-  m_Name: Mockup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8909666228680513041
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228680513038}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.7824244, y: 2.7824244, z: 2.7824244}
-  m_Children: []
-  m_Father: {fileID: 8844643724511272808}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -25, y: 676}
-  m_SizeDelta: {x: 1007, y: 972}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666228680513043
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228680513038}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228680513040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228680513038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6074c98a19d2aaf4d9ffbf0b1f6c88ef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -40279,11 +39824,11 @@ RectTransform:
   - {fileID: 8909666228100466088}
   - {fileID: 8909666227824836029}
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 397, y: -188}
+  m_AnchoredPosition: {x: 395, y: -125}
   m_SizeDelta: {x: 141.66666, y: 136.66666}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666228822529104
@@ -43332,81 +42877,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bda83328624a24586fcad253e7076a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8909666228914307767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228914307766}
-  - component: {fileID: 8909666228914307768}
-  - component: {fileID: 8909666228914307769}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8909666228914307766
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228914307767}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8909666228150706637}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 223.8}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!222 &8909666228914307768
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228914307767}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228914307769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228914307767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.3529412, g: 0.83137256, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8909666228915066662
 GameObject:
   m_ObjectHideFlags: 0
@@ -43474,83 +42944,6 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.22352941}
   m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &8909666228919746085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8909666228919746084}
-  - component: {fileID: 8909666228919746086}
-  - component: {fileID: 8909666228919746087}
-  m_Layer: 5
-  m_Name: Cute Bg
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8909666228919746084
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228919746085}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 8909666228150706637}
-  - {fileID: 8909666228096274048}
-  m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8909666228919746086
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228919746085}
-  m_CullTransparentMesh: 0
---- !u!114 &8909666228919746087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8909666228919746085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -50818,11 +50211,11 @@ RectTransform:
   m_LocalScale: {x: -2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -850, y: -130}
+  m_AnchoredPosition: {x: -850, y: -72.53}
   m_SizeDelta: {x: 19, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666229216866907
@@ -52159,11 +51552,11 @@ RectTransform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 850, y: -130}
+  m_AnchoredPosition: {x: 850, y: -72.53}
   m_SizeDelta: {x: 19, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666229295901450
@@ -52540,11 +51933,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 594.38, y: 330}
+  m_AnchoredPosition: {x: 594.38, y: 340}
   m_SizeDelta: {x: 530.25, y: 80.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666229308962004
@@ -53657,19 +53050,18 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8909666228845405472}
-  - {fileID: 8909666228478442306}
   - {fileID: 8909666229488516034}
   - {fileID: 8909666227730635077}
   - {fileID: 8699643859012712339}
   - {fileID: 8909666229654122145}
-  m_Father: {fileID: 8844643724511272808}
-  m_RootOrder: 2
+  m_Father: {fileID: 8909666229355251402}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -54.000004}
-  m_SizeDelta: {x: 1920, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 0, y: -110}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8909666229364543688
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -57216,7 +56608,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8909666228919746084}
   - {fileID: 8909666229295901447}
   - {fileID: 8909666229216866900}
   - {fileID: 8909666228234000991}
@@ -57224,12 +56615,12 @@ RectTransform:
   - {fileID: 8909666229308962002}
   - {fileID: 8909666229563502350}
   m_Father: {fileID: 8909666229364543687}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: 1920, y: 970}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8909666228213498928
 MonoBehaviour:
@@ -57246,8 +56637,8 @@ MonoBehaviour:
   pilot:
     nameKey: 
     id: 0
-    attributes: 0100000001000000010000000100000001000000
     hp: 0
+    attributes: 0100000001000000010000000100000001000000
     statusConditions: []
     usedSkillsInBattle: 
     isMale: 0
@@ -57257,8 +56648,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -57268,8 +56659,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -57279,8 +56670,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57291,8 +56682,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57304,8 +56695,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -57315,8 +56706,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57327,8 +56718,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57341,8 +56732,8 @@ MonoBehaviour:
       owner:
         nameKey: 
         id: 0
-        attributes: 0100000001000000010000000100000001000000
         hp: 0
+        attributes: 0100000001000000010000000100000001000000
         statusConditions: []
         usedSkillsInBattle: 
         isMale: 0
@@ -57352,8 +56743,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -57363,8 +56754,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57375,8 +56766,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57388,8 +56779,8 @@ MonoBehaviour:
           owner:
             nameKey: 
             id: 0
-            attributes: 0100000001000000010000000100000001000000
             hp: 0
+            attributes: 0100000001000000010000000100000001000000
             statusConditions: []
             usedSkillsInBattle: 
             isMale: 0
@@ -57399,8 +56790,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -57411,8 +56802,8 @@ MonoBehaviour:
               owner:
                 nameKey: 
                 id: 0
-                attributes: 0100000001000000010000000100000001000000
                 hp: 0
+                attributes: 0100000001000000010000000100000001000000
                 statusConditions: []
                 usedSkillsInBattle: 
                 isMale: 0
@@ -58891,7 +58282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 93, y: 168}
+  m_AnchoredPosition: {x: 93, y: 124}
   m_SizeDelta: {x: -60, y: 78.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8909666229563388924
@@ -59025,11 +58416,11 @@ RectTransform:
   - {fileID: 8909666228079381186}
   - {fileID: 8909666227792788009}
   m_Father: {fileID: 8909666229488516034}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 621.6, y: -296.96}
+  m_AnchoredPosition: {x: 621.6, y: -194}
   m_SizeDelta: {x: 475.8, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8909666229563502355
@@ -60615,14 +60006,14 @@ RectTransform:
   - {fileID: 8909666228301272792}
   - {fileID: 8909666228086532977}
   - {fileID: 8909666229631667433}
-  m_Father: {fileID: 8844643724511272808}
-  m_RootOrder: 0
+  m_Father: {fileID: 8909666229355251402}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 541}
-  m_SizeDelta: {x: 1920, y: 110}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 110}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8909666229644190597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60809,7 +60200,7 @@ RectTransform:
   - {fileID: 8909666229074313620}
   - {fileID: 8909666229418402165}
   m_Father: {fileID: 8909666229364543687}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -62260,6 +61651,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550512711815534 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666227906267196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436412372756 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62272,12 +61669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550512711815534 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666227906267196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228022299702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62392,12 +61783,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550512865596772 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228022299702}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436562678558 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62410,6 +61795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550512865596772 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228022299702}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228184488432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62532,6 +61923,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550513560191138 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228184488432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184436673349336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -62544,12 +61941,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550513560191138 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228184488432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228243938459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63306,7 +62697,7 @@ PrefabInstance:
     - target: {fileID: 224662961411214088, guid: 1ad290d9b7146db4f8f20d527db3c477,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224662961411214088, guid: 1ad290d9b7146db4f8f20d527db3c477,
         type: 3}
@@ -63570,9 +62961,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ad290d9b7146db4f8f20d527db3c477, type: 3}
---- !u!224 &8699643859012712339 stripped
+--- !u!224 &8699102654071867435 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224662961411214088, guid: 1ad290d9b7146db4f8f20d527db3c477,
+  m_CorrespondingSourceObject: {fileID: 224078255707829424, guid: 1ad290d9b7146db4f8f20d527db3c477,
     type: 3}
   m_PrefabInstance: {fileID: 8909666228243938459}
   m_PrefabAsset: {fileID: 0}
@@ -63588,9 +62979,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a4b6ecbbe157c4dacd88d42b870092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8699102654071867435 stripped
+--- !u!224 &8699643859012712339 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224078255707829424, guid: 1ad290d9b7146db4f8f20d527db3c477,
+  m_CorrespondingSourceObject: {fileID: 224662961411214088, guid: 1ad290d9b7146db4f8f20d527db3c477,
     type: 3}
   m_PrefabInstance: {fileID: 8909666228243938459}
   m_PrefabAsset: {fileID: 0}
@@ -64120,6 +63511,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550514025529723 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228683380777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435109103361 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -64132,12 +63529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550514025529723 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228683380777}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228703526622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64256,12 +63647,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550514045675404 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228703526622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435078521334 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -64274,6 +63659,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550514045675404 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228703526622}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228798075892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64392,6 +63783,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
+--- !u!224 &8700550514178239142 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228798075892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435256306908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -64404,12 +63801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &8700550514178239142 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228798075892}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228827237107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64528,12 +63919,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550514207142817 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228827237107}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435219019227 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -64546,6 +63931,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550514207142817 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228827237107}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666228887371022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64668,12 +64059,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6f58f22bf201d04cab5d416a0383e9e, type: 3}
---- !u!224 &8700550513726465116 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 8909666228887371022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8805184435431252518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114616035332431656, guid: b6f58f22bf201d04cab5d416a0383e9e,
@@ -64686,6 +64071,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6294778b37c484d8e8454fae63e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8700550513726465116 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224034988472015186, guid: b6f58f22bf201d04cab5d416a0383e9e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8909666228887371022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8909666229215639631
 PrefabInstance:
   m_ObjectHideFlags: 0

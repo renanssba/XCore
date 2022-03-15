@@ -11,6 +11,7 @@ public class TitleController : MonoBehaviour {
   public Panel optionsPanel;
 
   [Header("- Elements -")]
+  public GameObject newGameButton;
   public GameObject[] languageButtons;
   public Transform logoImage;
 
@@ -35,6 +36,9 @@ public class TitleController : MonoBehaviour {
 
     yield return new WaitForSeconds(1f);
     buttonsPanel.ShowPanel();
+
+    yield return new WaitForSeconds(0.3f);
+    Utils.SelectUiElement(newGameButton);
   }
 
   public void CloseLanguageSelectPanel() {

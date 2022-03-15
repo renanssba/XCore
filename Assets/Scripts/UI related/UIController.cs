@@ -51,8 +51,10 @@ public class UIController : MonoBehaviour {
 
 
   public void Update() {
-    skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
+    if(skipTurnButton != null) {
+      skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
                              GameController.instance.gameState != GameState.battlePhase);
+    }    
   }
 
   public void UpdateUI() {
