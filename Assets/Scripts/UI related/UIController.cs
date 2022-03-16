@@ -64,7 +64,7 @@ public class UIController : MonoBehaviour {
       "<size=50%>/" + VsnSaveSystem.GetIntVariable("max_days") + "</size>";
     int daytime = VsnSaveSystem.GetIntVariable("daytime");
     daytimeIcon.sprite = ResourcesManager.instance.daytimeSprites[daytime];
-    moneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
+    moneyText.text = "<sprite=\"Attributes\" index=4 tint=1>" + VsnSaveSystem.GetIntVariable("money");
 
     UpdateBattleUI();
   }

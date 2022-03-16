@@ -1,0 +1,34 @@
+﻿fade_music 0 0.7
+fade_out 0.7
+bg "Simulator Entrance BG b"
+wait 0.5
+fade_in 0.7
+
+goto_script "char_right_enter" "Dr Linda Hayes Sprite Idle "
+say "Dra. Hayes" "Olá \vsn(charName). Está pronto para embarcar na sua próxima missão?"
+goto mission_choices
+
+
+waypoint mission_choices
+// say_auto "Lara" "Quer fazer mais algum negócio?"
+waypoint store_choices
+choices "Sim" yes "Não" no
+
+
+waypoint yes
+say "Certo. Vá para o hangar e convoque os demais pilotos, vocês embarcam em algumas horas."
+fade_music 0 1
+fade_out 2
+load_scene "Mission"
+end_script
+
+waypoint no
+say "Continue seu treinamento. Em breve se sentirá pronto para a missão."
+
+fade_music 0 0.7
+fade_out 0.7
+char_reset_all
+bg null
+wait 0.5
+fade_in 0.7
+play_music "intermission_intro" "intermission_loop"

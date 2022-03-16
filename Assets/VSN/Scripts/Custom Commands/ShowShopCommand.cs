@@ -21,7 +21,7 @@ namespace Command {
         }
         VsnController.instance.WaitForCustomInput();
       } else {
-        itemScreen.screenTransition.CloseMenuScreen();
+        itemScreen.panel.CloseMenuScreen();
       }
     }
 

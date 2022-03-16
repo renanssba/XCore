@@ -345,7 +345,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114278502224380072
 MonoBehaviour:
@@ -1977,7 +1976,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114714821558875364
 MonoBehaviour:
@@ -2316,7 +2314,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114355532099407838
 MonoBehaviour:
@@ -2940,7 +2937,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114831597100753170
 MonoBehaviour:
@@ -4231,7 +4227,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114078162760227128}
   m_HandleRect: {fileID: 224396083769882292}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4992,7 +4988,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114339114329985298
 MonoBehaviour:
@@ -5498,8 +5493,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290201022
-  m_fontColor: {r: 0.74509805, g: 0.27058825, b: 0.7176471, a: 1}
+    rgba: 4290688581
+  m_fontColor: {r: 0.27058828, g: 0.71346396, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5933,7 +5928,6 @@ MonoBehaviour:
   itemListing:
     id: 0
     amount: 0
-    ownerId: -1
   interactionType: 0
 --- !u!114 &114290482152041478
 MonoBehaviour:
@@ -6138,8 +6132,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290201022
-  m_fontColor: {r: 0.74509805, g: 0.27058825, b: 0.7176471, a: 1}
+    rgba: 4290688581
+  m_fontColor: {r: 0.27058825, g: 0.7137255, b: 0.74509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6933,13 +6927,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32a4b6ecbbe157c4dacd88d42b870092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 114157245345946388}
   screenNameText: {fileID: 114525430846047026}
-  currentMoneyText: {fileID: 114602844135501326}
+  emptyIcon: {fileID: 1653546734053314}
   itemsHolder: {fileID: 1274495053474038}
   itemPrefab: {fileID: 1283959860102466, guid: dc598282986672e46ad3791f4920e6be, type: 3}
-  mundaneSprite: {fileID: 21300000, guid: 8dacd23141e68e04b83d37059ada76e8, type: 3}
-  celestialSprite: {fileID: 21300000, guid: 647281eec51f85543945ee43f6c5cf70, type: 3}
-  screenTransition: {fileID: 114157245345946388}
+  currentMoneyText: {fileID: 114602844135501326}
   screenContext:
     name: Inventory Context
     startingSelectedObject: {fileID: 0}
@@ -6969,7 +6962,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  emptyIcon: {fileID: 1653546734053314}
 --- !u!225 &225884706861943444
 CanvasGroup:
   m_ObjectHideFlags: 0

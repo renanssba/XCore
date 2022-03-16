@@ -362,11 +362,11 @@ public class TheaterController : MonoBehaviour {
         continue;
       }
       if(actorToPositionBack == enemyActors[1]) {
-        enemyActors[1].transform.DOLocalMove(enemyPosition1, focusAnimationDuration);
+        enemyActors[1].transform.DOLocalMove(enemyPosition2, focusAnimationDuration);
         continue;
       }
       if(actorToPositionBack == enemyActors[2]) {
-        enemyActors[2].transform.DOLocalMove(enemyPosition1, focusAnimationDuration);
+        enemyActors[2].transform.DOLocalMove(enemyPosition3, focusAnimationDuration);
         continue;
       }
     }

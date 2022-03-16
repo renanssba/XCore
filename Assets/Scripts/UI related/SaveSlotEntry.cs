@@ -52,7 +52,7 @@ public class SaveSlotEntry : MonoBehaviour {
       }
       
       dayText.text = Lean.Localization.LeanLocalization.GetTranslationText("ui/day") + " " + int.Parse(dic["VARNUMBER_day"]);
-      moneyText.text = "<sprite=\"Attributes\" index=4>" + int.Parse(dic["VARNUMBER_money"]);
+      moneyText.text = "<sprite=\"Attributes\" index=4 tint=1>" + int.Parse(dic["VARNUMBER_money"]);
       humanFaceImages[0].sprite = ResourcesManager.instance.GetCharacterSprite(5, CharacterSpritePart.face);
       humanFaceImages[1].sprite = ResourcesManager.instance.GetCharacterSprite(6, CharacterSpritePart.face);
       humanFaceImages[2].sprite = ResourcesManager.instance.GetCharacterSprite(7, CharacterSpritePart.face);

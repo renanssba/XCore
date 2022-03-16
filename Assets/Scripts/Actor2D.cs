@@ -22,9 +22,7 @@ public class Actor2D : MonoBehaviour {
 
   private MaterialPropertyBlock materialProperties;
 
-
   const float attackAnimTime = 0.18f;
-
 
 
   [ContextMenu("Print Material Property Block")]
@@ -59,7 +57,7 @@ public class Actor2D : MonoBehaviour {
     }
 
     if(!string.IsNullOrEmpty(battler.GetName())) {
-      Debug.LogWarning("UpdateCharacterGraphics. battler not NULL");
+      //Debug.LogWarning("UpdateCharacterGraphics. battler not NULL");
       renderers[0].sprite = ResourcesManager.instance.GetCharacterSprite(battler.id, CharacterSpritePart.mecha);
       renderers[0].gameObject.SetActive(true);
     } else {
@@ -68,13 +66,13 @@ public class Actor2D : MonoBehaviour {
   }
 
   void UpdateEnemyGraphics() {
-    if(battler.GetType() != typeof(Enemy) || battler == null) {
+    if(battler == null || battler.GetType() != typeof(Enemy)) {
       return;
     }
 
     renderers[0].sprite = LoadSprite("Enemies/" + ((Enemy)battler).spriteName);
     renderers[0].flipX = false;
-    shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
+    //shadowRenderer.transform.localScale = new Vector3(1.4f, 1f, 1f);
   }
 
   public void FaceLeft() {

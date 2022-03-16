@@ -90,7 +90,7 @@ public class ItemUI : MonoBehaviour {
 
     VsnController.instance.GotItemInput();
     //UIController.GetInstance().itemSelectorScreen.gameObject.SetActive(false);
-    ItemSelectorScreen.instance.screenTransition.CloseMenuScreen();
+    ItemSelectorScreen.instance.panel.CloseMenuScreen();
     JoystickController.instance.RemoveContext();
   }
 }

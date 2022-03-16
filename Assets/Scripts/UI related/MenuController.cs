@@ -85,7 +85,7 @@ public class MenuController : MonoBehaviour {
 
     coupleStatusScreen.panel.gameObject.SetActive(false);
     coupleStatusScreen.skilltreeScreen.screenTransitions.gameObject.SetActive(false);
-    inventoryScreen.screenTransition.gameObject.SetActive(false);
+    inventoryScreen.panel.gameObject.SetActive(false);
     systemScreen.optionsPanel.gameObject.SetActive(false);
     systemScreen.savePanel.gameObject.SetActive(false);
     extrasPanel.gameObject.SetActive(false);

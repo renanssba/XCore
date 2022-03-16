@@ -9,21 +9,23 @@ public class ItemSelectorScreen : MonoBehaviour {
 
   public static ItemSelectorScreen instance;
 
+  [Header("- Panel -")]
+  public Panel panel;
   public TextMeshProUGUI screenNameText;
-  public TextMeshProUGUI currentMoneyText;
-  public GameObject itemsHolder;
-  public GameObject itemPrefab;
-
-  public Sprite mundaneSprite;
-  public Sprite celestialSprite;
-
-  public Panel screenTransition;
-
-  public ScreenContext screenContext;
+  public GameObject emptyIcon;
 
   private ItemInteractionType interactionType;
 
-  public GameObject emptyIcon;
+  [Header("- Items -")]
+  public GameObject itemsHolder;
+  public GameObject itemPrefab;
+
+  [Header("- Money -")]
+  public TextMeshProUGUI currentMoneyText;
+
+  [Header("- Screen Context -")]
+  public ScreenContext screenContext;
+
 
   public void Awake() {
     if(instance == null) {
@@ -61,9 +63,9 @@ public class ItemSelectorScreen : MonoBehaviour {
     JoystickController.instance.AddContext(screenContext);
     Initialize(interType, inv);
     if(interType == ItemInteractionType.inventory) {
-      screenTransition.ShowPanel();
+      panel.ShowPanel();
     } else {
-      screenTransition.OpenMenuScreen();
+      panel.OpenMenuScreen();
     }
   }
 
@@ -71,7 +73,7 @@ public class ItemSelectorScreen : MonoBehaviour {
     SetScreenName(type);
 
     currentMoneyText.transform.parent.gameObject.SetActive(true);
-    currentMoneyText.text = "<sprite=\"Attributes\" index=4>" + VsnSaveSystem.GetIntVariable("money");
+    currentMoneyText.text = "<sprite=\"Attributes\" index=4 tint=1>" + VsnSaveSystem.GetIntVariable("money");
 
     interactionType = type;
     ClearItems();
@@ -157,7 +159,7 @@ public class ItemSelectorScreen : MonoBehaviour {
     VsnAudioManager.instance.PlaySfx("ui_menu_close");
     VsnSaveSystem.SetVariable("item_id", -1);
     VsnController.instance.GotItemInput();
-    screenTransition.CloseMenuScreen();
+    panel.CloseMenuScreen();
     JoystickController.instance.RemoveContext();
   }
 }
