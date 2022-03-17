@@ -41,7 +41,6 @@ public class ActionsPanel : MonoBehaviour {
 
   public void SetupBaseActionButtons() {
     List<GameObject> availableButtons = new List<GameObject>();
-    Debug.LogWarning("Current Battler Id: "+ CurrentBattlerId);
 
     baseActionButtons[0].GetComponent<ActionButton>().InitializeGeneric(CurrentPilot);
     baseActionButtons[3].GetComponent<ActionButton>().InitializeGeneric(CurrentPilot);

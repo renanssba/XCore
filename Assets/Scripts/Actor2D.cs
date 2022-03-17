@@ -217,8 +217,12 @@ public class Actor2D : MonoBehaviour {
 
   public void ShowDefendHitParticle() {
     GameObject particlePrefab = BattleController.instance.defendHitParticlePrefab;
-    Vector3 particlePrefabPos = particlePrefab.transform.localPosition;
-    //TODO: add "reduce damage" SFX
+    GameObject newParticle = Instantiate(particlePrefab, transform);
+    newParticle.transform.SetParent(newParticle.transform.parent.parent);
+  }
+
+  public void ShowMissParticle() {
+    GameObject particlePrefab = BattleController.instance.missParticlePrefab;
     GameObject newParticle = Instantiate(particlePrefab, transform);
     newParticle.transform.SetParent(newParticle.transform.parent.parent);
   }

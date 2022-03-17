@@ -57,6 +57,7 @@ public class BattleController : MonoBehaviour {
   public GameObject itemParticlePrefab;
   public GameObject defenseActionParticlePrefab;
   public GameObject defendHitParticlePrefab;
+  public GameObject missParticlePrefab;
 
   [Header("- Attack Animation -")]
   public Color greenColor;
@@ -313,8 +314,6 @@ public class BattleController : MonoBehaviour {
     damage = attacker.AttributeValue(usedSkill.damageAttribute) * usedSkill.damagePower;
     //damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
-    Debug.LogWarning(attacker.GetName() + " Hits!");
-
     // skill power
     //damage *= usedSkill.damagePower * Random.Range(0.9f, 1.1f);
 
@@ -325,9 +324,7 @@ public class BattleController : MonoBehaviour {
     damage *= defender.DamageTakenMultiplier(usedSkill.damageAttribute);
 
     // defend?
-    damage /= (defender.IsDefending() ? 2f : 1f);
-
-    Debug.Log("Final damage: " + damage);
+    damage *= (defender.IsDefending() ? 0.5f : 1f);
 
     return Mathf.Max(1, Mathf.RoundToInt(damage));
   }
@@ -418,6 +415,16 @@ public class BattleController : MonoBehaviour {
 
     // skill effects for every target
     foreach(Actor2D targetActor in targetActors) {
+
+
+      // if dodged
+      if(Random.Range(0, 100) < targetActor.battler.AttributeValue(Attributes.dodgeRate)) {
+        targetActor.ShowMissParticle();
+        //VsnAudioManager.instance.PlaySfx("damage_block");
+        continue;
+      }
+
+
       // skill receive animation
       if(usedSkill.animationSkin.animation != SkillAnimation.none &&
          usedSkill.animationSkin.animation != SkillAnimation.passive) {
