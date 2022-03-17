@@ -1,7 +1,5 @@
 ﻿goto *arg1
 
-
-
 waypoint get_exp
 set_var level_up false
 
@@ -28,35 +26,3 @@ if level_up == false
   say "char_name/none" "after_get_exp/say_5"
 endif
 end_script
-
-
-
-waypoint open_heartlock
-if previousOpenedHeartlocks < 1
-  if #currentRelationshipHeartLocksOpened >= 1
-    say "char_name/none" "after_get_exp/say_6"
-    say "char_name/none" "after_get_exp/say_7"
-  endif
-endif
-
-if previousOpenedHeartlocks < 2
-  if #currentRelationshipHeartLocksOpened >= 2
-    say "char_name/none" "after_get_exp/say_8"
-  endif
-endif
-end_script
-
-
-
-waypoint unlocked_skill
-if arg2 == 0
-  say "char_name/none" "after_get_exp/say_9"
-endif
-if arg2 == 1
-  say "char_name/none" "after_get_exp/say_10"
-endif
-if arg2 == 2
-  say "char_name/none" "after_get_exp/say_11"
-endif
-end_script
-

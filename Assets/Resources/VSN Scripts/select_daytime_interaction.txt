@@ -2,15 +2,7 @@
 bg null
 goto_script "cap1_interaction_pins"
 goto_script "show_people_screen"
-//fade_in 1
 
-if daytime == 0
-  goto_script "cap1_manha"
-endif
-set_var day 1
-if daytime == 1
-  goto_script "cap1_tarde"
-endif
-if daytime == 2
-  goto_script "cap1_noite"
-endif
+play_music "intermission_intro" "intermission_loop"
+fade_in 1
+end_script

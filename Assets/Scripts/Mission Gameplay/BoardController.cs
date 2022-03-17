@@ -5,14 +5,6 @@ using UnityEngine.Tilemaps;
 using DG.Tweening;
 
 
-public enum GameState {
-  choosingMovement,
-  choosingEngage,
-  battlePhase,
-  noInput
-}
-
-
 // height: 0.87
 public class BoardController : MonoBehaviour {
 

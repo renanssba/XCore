@@ -79,6 +79,25 @@ public class Combat {
   }
 }
 
+public enum GameState {
+  choosingCharacter,
+  actionsMenu,
+  choosingMovement,
+  choosingEngage,
+  battlePhase,
+  noInput
+}
+
+public enum InputOrigin {
+  IA = -1,
+  keyboardAndMouse,
+  joystick_1,
+  joystick_2,
+  joystick_3,
+  joystick_4,
+  none
+}
+
 
 public class GameController : MonoBehaviour {
   public static GameController instance;
@@ -221,7 +240,7 @@ public class GameController : MonoBehaviour {
     } else {
       StartMovementStep(0);
       gameState = GameState.choosingMovement;
-    }    
+    }
   }
 
   public IEnumerator FightBattle(Combat combat) {

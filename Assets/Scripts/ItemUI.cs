@@ -45,9 +45,9 @@ public class ItemUI : MonoBehaviour {
     typeImage.sprite = item.GetSprite();
 
     if(interactionType == ItemInteractionType.store_buy) {
-      costText.text = "<sprite=\"Attributes\" index=4>" + item.price.ToString();
+      costText.text = "<sprite=\"Attributes\" index=4 tint=1>" + item.price.ToString();
     } else {
-      costText.text = "<sprite=\"Attributes\" index=4>" + (item.price / 2).ToString();
+      costText.text = "<sprite=\"Attributes\" index=4 tint=1>" + (item.price / 2).ToString();
     }
     quantityText.text = "x" + itemListing.amount;
     if(interactionType == ItemInteractionType.store_buy ||

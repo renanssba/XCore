@@ -1,30 +1,20 @@
-// wait 1
-// char_reset_all
-// character char_right "Instructor Sprite Idle "
-// char_alpha char_right 0 0
-// char_alpha char_right 1 5
-// wait 5
-// goto_script "char_right_enter" "Instructor Sprite Idle "
-// character char_right "Instructor Sprite Idle "
-// char_scale char_right 1.3 0.3
-// // char_move_y 0 0.3
-// char_move_y -0.3 0.3
-// wait 0.3
-// wait 10
-
 fade_out 0
 wait 1
+bg "Duratron Base"
+fade_in 2
 say "" "Academia de pilotos de Mark1 da Duratron"
-bg "externa academia provisorio"
-fade_in 1
 wait 1
 say "CADETE" "Depois de árduos 4 anos de treinamento finalmente hoje é o dia da verdade."
 //Cena alistamento
 
-fade_out 1
-bg "alistamento"
-fade_in 1
-wait 1
+// fade_out 1
+// bg "alistamento"
+// fade_in 1
+// wait 1
+say "" "Você vai andando por um corredor em direção à Sala de Simuladores. No caminho, se depara com um cartaz que chama sua atenção."
+say "O cartaz contém um grupo de robôs em poses heróicas. Um deles segura uma bandeira e os outros portam armas. Diante deles estão sombras misteriosas e um terreno extraterrestre e selvagem."
+say "Em letras grandes está escrito: \qCoretex. Levando a paz e o progresso para os lugares mais distantes do universo.\q"
+
 say "CADETE" "(Olhando esse cartaz eu lembro do motivo por que vim parar aqui.)"
 say "CADETE" "(Eu até que me convenci, por um tempo, dessa propaganda toda da Coretex sobre se alistar e ajudar a levar a paz e a ordem às terras sem lei das colônias.)"
 say "CADETE" "(Mas a verdade mesmo é que eu não tinha dinheiro e nem podia contar com ninguém nesse mundo para me ajudar.)"
@@ -92,9 +82,12 @@ say "\vsn(charName)" "Não... não senhora."
 say "INSTRUTORA" "Sei..."
 goto_script "chars_exit"
 wait 0.5
+
 fade_out 1
-bg "Simulator Entrance BG b"
+bg "Simulador Sala"
+wait 1
 fade_in 1
+
 wait 1
 goto_script "char_right_enter" "Instructor Sprite Idle " 0.7
 wait 0.5
@@ -128,10 +121,13 @@ say "" "CENA DE COMBATE COM TUTORIAL DO JOGO"
 say "APÓS O JOGADOR VENCER O TUTORIAL, O JOGO RETOMA A VISÃO VN"
 say "" "Após terminar seu teste, todos os cadetes foram chamados individualmente à sala da instrutora para receberem seus resultados. Você foi o último a ser requisitado."
 
+char_reset_all
+character char_right "Instructor Sprite Idle "
 fade_in 1
 wait 1
 
-goto_script "char_right_enter" "Instructor Sprite Idle "
+// goto_script "char_right_enter" "Instructor Sprite Idle "
+
 say "INSTRUTORA" "Eu não acredito... como foi possível?"
 say "INSTRUTORA" "\vsn(charName)... você... você passou. Como você fez isso?"
 say "\vsn(charName)" "Eu... eu... passei?"
