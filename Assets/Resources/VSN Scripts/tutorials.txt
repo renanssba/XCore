@@ -111,42 +111,6 @@ goto end
 
 
 
-waypoint fertiliel_skip_first_turn
-set_var input_already_selected true
-goto end
-
-
-
-waypoint fertiliel_actions
-actor_animator_parameter angel "Choosing Action" true
-wait 1
-
-say "char_name/fertiliel" "tutorials/say_19"
-say "tutorials/say_20"
-
-action_input false
-tutorial_icon "item_button" true
-wait 1
-say "tutorials/say_21"
-say "tutorials/say_22"
-tutorial_icon "item_button" false
-// tutorial_icon "eyes_highlight" true
-// say "tutorials/say_23"
-// say "tutorials/say_24"
-// say "tutorials/say_25"
-// tutorial_icon "eyes_highlight" false
-
-tutorial_icon "idle_button" true
-say "tutorials/say_26"
-say "tutorials/say_27"
-tutorial_icon "idle_button" false
-vsn_state "WAITINGCUSTOMINPUT"
-set_var input_already_selected true
-set_var tutorial_fertiliel true
-goto end
-
-
-
 waypoint menu_attributes
 if tutorial_menu_attributes == true
   goto end

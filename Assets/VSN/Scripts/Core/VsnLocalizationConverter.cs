@@ -9,24 +9,19 @@ public class VsnLocalizationConverter : MonoBehaviour {
 
   Dictionary<string, string> commonCharNames;
   Dictionary<string, string> commonChoiceTexts;
-  List<string> buttonNameTexts;
+  //List<string> buttonNameTexts;
 
   public void PrepareFilesForLocalization() {
     string metadataFilePath = Application.dataPath + "/Resources/VSN Scripts/converted/strings_table.csv";
     string metaContent = "";
 
     commonCharNames = new Dictionary<string, string> {
-      { "Noelia", "char_name/fertiliel" },
-      { "Graciel", "char_name/graciel" },
-      { "Sup. Hardwell", "char_name/hardiel" },
-      { "\\boy", "char_name/boy" },
-      { "\\girl", "char_name/girl" },
       { "", "char_name/none" },
-      { "Daniel", "char_name/daniel" },
-      { "Ana", "char_name/anna" },
-      { "Beatrice", "char_name/beatrice" },
-      { "Clara", "char_name/claire" },
-      { "Valentão", "char_name/bully" }
+      { "Agnes", "char_name/agnes" },
+      { "Maya", "char_name/maya" },
+      { "Dra. Hayes", "char_name/hayes" },
+      { "Lara", "char_name/lara" },
+      { "Aaron", "char_name/aaron" }
     };
 
     commonChoiceTexts = new Dictionary<string, string> {
@@ -35,25 +30,6 @@ public class VsnLocalizationConverter : MonoBehaviour {
       { "Confirmar", "choices/confirm" },
       { "Cancelar", "choices/cancel" }
     };
-
-    buttonNameTexts = new List<string>() { "dare",
-      "shout",
-      "strike",
-      "motivate",
-      "complain",
-      "think",
-      "argue",
-      "insult",
-      "improvise",
-      "bluff",
-      "flatter",
-      "perform",
-      "soothe",
-      "pose",
-      "talk",
-      "beg" };
-
-
 
     //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts");
     //metaContent += PrepareFilesForLocalization(Application.dataPath + "/Resources/VSN Scripts/date_enemies");
@@ -211,12 +187,6 @@ public class VsnLocalizationConverter : MonoBehaviour {
           case "set_var":
             // if not using set_var with a String arg
             if(vsnArguments[1].GetType() != typeof(VsnString) ) {
-              content += lines[i].TrimEnd() + Environment.NewLine;
-              break;
-            }
-
-            // if using set_var to a String for button name
-            if(buttonNameTexts.Contains(args[1].Substring(1, args[1].Length - 2))) {
               content += lines[i].TrimEnd() + Environment.NewLine;
               break;
             }

@@ -1,7 +1,8 @@
 ﻿fade_out 0
 bg null
-goto_script "cap1_interaction_pins"
-goto_script "show_people_screen"
+goto_script "interaction_pins"
+set_screen "interact_with_board"
+update_ui
 
 play_music "intermission_intro" "intermission_loop"
 fade_in 1

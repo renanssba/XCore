@@ -20,8 +20,6 @@ public class BoardController : MonoBehaviour {
   public TileBase highlightedTile;
 
 
-  public Dictionary<Vector3, WorldTile> tilesData;
-
   [Header("- Shine -")]
   public Color playerHighlightColor;
   public Color enemyHighlightColor;
@@ -37,31 +35,6 @@ public class BoardController : MonoBehaviour {
   public void Awake() {
     instance = this;
   }
-
-
-  // currently not being used
-  // reference: https://medium.com/@allencoded/unity-tilemaps-and-storing-individual-tile-data-8b95d87e9f32
-  public void InitializeWorldTiles() {
-    tilesData = new Dictionary<Vector3, WorldTile>();
-    foreach(Vector3Int pos in floorBoard.cellBounds.allPositionsWithin) {
-      var localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-
-      if(!floorBoard.HasTile(localPlace)) continue;
-      var tile = new WorldTile {
-        LocalPlace = localPlace,
-        WorldLocation = floorBoard.CellToWorld(localPlace),
-        TileBase = floorBoard.GetTile(localPlace),
-        TilemapMember = floorBoard,
-        Name = localPlace.x + "," + localPlace.y,
-        Cost = 1 // TODO: Change this with the proper cost from ruletile
-      };
-
-      tilesData.Add(tile.WorldLocation, tile);
-    }
-  }
-
-
-  
 
 
 

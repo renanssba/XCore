@@ -35,14 +35,6 @@ public class UIController : MonoBehaviour {
   public InteractionPin[] interactionPins;
 
 
-  [Header("- Tactical Battler INFO Panel -")]
-  public BattlerInfoPanel battlerInfoPanel;
-
-  [Header("- Tactical Buttons -")]
-  public GameObject skipTurnButton;
-  public GameObject clickMapButton;
-
-
 
   public void Awake() {
     instance = this;
@@ -51,10 +43,10 @@ public class UIController : MonoBehaviour {
 
 
   public void Update() {
-    if(skipTurnButton != null) {
-      skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
-                             GameController.instance.gameState != GameState.battlePhase);
-    }    
+    //if(skipTurnButton != null) {
+    //  skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
+    //                         GameController.instance.gameState != GameState.battlePhase);
+    //}    
   }
 
   public void UpdateUI() {
@@ -123,7 +115,7 @@ public class UIController : MonoBehaviour {
       case "tactical_view":
         uiControllerPanel.ShowPanel();
         battleInfoPanel.HidePanel();
-        UIController.instance.EndBattlePhase();
+        TacticalUIController.instance.EndBattlePhase();
         TheaterController.instance.gameObject.SetActive(false);
         BoardController.instance.gameObject.SetActive(true);
 
@@ -133,7 +125,7 @@ public class UIController : MonoBehaviour {
       case "battle":
         uiControllerPanel.HidePanel();
         battleInfoPanel.ShowPanel();
-        UIController.instance.EnterBattlePhase();
+        TacticalUIController.instance.EnterBattlePhase();
         TheaterController.instance.gameObject.SetActive(true);
         BoardController.instance.gameObject.SetActive(false);
 
@@ -193,27 +185,5 @@ public class UIController : MonoBehaviour {
 
   public void SetInteractionPinLocationName(int id, string locationName) {
     interactionPins[id].SetLocation(locationName);
-  }
-
-
-
-  public void EnterBattlePhase() {
-    Select(null);
-    clickMapButton.SetActive(false);
-  }
-
-  public void EndBattlePhase() {
-    clickMapButton.SetActive(true);
-  }
-
-  public void Select(CharacterToken character) {
-    if(character == null) {
-      battlerInfoPanel.canvasGroup.alpha = 0f;
-      return;
-    }
-
-    battlerInfoPanel.canvasGroup.alpha = 1f;
-    battlerInfoPanel.Initialize(character.battler);
-    battlerInfoPanel.SkipHpBarAnimation();
   }
 }

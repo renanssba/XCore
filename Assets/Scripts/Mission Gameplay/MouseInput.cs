@@ -34,8 +34,8 @@ public class MouseInput : MonoBehaviour {
 
     transform.position = new Vector3(v.x, v.y, 0f);
 
-    if(GameController.instance.gameState == GameState.choosingMovement) {
-      UIController.instance.Select(SelectedCharacter);
+    if(GameController.instance.gameState == GameState.chooseMovement) {
+      TacticalUIController.instance.Select(SelectedCharacter);
     }    
   }
 

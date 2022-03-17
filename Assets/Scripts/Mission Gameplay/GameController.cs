@@ -80,10 +80,12 @@ public class Combat {
 }
 
 public enum GameState {
-  choosingCharacter,
+  setupPhase,
+  chooseCharacter,
   actionsMenu,
-  choosingMovement,
-  choosingEngage,
+  chooseMovement,
+  chooseEngagement,
+  confirmEngagement,
   battlePhase,
   noInput
 }
@@ -103,12 +105,12 @@ public class GameController : MonoBehaviour {
   public static GameController instance;
 
   [Header("- Game State -")]
-  public GameState gameState = GameState.choosingMovement;
+  public GameState gameState = GameState.noInput;
 
 
   [Header("- Characters -")]
   public List<CharacterToken> allCharacters;
-  public int currentCharacterId;
+  public int currentCharacterPos;
 
 
   [Header("- Combats -")]
@@ -126,7 +128,24 @@ public class GameController : MonoBehaviour {
 
 
   public CharacterToken CurrentCharacter {
-    get { return allCharacters[currentCharacterId]; }
+    get {
+      if(currentCharacterPos >= allCharacters.Count ||
+        currentCharacterPos < 0) {
+        return null;
+      }
+      return allCharacters[currentCharacterPos];
+    }
+  }
+
+  public InputOrigin InputOrigin {
+    get {
+      //if(gameState == GameState.setupPhase) return (InputOrigin)VsnSaveSystem.GetIntVariable("player1_input", 0);
+      //return InputOrigin.IA; /// DEBUG for testing IA vs IA
+      if(CurrentCharacter == null) return InputOrigin.none;
+      if(CurrentCharacter.combatTeam == CombatTeam.pc) return InputOrigin.IA;
+      if(CurrentCharacter.combatTeam == CombatTeam.player) return (InputOrigin)VsnSaveSystem.GetIntVariable("player1_input", 0);
+      return InputOrigin.none;
+    }
   }
 
 
@@ -139,27 +158,105 @@ public class GameController : MonoBehaviour {
   }
 
   public void Start() {
+    //stageDesignController.LoadStageDesign();
+
+    // Play Tactical Song
+    //VsnAudioManager.instance.PlayMusic("Valkyrie Arena OST 1 INTRO", "Valkyrie Arena OST 1 LOOP");
+    VsnController.instance.StartVSN("start battle");
     StartCoroutine(WaitSetupToStart());
   }
 
+
   public IEnumerator WaitSetupToStart() {
+    while(VsnController.instance.state != ExecutionState.STOPPED) {
+      yield return null;
+    }
     yield return null;
-    Initialize();
+    SetGameState(GameState.setupPhase);
   }
 
-  public void Initialize() {
-    BoardController.instance.InitializeWorldTiles();
-    StartMovementStep(0);
-  }
 
   void Update() {
-    if(Input.GetKeyDown(KeyCode.Space)) {
-      AdvanceStep();
-    }
-
     if(Input.GetKeyDown(KeyCode.F5)) {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    /// If current input is IA, dont take input from player
+    if(InputOrigin == InputOrigin.IA) {
+      return;
+    }
+
+    //if(Input.GetKeyDown(KeyCode.Space)) {
+    //  AdvanceStep();
+    //}
+
+    /// Clicked Cancel button
+    if(Input.GetMouseButtonDown(1)) {
+      ClickedCancelButton();
+    }
+  }
+
+
+  public void SetGameState(GameState newState) {
+    CleanHighlightedTiles();
+
+    gameState = GameState.noInput;
+    if(newState == GameState.actionsMenu && CheckIfMatchIsOver()) {
+      return;
+    } else {
+      StartCoroutine(UpdateGameState(newState));
+    }
+  }
+
+  public IEnumerator UpdateGameState(GameState newState) {
+    yield return null;
+    gameState = newState;
+
+    //Debug.LogWarning("SET GAMESTATE TO " + newState + "!!!");
+
+    CleanHighlightedTiles();
+    //if(CurrentCharacter == null) {
+    //  yield break;
+    //}
+    switch(gameState) {
+      case GameState.setupPhase:
+        /// TODO: Implement Setup Phase
+        break;
+      case GameState.actionsMenu:
+        //TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter);
+        TacticalUIController.instance.ShowActionsMenu();
+        TacticalUIController.instance.HideSkillConfirmPanel();
+        break;
+      case GameState.chooseMovement:
+        BoardController.instance.HighlightWalkableTiles(CurrentCharacter);
+        //TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter);
+        TacticalUIController.instance.HideActionsMenu();
+        TacticalUIController.instance.HideSkillConfirmPanel();
+        BoardController.instance.HighlightWalkableTiles(CurrentCharacter);
+        break;
+      case GameState.chooseEngagement:
+        TacticalUIController.instance.HideActionsMenu();
+        TacticalUIController.instance.HideSkillConfirmPanel();
+        BoardController.instance.HighlightAdjacentEnemies(CurrentCharacter);
+        break;
+      case GameState.confirmEngagement:
+        //TacticalUIController.instance.ShowSkillConfirmPanel();
+        //TacticalBoardController.instance.HighlightSkillAreaOfEffect(CurrentCharacter, CurrentSkill, skillCastPosition);
+        break;
+      case GameState.noInput:
+        TacticalUIController.instance.HideActionsMenu();
+        break;
+      default:
+        // do nothing
+        break;
+    }
+
+    bool needsCancelButton = false;
+    if(gameState == GameState.chooseEngagement ||
+       gameState == GameState.confirmEngagement) {
+      needsCancelButton = true;
+    }
+    TacticalUIController.instance.cancelButton.SetActive(needsCancelButton);
   }
 
 
@@ -177,15 +274,38 @@ public class GameController : MonoBehaviour {
     }
 
     switch(gameState) {
-      case GameState.choosingMovement:
+      case GameState.chooseMovement:
         // clicked during choose movement phase
         StartMovement(clickedGridPos);
         break;
-      case GameState.choosingEngage:
+      case GameState.chooseEngagement:
         // clicked during choose engagement phase
         StartEngagement();
         break;
-    }    
+    }
+  }
+
+  public void ClickedCancelButton() {
+    if(gameState == GameState.noInput ||
+      //!PlayerCanInput ||
+      gameState == GameState.chooseMovement) {
+      return;
+    }
+
+    SfxManager.StaticPlayCancelSfx();
+    switch(gameState) {
+      case GameState.actionsMenu:
+        if(RevertMovement()) {
+          SetGameState(GameState.chooseMovement);
+        }
+        break;
+      case GameState.chooseEngagement:
+        SetGameState(GameState.actionsMenu);
+        break;
+      case GameState.confirmEngagement:
+        SetGameState(GameState.chooseEngagement);
+        break;
+    }
   }
 
 
@@ -196,17 +316,17 @@ public class GameController : MonoBehaviour {
   }
 
   public void AdvanceStep() {
-    if(gameState == GameState.choosingMovement) {
+    if(gameState == GameState.chooseMovement) {
       StartEngagementStep();
-    } else if(gameState == GameState.choosingEngage) {
+    } else if(gameState == GameState.chooseEngagement) {
       EndCurrentCharacterTurn();
     }
   }
 
   public void EndCurrentCharacterTurn() {
     CleanHighlightedTiles();
-    currentCharacterId++;
-    if(currentCharacterId >= allCharacters.Count) {
+    currentCharacterPos++;
+    if(currentCharacterPos >= allCharacters.Count) {
       StartCoroutine(FightsPhase());
       return;
     }
@@ -216,8 +336,8 @@ public class GameController : MonoBehaviour {
       return;
     }
 
-    StartMovementStep(currentCharacterId);
-    gameState = GameState.choosingMovement;
+    StartMovementStep(currentCharacterPos);
+    gameState = GameState.chooseMovement;
   }
 
 
@@ -232,14 +352,10 @@ public class GameController : MonoBehaviour {
     yield return cameraController.GoToDefaultPosition();
     yield return new WaitForSeconds(0.3f);
 
-    /// START PLAYER PHASE
-    if(VictoryConditionMet()) {
-      VsnController.instance.StartVSN("victory");
-    } else if(DefeatConditionMet()) {
-      VsnController.instance.StartVSN("defeat");
-    } else {
+    /// RESTART PLAYER PHASE
+    if(!CheckIfMatchIsOver()) {
       StartMovementStep(0);
-      gameState = GameState.choosingMovement;
+      gameState = GameState.chooseMovement;
     }
   }
 
@@ -275,13 +391,25 @@ public class GameController : MonoBehaviour {
 
     CleanHighlightedTiles();
     CurrentCharacter.transform.DOMove(new Vector3(pos.x, pos.y, 0f), dur).OnComplete(() => {
-      StartEngagementStep();
+      SetGameState(GameState.chooseEngagement);
     });
   }
 
 
-  public void StartMovementStep(int id) {
-    currentCharacterId = id;
+  public bool RevertMovement() {
+    /// TODO: Implement
+    return false;
+    //if(!CurrentCharacter.canRevertMovement) {
+    //  SfxManager.StaticPlayForbbidenSfx();
+    //  return false;
+    //}
+    //CurrentCharacter.RevertMovement();
+    ////cameraController.FocusOnCharacterImmediate(CurrentCharacter);
+    //return true;
+  }
+
+  public void StartMovementStep(int pos) {
+    currentCharacterPos = pos;
     BoardController.instance.HighlightWalkableTiles(CurrentCharacter);
   }
 
@@ -290,7 +418,7 @@ public class GameController : MonoBehaviour {
 
   public void StartEngagementStep() {
     CleanHighlightedTiles();
-    gameState = GameState.choosingEngage;
+    gameState = GameState.chooseEngagement;
     BoardController.instance.HighlightAdjacentEnemies(CurrentCharacter);
   }
 
@@ -322,9 +450,32 @@ public class GameController : MonoBehaviour {
   }
 
 
+
+  public bool CheckIfMatchIsOver() {
+    if(gameState == GameState.setupPhase) {
+      return false;
+    }
+
+    if(VictoryConditionMet()) {
+      //Debug.LogWarning("end battle: victory");
+      VsnController.instance.StartVSN("victory");
+      currentCharacterPos = -1;
+      gameState = GameState.noInput;
+      return true;
+    }
+    if(DefeatConditionMet()) {
+      //Debug.LogWarning("end battle: defeat");
+      VsnController.instance.StartVSN("defeat");
+      currentCharacterPos = -1;
+      gameState = GameState.noInput;
+      return true;
+    }
+    return false;
+  }
+
   public bool VictoryConditionMet() {
     foreach(CharacterToken c in allCharacters) {
-      if(c != null && c.combatTeam == CombatTeam.enemy) {
+      if(c != null && c.combatTeam == CombatTeam.pc) {
         return false;
       }
     }
@@ -346,6 +497,6 @@ public class GameController : MonoBehaviour {
   }
 
   public void EndBattle() {
-    gameState = GameState.choosingMovement;
+    gameState = GameState.chooseMovement;
   }
 }

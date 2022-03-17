@@ -17,7 +17,7 @@ public enum CharacterId {
 
 public enum CombatTeam {
   player,
-  enemy,
+  pc,
   npc,
   any,
   none
@@ -28,7 +28,7 @@ public class CharacterToken : MonoBehaviour {
   public CharacterId id;
 
   [Header("- Team -")]
-  public CombatTeam combatTeam = CombatTeam.enemy;
+  public CombatTeam combatTeam = CombatTeam.pc;
 
   [Header("- Visuals -")]
   public SpriteRenderer renderer;
@@ -80,10 +80,10 @@ public class CharacterToken : MonoBehaviour {
 
 
   public CombatTeam OpponentCombatTeam() {
-    if(combatTeam == CombatTeam.enemy) {
+    if(combatTeam == CombatTeam.pc) {
       return CombatTeam.player;
     }
-    return CombatTeam.enemy;
+    return CombatTeam.pc;
   }
 
 
