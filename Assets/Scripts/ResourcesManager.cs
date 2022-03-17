@@ -60,6 +60,7 @@ public class ResourcesManager : MonoBehaviour {
       return;
     }
     DontDestroyOnLoad(gameObject);
+    GenerateCharacterSprites();
   }
 
   public Sprite GetCharacterSprite(int id, CharacterSpritePart spritePart) {

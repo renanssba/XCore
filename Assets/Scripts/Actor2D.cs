@@ -324,9 +324,9 @@ public class Actor2D : MonoBehaviour {
     if(effectivity < 0f) {
       particleColor = Color.green;
     } else if(effectivity > 1f) {
-      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/super_effective") + "</size>";
+      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("battle/super_effective") + "</size>";
     } else if(effectivity < 1f) {
-      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("date/ineffective") + "</size>";
+      particleString += "\n<size=12>" + Lean.Localization.LeanLocalization.GetTranslationText("battle/ineffective") + "</size>";
       particleColor = new Color(0.3f, 0.3f, 0.3f);
     }
     ShowParticleAnimation(particleString, particleColor);

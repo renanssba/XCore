@@ -34,9 +34,11 @@ public class MouseInput : MonoBehaviour {
 
     transform.position = new Vector3(v.x, v.y, 0f);
 
-    if(GameController.instance.gameState == GameState.chooseMovement) {
+    if(SelectedCharacter != null) {
       TacticalUIController.instance.SelectCharacterByCursor(SelectedCharacter.battler);
-    }    
+    } else {
+      TacticalUIController.instance.SelectCharacterByCursor(null);
+    }
   }
 
 

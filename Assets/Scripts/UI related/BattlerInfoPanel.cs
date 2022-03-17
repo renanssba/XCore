@@ -24,14 +24,11 @@ public class BattlerInfoPanel : MonoBehaviour {
 
   public virtual void SetSelectedUnit(Battler myBattler) {
     character = myBattler;
-
     if(character == null) {
       canvasGroup.alpha = 0f;
       return;
     }
-
     canvasGroup.alpha = 1f;
-    SetSelectedUnit(character);
     UpdateBattlerUI();
   }
 

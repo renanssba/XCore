@@ -226,7 +226,6 @@ public class TheaterController : MonoBehaviour {
   public void SetupBattle() {
     ClearBattle();
 
-    GameController.instance.StartBattle();
     BattleController.instance.SetupDateLocation();
 
 

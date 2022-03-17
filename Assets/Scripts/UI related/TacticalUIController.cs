@@ -87,4 +87,24 @@ public class TacticalUIController : MonoBehaviour {
   //  setupPhaseTitleText.text = Lean.Localization.LeanLocalization.GetTranslationText("setup_phase/title") + " (" +
   //    GameController.instance.allCharacters.CountByTeam(CombatTeam.player) + "/" + GameController.instance.heroesAllowed + ")";
   //}
+
+  public void ClickedMoveButton() {
+    if(!GameController.instance.CurrentCharacter.canWalk) {
+      SfxManager.StaticPlayForbbidenSfx();
+      return;
+    }
+    GameController.instance.SetGameState(GameState.chooseMovement);
+  }
+
+  public void ClickedEngageButton() {
+    GameController.instance.SetGameState(GameState.chooseEngagement);
+  }
+
+  public void ClickedManeuverButton() {
+    //GameController.instance.SetGameState(GameState.chooseMovement);
+  }
+
+  public void ClickedEndTurnButton() {
+    GameController.instance.AdvanceTurn();
+  }
 }

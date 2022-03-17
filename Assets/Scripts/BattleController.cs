@@ -143,11 +143,6 @@ public class BattleController : MonoBehaviour {
   public bool IsBattleHappening() {
     return VsnSaveSystem.GetBoolVariable("battle_is_happening");
   }
-  
-  public void EndBattle() {
-    VsnSaveSystem.SetVariable("battle_is_happening", false);
-    GameController.instance.EndBattle();
-  }
 
 
   public void FullHealParty() {
@@ -788,14 +783,21 @@ public class BattleController : MonoBehaviour {
       newSkill.id = int.Parse(entry["id"]);
 
       newSkill.name = entry["name"];
-      newSkill.type = GetSkillTypeByString(entry["type"]);
-      newSkill.range = GetActionRangeByString(entry["range"]);
+      newSkill.type = (SkillType)System.Enum.Parse(typeof(SkillType), entry["type"]);
+      newSkill.range = (ActionRange)System.Enum.Parse(typeof(ActionRange), entry["range"]);
 
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
+      } else {
+        newSkill.spCost = 0;
       }
 
-      newSkill.specialEffect = GetSkillEffectByString(entry["special effect"]);
+      if(!string.IsNullOrEmpty(entry["sp cost"])) {
+        newSkill.specialEffect = (SkillSpecialEffect)System.Enum.Parse(typeof(SkillSpecialEffect), entry["special effect"]);
+      } else {
+        newSkill.specialEffect = SkillSpecialEffect.none;
+      }
+
       if(!string.IsNullOrEmpty(entry["effect power"])) {
         newSkill.effectPower = float.Parse(entry["effect power"]);
       }
@@ -809,7 +811,7 @@ public class BattleController : MonoBehaviour {
       newSkill.givesConditionNames = ItemDatabase.GetStatusConditionNamesByString(entry["gives status conditions"]);
 
       if(!string.IsNullOrEmpty(entry["passive trigger"])) {
-        newSkill.activationTrigger = GetPassiveSkillTriggerByString(entry["passive trigger"]);
+        newSkill.activationTrigger = (PassiveSkillActivationTrigger)System.Enum.Parse(typeof(PassiveSkillActivationTrigger), entry["passive trigger"]);
       } else {
         newSkill.activationTrigger = PassiveSkillActivationTrigger.none;
       }
@@ -845,55 +847,6 @@ public class BattleController : MonoBehaviour {
       }
 
       allSkills.Add(newSkill);
-    }
-  }
-
-  public static ActionRange GetActionRangeByString(string actionRange) {
-    for(int i = 0; i <= (int)ActionRange.none; i++) {
-      if(((ActionRange)i).ToString() == actionRange) {
-        return (ActionRange)i;
-      }
-    }
-    return ActionRange.anyone;
-  }
-
-  public SkillSpecialEffect GetSkillEffectByString(string skillEffect) {
-    for(int i = 0; i <= (int)SkillSpecialEffect.none; i++) {
-      if(((SkillSpecialEffect)i).ToString() == skillEffect) {
-        return (SkillSpecialEffect)i;
-      }
-    }
-    return SkillSpecialEffect.none;
-  }
-
-  public PassiveSkillActivationTrigger GetPassiveSkillTriggerByString(string passiveTrigger) {
-    for(int i = 0; i <= (int)PassiveSkillActivationTrigger.none; i++) {
-      if(((PassiveSkillActivationTrigger)i).ToString() == passiveTrigger) {
-        return (PassiveSkillActivationTrigger)i;
-      }
-    }
-    return PassiveSkillActivationTrigger.none;
-  }
-
-  public SkillTarget GetSkillTargetByString(string targetName) {
-    for(int i = 0; i <= (int)SkillTarget.none; i++) {
-      if(((SkillTarget)i).ToString() == targetName) {
-        return (SkillTarget)i;
-      }
-    }
-    return SkillTarget.none;
-  }
-
-  public SkillType GetSkillTypeByString(string skillType) {
-    switch(skillType) {
-      case "attack":
-        return SkillType.attack;
-      case "active":
-        return SkillType.active;
-      case "passive":
-        return SkillType.passive;
-      default:
-        return SkillType.active;
     }
   }
 

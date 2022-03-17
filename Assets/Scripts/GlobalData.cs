@@ -69,9 +69,6 @@ public class GlobalData : MonoBehaviour {
       pilots.Add(newPilot);
     }
 
-    ResourcesManager.instance.GenerateCharacterSprites();
-
-
     relationships = new Relationship[3];
     for(int i = 0; i < 2; i++) {
       relationships[i] = new Relationship {

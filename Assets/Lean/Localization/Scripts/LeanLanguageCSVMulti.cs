@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Lean.Common;
 using System.Collections.Generic;
+using NaughtyAttributes;
 
 namespace Lean.Localization {
   /// <summary>This component will load localizations from a CSV file. By default they should be in the format:
@@ -26,6 +27,7 @@ namespace Lean.Localization {
     }
 
     [ContextMenu("Load From Source")]
+    [Button]
     public void LoadFromSource() {
       if(Source != null) {
         // Split file into lines, and loop through them all

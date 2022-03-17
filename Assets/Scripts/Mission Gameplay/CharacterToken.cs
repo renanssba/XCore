@@ -41,6 +41,12 @@ public class CharacterToken : MonoBehaviour {
   [Header("- My Battler -")]
   public Battler battler;
 
+  [SerializeField]
+  private Vector3 turnInitialPosition;
+  public bool canRevertMovement;
+  public bool canWalk;
+
+
 
   public void Start() {
     /// Initialize Battler
@@ -105,6 +111,34 @@ public class CharacterToken : MonoBehaviour {
 
 
 
+  public void InitializeTurn() {
+    canRevertMovement = false;
+    canWalk = true;
+    //EndDefense();
+    turnInitialPosition = transform.position;
+  }
+
+  public void EndTurn() {
+    //Debug.LogWarning("ENDING " + attributes.id + " TURN!");
+
+    /// pass status conditions turn
+    //for(int i = statusConditions.Count - 1; i >= 0; i--) {
+    //  if(statusConditions[i].duration > 0) {
+    //    statusConditions[i].duration--;
+    //  }
+    //  if(statusConditions[i].duration == 0) {
+    //    statusConditions.RemoveAt(i);
+    //  }
+    //}
+  }
+
+
+  public void Walked() {
+    canRevertMovement = true;
+    canWalk = false;
+  }
+
+
   public void TackleAnim(Vector3 posToAttack) {
     Vector3 targetPos = (posToAttack + transform.position)/2f;
     transform.DOMove(targetPos, 0.15f).SetLoops(2, LoopType.Yoyo);
@@ -113,16 +147,6 @@ public class CharacterToken : MonoBehaviour {
   public void UpdateHPSlider() {
     hpSlider.transform.localScale = new Vector3((float)battler.hp / battler.AttributeValue(Attributes.maxHp), 1f, 1f);
   }
-
-  //public void TakeDamage(int damage) {
-  //  GameObject obj = Instantiate(damageParticlePrefab, transform);
-  //  obj.transform.SetParent(transform.parent);
-  //  obj.GetComponentInChildren<TextMeshPro>().text = damage.ToString();
-
-  //  hp -= damage;
-  //  UpdateHPSlider();
-  //  CheckToDie();
-  //}
 
   public bool CheckToDie() {
     if(battler.hp <= 0) {
@@ -143,6 +167,16 @@ public class CharacterToken : MonoBehaviour {
     GameController.instance.CharacterDies(this);
     Destroy(gameObject);
   }
+
+
+  public void RevertMovement() {
+    transform.position = turnInitialPosition;
+    canRevertMovement = false;
+  }
+
+
+
+
 
   [Button]
   public void PrintBattler() {
