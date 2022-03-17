@@ -111,7 +111,7 @@ namespace Command {
       if(skillToActivate.range == ActionRange.all_characters) {
         return SkillTarget.allCharacters;
       }
-      if(skillToActivate.range == ActionRange.all_other_characters) {
+      if(skillToActivate.range == ActionRange.all_but_caster) {
         return (SkillTarget)((int)SkillTarget.allButPartyMember1 + (int)partyMemberId);
       }
       

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,23 +13,9 @@ public class BoardController : MonoBehaviour {
 
   [Header("- Tilemaps -")]
   public Tilemap floorBoard;
-  public Tilemap selectionBoard;
-
 
   [Header("- Tiles -")]
   public TileBase wallTile;
-  public TileBase highlightedTile;
-
-
-  [Header("- Shine -")]
-  public Color playerHighlightColor;
-  public Color enemyHighlightColor;
-  public Color engageHighlightColor;
-  public float time;
-
-
-  [Header("- Engagement Icons -")]
-  public TileBase engageTile;
 
 
 
@@ -37,56 +24,45 @@ public class BoardController : MonoBehaviour {
   }
 
 
+  ///  RANGE CALCULATION
+  public List<Vector2Int> WalkableTilesFromPosition(Vector2Int pos, int movesLeft, CombatTeam combatTeam) {
+    List<Vector2Int> walkableTiles = new List<Vector2Int> { pos };
+    List<Vector2Int> neighbors = new List<Vector2Int>();
 
-  public void HighlightWalkableTiles(CharacterToken character) {
-    List<Vector2Int> neighbors = character.GetWalkableTiles();
-
-    foreach(Vector2Int pos in neighbors) {
-      if(TeamInTile(pos) == CombatTeam.none ||
-         pos == character.BoardGridPosition()) {
-        selectionBoard.SetTile(pos, highlightedTile);
-      }      
+    if(movesLeft == 0) {
+      return walkableTiles;
     }
 
-    selectionBoard.GetComponent<TilemapRenderer>().sortingOrder = 0;
-    ShineWalkableTiles(character.combatTeam);
+    neighbors = GetWalkableAdjacentTiles(pos, combatTeam);
+    foreach(Vector2Int tile in neighbors) {
+      walkableTiles.AddRange(WalkableTilesFromPosition(tile, movesLeft - 1, combatTeam));
+    }
+    walkableTiles = walkableTiles.Distinct().ToList();
+    return walkableTiles;
   }
 
-  public void ShineWalkableTiles(CombatTeam combatTeam) {
-    Color highlightColor;
-    if(combatTeam == CombatTeam.player) {
-      highlightColor = playerHighlightColor;
-    } else {
-      highlightColor = enemyHighlightColor;
+
+  public void HighlightWalkableTiles(CharacterToken character) {
+    List<Vector2Int> selectedTiles = WalkableTilesFromPosition(character.BoardGridPosition(),
+                                                               character.battler.AttributeValue(Attributes.movementRange),
+                                                               character.combatTeam);
+    foreach(Vector2Int pos in selectedTiles) {
+      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.walkable);
     }
-    ShineTiles(highlightColor);
   }
 
 
 
   public void HighlightAdjacentEnemies(CharacterToken character) {
-    List<Vector2Int> neighbors = character.GetAdjacentTiles();
+    List<Vector2Int> selectedTiles = GetAdjacentTiles(character.BoardGridPosition());
     CombatTeam opponentTeam = character.OpponentCombatTeam();
 
-    foreach(Vector2Int pos in neighbors) {
-      if(TeamInTile(pos) == opponentTeam) {
-        selectionBoard.SetTile(pos, engageTile);
-      }
+    selectedTiles = selectedTiles.FilterByCombatTeam(opponentTeam);
+
+    foreach(Vector2Int pos in selectedTiles) {
+      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.offensiveSkill);
     }
-
-    selectionBoard.GetComponent<TilemapRenderer>().sortingOrder = 5;
-    ShineEngagementTiles();
-  }
-
-  public void ShineEngagementTiles() {
-    ShineTiles(engageHighlightColor);
-  }
-
-  public void ShineTiles(Color highlightColor) {
-    DOTween.Kill(selectionBoard);
-    selectionBoard.color = highlightColor;
-    DOTween.To(() => selectionBoard.color, x => selectionBoard.color = x, highlightColor * 1.5f, time).
-      SetLoops(-1, LoopType.Yoyo);
+    //selectionBoard.GetComponent<TilemapRenderer>().sortingOrder = 5;
   }
 
 
@@ -100,19 +76,35 @@ public class BoardController : MonoBehaviour {
     return CombatTeam.none;
   }
 
-  public void StopHighlightWalkableTiles() {
-    DOTween.KillAll(selectionBoard);
-    for(int i = 0; i < 20; i++) {
-      for(int j = 0; j < 20; j++) {
-        TileBase tileB = selectionBoard.GetTile(new Vector2Int(i, j));
-        if(tileB != null) {
-          selectionBoard.SetTile(new Vector2Int(i, j), null);
-        }
-      }
-    }
+
+
+  public List<Vector2Int> GetWalkableAdjacentTiles(Vector2Int pos, CombatTeam playerTeam) {
+    List<Vector2Int> adjacent = GetAdjacentTiles(pos);
+    List<Vector2Int> empties = adjacent.FilterByCombatTeam(CombatTeam.none);
+    List<Vector2Int> companions = adjacent.FilterByCombatTeam(playerTeam);
+    empties.AddRange(companions);
+
+    return empties;
   }
 
 
+  public List<Vector2Int> GetAdjacentTiles(Vector2Int pos) {
+    List<Vector2Int> neighbors = new List<Vector2Int>();
+
+    for(int i = 0; i < 20; i++) {
+      for(int j = 0; j < 20; j++) {
+        TileBase tileB = floorBoard.GetTile(new Vector2Int(i, j));
+        if(tileB != null) {
+          if(IsCloseEnough(floorBoard.layoutGrid.CellToWorld(pos),
+                           floorBoard.layoutGrid.CellToWorld(new Vector2Int(i, j)), 1) &&
+             floorBoard.GetTile(new Vector2Int(i, j)) != wallTile) {
+            neighbors.Add(new Vector2Int(i, j));
+          }
+        }
+      }
+    }
+    return neighbors;
+  }
 
   public List<Vector2Int> GetWalkableNeighborTiles(Vector2Int pos, CombatTeam playerTeam) {
     List<Vector2Int> neighbors = new List<Vector2Int>();

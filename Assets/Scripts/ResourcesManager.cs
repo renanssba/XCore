@@ -15,13 +15,15 @@ public class CharacterSpriteCollection {
   [Header("- Tactical Icons -")]
   public Sprite faceIcon;
   public Sprite portraitIcon;
+  public Sprite mapIcon;
 }
 
 public enum CharacterSpritePart {
   fullBody,
   mecha,
   face,
-  portrait
+  portrait,
+  mapIcon
 }
 
 
@@ -78,6 +80,8 @@ public class ResourcesManager : MonoBehaviour {
         return collection.faceIcon;
       case CharacterSpritePart.portrait:
         return collection.portraitIcon;
+      case CharacterSpritePart.mapIcon:
+        return collection.mapIcon;
       default:
         return null;
     }
@@ -103,6 +107,7 @@ public class ResourcesManager : MonoBehaviour {
     spriteCollection.mechaBody = Resources.Load<Sprite>(characterSpritesPath + charName + "-mecha");
     spriteCollection.faceIcon = Resources.Load<Sprite>(characterSpritesPath + charName + "-face");
     spriteCollection.portraitIcon = Resources.Load<Sprite>(characterSpritesPath + charName + "-portrait");
+    spriteCollection.mapIcon = Resources.Load<Sprite>(characterSpritesPath + charName + "-mapicon");
     return spriteCollection;
   }
 

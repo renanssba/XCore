@@ -7,21 +7,16 @@ using DG.Tweening;
 
 
 public enum StatusConditionEffect {
-  raiseGuts,
-  raiseIntelligence,
-  raiseCharisma,
-  raiseEndurance,
-  turnDamageGuts,
-  turnDamageIntelligence,
-  turnDamageCharisma,
+  raiseMaxHp,
+  raiseMovementRange,
+  raiseAttack,
+  raiseAgility,
+  raiseDodgeRate,
+  damageEveryTurn,
   damageMultiplier,
   missAttacks,
-  confusion,
   cantAct,
   becomeTarget,
-  digesting,
-  reflectOnMain,
-  reflectOnSupport,
   count
 }
 
@@ -73,19 +68,19 @@ public class StatusCondition {
     string desc = "";
 
     switch(statusEffect[i]) {
-      case StatusConditionEffect.raiseGuts:
+      case StatusConditionEffect.raiseAttack:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/guts");
         break;
-      case StatusConditionEffect.raiseIntelligence:
+      case StatusConditionEffect.raiseAgility:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/intelligence");
         break;
-      case StatusConditionEffect.raiseCharisma:
+      case StatusConditionEffect.raiseDodgeRate:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/charisma");
         break;
-      case StatusConditionEffect.raiseEndurance:
+      case StatusConditionEffect.raiseMovementRange:
         desc += (statusEffectPower[i] > 0) ? "+" + statusEffectPower[i] + " " : statusEffectPower[i].ToString() + " ";
         desc += Lean.Localization.LeanLocalization.GetTranslationText("attribute/endurance");
         break;

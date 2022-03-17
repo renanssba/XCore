@@ -14,6 +14,7 @@ public class TacticalUIController : MonoBehaviour {
 
   [Header("- Tactical Actions Panel -")]
   public Panel tacticalActionsPanel;
+  public Button movementButton;
 
   //[Header("- Setup Phase Panel -")]
   //public Panel setupPhasePanel;
@@ -56,6 +57,7 @@ public class TacticalUIController : MonoBehaviour {
 
   public void ShowActionsMenu() {
     tacticalActionsPanel.ShowPanel();
+    Utils.SelectUiElement(movementButton.gameObject);
   }
 
   public void HideActionsMenu() {

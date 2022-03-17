@@ -17,7 +17,7 @@ public enum ActionRange {
   all_allies,
   all_enemies,
   random_enemy,
-  all_other_characters,
+  all_but_caster,
   all_characters,
   none
 }
@@ -169,9 +169,6 @@ public class Skill {
   public float triggerChance;
 
   public ActionSkin animationSkin;
-  //public SkillAnimation animation;
-  //public string skillAnimationArgument;
-
   public string[] tags;
 
 

@@ -156,8 +156,8 @@ public class GameController : MonoBehaviour {
 
   public void Start() {
     //stageDesignController.LoadStageDesign();
-    currentCharacterPos = -1;
-    
+    SelectNoCharacter();
+
     // Play Tactical Song
     //VsnAudioManager.instance.PlayMusic("Valkyrie Arena OST 1 INTRO", "Valkyrie Arena OST 1 LOOP");
     VsnController.instance.StartVSN("start battle");
@@ -246,7 +246,8 @@ public class GameController : MonoBehaviour {
 
     bool needsCancelButton = false;
     if(gameState == GameState.chooseEngagement ||
-       gameState == GameState.confirmEngagement) {
+       gameState == GameState.confirmEngagement ||
+       gameState == GameState.chooseMovement) {
       needsCancelButton = true;
     }
     TacticalUIController.instance.cancelButton.SetActive(needsCancelButton);
@@ -254,15 +255,15 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickedMap() {
+    Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
+
     if(gameState == GameState.noInput || gameState == GameState.battlePhase ||
        Input.GetMouseButtonDown(0) == false) {
       return;
-    }
-    Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
-    Vector3 pos = BoardController.instance.floorBoard.layoutGrid.CellToWorld(clickedGridPos);
+    }    
 
-    if(BoardController.instance.selectionBoard.GetTile(new Vector2Int(clickedGridPos.x, clickedGridPos.y)) == null) {
-      Debug.LogWarning("Error SFX");
+    if(!HighlightedTilesLayer.instance.IsTileHighlighted(clickedGridPos)) {
+      SfxManager.StaticPlayForbbidenSfx();
       return;
     }
 
@@ -301,7 +302,7 @@ public class GameController : MonoBehaviour {
 
 
   public void CleanHighlightedTiles() {
-    BoardController.instance.StopHighlightWalkableTiles();
+    HighlightedTilesLayer.instance.StopHighlightWalkableTiles();
   }
 
   public void AdvanceTurn() {
@@ -311,37 +312,36 @@ public class GameController : MonoBehaviour {
     TacticalUIController.instance.HideActionsMenu();
     CleanHighlightedTiles();
 
-
     currentCharacterPos++;
+
+    /// enter battler phase
     if(currentCharacterPos >= allCharacters.Count) {
-      currentCharacterPos = -1;
+      SelectNoCharacter();
       SetGameState(GameState.battlePhase);
       return;
     }
 
-
-    if(Combat.CharacterIsEngagedInCombat(CurrentCharacter)) {
-      CurrentCharacter.InitializeTurn();
-      AdvanceTurn();
-      return;
-    }
-
-    InitializeCharacterTurn(currentCharacterPos);
-  }
-
-  public void InitializeCharacterTurn(int characterId) {
-    currentCharacterPos = characterId;
-    if(CurrentCharacter != null) {
-      CurrentCharacter.InitializeTurn();
-    }
-    //SetInputModuleId();
-    //UpdateCurrentCharacter();
-
+    /// show player and enemy phase title cards
     if(currentCharacterPos == 0) {
       StartCoroutine(StartPhaseAnim());
       return;
     } else if(currentCharacterPos == FirstEnemy()) {
       StartCoroutine(StartPhaseAnim());
+      return;
+    }
+
+    InitializeCharacterTurn();
+  }
+
+  public void InitializeCharacterTurn() {
+    if(CurrentCharacter != null) {
+      CurrentCharacter.InitializeTurn();
+    }
+    //SetInputModuleId();
+    UpdateCurrentCharacter();
+
+    if(Combat.CharacterIsEngagedInCombat(CurrentCharacter)) {
+      AdvanceTurn();
       return;
     }
 
@@ -351,6 +351,18 @@ public class GameController : MonoBehaviour {
     //MouseInput.instance.SelectGridPosition(CurrentCharacter.BoardGridPosition());
     //CameraController.instance.FocusOnCharacterThenChangeGamestate(CurrentCharacter, GameState.chooseMovement);
   }
+
+  public void SelectNoCharacter() {
+    currentCharacterPos = -1;
+    UpdateCurrentCharacter();
+  }
+
+  public void UpdateCurrentCharacter() {
+    foreach(CharacterToken c in allCharacters) {
+      c.BecomeCurrentCharacter(c == CurrentCharacter);
+    }
+  }
+
 
   public int FirstEnemy() {
     for(int i=0; i<allCharacters.Count; i++) {
@@ -366,15 +378,13 @@ public class GameController : MonoBehaviour {
   public IEnumerator StartPhaseAnim() {
     gameState = GameState.noInput;
 
-    Debug.LogWarning("StartPhaseAnim CALLED!!!");
-
     if(currentCharacterPos == 0) {
       VsnController.instance.StartVSN("player_phase");
     } else {
       VsnController.instance.StartVSN("enemy_phase");
     }
     yield return WaitForVsnExecution();
-    SetGameState(GameState.actionsMenu);
+    InitializeCharacterTurn();
   }
 
   public IEnumerator WaitForVsnExecution() {
@@ -386,7 +396,6 @@ public class GameController : MonoBehaviour {
   public IEnumerator FightsPhase() {
     foreach(Combat c in activeCombats) {
       yield return FightBattle(c);
-      c.DestroyIcons();
     }
     activeCombats.Clear();
 
@@ -407,10 +416,11 @@ public class GameController : MonoBehaviour {
     yield return new WaitForSeconds(0.5f);
 
     yield return WaitForVsnExecution();
+    combat.DestroyIcons();
 
     bool someoneDies = false;
     foreach(CharacterToken ct in combat.characters) {
-      ct.UpdateHPSlider();
+      ct.UpdateUI();
       bool died = ct.CheckToDie();
       someoneDies = someoneDies || died;
     }
@@ -467,7 +477,7 @@ public class GameController : MonoBehaviour {
 
   public void RegisterCharacter(CharacterToken newCharacter) {
     allCharacters.Add(newCharacter);
-    allCharacters = allCharacters.OrderBy(o => o.id).ToList();
+    allCharacters = allCharacters.OrderBy(o => o.Id).ToList();
   }
 
   public void CharacterDies(CharacterToken dyingCharacter) {
@@ -484,13 +494,13 @@ public class GameController : MonoBehaviour {
 
     if(VictoryConditionMet()) {
       VsnController.instance.StartVSN("victory");
-      currentCharacterPos = -1;
+      SelectNoCharacter();
       gameState = GameState.noInput;
       return true;
     }
     if(DefeatConditionMet()) {
       VsnController.instance.StartVSN("defeat");
-      currentCharacterPos = -1;
+      SelectNoCharacter();
       gameState = GameState.noInput;
       return true;
     }

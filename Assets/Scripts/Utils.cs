@@ -540,6 +540,30 @@ public static class MyExtensions {
   public static void SetTile(this Tilemap tilemap, Vector2Int position, TileBase tile) {
     tilemap.SetTile(position.ToVector3Int(), tile);
   }
+
+  public static List<Vector2Int> FilterByCombatTeam(this List<Vector2Int> posList, CombatTeam playerTeam) {
+    List<Vector2Int> newList = new List<Vector2Int>();
+
+    for(int i = 0; i < posList.Count; i++) {
+      Vector2Int pos = posList[i];
+      if(playerTeam == CombatTeam.any || BoardController.instance.TeamInTile(pos) == playerTeam) {
+        newList.Add(pos);
+      }
+    }
+    return newList;
+  }
+
+  //public static List<Vector2Int> FilterOutObstacles(this List<Vector2Int> posList) {
+  //  List<Vector2Int> newList = new List<Vector2Int>();
+
+  //  for(int i = 0; i < posList.Count; i++) {
+  //    Vector2Int pos = posList[i];
+  //    if(!BoardController.instance.ContainsObstacle(pos)) {
+  //      newList.Add(pos);
+  //    }
+  //  }
+  //  return newList;
+  //}
 }
 
 public static class TweenAnimations {

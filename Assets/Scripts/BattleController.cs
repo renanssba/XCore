@@ -39,9 +39,6 @@ public class BattleController : MonoBehaviour {
   public List<Skill> allSkills;
   public TextAsset skillsFile;
 
-  public List<ActionSkin> playerActionSkins;
-  public TextAsset actionSkinsFile;
-
   [Header("- Status Conditions -")]
   public List<StatusCondition> allStatusConditions;
   public TextAsset statusConditionsFile;
@@ -101,7 +98,6 @@ public class BattleController : MonoBehaviour {
     selectedTargetPartyId = new SkillTarget[0];
     LoadAllEnemies();
     LoadAllSkills();
-    LoadAllActionSkins();
     LoadAllStatusConditions();
   }
 
@@ -112,7 +108,7 @@ public class BattleController : MonoBehaviour {
     List<Enemy> enemiesParty = new List<Enemy>();
 
     foreach(CharacterToken characterToken in combat.characters) {
-      if(characterToken.id <= CharacterId.maya) {
+      if(characterToken.Id <= (int)CharacterId.maya) {
         heroesParty.Add((Pilot)characterToken.battler);
       } else {
         enemiesParty.Add((Enemy)characterToken.battler);
@@ -365,14 +361,6 @@ public class BattleController : MonoBehaviour {
     VsnController.instance.state = ExecutionState.PLAYING;
   }
 
-
-
-  public ActionSkin GetActionSkin(Pilot user, Skill usedSkill) {
-    string sexModifier = (user.isMale ? "_boy" : "_girl");
-    string actionSkinName = SpecialCodes.InterpretStrings("\\vsn(" + usedSkill.damageAttribute.ToString() + "_action" + sexModifier + "_name)");
-    Debug.LogWarning("actionSkinName: "+ actionSkinName);
-    return GetActionSkinByName(actionSkinName);
-  }
 
 
   public IEnumerator ExecuteBattlerSkill(SkillTarget targetId, Skill usedSkill) {
@@ -754,7 +742,7 @@ public class BattleController : MonoBehaviour {
 
       actionSkin = new ActionSkin();
       actionSkin.sfxName = dic["base attack sfx"];
-      actionSkin.animation = GetSkillAnimationByString(dic["base attack animation"]);
+      actionSkin.animation = (SkillAnimation)System.Enum.Parse(typeof(SkillAnimation), dic["base attack animation"]);
       actionSkin.animationArgument = Utils.GetStringArgument(dic["base attack animation"]);
       loadedEnemy.baseAttackSkin = actionSkin;
 
@@ -831,7 +819,7 @@ public class BattleController : MonoBehaviour {
 
       newSkill.sprite = Resources.Load<Sprite>("Icons/" + entry["sprite"]);
       newSkill.animationSkin = new ActionSkin();
-      newSkill.animationSkin.animation = GetSkillAnimationByString(entry["animation"]);
+      newSkill.animationSkin.animation = (SkillAnimation)System.Enum.Parse(typeof(SkillAnimation), entry["animation"]);
       newSkill.animationSkin.animationArgument = Utils.GetStringArgument(entry["animation"]);
       newSkill.animationSkin.sfxName = entry["animation sfx"];
 
@@ -857,54 +845,10 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public SkillAnimation GetSkillAnimationByString(string skillAnimation) {
-    for(int i = 0; i <= (int)SkillAnimation.none; i++) {
-      if(skillAnimation.StartsWith( ((SkillAnimation)i).ToString() ) ) {
-        return (SkillAnimation)i;
-      }
-    }
-    return SkillAnimation.none;
-  }
-
   public Skill GetSkillById(int id) {
     foreach(Skill skill in allSkills) {
       if(skill.id == id) {
         return skill;
-      }
-    }
-    return null;
-  }
-
-  public Skill GetSkillByName(string name) {
-    foreach(Skill skill in allSkills) {
-      if(skill.name == name) {
-        return skill;
-      }
-    }
-    return null;
-  }
-
-
-  public void LoadAllActionSkins() {
-    SpreadsheetData data = SpreadsheetReader.ReadTabSeparatedFile(actionSkinsFile, 1);
-
-    playerActionSkins = new List<ActionSkin>();
-    foreach(Dictionary<string, string> entry in data.data) {
-      ActionSkin newSkin = new ActionSkin() {
-        name = entry["name"],
-        sfxName = entry["sfx"],
-        animation = GetSkillAnimationByString(entry["animation"]),
-        animationArgument = Utils.GetStringArgument(entry["animation"])
-    };
-
-      playerActionSkins.Add(newSkin);
-    }
-  }
-
-  public ActionSkin GetActionSkinByName(string name) {
-    foreach(ActionSkin currentActionSkin in playerActionSkins) {
-      if(currentActionSkin.name == name) {
-        return currentActionSkin;
       }
     }
     return null;
@@ -926,10 +870,10 @@ public class BattleController : MonoBehaviour {
 
       List<StatusConditionEffect> effects = new List<StatusConditionEffect>();
       List<float> effectsPower = new List<float>();
-      //Debug.LogWarning("Status Condition: " + newStatusCondition.name);
+
       for(int i=1; i<=3; i++) {
         if(!string.IsNullOrEmpty(entry["effect "+i])) {
-          effects.Add(GetStatusConditionEffectByString(entry["effect " + i]));
+          effects.Add( (StatusConditionEffect)System.Enum.Parse(typeof(StatusConditionEffect), entry["effect " + i]) );
           if(!string.IsNullOrEmpty(entry["effect " + i + " power"])) {
             effectsPower.Add(float.Parse(entry["effect " + i + " power"]));
           } else {
@@ -944,16 +888,6 @@ public class BattleController : MonoBehaviour {
     }
   }
 
-  public StatusConditionEffect GetStatusConditionEffectByString(string effect) {
-    //Debug.LogWarning("effect: " + effect);
-    for(int i = 0; i <= (int)StatusConditionEffect.count; i++) {
-      if(((StatusConditionEffect)i).ToString() == effect) {
-        return (StatusConditionEffect)i;
-      }
-    }
-    return StatusConditionEffect.raiseGuts;
-  }
-
 
   public StatusCondition GetStatusConditionByName(string name) {
     foreach(StatusCondition c in allStatusConditions) {
@@ -964,12 +898,4 @@ public class BattleController : MonoBehaviour {
     return null;
   }
 
-  public StatusCondition GetStatusConditionById(int id) {
-    foreach(StatusCondition c in allStatusConditions) {
-      if(c.id == id) {
-        return c;
-      }
-    }
-    return null;
-  }
 }

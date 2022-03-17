@@ -25,35 +25,43 @@ public enum CombatTeam {
 
 
 public class CharacterToken : MonoBehaviour {
-  public CharacterId id;
+  [SerializeField]
+  private CharacterId idToLoad;
 
   [Header("- Team -")]
   public CombatTeam combatTeam = CombatTeam.pc;
 
+  [Header("- My Battler -")]
+  public Battler battler;
+
   [Header("- Visuals -")]
   public SpriteRenderer renderer;
   public GameObject hpSlider;
+  public GameObject currentCharacterIcon;
 
   [Header("- Effect Particles -")]
   public GameObject damageParticlePrefab;
   public GameObject missParticlePrefab;
-
-  [Header("- My Battler -")]
-  public Battler battler;
 
   [SerializeField]
   private Vector3 turnInitialPosition;
   public bool canRevertMovement;
   public bool canWalk;
 
+  public int Id {
+    get {
+      return battler.id;
+    }
+  }
+
 
 
   public void Start() {
     /// Initialize Battler
-    if(id <= CharacterId.maya) {
-      battler = GlobalData.instance.pilots[(int)id];
+    if(idToLoad <= CharacterId.maya) {
+      battler = GlobalData.instance.pilots[(int)idToLoad];
     } else {
-      Enemy newEnemy = new Enemy(BattleController.instance.GetEnemyById((int)id));
+      Enemy newEnemy = new Enemy(BattleController.instance.GetEnemyById((int)idToLoad));
       battler = newEnemy;
       GlobalData.instance.instancedEnemies.Add(newEnemy);
     }
@@ -61,7 +69,7 @@ public class CharacterToken : MonoBehaviour {
     Debug.LogWarning("character " + name + " registering");
     GameController.instance.RegisterCharacter(this);
     //renderer.sprite = ResourcesManager.instance
-    UpdateHPSlider();
+    UpdateUI();
     SnapToTile();
   }
 
@@ -74,10 +82,6 @@ public class CharacterToken : MonoBehaviour {
   public Vector2Int BoardGridPosition() {
     Grid grid = BoardController.instance.floorBoard.layoutGrid;
     return (Vector2Int)grid.WorldToCell(transform.position);
-  }
-
-  public List<Vector2Int> GetWalkableTiles() {
-    return WalkableTilesFromPosition(BoardGridPosition(), battler.AttributeValue(Attributes.movementRange));
   }
 
   public List<Vector2Int> GetAdjacentTiles() {
@@ -144,7 +148,8 @@ public class CharacterToken : MonoBehaviour {
     transform.DOMove(targetPos, 0.15f).SetLoops(2, LoopType.Yoyo);
   }
 
-  public void UpdateHPSlider() {
+  public void UpdateUI() {
+    renderer.sprite = ResourcesManager.instance.GetCharacterSprite(Id, CharacterSpritePart.mapIcon);
     hpSlider.transform.localScale = new Vector3((float)battler.hp / battler.AttributeValue(Attributes.maxHp), 1f, 1f);
   }
 
@@ -163,7 +168,7 @@ public class CharacterToken : MonoBehaviour {
 
 
   public void Die() {
-    Debug.LogWarning("Character "+id+" has died!");
+    Debug.LogWarning("Character " + Id + " has died!");
     GameController.instance.CharacterDies(this);
     Destroy(gameObject);
   }
@@ -172,6 +177,10 @@ public class CharacterToken : MonoBehaviour {
   public void RevertMovement() {
     transform.position = turnInitialPosition;
     canRevertMovement = false;
+  }
+
+  public void BecomeCurrentCharacter(bool isCurrent) {
+    currentCharacterIcon.SetActive(isCurrent);
   }
 
 

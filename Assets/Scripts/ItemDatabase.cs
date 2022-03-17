@@ -22,7 +22,7 @@ public class ItemDatabase : MonoBehaviour {
   }
 
   void Start(){
-    Debug.LogWarning("START ITEMDATABASE");
+    //Debug.LogWarning("START ITEMDATABASE");
     LoadAllItems();
   }
 

@@ -301,8 +301,7 @@ public abstract class Battler {
     }
 
     for(int i=0; i<sc.statusEffect.Length; i++) {
-      if(sc.statusEffect[i] >= StatusConditionEffect.turnDamageGuts &&
-         sc.statusEffect[i] <= StatusConditionEffect.turnDamageCharisma) {
+      if(sc.statusEffect[i] == StatusConditionEffect.damageEveryTurn) {
         damageDealtBefore = false;
         for(int j=0; j < statusCondPos; j++) {
           if(statusConditions[j].ContainsStatusEffect(sc.statusEffect[i])) {
