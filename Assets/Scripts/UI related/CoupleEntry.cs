@@ -14,8 +14,8 @@ public class CoupleEntry : MonoBehaviour {
 
   public void Initialize(Relationship rel) {
     relationship = rel;
-    coupleCards[0].Initialize(rel.people[0]);
-    coupleCards[1].Initialize(rel.people[1]);
+    coupleCards[0].SetSelectedUnit(rel.people[0]);
+    coupleCards[1].SetSelectedUnit(rel.people[1]);
   }
 
   public void OnEnable() {

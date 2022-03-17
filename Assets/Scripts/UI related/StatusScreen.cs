@@ -44,7 +44,7 @@ public class StatusScreen : MonoBehaviour {
   }
 
   public void UpdateUI() {
-    pilotCard.Initialize(pilot);
+    pilotCard.SetSelectedUnit(pilot);
 
     if(BattleController.instance.IsBattleHappening()){
       skilltreeButtonShade.gameObject.SetActive(true);

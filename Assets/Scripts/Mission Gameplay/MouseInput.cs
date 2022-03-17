@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +35,7 @@ public class MouseInput : MonoBehaviour {
     transform.position = new Vector3(v.x, v.y, 0f);
 
     if(GameController.instance.gameState == GameState.chooseMovement) {
-      TacticalUIController.instance.Select(SelectedCharacter);
+      TacticalUIController.instance.SelectCharacterByCursor(SelectedCharacter.battler);
     }    
   }
 

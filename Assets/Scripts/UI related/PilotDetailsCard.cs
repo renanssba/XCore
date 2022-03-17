@@ -31,7 +31,7 @@ public class PilotDetailsCard : BattlerInfoPanel {
   public PilotCardLayout coupleEntryLayout = PilotCardLayout.statusScreen;
 
 
-  public override void Initialize(Battler myBattler){
+  public override void SetSelectedUnit(Battler myBattler){
     character = myBattler;
     UpdateUI();
   }
@@ -43,7 +43,6 @@ public class PilotDetailsCard : BattlerInfoPanel {
 
     /// Update Basic Info, like HP, SP and 
     UpdateBattlerUI();
-    SkipHpBarAnimation();
 
 
     int relationshipId = StatusScreen.instance.pilot.id;

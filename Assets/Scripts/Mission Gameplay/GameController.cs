@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -223,13 +223,13 @@ public class GameController : MonoBehaviour {
         /// TODO: Implement Setup Phase
         break;
       case GameState.actionsMenu:
-        //TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter);
+        TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter.battler);
         TacticalUIController.instance.ShowActionsMenu();
         TacticalUIController.instance.HideSkillConfirmPanel();
         break;
       case GameState.chooseMovement:
         BoardController.instance.HighlightWalkableTiles(CurrentCharacter);
-        //TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter);
+        TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter.battler);
         TacticalUIController.instance.HideActionsMenu();
         TacticalUIController.instance.HideSkillConfirmPanel();
         BoardController.instance.HighlightWalkableTiles(CurrentCharacter);

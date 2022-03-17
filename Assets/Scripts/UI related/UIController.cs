@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +25,7 @@ public class UIController : MonoBehaviour {
   public BattlerInfoPanel[] heroesInfoPanels;
   public BattlerInfoPanel[] enemyInfoPanels;
 
-  [Header("- Actions Panel -")]
+  [Header("- Battle Actions Panel -")]
   public ActionsPanel actionsPanel;
   public GameObject selectTargetPanel;
   public GameObject[] selectTargets;
@@ -41,13 +41,6 @@ public class UIController : MonoBehaviour {
   }
 
 
-
-  public void Update() {
-    //if(skipTurnButton != null) {
-    //  skipTurnButton.SetActive(GameController.instance.gameState != GameState.noInput &&
-    //                         GameController.instance.gameState != GameState.battlePhase);
-    //}    
-  }
 
   public void UpdateUI() {
     GlobalData gb = GlobalData.instance;
@@ -69,7 +62,7 @@ public class UIController : MonoBehaviour {
     for(int i=0; i<3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
         heroesInfoPanels[i].gameObject.SetActive(true);
-        heroesInfoPanels[i].Initialize(BattleController.instance.partyMembers[i]);
+        heroesInfoPanels[i].SetSelectedUnit(BattleController.instance.partyMembers[i]);
       } else {
         heroesInfoPanels[i].gameObject.SetActive(false);
       }
@@ -77,7 +70,7 @@ public class UIController : MonoBehaviour {
       if(BattleController.instance.enemyMembers != null &&
          BattleController.instance.enemyMembers.Length > i) {
         enemyInfoPanels[i].gameObject.SetActive(true);
-        enemyInfoPanels[i].Initialize(BattleController.instance.enemyMembers[i]);
+        enemyInfoPanels[i].SetSelectedUnit(BattleController.instance.enemyMembers[i]);
       } else {
         enemyInfoPanels[i].gameObject.SetActive(false);
       }
@@ -89,12 +82,12 @@ public class UIController : MonoBehaviour {
     Debug.LogWarning("SKIPPING HP BAR ANIM FOR HEROES");
     for(int i = 0; i < 3; i++) {
       if(BattleController.instance.partyMembers.Length > i) {
-        heroesInfoPanels[i].SkipHpBarAnimation();
+        heroesInfoPanels[i].SkipHpAndSpBarAnimations();
       }
 
       if(BattleController.instance.enemyMembers != null &&
          BattleController.instance.enemyMembers.Length > i) {
-        enemyInfoPanels[i].SkipHpBarAnimation();
+        enemyInfoPanels[i].SkipHpAndSpBarAnimations();
       }
     }
   }

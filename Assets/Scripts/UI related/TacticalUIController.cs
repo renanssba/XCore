@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +8,9 @@ public class TacticalUIController : MonoBehaviour {
   public static TacticalUIController instance;
 
 
-  [Header("- Tactical Battler INFO Panel -")]
-  public BattlerInfoPanel battlerInfoPanel;
+  [Header("- Battler Info Panels -")]
+  public BattlerInfoPanel currentBattlerInfoPanel;
+  public BattlerInfoPanel selectedBattlerInfoPanel;
 
   [Header("- Tactical Actions Panel -")]
   public Panel tacticalActionsPanel;
@@ -19,9 +20,9 @@ public class TacticalUIController : MonoBehaviour {
   //public Image heroToPositionImage;
   //public TextMeshProUGUI setupPhaseTitleText;
 
-  [Header("- Confirm Skill Use Panel -")]
-  public Panel skillConfirmPanel;
-  public TextMeshProUGUI skillConfirmText;
+  [Header("- Engagement Confirm Panel -")]
+  public Panel engagementConfirmPanel;
+  public TextMeshProUGUI engagementConfirmText;
 
 
   [Header("- Cancel Button -")]
@@ -36,7 +37,7 @@ public class TacticalUIController : MonoBehaviour {
   }
 
   public void EnterBattlePhase() {
-    Select(null);
+    SelectCharacterByCursor(null);
     clickMapButton.SetActive(false);
   }
 
@@ -44,15 +45,12 @@ public class TacticalUIController : MonoBehaviour {
     clickMapButton.SetActive(true);
   }
 
-  public void Select(CharacterToken character) {
-    if(character == null) {
-      battlerInfoPanel.canvasGroup.alpha = 0f;
-      return;
-    }
+  public void ShowCurrentCharacterInfo(Battler character) {
+    currentBattlerInfoPanel.SetSelectedUnit(character);
+  }
 
-    battlerInfoPanel.canvasGroup.alpha = 1f;
-    battlerInfoPanel.Initialize(character.battler);
-    battlerInfoPanel.SkipHpBarAnimation();
+  public void SelectCharacterByCursor(Battler selectedUnit) {
+    selectedBattlerInfoPanel.SetSelectedUnit(selectedUnit);
   }
 
 
@@ -65,14 +63,14 @@ public class TacticalUIController : MonoBehaviour {
   }
 
 
-  public void ShowSkillConfirmPanel() {
+  public void ShowEngagementConfirmPanel() {
     //skillConfirmText.text = Lean.Localization.LeanLocalization.GetTranslationText("actions/confirm_use").
     //  Replace("XXXXX", GameController.instance.CurrentSkill.PrintableName());
-    skillConfirmPanel.ShowPanel();
+    engagementConfirmPanel.ShowPanel();
   }
 
   public void HideSkillConfirmPanel() {
-    skillConfirmPanel.gameObject.SetActive(false);
+    engagementConfirmPanel.gameObject.SetActive(false);
   }
 
 

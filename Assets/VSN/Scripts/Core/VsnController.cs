@@ -224,7 +224,7 @@ public class VsnController : MonoBehaviour {
     Debug.LogWarning("Finishing VSN execution!");
 
     state = ExecutionState.STOPPED;
-    Debug.LogWarning("SET STATE STOPPED - FinishVSN");
+    //Debug.LogWarning("SET STATE STOPPED - FinishVSN");
     if(clearGraphicsWhenStop){
       VsnUIManager.instance.ResetBackground();
       VsnUIManager.instance.ResetAllCharacters();
