@@ -8,6 +8,8 @@ public class MouseInput : MonoBehaviour {
   public static MouseInput instance;
 
   public Tilemap world;
+  public Vector2Int lastWalkableTileSelected;
+
 
   public CharacterToken SelectedCharacter {
     get {
@@ -33,6 +35,9 @@ public class MouseInput : MonoBehaviour {
     Vector3 v = grid.CellToWorld(selectedPos);
 
     transform.position = new Vector3(v.x, v.y, 0f);
+    if(HighlightedTilesLayer.instance.IsTileWalkable(selectedPos)) {
+      lastWalkableTileSelected = selectedPos;
+    }
 
     if(SelectedCharacter != null) {
       TacticalUIController.instance.SelectCharacterByCursor(SelectedCharacter.battler);

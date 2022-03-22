@@ -13,6 +13,7 @@ public enum CharacterId {
   fly = 30,
   brute = 31,
   boss = 32,
+  city = 33,
 }
 
 public enum CombatTeam {
@@ -20,6 +21,7 @@ public enum CombatTeam {
   pc,
   npc,
   any,
+  building,
   none
 }
 
@@ -53,6 +55,9 @@ public class CharacterToken : MonoBehaviour {
 
   public int Id {
     get {
+      if(battler == null) {
+        return (int)idToLoad;
+      }
       return battler.id;
     }
   }
@@ -63,10 +68,12 @@ public class CharacterToken : MonoBehaviour {
     /// Initialize Battler
     if(idToLoad <= CharacterId.maya) {
       battler = GlobalData.instance.pilots[(int)idToLoad];
-    } else {
+    } else if(idToLoad <= CharacterId.boss) {
       Enemy newEnemy = new Enemy(BattleController.instance.GetEnemyById((int)idToLoad));
       battler = newEnemy;
       GlobalData.instance.instancedEnemies.Add(newEnemy);
+    } else {
+      battler = null;
     }
     usedTurn = false;
 

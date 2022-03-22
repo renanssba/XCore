@@ -578,6 +578,18 @@ public static class MyExtensions {
     return newList;
   }
 
+
+  public static List<Vector2Int> Intersection(this List<Vector2Int> aList, List<Vector2Int> bList) {
+    List<Vector2Int> newList = new List<Vector2Int>();
+
+    for(int i = 0; i < aList.Count; i++) {
+      if(bList.Contains(aList[i])) {
+        newList.Add(aList[i]);
+      }
+    }
+    return newList;
+  }
+
   //public static List<Vector2Int> FilterOutObstacles(this List<Vector2Int> posList) {
   //  List<Vector2Int> newList = new List<Vector2Int>();
 

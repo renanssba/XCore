@@ -13,8 +13,7 @@ public class TacticalUIController : MonoBehaviour {
   public BattlerInfoPanel selectedBattlerInfoPanel;
 
   [Header("- Tactical Actions Panel -")]
-  public Panel tacticalActionsPanel;
-  public Button movementButton;
+  public TacticalActionsPanel tacticalActionsPanel;
 
   //[Header("- Setup Phase Panel -")]
   //public Panel setupPhasePanel;
@@ -57,7 +56,6 @@ public class TacticalUIController : MonoBehaviour {
 
   public void ShowActionsMenu() {
     tacticalActionsPanel.ShowPanel();
-    Utils.SelectUiElement(movementButton.gameObject);
   }
 
   public void HideActionsMenu() {
@@ -90,12 +88,9 @@ public class TacticalUIController : MonoBehaviour {
   //    GameController.instance.allCharacters.CountByTeam(CombatTeam.player) + "/" + GameController.instance.heroesAllowed + ")";
   //}
 
-  public void ClickedMoveButton() {
-    if(!GameController.instance.CurrentCharacter.canMove) {
-      SfxManager.StaticPlayForbbidenSfx();
-      return;
-    }
-    GameController.instance.SetGameState(GameState.chooseMovement);
+
+  public void ClickedUndoMovementButton() {
+    GameController.instance.RevertMovement();
   }
 
   public void ClickedEngageButton() {

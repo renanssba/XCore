@@ -50,15 +50,12 @@ public class IAController : MonoBehaviour {
 
 
   public IEnumerator DecideCharacter() {
-    yield return new WaitForSeconds(0.01f);
     foreach(CharacterToken ct in GameController.instance.allCharacters) {
       Debug.LogWarning("Deciding Characters");
 
       if(ct.combatTeam == CombatTeam.pc && !ct.usedTurn) {
         GameController.instance.InitializeCharacterTurn(GameController.instance.GetCharacterPos(ct));
-        yield return null;
-        coroutine = null;
-        yield break;
+        break;
       }
     }
     yield return null;
@@ -67,13 +64,13 @@ public class IAController : MonoBehaviour {
 
   public IEnumerator DecideAction() {
     if(CanEngageNow()) {
-      yield return new WaitForSeconds(0.5f);
+      yield return new WaitForSeconds(0.3f);
       GameController.instance.SetGameState(GameState.chooseEngagement);
     } else if(CanMoveYet()) {
-      yield return new WaitForSeconds(0.5f);
+      yield return new WaitForSeconds(0.3f);
       GameController.instance.SetGameState(GameState.chooseMovement);
     } else {
-      yield return new WaitForSeconds(0.5f);
+      yield return new WaitForSeconds(0.3f);
       GameController.instance.EndTurn();
     }
     coroutine = null;
@@ -89,6 +86,10 @@ public class IAController : MonoBehaviour {
 
     Debug.LogWarning("Frametime: " + Frametime + ". Target framerate: " + Application.targetFrameRate);
     foreach(Vector2Int tileOption in walkableTiles) {
+      if(!HighlightedTilesLayer.instance.IsTileInputValid(tileOption)) {
+        continue;
+      }
+
       newState = new IAState(tileOption);
       newState.CharacterMoves(CurrentCharacter, tileOption);
       newState.CalculateHeuristic();
@@ -102,7 +103,7 @@ public class IAController : MonoBehaviour {
       }
     }
     float timePassed = 0.001f * (System.DateTime.Now - realStart).Milliseconds;
-    float timeToPass = 0.5f - timePassed;
+    float timeToPass = 0.4f - timePassed;
     Debug.LogWarning("TIME PASSED: " + s);
     Debug.LogWarning("TOTAL TIME PASSED DECIDING MOVEMENT: " + timePassed);
 
@@ -125,6 +126,10 @@ public class IAController : MonoBehaviour {
 
     //Debug.LogWarning("Frametime: " + Frametime + ". Target framerate: " + Application.targetFrameRate);
     foreach(Vector2Int tileOption in engageInputs) {
+      if(!HighlightedTilesLayer.instance.IsTileInputValid(tileOption)) {
+        continue;
+      }
+
       newState = new IAState(tileOption);
       newState.EngageWith(BoardController.instance.CharacterInPosition(tileOption));
       newState.CalculateHeuristic();
@@ -136,7 +141,7 @@ public class IAController : MonoBehaviour {
       }
     }
     float timePassed = 0.001f * (System.DateTime.Now - realStart).Milliseconds;
-    float timeToPass = 0.5f - timePassed;
+    float timeToPass = 0.4f - timePassed;
     //Debug.LogWarning("TOTAL TIME PASSED DECIDING MOVEMENT: " + timePassed);
 
     chosenState = possibleStates.FindBestState();

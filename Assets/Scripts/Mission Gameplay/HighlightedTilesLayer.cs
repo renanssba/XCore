@@ -10,11 +10,13 @@ public class HighlightedTilesLayer : MonoBehaviour {
   public GameObject highlightedTilePrefab;
   public Transform highlightedContent;
   public List<Vector2Int> highlightedPositions;
+  public List<TileHighlight> highlights;
 
 
   public void Awake() {
     instance = this;
     highlightedPositions = new List<Vector2Int>();
+    highlights = new List<TileHighlight>();
   }
 
 
@@ -28,11 +30,35 @@ public class HighlightedTilesLayer : MonoBehaviour {
     Vector3 spawnPos = grid.CellToWorld(pos);
 
     GameObject newObj = Instantiate(highlightedTilePrefab, spawnPos, Quaternion.identity, highlightedContent);
-    newObj.GetComponent<TileHighlight>().Initialize(highlightType);
+    newObj.GetComponent<TileHighlight>().Initialize(pos, highlightType);
+    highlights.Add(newObj.GetComponent<TileHighlight>());
   }
 
-  public bool IsTileHighlighted(Vector2Int pos) {
-    return highlightedPositions.Contains(pos);
+  public bool IsTileInputValid(Vector2Int pos) {
+    foreach(TileHighlight tile in highlights) {
+      if(tile.myPos == pos) {
+        return tile.IsInputValid();
+      }
+    }
+    return false;
+  }
+
+  public bool IsTileWalkable(Vector2Int pos) {
+    foreach(TileHighlight tile in highlights) {
+      if(tile.myPos == pos && tile.mytype == TileHighlightType.walkableTile) {
+        return tile.IsInputValid();
+      }
+    }
+    return false;
+  }
+
+  public TileHighlightType HighlightTypeInPos(Vector2Int pos) {
+    foreach(TileHighlight tile in highlights) {
+      if(tile.myPos == pos) {
+        return tile.mytype;
+      }
+    }
+    return TileHighlightType.none;
   }
 
 
@@ -44,5 +70,6 @@ public class HighlightedTilesLayer : MonoBehaviour {
 
     highlightedContent.ClearChildren();
     highlightedPositions.Clear();
+    highlights.Clear();
   }
 }

@@ -6,11 +6,17 @@ using DG.Tweening;
 public enum TileHighlightType {
   walkableTile,
   characterToEngage,
-  supportSkill
+  supportSkill,
+  none
 }
 
 
 public class TileHighlight : MonoBehaviour {
+
+  [Header("- Data -")]
+  public TileHighlightType mytype;
+  public Vector2Int myPos;
+
   [Header("- Renderer -")]
   public SpriteRenderer tileRenderer;
 
@@ -21,10 +27,9 @@ public class TileHighlight : MonoBehaviour {
 
   public float shineAnimTime = 0.8f;
 
-  private TileHighlightType mytype;
 
-
-  public void Initialize(TileHighlightType type) {
+  public void Initialize(Vector2Int pos, TileHighlightType type) {
+    myPos = pos;
     mytype = type;
     switch(type) {
       case TileHighlightType.walkableTile:
@@ -41,7 +46,25 @@ public class TileHighlight : MonoBehaviour {
 
   public void ShineTile(Color highlightColor) {
     tileRenderer.color = highlightColor;
-    tileRenderer.DOColor(highlightColor * 1.5f, shineAnimTime).SetLoops(-1, LoopType.Yoyo);
+    Color endColor = highlightColor * 1.5f;
+    endColor.a = highlightColor.a;
+    tileRenderer.DOColor(endColor, shineAnimTime).SetLoops(-1, LoopType.Yoyo);
+  }
+
+  public bool IsInputValid() {
+    if(mytype == TileHighlightType.walkableTile) {
+      if(BoardController.instance.CharacterInPosition(myPos) != null &&
+         BoardController.instance.CharacterInPosition(myPos) != GameController.instance.CurrentCharacter) {
+        return false;
+      }
+    }
+    if(mytype == TileHighlightType.characterToEngage) {
+      if(BoardController.instance.CharacterInPosition(myPos) == null ||
+         BoardController.instance.CharacterInPosition(myPos) == GameController.instance.CurrentCharacter) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public void BeforeDestroy() {

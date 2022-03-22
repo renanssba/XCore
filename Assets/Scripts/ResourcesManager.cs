@@ -88,7 +88,7 @@ public class ResourcesManager : MonoBehaviour {
   }
 
   public void GenerateCharacterSprites() {
-    characterSpritesCollections = new CharacterSpriteCollection[33];
+    characterSpritesCollections = new CharacterSpriteCollection[34];
     characterSpritesCollections[0] = NewSpriteCollection("marcus");
     characterSpritesCollections[1] = NewSpriteCollection("agnes");
     characterSpritesCollections[2] = NewSpriteCollection("maya");
@@ -96,6 +96,7 @@ public class ResourcesManager : MonoBehaviour {
     characterSpritesCollections[30] = NewSpriteCollection("fly");
     characterSpritesCollections[31] = NewSpriteCollection("brute");
     characterSpritesCollections[32] = NewSpriteCollection("boss");
+    characterSpritesCollections[33] = NewSpriteCollection("city");
   }
 
   public CharacterSpriteCollection NewSpriteCollection(string charName) {

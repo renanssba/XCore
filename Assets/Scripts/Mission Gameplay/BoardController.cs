@@ -52,34 +52,9 @@ public class BoardController : MonoBehaviour {
                                                                character.battler.GetAttributeValue(Attributes.movementRange),
                                                                character.combatTeam);
 
-    selectedTiles = selectedTiles.FilterByCombatTeam(CombatTeam.none);
+    //selectedTiles = selectedTiles.FilterByCombatTeam(CombatTeam.none);
     selectedTiles.Add(character.BoardGridPosition());
     return selectedTiles;
-  }
-
-  public void HighlightWalkableTiles(CharacterToken character) {
-    List<Vector2Int> walkableTiles = CalculateWalkableTiles(character);
-
-    foreach(Vector2Int pos in walkableTiles) {
-      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.walkableTile);
-    }
-
-    HighlightEngageableTiles(walkableTiles);
-  }
-
-  public void HighlightEngageableTiles(List<Vector2Int> walkableTiles) {
-    List<Vector2Int> engageableTiles = new List<Vector2Int>();
-
-    foreach(Vector2Int w in walkableTiles) {
-      engageableTiles.AddRange(GetAdjacentTiles(w));
-    }
-    engageableTiles = engageableTiles.Distinct().ToList();
-
-    foreach(Vector2Int pos in engageableTiles) {
-      if(!walkableTiles.Contains(pos)) {
-        HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.characterToEngage);
-      }
-    }
   }
 
 
@@ -92,6 +67,20 @@ public class BoardController : MonoBehaviour {
     return selectedTiles;
   }
 
+  public List<Vector2Int> CalculateTradeableTiles(CharacterToken character) {
+    List<Vector2Int> selectedTiles = GetAdjacentTiles(character.BoardGridPosition());
+    selectedTiles = selectedTiles.FilterByCombatTeam(character.combatTeam);
+    return selectedTiles;
+  }
+
+  public List<Vector2Int> CalculateRepairTiles(CharacterToken character) {
+    List<Vector2Int> selectedTiles = GetAdjacentTiles(character.BoardGridPosition());
+    //selectedTiles = selectedTiles.FilterByCombatTeam(CombatTeam.building);
+    return selectedTiles;
+  }
+
+
+
   public void HighlightAdjacentEnemies(CharacterToken character) {
     List<Vector2Int> selectedTiles = CalculateEngagementTargets(character);
 
@@ -99,6 +88,31 @@ public class BoardController : MonoBehaviour {
       HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.characterToEngage);
     }
     //selectionBoard.GetComponent<TilemapRenderer>().sortingOrder = 5;
+  }
+
+  public void HighlightWalkableTiles(CharacterToken character) {
+    List<Vector2Int> walkableTiles = CalculateWalkableTiles(character);
+
+    foreach(Vector2Int pos in walkableTiles) {
+      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.walkableTile);
+    }
+
+    HighlightEngageableEnemiesAroundMovement(walkableTiles);
+  }
+
+  public void HighlightEngageableEnemiesAroundMovement(List<Vector2Int> walkableTiles) {
+    List<Vector2Int> engageableTiles = new List<Vector2Int>();
+
+    foreach(Vector2Int w in walkableTiles) {
+      engageableTiles.AddRange(GetAdjacentTiles(w));
+    }
+    engageableTiles = engageableTiles.Distinct().ToList();
+
+    foreach(Vector2Int pos in engageableTiles) {
+      if(!walkableTiles.Contains(pos)) {
+        HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.characterToEngage);
+      }
+    }
   }
 
 

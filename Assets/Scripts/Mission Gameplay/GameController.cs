@@ -313,22 +313,22 @@ public class GameController : MonoBehaviour {
 
 
   public void ClickedMap() {
-    Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
+    Vector2Int clickedPos = MouseInput.instance.SelectedGridPosition();
 
     if(gameState == GameState.noInput ||
        Input.GetMouseButtonDown(0) == false) {
       return;
     }
 
-    if((gameState == GameState.chooseMovement || gameState == GameState.chooseEngagement) &&
-       !HighlightedTilesLayer.instance.IsTileHighlighted(clickedGridPos)) {
+    if(!HighlightedTilesLayer.instance.IsTileInputValid(clickedPos) &&
+      (gameState == GameState.chooseMovement || gameState == GameState.chooseEngagement)) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
 
     switch(gameState) {
       case GameState.chooseCharacter:
-        CharacterToken ct = BoardController.instance.CharacterInPosition(clickedGridPos);
+        CharacterToken ct = BoardController.instance.CharacterInPosition(clickedPos);
         if(ct != null && ct.combatTeam == CombatTeam.player) {
           InitializeCharacterTurn(GetCharacterPos(ct));
         } else {
@@ -338,11 +338,11 @@ public class GameController : MonoBehaviour {
         break;
       case GameState.chooseMovement:
         // clicked during choose movement phase
-        StartMovement(clickedGridPos);
+        StartMovement(clickedPos);
         break;
       case GameState.chooseEngagement:
         // clicked during choose engagement phase
-        StartEngagement(clickedGridPos);
+        StartEngagement(clickedPos);
         break;
     }
   }
@@ -360,7 +360,6 @@ public class GameController : MonoBehaviour {
         break;
       case GameState.actionsMenu:
         RevertMovement();
-        SetGameState(GameState.chooseMovement);
         break;
       case GameState.chooseEngagement:
         SetGameState(GameState.actionsMenu);
@@ -493,9 +492,9 @@ public class GameController : MonoBehaviour {
 
     currentCombat = combat;
     VsnController.instance.StartVSN("battle");
-    yield return new WaitForSeconds(0.5f);
-
     yield return WaitForVsnExecution();
+
+    yield return new WaitForSeconds(0.5f);
     combat.DestroyIcons();
 
     bool someoneDies = false;
@@ -507,26 +506,71 @@ public class GameController : MonoBehaviour {
     if(someoneDies) {
       yield return new WaitForSeconds(0.5f);
     }
+    yield return new WaitForSeconds(0.5f);
   }
 
 
-  public void StartMovement(Vector2Int clickedGridPos) {
-    Vector3 pos = BoardController.instance.floorBoard.layoutGrid.CellToWorld(clickedGridPos);
-    float dur = 1f;
-    if(clickedGridPos == CurrentCharacter.BoardGridPosition()) {
+
+  public void StartMovement(Vector2Int clickedPos) {
+    float dur = 0.65f;
+    Vector2Int posToWalk = clickedPos;
+    Vector2Int posToEngage = clickedPos;
+    bool shouldEngage = false;
+    
+    if(HighlightedTilesLayer.instance.HighlightTypeInPos(clickedPos) == TileHighlightType.walkableTile) {
+      posToWalk = clickedPos;
+    } else {
+      posToEngage = clickedPos;
+      shouldEngage = true;
+      posToWalk = DecidePositionToWalk(clickedPos);
+      if(posToWalk.x == -50 && posToWalk.y == -50) {
+        SfxManager.StaticPlayForbbidenSfx();
+        return;
+      }
+    }
+
+    if(posToWalk == CurrentCharacter.BoardGridPosition()) {
       dur = 0f;
     }
 
     CleanHighlightedTiles();
     SetGameState(GameState.noInput);
-    //CurrentCharacter.BecomeCurrentCharacter(false);
 
+    Vector3 pos = BoardController.instance.floorBoard.layoutGrid.CellToWorld(posToWalk);
     CurrentCharacter.transform.DOMove(new Vector3(pos.x, pos.y, 0f), dur).OnComplete(() => {
-      SetGameState(GameState.actionsMenu);
       CurrentCharacter.RegisterMovement();
+
+      if(shouldEngage) {
+        StartEngagement(posToEngage);
+      } else {
+        SetGameState(GameState.actionsMenu);
+      }
     });
   }
 
+  public Vector2Int DecidePositionToWalk(Vector2Int targetPos) {
+    Vector2Int lastPos = MouseInput.instance.lastWalkableTileSelected;
+    List<Vector2Int> possiblePositions = new List<Vector2Int>();
+    List<Vector2Int> neighborPositions = BoardController.instance.WalkableTilesFromPosition(targetPos, 1, CurrentCharacter.combatTeam);
+    
+    foreach(Vector2Int neighbor in neighborPositions) {
+      if(HighlightedTilesLayer.instance.IsTileInputValid(neighbor) && neighbor != targetPos) {
+        possiblePositions.Add(neighbor);
+      }
+    }
+
+    if(possiblePositions.Count <= 0) {
+      return new Vector2Int(-50, -50);
+    }
+
+    if(possiblePositions.Contains(CurrentCharacter.BoardGridPosition())) {
+      return CurrentCharacter.BoardGridPosition();
+    }
+    if(possiblePositions.Contains(lastPos)) {
+      return lastPos;
+    }
+    return possiblePositions[0];
+  }
 
   public bool RevertMovement() {
     if(!CurrentCharacter.canRevertMovement) {
@@ -534,14 +578,14 @@ public class GameController : MonoBehaviour {
       return false;
     }
     CurrentCharacter.RevertMovement();
+    SetGameState(GameState.chooseMovement);
     //cameraController.FocusOnCharacterImmediate(CurrentCharacter);
     return true;
   }
 
-  
 
-  public void StartEngagement(Vector2Int clickedGridPos) {
-    CharacterToken clicked = BoardController.instance.CharacterInPosition(clickedGridPos);
+  public void StartEngagement(Vector2Int clickedPos) {
+    CharacterToken clicked = BoardController.instance.CharacterInPosition(clickedPos);
     bool addedToEngagement = false;
 
     foreach(Combat c in activeCombats) {
@@ -565,6 +609,7 @@ public class GameController : MonoBehaviour {
     }
     return 0;
   }
+
 
 
   public void RegisterCharacter(CharacterToken newCharacter) {
@@ -615,8 +660,4 @@ public class GameController : MonoBehaviour {
     return true;
   }
 
-
-  public void EndBattle() {
-    //SetGameState(GameState.chooseMovement);
-  }
 }
