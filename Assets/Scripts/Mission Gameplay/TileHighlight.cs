@@ -4,8 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 
 public enum TileHighlightType {
-  walkable,
-  offensiveSkill,
+  walkableTile,
+  characterToEngage,
   supportSkill
 }
 
@@ -21,25 +21,25 @@ public class TileHighlight : MonoBehaviour {
 
   public float shineAnimTime = 0.8f;
 
-  TileHighlightType mytype;
+  private TileHighlightType mytype;
 
 
   public void Initialize(TileHighlightType type) {
     mytype = type;
     switch(type) {
-      case TileHighlightType.walkable:
-        ShineTiles(movementHighlightColor);
+      case TileHighlightType.walkableTile:
+        ShineTile(movementHighlightColor);
         break;
-      case TileHighlightType.offensiveSkill:
-        ShineTiles(attackHighlightColor);
+      case TileHighlightType.characterToEngage:
+        ShineTile(attackHighlightColor);
         break;
       case TileHighlightType.supportSkill:
-        ShineTiles(supportHighlightColor);
+        ShineTile(supportHighlightColor);
         break;
     }
   }
 
-  public void ShineTiles(Color highlightColor) {
+  public void ShineTile(Color highlightColor) {
     tileRenderer.color = highlightColor;
     tileRenderer.DOColor(highlightColor * 1.5f, shineAnimTime).SetLoops(-1, LoopType.Yoyo);
   }

@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
 
   public IEnumerator GoToDefaultPosition() {
     Camera.main.transform.DOMove(defaultCameraPos, cameraMoveTime);
-    Camera.main.DOOrthoSize(5f, cameraMoveTime);
+    Camera.main.DOOrthoSize(5.8f, cameraMoveTime);
     yield return new WaitForSeconds(cameraMoveTime);
   }
 

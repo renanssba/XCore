@@ -105,13 +105,13 @@ namespace Command {
 
 
     public static SkillTarget GetTargetFromSkill(Skill skillToActivate, SkillTarget partyMemberId) {
-      if(skillToActivate.range == ActionRange.self) {
+      if(skillToActivate.range == SkillRange.self) {
         return partyMemberId;
       }
-      if(skillToActivate.range == ActionRange.all_characters) {
+      if(skillToActivate.range == SkillRange.all_characters) {
         return SkillTarget.allCharacters;
       }
-      if(skillToActivate.range == ActionRange.all_but_caster) {
+      if(skillToActivate.range == SkillRange.all_but_caster) {
         return (SkillTarget)((int)SkillTarget.allButPartyMember1 + (int)partyMemberId);
       }
       
@@ -119,18 +119,18 @@ namespace Command {
         case SkillTarget.enemy1:
         case SkillTarget.enemy2:
         case SkillTarget.enemy3:
-          if(skillToActivate.range == ActionRange.all_allies) {
+          if(skillToActivate.range == SkillRange.all_allies) {
             return SkillTarget.allEnemies;
-          }else if(skillToActivate.range == ActionRange.all_enemies) {
+          }else if(skillToActivate.range == SkillRange.all_enemies) {
             return SkillTarget.allHeroes;
           }
           break;
         case SkillTarget.partyMember1:
         case SkillTarget.partyMember2:
         case SkillTarget.partyMember3:
-          if(skillToActivate.range == ActionRange.all_allies) {
+          if(skillToActivate.range == SkillRange.all_allies) {
             return SkillTarget.allHeroes;
-          } else if(skillToActivate.range == ActionRange.all_enemies) {
+          } else if(skillToActivate.range == SkillRange.all_enemies) {
             return SkillTarget.allEnemies;
           }
           break;

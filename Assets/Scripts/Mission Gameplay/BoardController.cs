@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 using DG.Tweening;
 
 
+// Unity grid tile size for this project
+// width: 0.5
 // height: 0.87
 public class BoardController : MonoBehaviour {
 
@@ -16,6 +18,9 @@ public class BoardController : MonoBehaviour {
 
   [Header("- Tiles -")]
   public TileBase wallTile;
+
+  [Header("- Pathfindig -")]
+  public AStarAlgorithm pathfinding;
 
 
 
@@ -42,25 +47,56 @@ public class BoardController : MonoBehaviour {
   }
 
 
-  public void HighlightWalkableTiles(CharacterToken character) {
+  public List<Vector2Int> CalculateWalkableTiles(CharacterToken character) {
     List<Vector2Int> selectedTiles = WalkableTilesFromPosition(character.BoardGridPosition(),
-                                                               character.battler.AttributeValue(Attributes.movementRange),
+                                                               character.battler.GetAttributeValue(Attributes.movementRange),
                                                                character.combatTeam);
-    foreach(Vector2Int pos in selectedTiles) {
-      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.walkable);
+
+    selectedTiles = selectedTiles.FilterByCombatTeam(CombatTeam.none);
+    selectedTiles.Add(character.BoardGridPosition());
+    return selectedTiles;
+  }
+
+  public void HighlightWalkableTiles(CharacterToken character) {
+    List<Vector2Int> walkableTiles = CalculateWalkableTiles(character);
+
+    foreach(Vector2Int pos in walkableTiles) {
+      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.walkableTile);
+    }
+
+    HighlightEngageableTiles(walkableTiles);
+  }
+
+  public void HighlightEngageableTiles(List<Vector2Int> walkableTiles) {
+    List<Vector2Int> engageableTiles = new List<Vector2Int>();
+
+    foreach(Vector2Int w in walkableTiles) {
+      engageableTiles.AddRange(GetAdjacentTiles(w));
+    }
+    engageableTiles = engageableTiles.Distinct().ToList();
+
+    foreach(Vector2Int pos in engageableTiles) {
+      if(!walkableTiles.Contains(pos)) {
+        HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.characterToEngage);
+      }
     }
   }
 
 
-
-  public void HighlightAdjacentEnemies(CharacterToken character) {
+  public List<Vector2Int> CalculateEngagementTargets(CharacterToken character) {
     List<Vector2Int> selectedTiles = GetAdjacentTiles(character.BoardGridPosition());
     CombatTeam opponentTeam = character.OpponentCombatTeam();
 
     selectedTiles = selectedTiles.FilterByCombatTeam(opponentTeam);
+    selectedTiles = selectedTiles.FilterEngageableTargets(character.combatTeam);
+    return selectedTiles;
+  }
+
+  public void HighlightAdjacentEnemies(CharacterToken character) {
+    List<Vector2Int> selectedTiles = CalculateEngagementTargets(character);
 
     foreach(Vector2Int pos in selectedTiles) {
-      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.offensiveSkill);
+      HighlightedTilesLayer.instance.SetTile(pos, TileHighlightType.characterToEngage);
     }
     //selectionBoard.GetComponent<TilemapRenderer>().sortingOrder = 5;
   }
@@ -91,8 +127,8 @@ public class BoardController : MonoBehaviour {
   public List<Vector2Int> GetAdjacentTiles(Vector2Int pos) {
     List<Vector2Int> neighbors = new List<Vector2Int>();
 
-    for(int i = 0; i < 20; i++) {
-      for(int j = 0; j < 20; j++) {
+    for(int i = pos.x - 1; i <= pos.x + 1; i++) {
+      for(int j = pos.y - 1; j <= pos.y + 1; j++) {
         TileBase tileB = floorBoard.GetTile(new Vector2Int(i, j));
         if(tileB != null) {
           if(IsCloseEnough(floorBoard.layoutGrid.CellToWorld(pos),
@@ -106,30 +142,29 @@ public class BoardController : MonoBehaviour {
     return neighbors;
   }
 
-  public List<Vector2Int> GetWalkableNeighborTiles(Vector2Int pos, CombatTeam playerTeam) {
-    List<Vector2Int> neighbors = new List<Vector2Int>();
-
-    for(int i=0; i<20; i++) {
-      for(int j=0; j<20; j++) {
-        TileBase tileB = floorBoard.GetTile(new Vector2Int(i, j));
-        if(tileB != null) {
-          if(IsCloseEnough(floorBoard.layoutGrid.CellToWorld(pos),
-                           floorBoard.layoutGrid.CellToWorld(new Vector2Int(i, j)), 1) &&
-             floorBoard.GetTile(new Vector2Int(i, j)) != wallTile &&
-             (playerTeam == CombatTeam.any || TeamInTile(pos) == playerTeam || TeamInTile(pos) == CombatTeam.none) ) {
-            neighbors.Add(new Vector2Int(i, j));
-          }
-        }
-      }
-    }
-    return neighbors;
-  }
-
   public bool IsCloseEnough(Vector3 posA, Vector3 posB, int distance) {
     if(Vector3.Distance(posA, posB) < 1.003f * distance + 0.05f) {
       return true;
     }
     return false;
+  }
+
+
+  public CharacterToken CharacterInPosition(Vector2Int selectedPos) {
+    foreach(CharacterToken c in GameController.instance.allCharacters) {
+      if(c.BoardGridPosition() == selectedPos) {
+        return c;
+      }
+    }
+    return null;
+  }
+
+  public bool IsPositionWalkable(Vector2Int pos, CombatTeam alliesTeam) {
+    if(TeamInTile(pos) != alliesTeam && TeamInTile(pos) != CombatTeam.none &&
+       alliesTeam != CombatTeam.any) {
+      return false;
+    }
+    return true;
   }
 
 }

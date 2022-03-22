@@ -10,7 +10,6 @@ public class HighlightedTilesLayer : MonoBehaviour {
   public GameObject highlightedTilePrefab;
   public Transform highlightedContent;
   public List<Vector2Int> highlightedPositions;
-  public Grid boardGrid;
 
 
   public void Awake() {
@@ -24,7 +23,11 @@ public class HighlightedTilesLayer : MonoBehaviour {
       return;
     }
     highlightedPositions.Add(pos);
-    GameObject newObj = Instantiate(highlightedTilePrefab, new Vector3(pos.x, pos.y, 0f), Quaternion.identity, highlightedContent);
+
+    Grid grid = BoardController.instance.floorBoard.layoutGrid;
+    Vector3 spawnPos = grid.CellToWorld(pos);
+
+    GameObject newObj = Instantiate(highlightedTilePrefab, spawnPos, Quaternion.identity, highlightedContent);
     newObj.GetComponent<TileHighlight>().Initialize(highlightType);
   }
 

@@ -91,7 +91,7 @@ public class TacticalUIController : MonoBehaviour {
   //}
 
   public void ClickedMoveButton() {
-    if(!GameController.instance.CurrentCharacter.canWalk) {
+    if(!GameController.instance.CurrentCharacter.canMove) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
@@ -107,6 +107,6 @@ public class TacticalUIController : MonoBehaviour {
   }
 
   public void ClickedEndTurnButton() {
-    GameController.instance.AdvanceTurn();
+    GameController.instance.EndTurn();
   }
 }

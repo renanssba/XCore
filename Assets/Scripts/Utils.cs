@@ -288,7 +288,7 @@ public class Utils {
       }
 
 
-      if(condition == "defending" && !TheaterController.instance.GetActorByPartyId(skillUserId).battler.IsDefending()) {
+      if(condition == "defending" && !TheaterController.instance.GetActorByPartyPos(skillUserId).battler.IsDefending()) {
         return false;
       }
 
@@ -553,6 +553,31 @@ public static class MyExtensions {
     return newList;
   }
 
+  public static List<Vector2Int> FilterEngageableTargets(this List<Vector2Int> posList, CombatTeam playerTeam) {
+    List<Vector2Int> newList = new List<Vector2Int>();
+
+    for(int i = 0; i < posList.Count; i++) {
+      CharacterToken ct = BoardController.instance.CharacterInPosition(posList[i]);
+      int engaged = GameController.instance.CountCharactersEngagedWithThis(ct);
+      if(engaged < Combat.maxCombatPartySize) {
+        newList.Add(posList[i]);
+      }
+    }
+    return newList;
+  }
+
+  public static List<Vector2Int> FilterOnly(this List<Vector2Int> posList, CombatTeam playerTeam) {
+    List<Vector2Int> newList = new List<Vector2Int>();
+
+    for(int i = 0; i < posList.Count; i++) {
+      Vector2Int pos = posList[i];
+      if(playerTeam == CombatTeam.any || BoardController.instance.TeamInTile(pos) == playerTeam) {
+        newList.Add(pos);
+      }
+    }
+    return newList;
+  }
+
   //public static List<Vector2Int> FilterOutObstacles(this List<Vector2Int> posList) {
   //  List<Vector2Int> newList = new List<Vector2Int>();
 
@@ -564,6 +589,17 @@ public static class MyExtensions {
   //  }
   //  return newList;
   //}
+
+  public static IAState FindBestState(this List<IAState> possibleStates) {
+    IAState best = possibleStates[0];
+
+    foreach(IAState state in possibleStates) {
+      if(state.heuristic > best.heuristic) {
+        best = state;
+      }
+    }
+    return best;
+  }
 }
 
 public static class TweenAnimations {

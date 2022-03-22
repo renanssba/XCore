@@ -8,7 +8,7 @@ public enum SkillType {
   passive
 }
 
-public enum ActionRange {
+public enum SkillRange {
   self,
   one_ally,
   other_ally,
@@ -146,7 +146,7 @@ public class Skill {
 
   public Sprite sprite;
   public SkillType type;
-  public ActionRange range;
+  public SkillRange range;
 
   public int spCost;
 

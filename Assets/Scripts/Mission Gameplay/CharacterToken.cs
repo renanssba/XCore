@@ -43,10 +43,13 @@ public class CharacterToken : MonoBehaviour {
   public GameObject damageParticlePrefab;
   public GameObject missParticlePrefab;
 
+  [Header("- Turn Possibilities -")]
+  public bool usedTurn;
+  public bool canRevertMovement;
+  public bool canMove;
+
   [SerializeField]
   private Vector3 turnInitialPosition;
-  public bool canRevertMovement;
-  public bool canWalk;
 
   public int Id {
     get {
@@ -65,12 +68,12 @@ public class CharacterToken : MonoBehaviour {
       battler = newEnemy;
       GlobalData.instance.instancedEnemies.Add(newEnemy);
     }
+    usedTurn = false;
 
     Debug.LogWarning("character " + name + " registering");
     GameController.instance.RegisterCharacter(this);
-    //renderer.sprite = ResourcesManager.instance
-    UpdateUI();
     SnapToTile();
+    UpdateUI();
   }
 
   public void SnapToTile() {
@@ -84,10 +87,6 @@ public class CharacterToken : MonoBehaviour {
     return (Vector2Int)grid.WorldToCell(transform.position);
   }
 
-  public List<Vector2Int> GetAdjacentTiles() {
-    return BoardController.instance.GetWalkableNeighborTiles(BoardGridPosition(), CombatTeam.any);
-  }
-
 
   public CombatTeam OpponentCombatTeam() {
     if(combatTeam == CombatTeam.pc) {
@@ -97,32 +96,33 @@ public class CharacterToken : MonoBehaviour {
   }
 
 
-  public List<Vector2Int> WalkableTilesFromPosition(Vector2Int pos, int movesLeft) {
-    List<Vector2Int> walkableTiles = new List<Vector2Int>();
-    List<Vector2Int> neighbors = new List<Vector2Int>();
 
-    if(movesLeft == 0) {
-      return walkableTiles;
+  public void StartNewGamePhase() {
+    BecomeCurrentCharacter(false);
+
+    if(GameController.instance.CountCharactersEngagedWithThis(this) != 0) {
+      usedTurn = true;
+      UpdateUI();
+      return;
     }
+    usedTurn = false;
 
-    neighbors = BoardController.instance.GetWalkableNeighborTiles(pos, combatTeam);
-    walkableTiles.AddRange(neighbors);
-    foreach(Vector2Int tile in neighbors) {
-      walkableTiles.AddRange(WalkableTilesFromPosition(tile, movesLeft-1));
-    }
-    return walkableTiles;
-  }
-
-
-
-  public void InitializeTurn() {
     canRevertMovement = false;
-    canWalk = true;
-    //EndDefense();
+    canMove = true;
     turnInitialPosition = transform.position;
+    UpdateUI();
   }
+
+  //public void InitializeTurn() {
+  //  canRevertMovement = false;
+  //  canMove = true;
+  //  turnInitialPosition = transform.position;
+  //}
 
   public void EndTurn() {
+    BecomeCurrentCharacter(false);
+    usedTurn = true;
+    UpdateUI();
     //Debug.LogWarning("ENDING " + attributes.id + " TURN!");
 
     /// pass status conditions turn
@@ -137,9 +137,9 @@ public class CharacterToken : MonoBehaviour {
   }
 
 
-  public void Walked() {
+  public void RegisterMovement() {
     canRevertMovement = true;
-    canWalk = false;
+    canMove = false;
   }
 
 
@@ -150,7 +150,22 @@ public class CharacterToken : MonoBehaviour {
 
   public void UpdateUI() {
     renderer.sprite = ResourcesManager.instance.GetCharacterSprite(Id, CharacterSpritePart.mapIcon);
-    hpSlider.transform.localScale = new Vector3((float)battler.hp / battler.AttributeValue(Attributes.maxHp), 1f, 1f);
+    hpSlider.transform.localScale = new Vector3((float)battler.hp / battler.GetAttributeValue(Attributes.maxHp), 1f, 1f);
+    if(usedTurn && GamePhaseIsMyTurn()) {
+      renderer.color = Color.gray;
+    } else {
+      renderer.color = Color.white;
+    }
+  }
+
+  public bool GamePhaseIsMyTurn() {
+    if(GameController.instance.gamePhase == GamePhase.playerPhase && combatTeam == CombatTeam.player) {
+      return true;
+    }
+    if(GameController.instance.gamePhase == GamePhase.enemyPhase && combatTeam == CombatTeam.pc) {
+      return true;
+    }
+    return false;
   }
 
   public bool CheckToDie() {

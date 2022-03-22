@@ -110,10 +110,6 @@ public class Enemy : Battler {
   
   public override void HealSp(int value){}
 
-  public override bool IsDefending() {
-    return false;
-  }
-
   public override int FightingSide() {
     return 2;
   }

@@ -29,7 +29,7 @@ public abstract class Battler {
 
   public abstract string GetName();
 
-  public int AttributeValue(Attributes att) {
+  public int GetAttributeValue(Attributes att) {
     return AttributeValue((int)att);
   }
 
@@ -93,13 +93,13 @@ public abstract class Battler {
   public virtual void HealHP(int value) {
     //Debug.Log("Healed "+nameKey+" for "+value+" hp!");
     hp += value;
-    hp = Mathf.Min(hp, AttributeValue(Attributes.maxHp));
+    hp = Mathf.Min(hp, GetAttributeValue(Attributes.maxHp));
     hp = Mathf.Max(hp, 0);
     UIController.instance.UpdateBattleUI();
   }
 
   public virtual void HealHpPercent(float fraction) {
-    HealHP((int)(AttributeValue(Attributes.maxHp) * fraction));
+    HealHP((int)(GetAttributeValue(Attributes.maxHp) * fraction));
   }
 
   public virtual void TakeDamage(int value) {
@@ -108,7 +108,9 @@ public abstract class Battler {
 
   public abstract void HealSp(int value);
 
-  public abstract bool IsDefending();
+  public virtual bool IsDefending() {
+    return false;
+  }
 
   public abstract int FightingSide();
 
@@ -119,7 +121,7 @@ public abstract class Battler {
   }
 
   public virtual int MaxHP() {
-    return AttributeValue(Attributes.maxHp);
+    return GetAttributeValue(Attributes.maxHp);
   }
 
   public virtual int CurrentHP() {

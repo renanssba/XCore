@@ -24,7 +24,7 @@ public class Item {
   public int id;
 
   public List<ItemType> types;
-  public ActionRange range;
+  public SkillRange range;
 
   public string[] healsConditionNames;
   public string[] givesConditionNames;

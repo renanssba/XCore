@@ -11,6 +11,9 @@ public class Combat {
   public List<CharacterToken> characters;
   public List<GameObject> engageIcons;
 
+  public const int maxCombatPartySize = 3;
+
+
   public Combat(CharacterToken a, CharacterToken b) {
     characters = new List<CharacterToken>();
     engageIcons = new List<GameObject>();
@@ -34,9 +37,23 @@ public class Combat {
     characters = OrderByAgility();
   }
 
+  public bool Contains(CharacterToken character) {
+    return characters.Contains(character);
+  }
+
+  public int CountCharactersByTeam(CombatTeam team) {
+    int count = 0;
+    foreach(CharacterToken ct in characters) {
+      if(ct.combatTeam == team) {
+        count++;
+      }
+    }
+    return count;
+  }
+
 
   public List<CharacterToken> OrderByAgility() {
-    return characters.OrderByDescending(q => q.battler.AttributeValue(Attributes.agility)).ToList();
+    return characters.OrderByDescending(q => q.battler.GetAttributeValue(Attributes.agility)).ToList();
   }
 
   public CharacterToken RandomCharacterInTeam(CombatTeam team) {
@@ -69,14 +86,22 @@ public class Combat {
   }
 
 
-  public static bool CharacterIsEngagedInCombat(CharacterToken a) {
+  public static bool CharacterIsEngagedInCombat(CharacterToken character) {
     foreach(Combat c in GameController.instance.activeCombats) {
-      if(c.characters.Contains(a)) {
+      if(c.characters.Contains(character)) {
         return true;
       }
     }
     return false; 
   }
+
+}
+
+
+public enum GamePhase {
+  playerPhase,
+  enemyPhase,
+  battlePhase
 }
 
 public enum GameState {
@@ -86,7 +111,6 @@ public enum GameState {
   chooseMovement,
   chooseEngagement,
   confirmEngagement,
-  battlePhase,
   noInput
 }
 
@@ -105,6 +129,7 @@ public class GameController : MonoBehaviour {
   public static GameController instance;
 
   [Header("- Game State -")]
+  public GamePhase gamePhase = GamePhase.playerPhase;
   public GameState gameState = GameState.noInput;
 
 
@@ -118,10 +143,6 @@ public class GameController : MonoBehaviour {
   public GameObject engageIconPrefab;
 
   public Combat currentCombat;
-
-
-  [Header("- Camera -")]
-  public CameraController cameraController;
 
 
   public CharacterToken CurrentCharacter {
@@ -138,9 +159,10 @@ public class GameController : MonoBehaviour {
     get {
       //if(gameState == GameState.setupPhase) return (InputOrigin)VsnSaveSystem.GetIntVariable("player1_input", 0);
       //return InputOrigin.IA; /// DEBUG for testing IA vs IA
-      if(CurrentCharacter == null) return InputOrigin.none;
-      if(CurrentCharacter.combatTeam == CombatTeam.pc) return InputOrigin.IA;
-      if(CurrentCharacter.combatTeam == CombatTeam.player) return (InputOrigin)VsnSaveSystem.GetIntVariable("player1_input", 0);
+      //if(CurrentCharacter == null) return InputOrigin.none;
+
+      if(gamePhase == GamePhase.enemyPhase) return InputOrigin.IA;
+      if(gamePhase == GamePhase.playerPhase) return (InputOrigin)VsnSaveSystem.GetIntVariable("player1_input", 0);
       return InputOrigin.none;
     }
   }
@@ -167,8 +189,7 @@ public class GameController : MonoBehaviour {
 
   public IEnumerator WaitSetupToStart() {
     yield return WaitForVsnExecution();
-    yield return null;
-    AdvanceTurn();
+    yield return StartGamePhase(GamePhase.playerPhase);
   }
 
 
@@ -185,6 +206,32 @@ public class GameController : MonoBehaviour {
     /// Clicked Cancel button
     if(Input.GetMouseButtonDown(1)) {
       ClickedCancelButton();
+    }
+  }
+
+
+  public IEnumerator StartGamePhase(GamePhase newPhase) {
+    InitializeGamePhaseForCharacters();
+    gamePhase = newPhase;
+    gameState = GameState.noInput;
+
+    switch(newPhase) {
+      case GamePhase.playerPhase:
+        VsnController.instance.StartVSN("player_phase");
+        yield return WaitForVsnExecution();
+        SetGameState(GameState.chooseCharacter);
+        break;
+      case GamePhase.enemyPhase:
+        VsnController.instance.StartVSN("enemy_phase");
+        yield return WaitForVsnExecution();
+        SetGameState(GameState.chooseCharacter);
+        break;
+      case GamePhase.battlePhase:
+        yield return new WaitForSeconds(1f);
+        VsnController.instance.StartVSN("battle_phase");
+        yield return WaitForVsnExecution();
+        StartCoroutine(BattlePhase());
+        break;
     }
   }
 
@@ -210,9 +257,24 @@ public class GameController : MonoBehaviour {
       case GameState.setupPhase:
         /// TODO: Implement Setup Phase
         break;
+      case GameState.chooseCharacter:
+        SelectNoCharacter();
+        TacticalUIController.instance.ShowCurrentCharacterInfo(null);
+        TacticalUIController.instance.HideActionsMenu();
+        TacticalUIController.instance.HideSkillConfirmPanel();
+        /// check if should advance phase
+        if((gamePhase == GamePhase.playerPhase && !TeamCanStillAct(CombatTeam.player)) ||
+           (gamePhase == GamePhase.enemyPhase && !TeamCanStillAct(CombatTeam.pc))) {
+          AdvancePhase();
+        }
+        break;
       case GameState.actionsMenu:
         TacticalUIController.instance.ShowCurrentCharacterInfo(CurrentCharacter.battler);
-        TacticalUIController.instance.ShowActionsMenu();
+        if(InputOrigin != InputOrigin.IA) {
+          TacticalUIController.instance.ShowActionsMenu();
+        } else {
+          TacticalUIController.instance.HideActionsMenu();
+        }
         TacticalUIController.instance.HideSkillConfirmPanel();
         break;
       case GameState.chooseMovement:
@@ -226,18 +288,13 @@ public class GameController : MonoBehaviour {
         TacticalUIController.instance.HideSkillConfirmPanel();
         BoardController.instance.HighlightAdjacentEnemies(CurrentCharacter);
         break;
-      case GameState.battlePhase:
-        TacticalUIController.instance.ShowCurrentCharacterInfo(null);
-        TacticalUIController.instance.HideActionsMenu();
-        TacticalUIController.instance.HideSkillConfirmPanel();
-        StartCoroutine(FightsPhase());
-        break;
       case GameState.confirmEngagement:
         //TacticalUIController.instance.ShowSkillConfirmPanel();
         //TacticalBoardController.instance.HighlightSkillAreaOfEffect(CurrentCharacter, CurrentSkill, skillCastPosition);
         break;
       case GameState.noInput:
         TacticalUIController.instance.HideActionsMenu();
+        TacticalUIController.instance.HideSkillConfirmPanel();
         break;
       default:
         // do nothing
@@ -245,9 +302,10 @@ public class GameController : MonoBehaviour {
     }
 
     bool needsCancelButton = false;
-    if(gameState == GameState.chooseEngagement ||
-       gameState == GameState.confirmEngagement ||
-       gameState == GameState.chooseMovement) {
+    if((gameState == GameState.chooseEngagement ||
+        gameState == GameState.confirmEngagement ||
+        gameState == GameState.chooseMovement) &&
+        InputOrigin != InputOrigin.IA) {
       needsCancelButton = true;
     }
     TacticalUIController.instance.cancelButton.SetActive(needsCancelButton);
@@ -257,38 +315,52 @@ public class GameController : MonoBehaviour {
   public void ClickedMap() {
     Vector2Int clickedGridPos = MouseInput.instance.SelectedGridPosition();
 
-    if(gameState == GameState.noInput || gameState == GameState.battlePhase ||
+    if(gameState == GameState.noInput ||
        Input.GetMouseButtonDown(0) == false) {
       return;
-    }    
+    }
 
-    if(!HighlightedTilesLayer.instance.IsTileHighlighted(clickedGridPos)) {
+    if((gameState == GameState.chooseMovement || gameState == GameState.chooseEngagement) &&
+       !HighlightedTilesLayer.instance.IsTileHighlighted(clickedGridPos)) {
       SfxManager.StaticPlayForbbidenSfx();
       return;
     }
 
     switch(gameState) {
+      case GameState.chooseCharacter:
+        CharacterToken ct = BoardController.instance.CharacterInPosition(clickedGridPos);
+        if(ct != null && ct.combatTeam == CombatTeam.player) {
+          InitializeCharacterTurn(GetCharacterPos(ct));
+        } else {
+          SfxManager.StaticPlayForbbidenSfx();
+          return;
+        }
+        break;
       case GameState.chooseMovement:
         // clicked during choose movement phase
         StartMovement(clickedGridPos);
         break;
       case GameState.chooseEngagement:
         // clicked during choose engagement phase
-        StartEngagement();
+        StartEngagement(clickedGridPos);
         break;
     }
   }
 
   public void ClickedCancelButton() {
     if(gameState == GameState.noInput ||
-       gameState == GameState.actionsMenu) {
+      gameState == GameState.chooseCharacter) {
       return;
     }
 
     SfxManager.StaticPlayCancelSfx();
     switch(gameState) {
       case GameState.chooseMovement:
-        SetGameState(GameState.actionsMenu);
+        SetGameState(GameState.chooseCharacter);
+        break;
+      case GameState.actionsMenu:
+        RevertMovement();
+        SetGameState(GameState.chooseMovement);
         break;
       case GameState.chooseEngagement:
         SetGameState(GameState.actionsMenu);
@@ -305,62 +377,82 @@ public class GameController : MonoBehaviour {
     HighlightedTilesLayer.instance.StopHighlightWalkableTiles();
   }
 
-  public void AdvanceTurn() {
-    if(CurrentCharacter != null) {
-      CurrentCharacter.EndTurn();
+
+  public void AdvancePhase() {
+    switch(gamePhase) {
+      case GamePhase.playerPhase:
+        StartCoroutine(StartGamePhase(GamePhase.enemyPhase));
+        break;
+      case GamePhase.enemyPhase:
+        StartCoroutine(StartGamePhase(GamePhase.battlePhase));
+        break;
+      case GamePhase.battlePhase:
+        StartCoroutine(StartGamePhase(GamePhase.playerPhase));
+        break;
     }
-    TacticalUIController.instance.HideActionsMenu();
-    CleanHighlightedTiles();
-
-    currentCharacterPos++;
-
-    /// enter battler phase
-    if(currentCharacterPos >= allCharacters.Count) {
-      SelectNoCharacter();
-      SetGameState(GameState.battlePhase);
-      return;
-    }
-
-    /// show player and enemy phase title cards
-    if(currentCharacterPos == 0) {
-      StartCoroutine(StartPhaseAnim());
-      return;
-    } else if(currentCharacterPos == FirstEnemy()) {
-      StartCoroutine(StartPhaseAnim());
-      return;
-    }
-
-    InitializeCharacterTurn();
   }
 
-  public void InitializeCharacterTurn() {
-    if(CurrentCharacter != null) {
-      CurrentCharacter.InitializeTurn();
-    }
-    //SetInputModuleId();
-    UpdateCurrentCharacter();
 
-    if(Combat.CharacterIsEngagedInCombat(CurrentCharacter)) {
-      AdvanceTurn();
+  public void InitializeCharacterTurn(int newTurn) {
+    Debug.LogWarning("New character selected: " + allCharacters[newTurn].battler.nameKey);
+
+    if(allCharacters[newTurn].usedTurn) {
+      SfxManager.StaticPlayForbbidenSfx();
       return;
     }
 
-    SetGameState(GameState.actionsMenu);
+    currentCharacterPos = newTurn;
+    allCharacters[currentCharacterPos].BecomeCurrentCharacter(true);
+
+    SetGameState(GameState.chooseMovement);
 
     //if(CurrentCharacter == null) return;
     //MouseInput.instance.SelectGridPosition(CurrentCharacter.BoardGridPosition());
     //CameraController.instance.FocusOnCharacterThenChangeGamestate(CurrentCharacter, GameState.chooseMovement);
   }
 
-  public void SelectNoCharacter() {
-    currentCharacterPos = -1;
-    UpdateCurrentCharacter();
+  public void EndTurn() {
+    TacticalUIController.instance.HideActionsMenu();
+    TacticalUIController.instance.ShowCurrentCharacterInfo(null);
+    CleanHighlightedTiles();
+
+    if(CurrentCharacter != null) {
+      CurrentCharacter.EndTurn();
+    }
+    SetGameState(GameState.chooseCharacter);
   }
 
-  public void UpdateCurrentCharacter() {
-    foreach(CharacterToken c in allCharacters) {
-      c.BecomeCurrentCharacter(c == CurrentCharacter);
+
+  public void SelectNoCharacter() {
+    if(CurrentCharacter != null) {
+      CurrentCharacter.BecomeCurrentCharacter(false);
     }
+    currentCharacterPos = -1;
+  }
+
+  public void InitializeGamePhaseForCharacters() {
+    foreach(CharacterToken ct in allCharacters) {
+      ct.StartNewGamePhase();
+    }
+  }
+
+
+  public int GetCharacterPos(CharacterToken ct) {
+    for(int i = 0; i < allCharacters.Count; i++) {
+      if(allCharacters[i] == ct) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public bool TeamCanStillAct(CombatTeam team) {
+    foreach(CharacterToken ct in allCharacters) {
+      if(ct.combatTeam == team && !ct.usedTurn) {
+        return true;
+      }
+    }
+    return false;
   }
 
 
@@ -375,41 +467,29 @@ public class GameController : MonoBehaviour {
 
 
 
-  public IEnumerator StartPhaseAnim() {
-    gameState = GameState.noInput;
-
-    if(currentCharacterPos == 0) {
-      VsnController.instance.StartVSN("player_phase");
-    } else {
-      VsnController.instance.StartVSN("enemy_phase");
-    }
-    yield return WaitForVsnExecution();
-    InitializeCharacterTurn();
-  }
-
   public IEnumerator WaitForVsnExecution() {
     while(VsnController.instance.state != ExecutionState.STOPPED) {
       yield return null;
     }
   }
 
-  public IEnumerator FightsPhase() {
+  public IEnumerator BattlePhase() {
     foreach(Combat c in activeCombats) {
       yield return FightBattle(c);
     }
     activeCombats.Clear();
 
-    yield return cameraController.GoToDefaultPosition();
+    yield return CameraController.instance.GoToDefaultPosition();
     yield return new WaitForSeconds(0.3f);
 
     /// RESTART PLAYER PHASE
     if(!CheckIfMatchIsOver()) {
-      AdvanceTurn();
+      AdvancePhase();
     }
   }
 
   public IEnumerator FightBattle(Combat combat) {
-    yield return cameraController.FocusOnCombat(combat);
+    yield return CameraController.instance.FocusOnCombat(combat);
 
     currentCombat = combat;
     VsnController.instance.StartVSN("battle");
@@ -438,9 +518,12 @@ public class GameController : MonoBehaviour {
     }
 
     CleanHighlightedTiles();
-    CurrentCharacter.Walked();
+    SetGameState(GameState.noInput);
+    //CurrentCharacter.BecomeCurrentCharacter(false);
+
     CurrentCharacter.transform.DOMove(new Vector3(pos.x, pos.y, 0f), dur).OnComplete(() => {
       SetGameState(GameState.actionsMenu);
+      CurrentCharacter.RegisterMovement();
     });
   }
 
@@ -457,12 +540,12 @@ public class GameController : MonoBehaviour {
 
   
 
-  public void StartEngagement() {
-    CharacterToken clicked = MouseInput.instance.SelectedCharacter;
+  public void StartEngagement(Vector2Int clickedGridPos) {
+    CharacterToken clicked = BoardController.instance.CharacterInPosition(clickedGridPos);
     bool addedToEngagement = false;
 
     foreach(Combat c in activeCombats) {
-      if(c.characters.Contains(clicked)) {
+      if(c.Contains(clicked)) {
         c.AddConflict(clicked, CurrentCharacter);
         addedToEngagement = true;
         break;
@@ -471,7 +554,16 @@ public class GameController : MonoBehaviour {
     if(!addedToEngagement) {
       activeCombats.Add(new Combat(clicked, CurrentCharacter));
     }
-    AdvanceTurn();
+    EndTurn();
+  }
+
+  public int CountCharactersEngagedWithThis(CharacterToken character) {
+    foreach(Combat combat in activeCombats) {
+      if(combat.Contains(character)) {
+        return combat.CountCharactersByTeam(character.OpponentCombatTeam());
+      }
+    }
+    return 0;
   }
 
 
@@ -494,13 +586,11 @@ public class GameController : MonoBehaviour {
 
     if(VictoryConditionMet()) {
       VsnController.instance.StartVSN("victory");
-      SelectNoCharacter();
       gameState = GameState.noInput;
       return true;
     }
     if(DefeatConditionMet()) {
       VsnController.instance.StartVSN("defeat");
-      SelectNoCharacter();
       gameState = GameState.noInput;
       return true;
     }

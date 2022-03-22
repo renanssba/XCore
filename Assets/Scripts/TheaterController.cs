@@ -66,6 +66,7 @@ public class TheaterController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
+    gameObject.SetActive(false);
   }
 
 
@@ -180,7 +181,7 @@ public class TheaterController : MonoBehaviour {
   }
 
 
-  public Actor2D GetActorByPartyId(SkillTarget actorId) {
+  public Actor2D GetActorByPartyPos(SkillTarget actorId) {
     switch(actorId) {
       case SkillTarget.partyMember1:
         return partyActors[0];
@@ -198,12 +199,20 @@ public class TheaterController : MonoBehaviour {
     return null;
   }
 
-  public Actor2D[] GetAllHeroesActors() {
-    return partyActors;
+  public Actor2D[] GetHeroActorsInBattle() {
+    Actor2D[] targetActors = new Actor2D[BattleController.instance.partyMembers.Length];
+    for(int i=0; i<BattleController.instance.partyMembers.Length; i++) {
+      targetActors[i] = GetActorByBattler(BattleController.instance.partyMembers[i]);
+    }
+    return targetActors;
   }
 
-  public Actor2D[] GetAllEnemiesActors() {
-    return enemyActors;
+  public Actor2D[] GetEnemyActorsInBattle() {
+    Actor2D[] targetActors = new Actor2D[BattleController.instance.enemyMembers.Length];
+    for(int i = 0; i < BattleController.instance.enemyMembers.Length; i++) {
+      targetActors[i] = GetActorByBattler(BattleController.instance.enemyMembers[i]);
+    }
+    return targetActors;
   }
 
   public Actor2D GetActorByBattler(Battler character) {
@@ -286,10 +295,10 @@ public class TheaterController : MonoBehaviour {
 
   public void SetCharacterChoosingAction(int characterId) {
     for(int i = 0; i < 3; i++) {
-      GetActorByPartyId((SkillTarget)i).SetChooseActionMode(false);
+      GetActorByPartyPos((SkillTarget)i).SetChooseActionMode(false);
     }
     if(characterId >= 0 && characterId <= 2) {
-      GetActorByPartyId((SkillTarget)characterId).SetChooseActionMode(true);
+      GetActorByPartyPos((SkillTarget)characterId).SetChooseActionMode(true);
     }
   }
 

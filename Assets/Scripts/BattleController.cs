@@ -145,7 +145,7 @@ public class BattleController : MonoBehaviour {
   public void FullHealParty() {
     for(int i=0; i < partyMembers.Length; i++) {
       partyMembers[i].RemoveAllStatusConditions();
-      partyMembers[i].HealHP(partyMembers[i].AttributeValue(Attributes.maxHp));
+      partyMembers[i].HealHP(partyMembers[i].GetAttributeValue(Attributes.maxHp));
       partyMembers[i].HealSp(partyMembers[i].GetMaxSp());
     }
   }
@@ -196,34 +196,34 @@ public class BattleController : MonoBehaviour {
     UIController.instance.actionsPanel.EndActionSelect();
   }
 
-  public void WaitToSelectTarget(ActionRange range, int currentBattler) {
+  public void WaitToSelectTarget(SkillRange range, int currentBattler) {
     UIController.instance.actionsPanel.EndActionSelect();
     
     UIController.instance.selectTargetPanel.SetActive(true);
     switch(range) {
-      case ActionRange.self:
+      case SkillRange.self:
         SetHeroTargetSelections(false);
         SetEnemyTargetSelections(false);
         UIController.instance.selectTargets[currentBattler].SetActive(true);
         break;
-      case ActionRange.one_ally:
+      case SkillRange.one_ally:
         SetHeroTargetSelections(true);
         SetEnemyTargetSelections(false);
         break;
-      case ActionRange.other_ally:
+      case SkillRange.other_ally:
         SetHeroTargetSelections(true);
         SetEnemyTargetSelections(false);
         UIController.instance.selectTargets[currentBattler].SetActive(false);
         break;
-      case ActionRange.one_enemy:
+      case SkillRange.one_enemy:
         SetHeroTargetSelections(false);
         SetEnemyTargetSelections(true);
         break;
-      case ActionRange.anyone:
+      case SkillRange.anyone:
         SetHeroTargetSelections(true);
         SetEnemyTargetSelections(true);
         break;
-      case ActionRange.random_enemy:
+      case SkillRange.random_enemy:
         UIController.instance.selectTargetPanel.SetActive(false);
         selectedTargetPartyId[currentBattler] = SkillTarget.enemy1;
         HideActionButtons();
@@ -307,7 +307,7 @@ public class BattleController : MonoBehaviour {
     Debug.Log("attacker: " + attacker.GetName());
     Debug.Log("defender: " + defender.GetName());
 
-    damage = attacker.AttributeValue(usedSkill.damageAttribute) * usedSkill.damagePower;
+    damage = attacker.GetAttributeValue(usedSkill.damageAttribute) * usedSkill.damagePower;
     //damage = (3f*attacker.AttributeValue((int)usedSkill.damageAttribute) / Mathf.Max(2f * defender.AttributeValue((int)Attributes.endurance) + defender.AttributeValue((int)usedSkill.damageAttribute), 1f));
 
     // skill power
@@ -369,11 +369,11 @@ public class BattleController : MonoBehaviour {
     Actor2D[] targetActors;
 
     if(targetId == SkillTarget.allEnemies) {
-      targetActors = TheaterController.instance.GetAllEnemiesActors();
+      targetActors = TheaterController.instance.GetEnemyActorsInBattle();
     } else if(targetId == SkillTarget.allHeroes) {
-      targetActors = TheaterController.instance.GetAllHeroesActors();
+      targetActors = TheaterController.instance.GetHeroActorsInBattle();
     } else {
-      targetActors = new Actor2D[] { TheaterController.instance.GetActorByPartyId(targetId) };
+      targetActors = new Actor2D[] { TheaterController.instance.GetActorByPartyPos(targetId) };
     }
 
 
@@ -404,11 +404,11 @@ public class BattleController : MonoBehaviour {
     // skill effects for every target
     foreach(Actor2D targetActor in targetActors) {
 
-
       // if dodged
-      if(Random.Range(0, 100) < targetActor.battler.AttributeValue(Attributes.dodgeRate)) {
-        targetActor.ShowMissParticle();
+      if(Random.Range(0, 100) < targetActor.battler.GetAttributeValue(Attributes.dodgeRate)) {
         //VsnAudioManager.instance.PlaySfx("damage_block");
+        targetActor.ShowMissParticle();
+        yield return new WaitForSeconds(1f);
         continue;
       }
 
@@ -454,11 +454,9 @@ public class BattleController : MonoBehaviour {
           TheaterController.instance.Screenshake(1f);
         }
 
+        targetActor.battler.TakeDamage(effectiveAttackDamage);
 
         targetActor.ShowDamageParticle(effectiveAttackDamage, effectivity);
-        //yield return new WaitForSeconds(1f);
-
-        targetActor.battler.TakeDamage(effectiveAttackDamage);
         yield return new WaitForSeconds(1f);
       }
 
@@ -547,8 +545,8 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteUseItem(SkillTarget itemUserId, SkillTarget targetId, Item usedItem) {
-    Actor2D userActor = TheaterController.instance.GetActorByPartyId(itemUserId);
-    Actor2D targetActor = TheaterController.instance.GetActorByPartyId(targetId);
+    Actor2D userActor = TheaterController.instance.GetActorByPartyPos(itemUserId);
+    Actor2D targetActor = TheaterController.instance.GetActorByPartyPos(targetId);
     Battler target = targetActor.battler;
 
     TheaterController.instance.FocusActors(new Actor2D[] { userActor, targetActor });
@@ -607,7 +605,7 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteDefend(SkillTarget partyMemberId) {
-    Actor2D defendingActor = TheaterController.instance.GetActorByPartyId(partyMemberId);
+    Actor2D defendingActor = TheaterController.instance.GetActorByPartyPos(partyMemberId);
     Battler defender = defendingActor.battler;
 
     defendingActor.DefendActionAnimation();
@@ -628,7 +626,7 @@ public class BattleController : MonoBehaviour {
 
 
   public IEnumerator ExecuteIdle(SkillTarget partyMemberId) {
-    Actor2D idleActor = TheaterController.instance.GetActorByPartyId(partyMemberId);
+    Actor2D idleActor = TheaterController.instance.GetActorByPartyPos(partyMemberId);
     Battler defender = idleActor.battler;
     VsnSaveSystem.SetVariable("target_name", idleActor.battler.GetName());
 
@@ -648,11 +646,11 @@ public class BattleController : MonoBehaviour {
     VsnController.instance.state = ExecutionState.WAITING;
     Skill skillUsed = ((Enemy)CurrentBattler).DecideWhichSkillToUse();
 
-    if(skillUsed.range == ActionRange.all_allies) {
+    if(skillUsed.range == SkillRange.all_allies) {
       targetId = SkillTarget.allEnemies;
-    } else if(skillUsed.range == ActionRange.all_enemies) {
+    } else if(skillUsed.range == SkillRange.all_enemies) {
       targetId = SkillTarget.allHeroes;
-    } else if(skillUsed.range == ActionRange.self || skillUsed.range == ActionRange.one_ally) {
+    } else if(skillUsed.range == SkillRange.self || skillUsed.range == SkillRange.one_ally) {
       targetId = SkillTarget.enemy1;
     } else {
       // change target if the other party member is using Guardian
@@ -779,7 +777,7 @@ public class BattleController : MonoBehaviour {
 
       newSkill.name = entry["name"];
       newSkill.type = (SkillType)System.Enum.Parse(typeof(SkillType), entry["type"]);
-      newSkill.range = (ActionRange)System.Enum.Parse(typeof(ActionRange), entry["range"]);
+      newSkill.range = (SkillRange)System.Enum.Parse(typeof(SkillRange), entry["range"]);
 
       if(!string.IsNullOrEmpty(entry["sp cost"])) {
         newSkill.spCost = int.Parse(entry["sp cost"]);
@@ -862,7 +860,7 @@ public class BattleController : MonoBehaviour {
     foreach(Dictionary<string, string> entry in data.data) {
       StatusCondition newStatusCondition = new StatusCondition();
 
-      newStatusCondition.id = int.Parse(entry["id"]);
+      newStatusCondition.id = (StatusConditionId)System.Enum.Parse(typeof(StatusConditionId), entry["id"]);
       newStatusCondition.name = entry["name"];
       newStatusCondition.stackable = int.Parse(entry["stackable"]);
 

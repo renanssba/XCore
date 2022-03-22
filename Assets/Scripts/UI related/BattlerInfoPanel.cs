@@ -43,7 +43,7 @@ public class BattlerInfoPanel : MonoBehaviour {
     faceImage.sprite = ResourcesManager.instance.GetCharacterSprite(character.id, CharacterSpritePart.face);
 
     /// HP
-    hpSlider.SetMaxValue(character.AttributeValue(Attributes.maxHp));
+    hpSlider.SetMaxValue(character.GetAttributeValue(Attributes.maxHp));
     hpSlider.SetSliderValue(character.hp);
 
     /// SP

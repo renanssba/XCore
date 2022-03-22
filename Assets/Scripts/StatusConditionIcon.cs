@@ -6,6 +6,13 @@ using TMPro;
 using DG.Tweening;
 
 
+public enum StatusConditionId {
+  encouraged,
+  focused,
+  inspired,
+  none
+}
+
 public enum StatusConditionEffect {
   raiseMaxHp,
   raiseMovementRange,
@@ -24,8 +31,7 @@ public enum StatusConditionEffect {
 [System.Serializable]
 public class StatusCondition {
   public string name;
-  //public string description;
-  public int id;
+  public StatusConditionId id;
   public int duration;
   public int maxDurationShowable;
   public Sprite sprite;
